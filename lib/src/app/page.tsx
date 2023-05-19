@@ -28,8 +28,8 @@ export default function Home() {
 
           <h3 className='main-color'>Sign In</h3>
 
-          <label htmlFor='email'>Email<span className='err'>*</span></label>
-          <Input type="email" placeholder="Enter email" id="email" name="email" size="lg" validation onChange={getData} /><br></br>
+          {/* <label htmlFor='email'>Email<span className='err'>*</span></label> */}
+          <Input type="email" placeholder="Enter email" id="email" name="email" size="lg" validation onChange={getData} label="Email Id"/><br></br>
 
           <label htmlFor='password'>Password<span className='err'>*</span></label>
           <Input type="password" placeholder="Enter password" id="password" name="password" size="lg" validation onChange={getData} /><br></br>

@@ -9,7 +9,7 @@ CREATED BY :-
 */
 
 import React from "react";
-// import styles from '../dist/index.css';
+import styles from './index.css';
 
 export default class ExampleComponent extends React.Component {
   constructor(props) {
@@ -122,7 +122,7 @@ export default class ExampleComponent extends React.Component {
     }
 
     return (
-      <div>
+      <div className="inputBox">
         <label>{label}</label>
         <input
           type={type}

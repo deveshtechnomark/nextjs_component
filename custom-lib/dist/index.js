@@ -2066,6 +2066,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
+var styles = {"inputLable":"index_inputLable__3HElx","inputBox":"index_inputBox__2qPqS"};
+
 /* 
 
 CREATED BY :-
@@ -2075,7 +2077,6 @@ CREATED BY :-
 -> Kenil Mendpara
 
 */
-
 class ExampleComponent extends react.Component {
   constructor(props) {
     super(props);
@@ -2243,7 +2244,9 @@ class ExampleComponent extends react.Component {
       inputClassName += ` ${styles[variant]}`;
     }
 
-    return react.createElement("div", null, react.createElement("label", null, label), react.createElement("input", {
+    return react.createElement("div", {
+      className: "inputBox"
+    }, react.createElement("label", null, label), react.createElement("input", {
       type: type,
       placeholder: placeholder,
       className: inputClassName,
