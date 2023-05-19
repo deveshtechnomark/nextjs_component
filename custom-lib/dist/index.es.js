@@ -2073,6 +2073,7 @@ CREATED BY :-
 -> Kenil Mendpara
 
 */
+
 const styles = {
   sm: {
     color: "black",
@@ -2082,7 +2083,7 @@ const styles = {
   md: {
     color: "black",
     padding: "10px",
-    width: "200px",
+    width: "230px",
     fontFamily: "Arial"
   },
   lg: {
@@ -2237,6 +2238,7 @@ class ExampleComponent extends react.Component {
       size,
       label,
       className,
+      onClick,
       min,
       max,
       id,
@@ -2275,7 +2277,8 @@ class ExampleComponent extends react.Component {
       minLength: minLength,
       maxLength: maxLength,
       hidden: hidden,
-      accept: accept
+      accept: accept,
+      onClick: onClick
     }), error && react.createElement("div", {
       style: {
         color: "red"

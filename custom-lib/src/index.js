@@ -9,45 +9,7 @@ CREATED BY :-
 */
 
 import React from "react";
-
-const styles = {
-  sm: {
-    color: "black",
-    padding: "10px",
-    fontFamily: "Arial"
-  },
-  md: {
-    color: "black",
-    padding: "10px",
-    width: "200px",
-    fontFamily: "Arial"
-  },
-  lg: {
-    color: "black",
-    padding: "10px",
-    width: "300px",
-    fontFamily: "Arial"
-  },
-  outlined: {
-    border: "2px solid #D4ADFC",
-    borderRadius: "3px"
-  },
-  filled: {
-    backgroundColor: "#F1F6F9",
-    border: " 2px solid #D4ADFC",
-    borderLeft: "none",
-    borderTop: "none",
-    borderRight: "none",
-    borderRadius: "3px"
-  },
-  standard: {
-    border: "2px solid #9BA4B5",
-    borderRadius: "3px"
-  },
-  shadow: {
-    boxShadow: "0 0 5px rgba(0, 0, 0, 0.5)"
-  }
-};
+// import styles from '../dist/index.css';
 
 export default class ExampleComponent extends React.Component {
   constructor(props) {
@@ -64,9 +26,9 @@ export default class ExampleComponent extends React.Component {
 
 
   handleChange(event) {
-    const {onChange} = this.props;
+    const { onChange } = this.props;
     this.setState({ getValue: event.target.value, error: "" });
-    if(onChange){
+    if (onChange) {
       onChange(event.target.name, event.target.value);
     }
   }
@@ -134,15 +96,30 @@ export default class ExampleComponent extends React.Component {
         this.setState({ error: `${type} size cannot exceed 1MB.` });
       }
     }
-    
+
   }
-
   render() {
-    const { type, placeholder, size, label, className, min, max, id, name, value, hidden, minLength, maxLength, accept, required, disabled, variant } = this.props;
+    const { type, placeholder, size, label, className, onClick, min, max, id, name, value, hidden, minLength, maxLength, accept, required, disabled, variant } = this.props;
     const { getValue, error } = this.state;
-    let inputStyle = {};
+    let inputClassName = '';
 
-    inputStyle = { ...styles[size], ...(variant ? styles[variant] : {}) };
+    switch (size) {
+      case 'sm':
+        inputClassName = styles.sm;
+        break;
+      case 'md':
+        inputClassName = styles.md;
+        break;
+      case 'lg':
+        inputClassName = styles.lg;
+        break;
+      default:
+        break;
+    }
+
+    if (variant) {
+      inputClassName += ` ${styles[variant]}`;
+    }
 
     return (
       <div>
@@ -150,11 +127,10 @@ export default class ExampleComponent extends React.Component {
         <input
           type={type}
           placeholder={placeholder}
-          style={inputStyle}
+          className={inputClassName}
           value={value || getValue}
           onChange={this.handleChange}
           onBlur={this.handleValidation}
-          className={className}
           min={min}
           max={max}
           id={id}
@@ -165,6 +141,7 @@ export default class ExampleComponent extends React.Component {
           maxLength={maxLength}
           hidden={hidden}
           accept={accept}
+          onClick={onClick}
         />
         {error && <div style={{ color: "red" }}>{error}</div>}
       </div>

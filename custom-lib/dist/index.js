@@ -2075,44 +2075,7 @@ CREATED BY :-
 -> Kenil Mendpara
 
 */
-const styles = {
-  sm: {
-    color: "black",
-    padding: "10px",
-    fontFamily: "Arial"
-  },
-  md: {
-    color: "black",
-    padding: "10px",
-    width: "200px",
-    fontFamily: "Arial"
-  },
-  lg: {
-    color: "black",
-    padding: "10px",
-    width: "300px",
-    fontFamily: "Arial"
-  },
-  outlined: {
-    border: "2px solid #D4ADFC",
-    borderRadius: "3px"
-  },
-  filled: {
-    backgroundColor: "#F1F6F9",
-    border: " 2px solid #D4ADFC",
-    borderLeft: "none",
-    borderTop: "none",
-    borderRight: "none",
-    borderRadius: "3px"
-  },
-  standard: {
-    border: "2px solid #9BA4B5",
-    borderRadius: "3px"
-  },
-  shadow: {
-    boxShadow: "0 0 5px rgba(0, 0, 0, 0.5)"
-  }
-};
+
 class ExampleComponent extends react.Component {
   constructor(props) {
     super(props);
@@ -2239,6 +2202,7 @@ class ExampleComponent extends react.Component {
       size,
       label,
       className,
+      onClick,
       min,
       max,
       id,
@@ -2256,18 +2220,36 @@ class ExampleComponent extends react.Component {
       getValue,
       error
     } = this.state;
-    let inputStyle = {};
-    inputStyle = { ...styles[size],
-      ...(variant ? styles[variant] : {})
-    };
+    let inputClassName = '';
+
+    switch (size) {
+      case 'sm':
+        inputClassName = styles.sm;
+        break;
+
+      case 'md':
+        inputClassName = styles.md;
+        break;
+
+      case 'lg':
+        inputClassName = styles.lg;
+        break;
+
+      default:
+        break;
+    }
+
+    if (variant) {
+      inputClassName += ` ${styles[variant]}`;
+    }
+
     return react.createElement("div", null, react.createElement("label", null, label), react.createElement("input", {
       type: type,
       placeholder: placeholder,
-      style: inputStyle,
+      className: inputClassName,
       value: value || getValue,
       onChange: this.handleChange,
       onBlur: this.handleValidation,
-      className: className,
       min: min,
       max: max,
       id: id,
@@ -2277,7 +2259,8 @@ class ExampleComponent extends react.Component {
       minLength: minLength,
       maxLength: maxLength,
       hidden: hidden,
-      accept: accept
+      accept: accept,
+      onClick: onClick
     }), error && react.createElement("div", {
       style: {
         color: "red"
@@ -2288,4 +2271,3 @@ class ExampleComponent extends react.Component {
 }
 
 module.exports = ExampleComponent;
-//# sourceMappingURL=index.js.map
