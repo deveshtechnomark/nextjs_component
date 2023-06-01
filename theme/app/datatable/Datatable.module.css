@@ -1,0 +1,9 @@
+.refreshBtn {
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.refreshBtn.clicked {
+  transform: rotate(180deg);
+  transition: 0.5s;
+}

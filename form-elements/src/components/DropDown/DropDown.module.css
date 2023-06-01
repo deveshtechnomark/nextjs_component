@@ -1,0 +1,28 @@
+.container__select {
+  height: 40px;
+  width: 100%;
+  margin: 5px 0px;
+}
+
+.container__select select,
+input {
+  margin: 3px 2px;
+  padding-left: 5px;
+  height: 40px;
+  width: 100%;
+  border-radius: 3px;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+}
+
+.container__select option {
+  text-transform: capitalize;
+}
+
+.dropdown_label{
+  text-transform: capitalize;
+  font-size: 18px;
+}

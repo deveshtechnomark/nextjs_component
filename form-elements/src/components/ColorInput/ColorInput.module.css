@@ -1,0 +1,22 @@
+.color__input__wrapper {
+  height: 2rem;
+  width: 2rem;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.color__input__wrapper input[type="color"] {
+  position: absolute;
+  height: 4em;
+  width: 4em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  border: none;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0;
+  background-color: #34495e;
+  min-height: 100vh;
+}
+
+.nav .activeLink {
+  background-color: #fff;
+  color: #34495e;
+  width: 10rem;
+  font-weight: bold;
+  padding: 5px 0px 5px 20px;
+  margin: 5px 0px;
+}
+
+.nav .inactiveLink {
+  color: #fff;
+  width: 10rem;
+  font-weight: bold;
+  padding: 5px 0px 5px 20px;
+  margin: 5px 0px;
+}
+
+.btn {
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.success {
+  background-color: #5cb85c;
+}
+
+.error {
+  background-color: #d9534f;
+}
+
+.warning {
+  background-color: #f0ad4e;
+}
+
+.info {
+  background-color: #5bc0de;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+  width: 100%;
+}
+
+.col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.justify-content-between{
+  justify-content: space-between;
+}
+
+.justify-content-end{
+  justify-content: end;
+}
+
+.align-items-center{
+  align-items: center;
+}
+
+.card {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.16);
+  display: inline-block;
+  padding: 15px;
+}
+
+.flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.subTitle{
+  text-transform: capitalize;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}

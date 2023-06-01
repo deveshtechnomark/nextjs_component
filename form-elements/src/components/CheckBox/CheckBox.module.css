@@ -1,0 +1,17 @@
+.container__checkbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.container__checkbox input {
+  height: 15px;
+  width: 15px;
+}
+
+.container__checkbox label {
+  cursor: pointer;
+  margin: 0px 3px;
+  font-size: 16px;
+  text-transform: capitalize;
+}

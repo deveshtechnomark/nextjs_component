@@ -1,0 +1,16 @@
+.container__radio {
+  display: flex;
+  flex-direction: row;
+}
+
+.container__radio input {
+  height: 15px;
+  width: 15px;
+}
+
+.container__radio label {
+  cursor: pointer;
+  margin: 0px 3px;
+  font-size: 18px;
+  text-transform: capitalize;
+}

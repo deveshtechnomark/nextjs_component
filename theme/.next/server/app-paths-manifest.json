@@ -1,0 +1,6 @@
+{
+  "/page": "app/page.js",
+  "/datatable/page": "app/datatable/page.js",
+  "/toast/page": "app/toast/page.js",
+  "/form-element/page": "app/form-element/page.js"
+}

@@ -1,0 +1,17 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[2].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[2].oneOf[13].use[3]!../next-datatable/dist/index.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+.DataTable-module_dataContainer__1ldzv span{font-size:1rem;padding-top:10px}.DataTable-module_header__x0i96{background-color:#ccc;padding:1rem;display:flex;flex-direction:row;justify-content:space-between}.DataTable-module_exportButtonsBox__TIQSe{border-radius:5px;justify-content:flex-end}.DataTable-module_exportButton__34bYh{padding:5px;cursor:pointer;border:1px solid #ccc}.DataTable-module_csv_Btn__hgY1w{text-decoration:none;color:#000;padding:5px}.DataTable-module_pdf_Btn__3hjEb{margin-left:15px}.DataTable-module_input__3Hk4W{margin-bottom:10px;padding:5px}.DataTable-module_table__4Ta2W{width:100%;border-collapse:collapse}.DataTable-module_table__4Ta2W td,.DataTable-module_table__4Ta2W th{padding:10px;border:1px solid #ccc}.DataTable-module_table__4Ta2W th{background-color:#f2f2f2;cursor:pointer}.DataTable-module_table__4Ta2W th span{margin-left:5px}.DataTable-module_table__4Ta2W tbody tr:nth-child(2n){background-color:#f9f9f9}.DataTable-module_pagination__3uQNt{margin:0 10px}.DataTable-module_footerPagination__3TGhu{display:flex;align-items:center}.DataTable-module_footerPagination__3TGhu button{padding:5px 10px;margin-right:5px;background-color:#f2f2f2;border:none;cursor:pointer}.DataTable-module_footerPagination__3TGhu button:disabled{opacity:.5;cursor:not-allowed}.DataTable-module_activePage__2o-wi{font-weight:700}.DataTable-module_footerPagination__3TGhu{margin-top:10px;justify-content:flex-end}.DataTable-module_tableSelect__2iVxY{padding:8px;font-size:14px;border:1px solid #ccc;border-radius:4px}.DataTable-module_image__3rCu5{max-width:80px;max-height:80px;border-radius:5px}.DataTable-module_footer__22RW8{background-color:#ccc;padding:10px;margin-top:10px}
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[2].oneOf[8].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[2].oneOf[8].use[3]!./app/datatable/Datatable.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+.Datatable_refreshBtn__4gjtM {
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.Datatable_refreshBtn__4gjtM.Datatable_clicked__KKbKg {
+  transform: rotate(180deg);
+  transition: 0.5s;
+}
+

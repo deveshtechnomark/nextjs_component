@@ -1,0 +1,30 @@
+.container__btn {
+  margin: 5px 0px;
+  height: 45px;
+  width: 80%;
+}
+
+.__btn {
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.__btn:hover {
+  transition-delay: 0.05s;
+  border-radius: 12px;
+}
+
+.primary__btn {
+  background-color: #0069d9;
+}
+
+.secondary__btn {
+  background-color: #6c757d;
+}
