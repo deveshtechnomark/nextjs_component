@@ -13,16 +13,25 @@ class RadioButton extends React.Component {
   }
 
   handleChange() {
-    this.setState((prevState) => ({
-      checked: !prevState.checked,
-      disabled: !prevState.disabled,
-      invalid: this.props.invalid && !prevState.checked,
-    }));
+    const { onChange } = this.props;
+    this.setState(
+      (prevState) => ({
+        checked: !prevState.checked,
+        disabled: !prevState.disabled,
+        invalid: this.props.invalid && !prevState.checked,
+      }),
+      () => {
+        if (onChange) {
+          onChange(this.state.checked);
+        }
+      }
+    );
   }
 
   render() {
-    const { label, name, id, checked, disabled, invalid, customClassName, onChange } = this.props;
-    const uniqueId = `${name}_${id}`;
+    const { label, id, disabled, invalid, customClassName } = this.props;
+    const { checked } = this.state;
+    const uniqueId = `${id}_${label}`;
 
     const labelClassName = [
       styles.radio_label,
@@ -35,10 +44,9 @@ class RadioButton extends React.Component {
       <React.Fragment>
         <input
           type="radio"
-          name={name}
           id={uniqueId}
           checked={checked}
-          onChange={onChange}
+          onChange={this.handleChange}
           disabled={disabled}
         />
         <label htmlFor={uniqueId} className={labelClassName}>
