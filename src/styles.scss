@@ -1,0 +1,57 @@
+$btn-background-color: white;
+$btn-text-color: black;
+$btn-border-color: rgb(175, 174, 174);
+$btn-hover-color: rgb(0, 178, 157, 0.3);
+
+@mixin buttonStyles {
+  position: relative;
+  padding: 7px;
+  background-color: $btn-background-color;
+  color: $btn-text-color;
+  font-size: 0.5rem;
+  border: none;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: $btn-hover-color;
+    color: black;
+    opacity: 0;
+    transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+  }
+
+  &:hover:before {
+    width: 200%;
+    height: 200%;
+    opacity: 1;
+    transition: width 0.3s ease-in, height 0.3s ease-in, opacity 0.3s ease-in;
+  }
+}
+
+.btnStyle {
+  @include buttonStyles;
+}
+
+.activeBtn {
+  border-color: #02B89D;
+  background-color: $btn-hover-color;
+}
+
+.gridStyle {
+  border: 1px solid $btn-border-color;
+  border-radius: 4px;
+}
+
+.withSpace{
+  margin: 5px;
+}
