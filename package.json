@@ -27,6 +27,7 @@
     "sass": "^1.62.1"
   },
   "dependencies": {
-    "@rollup/plugin-babel": "^6.0.3"
+    "@rollup/plugin-babel": "^6.0.3",
+    "react-icons": "^4.9.0"
   }
 }

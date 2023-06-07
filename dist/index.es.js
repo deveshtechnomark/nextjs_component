@@ -2187,7 +2187,83 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"listItem":"styles_listItem__3B4xI","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","dropdownItems":"styles_dropdownItems__2T8NO"};
+var DefaultContext = {
+  color: undefined,
+  size: undefined,
+  className: undefined,
+  style: undefined,
+  attr: undefined
+};
+var IconContext = react.createContext && react.createContext(DefaultContext);
+
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
+var __rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+function Tree2Element(tree) {
+  return tree && tree.map(function (node, i) {
+    return react.createElement(node.tag, __assign({
+      key: i
+    }, node.attr), Tree2Element(node.child));
+  });
+}
+function GenIcon(data) {
+  // eslint-disable-next-line react/display-name
+  return function (props) {
+    return react.createElement(IconBase, __assign({
+      attr: __assign({}, data.attr)
+    }, props), Tree2Element(data.child));
+  };
+}
+function IconBase(props) {
+  var elem = function (conf) {
+    var attr = props.attr,
+      size = props.size,
+      title = props.title,
+      svgProps = __rest(props, ["attr", "size", "title"]);
+    var computedSize = size || conf.size || "1em";
+    var className;
+    if (conf.className) className = conf.className;
+    if (props.className) className = (className ? className + " " : "") + props.className;
+    return react.createElement("svg", __assign({
+      stroke: "currentColor",
+      fill: "currentColor",
+      strokeWidth: "0"
+    }, conf.attr, attr, svgProps, {
+      className: className,
+      style: __assign(__assign({
+        color: props.color || conf.color
+      }, conf.style), props.style),
+      height: computedSize,
+      width: computedSize,
+      xmlns: "http://www.w3.org/2000/svg"
+    }), title && react.createElement("title", null, title), props.children);
+  };
+  return IconContext !== undefined ? react.createElement(IconContext.Consumer, null, function (conf) {
+    return elem(conf);
+  }) : elem(DefaultContext);
+}
+
+// THIS FILE IS AUTO GENERATED
+function FaUserCircle (props) {
+  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 496 512"},"child":[{"tag":"path","attr":{"d":"M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"}}]})(props);
+}
+
+var styles = {"listItem":"styles_listItem__3B4xI","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","listSpan":"styles_listSpan__fJ06z","activeItem":"styles_activeItem__1nne_","dropdownItems":"styles_dropdownItems__2T8NO","cardMain":"styles_cardMain__1_xXT"};
 
 var top = 'top';
 var bottom = 'bottom';
@@ -4090,7 +4166,7 @@ var data = createCommonjsModule(function (module, exports) {
   return data;
 
 }));
-//# sourceMappingURL=data.js.map
+
 });
 
 var util = createCommonjsModule(function (module, exports) {
@@ -4372,7 +4448,7 @@ var util = createCommonjsModule(function (module, exports) {
   Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 
 }));
-//# sourceMappingURL=index.js.map
+
 });
 
 var eventHandler = createCommonjsModule(function (module, exports) {
@@ -4609,7 +4685,7 @@ var eventHandler = createCommonjsModule(function (module, exports) {
   return EventHandler;
 
 }));
-//# sourceMappingURL=event-handler.js.map
+
 });
 
 var manipulator = createCommonjsModule(function (module, exports) {
@@ -4681,7 +4757,7 @@ var manipulator = createCommonjsModule(function (module, exports) {
   return Manipulator;
 
 }));
-//# sourceMappingURL=manipulator.js.map
+
 });
 
 var config = createCommonjsModule(function (module, exports) {
@@ -4749,7 +4825,7 @@ var config = createCommonjsModule(function (module, exports) {
   return Config;
 
 }));
-//# sourceMappingURL=config.js.map
+
 });
 
 var baseComponent = createCommonjsModule(function (module, exports) {
@@ -4833,7 +4909,7 @@ var baseComponent = createCommonjsModule(function (module, exports) {
   return BaseComponent;
 
 }));
-//# sourceMappingURL=base-component.js.map
+
 });
 
 var selectorEngine = createCommonjsModule(function (module, exports) {
@@ -4937,7 +5013,7 @@ var selectorEngine = createCommonjsModule(function (module, exports) {
   return SelectorEngine;
 
 }));
-//# sourceMappingURL=selector-engine.js.map
+
 });
 
 var dropdown = createCommonjsModule(function (module, exports) {
@@ -5339,10 +5415,10 @@ var dropdown = createCommonjsModule(function (module, exports) {
   return Dropdown;
 
 }));
-//# sourceMappingURL=dropdown.js.map
+
 });
 
-class ExampleComponent extends react.Component {
+class MultiSelect extends react.Component {
   constructor(props) {
     super(props);
     this.toggleDropdown = () => {
@@ -5369,27 +5445,17 @@ class ExampleComponent extends react.Component {
         });
       }
     };
-    this.handleSingleOptionClick = option => {
-      const {
-        singleSelect
-      } = this.state;
-      this.setState({
-        singleSelect: option
-      });
-    };
     this.state = {
       isOpen: false,
       searchQuery: '',
-      selectedOptions: [],
-      singleSelect: ''
+      selectedOptions: []
     };
   }
   render() {
     const {
       isOpen,
       searchQuery,
-      selectedOptions,
-      singleSelect
+      selectedOptions
     } = this.state;
     const {
       options,
@@ -5403,13 +5469,13 @@ class ExampleComponent extends react.Component {
     react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
       className: "container"
     }, /*#__PURE__*/react.createElement("div", {
-      className: "card"
+      className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
-      className: "col-3"
+      className: "col-auto"
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
-      className: "sr-only",
+      className: "sr-only px-md-2",
       htmlFor: "inlineFormInput"
     }, label), /*#__PURE__*/react.createElement("input", {
       type: "text",
@@ -5430,23 +5496,24 @@ class ExampleComponent extends react.Component {
       className: styles.dropdownCheckbox,
       checked: selectedOptions.includes(option),
       onChange: () => {}
-    }), /*#__PURE__*/react.createElement("span", null, option)))))))))) :
-    //type = icon
-    type === "icon" ? /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+    }), /*#__PURE__*/react.createElement("span", null, option)))))))))) : type === "radio" ?
+    /*#__PURE__*/
+    //type = radio
+    react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
       className: "container"
     }, /*#__PURE__*/react.createElement("div", {
-      className: "card"
+      className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
-      className: "col-3"
+      className: "col-auto"
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
-      className: "sr-only",
+      className: "sr-only px-md-2",
       htmlFor: "inlineFormInput"
     }, label), /*#__PURE__*/react.createElement("input", {
       type: "text",
       className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
-      placeholder: singleSelect.length > 0 ? singleSelect.join(', ') : 'Please Select',
+      placeholder: selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Please Select',
       value: searchQuery,
       onChange: this.handleSearchChange,
       onFocus: this.toggleDropdown
@@ -5462,15 +5529,89 @@ class ExampleComponent extends react.Component {
       className: styles.dropdownCheckbox,
       checked: selectedOptions.includes(option),
       onChange: () => {}
-    }), /*#__PURE__*/react.createElement("span", null, option)))))))))) :
+    }), /*#__PURE__*/react.createElement("span", null, option)))))))))) : type === "icon" ?
     /*#__PURE__*/
-    //type Default
+    //type = icon
     react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
       className: "container"
     }, /*#__PURE__*/react.createElement("div", {
-      className: "card"
+      className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
-      className: "col-3"
+      className: "col-auto"
+    }, /*#__PURE__*/react.createElement("div", {
+      className: "dropdown"
+    }, /*#__PURE__*/react.createElement("label", {
+      className: "sr-only px-md-2",
+      htmlFor: "inlineFormInput"
+    }, label), /*#__PURE__*/react.createElement("input", {
+      type: "text",
+      className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
+      placeholder: selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Please Select',
+      value: searchQuery,
+      onChange: this.handleSearchChange,
+      onFocus: this.toggleDropdown
+    }), isOpen && /*#__PURE__*/react.createElement("ul", {
+      className: `${styles.dropdownItems} col-12`
+    }, filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
+      className: styles.listItem
+    }, /*#__PURE__*/react.createElement("li", {
+      key: option,
+      onClick: () => this.handleOptionClick(option)
+    }, /*#__PURE__*/react.createElement("span", {
+      className: styles.listSpan
+    }, " ", /*#__PURE__*/react.createElement(FaUserCircle, {
+      size: 20,
+      color: "black"
+    }), option)))))))))) : "No data");
+  }
+}
+
+class Select extends react.Component {
+  constructor(props) {
+    super(props);
+    this.toggleDropdown = () => {
+      this.setState(prevState => ({
+        open: !prevState.open
+      }));
+    };
+    this.handleSearchChange = e => {
+      this.setState({
+        searchQuery: e.target.value
+      });
+    };
+    this.handleSingleOptionClick = option => {
+      this.setState({
+        singleSelect: option,
+        selectedOption: option,
+        open: false
+      });
+    };
+    this.state = {
+      open: false,
+      searchQuery: '',
+      singleSelect: '',
+      selectedOption: null
+    };
+  }
+  render() {
+    const {
+      open,
+      searchQuery,
+      singleSelect,
+      selectedOption
+    } = this.state;
+    const {
+      options,
+      type,
+      label
+    } = this.props;
+    const filteredOptions = options.filter(option => option.toLowerCase().includes(searchQuery.toLowerCase()));
+    return /*#__PURE__*/react.createElement("div", {
+      className: "container"
+    }, /*#__PURE__*/react.createElement("div", {
+      className: styles.cardMain
+    }, /*#__PURE__*/react.createElement("div", {
+      className: "col-auto"
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
@@ -5479,23 +5620,22 @@ class ExampleComponent extends react.Component {
     }, label), /*#__PURE__*/react.createElement("input", {
       type: "text",
       className: "form-control ml-0 border-0 border-bottom border-success rounded-0",
-      placeholder: singleSelect != '' ? singleSelect : 'Please Select',
+      placeholder: singleSelect !== '' ? singleSelect : 'Please Select',
       value: searchQuery,
       onChange: this.handleSearchChange,
-      onFocus: this.toggleDropdown
-    }), isOpen && /*#__PURE__*/react.createElement("ul", {
+      onFocus: this.toggleDropdown,
+      onClick: this.toggleDropdown
+    }), open && /*#__PURE__*/react.createElement("ul", {
       className: `${styles.dropdownItems} col-12`
-    }, options.map(option => /*#__PURE__*/react.createElement("div", {
-      className: styles.listItem
-    }, /*#__PURE__*/react.createElement("li", {
+    }, filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
+      className: styles.listItem,
       key: option
-    }, /*#__PURE__*/react.createElement("button", {
-      className: "dropdown-item",
-      type: "button",
+    }, /*#__PURE__*/react.createElement("li", {
+      className: `dropdown-item ${option === selectedOption ? styles.activeItem : ''}`,
       onClick: () => this.handleSingleOptionClick(option)
-    }, " ", option)))))))))));
+    }, option))))))));
   }
 }
 
-export default ExampleComponent;
+export { MultiSelect, Select };
 //# sourceMappingURL=index.es.js.map
