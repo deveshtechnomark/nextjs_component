@@ -1,0 +1,203 @@
+/* Reset default margin, display, and font properties */
+body {
+  margin: 0;
+  display: flex;
+  min-height: 30vh;
+  flex-direction: column;
+  font: 400 0.90rem sans-serif;
+  color: #7a7a8c;
+  background-position: 0 0, 25px 25px; /* Background position */
+}
+
+/* Remove underline from links and set link color */
+a {
+  text-decoration: none;
+  color: #7a7a8c;
+}
+
+/* Style for the name section */
+.name {
+  margin-bottom: 0.675rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Styles for the gear icon */
+svg.gear {
+  order: 1;
+  margin-left: 1.35rem;
+  cursor: help;
+}
+
+/* Styles for the button */
+.btn {
+  position: absolute;
+  bottom: 1.35rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Styles for the label */
+label {
+  position: relative;
+  margin: 0.675rem 1.35rem;
+  display: flex;
+  width: auto;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Hide the radio input */
+input {
+  display: none;
+}
+
+/* Styles for radio labels */
+.radio_label {
+  position: relative;
+  margin: 0.675rem 1.35rem;
+  display: flex;
+  width: auto;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Styles for the radio checkbox */
+.radio_check {
+  margin-right: 7px;
+  width: 1.35rem;
+  height: 1.35rem;
+  position: relative;
+}
+
+/* Styles for the radio checkbox border */
+.radio_border {
+  fill: none;
+  stroke: #7a7a8c;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+/* Hover styles for radio checkbox */
+.radio_check:hover .radio_border {
+  stroke: #25be9b;
+  box-shadow: 0 0 8px rgba(3, 241, 182, 0.4);
+  outline: 4px solid rgba(3, 241, 182, 0.4);
+  border-radius: 50%;
+}
+
+/* Styles for the radio dot */
+.radio_check .radio_dot {
+  fill: url(#radio_gradient);
+  transform: scale(0);
+  transform-origin: 50% 50%;
+}
+
+/* Styles for checked radio input */
+input:checked+label .radio_border {
+  stroke: url(#radio_gradient);
+  stroke-dasharray: 145;
+  stroke-dashoffset: 145;
+  animation: checked 800ms ease forwards;
+}
+
+/* Styles for checked radio dot */
+input:checked+label .radio_dot {
+  transform: scale(1);
+  transition: transform 700ms cubic-bezier(0.57, 0.21, 0.69, 3.25);
+  filter: drop-shadow(0px 0px 8px rgba(3, 241, 182, 0.4));
+  animation-fill-mode: forwards;
+}
+
+/* Styles for disabled input */
+input[disabled]+label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Styles for disabled radio border */
+input[disabled]+label .radio_border {
+  stroke: #ccc;
+}
+
+/* Styles for disabled radio dot */
+input[disabled]+label .radio_dot {
+  fill: #ccc;
+}
+
+/* Styles for disabled invalid label */
+input[disabled]+label.invalid_label .radio_border {
+  stroke: red;
+}
+
+/* Styles for disabled invalid dot */
+input[disabled]+label.invalid_label .radio_dot {
+  fill: url(#invalid_gradient);
+}
+
+/* Animation keyframes for checked radio */
+@keyframes checked {
+  0% {
+    stroke-dashoffset: 145;
+  }
+  50% {
+    stroke-dashoffset: 72.5;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Styles for invalid label */
+.invalid_label {
+  color: red;
+}
+
+/* Hover styles for invalid checkbox */
+.invalid_check:hover .invalid_border {
+  box-shadow: 0 0 8px rgba(241, 3, 3, 0.4);
+  outline: 4px solid rgba(241, 3, 3, 0.4);
+  border-radius: 50%;
+}
+
+/* Styles for invalid border */
+.invalid_border {
+  fill: none;
+  stroke: #f70000;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+/* Hover styles for invalid checkbox */
+.invalid_check:hover .invalid_border {
+  stroke: #ff0606;
+}
+
+/* Styles for invalid dot in checked input */
+.invalid_check .invalid_dot {
+  fill: url(#invalid_gradient);
+  transform: scale(0);
+  transform-origin: 50% 50%;
+}
+
+/* Styles for checked invalid border */
+input:checked+label .invalid_border {
+  stroke: url(#invalid_gradient);
+  stroke-dasharray: 145;
+  stroke-dashoffset: 145;
+  animation: checked 800ms ease forwards;
+}
+
+/* Styles for checked invalid dot */
+input:checked+label .invalid_dot {
+  transform: scale(1);
+  transition: transform 700ms cubic-bezier(0.57, 0.21, 0.69, 3.25);
+  filter: drop-shadow(0px 0px 8px rgba(213, 5, 5, 0.4));
+  animation-fill-mode: forwards;
+}
+
+/* Styles for clicked radio checkbox */
+.radio_check.clicked .radio_border {
+  filter: drop-shadow(0px 0px 8px rgba(37, 190, 155, 0.4));
+  /* Change the color values if needed */
+}
