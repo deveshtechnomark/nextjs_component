@@ -2162,6 +2162,7 @@ class Pagination extends react.Component {
     } = this.state;
     const buttons = [];
     var temp;
+    var flag = false;
     if (this.initial >= 1) {
       temp = this.initial;
     } else {
@@ -2176,6 +2177,9 @@ class Pagination extends react.Component {
             value: temp,
             onClick: e => this.handleClick(temp, e.target.value)
           }, temp));
+          if (temp === this.total - 1) {
+            flag = true;
+          }
         }
       }
       if (i === this.limit) {
@@ -2183,15 +2187,19 @@ class Pagination extends react.Component {
       }
       temp++;
     }
-    if (this.initial !== this.total - this.limit + 1) {
-      buttons.push(react.createElement("button", {
-        className: `${styles.btnStyle} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`,
-        key: "ellipsis",
-        disabled: true
-      }, "..."));
+    if (!flag) {
+      if (this.total > this.limit) {
+        if (this.initial !== this.total - this.limit + 1) {
+          buttons.push(react.createElement("button", {
+            className: `${styles.btnStyle} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`,
+            key: "ellipsis",
+            disabled: true
+          }, "..."));
+        }
+      }
     }
     buttons.push(react.createElement("button", {
-      className: `${styles.btnStyle} ${activeButton === this.total ? styles.activeBtn : ''} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`,
+      className: `${activeButton === this.total ? styles.activeBtn : ''} ${styles.btnStyle}  ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`,
       key: this.total,
       value: this.total,
       onClick: e => this.handleClick(temp, e.target.value)

@@ -33,19 +33,19 @@ class Pagination extends React.Component {
             console.log(this.initial)
           }
         }
-        this.setState((prevState) => ({ activeButton: +prevState.activeButton + 1 })); 
+        this.setState((prevState) => ({ activeButton: +prevState.activeButton + 1 }));
       }
     }
 
     else if (i === 'prev') {
       const { activeButton } = this.state;
-      if(activeButton === this.total){
+      if (activeButton === this.total) {
         this.initial = this.total - this.limit + 1
       }
       if (activeButton > 1) {
         this.setState((prevState) => ({ activeButton: prevState.activeButton - 1 }));
         if (activeButton <= this.initial) {
-            this.initial = activeButton - this.limit;
+          this.initial = activeButton - this.limit;
         }
       }
     }
@@ -72,10 +72,11 @@ class Pagination extends React.Component {
     const { activeButton } = this.state;
     const buttons = [];
     var temp;
-    if(this.initial >= 1){
-    temp = this.initial
+    var flag = false;
+    if (this.initial >= 1) {
+      temp = this.initial
     }
-    else{
+    else {
       temp = 1
     }
 
@@ -91,6 +92,9 @@ class Pagination extends React.Component {
               {temp}
             </button>
           );
+          if (temp === this.total - 1) {
+            flag = true
+          }
         }
       }
       if (i === this.limit) {
@@ -99,22 +103,25 @@ class Pagination extends React.Component {
       temp++;
     }
 
-    if (this.initial !== this.total - this.limit + 1) {
-      if()
-      buttons.push(
-        <button
-          className={`${styles.btnStyle} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`}
-          key="ellipsis"
-          disabled
-        >
-          ...
-        </button>
-      );
+    if (!flag) {
+      if (this.total > this.limit) {
+        if (this.initial !== this.total - this.limit + 1) {
+          buttons.push(
+            <button
+              className={`${styles.btnStyle} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`}
+              key="ellipsis"
+              disabled
+            >
+              ...
+            </button>
+          );
+        }
+      }
     }
 
     buttons.push(
       <button
-        className={`${styles.btnStyle} ${activeButton === this.total ? styles.activeBtn : ''} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`}
+        className={`${activeButton === this.total ? styles.activeBtn : ''} ${styles.btnStyle}  ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`}
         key={this.total} value={this.total}
         onClick={(e) => this.handleClick(temp, e.target.value)}
       >
