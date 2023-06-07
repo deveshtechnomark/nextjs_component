@@ -17,12 +17,11 @@ class RadioButton extends React.Component {
       checked: !prevState.checked,
       disabled: !prevState.disabled,
       invalid: this.props.invalid && !prevState.checked,
-      clicked: prevState.checked,
     }));
   }
 
   render() {
-    const { label, name, id, disabled, invalid, customClassName } = this.props;
+    const { label, name, id, checked, disabled, invalid, customClassName, onChange } = this.props;
     const uniqueId = `${name}_${id}`;
 
     const labelClassName = [
@@ -38,8 +37,8 @@ class RadioButton extends React.Component {
           type="radio"
           name={name}
           id={uniqueId}
-          checked={this.state.checked}
-          onChange={this.handleChange}
+          checked={checked}
+          onChange={onChange}
           disabled={disabled}
         />
         <label htmlFor={uniqueId} className={labelClassName}>
