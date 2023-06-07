@@ -531,16 +531,12 @@ video {
   box-sizing: border-box;
 }
 
-.w-full {
-  width: 100%;
-}
-
 .p-0 {
   padding: 0px;
 }
 
 .font-proxima {
-  font-family: proxima nova;
+  font-family: Proxima Nova;
 }
 
 .text-\[10px\] {

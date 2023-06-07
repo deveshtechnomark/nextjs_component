@@ -67,7 +67,7 @@ export default class Typography extends React.Component {
 
     const combinedClassName = `${styles} ${className}`;
     return (
-      <div className="w-full mx-auto p-0 box-border">
+      <div className="mx-auto p-0 box-border">
         <span
           {...this.props}
           style={style}

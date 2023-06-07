@@ -3,5 +3,4 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@import url('../fonts/proxima_nova/proximanova-regular.otf');
+@import url('../fonts/proxima_nova/stylesheet.css');

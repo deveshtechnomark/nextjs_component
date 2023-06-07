@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     fontFamily: {
-      'proxima': 'proxima nova'
+      proxima: ['Proxima Nova'],
     }
   },
   plugins: [],
