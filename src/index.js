@@ -15,6 +15,7 @@ class Pagination extends React.Component {
     this.last = null
   }
 
+
   handleClick = (i, buttonValue) => {
     if (i === 'next') {
       const { activeButton } = this.state;
@@ -24,30 +25,27 @@ class Pagination extends React.Component {
         this.setState({ activeButton: 1 });
       }
       else if (activeButton <= total) {
+        console.log(this.last, " ", activeButton);
         if (this.last == activeButton) {
           if (activeButton !== this.total) {
             this.prevLimit = this.limit
-            this.initial = activeButton + 1
+            this.initial = +activeButton + 1
+            console.log(this.initial)
           }
         }
-        this.setState((prevState) => ({ activeButton: prevState.activeButton + 1 }));
+        this.setState((prevState) => ({ activeButton: +prevState.activeButton + 1 })); 
       }
-      else if(activeButton === this.total){
-      }
-
     }
 
     else if (i === 'prev') {
       const { activeButton } = this.state;
+      if(activeButton === this.total){
+        this.initial = this.total - this.limit + 1
+      }
       if (activeButton > 1) {
         this.setState((prevState) => ({ activeButton: prevState.activeButton - 1 }));
         if (activeButton <= this.initial) {
-          if(activeButton === 2){
-            this.initial = 1
-          }
-          else{
             this.initial = activeButton - this.limit;
-          }
         }
       }
     }
@@ -63,19 +61,23 @@ class Pagination extends React.Component {
     }
 
     else {
-      const { activeButton } = this.state;
-      this.setState({ activeButton: buttonValue }, () => {
+      this.setState({ activeButton: +buttonValue }, () => {
         console.log("Active button: ", this.state.activeButton);
       });
     }
-
   }
 
   renderButtons() {
     var { grid, withSpace } = this.props;
     const { activeButton } = this.state;
     const buttons = [];
-    var temp = this.initial
+    var temp;
+    if(this.initial >= 1){
+    temp = this.initial
+    }
+    else{
+      temp = 1
+    }
 
     for (let i = 1; i <= this.limit; i++) {
       if (temp !== this.total) {
@@ -91,13 +93,14 @@ class Pagination extends React.Component {
           );
         }
       }
-      if (i == this.limit) {
+      if (i === this.limit) {
         this.last = temp
       }
       temp++;
     }
 
     if (this.initial !== this.total - this.limit + 1) {
+      if()
       buttons.push(
         <button
           className={`${styles.btnStyle} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`}
@@ -108,7 +111,6 @@ class Pagination extends React.Component {
         </button>
       );
     }
-
 
     buttons.push(
       <button
@@ -131,7 +133,7 @@ class Pagination extends React.Component {
       <div className='main-div'>
         {last ? (
           <button
-            className={`${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''}`}
+            className={`${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `}
             onClick={() => this.handleClick('first')}
           >
             First

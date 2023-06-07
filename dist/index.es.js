@@ -2096,33 +2096,31 @@ class Pagination extends react.Component {
             activeButton: 1
           });
         } else if (activeButton <= total) {
+          console.log(this.last, " ", activeButton);
           if (this.last == activeButton) {
             if (activeButton !== this.total) {
               this.prevLimit = this.limit;
-              this.initial = activeButton + 1;
+              this.initial = +activeButton + 1;
+              console.log(this.initial);
             }
           }
           this.setState(prevState => ({
-            activeButton: prevState.activeButton + 1
+            activeButton: +prevState.activeButton + 1
           }));
-        } else if (activeButton === this.total) {
-          console.log("this is active button");
         }
       } else if (i === 'prev') {
         const {
           activeButton
         } = this.state;
-        console.log("Prev active button: ", activeButton);
+        if (activeButton === this.total) {
+          this.initial = this.total - this.limit + 1;
+        }
         if (activeButton > 1) {
           this.setState(prevState => ({
             activeButton: prevState.activeButton - 1
           }));
           if (activeButton <= this.initial) {
-            if (activeButton === 2) {
-              this.initial = 1;
-            } else {
-              this.initial = activeButton - this.limit;
-            }
+            this.initial = activeButton - this.limit;
           }
         }
       } else if (i === '>>' || i === "last") {
@@ -2136,12 +2134,8 @@ class Pagination extends react.Component {
           activeButton: 1
         }));
       } else {
-        const {
-          activeButton
-        } = this.state;
-        console.log("Button button: ", buttonValue);
         this.setState({
-          activeButton: buttonValue
+          activeButton: +buttonValue
         }, () => {
           console.log("Active button: ", this.state.activeButton);
         });
@@ -2165,7 +2159,12 @@ class Pagination extends react.Component {
       activeButton
     } = this.state;
     const buttons = [];
-    var temp = this.initial;
+    var temp;
+    if (this.initial >= 1) {
+      temp = this.initial;
+    } else {
+      temp = 1;
+    }
     for (let i = 1; i <= this.limit; i++) {
       if (temp !== this.total) {
         if (temp <= this.total) {
@@ -2177,13 +2176,11 @@ class Pagination extends react.Component {
           }, temp));
         }
       }
-      if (i == this.limit) {
+      if (i === this.limit) {
         this.last = temp;
       }
       temp++;
     }
-
-    // if (i === this.limit && this.total > this.limit) {
     if (this.initial !== this.total - this.limit + 1) {
       buttons.push(react.createElement("button", {
         className: `${styles.btnStyle} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`,
@@ -2210,7 +2207,7 @@ class Pagination extends react.Component {
     return react.createElement("div", {
       className: "main-div"
     }, last ? react.createElement("button", {
-      className: `${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''}`,
+      className: `${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `,
       onClick: () => this.handleClick('first')
     }, "First") : react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === '<<' ? styles.activeBtn : ''}`,
