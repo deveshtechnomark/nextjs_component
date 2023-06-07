@@ -2324,7 +2324,7 @@ class Select extends react.Component {
       open
     } = this.state;
     return react.createElement("div", {
-      className: "w-full md:w-72 font-medium flex-row"
+      className: "w-72 md:w-72 font-medium flex-row"
     }, react.createElement("label", {
       className: classnames("text-sm font-normal text-gray-700", open && "text-green-700"),
       htmlFor: "select"

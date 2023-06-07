@@ -38,7 +38,7 @@ class Select extends React.Component {
     const { selected, open } = this.state;
 
     return (
-      <div className="w-full md:w-72 font-medium flex-row">
+      <div className="w-72 md:w-72 font-medium flex-row">
         <label
           className={classNames(
             "text-sm font-normal text-gray-700",
@@ -48,6 +48,7 @@ class Select extends React.Component {
         >
           {label}
         </label>
+
         <div
           onClick={this.handleToggleOpen}
           id="select"
