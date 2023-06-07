@@ -1,0 +1,7 @@
+/* you can write your style code here if any... */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import url('../fonts/proxima_nova/proximanova-regular.otf');
