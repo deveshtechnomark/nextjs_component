@@ -1,0 +1,88 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+label {
+  position: relative;
+  display: flex;
+  width: auto;
+  align-items: center;
+  font-family: "Proxima Nova";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.02em;
+  color: #212529;
+  cursor: pointer;
+}
+
+.__invalidLabel {
+  color: #dc3545;
+}
+
+.check {
+  margin: 2px 0px;
+  margin-right: 0.3em;
+  width: 18px;
+  height: 18px;
+}
+
+.check #border {
+  fill: none;
+  stroke: #7a7a8c;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.invalidCheck #border {
+  stroke: #dc3545;
+}
+
+.check #dot {
+  fill: url(#gradient);
+  transform: scale(0);
+  transform-origin: 50% 50%;
+}
+
+.__radio {
+  height: 0;
+  width: 0;
+  appearance: none;
+  position: absolute;
+}
+
+.__radio:focus + label > .check {
+  box-shadow: 0 0 0 4px #64dbc980;
+  border-radius: 50%;
+}
+
+.__radio:focus + label > .invalidCheck {
+  box-shadow: 0 0 0 4px #dc354680;
+  border-radius: 50%;
+}
+
+.__radio:checked + label svg #border {
+  stroke: url(#gradient);
+  stroke-dasharray: 145;
+  stroke-dashoffset: 145;
+  animation: checked 500ms ease forwards;
+}
+
+.__radio:checked + label svg #dot {
+  transform: scale(1);
+  transition: transform 500ms cubic-bezier(0.57, 0.21, 0.69, 3.25);
+}
+
+.__radio:disabled + label {
+  opacity: 0.5;
+}
+
+@keyframes checked {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
