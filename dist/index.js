@@ -3133,7 +3133,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 });
 
-var styles = {"container":"styles-module_container__DmMTy","__invalidLabel":"styles-module___invalidLabel__1oqk4","check":"styles-module_check__2kRvT","border":"styles-module_border__18Hao","invalidCheck":"styles-module_invalidCheck__1VHED","dot":"styles-module_dot__f4ZVh","__radio":"styles-module___radio__WyngD","checked":"styles-module_checked__kAlPq"};
+var styles = {"container":"styles-module_container__DmMTy","invalidLabel":"styles-module_invalidLabel__1Ij5o","check":"styles-module_check__2kRvT","border":"styles-module_border__18Hao","invalidCheck":"styles-module_invalidCheck__1VHED","dot":"styles-module_dot__f4ZVh","__radio":"styles-module___radio__WyngD","checked":"styles-module_checked__kAlPq"};
 
 class Radio extends react.Component {
   constructor(props) {
@@ -3154,23 +3154,11 @@ class Radio extends react.Component {
       id: id
     }, this.props)), /*#__PURE__*/react.createElement("label", {
       htmlFor: id,
-      className: variant === "invalid" ? styles.__invalidLabel : ""
+      className: variant === "invalid" ? styles.invalidLabel : ""
     }, /*#__PURE__*/react.createElement("svg", {
-      className: `${styles.check} ${variant === "invalid" && styles.invalidCheck}`,
+      className: `${styles.check} ${variant === "invalid" ? styles.invalidCheck : ""}`,
       viewBox: "0 0 40 40"
-    }, /*#__PURE__*/react.createElement("defs", null, /*#__PURE__*/react.createElement("linearGradient", {
-      id: "gradient",
-      x1: "0",
-      y1: "0",
-      x2: "0",
-      y2: "100%"
-    }, /*#__PURE__*/react.createElement("stop", {
-      offset: "0%",
-      stopColor: variant !== "invalid" ? "#02B89D" : "#dc3545"
-    }), /*#__PURE__*/react.createElement("stop", {
-      offset: "100%",
-      stopColor: variant !== "invalid" ? "#02B89D" : "#dc3545"
-    }))), /*#__PURE__*/react.createElement("circle", {
+    }, /*#__PURE__*/react.createElement("circle", {
       id: styles.border,
       r: "18px",
       cx: "20px",

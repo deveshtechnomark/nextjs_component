@@ -23,26 +23,14 @@ export default class Radio extends React.Component {
         />
         <label
           htmlFor={id}
-          className={variant === "invalid" ? styles.__invalidLabel : ""}
+          className={variant === "invalid" ? styles.invalidLabel : ""}
         >
           <svg
             className={`${styles.check} ${
-              variant === "invalid" && styles.invalidCheck
+              variant === "invalid" ? styles.invalidCheck : ""
             }`}
             viewBox="0 0 40 40"
           >
-            <defs>
-              <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%">
-                <stop
-                  offset="0%"
-                  stopColor={variant !== "invalid" ? "#02B89D" : "#dc3545"}
-                ></stop>
-                <stop
-                  offset="100%"
-                  stopColor={variant !== "invalid" ? "#02B89D" : "#dc3545"}
-                ></stop>
-              </linearGradient>
-            </defs>
             <circle id={styles.border} r="18px" cx="20px" cy="20px"></circle>
             <circle id={styles.dot} r="8px" cx="20px" cy="20px"></circle>
           </svg>
