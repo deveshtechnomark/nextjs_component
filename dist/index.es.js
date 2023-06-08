@@ -2078,7 +2078,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"btnStyle":"styles_btnStyle__wvdyK","activeBtn":"styles_activeBtn__kHobu","gridStyle":"styles_gridStyle__3uQ9V","withSpace":"styles_withSpace__2LkxR"};
+var styles = {"btnStyle":"styles_btnStyle__wvdyK","activeBtn":"styles_activeBtn__kHobu","gridStyle":"styles_gridStyle__3uQ9V","withSpace":"styles_withSpace__2LkxR","firstButton":"styles_firstButton__3oWeD","lastButton":"styles_lastButton__1rV4e"};
 
 class Pagination extends react.Component {
   constructor(props) {
@@ -2096,12 +2096,10 @@ class Pagination extends react.Component {
             activeButton: 1
           });
         } else if (activeButton <= total) {
-          console.log(this.last, " ", activeButton);
           if (this.last == activeButton) {
             if (activeButton !== this.total) {
               this.prevLimit = this.limit;
               this.initial = +activeButton + 1;
-              console.log(this.initial);
             }
           }
           this.setState(prevState => ({
@@ -2136,8 +2134,6 @@ class Pagination extends react.Component {
       } else {
         this.setState({
           activeButton: +buttonValue
-        }, () => {
-          console.log("Active button: ", this.state.activeButton);
         });
       }
     });
@@ -2151,16 +2147,20 @@ class Pagination extends react.Component {
     this.last = null;
   }
   renderButtons() {
-    var {
-      grid,
-      withSpace
-    } = this.props;
     const {
       activeButton
     } = this.state;
     const buttons = [];
-    var temp;
-    var flag = false;
+    const {
+      grid,
+      withSpace
+    } = this.props;
+    let temp;
+    let flag = false;
+    let applyBorder = false;
+    if (grid && !withSpace || !grid && !withSpace) {
+      applyBorder = true;
+    }
     if (this.initial >= 1) {
       temp = this.initial;
     } else {
@@ -2169,8 +2169,11 @@ class Pagination extends react.Component {
     for (let i = 1; i <= this.limit; i++) {
       if (temp !== this.total) {
         if (temp <= this.total) {
+          const isFirstButton = temp === 1;
+          const firstButton = isFirstButton && !withSpace;
+          const btnClassNames = [styles.btnStyle, activeButton === temp ? styles.activeBtn : '', grid ? styles.gridStyle : '', withSpace ? styles.withSpace : '', firstButton ? styles.firstButton : ''].join(' ');
           buttons.push(react.createElement("button", {
-            className: `${styles.btnStyle} ${activeButton === temp ? styles.activeBtn : ''} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`,
+            className: btnClassNames,
             key: temp,
             value: temp,
             onClick: e => this.handleClick(temp, e.target.value)
@@ -2197,45 +2200,47 @@ class Pagination extends react.Component {
       }
     }
     buttons.push(react.createElement("button", {
-      className: `${activeButton === this.total ? styles.activeBtn : ''} ${styles.btnStyle}  ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''}`,
+      className: `${activeButton === this.total ? styles.activeBtn : ''} ${styles.btnStyle} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''} ${applyBorder === true ? styles.lastButton : ''}`,
       key: this.total,
       value: this.total,
-      onClick: e => this.handleClick(temp, e.target.value)
+      onClick: e => this.handleClick(this.total, e.target.value)
     }, this.total));
     return buttons;
   }
   render() {
     const {
       next,
-      last
+      last,
+      arrows,
+      className
     } = this.props;
     const {
       activeButton
     } = this.state;
     return react.createElement("div", {
-      className: "main-div"
+      className: `${className ? className : ''}`
     }, last ? react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `,
       onClick: () => this.handleClick('first')
-    }, "First") : react.createElement("button", {
+    }, "First") : arrows && react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === '<<' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('<<')
     }, "<<"), next ? react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'prev' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('prev')
-    }, "Prev") : react.createElement("button", {
+    }, "Prev") : arrows && react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'prev' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('prev')
     }, "<"), this.renderButtons(), next ? react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'next' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('next')
-    }, "Next") : react.createElement("button", {
+    }, "Next") : arrows && react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'next' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('next')
     }, ">"), last ? react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'last' ? styles.activeBtn : ''} `,
       onClick: () => this.handleClick('last')
-    }, "Last") : react.createElement("button", {
+    }, "Last") : arrows && react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === '>>' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('>>')
     }, ">>"));
