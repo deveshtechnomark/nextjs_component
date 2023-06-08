@@ -5,33 +5,24 @@ class RadioButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: props.checked || false,
       disabled: props.disabled || false,
       invalid: props.invalid || false,
+      checked: props.checked || false,
+      name: props.name, 
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange() {
-    const { onChange } = this.props;
-    this.setState(
-      (prevState) => ({
-        checked: !prevState.checked,
-        disabled: !prevState.disabled,
-        invalid: this.props.invalid && !prevState.checked,
-      }),
-      () => {
-        if (onChange) {
-          onChange(this.state.checked);
-        }
-      }
-    );
+    const { invalid } = this.state;
+    this.setState({
+      invalid: invalid,
+    });
   }
 
   render() {
-    const { label, id, disabled, invalid, customClassName } = this.props;
-    const { checked } = this.state;
-    const uniqueId = `${id}_${label}`;
+    const { label, id, disabled, invalid, customClassName, value, checked } = this.props;
+    const { name } = this.state;
 
     const labelClassName = [
       styles.radio_label,
@@ -44,13 +35,15 @@ class RadioButton extends React.Component {
       <React.Fragment>
         <input
           type="radio"
-          id={uniqueId}
-          checked={checked}
+          id={id}
+          name={name}
           onChange={this.handleChange}
           disabled={disabled}
+          checked={checked}
+          value={value}
         />
-        <label htmlFor={uniqueId} className={labelClassName}>
-          <svg
+        <label htmlFor={id} className={labelClassName}>
+        <svg
             className={`${styles.radio_check} ${invalid ? styles.invalid_check : ''}`}
             viewBox="0 0 40 40"
           >
@@ -65,17 +58,13 @@ class RadioButton extends React.Component {
               </linearGradient>
             </defs>
             <circle
-              className={`${styles.radio_border} ${
-                invalid ? styles.invalid_border : ''
-              }`}
+              className={`${styles.radio_border} ${invalid ? styles.invalid_border : ''}`}
               r="14px"
               cx="20px"
               cy="20px"
             ></circle>
             <circle
-              className={`${styles.radio_dot} ${
-                invalid ? styles.invalid_dot : ''
-              }`}
+              className={`${styles.radio_dot} ${invalid ? styles.invalid_dot : ''}`}
               r="6px"
               cx="20px"
               cy="20px"

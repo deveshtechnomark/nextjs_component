@@ -99,6 +99,10 @@ input:checked+label .radio_border {
   stroke-dasharray: 145;
   stroke-dashoffset: 145;
   animation: checked 800ms ease forwards;
+  box-shadow: 0 0 8px rgba(3, 241, 182, 0.4);
+  outline: 4px solid rgba(3, 241, 182, 0.4);
+  border-radius: 50%;
+
 }
 
 /* Styles for checked radio dot */
@@ -186,6 +190,9 @@ input:checked+label .invalid_border {
   stroke-dasharray: 145;
   stroke-dashoffset: 145;
   animation: checked 800ms ease forwards;
+  box-shadow: 0 0 8px rgba(241, 3, 3, 0.4);
+  outline: 4px solid rgba(241, 3, 3, 0.4);
+  border-radius: 50%;
 }
 
 /* Styles for checked invalid dot */
