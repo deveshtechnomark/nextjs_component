@@ -1,15 +1,15 @@
 import React from "react";
 import { BiChevronDown } from "react-icons/bi";
+import { FaUserAlt } from "react-icons/fa";
 import classNames from "classnames";
 import "../styles/styles.css";
 
-class SelectSearch extends React.Component {
+class SelectWithIcon extends React.Component {
   constructor(props) {
     super(props);
-    const { defaultValue, select } = props;
+    const { defaultValue } = props;
     this.state = {
-      inputValue: "",
-      selected: defaultValue || "",
+      selected: defaultValue || [],
       open: false,
     };
     this.selectRef = React.createRef();
@@ -33,13 +33,23 @@ class SelectSearch extends React.Component {
   };
 
   handleSelect = (value) => {
+    const { selected } = this.state;
+    const selectedIndex = selected.indexOf(value);
+    let updatedSelected = [];
+
+    if (selectedIndex === -1) {
+      // Value is not selected, add it to the selection
+      updatedSelected = [...selected, value];
+    } else {
+      // Value is already selected, remove it from the selection
+      updatedSelected = [
+        ...selected.slice(0, selectedIndex),
+        ...selected.slice(selectedIndex + 1),
+      ];
+    }
+
     this.setState({
-      selected: value,
-      open: false,
-      inputValue: "",
-    },
-    () => {
-      console.log(value);
+      selected: updatedSelected,
     });
   };
 
@@ -49,15 +59,23 @@ class SelectSearch extends React.Component {
     }));
   };
 
-  handleInputChange = (e) => {
-    this.setState({
-      inputValue: e.target.value.toLowerCase(),
-    });
-  };
-
   render() {
     const { options, label } = this.props;
-    const { inputValue, selected, open } = this.state;
+    const { selected, open } = this.state;
+
+    const selectedDisplay =
+      selected.length > 0 ? (
+        selected.length > 2 ? (
+          <>
+            {selected.slice(0, 2).join(", ")}
+            <span className="ml-2">+{selected.length - 2}</span>
+          </>
+        ) : (
+          selected.join(", ")
+        )
+      ) : (
+        "Select.."
+      );
 
     return (
       <div
@@ -79,17 +97,13 @@ class SelectSearch extends React.Component {
           id="select"
           className={classNames(
             "flex justify-between bg-white border-b border-gray-300 text-gray-800 p-2 text-base font-normal transition-colors duration-300",
-            !selected && "text-gray-800",
+            selected.length === 0 && "text-gray-800",
             open && "text-green-700",
             !open ? "cursor-pointer" : "cursor-default",
             "hover:border-green-700"
           )}
         >
-          {selected
-            ? selected.length > 25
-              ? selected.substring(0, 25) + "..."
-              : selected
-            : "Select.."}
+          {selectedDisplay}
           <BiChevronDown
             size={20}
             color="black"
@@ -101,7 +115,7 @@ class SelectSearch extends React.Component {
 
         <ul
           className={classNames(
-            "absolute z-10 bg-white mt-2 w-full overflow-y-auto shadow-md transition-transform",
+            "absolute z-10 bg-white w-full mt-2 overflow-y-auto shadow-md transition-transform",
             open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300",
@@ -110,17 +124,6 @@ class SelectSearch extends React.Component {
             }
           )}
         >
-          <div className="flex items-center px-1 sticky top-0 bg-white">
-            {/* <AiOutlineSearch size={18} className="text-gray-700" /> */}
-            <input
-              type="text"
-              placeholder="Search..."
-              className="placeholder:text-gray-700 p-2 outline-none text-sm font-normal"
-              value={inputValue}
-              onChange={this.handleInputChange}
-            />
-          </div>
-
           {options &&
             options.map((option) => (
               <li
@@ -128,18 +131,19 @@ class SelectSearch extends React.Component {
                 className={classNames(
                   "p-3 text-sm hover:bg-gray-200 font-normal cursor-pointer",
                   {
-                    "bg-gray-200": option.value === selected,
-                    hidden:
-                      !option.label.toLowerCase().startsWith(inputValue) &&
-                      !option.label.toLowerCase().includes(inputValue),
+                    "bg-gray-200": selected.includes(option.value),
                   }
                 )}
-                onClick={() => {
-                  if (option.value !== selected) {
-                    this.handleSelect(option.value);
-                  }
-                }}
+                onClick={() => this.handleSelect(option.value)}
               >
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={selected.includes(option.value)}
+                  onChange={() => this.handleSelect(option.value)}
+                />
+
+                {/* <FaUserAlt className="mr-2" /> */}
                 {option.label}
               </li>
             ))}
@@ -149,4 +153,4 @@ class SelectSearch extends React.Component {
   }
 }
 
-export { SelectSearch };
+export { SelectWithIcon };

@@ -9,9 +9,27 @@ class MultiSelectCheck extends React.Component {
     const { defaultValue } = props;
     this.state = {
       selected: defaultValue || [],
-      open: false
+      open: false,
     };
+    this.selectRef = React.createRef();
   }
+
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
+  }
+
+  handleOutsideClick = (event) => {
+    if (
+      this.selectRef.current &&
+      !this.selectRef.current.contains(event.target)
+    ) {
+      this.setState({ open: false });
+    }
+  };
 
   handleSelect = (value) => {
     const { selected } = this.state;
@@ -23,17 +41,20 @@ class MultiSelectCheck extends React.Component {
       updatedSelected = [...selected, value];
     } else {
       // Value is already selected, remove it from the selection
-      updatedSelected = [...selected.slice(0, selectedIndex), ...selected.slice(selectedIndex + 1)];
+      updatedSelected = [
+        ...selected.slice(0, selectedIndex),
+        ...selected.slice(selectedIndex + 1),
+      ];
     }
 
     this.setState({
-      selected: updatedSelected
+      selected: updatedSelected,
     });
   };
 
   handleToggleOpen = () => {
     this.setState((prevState) => ({
-      open: !prevState.open
+      open: !prevState.open,
     }));
   };
 
@@ -41,22 +62,26 @@ class MultiSelectCheck extends React.Component {
     const { options, label } = this.props;
     const { selected, open } = this.state;
 
-    const selectedDisplay = selected.length > 0 ? (
-      selected.length > 2 ? (
-        <>
-          {selected.slice(0, 2).join(", ")}
-          <span className="ml-2">+{selected.length - 2}</span>
-        </>
+    const selectedDisplay =
+      selected.length > 0 ? (
+        selected.length > 2 ? (
+          <>
+            {selected.slice(0, 2).join(", ")}
+            <span className="ml-2">+{selected.length - 2}</span>
+          </>
+        ) : (
+          selected.join(", ")
+        )
       ) : (
-        selected.join(", ")
-      )
-    ) : (
-      "Select.."
-    );
-    
+        "Select.."
+      );
 
     return (
-      <div className="w-full md:w-72 font-medium flex-row">
+      <div
+        className="relative font-medium flex-row"
+        ref={this.selectRef}
+        style={{width:"215px"}}
+      >
         <label
           className={classNames(
             "text-sm font-normal text-gray-700",
@@ -82,19 +107,19 @@ class MultiSelectCheck extends React.Component {
             size={20}
             color="black"
             className={classNames({
-              "rotate-180": open
+              "rotate-180": open,
             })}
           />
         </div>
 
         <ul
           className={classNames(
-            "bg-white mt-2 overflow-y-auto shadow-md transition-transform",
+            "absolute z-10 bg-white w-full mt-2 overflow-y-auto shadow-md transition-transform",
             open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300",
             {
-              "ease-out": open
+              "ease-out": open,
             }
           )}
         >
@@ -105,7 +130,7 @@ class MultiSelectCheck extends React.Component {
                 className={classNames(
                   "p-3 text-sm hover:bg-gray-200 font-normal cursor-pointer",
                   {
-                    "bg-gray-200": selected.includes(option.value)
+                    "bg-gray-200": selected.includes(option.value),
                   }
                 )}
                 onClick={() => this.handleSelect(option.value)}

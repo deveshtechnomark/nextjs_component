@@ -2138,11 +2138,10 @@ function IconBase(props) {
 // THIS FILE IS AUTO GENERATED
 function BiChevronDown (props) {
   return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 24 24"},"child":[{"tag":"path","attr":{"d":"M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"}}]})(props);
-}
-
-// THIS FILE IS AUTO GENERATED
-function AiOutlineSearch (props) {
-  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 1024 1024"},"child":[{"tag":"path","attr":{"d":"M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"}}]})(props);
+}function BiUserCircle (props) {
+  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 24 24"},"child":[{"tag":"path","attr":{"d":"M12 2A10.13 10.13 0 0 0 2 12a10 10 0 0 0 4 7.92V20h.1a9.7 9.7 0 0 0 11.8 0h.1v-.08A10 10 0 0 0 22 12 10.13 10.13 0 0 0 12 2zM8.07 18.93A3 3 0 0 1 11 16.57h2a3 3 0 0 1 2.93 2.36 7.75 7.75 0 0 1-7.86 0zm9.54-1.29A5 5 0 0 0 13 14.57h-2a5 5 0 0 0-4.61 3.07A8 8 0 0 1 4 12a8.1 8.1 0 0 1 8-8 8.1 8.1 0 0 1 8 8 8 8 0 0 1-2.39 5.64z"}},{"tag":"path","attr":{"d":"M12 6a3.91 3.91 0 0 0-4 4 3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4zm0 6a1.91 1.91 0 0 1-2-2 1.91 1.91 0 0 1 2-2 1.91 1.91 0 0 1 2 2 1.91 1.91 0 0 1-2 2z"}}]})(props);
+}function BiX (props) {
+  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 24 24"},"child":[{"tag":"path","attr":{"d":"m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"}}]})(props);
 }
 
 var classnames = createCommonjsModule(function (module) {
@@ -2204,11 +2203,20 @@ var classnames = createCommonjsModule(function (module) {
 class SelectSearch extends react.Component {
   constructor(props) {
     super(props);
+    this.handleOutsideClick = event => {
+      if (this.selectRef.current && !this.selectRef.current.contains(event.target)) {
+        this.setState({
+          open: false
+        });
+      }
+    };
     this.handleSelect = value => {
       this.setState({
         selected: value,
         open: false,
         inputValue: ""
+      }, () => {
+        console.log(value);
       });
     };
     this.handleToggleOpen = () => {
@@ -2222,13 +2230,21 @@ class SelectSearch extends react.Component {
       });
     };
     const {
-      defaultValue
+      defaultValue,
+      select
     } = props;
     this.state = {
       inputValue: "",
       selected: defaultValue || "",
       open: false
     };
+    this.selectRef = react.createRef();
+  }
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
   }
   render() {
     const {
@@ -2241,7 +2257,11 @@ class SelectSearch extends react.Component {
       open
     } = this.state;
     return react.createElement("div", {
-      className: "w-full md:w-72 font-medium flex-row"
+      className: "relative font-medium flex-row",
+      ref: this.selectRef,
+      style: {
+        width: "215px"
+      }
     }, react.createElement("label", {
       className: classnames("text-sm font-normal text-gray-700", open && "text-green-700"),
       htmlFor: "select"
@@ -2256,15 +2276,12 @@ class SelectSearch extends react.Component {
         "rotate-180": open
       })
     })), react.createElement("ul", {
-      className: classnames("bg-white mt-2 overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
+      className: classnames("absolute z-10 bg-white mt-2 w-full overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
         "ease-out": open
       })
     }, react.createElement("div", {
       className: "flex items-center px-1 sticky top-0 bg-white"
-    }, react.createElement(AiOutlineSearch, {
-      size: 18,
-      className: "text-gray-700"
-    }), react.createElement("input", {
+    }, react.createElement("input", {
       type: "text",
       placeholder: "Search...",
       className: "placeholder:text-gray-700 p-2 outline-none text-sm font-normal",
@@ -2288,73 +2305,120 @@ class SelectSearch extends react.Component {
 class Select extends react.Component {
   constructor(props) {
     super(props);
-    this.handleSelect = value => {
-      this.setState({
-        selected: value,
-        open: false
-      }, () => {
-        console.log(value);
-        this.props.onSelect(value); // Call the onSelect callback prop
-      });
+    this.handleOutsideClick = event => {
+      if (this.selectRef.current && !this.selectRef.current.contains(event.target)) {
+        this.setState({
+          open: false
+        });
+      }
     };
     this.handleToggleOpen = () => {
       this.setState(prevState => ({
         open: !prevState.open
       }));
     };
-    const {
-      defaultValue
-    } = props;
+    this.handleInputChange = e => {
+      const inputValue = e.target.value.toLowerCase();
+      this.setState({
+        inputValue
+      });
+    };
+    this.handleSelect = value => {
+      this.setState({
+        inputValue: value,
+        open: false
+      }, () => {
+        console.log(value);
+        this.props.onSelect(value); // Calling the onSelect callback prop for fetching value
+      });
+    };
     this.state = {
-      selected: defaultValue || "",
+      inputValue: "",
       open: false
     };
+    this.selectRef = react.createRef();
+  }
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
   }
   render() {
     const {
       options,
-      label
+      label,
+      type
     } = this.props;
     const {
-      selected,
-      open
+      open,
+      inputValue
     } = this.state;
     return react.createElement("div", {
-      className: "w-72 md:w-72 font-medium flex-row"
+      className: "relative font-medium flex-row border-b border-gray-300 hover:border-CSgreen transition-colors duration-300",
+      ref: this.selectRef,
+      style: {
+        width: "215px"
+      }
     }, react.createElement("label", {
-      className: classnames("text-sm font-normal text-gray-700", open && "text-green-700"),
+      className: classnames("text-sm font-normal text-gray-700", open && "text-CSgreen"),
       htmlFor: "select"
     }, label), react.createElement("div", {
-      onClick: this.handleToggleOpen,
+      className: "flex flex-row items-center justify-center relative mt-0.5"
+    }, react.createElement("input", {
       id: "select",
-      className: classnames("flex justify-between bg-white border-b border-gray-300 text-gray-800 p-2 text-base font-normal transition-colors duration-300", !selected && "text-gray-800", open && "text-green-700", !open ? "cursor-pointer" : "cursor-default", "hover:border-green-700")
-    }, selected ? selected.length > 25 ? selected.substring(0, 25) + "..." : selected : "Select..", react.createElement(BiChevronDown, {
-      size: 20,
-      color: "black",
+      onClick: this.handleToggleOpen,
+      onChange: this.handleInputChange,
+      readOnly: !open,
+      placeholder: "Please Select...",
+      value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
+      style: {
+        width: "191px"
+      },
+      className: classnames("flex-grow bg-white text-gray-800 p-2 text-[16px] font-normal", !inputValue && "text-gray-800", open && "text-CSgreen", !open ? "cursor-pointer" : "cursor-default", "outline-none", !open ? "placeholder-gray-600" : "placeholder-CSgreen")
+    }), react.createElement(BiChevronDown, {
+      size: 24,
+      color: "#333333",
+      onClick: this.handleToggleOpen,
       className: classnames({
         "rotate-180": open
-      })
+      }, "cursor-pointer")
     })), react.createElement("ul", {
-      className: classnames("bg-white mt-2 overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
+      className: classnames("absolute z-10 w-full bg-white mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
         "ease-out": open
       })
     }, options && options.map(option => react.createElement("li", {
       key: option.value,
-      className: classnames("p-3 text-sm hover:bg-gray-200 font-normal cursor-pointer", {
-        "bg-gray-200": option.value === selected
+      className: classnames("p-[10px] text-sm hover:bg-gray-200 font-normal cursor-pointer flex",
+      // Add 'flex' class
+      {
+        "bg-gray-200": option.value === inputValue,
+        hidden: !option.label.toLowerCase().startsWith(inputValue)
       }),
       onClick: () => {
-        if (option.value !== selected) {
+        if (option.value !== inputValue) {
           this.handleSelect(option.value);
         }
       }
-    }, option.label))));
+    }, type === "icons" && react.createElement("span", {
+      className: "mr-2 flex-shrink-0 items-center"
+    }, react.createElement(BiUserCircle, {
+      size: 20,
+      color: "#333333"
+    })), option.label))));
   }
 }
 
 class MultiSelectCheck extends react.Component {
   constructor(props) {
     super(props);
+    this.handleOutsideClick = event => {
+      if (this.selectRef.current && !this.selectRef.current.contains(event.target)) {
+        this.setState({
+          open: false
+        });
+      }
+    };
     this.handleSelect = value => {
       const {
         selected
@@ -2384,6 +2448,13 @@ class MultiSelectCheck extends react.Component {
       selected: defaultValue || [],
       open: false
     };
+    this.selectRef = react.createRef();
+  }
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
   }
   render() {
     const {
@@ -2398,7 +2469,11 @@ class MultiSelectCheck extends react.Component {
       className: "ml-2"
     }, "+", selected.length - 2)) : selected.join(", ") : "Select..";
     return react.createElement("div", {
-      className: "w-full md:w-72 font-medium flex-row"
+      className: "relative font-medium flex-row",
+      ref: this.selectRef,
+      style: {
+        width: "215px"
+      }
     }, react.createElement("label", {
       className: classnames("text-sm font-normal text-gray-700", open && "text-green-700"),
       htmlFor: "select"
@@ -2413,7 +2488,7 @@ class MultiSelectCheck extends react.Component {
         "rotate-180": open
       })
     })), react.createElement("ul", {
-      className: classnames("bg-white mt-2 overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
+      className: classnames("absolute z-10 bg-white w-full mt-2 overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
         "ease-out": open
       })
     }, options && options.map(option => react.createElement("li", {
@@ -2431,77 +2506,16 @@ class MultiSelectCheck extends react.Component {
   }
 }
 
-class SelectCheck extends react.Component {
+class MultiSelectChip extends react.Component {
   constructor(props) {
     super(props);
-    this.handleSelect = value => {
-      this.setState({
-        selected: [value],
-        open: false
-      });
+    this.handleOutsideClick = event => {
+      if (this.selectRef.current && !this.selectRef.current.contains(event.target)) {
+        this.setState({
+          open: false
+        });
+      }
     };
-    this.handleToggleOpen = () => {
-      this.setState(prevState => ({
-        open: !prevState.open
-      }));
-    };
-    const {
-      defaultValue
-    } = props;
-    this.state = {
-      selected: defaultValue || [],
-      open: false
-    };
-  }
-  render() {
-    const {
-      options,
-      label
-    } = this.props;
-    const {
-      selected,
-      open
-    } = this.state;
-    const selectedDisplay = selected.length > 0 ? selected.length > 2 ? react.createElement(react.Fragment, null, selected.slice(0, 2).join(", "), react.createElement("span", {
-      className: "ml-2"
-    }, "+", selected.length - 2)) : selected.join(", ") : "Select..";
-    return react.createElement("div", {
-      className: "w-full md:w-72 font-medium flex-row"
-    }, react.createElement("label", {
-      className: classnames("text-sm font-normal text-gray-700", open && "text-green-700"),
-      htmlFor: "select"
-    }, label), react.createElement("div", {
-      onClick: this.handleToggleOpen,
-      id: "select",
-      className: classnames("flex justify-between bg-white border-b border-gray-300 text-gray-800 p-2 text-base font-normal transition-colors duration-300", selected.length === 0 && "text-gray-800", open && "text-green-700", !open ? "cursor-pointer" : "cursor-default", "hover:border-green-700")
-    }, selectedDisplay, react.createElement(BiChevronDown, {
-      size: 20,
-      color: "black",
-      className: classnames({
-        "rotate-180": open
-      })
-    })), react.createElement("ul", {
-      className: classnames("bg-white mt-2 overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
-        "ease-out": open
-      })
-    }, options && options.map(option => react.createElement("li", {
-      key: option.value,
-      className: classnames("p-3 text-sm hover:bg-gray-200 font-normal cursor-pointer", {
-        "bg-gray-200": selected.includes(option.value)
-      }),
-      onClick: () => this.handleSelect(option.value)
-    }, react.createElement("input", {
-      type: "checkbox",
-      className: "mr-2",
-      checked: selected[0] === option.value,
-      onChange: () => this.handleSelect(option.value)
-    }), option.label))));
-  }
-}
-
-class MultiSelect extends react.Component {
-  constructor(props) {
-    super(props);
     this.handleSelect = value => {
       const {
         selected
@@ -2534,51 +2548,93 @@ class MultiSelect extends react.Component {
       selected: defaultValue || [],
       open: false
     };
+    this.selectRef = react.createRef();
+  }
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
   }
   render() {
     const {
       options,
-      label
+      label,
+      type
     } = this.props;
     const {
       selected,
       open
     } = this.state;
-    const selectedDisplay = selected.length > 0 ? selected.length > 2 ? react.createElement(react.Fragment, null, selected.slice(0, 2).join(", "), react.createElement("span", {
-      className: "ml-2"
-    }, "+", selected.length - 2)) : selected.join(", ") : "Select..";
+    const selectedDisplay = selected.length > 0 ? react.createElement("div", {
+      className: "flex flex-wrap items-center"
+    }, selected.slice(0, 2).map(option => react.createElement("div", {
+      key: option,
+      className: classnames("flex items-center badge bg-gray-200 text-black border border-gray-400 rounded-sm px-1 mr-[5px] mb-2 text-[12px]", option.length > 6 && "max-w-[70px]")
+    }, react.createElement("span", {
+      title: option
+    }, option.length > 6 ? option.substring(0, 6) + "..." : option), react.createElement(BiX, {
+      size: 12,
+      className: "ml-1 cursor-pointer",
+      onClick: () => this.handleSelect(option)
+    }))), selected.length > 2 && react.createElement("div", {
+      className: "flex items-center badge bg-gray-200 text-black border border-gray-400 rounded-sm px-1 mr-[5px] mb-2 text-[12px]"
+    }, "+", selected.length - 2)) : react.createElement("div", {
+      className: "text-gray-600 pb-2"
+    }, "Please Select...");
     return react.createElement("div", {
-      className: "w-full md:w-72 font-medium flex-row"
+      className: "relative font-medium flex-row",
+      ref: this.selectRef,
+      style: {
+        width: "215px"
+      }
     }, react.createElement("label", {
       className: classnames("text-sm font-normal text-gray-700", open && "text-green-700"),
       htmlFor: "select"
     }, label), react.createElement("div", {
       onClick: this.handleToggleOpen,
       id: "select",
-      className: classnames("flex justify-between bg-white border-b border-gray-300 text-gray-800 p-2 text-base font-normal transition-colors duration-300", selected.length === 0 && "text-gray-800", open && "text-green-700", !open ? "cursor-pointer" : "cursor-default", "hover:border-green-700")
+      className: classnames("flex justify-between bg-white border-b border-gray-300 text-gray-800 pt-2 pl-2 text-base font-normal transition-colors duration-300", selected.length === 0 && "text-gray-800", open && "text-green-700", !open ? "cursor-pointer" : "cursor-default", "hover:border-green-700")
     }, selectedDisplay, react.createElement(BiChevronDown, {
-      size: 20,
+      size: 24,
       color: "black",
       className: classnames({
         "rotate-180": open
       })
     })), react.createElement("ul", {
-      className: classnames("bg-white mt-2 overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
+      className: classnames("absolute z-10 w-full bg-white mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
         "ease-out": open
       })
     }, options && options.map(option => react.createElement("li", {
       key: option.value,
-      className: classnames("p-3 text-sm hover:bg-gray-200 font-normal cursor-pointer", {
+      className: classnames("p-3 text-sm hover:bg-gray-200 font-normal cursor-pointer flex", {
         "bg-gray-200": selected.includes(option.value)
       }),
       onClick: () => this.handleSelect(option.value)
-    }, option.label))));
+    }, type === "icons" && react.createElement("span", {
+      className: "mr-2 flex-shrink-0 items-center"
+    }, react.createElement(BiUserCircle, {
+      size: 20,
+      color: "#333333"
+    })), type === "checkbox" && react.createElement("input", {
+      type: "checkbox",
+      className: "mr-2",
+      checked: selected.includes(option.value),
+      readOnly: true
+    }), option.label))));
   }
 }
 
 class MultiSelectShift extends react.Component {
   constructor(props) {
     super(props);
+    this.handleOutsideClick = event => {
+      if (this.selectRef.current && !this.selectRef.current.contains(event.target)) {
+        this.setState({
+          open: false
+        });
+      }
+    };
     this.handleSelect = (value, index, shiftKey) => {
       const {
         selected,
@@ -2619,8 +2675,15 @@ class MultiSelectShift extends react.Component {
       open: false,
       lastSelectedIndex: -1 // Track the last selected index when using Shift key
     };
-  }
 
+    this.selectRef = react.createRef();
+  }
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
+  }
   render() {
     const {
       options,
@@ -2634,7 +2697,11 @@ class MultiSelectShift extends react.Component {
       className: "ml-2"
     }, "+", selected.length - 2)) : selected.join(", ") : "Select..";
     return react.createElement("div", {
-      className: "w-full md:w-72 font-medium flex-row"
+      className: "relative font-medium flex-row",
+      ref: this.selectRef,
+      style: {
+        width: "215px"
+      }
     }, react.createElement("label", {
       className: classnames("text-sm font-normal text-gray-700", open && "text-green-700"),
       htmlFor: "select"
@@ -2649,7 +2716,7 @@ class MultiSelectShift extends react.Component {
         "rotate-180": open
       })
     })), react.createElement("ul", {
-      className: classnames("bg-white mt-2 overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
+      className: classnames("absolute z-10 bg-white mt-2 w-full overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
         "ease-out": open
       })
     }, options && options.map((option, index) => react.createElement("li", {
@@ -2662,5 +2729,226 @@ class MultiSelectShift extends react.Component {
   }
 }
 
-export { MultiSelect, MultiSelectCheck, MultiSelectShift, Select, SelectCheck, SelectSearch };
+class SelectWithIcon extends react.Component {
+  constructor(props) {
+    super(props);
+    this.handleOutsideClick = event => {
+      if (this.selectRef.current && !this.selectRef.current.contains(event.target)) {
+        this.setState({
+          open: false
+        });
+      }
+    };
+    this.handleSelect = value => {
+      const {
+        selected
+      } = this.state;
+      const selectedIndex = selected.indexOf(value);
+      let updatedSelected = [];
+      if (selectedIndex === -1) {
+        // Value is not selected, add it to the selection
+        updatedSelected = [...selected, value];
+      } else {
+        // Value is already selected, remove it from the selection
+        updatedSelected = [...selected.slice(0, selectedIndex), ...selected.slice(selectedIndex + 1)];
+      }
+      this.setState({
+        selected: updatedSelected
+      });
+    };
+    this.handleToggleOpen = () => {
+      this.setState(prevState => ({
+        open: !prevState.open
+      }));
+    };
+    const {
+      defaultValue
+    } = props;
+    this.state = {
+      selected: defaultValue || [],
+      open: false
+    };
+    this.selectRef = react.createRef();
+  }
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
+  }
+  render() {
+    const {
+      options,
+      label
+    } = this.props;
+    const {
+      selected,
+      open
+    } = this.state;
+    const selectedDisplay = selected.length > 0 ? selected.length > 2 ? react.createElement(react.Fragment, null, selected.slice(0, 2).join(", "), react.createElement("span", {
+      className: "ml-2"
+    }, "+", selected.length - 2)) : selected.join(", ") : "Select..";
+    return react.createElement("div", {
+      className: "relative font-medium flex-row",
+      ref: this.selectRef,
+      style: {
+        width: "215px"
+      }
+    }, react.createElement("label", {
+      className: classnames("text-sm font-normal text-gray-700", open && "text-green-700"),
+      htmlFor: "select"
+    }, label), react.createElement("div", {
+      onClick: this.handleToggleOpen,
+      id: "select",
+      className: classnames("flex justify-between bg-white border-b border-gray-300 text-gray-800 p-2 text-base font-normal transition-colors duration-300", selected.length === 0 && "text-gray-800", open && "text-green-700", !open ? "cursor-pointer" : "cursor-default", "hover:border-green-700")
+    }, selectedDisplay, react.createElement(BiChevronDown, {
+      size: 20,
+      color: "black",
+      className: classnames({
+        "rotate-180": open
+      })
+    })), react.createElement("ul", {
+      className: classnames("absolute z-10 bg-white w-full mt-2 overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300", {
+        "ease-out": open
+      })
+    }, options && options.map(option => react.createElement("li", {
+      key: option.value,
+      className: classnames("p-3 text-sm hover:bg-gray-200 font-normal cursor-pointer", {
+        "bg-gray-200": selected.includes(option.value)
+      }),
+      onClick: () => this.handleSelect(option.value)
+    }, react.createElement("input", {
+      type: "checkbox",
+      className: "mr-2",
+      checked: selected.includes(option.value),
+      onChange: () => this.handleSelect(option.value)
+    }), option.label))));
+  }
+}
+
+class MultiSelectSearch extends react.Component {
+  constructor(props) {
+    super(props);
+    this.handleOutsideClick = event => {
+      if (this.selectRef.current && !this.selectRef.current.contains(event.target)) {
+        this.setState({
+          open: false
+        });
+      }
+    };
+    this.handleToggleOpen = () => {
+      this.setState(prevState => ({
+        open: !prevState.open
+      }));
+    };
+    this.handleInputChange = e => {
+      const inputValue = e.target.value.toLowerCase();
+      this.setState({
+        inputValue
+      });
+    };
+    this.handleSelect = value => {
+      const {
+        selectedValues
+      } = this.state;
+      const updatedValues = [...selectedValues];
+      const index = updatedValues.indexOf(value);
+      if (index > -1) {
+        updatedValues.splice(index, 1); // Remove the value if already selected
+      } else {
+        updatedValues.push(value); // Add the value if not selected
+      }
+
+      this.setState({
+        selectedValues: updatedValues,
+        inputValue: ""
+      }, () => {
+        console.log(updatedValues);
+        this.props.onSelect(updatedValues); // Calling the onSelect callback prop
+      });
+    };
+    this.state = {
+      selectedValues: [],
+      inputValue: "",
+      open: false
+    };
+    this.selectRef = react.createRef();
+  }
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
+  }
+  render() {
+    const {
+      options,
+      label,
+      type
+    } = this.props;
+    const {
+      open,
+      inputValue,
+      selectedValues
+    } = this.state;
+    return react.createElement("div", {
+      className: "relative font-medium flex-row border-b border-gray-300 hover:border-green-700 transition-colors duration-300",
+      ref: this.selectRef,
+      style: {
+        width: "215px"
+      }
+    }, react.createElement("label", {
+      className: classnames("text-sm font-normal text-gray-700", open && "text-green-700"),
+      htmlFor: "select"
+    }, label), react.createElement("div", {
+      className: "flex flex-row items-center justify-center relative mt-0.5"
+    }, react.createElement("input", {
+      id: "select",
+      onClick: this.handleToggleOpen // Updated event handler
+      ,
+      onChange: this.handleInputChange,
+      readOnly: !open,
+      placeholder: selectedValues.length > 0 ? `${selectedValues.length} selected` : "Please Select...",
+      value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
+      style: {
+        width: "191px"
+      },
+      className: classnames("flex-grow bg-white  text-gray-800 p-2 text-[16px] font-normal", !inputValue && "text-gray-800", open && "text-green-700", !open ? "cursor-pointer" : "cursor-default", "outline-none", !open ? "placeholder-gray-600" : "placeholder-green-700")
+    }), react.createElement(BiChevronDown, {
+      size: 24,
+      color: "#333333",
+      onClick: this.handleToggleOpen,
+      className: classnames({
+        "rotate-180": open
+      }, "cursor-pointer")
+    })), react.createElement("ul", {
+      className: classnames("absolute z-10 w-full bg-white mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
+        "ease-out": open
+      })
+    }, options && options.map(option => react.createElement("li", {
+      key: option.value,
+      className: classnames("p-[10px] text-sm hover:bg-gray-200 font-normal cursor-pointer flex", {
+        "bg-gray-200": selectedValues.includes(option.value),
+        hidden: !option.label.toLowerCase().startsWith(inputValue)
+      }),
+      onClick: () => {
+        if (option.value !== inputValue) {
+          this.handleSelect(option.value);
+        }
+      }
+    }, type === "icons" && react.createElement("span", {
+      className: "mr-2 flex-shrink-0 items-center"
+    }, react.createElement(BiUserCircle, {
+      size: 20,
+      color: "#333333"
+    })), type === "checkbox" && react.createElement("input", {
+      type: "checkbox",
+      className: "mr-2",
+      checked: selectedValues.includes(option.value),
+      readOnly: true
+    }), option.label))));
+  }
+}
+
+export { MultiSelectCheck, MultiSelectChip, MultiSelectSearch, MultiSelectShift, Select, SelectSearch, SelectWithIcon };
 //# sourceMappingURL=index.es.js.map

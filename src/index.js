@@ -1,8 +1,9 @@
 import { SelectSearch } from "./components/SelectSearch";
 import { Select } from "./components/Select";
 import { MultiSelectCheck } from "./components/MultiSelectCheck";
-import { SelectCheck } from "./components/SelectCheck";
-import { MultiSelect } from "./components/MultiSelect";
+import { MultiSelectChip } from "./components/MultiSelectChip";
 import { MultiSelectShift } from "./components/MultiSelectShift";
+import { SelectWithIcon } from "./components/SelectWithIcon";
+import { MultiSelectSearch } from "./components/MultiSelectSearch";
 
-export { SelectSearch, Select, MultiSelectCheck, SelectCheck, MultiSelect, MultiSelectShift };
+export { SelectSearch, Select, MultiSelectCheck, MultiSelectChip, MultiSelectShift, SelectWithIcon, MultiSelectSearch };

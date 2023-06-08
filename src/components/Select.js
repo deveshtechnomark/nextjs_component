@@ -1,91 +1,116 @@
 import React from "react";
-import { BiChevronDown } from "react-icons/bi";
+import { BiChevronDown, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
 import "../styles/styles.css";
 
 class Select extends React.Component {
   constructor(props) {
     super(props);
-    const { defaultValue } = props;
     this.state = {
-      selected: defaultValue || "",
-      open: false
+      inputValue: "",
+      open: false,
     };
+    this.selectRef = React.createRef();
   }
+
+  componentDidMount() {
+    window.addEventListener("click", this.handleOutsideClick);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleOutsideClick);
+  }
+
+  handleOutsideClick = (event) => {
+    if (
+      this.selectRef.current &&
+      !this.selectRef.current.contains(event.target)
+    ) {
+      this.setState({ open: false });
+    }
+  };
+
+  handleToggleOpen = () => {
+    this.setState((prevState) => ({
+      open: !prevState.open,
+    }));
+  };
+
+  handleInputChange = (e) => {
+    const inputValue = e.target.value.toLowerCase();
+    this.setState({ inputValue });
+  };
 
   handleSelect = (value) => {
     this.setState(
       {
-        selected: value,
-        open: false
+        inputValue: value,
+        open: false,
       },
       () => {
         console.log(value);
-        this.props.onSelect(value); // Call the onSelect callback prop
+        this.props.onSelect(value); // Calling the onSelect callback prop for fetching value
       }
     );
   };
 
-
-  handleToggleOpen = () => {
-    this.setState((prevState) => ({
-      open: !prevState.open
-    }));
-  };
-
   render() {
-    const { options, label } = this.props;
-    const { selected, open } = this.state;
+    const { options, label, type } = this.props;
+    const { open, inputValue } = this.state;
 
     return (
-      <div className="w-72 md:w-72 font-medium flex-row">
+      <div
+        className="relative font-medium flex-row border-b border-gray-300 hover:border-CSgreen transition-colors duration-300"
+        ref={this.selectRef}
+        style={{ width: "215px" }}
+      >
         <label
           className={classNames(
             "text-sm font-normal text-gray-700",
-            open && "text-green-700"
+            open && "text-CSgreen"
           )}
           htmlFor="select"
         >
           {label}
         </label>
 
-        <div
-          onClick={this.handleToggleOpen}
-          id="select"
-          className={classNames(
-            "flex justify-between bg-white border-b border-gray-300 text-gray-800 p-2 text-base font-normal transition-colors duration-300",
-            !selected && "text-gray-800",
-            open && "text-green-700",
-            !open ? "cursor-pointer" : "cursor-default",
-            "hover:border-green-700"
-          )}
-        >
-          {selected ? (
-            selected.length > 25 ? (
-              selected.substring(0, 25) + "..."
-            ) : (
-              selected
-            )
-          ) : (
-            "Select.."
-          )}
+        <div className="flex flex-row items-center justify-center relative mt-0.5">
+          <input
+            id="select"
+            onClick={this.handleToggleOpen}
+            onChange={this.handleInputChange}
+            readOnly={!open}
+            placeholder="Please Select..."
+            value={
+              inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue
+            }
+            style={{ width: "191px" }}
+            className={classNames(
+              "flex-grow bg-white text-gray-800 p-2 text-[16px] font-normal",
+              !inputValue && "text-gray-800",
+              open && "text-CSgreen",
+              !open ? "cursor-pointer" : "cursor-default",
+              "outline-none",
+              !open ? "placeholder-gray-600" : "placeholder-CSgreen"
+            )}
+          />
+
           <BiChevronDown
-            size={20}
-            color="black"
-            className={classNames({
-              "rotate-180": open
-            })}
+            size={24}
+            color="#333333"
+            onClick={this.handleToggleOpen}
+            className={classNames({ "rotate-180": open }, "cursor-pointer")}
           />
         </div>
 
         <ul
           className={classNames(
-            "bg-white mt-2 overflow-y-auto shadow-md transition-transform",
+            "absolute z-10 w-full bg-white mt-[1px] overflow-y-auto shadow-md transition-transform",
             open
-              ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300"
-              : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300",
+              ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
+              : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
             {
-              "ease-out": open
+              "ease-out": open,
             }
           )}
         >
@@ -94,20 +119,27 @@ class Select extends React.Component {
               <li
                 key={option.value}
                 className={classNames(
-                  "p-3 text-sm hover:bg-gray-200 font-normal cursor-pointer",
+                  "p-[10px] text-sm hover:bg-gray-200 font-normal cursor-pointer flex", // Add 'flex' class
                   {
-                    "bg-gray-200": option.value === selected
+                    "bg-gray-200": option.value === inputValue,
+                    hidden: !option.label.toLowerCase().startsWith(inputValue),
                   }
                 )}
                 onClick={() => {
-                  if (option.value !== selected) {
+                  if (option.value !== inputValue) {
                     this.handleSelect(option.value);
                   }
                 }}
               >
+                {type === "icons" && (
+                  <span className="mr-2 flex-shrink-0 items-center">
+                    <BiUserCircle size={20} color="#333333" />
+                  </span>
+                )}
                 {option.label}
               </li>
             ))}
+
         </ul>
       </div>
     );
