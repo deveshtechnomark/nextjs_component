@@ -1,4 +1,3 @@
-import { MultiSelect } from "./components/MultiSelect";
-import { Select } from "./components/Select";
+export { MultiSelect } from "./components/MultiSelect";
+export { Select } from "./components/Select";
 
-export { Select, MultiSelect };

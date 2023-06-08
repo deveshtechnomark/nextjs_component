@@ -1,10 +1,17 @@
-
 .listItem {
-    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    margin: 0px 10px;
+    height: 35px;
     cursor: pointer;
+
     .dropdownCheckbox {
-        margin-right: 15px;
+        margin-right: 8px;
     }
+}
+
+.listItem:hover{
+    background-color: #F6F6F6;
 
 }
 
@@ -13,7 +20,16 @@
     margin-left: 10px;
 }
 
+.listIcon {
+    margin-right: 5px;
+}
+
+
 .activeItem {
+    background-color: #F6F6F6;
+}
+
+.activeItem:hover {
     background-color: #F6F6F6;
 }
 
@@ -27,10 +43,23 @@
     z-index: 1;
 }
 
+
 .cardMain {
     width: 300px;
     border: 1px solid #fff;
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Icon
+.spanIcon {
+    position: absolute;
+    right: 10px;
+    top: 30%;
+    z-index: 10
+}
+
+.spanIcon_rotate{
+    rotate: 180deg;
 }

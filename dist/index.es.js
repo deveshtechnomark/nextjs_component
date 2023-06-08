@@ -2259,11 +2259,13 @@ function IconBase(props) {
 }
 
 // THIS FILE IS AUTO GENERATED
-function FaUserCircle (props) {
+function FaChevronDown (props) {
+  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 448 512"},"child":[{"tag":"path","attr":{"d":"M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"}}]})(props);
+}function FaUserCircle (props) {
   return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 496 512"},"child":[{"tag":"path","attr":{"d":"M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"}}]})(props);
 }
 
-var styles = {"listItem":"styles_listItem__3B4xI","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","listSpan":"styles_listSpan__fJ06z","activeItem":"styles_activeItem__1nne_","dropdownItems":"styles_dropdownItems__2T8NO","cardMain":"styles_cardMain__1_xXT"};
+var styles = {"listItem":"styles_listItem__3B4xI","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","listSpan":"styles_listSpan__fJ06z","listIcon":"styles_listIcon__2lhpx","activeItem":"styles_activeItem__1nne_","dropdownItems":"styles_dropdownItems__2T8NO","cardMain":"styles_cardMain__1_xXT","spanIcon":"styles_spanIcon__3Vyfe","spanIcon_rotate":"styles_spanIcon_rotate__2PBBe"};
 
 var top = 'top';
 var bottom = 'bottom';
@@ -4166,7 +4168,7 @@ var data = createCommonjsModule(function (module, exports) {
   return data;
 
 }));
-
+//# sourceMappingURL=data.js.map
 });
 
 var util = createCommonjsModule(function (module, exports) {
@@ -4448,7 +4450,7 @@ var util = createCommonjsModule(function (module, exports) {
   Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 
 }));
-
+//# sourceMappingURL=index.js.map
 });
 
 var eventHandler = createCommonjsModule(function (module, exports) {
@@ -4685,7 +4687,7 @@ var eventHandler = createCommonjsModule(function (module, exports) {
   return EventHandler;
 
 }));
-
+//# sourceMappingURL=event-handler.js.map
 });
 
 var manipulator = createCommonjsModule(function (module, exports) {
@@ -4757,7 +4759,7 @@ var manipulator = createCommonjsModule(function (module, exports) {
   return Manipulator;
 
 }));
-
+//# sourceMappingURL=manipulator.js.map
 });
 
 var config = createCommonjsModule(function (module, exports) {
@@ -4825,7 +4827,7 @@ var config = createCommonjsModule(function (module, exports) {
   return Config;
 
 }));
-
+//# sourceMappingURL=config.js.map
 });
 
 var baseComponent = createCommonjsModule(function (module, exports) {
@@ -4909,7 +4911,7 @@ var baseComponent = createCommonjsModule(function (module, exports) {
   return BaseComponent;
 
 }));
-
+//# sourceMappingURL=base-component.js.map
 });
 
 var selectorEngine = createCommonjsModule(function (module, exports) {
@@ -5013,7 +5015,7 @@ var selectorEngine = createCommonjsModule(function (module, exports) {
   return SelectorEngine;
 
 }));
-
+//# sourceMappingURL=selector-engine.js.map
 });
 
 var dropdown = createCommonjsModule(function (module, exports) {
@@ -5415,12 +5417,19 @@ var dropdown = createCommonjsModule(function (module, exports) {
   return Dropdown;
 
 }));
-
+//# sourceMappingURL=dropdown.js.map
 });
 
 class MultiSelect extends react.Component {
   constructor(props) {
     super(props);
+    this.handleCliclOutSide = e => {
+      if (this.selectRef.current && !this.selectRef.current.contains(e.target)) {
+        this.setState({
+          isOpen: false
+        });
+      }
+    };
     this.toggleDropdown = () => {
       this.setState(prevState => ({
         isOpen: !prevState.isOpen
@@ -5438,11 +5447,25 @@ class MultiSelect extends react.Component {
       if (selectedOptions.includes(option)) {
         this.setState({
           selectedOptions: selectedOptions.filter(item => item !== option)
+        }, () => {
+          this.props.onSelect(selectedOptions);
         });
       } else {
         this.setState({
           selectedOptions: [...selectedOptions, option]
+        }, () => {
+          this.props.onSelect(selectedOptions);
         });
+      }
+    };
+    this.selectedItems = array => {
+      let selectedElements = 3;
+      if (array.length <= selectedElements) {
+        return array.join(', ');
+      } else {
+        let displayedElements = array.slice(0, selectedElements);
+        displayedElements.push('...');
+        return displayedElements.join(', ');
       }
     };
     this.state = {
@@ -5450,6 +5473,14 @@ class MultiSelect extends react.Component {
       searchQuery: '',
       selectedOptions: []
     };
+    this.selectRef = /*#__PURE__*/react.createRef();
+  }
+  componentDidMount() {
+    console.log();
+    window.addEventListener("click", this.handleCliclOutSide);
+  }
+  componentWillMount() {
+    window.addEventListener("click", this.handleCliclOutSide);
   }
   render() {
     const {
@@ -5467,7 +5498,8 @@ class MultiSelect extends react.Component {
     /*#__PURE__*/
     //type = checkbox
     react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-      className: "container"
+      className: "container",
+      ref: this.selectRef
     }, /*#__PURE__*/react.createElement("div", {
       className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
@@ -5477,22 +5509,33 @@ class MultiSelect extends react.Component {
     }, /*#__PURE__*/react.createElement("label", {
       className: "sr-only px-md-2",
       htmlFor: "inlineFormInput"
-    }, label), /*#__PURE__*/react.createElement("input", {
+    }, label), /*#__PURE__*/react.createElement("div", {
+      className: "input-group"
+    }, /*#__PURE__*/react.createElement("input", {
       type: "text",
+      id: "inlineFormInput",
       className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
-      placeholder: selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Please Select',
+      placeholder: selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : 'Please Select',
       value: searchQuery,
       onChange: this.handleSearchChange,
-      onFocus: this.toggleDropdown
-    }), isOpen && /*#__PURE__*/react.createElement("ul", {
+      onClick: this.toggleDropdown
+    }), /*#__PURE__*/react.createElement("div", {
+      className: styles.spanIcon
+    }, /*#__PURE__*/react.createElement(FaChevronDown, {
+      className: `${isOpen && styles.spanIcon_rotate}`,
+      size: 15
+    }))), isOpen && /*#__PURE__*/react.createElement("ul", {
       className: `${styles.dropdownItems} col-12`
     }, filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
-      className: styles.listItem
+      key: option,
+      className: styles.listItem,
+      htmlFor: "listInput"
     }, /*#__PURE__*/react.createElement("li", {
       key: option,
       onClick: () => this.handleOptionClick(option)
     }, /*#__PURE__*/react.createElement("input", {
       type: "checkbox",
+      id: "listInput",
       className: styles.dropdownCheckbox,
       checked: selectedOptions.includes(option),
       onChange: () => {}
@@ -5500,7 +5543,8 @@ class MultiSelect extends react.Component {
     /*#__PURE__*/
     //type = radio
     react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-      className: "container"
+      className: "container",
+      ref: this.selectRef
     }, /*#__PURE__*/react.createElement("div", {
       className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
@@ -5510,16 +5554,24 @@ class MultiSelect extends react.Component {
     }, /*#__PURE__*/react.createElement("label", {
       className: "sr-only px-md-2",
       htmlFor: "inlineFormInput"
-    }, label), /*#__PURE__*/react.createElement("input", {
+    }, label), /*#__PURE__*/react.createElement("div", {
+      className: "input-group"
+    }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
-      placeholder: selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Please Select',
+      placeholder: selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : 'Please Select',
       value: searchQuery,
       onChange: this.handleSearchChange,
-      onFocus: this.toggleDropdown
-    }), isOpen && /*#__PURE__*/react.createElement("ul", {
+      onClick: this.toggleDropdown
+    }), /*#__PURE__*/react.createElement("div", {
+      className: styles.spanIcon
+    }, /*#__PURE__*/react.createElement(FaChevronDown, {
+      className: `${isOpen && styles.spanIcon_rotate}`,
+      size: 15
+    }))), isOpen && /*#__PURE__*/react.createElement("ul", {
       className: `${styles.dropdownItems} col-12`
     }, filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
+      key: option,
       className: styles.listItem
     }, /*#__PURE__*/react.createElement("li", {
       key: option,
@@ -5533,7 +5585,8 @@ class MultiSelect extends react.Component {
     /*#__PURE__*/
     //type = icon
     react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
-      className: "container"
+      className: "container",
+      ref: this.selectRef
     }, /*#__PURE__*/react.createElement("div", {
       className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
@@ -5543,24 +5596,34 @@ class MultiSelect extends react.Component {
     }, /*#__PURE__*/react.createElement("label", {
       className: "sr-only px-md-2",
       htmlFor: "inlineFormInput"
-    }, label), /*#__PURE__*/react.createElement("input", {
+    }, label), /*#__PURE__*/react.createElement("div", {
+      className: "input-group"
+    }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
-      placeholder: selectedOptions.length > 0 ? selectedOptions.join(', ') : 'Please Select',
+      placeholder: selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : 'Please Select',
       value: searchQuery,
       onChange: this.handleSearchChange,
-      onFocus: this.toggleDropdown
-    }), isOpen && /*#__PURE__*/react.createElement("ul", {
+      onClick: this.toggleDropdown
+    }), /*#__PURE__*/react.createElement("div", {
+      className: styles.spanIcon
+    }, /*#__PURE__*/react.createElement(FaChevronDown, {
+      className: `${isOpen && styles.spanIcon_rotate}`,
+      size: 15
+    }))), isOpen && /*#__PURE__*/react.createElement("ul", {
       className: `${styles.dropdownItems} col-12`
     }, filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
+      key: option,
       className: styles.listItem
     }, /*#__PURE__*/react.createElement("li", {
       key: option,
+      className: `dropdown-item`,
       onClick: () => this.handleOptionClick(option)
     }, /*#__PURE__*/react.createElement("span", {
       className: styles.listSpan
     }, " ", /*#__PURE__*/react.createElement(FaUserCircle, {
       size: 20,
+      className: styles.listIcon,
       color: "black"
     }), option)))))))))) : "No data");
   }
@@ -5569,9 +5632,16 @@ class MultiSelect extends react.Component {
 class Select extends react.Component {
   constructor(props) {
     super(props);
+    this.handleCliclOutSide = e => {
+      if (this.selectRef.current && !this.selectRef.current.contains(e.target)) {
+        this.setState({
+          isOpen: false
+        });
+      }
+    };
     this.toggleDropdown = () => {
       this.setState(prevState => ({
-        open: !prevState.open
+        isOpen: !prevState.isOpen
       }));
     };
     this.handleSearchChange = e => {
@@ -5582,23 +5652,33 @@ class Select extends react.Component {
     this.handleSingleOptionClick = option => {
       this.setState({
         singleSelect: option,
-        selectedOption: option,
-        open: false
+        activeOption: option,
+        isOpen: false
+      }, () => {
+        this.props.onSelect(option);
       });
     };
     this.state = {
-      open: false,
+      isOpen: false,
       searchQuery: '',
       singleSelect: '',
-      selectedOption: null
+      activeOption: null
     };
+    this.selectRef = /*#__PURE__*/react.createRef();
+  }
+  componentDidMount() {
+    console.log();
+    window.addEventListener("click", this.handleCliclOutSide);
+  }
+  componentWillMount() {
+    window.addEventListener("click", this.handleCliclOutSide);
   }
   render() {
     const {
-      open,
+      isOpen,
       searchQuery,
       singleSelect,
-      selectedOption
+      activeOption
     } = this.state;
     const {
       options,
@@ -5607,7 +5687,8 @@ class Select extends react.Component {
     } = this.props;
     const filteredOptions = options.filter(option => option.toLowerCase().includes(searchQuery.toLowerCase()));
     return /*#__PURE__*/react.createElement("div", {
-      className: "container"
+      className: "container",
+      ref: this.selectRef
     }, /*#__PURE__*/react.createElement("div", {
       className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
@@ -5617,21 +5698,30 @@ class Select extends react.Component {
     }, /*#__PURE__*/react.createElement("label", {
       className: "sr-only px-md-2",
       htmlFor: "inlineFormInput"
-    }, label), /*#__PURE__*/react.createElement("input", {
+    }, label), /*#__PURE__*/react.createElement("div", {
+      className: "input-group"
+    }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       className: "form-control ml-0 border-0 border-bottom border-success rounded-0",
       placeholder: singleSelect !== '' ? singleSelect : 'Please Select',
       value: searchQuery,
       onChange: this.handleSearchChange,
-      onFocus: this.toggleDropdown,
       onClick: this.toggleDropdown
-    }), open && /*#__PURE__*/react.createElement("ul", {
+    }), /*#__PURE__*/react.createElement("div", {
+      className: styles.spanIcon
+    }, /*#__PURE__*/react.createElement(FaChevronDown, {
+      className: `${isOpen && styles.spanIcon_rotate}`,
+      size: 15
+    }))), isOpen && /*#__PURE__*/react.createElement("ul", {
       className: `${styles.dropdownItems} col-12`
     }, filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
       className: styles.listItem,
       key: option
     }, /*#__PURE__*/react.createElement("li", {
-      className: `dropdown-item ${option === selectedOption ? styles.activeItem : ''}`,
+      style: {
+        padding: "5px"
+      },
+      className: `dropdown-item ${option === activeOption ? styles.activeItem : ''}`,
       onClick: () => this.handleSingleOptionClick(option)
     }, option))))))));
   }
