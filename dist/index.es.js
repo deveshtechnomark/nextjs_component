@@ -2098,67 +2098,67 @@ class Typography extends react.Component {
 
     switch (type) {
       case "h1":
-        styles = "text-[32px] font-normal md:text-[40px] font-proxima";
+        styles = "text-[32px] font-normal md:text-[40px]";
         break;
 
       case "h2":
-        styles = "text-black  text-[28px] font-normal md:text-[32px] font-proxima";
+        styles = "text-black  text-[28px] font-normal md:text-[32px] ";
         break;
 
       case "h3":
-        styles = "text-black text-[24px] font-normal md:text-[28px] font-proxima";
+        styles = "text-black text-[24px] font-normal md:text-[28px]";
         break;
 
       case "h4":
-        styles = "text-black text-[20px] font-normal md:text-[24px] font-proxima";
+        styles = "text-black text-[20px] font-normal md:text-[24px] ";
         break;
 
       case "h5":
-        styles = "text-black text-[16px]  font-normal md:text-[20px] font-proxima";
+        styles = "text-black text-[16px]  font-normal md:text-[20px]";
         break;
 
       case "h6":
-        styles = "text-black text-[14px] font-normal md:text-[16px] font-proxima";
+        styles = "text-black text-[14px] font-normal md:text-[16px]";
         break;
 
       case "title":
-        styles = "text-black text-[16px] font-medium md:text-[20px] font-proxima";
+        styles = "text-black text-[16px] font-medium md:text-[20px]";
         break;
 
       case "sub-title":
-        styles = "text-black text-[16px] font-medium md:text-[16px] font-proxima";
+        styles = "text-black text-[16px] font-medium md:text-[16px] ";
         break;
 
       case "table-title":
-        styles = "text-black text-[14px] font-bold md:text-[16px] font-proxima";
+        styles = "text-black text-[14px] font-bold md:text-[16px]";
         break;
 
       case "label":
-        styles = "text-black text-[12px] font-normal md:text-[14px] font-proxima";
+        styles = "text-black text-[12px] font-normal md:text-[14px]";
         break;
 
       case "body":
-        styles = "text-black text-[14px] font-normal md:text-[16px] font-proxima";
+        styles = "text-black text-[14px] font-normal md:text-[16px]";
         break;
 
       case "button":
-        styles = "text-black text-[16px] font-normal md:text-[16px] font-proxima";
+        styles = "text-black text-[16px] font-normal md:text-[16px]";
         break;
 
       case "caption":
-        styles = "text-black text-[10px] font-normal md:text-[10px] font-proxima";
+        styles = "text-black text-[10px] font-normal md:text-[10px]";
         break;
 
       case "badge":
-        styles = "text-black text-[10px] font-normal md:text-[10px] font-proxima";
+        styles = "text-black text-[10px] font-normal md:text-[10px]";
         break;
 
       case "tool-tip":
-        styles = "text-black text-[16px] font-normal md:text-[14px] font-proxima";
+        styles = "text-black text-[16px] font-normal md:text-[14px]";
         break;
 
       default:
-        styles = "text-black text-[14px] font-normal md:text-[16px] font-proxima";
+        styles = "text-black text-[14px] font-normal md:text-[16px]";
         break;
     }
 
