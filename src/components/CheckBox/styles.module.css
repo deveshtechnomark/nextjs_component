@@ -42,7 +42,7 @@
   content: "";
   position: absolute;
   top: 0.75em;
-  left: 0.3em;
+  left: 0.65em;
   border-right: 1.5px solid transparent;
   border-bottom: 1.5px solid transparent;
   transform: rotate(45deg);
@@ -165,7 +165,7 @@
 
   .__checkBox:checked + .__label > .__checkBoxDiv:before {
     top: 0.7em;
-    left: 0.25em;
+    left: 0.55em;
     border-right: 1px solid transparent;
     border-bottom: 1px solid transparent;
   }
