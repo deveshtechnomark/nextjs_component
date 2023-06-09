@@ -1,15 +1,17 @@
-import React from 'react';
-import { FaUserCircle, FaChevronDown } from 'react-icons/fa';
-import styles from '../scss/styles.scss';
-import '../css/bootstrapCustom.css';
-import 'bootstrap/js/dist/dropdown';
+import React from "react";
+import styles from "../scss/styles.scss";
+import "../css/bootstrapCustom.css";
+import "bootstrap/js/dist/dropdown";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 class MultiSelect extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isOpen: false,
-            searchQuery: '',
+            searchQuery: "",
             selectedOptions: [],
         };
         this.selectRef = React.createRef();
@@ -57,16 +59,22 @@ class MultiSelect extends React.Component {
         }
     };
 
-    selectedItems = (array) => {
-        let selectedElements = 3;
-        if (array.length <= selectedElements) {
-            return array.join(', ');
+    selectedItems = (arrayItem) => {
+        let selectedElements = 2;
+        if (arrayItem.length <= selectedElements) {
+            return arrayItem.join(", ");
         } else {
-            let displayedElements = array.slice(0, selectedElements);
-            displayedElements.push('...');
-            return displayedElements.join(', ');
+            let displayedElements = arrayItem.slice(0, selectedElements);
+            displayedElements.push("...");
+            return displayedElements.join(", ");
         }
     }
+    optionLength = (arrayItem) => {
+        if (arrayItem.length > 2) {
+            return " +".concat(arrayItem.length - 2, "  ");
+        }
+    }
+
     render() {
 
         const { isOpen, searchQuery, selectedOptions } = this.state;
@@ -77,24 +85,64 @@ class MultiSelect extends React.Component {
         return (
             <>
                 {type === "checkbox" ?
-                    //type = checkbox
-                    <>
+                    <div className="container" ref={this.selectRef}>
+                        <div className={styles.cardMain}>
+                            <div className="col-auto">
+                                <div className="dropdown">
+                                    <label htmlFor="checkboxInput">{label}</label>
+                                    <div className="input-group">
+                                        <input
+                                            type="text"
+                                            id="checkboxInput"
+                                            className={"form-control mb-2 border-0 border-bottom border-success rounded-0"}
+                                            placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select"}
+                                            value={searchQuery}
+                                            onChange={this.handleSearchChange}
+                                            onClick={this.toggleDropdown}
+                                        />
+                                        <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
+
+                                    </div>
+
+                                    {isOpen && (
+                                        <ul className={`${styles.dropdownItems} col-12`}>
+                                            {filteredOptions.map((option) => (
+                                                <div key={option} className={styles.listItem} htmlFor="listInput">
+                                                    <li key={option} onClick={() => this.handleOptionClick(option)}>
+                                                        <input
+                                                            type="checkbox"
+                                                            id="listInput"
+                                                            className={styles.dropdownCheckbox}
+                                                            checked={selectedOptions.includes(option)}
+                                                        />
+                                                        <span>{option}</span>
+                                                    </li>
+                                                </div>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    : type === "radio" ?
                         <div className="container" ref={this.selectRef}>
                             <div className={styles.cardMain}>
                                 <div className="col-auto">
                                     <div className="dropdown">
-                                        <label className="sr-only px-md-2" htmlFor="inlineFormInput">{label}</label>
+                                        <label htmlFor="radioInput">{label}</label>
                                         <div className="input-group">
                                             <input
                                                 type="text"
-                                                id="inlineFormInput"
+                                                id="radioInput"
                                                 className={"form-control mb-2 border-0 border-bottom border-success rounded-0"}
-                                                placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : 'Please Select'}
+                                                placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select"}
                                                 value={searchQuery}
                                                 onChange={this.handleSearchChange}
                                                 onClick={this.toggleDropdown}
                                             />
-                                            <div className={styles.spanIcon}><FaChevronDown className={`${isOpen && styles.spanIcon_rotate}`} size={15} /></div>
+                                            <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
+
                                         </div>
 
                                         {isOpen && (
@@ -103,11 +151,10 @@ class MultiSelect extends React.Component {
                                                     <div key={option} className={styles.listItem} htmlFor="listInput">
                                                         <li key={option} onClick={() => this.handleOptionClick(option)}>
                                                             <input
-                                                                type="checkbox"
+                                                                type="radio"
                                                                 id="listInput"
                                                                 className={styles.dropdownCheckbox}
                                                                 checked={selectedOptions.includes(option)}
-                                                                onChange={() => { }}
                                                             />
                                                             <span>{option}</span>
                                                         </li>
@@ -119,75 +166,97 @@ class MultiSelect extends React.Component {
                                 </div>
                             </div>
                         </div>
-
-                    </> :
-                    type === "radio" ?
-                        //type = radio
-                        <>
+                        : type === "icon" ?
                             <div className="container" ref={this.selectRef}>
                                 <div className={styles.cardMain}>
                                     <div className="col-auto">
                                         <div className="dropdown">
-                                            <label className="sr-only px-md-2" htmlFor="inlineFormInput">{label}</label>
+                                            <label htmlFor="iconInput">{label}</label>
                                             <div className="input-group">
                                                 <input
                                                     type="text"
+                                                    id="iconInput"
                                                     className={"form-control mb-2 border-0 border-bottom border-success rounded-0"}
-                                                    placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : 'Please Select'}
+                                                    placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select"}
                                                     value={searchQuery}
                                                     onChange={this.handleSearchChange}
                                                     onClick={this.toggleDropdown}
                                                 />
-                                                <div className={styles.spanIcon}><FaChevronDown className={`${isOpen && styles.spanIcon_rotate}`} size={15} /></div>
+                                                <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
+
                                             </div>
+
                                             {isOpen && (
                                                 <ul className={`${styles.dropdownItems} col-12`}>
-                                                    {filteredOptions.map((option) => (
-                                                        <div key={option} className={styles.listItem}>
-                                                            <li key={option} onClick={() => this.handleOptionClick(option)}>
-                                                                <input
-                                                                    type="radio"
-                                                                    className={styles.dropdownCheckbox}
-                                                                    checked={selectedOptions.includes(option)}
-                                                                    onChange={() => { }}
-                                                                />
-                                                                <span>{option}</span>
-                                                            </li>
-                                                        </div>
-                                                    ))}
+                                                    {isOpen && (
+                                                        <ul className={`${styles.dropdownItems} col-12`}>
+                                                            {filteredOptions.map((option) => (
+                                                                <div key={option} className={styles.listItem}>
+                                                                    <li key={option}
+                                                                        className={`dropdown-item`}
+                                                                        onClick={() => this.handleOptionClick(option)}>
+                                                                        <span className={styles.listSpan}> <FontAwesomeIcon icon={faUserCircle} size="lg" className={styles.listIcon} color="black" />{option}</span>
+                                                                    </li>
+                                                                </div>
+                                                            ))}
+                                                        </ul>
+                                                    )}
                                                 </ul>
                                             )}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </> : type === "icon" ?
-                            //type = icon
-                            <>
+                            : type === "chip" ?
                                 <div className="container" ref={this.selectRef}>
                                     <div className={styles.cardMain}>
                                         <div className="col-auto">
                                             <div className="dropdown">
-                                                <label className="sr-only px-md-2" htmlFor="inlineFormInput">{label}</label>
+                                                <label htmlFor="chipInput">
+                                                    {label}
+                                                </label>
                                                 <div className="input-group">
+                                                    {selectedOptions.length > 0 && (
+                                                        <div className={styles.chips}>
+                                                            {selectedOptions.slice(0, 2).map((option) => (
+                                                                <div className={styles.chip} key={option}>
+                                                                    {option}
+                                                                    <span className={styles.chipClose} onClick={() => this.handleOptionClick(option)}>
+                                                                        &times;
+                                                                    </span>
+                                                                </div>
+                                                            ))}
+                                                            {<div className={styles.chipCount}>
+                                                                {this.optionLength(selectedOptions)}
+                                                            </div>}
+                                                        </div>
+                                                    )}
                                                     <input
                                                         type="text"
-                                                        className={"form-control mb-2 border-0 border-bottom border-success rounded-0"}
-                                                        placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : 'Please Select'}
+                                                        id="chipInput"
+                                                        className="form-control mb-2 border-0 border-bottom border-success rounded-0"
+                                                        placeholder={selectedOptions.length > 0 ? "" : "Please Select"}
                                                         value={searchQuery}
                                                         onChange={this.handleSearchChange}
                                                         onClick={this.toggleDropdown}
                                                     />
-                                                    <div className={styles.spanIcon}><FaChevronDown className={`${isOpen && styles.spanIcon_rotate}`} size={15} /></div>
+                                                    <div className={styles.spanIcon} onClick={this.toggleDropdown}>
+                                                        <FontAwesomeIcon icon={faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" />
+                                                    </div>
+
                                                 </div>
                                                 {isOpen && (
                                                     <ul className={`${styles.dropdownItems} col-12`}>
                                                         {filteredOptions.map((option) => (
-                                                            <div key={option} className={styles.listItem}>
-                                                                <li key={option}
-                                                                    className={`dropdown-item`}
-                                                                    onClick={() => this.handleOptionClick(option)}>
-                                                                    <span className={styles.listSpan}> <FaUserCircle size={20} className={styles.listIcon} color='black' />{option}</span>
+                                                            <div key={option} className={styles.listItem} htmlFor="listInput">
+                                                                <li key={option} onClick={() => this.handleOptionClick(option)}>
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        id="listInput"
+                                                                        className={styles.dropdownCheckbox}
+                                                                        checked={selectedOptions.includes(option)}
+                                                                    />
+                                                                    <span>{option}</span>
                                                                 </li>
                                                             </div>
                                                         ))}
@@ -197,8 +266,7 @@ class MultiSelect extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                            </>
-                            : "No data"
+                                : "Invalid option"
                 }
             </>
         );

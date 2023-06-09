@@ -1,3 +1,11 @@
+input[type=text]:focus {
+    box-shadow: inset 0 -1px 0 #ddd;
+}
+input[type=text] {
+    padding-left: 0px;
+    // box-shadow: inset 0 -1px 0 #ddd;
+}
+
 .listItem {
     display: flex;
     align-items: center;
@@ -10,7 +18,7 @@
     }
 }
 
-.listItem:hover{
+.listItem:hover {
     background-color: #F6F6F6;
 
 }
@@ -52,14 +60,58 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-// Icon
 .spanIcon {
     position: absolute;
     right: 10px;
-    top: 30%;
-    z-index: 10
+    top: 15%;
+    z-index: 10;
+    cursor: pointer;
 }
 
-.spanIcon_rotate{
+.spanIconRotate {
     rotate: 180deg;
+}
+
+.chips {
+    display: flex;
+    border-bottom: 1px solid green;
+    padding: 3.5px;
+    height: fit-content;
+}
+
+.chip {
+    display: flex;
+    align-items: center;
+    margin: 2px;
+    padding: 2px 6px;
+    background-color: #E9ECEF;
+    border-radius: 1px;
+    font-size: 14px;
+}
+
+.chipClose {
+    margin-left: 8px;
+    cursor: pointer;
+    color: #888;
+}
+
+.chipClear {
+    margin-left: 8px;
+    cursor: pointer;
+    color: #888;
+}
+
+.chipClear:hover,
+.chipClose:hover {
+    color: #000;
+}
+.chipCount{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2px;
+    // padding: 2px 6px;
+    background-color: #E9ECEF;
+    border-radius: 1px;
+    font-size: 14px;
 }
