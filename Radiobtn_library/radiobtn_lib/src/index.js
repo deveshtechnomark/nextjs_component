@@ -7,21 +7,23 @@ class RadioButton extends React.Component {
     this.state = {
       disabled: props.disabled || false,
       invalid: props.invalid || false,
+      name: props.name,
+      value: props.value || '',
       checked: props.checked || false,
-      name: props.name, 
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange() {
-    const { invalid } = this.state;
+    const { invalid, value, checked } = this.state;
     this.setState({
-      invalid: invalid,
+      invalid: checked ? invalid : false,
+      checked: !checked,
     });
   }
 
   render() {
-    const { label, id, disabled, invalid, customClassName, value, checked } = this.props;
+    const { label, id, disabled, invalid, customClassName, value, defaultChecked } = this.props;
     const { name } = this.state;
 
     const labelClassName = [
@@ -39,11 +41,11 @@ class RadioButton extends React.Component {
           name={name}
           onChange={this.handleChange}
           disabled={disabled}
-          checked={checked}
           value={value}
+          defaultChecked={defaultChecked}
         />
         <label htmlFor={id} className={labelClassName}>
-        <svg
+          <svg
             className={`${styles.radio_check} ${invalid ? styles.invalid_check : ''}`}
             viewBox="0 0 40 40"
           >

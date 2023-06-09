@@ -1,0 +1,68 @@
+'use client'
+
+import RadioButton from 'radiobtn_lib';
+import React, { ChangeEvent, useState, useEffect } from 'react';
+import 'radiobtn_lib/dist/index.css';
+import './bootstrap-custom.css';
+
+export default function Home() {
+  const [selectedOption, setSelectedOption] = useState<string>('');
+
+  const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption(event.target.value);
+  };
+
+  useEffect(() => {
+    const storedOption = localStorage.getItem('selectedOption');
+    if (storedOption) {
+      setSelectedOption(storedOption);
+    } else {
+      setSelectedOption('option3');
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('selectedOption', selectedOption);
+  }, [selectedOption]);
+
+  return (
+    <div className="card">
+      <RadioButton
+        value="option1"
+        label="Option 1"
+        name="option"
+        id="option1"
+        defaultChecked={selectedOption === 'option1'}
+        onChange={handleOptionChange}
+      />
+      <RadioButton
+        value="option2"
+        label="Option 2"
+        name="option"
+        id="option2"
+        defaultChecked={selectedOption === 'option2'}
+        onChange={handleOptionChange}
+      />
+      <RadioButton
+        value="option3"
+        label="Option 3"
+        name="option"
+        id="option3"
+        defaultChecked={selectedOption === 'option3'}
+        onChange={handleOptionChange}
+      />
+
+      <RadioButton
+        value="option4"
+        label="Option 4"
+        name="option"
+        id="option4"
+        invalid
+        defaultChecked={selectedOption === 'option4'}
+        onChange={handleOptionChange}
+      />
+
+
+    </div>
+  );
+}

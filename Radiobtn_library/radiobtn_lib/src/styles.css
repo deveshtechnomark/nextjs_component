@@ -122,6 +122,9 @@ input[disabled]+label {
 /* Styles for disabled radio border */
 input[disabled]+label .radio_border {
   stroke: #ccc;
+  box-shadow: 0 0 8px rgba(241, 240, 240, 0.4);
+  outline: 4px solid rgba(240, 238, 238, 0.4);
+  border-radius: 50%;
 }
 
 /* Styles for disabled radio dot */
@@ -181,6 +184,7 @@ input[disabled]+label.invalid_label .radio_dot {
 .invalid_check .invalid_dot {
   fill: url(#invalid_gradient);
   transform: scale(0);
+
   transform-origin: 50% 50%;
 }
 
