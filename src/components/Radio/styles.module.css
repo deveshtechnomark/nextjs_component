@@ -10,13 +10,6 @@
   display: flex;
   width: auto;
   align-items: center;
-  font-family: "Proxima Nova";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0.02em;
-  color: #212529;
   cursor: pointer;
 }
 

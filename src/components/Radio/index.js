@@ -4,6 +4,8 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { Typography } from "Typography";
+import "Typography/dist/tailwind.css";
 
 import styles from "./styles.module.css";
 
@@ -11,6 +13,7 @@ export default class Radio extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     const { className, variant, label, id } = this.props;
     return (
@@ -34,7 +37,7 @@ export default class Radio extends React.Component {
             <circle id={styles.border} r="18px" cx="20px" cy="20px"></circle>
             <circle id={styles.dot} r="8px" cx="20px" cy="20px"></circle>
           </svg>
-          {label}
+          <Typography type="label">{label}</Typography>
         </label>
       </div>
     );

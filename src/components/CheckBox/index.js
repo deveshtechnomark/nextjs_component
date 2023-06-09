@@ -4,8 +4,10 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { Typography } from "Typography";
 
 import styles from "./styles.module.css";
+import "Typography/dist/tailwind.css";
 
 export default class CheckBox extends React.Component {
   constructor(props) {
@@ -29,7 +31,7 @@ export default class CheckBox extends React.Component {
               variant2 === "intermediate" && styles.intermediate
             }`}
           ></span>
-          {label}
+          <Typography>{label}</Typography>
         </label>
       </>
     );
