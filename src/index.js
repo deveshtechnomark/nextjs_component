@@ -152,14 +152,18 @@ class Pagination extends React.Component {
     const { activeButton } = this.state;
 
     return (
-      <div className={`${className? className: ''}`}>
+      <div className={`${styles.main_div}  ${className? className: ''}`}>
         {last ? (
+          <>
           <button
             className={`${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `}
             onClick={() => this.handleClick('first')}
           >
             First
           </button>
+
+          {next && <div className={styles.line}></div>}
+          </>
         ) : arrows && (
           <button
             className={`${styles.btnStyle} ${activeButton === '<<' ? styles.activeBtn : ''}`}
@@ -204,12 +208,15 @@ class Pagination extends React.Component {
         )}
 
         {last ? (
+          <>
+          {next && <div className={styles.line}></div>}
           <button
             className={`${styles.btnStyle} ${activeButton === 'last' ? styles.activeBtn : ''} `}
             onClick={() => this.handleClick('last')}
           >
             Last
           </button>
+          </>
         ) : arrows &&  (
           <button
             className={`${styles.btnStyle} ${activeButton === '>>' ? styles.activeBtn : ''}`}
@@ -217,7 +224,9 @@ class Pagination extends React.Component {
           >
             &gt;&gt;
           </button>
+          
         )}
+        
       </div>
     );
   }

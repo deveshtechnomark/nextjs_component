@@ -2080,7 +2080,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"btnStyle":"styles_btnStyle__wvdyK","activeBtn":"styles_activeBtn__kHobu","gridStyle":"styles_gridStyle__3uQ9V","withSpace":"styles_withSpace__2LkxR","firstButton":"styles_firstButton__3oWeD","lastButton":"styles_lastButton__1rV4e"};
+var styles = {"main_div":"styles_main_div__Rg8tn","btnStyle":"styles_btnStyle__wvdyK","activeBtn":"styles_activeBtn__kHobu","gridStyle":"styles_gridStyle__3uQ9V","withSpace":"styles_withSpace__2LkxR","firstButton":"styles_firstButton__3oWeD","lastButton":"styles_lastButton__1rV4e","line":"styles_line__37sPe"};
 
 class Pagination extends react.Component {
   constructor(props) {
@@ -2220,11 +2220,13 @@ class Pagination extends react.Component {
       activeButton
     } = this.state;
     return react.createElement("div", {
-      className: `${className ? className : ''}`
-    }, last ? react.createElement("button", {
+      className: `${styles.main_div}  ${className ? className : ''}`
+    }, last ? react.createElement(react.Fragment, null, react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `,
       onClick: () => this.handleClick('first')
-    }, "First") : arrows && react.createElement("button", {
+    }, "First"), next && react.createElement("div", {
+      className: styles.line
+    })) : arrows && react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === '<<' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('<<')
     }, "<<"), next ? react.createElement("button", {
@@ -2239,10 +2241,12 @@ class Pagination extends react.Component {
     }, "Next") : arrows && react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'next' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('next')
-    }, ">"), last ? react.createElement("button", {
+    }, ">"), last ? react.createElement(react.Fragment, null, next && react.createElement("div", {
+      className: styles.line
+    }), react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'last' ? styles.activeBtn : ''} `,
       onClick: () => this.handleClick('last')
-    }, "Last") : arrows && react.createElement("button", {
+    }, "Last")) : arrows && react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === '>>' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('>>')
     }, ">>"));
