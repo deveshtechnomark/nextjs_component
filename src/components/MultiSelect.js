@@ -4,7 +4,7 @@ import "../css/bootstrapCustom.css";
 import "bootstrap/js/dist/dropdown";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import * as Icon from "@fortawesome/free-solid-svg-icons";
 
 class MultiSelect extends React.Component {
     constructor(props) {
@@ -74,11 +74,14 @@ class MultiSelect extends React.Component {
             return " +".concat(arrayItem.length - 2, "  ");
         }
     }
-
+    clearSelectedOptions = () => {
+        this.setState({ selectedOptions: [] });
+    };
     render() {
 
         const { isOpen, searchQuery, selectedOptions } = this.state;
-        const { options, type, label } = this.props;
+        const { options, type, label, iconName } = this.props;
+        console.log("🚀 ~ file: MultiSelect.js:82 ~ MultiSelect ~ render ~ iconName:", typeof (Icon))
         const filteredOptions = options.filter((option) =>
             option.toLowerCase().includes(searchQuery.toLowerCase())
         );
@@ -100,14 +103,17 @@ class MultiSelect extends React.Component {
                                             onChange={this.handleSearchChange}
                                             onClick={this.toggleDropdown}
                                         />
-                                        <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
+                                        <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={Icon.faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
 
                                     </div>
 
                                     {isOpen && (
-                                        <ul className={`${styles.dropdownItems} col-12`}>
+                                        <ul className={`${styles.dropdownItems} col-12`} htmlFor="listInput">
                                             {filteredOptions.map((option) => (
-                                                <div key={option} className={styles.listItem} htmlFor="listInput">
+
+                                                <div key={option}
+                                                    className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
+                                                    htmlFor="listInput">
                                                     <li key={option} onClick={() => this.handleOptionClick(option)}>
                                                         <input
                                                             type="checkbox"
@@ -141,14 +147,15 @@ class MultiSelect extends React.Component {
                                                 onChange={this.handleSearchChange}
                                                 onClick={this.toggleDropdown}
                                             />
-                                            <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
+                                            <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={Icon.faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
 
                                         </div>
 
                                         {isOpen && (
                                             <ul className={`${styles.dropdownItems} col-12`}>
                                                 {filteredOptions.map((option) => (
-                                                    <div key={option} className={styles.listItem} htmlFor="listInput">
+                                                    <div key={option} className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
+                                                        htmlFor="listInput">
                                                         <li key={option} onClick={() => this.handleOptionClick(option)}>
                                                             <input
                                                                 type="radio"
@@ -182,7 +189,7 @@ class MultiSelect extends React.Component {
                                                     onChange={this.handleSearchChange}
                                                     onClick={this.toggleDropdown}
                                                 />
-                                                <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
+                                                <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={Icon.faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
 
                                             </div>
 
@@ -191,11 +198,12 @@ class MultiSelect extends React.Component {
                                                     {isOpen && (
                                                         <ul className={`${styles.dropdownItems} col-12`}>
                                                             {filteredOptions.map((option) => (
-                                                                <div key={option} className={styles.listItem}>
+                                                                <div key={option} className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
+                                                                >
                                                                     <li key={option}
                                                                         className={`dropdown-item`}
                                                                         onClick={() => this.handleOptionClick(option)}>
-                                                                        <span className={styles.listSpan}> <FontAwesomeIcon icon={faUserCircle} size="lg" className={styles.listIcon} color="black" />{option}</span>
+                                                                        <span className={styles.listSpan}> <FontAwesomeIcon icon={Icon.faUserCircle} size="lg" className={styles.listIcon} color="black" />{option}</span>
                                                                     </li>
                                                                 </div>
                                                             ))}
@@ -241,14 +249,18 @@ class MultiSelect extends React.Component {
                                                         onClick={this.toggleDropdown}
                                                     />
                                                     <div className={styles.spanIcon} onClick={this.toggleDropdown}>
-                                                        <FontAwesomeIcon icon={faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" />
+                                                        <FontAwesomeIcon icon={Icon.faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" />
                                                     </div>
 
                                                 </div>
                                                 {isOpen && (
                                                     <ul className={`${styles.dropdownItems} col-12`}>
+                                                        <span className={`${styles.chipClear} ${styles.listItem}`} onClick={this.clearSelectedOptions}>
+                                                            Clear All
+                                                        </span>
                                                         {filteredOptions.map((option) => (
-                                                            <div key={option} className={styles.listItem} htmlFor="listInput">
+                                                            <div key={option} className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
+                                                                htmlFor="listInput">
                                                                 <li key={option} onClick={() => this.handleOptionClick(option)}>
                                                                     <input
                                                                         type="checkbox"
