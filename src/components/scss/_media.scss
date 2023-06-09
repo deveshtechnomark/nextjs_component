@@ -1,0 +1,16 @@
+
+/*----------------- responsive variations -----------------*/
+$mini-screen: 1080px;
+$tab-view: 768px;
+
+@mixin mini-screen {
+    @media (max-width: #{$mini-screen}) {
+        @content;
+    }
+}
+
+@mixin tab-view {
+    @media (max-width: #{$tab-view}) {
+        @content;
+    }
+}

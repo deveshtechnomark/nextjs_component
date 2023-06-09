@@ -1,0 +1,25 @@
+@mixin fonts-source($size: false, $colour: false, $weight: false, $lh: false, $ls: false, $ff : false ) {
+    @if $size {
+        font-size: $size;
+    }
+
+    @if $colour {
+        color: $colour;
+    }
+
+    @if $weight {
+        font-weight: $weight;
+    }
+
+    @if $lh {
+        line-height: $lh;
+    }
+
+    @if $ls {
+        letter-spacing: $ls;
+    }
+
+    @if $ff {
+        font-family: $ff;
+    }
+}

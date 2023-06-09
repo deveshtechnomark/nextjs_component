@@ -1,0 +1,176 @@
+@import './colors';
+@import './mixins';
+@import './media';
+
+@import url('../fonts/stylesheet.css');
+
+
+.h1Style {
+    @include fonts-source($size: 40px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%, );
+
+    @include mini-screen {
+        @include fonts-source($size: 40px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 32px);
+    }
+}
+
+.h2Style {
+    @include fonts-source($size: 32px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%, );
+
+    @include mini-screen {
+        @include fonts-source($size: 32px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 28px);
+    }
+}
+
+.h3Style {
+    @include fonts-source($size: 28px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%, $ff : "Proxima Nova");
+
+    @include mini-screen {
+        @include fonts-source($size: 28px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 24px);
+    }
+}
+
+.h4Style {
+    @include fonts-source($size: 24px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 24px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 20px);
+    }
+}
+
+.h5Style {
+    @include fonts-source($size: 20px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 20px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 16px);
+    }
+}
+
+.h6Style {
+    @include fonts-source($size: 16px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 16px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 14px);
+    }
+}
+
+.titleStyle {
+    @include fonts-source($size: 20px, $weight: 500, $colour: color(pure-black), $lh: 120%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 20px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 16px);
+    }
+}
+
+.sub_titleStyle {
+    @include fonts-source($size: 16px, $weight: 500, $colour: color(pure-black), $lh: 120%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 16px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 14px);
+    }
+}
+
+.table_titleStyle {
+    @include fonts-source($size: 16px, $weight: 700, $colour: color(pure-black), $lh: 17.5px, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 16px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 14px);
+    }
+}
+
+.labelStyle {
+    @include fonts-source($size: 14px, $weight: 400, $colour: color(pure-black), $lh: 150%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 14px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 12px, $lh: 18px);
+    }
+}
+
+.bodyStyle {
+    @include fonts-source($size: 16px, $weight: 400, $colour: color(pure-black), $lh: 150%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 16px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 14px, $lh: 120%);
+    }
+}
+
+.buttonStyle {
+    @include fonts-source($size: 16px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 16px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 16px);
+    }
+}
+
+.badgeStyle {
+    @include fonts-source($size: 10px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 10px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 10px);
+    }
+}
+
+.tool_tipStyle {
+    @include fonts-source($size: 14px, $weight: 700, $colour: color(pure-black), $lh: 150%, $ls: 2%,);
+
+    @include mini-screen {
+        @include fonts-source($size: 14px);
+    }
+
+    @include tab-view {
+        @include fonts-source($size: 16px, $lh: 120%);
+    }
+}
+
+
