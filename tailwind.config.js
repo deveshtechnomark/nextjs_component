@@ -5,7 +5,14 @@ module.exports = {
     extend: {
       colors: {
         CSgreen: "#02B89D",
-      },
+        CSDarkGray: "#333333",
+        CSSecondaryGray: "#6E6D7A",
+        CSGrayChip: "#212529",
+        CSDropDownBG: "#FFFFFF",
+        CSListHover: "#F6F6F6",
+        CSChipBG: "#E9ECEF",
+        CSChipBorder: "#CED4DA"
+      }
     },
   },
   variants: {

@@ -2,6 +2,8 @@ import React from "react";
 import { BiChevronDown, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
 import "../styles/styles.css";
+import { CheckBox } from "form-elements";
+import "form-elements/dist/index.css";
 
 class MultiSelectSearch extends React.Component {
   constructor(props) {
@@ -75,14 +77,13 @@ class MultiSelectSearch extends React.Component {
 
     return (
       <div
-        className="relative font-medium flex-row border-b border-gray-300 hover:border-green-700 transition-colors duration-300"
+        className="relative font-medium w-full flex-row border-b border-gray-300 hover:border-CSgreen transition-colors duration-300"
         ref={this.selectRef}
-        style={{ width: "215px" }}
       >
         <label
           className={classNames(
-            "text-sm font-normal text-gray-700",
-            open && "text-green-700"
+            "text-sm font-normal text-CSSecondaryGray",
+            open && "text-CSgreen"
           )}
           htmlFor="select"
         >
@@ -108,13 +109,13 @@ class MultiSelectSearch extends React.Component {
             }
             style={{ width: "191px" }}
             className={classNames(
-              "flex-grow bg-white  text-gray-800 p-2 text-[16px] font-normal",
-              !inputValue && "text-gray-800",
-              open && "text-green-700",
+              "flex-grow bg-white  text-CSDarkGray p-2 text-[14px] font-normal",
+              !inputValue && "text-CSDarkGray",
+              open && "text-CSgreen",
               !open ? "cursor-pointer" : "cursor-default",
 
               "outline-none",
-              !open ? "placeholder-gray-600" : "placeholder-green-700"
+              !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen"
             )}
           />
 
@@ -131,7 +132,7 @@ class MultiSelectSearch extends React.Component {
 
         <ul
           className={classNames(
-            "absolute z-10 w-full bg-white mt-[1px] overflow-y-auto shadow-md transition-transform",
+            "absolute z-10 w-full bg-CSDropDownBG mt-[1px] overflow-y-auto shadow-md transition-transform",
             open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
@@ -145,9 +146,9 @@ class MultiSelectSearch extends React.Component {
               <li
                 key={option.value}
                 className={classNames(
-                  "p-[10px] text-sm hover:bg-gray-200 font-normal cursor-pointer flex",
+                  "p-[10px] text-sm hover:bg-CSListHover font-normal cursor-pointer flex",
                   {
-                    "bg-gray-200": selectedValues.includes(option.value),
+                    "bg-CSListHover": selectedValues.includes(option.value),
                     hidden: !option.label.toLowerCase().startsWith(inputValue),
                   }
                 )}
@@ -169,6 +170,7 @@ class MultiSelectSearch extends React.Component {
                     checked={selectedValues.includes(option.value)}
                     readOnly
                   />
+                  // <CheckBox id={selectedValues.includes(option.value)} checked={selectedValues.includes(option.value)} readOnly/>
                 )}
                 {option.label}
               </li>
