@@ -1,5 +1,3 @@
-import { Select } from "./components/Select";
-import { MultiSelectChip } from "./components/MultiSelectChip";
-import { MultiSelectSearch } from "./components/MultiSelectSearch";
+import Pagination from "./components/Pagination";
 
-export { Select, MultiSelectChip, MultiSelectSearch };
+export default Pagination;
