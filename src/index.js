@@ -40,7 +40,7 @@ class Accordion extends React.Component {
     const { dataCollection, label, icon, one } = this.props;
 
     return (
-      <div className="bg-white border border-gray-500 rounded p-10 mx-auto">
+      <div className="px-10 py-5 mx-auto">
         {label && <div className="text-md md:text-xl font-semibold">{label}</div>}
         <div className="w-full">
           {dataCollection.map((item, index) => (

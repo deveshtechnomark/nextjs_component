@@ -2318,7 +2318,7 @@ class Accordion extends react.Component {
       one
     } = this.props;
     return /*#__PURE__*/react.createElement("div", {
-      className: "bg-white border border-gray-500 rounded p-10 mx-auto"
+      className: "px-10 py-5 mx-auto"
     }, label && /*#__PURE__*/react.createElement("div", {
       className: "text-md md:text-xl font-semibold"
     }, label), /*#__PURE__*/react.createElement("div", {
