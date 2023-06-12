@@ -3,7 +3,8 @@ import styles from "../scss/style.scss";
 import { AiOutlineCheckCircle, AiOutlineClose, AiOutlineFontSize, AiOutlineWarning } from "react-icons/ai";
 import { IoIosInformationCircleOutline } from 'react-icons/io';
 import { BiErrorCircle } from 'react-icons/bi';
-
+import Typography  from 'typography';
+import "typography/dist/index.css";
 
 class Alert extends React.Component {
   constructor(props) {
@@ -19,11 +20,11 @@ class Alert extends React.Component {
 
   render() {
     const { showAlert } = this.state;
-    const { head, varient, message } = this.props;
+    const { head, variant, message } = this.props;
 
     let divClass;
 
-    switch (varient) {
+    switch (variant) {
       case "success":
         divClass = `${styles.alert_success}`;
         break;
@@ -44,16 +45,17 @@ class Alert extends React.Component {
 
     return (
       <>
+      <Typography type="h1">fddd</Typography>
         <div className={divClass}>
           <div className={styles.alert_inner}>
             {
-              varient == "success" ?
+              variant == "success" ?
                 <AiOutlineCheckCircle size={20}/> :
-                varient == "warning" ?
+                variant == "warning" ?
                   <AiOutlineWarning size={20}/> :
-                  varient == "error" ?
+                  variant == "error" ?
                     <BiErrorCircle size={20} /> :
-                    varient == "information" ?
+                    variant == "information" ?
                       <IoIosInformationCircleOutline size={20}/> :
                       null
             }
