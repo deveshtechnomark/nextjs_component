@@ -4,7 +4,7 @@ import { AiOutlineCheckCircle, AiOutlineClose, AiOutlineFontSize, AiOutlineWarni
 import { IoIosInformationCircleOutline } from 'react-icons/io';
 import { BiErrorCircle } from 'react-icons/bi';
 import Typography  from 'typography';
-// import "typography/dist/index.css";
+// import "typography/dist/index.css";  
 
 class Alert extends React.Component {
   constructor(props) {
