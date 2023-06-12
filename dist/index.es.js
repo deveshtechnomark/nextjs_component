@@ -2064,7 +2064,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"alert_inner":"style_alert_inner__8Whom","message":"style_message__2BgiE","alert_success":"style_alert_success__3uTXW","close":"style_close__1oiGo","alert_error":"style_alert_error__WFrxa","error_icon":"style_error_icon__1w-N6","alert_warning":"style_alert_warning__OqJId","alert_information":"style_alert_information__EggRK"};
+var styles = {"alert_inner":"style_alert_inner__8Whom","message":"style_message__2BgiE","alert_success":"style_alert_success__3uTXW","strong":"style_strong__2EGW1","close":"style_close__1oiGo","alert_error":"style_alert_error__WFrxa","error_icon":"style_error_icon__1w-N6","alert_warning":"style_alert_warning__OqJId","alert_information":"style_alert_information__EggRK"};
 
 var DefaultContext = {
   color: undefined,
@@ -4807,9 +4807,7 @@ class Alert extends react.Component {
       return null;
     }
 
-    return react.createElement(react.Fragment, null, react.createElement(Typography, {
-      type: "h1"
-    }, "fddd"), react.createElement("div", {
+    return react.createElement(react.Fragment, null, react.createElement("div", {
       className: divClass
     }, react.createElement("div", {
       className: styles.alert_inner
@@ -4821,7 +4819,9 @@ class Alert extends react.Component {
       size: 20
     }) : variant == "information" ? react.createElement(IoIosInformationCircleOutline, {
       size: 20
-    }) : null, react.createElement("strong", null, head), react.createElement(AiOutlineClose, {
+    }) : null, react.createElement("strong", {
+      className: styles.strong
+    }, head), react.createElement(AiOutlineClose, {
       className: styles.close,
       onClick: this.handleClose
     })), message ? react.createElement("p", {

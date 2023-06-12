@@ -4,7 +4,7 @@ import { AiOutlineCheckCircle, AiOutlineClose, AiOutlineFontSize, AiOutlineWarni
 import { IoIosInformationCircleOutline } from 'react-icons/io';
 import { BiErrorCircle } from 'react-icons/bi';
 import Typography  from 'typography';
-import "typography/dist/index.css";
+// import "typography/dist/index.css";
 
 class Alert extends React.Component {
   constructor(props) {
@@ -45,7 +45,6 @@ class Alert extends React.Component {
 
     return (
       <>
-      <Typography type="h1">fddd</Typography>
         <div className={divClass}>
           <div className={styles.alert_inner}>
             {
@@ -59,7 +58,7 @@ class Alert extends React.Component {
                       <IoIosInformationCircleOutline size={20}/> :
                       null
             }
-            <strong>{head}</strong>
+            <strong className={styles.strong}>{head}</strong>
             <AiOutlineClose className={styles.close} onClick={this.handleClose} />
           </div>
           {message ? <p className={styles.message}>{message}</p> : null}
