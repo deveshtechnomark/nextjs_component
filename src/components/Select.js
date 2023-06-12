@@ -3,6 +3,9 @@ import { BiChevronDown, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
 import "../styles/styles.css";
 
+// importing another custom library
+import { Typography } from "Typography";
+
 class Select extends React.Component {
   constructor(props) {
     super(props);
@@ -67,12 +70,12 @@ class Select extends React.Component {
       >
         <label
           className={classNames(
-            "text-sm font-normal text-CSSecondaryGray",
+            "text-[14px] font-normal font-proxima text-CSSecondaryGray",
             open && "text-CSgreen"
           )}
           htmlFor="select"
         >
-          {label}
+          <Typography type="label">{label}*</Typography>
         </label>
 
         <div className="flex flex-row items-center justify-center relative mt-0.5">
@@ -87,11 +90,10 @@ class Select extends React.Component {
             }
             style={{ width: "191px" }}
             className={classNames(
-              "flex-grow bg-white text-CSDarkGray p-2 text-[14px] font-normal",
+              "flex-grow outline-none bg-white text-CSDarkGray p-2 text-[16px] font-normal font-proxima",
               !inputValue && "text-CSDarkGray",
               open && "text-CSgreen",
               !open ? "cursor-pointer" : "cursor-default",
-              "outline-none",
               !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen"
             )}
           />
@@ -120,7 +122,7 @@ class Select extends React.Component {
               <li
                 key={option.value}
                 className={classNames(
-                  "p-[10px] text-sm hover:bg-CSListHover font-normal cursor-pointer flex", // Add 'flex' class
+                  "p-[10px] text-[16px] font-proxima hover:bg-CSListHover font-normal cursor-pointer flex",
                   {
                     "bg-CSListHover": option.value === inputValue,
                     hidden: !option.label.toLowerCase().startsWith(inputValue),

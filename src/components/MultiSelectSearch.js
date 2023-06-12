@@ -2,9 +2,9 @@ import React from "react";
 import { BiChevronDown, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
 import "../styles/styles.css";
-import { CheckBox } from "form-elements";
-import "form-elements/dist/index.css";
 
+// importing another custom library
+import { Typography } from "Typography";
 class MultiSelectSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -51,7 +51,7 @@ class MultiSelectSearch extends React.Component {
 
     const index = updatedValues.indexOf(value);
     if (index > -1) {
-      updatedValues.splice(index, 1); // Remove the value if already selected
+      updatedValues.splice(index, 1); // it will Remove the value if already selected
     } else {
       updatedValues.push(value); // Add the value if not selected
     }
@@ -68,9 +68,6 @@ class MultiSelectSearch extends React.Component {
     );
   };
 
-
-
-
   render() {
     const { options, label, type } = this.props;
     const { open, inputValue, selectedValues } = this.state;
@@ -82,12 +79,12 @@ class MultiSelectSearch extends React.Component {
       >
         <label
           className={classNames(
-            "text-sm font-normal text-CSSecondaryGray",
+            "text-[14px] font-normal font-proxima text-CSSecondaryGray",
             open && "text-CSgreen"
           )}
           htmlFor="select"
         >
-          {label}
+          <Typography type="label">{label}*</Typography>
         </label>
 
 
@@ -109,12 +106,10 @@ class MultiSelectSearch extends React.Component {
             }
             style={{ width: "191px" }}
             className={classNames(
-              "flex-grow bg-white  text-CSDarkGray p-2 text-[14px] font-normal",
+              "flex-grow bg-white outline-none text-CSDarkGray p-2 text-[16px] font-normal font-proxima",
               !inputValue && "text-CSDarkGray",
               open && "text-CSgreen",
               !open ? "cursor-pointer" : "cursor-default",
-
-              "outline-none",
               !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen"
             )}
           />
@@ -146,7 +141,7 @@ class MultiSelectSearch extends React.Component {
               <li
                 key={option.value}
                 className={classNames(
-                  "p-[10px] text-sm hover:bg-CSListHover font-normal cursor-pointer flex",
+                  "p-[10px] text-[16px] hover:bg-CSListHover font-normal font-proxima cursor-pointer flex",
                   {
                     "bg-CSListHover": selectedValues.includes(option.value),
                     hidden: !option.label.toLowerCase().startsWith(inputValue),
@@ -170,7 +165,6 @@ class MultiSelectSearch extends React.Component {
                     checked={selectedValues.includes(option.value)}
                     readOnly
                   />
-                  // <CheckBox id={selectedValues.includes(option.value)} checked={selectedValues.includes(option.value)} readOnly/>
                 )}
                 {option.label}
               </li>

@@ -3,6 +3,9 @@ import { BiChevronDown, BiX, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
 import "../styles/styles.css";
 
+// importing another custom library
+import { Typography } from "Typography";
+
 class MultiSelectChip extends React.Component {
   constructor(props) {
     super(props);
@@ -86,7 +89,7 @@ class MultiSelectChip extends React.Component {
             <div
               key={option}
               className={classNames(
-                "flex items-center badge bg-CSChipBG text-CSGrayChip border border-CSChipBorder rounded-sm px-1 mr-[5px] mb-2 text-[14px]",
+                "flex items-center badge bg-CSChipBG text-CSGrayChip border border-CSChipBorder rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima",
                 option.length > 8 && "max-w-[100px]"
               )}
             >
@@ -101,13 +104,13 @@ class MultiSelectChip extends React.Component {
             </div>
           ))}
           {selected.length > 2 && (
-            <div className="flex items-center badge bg-CSChipBG text-CSDarkGray border border-CSChipBorder rounded-sm px-1 mr-[5px] mb-2 text-[14px]">
+            <div className="flex items-center badge bg-CSChipBG text-CSDarkGray border border-CSChipBorder rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima">
               +{selected.length - 2}
             </div>
           )}
         </div>
       ) : (
-        <div className={classNames("text-CSDarkGray pb-2",
+        <div className={classNames("text-CSDarkGray pb-2 font-proxima",
           open && "text-CSgreen"
         )}>Please Select...</div>
       );
@@ -119,18 +122,18 @@ class MultiSelectChip extends React.Component {
       >
         <label
           className={classNames(
-            "text-sm font-normal text-CSSecondaryGray",
+            "text-[14px] font-normal font-proxima text-CSSecondaryGray",
             open && "text-CSgreen"
           )}
           htmlFor="select"
         >
-          {label}
+          <Typography type="label">{label}*</Typography>
         </label>
         <div
           onClick={this.handleToggleOpen}
           id="select"
           className={classNames(
-            "flex justify-between bg-white border-b border-gray-300 text-CSDarkGray pt-2 pl-2 text-[14px] font-normal transition-colors duration-300",
+            "flex justify-between bg-white border-b border-gray-300 text-CSDarkGray pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300",
             selected.length === 0 && "text-CSDarkGray",
             open && "text-CSgreen",
             !open ? "cursor-pointer" : "cursor-default",
@@ -151,8 +154,8 @@ class MultiSelectChip extends React.Component {
           className={classNames(
             "absolute z-10 w-full bg-CSDropDownBG mt-[1px] overflow-y-auto shadow-md transition-transform",
             open
-              ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-300"
-              : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-300",
+              ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
+              : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
             {
               "ease-out": open,
             }
@@ -160,7 +163,7 @@ class MultiSelectChip extends React.Component {
         >
           <li
             className={classNames(
-              "pt-3 pl-3 text-[14px] font-normal text-CSgreen cursor-pointer flex"
+              "pt-3 pl-3 text-[16px] font-normal font-proxima text-CSgreen cursor-pointer flex"
             )}
             onClick={this.handleClearAll}
           >
@@ -171,7 +174,7 @@ class MultiSelectChip extends React.Component {
               <li
                 key={option.value}
                 className={classNames(
-                  "p-3 text-sm hover:bg-CSListHover font-normal cursor-pointer flex",
+                  "p-3 text-[16px] hover:bg-CSListHover font-normal font-proxima cursor-pointer flex",
                   {
                     "bg-CSListHover": selected.includes(option.value),
                   }

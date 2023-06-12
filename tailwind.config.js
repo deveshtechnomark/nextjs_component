@@ -2,6 +2,9 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      proxima: ['Proxima Nova'],
+    },
     extend: {
       colors: {
         CSgreen: "#02B89D",
@@ -12,7 +15,7 @@ module.exports = {
         CSListHover: "#F6F6F6",
         CSChipBG: "#E9ECEF",
         CSChipBorder: "#CED4DA"
-      }
+      },
     },
   },
   variants: {
