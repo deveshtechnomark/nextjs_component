@@ -3,12 +3,10 @@ import styles from "../scss/styles.scss";
 import "../css/bootstrapCustom.css";
 import "bootstrap/js/dist/dropdown";
 
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
-let document;
-if (typeof window !== "undefined") {
-    document = window.document;
-}
+
 class MultiSelect extends React.Component {
     constructor(props) {
         super(props);
@@ -21,15 +19,12 @@ class MultiSelect extends React.Component {
     }
 
     componentDidMount() {
-        if (document) {
-            window.addEventListener("click", this.handleCliclOutSide);
-        }
+        window.addEventListener("click", this.handleCliclOutSide);
     }
     componentWillMount() {
-        if (document) {
-            window.addEventListener("click", this.handleCliclOutSide);
-        }
+        window.addEventListener("click", this.handleCliclOutSide);
     }
+
     handleCliclOutSide = (e) => {
         if (this.selectRef.current && !this.selectRef.current.contains(e.target)) {
             this.setState({ isOpen: false })
@@ -38,8 +33,9 @@ class MultiSelect extends React.Component {
 
     toggleDropdown = () => {
         this.setState((prevState) => ({
-            isOpen: !prevState.isOpen,
+            isOpen: !prevState.isOpen
         }));
+
     };
 
     handleSearchChange = (e) => {
@@ -84,6 +80,7 @@ class MultiSelect extends React.Component {
         this.setState({ selectedOptions: [] });
     };
 
+
     render() {
 
         const { isOpen, searchQuery, selectedOptions } = this.state;
@@ -94,24 +91,24 @@ class MultiSelect extends React.Component {
         );
         return (
             <>
+
                 {type === "checkbox" ?
                     <div className="container" ref={this.selectRef}>
                         <div className={styles.cardMain}>
                             <div className="col-auto">
                                 <div className="dropdown">
-                                    <label htmlFor="checkboxInput">{labelName}</label>
-                                    <div className="input-group">
+                                    <label htmlFor="checkboxInput" className={isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`} >{labelName}</label>
+                                    <div className={`input-group ${styles.borderBottom}`}>
                                         <input
                                             type="text"
                                             id="checkboxInput"
-                                            className={"form-control mb-2 border-0 border-bottom border-success rounded-0"}
+                                            className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`}
                                             placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select"}
                                             value={searchQuery}
                                             onChange={this.handleSearchChange}
                                             onClick={this.toggleDropdown}
                                         />
                                         <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={Icon.faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
-
                                     </div>
 
                                     {isOpen && (
@@ -143,21 +140,19 @@ class MultiSelect extends React.Component {
                             <div className={styles.cardMain}>
                                 <div className="col-auto">
                                     <div className="dropdown">
-                                        <label htmlFor="radioInput">{labelName}</label>
-                                        <div className="input-group">
+                                        <label htmlFor="radioInput" className={isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`} >{labelName}</label>
+                                        <div className={`input-group ${styles.borderBottom}`}>
                                             <input
                                                 type="text"
                                                 id="radioInput"
-                                                className={"form-control mb-2 border-0 border-bottom border-success rounded-0"}
+                                                className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`}
                                                 placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select"}
                                                 value={searchQuery}
                                                 onChange={this.handleSearchChange}
                                                 onClick={this.toggleDropdown}
                                             />
                                             <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={Icon.faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
-
                                         </div>
-
                                         {isOpen && (
                                             <ul className={`${styles.dropdownItems} col-12`}>
                                                 {filteredOptions.map((option) => (
@@ -170,6 +165,7 @@ class MultiSelect extends React.Component {
                                                                 className={styles.dropdownCheckbox}
                                                                 checked={selectedOptions.includes(option)}
                                                             />
+
                                                             <span>{option}</span>
                                                         </li>
                                                     </div>
@@ -185,19 +181,18 @@ class MultiSelect extends React.Component {
                                 <div className={styles.cardMain}>
                                     <div className="col-auto">
                                         <div className="dropdown">
-                                            <label htmlFor="iconInput">{labelName}</label>
-                                            <div className="input-group">
+                                            <label htmlFor="iconInput" className={isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`} >{labelName}</label>
+                                            <div className={`input-group ${styles.borderBottom}`}>
                                                 <input
                                                     type="text"
                                                     id="iconInput"
-                                                    className={"form-control mb-2 border-0 border-bottom border-success rounded-0"}
+                                                    className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`}
                                                     placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select"}
                                                     value={searchQuery}
                                                     onChange={this.handleSearchChange}
                                                     onClick={this.toggleDropdown}
                                                 />
                                                 <div className={styles.spanIcon} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={Icon.faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
-
                                             </div>
 
                                             {isOpen && (
@@ -227,10 +222,8 @@ class MultiSelect extends React.Component {
                                     <div className={styles.cardMain}>
                                         <div className="col-auto">
                                             <div className="dropdown">
-                                                <label htmlFor="chipInput">
-                                                    {labelName}
-                                                </label>
-                                                <div className="input-group">
+                                                <label htmlFor="chipInput" className={isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`} >{labelName}</label>
+                                                <div className={`input-group ${styles.borderBottom}`}>
                                                     {selectedOptions.length > 0 && (
                                                         <div className={styles.chips}>
                                                             {selectedOptions.slice(0, 2).map((option) => (
@@ -249,8 +242,8 @@ class MultiSelect extends React.Component {
                                                     <input
                                                         type="text"
                                                         id="chipInput"
-                                                        className="form-control mb-2 border-0 border-bottom border-success rounded-0"
-                                                        placeholder={selectedOptions.length > 0 ? "" : "Please Select"}
+                                                        className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`}
+                                                        placeholder={selectedOptions.length > 0 ? '' : "Please Select"}
                                                         value={searchQuery}
                                                         onChange={this.handleSearchChange}
                                                         onClick={this.toggleDropdown}

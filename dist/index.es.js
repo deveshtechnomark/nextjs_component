@@ -2216,7 +2216,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"listItem":"styles_listItem__3B4xI","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","listSpan":"styles_listSpan__fJ06z","listIcon":"styles_listIcon__2lhpx","activeItem":"styles_activeItem__1nne_","dropdownItems":"styles_dropdownItems__2T8NO","cardMain":"styles_cardMain__1_xXT","spanIcon":"styles_spanIcon__3Vyfe","spanIconRotate":"styles_spanIconRotate__3gUJv","chips":"styles_chips__1-kaG","chip":"styles_chip__GRp9n","chipClose":"styles_chipClose__3Ua3_","chipClear":"styles_chipClear__2fAYB","chipCount":"styles_chipCount__3UOy1"};
+var styles = {"borderBottom":"styles_borderBottom__UgkDA","labelSelected":"styles_labelSelected__2DLuP","labelDefault":"styles_labelDefault__1a30M","placeholderSelected":"styles_placeholderSelected__1CEIU","placeholderDefault":"styles_placeholderDefault__321CE","listItem":"styles_listItem__3B4xI","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","listSpan":"styles_listSpan__fJ06z","listIcon":"styles_listIcon__2lhpx","activeItem":"styles_activeItem__1nne_","dropdownItems":"styles_dropdownItems__2T8NO","cardMain":"styles_cardMain__1_xXT","spanIcon":"styles_spanIcon__3Vyfe","spanIconRotate":"styles_spanIconRotate__3gUJv","chips":"styles_chips__1-kaG","chip":"styles_chip__GRp9n","chipClose":"styles_chipClose__3Ua3_","chipClear":"styles_chipClear__2fAYB","chipCount":"styles_chipCount__3UOy1"};
 
 var top = 'top';
 var bottom = 'bottom';
@@ -21237,10 +21237,6 @@ var Icon = /*#__PURE__*/Object.freeze({
   faLevelUpAlt: faLevelUpAlt
 });
 
-let document$1;
-if (typeof window !== "undefined") {
-  document$1 = window.document;
-}
 class MultiSelect extends react.Component {
   constructor(props) {
     super(props);
@@ -21307,14 +21303,10 @@ class MultiSelect extends react.Component {
     this.selectRef = /*#__PURE__*/react.createRef();
   }
   componentDidMount() {
-    if (document$1) {
-      window.addEventListener("click", this.handleCliclOutSide);
-    }
+    window.addEventListener("click", this.handleCliclOutSide);
   }
   componentWillMount() {
-    if (document$1) {
-      window.addEventListener("click", this.handleCliclOutSide);
-    }
+    window.addEventListener("click", this.handleCliclOutSide);
   }
   render() {
     const {
@@ -21339,13 +21331,14 @@ class MultiSelect extends react.Component {
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
-      htmlFor: "checkboxInput"
+      htmlFor: "checkboxInput",
+      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
-      className: "input-group"
+      className: `input-group ${styles.borderBottom}`
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "checkboxInput",
-      className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
+      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
       placeholder: selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,
@@ -21382,13 +21375,14 @@ class MultiSelect extends react.Component {
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
-      htmlFor: "radioInput"
+      htmlFor: "radioInput",
+      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
-      className: "input-group"
+      className: `input-group ${styles.borderBottom}`
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "radioInput",
-      className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
+      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
       placeholder: selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,
@@ -21424,13 +21418,14 @@ class MultiSelect extends react.Component {
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
-      htmlFor: "iconInput"
+      htmlFor: "iconInput",
+      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
-      className: "input-group"
+      className: `input-group ${styles.borderBottom}`
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "iconInput",
-      className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
+      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
       placeholder: selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,
@@ -21470,9 +21465,10 @@ class MultiSelect extends react.Component {
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
-      htmlFor: "chipInput"
+      htmlFor: "chipInput",
+      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
-      className: "input-group"
+      className: `input-group ${styles.borderBottom}`
     }, selectedOptions.length > 0 && /*#__PURE__*/react.createElement("div", {
       className: styles.chips
     }, selectedOptions.slice(0, 2).map(option => /*#__PURE__*/react.createElement("div", {
@@ -21486,8 +21482,8 @@ class MultiSelect extends react.Component {
     }, this.optionLength(selectedOptions)) : ''), /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "chipInput",
-      className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
-      placeholder: selectedOptions.length > 0 ? "" : "Please Select",
+      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
+      placeholder: selectedOptions.length > 0 ? '' : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,
       onClick: this.toggleDropdown
@@ -21586,13 +21582,14 @@ class Select extends react.Component {
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
-      htmlFor: "inlineFormInput"
+      htmlFor: "inlineFormInput",
+      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
-      className: "input-group"
+      className: `input-group ${styles.borderBottom}`
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "inlineFormInput",
-      className: "form-control ml-0 border-0 border-bottom border-success rounded-0",
+      className: isOpen === true ? `form-control mb-2 border-0 rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
       placeholder: singleSelect !== "" ? singleSelect : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,

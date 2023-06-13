@@ -64,12 +64,12 @@ class Select extends React.Component {
         <div className={styles.cardMain}>
           <div className="col-auto">
             <div className="dropdown">
-              <label htmlFor="inlineFormInput">{labelName}</label>
-              <div className="input-group">
+              <label htmlFor="inlineFormInput" className={isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`} >{labelName}</label>
+              <div className={`input-group ${styles.borderBottom}`}>
                 <input
                   type="text"
                   id="inlineFormInput"
-                  className={"form-control ml-0 border-0 border-bottom border-success rounded-0"}
+                  className={isOpen === true ? `form-control mb-2 border-0 rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`}
                   placeholder={singleSelect !== "" ? singleSelect : "Please Select"}
                   value={searchQuery}
                   onChange={this.handleSearchChange}
