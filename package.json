@@ -12,11 +12,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "next": "^9.0.2",
     "@babel/core": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "next": "^9.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "rollup": "^1.17.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.0.1",
@@ -24,6 +24,7 @@
     "rollup-plugin-postcss": "^2.0.3"
   },
   "dependencies": {
+    "react-ripples": "^2.2.1",
     "tailwindcss": "^3.3.2"
   }
 }

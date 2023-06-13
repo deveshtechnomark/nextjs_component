@@ -1,4 +1,5 @@
 import React from "react";
+import Ripples from "react-ripples";
 import "./index.css";
 
 class Button extends React.Component {
@@ -54,7 +55,7 @@ class Button extends React.Component {
     } = this.props;
 
     return (
-      <div>
+      <Ripples color="rgba(255,255,255, 0.3)">
         <button
           {...this.props}
           style={{ style }}
@@ -176,7 +177,7 @@ class Button extends React.Component {
           ></span>
           <span className="relative">{children}</span>
         </button>
-      </div>
+      </Ripples>
     );
   }
 }
