@@ -60,7 +60,7 @@ class Select extends React.Component {
       option.toLowerCase().includes(searchQuery.toLowerCase())
     );
     return (
-      <div className="container" ref={this.selectRef}>
+      <div className="container1" ref={this.selectRef}>
         <div className={styles.cardMain}>
           <div className="col-auto">
             <div className="dropdown">

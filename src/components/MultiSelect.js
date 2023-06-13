@@ -2,7 +2,8 @@ import React from "react";
 import styles from "../scss/styles.scss";
 import "../css/bootstrapCustom.css";
 import "bootstrap/js/dist/dropdown";
-
+import { CheckBox } from "checkbox";
+import RadioButton from "radiobtn_lib";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +15,7 @@ class MultiSelect extends React.Component {
             isOpen: false,
             searchQuery: "",
             selectedOptions: [],
+            checkedValues: [],
         };
         this.selectRef = React.createRef();
     }
@@ -44,22 +46,7 @@ class MultiSelect extends React.Component {
         });
     };
 
-    handleOptionClick = (option) => {
-        const { selectedOptions } = this.state;
-        if (selectedOptions.includes(option)) {
-            this.setState({
-                selectedOptions: selectedOptions.filter((item) => item !== option),
-            }, () => {
-                this.props.onSelect(selectedOptions)
-            });
-        } else {
-            this.setState({
-                selectedOptions: [...selectedOptions, option],
-            }, () => {
-                this.props.onSelect(selectedOptions)
-            });
-        }
-    };
+
 
     selectedItems = (arrayItem) => {
         let selectedElements = 2;
@@ -81,19 +68,51 @@ class MultiSelect extends React.Component {
     };
 
 
+    handleCheckboxChange = (event) => {
+        const value = event.target.id;
+        const isChecked = event.target.checked;
+        const { selectedOptions } = this.state;
+        if (isChecked) {
+            this.setState((prevState) => ({
+                selectedOptions: [...prevState.selectedOptions, value],
+            }));
+        } else {
+            this.setState((prevState) => ({
+                selectedOptions: prevState.selectedOptions.filter((item) => item !== value),
+            }));
+        }
+    };
+    handleOptionClick = (option) => {
+        const { selectedOptions } = this.state;
+        if (selectedOptions.includes(option)) {
+            this.setState({
+                selectedOptions: selectedOptions.filter((item) => item !== option),
+            }, () => {
+                this.props.onSelect(selectedOptions)
+            });
+        } else {
+            this.setState({
+                selectedOptions: [...selectedOptions, option],
+            }, () => {
+                this.props.onSelect(selectedOptions)
+            });
+        }
+    };
+
     render() {
 
-        const { isOpen, searchQuery, selectedOptions } = this.state;
+        const { isOpen, searchQuery, selectedOptions, checkedValues } = this.state;
         const { options, type, labelName, iconName } = this.props;
 
         const filteredOptions = options.filter((option) =>
             option.toLowerCase().includes(searchQuery.toLowerCase())
         );
+
         return (
             <>
 
                 {type === "checkbox" ?
-                    <div className="container" ref={this.selectRef}>
+                    <div className="container1" ref={this.selectRef}>
                         <div className={styles.cardMain}>
                             <div className="col-auto">
                                 <div className="dropdown">
@@ -119,13 +138,7 @@ class MultiSelect extends React.Component {
                                                     className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
                                                     htmlFor="listInput">
                                                     <li key={option} onClick={() => this.handleOptionClick(option)}>
-                                                        <input
-                                                            type="checkbox"
-                                                            id="listInput"
-                                                            className={styles.dropdownCheckbox}
-                                                            checked={selectedOptions.includes(option)}
-                                                        />
-                                                        <span>{option}</span>
+                                                        <CheckBox id={option} label={option} name={option} onChange={this.handleCheckboxChange} />
                                                     </li>
                                                 </div>
                                             ))}
@@ -136,7 +149,7 @@ class MultiSelect extends React.Component {
                         </div>
                     </div>
                     : type === "radio" ?
-                        <div className="container" ref={this.selectRef}>
+                        <div className="container1" ref={this.selectRef}>
                             <div className={styles.cardMain}>
                                 <div className="col-auto">
                                     <div className="dropdown">
@@ -159,14 +172,7 @@ class MultiSelect extends React.Component {
                                                     <div key={option} className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
                                                         htmlFor="listInput">
                                                         <li key={option} onClick={() => this.handleOptionClick(option)}>
-                                                            <input
-                                                                type="radio"
-                                                                id="listInput"
-                                                                className={styles.dropdownCheckbox}
-                                                                checked={selectedOptions.includes(option)}
-                                                            />
-
-                                                            <span>{option}</span>
+                                                            <RadioButton label={option} name={option} id={option} className={styles.dropdownCheckbox}  onChange={this.handleCheckboxChange}/>
                                                         </li>
                                                     </div>
                                                 ))}
@@ -177,7 +183,7 @@ class MultiSelect extends React.Component {
                             </div>
                         </div>
                         : type === "icon" ?
-                            <div className="container" ref={this.selectRef}>
+                            <div className="container1" ref={this.selectRef}>
                                 <div className={styles.cardMain}>
                                     <div className="col-auto">
                                         <div className="dropdown">
@@ -218,7 +224,7 @@ class MultiSelect extends React.Component {
                                 </div>
                             </div>
                             : type === "chip" ?
-                                <div className="container" ref={this.selectRef}>
+                                <div className="container1" ref={this.selectRef}>
                                     <div className={styles.cardMain}>
                                         <div className="col-auto">
                                             <div className="dropdown">
@@ -262,13 +268,7 @@ class MultiSelect extends React.Component {
                                                             <div key={option} className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
                                                                 htmlFor="listInput">
                                                                 <li key={option} onClick={() => this.handleOptionClick(option)}>
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        id="listInput"
-                                                                        className={styles.dropdownCheckbox}
-                                                                        checked={selectedOptions.includes(option)}
-                                                                    />
-                                                                    <span>{option}</span>
+                                                                    <CheckBox id={option} label={option} name={option} onChange={this.handleCheckboxChange} />
                                                                 </li>
                                                             </div>
                                                         ))}
