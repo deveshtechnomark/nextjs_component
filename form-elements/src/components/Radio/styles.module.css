@@ -1,0 +1,99 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container label {
+  position: relative;
+  display: flex;
+  width: auto;
+  align-items: center;
+  cursor: pointer;
+}
+
+.container .invalidLabel {
+  color: #dc3545;
+}
+
+.check {
+  margin: 2px 10px;
+  margin-right: 0.3em;
+  width: 18px;
+  height: 18px;
+}
+
+.check #border {
+  fill: none;
+  stroke: #7a7a8c;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.invalidCheck #border {
+  stroke: #dc3545;
+}
+
+.check #dot {
+  fill: #02b89d;
+  box-shadow: 0 0 0 2px #02b89d;
+  transform: scale(0);
+  transform-origin: 50% 50%;
+}
+
+.invalidCheck #dot {
+  fill: #dc3545;
+}
+
+.__radio {
+  height: 0;
+  width: 0;
+  appearance: none;
+  position: absolute;
+}
+
+.__radio:hover:not(:disabled) + label > .check #border {
+  stroke: #02b89d;
+}
+
+.__radio:focus + label > .check {
+  box-shadow: 0 0 0 4px #64dbc980;
+  border-radius: 50%;
+}
+
+.__radio:focus + label > .invalidCheck {
+  box-shadow: 0 0 0 4px #dc354680;
+  border-radius: 50%;
+}
+
+.__radio:checked + label .check #border {
+  stroke: #02b89d;
+  stroke-dasharray: 145;
+  stroke-dashoffset: 145;
+  animation: checked 500ms ease forwards;
+}
+
+.__radio:checked + label .check #dot {
+  transform: scale(1);
+  box-shadow: 0px 0px 0px 2px #02b89d;
+  transition: transform 500ms cubic-bezier(0.57, 0.21, 0.69, 3.25);
+}
+
+.__radio:checked + label .invalidCheck #border {
+  stroke: #dc3545;
+}
+
+.__radio:hover:not(:disabled) + label > .invalidCheck #border {
+  stroke: #dc3545;
+}
+
+.__radio:disabled + label {
+  opacity: 0.5;
+}
+
+@keyframes checked {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

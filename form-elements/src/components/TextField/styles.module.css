@@ -1,0 +1,73 @@
+.container__input {
+  margin: 3px 2px;
+  padding-left: 5px;
+  height: 40px;
+  width: 80%;
+  border-radius: 3px;
+  position: relative;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+.label__input {
+  text-transform: capitalize;
+  font-size: 18px;
+}
+
+.container__input input {
+  height: 90%;
+  width: 90%;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.hidden__input {
+  display: none;
+}
+
+.container__input input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.container__input input[type="file"]::file-selector-button {
+  height: 100%;
+  background: none;
+  border: none;
+  border-right: 2px solid black;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.container__input input[type="file"]::file-selector-button:hover {
+  background-color: whitesmoke;
+}
+
+.icons__input {
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  top: 12px;
+  height: 18px;
+  width: 18px;
+}
+
+.error__input {
+  padding: 0px 1%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 96%;
+  top: 40px;
+  font-weight: 500;
+  position: absolute;
+  background-color: grey;
+  border-radius: 5px;
+}

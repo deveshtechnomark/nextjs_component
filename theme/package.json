@@ -1,0 +1,36 @@
+{
+  "name": "theme",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.9",
+    "@types/react-dom": "18.2.4",
+    "accordionlib": "file:../Accordion",
+    "alertlib": "file:../Alert",
+    "autoprefixer": "10.4.14",
+    "Breadcrumb": "file:../Breadcrumb",
+    "buttonlib": "file:../Button",
+    "closebuttonlib": "file:../Close",
+    "eslint": "8.42.0",
+    "eslint-config-next": "13.4.4",
+    "form-elements": "file:../form-elements",
+    "next": "13.4.4",
+    "pagination-lib": "file:../Pagination",
+    "postcss": "8.4.24",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "select-dropdown-tw": "file:../Dropdown",
+    "tailwindcss": "3.3.2",
+    "toastlib": "file:../Toast",
+    "tooltiplib": "file:../Tooltip",
+    "typescript": "5.1.3",
+    "Typography": "file:../Typography"
+  }
+}
