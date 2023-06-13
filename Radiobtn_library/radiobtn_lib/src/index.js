@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './styles.css';
+import Typography from 'typography';
+import 'typography/dist/index.css';
 
 class RadioButton extends React.Component {
   constructor(props) {
@@ -23,14 +25,14 @@ class RadioButton extends React.Component {
   }
 
   render() {
-    const { label, id, disabled, invalid, customClassName, value, defaultChecked } = this.props;
+    const { label, id, disabled, invalid, className, value, defaultChecked } = this.props;
     const { name } = this.state;
 
     const labelClassName = [
       styles.radio_label,
       disabled ? styles.disabled_label : '',
       invalid ? styles.invalid_label : '',
-      customClassName || '',
+      className || '',
     ].join(' ');
 
     return (
