@@ -21237,6 +21237,10 @@ var Icon = /*#__PURE__*/Object.freeze({
   faLevelUpAlt: faLevelUpAlt
 });
 
+let document$1;
+if (typeof window !== "undefined") {
+  document$1 = window.document;
+}
 class MultiSelect extends react.Component {
   constructor(props) {
     super(props);
@@ -21280,9 +21284,9 @@ class MultiSelect extends react.Component {
       if (arrayItem.length <= selectedElements) {
         return arrayItem.join(", ");
       } else {
-        let displayedElements = arrayItem.slice(0, selectedElements);
-        displayedElements.push("...");
-        return displayedElements.join(", ");
+        let displayElements = arrayItem.slice(0, selectedElements);
+        displayElements.push("...");
+        return displayElements.join(", ");
       }
     });
     _defineProperty(this, "optionLength", arrayItem => {
@@ -21303,11 +21307,14 @@ class MultiSelect extends react.Component {
     this.selectRef = /*#__PURE__*/react.createRef();
   }
   componentDidMount() {
-    console.log();
-    window.addEventListener("click", this.handleCliclOutSide);
+    if (document$1) {
+      window.addEventListener("click", this.handleCliclOutSide);
+    }
   }
   componentWillMount() {
-    window.addEventListener("click", this.handleCliclOutSide);
+    if (document$1) {
+      window.addEventListener("click", this.handleCliclOutSide);
+    }
   }
   render() {
     const {
@@ -21318,10 +21325,9 @@ class MultiSelect extends react.Component {
     const {
       options,
       type,
-      label,
+      labelName,
       iconName
     } = this.props;
-    console.log("🚀 ~ file: MultiSelect.js:82 ~ MultiSelect ~ render ~ iconName:", typeof Icon);
     const filteredOptions = options.filter(option => option.toLowerCase().includes(searchQuery.toLowerCase()));
     return /*#__PURE__*/react.createElement(react.Fragment, null, type === "checkbox" ? /*#__PURE__*/react.createElement("div", {
       className: "container",
@@ -21334,7 +21340,7 @@ class MultiSelect extends react.Component {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
       htmlFor: "checkboxInput"
-    }, label), /*#__PURE__*/react.createElement("div", {
+    }, labelName), /*#__PURE__*/react.createElement("div", {
       className: "input-group"
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
@@ -21377,7 +21383,7 @@ class MultiSelect extends react.Component {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
       htmlFor: "radioInput"
-    }, label), /*#__PURE__*/react.createElement("div", {
+    }, labelName), /*#__PURE__*/react.createElement("div", {
       className: "input-group"
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
@@ -21419,7 +21425,7 @@ class MultiSelect extends react.Component {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
       htmlFor: "iconInput"
-    }, label), /*#__PURE__*/react.createElement("div", {
+    }, labelName), /*#__PURE__*/react.createElement("div", {
       className: "input-group"
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
@@ -21450,7 +21456,7 @@ class MultiSelect extends react.Component {
     }, /*#__PURE__*/react.createElement("span", {
       className: styles.listSpan
     }, " ", /*#__PURE__*/react.createElement(FontAwesomeIcon, {
-      icon: faUserCircle,
+      icon: Icon[iconName],
       size: "lg",
       className: styles.listIcon,
       color: "black"
@@ -21465,7 +21471,7 @@ class MultiSelect extends react.Component {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
       htmlFor: "chipInput"
-    }, label), /*#__PURE__*/react.createElement("div", {
+    }, labelName), /*#__PURE__*/react.createElement("div", {
       className: "input-group"
     }, selectedOptions.length > 0 && /*#__PURE__*/react.createElement("div", {
       className: styles.chips
@@ -21475,9 +21481,9 @@ class MultiSelect extends react.Component {
     }, option, /*#__PURE__*/react.createElement("span", {
       className: styles.chipClose,
       onClick: () => this.handleOptionClick(option)
-    }, "\xD7"))), /*#__PURE__*/react.createElement("div", {
+    }, "\xD7"))), this.optionLength(selectedOptions) ? /*#__PURE__*/react.createElement("div", {
       className: styles.chipCount
-    }, this.optionLength(selectedOptions))), /*#__PURE__*/react.createElement("input", {
+    }, this.optionLength(selectedOptions)) : ''), /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "chipInput",
       className: "form-control mb-2 border-0 border-bottom border-success rounded-0",
@@ -21567,7 +21573,7 @@ class Select extends react.Component {
     const {
       options,
       type,
-      label
+      labelName
     } = this.props;
     const filteredOptions = options.filter(option => option.toLowerCase().includes(searchQuery.toLowerCase()));
     return /*#__PURE__*/react.createElement("div", {
@@ -21581,7 +21587,7 @@ class Select extends react.Component {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement("label", {
       htmlFor: "inlineFormInput"
-    }, label), /*#__PURE__*/react.createElement("div", {
+    }, labelName), /*#__PURE__*/react.createElement("div", {
       className: "input-group"
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",

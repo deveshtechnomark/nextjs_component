@@ -5,7 +5,10 @@ import "bootstrap/js/dist/dropdown";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
-
+let document;
+if (typeof window !== "undefined") {
+    document = window.document;
+}
 class MultiSelect extends React.Component {
     constructor(props) {
         super(props);
@@ -18,11 +21,14 @@ class MultiSelect extends React.Component {
     }
 
     componentDidMount() {
-        console.log();
-        window.addEventListener("click", this.handleCliclOutSide);
+        if (document) {
+            window.addEventListener("click", this.handleCliclOutSide);
+        }
     }
     componentWillMount() {
-        window.addEventListener("click", this.handleCliclOutSide);
+        if (document) {
+            window.addEventListener("click", this.handleCliclOutSide);
+        }
     }
     handleCliclOutSide = (e) => {
         if (this.selectRef.current && !this.selectRef.current.contains(e.target)) {
@@ -64,9 +70,9 @@ class MultiSelect extends React.Component {
         if (arrayItem.length <= selectedElements) {
             return arrayItem.join(", ");
         } else {
-            let displayedElements = arrayItem.slice(0, selectedElements);
-            displayedElements.push("...");
-            return displayedElements.join(", ");
+            let displayElements = arrayItem.slice(0, selectedElements);
+            displayElements.push("...");
+            return displayElements.join(", ");
         }
     }
     optionLength = (arrayItem) => {
@@ -77,11 +83,12 @@ class MultiSelect extends React.Component {
     clearSelectedOptions = () => {
         this.setState({ selectedOptions: [] });
     };
+
     render() {
 
         const { isOpen, searchQuery, selectedOptions } = this.state;
-        const { options, type, label, iconName } = this.props;
-        console.log("🚀 ~ file: MultiSelect.js:82 ~ MultiSelect ~ render ~ iconName:", typeof (Icon))
+        const { options, type, labelName, iconName } = this.props;
+
         const filteredOptions = options.filter((option) =>
             option.toLowerCase().includes(searchQuery.toLowerCase())
         );
@@ -92,7 +99,7 @@ class MultiSelect extends React.Component {
                         <div className={styles.cardMain}>
                             <div className="col-auto">
                                 <div className="dropdown">
-                                    <label htmlFor="checkboxInput">{label}</label>
+                                    <label htmlFor="checkboxInput">{labelName}</label>
                                     <div className="input-group">
                                         <input
                                             type="text"
@@ -136,7 +143,7 @@ class MultiSelect extends React.Component {
                             <div className={styles.cardMain}>
                                 <div className="col-auto">
                                     <div className="dropdown">
-                                        <label htmlFor="radioInput">{label}</label>
+                                        <label htmlFor="radioInput">{labelName}</label>
                                         <div className="input-group">
                                             <input
                                                 type="text"
@@ -178,7 +185,7 @@ class MultiSelect extends React.Component {
                                 <div className={styles.cardMain}>
                                     <div className="col-auto">
                                         <div className="dropdown">
-                                            <label htmlFor="iconInput">{label}</label>
+                                            <label htmlFor="iconInput">{labelName}</label>
                                             <div className="input-group">
                                                 <input
                                                     type="text"
@@ -203,7 +210,7 @@ class MultiSelect extends React.Component {
                                                                     <li key={option}
                                                                         className={`dropdown-item`}
                                                                         onClick={() => this.handleOptionClick(option)}>
-                                                                        <span className={styles.listSpan}> <FontAwesomeIcon icon={Icon.faUserCircle} size="lg" className={styles.listIcon} color="black" />{option}</span>
+                                                                        <span className={styles.listSpan}> <FontAwesomeIcon icon={Icon[iconName]} size="lg" className={styles.listIcon} color="black" />{option}</span>
                                                                     </li>
                                                                 </div>
                                                             ))}
@@ -221,7 +228,7 @@ class MultiSelect extends React.Component {
                                         <div className="col-auto">
                                             <div className="dropdown">
                                                 <label htmlFor="chipInput">
-                                                    {label}
+                                                    {labelName}
                                                 </label>
                                                 <div className="input-group">
                                                     {selectedOptions.length > 0 && (
@@ -234,9 +241,9 @@ class MultiSelect extends React.Component {
                                                                     </span>
                                                                 </div>
                                                             ))}
-                                                            {<div className={styles.chipCount}>
+                                                            {this.optionLength(selectedOptions) ? <div className={styles.chipCount}>
                                                                 {this.optionLength(selectedOptions)}
-                                                            </div>}
+                                                            </div> : ''}
                                                         </div>
                                                     )}
                                                     <input

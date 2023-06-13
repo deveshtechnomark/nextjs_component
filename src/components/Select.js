@@ -55,7 +55,7 @@ class Select extends React.Component {
 
   render() {
     const { isOpen, searchQuery, singleSelect, activeOption } = this.state;
-    const { options, type, label } = this.props;
+    const { options, type, labelName } = this.props;
     const filteredOptions = options.filter((option) =>
       option.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -64,7 +64,7 @@ class Select extends React.Component {
         <div className={styles.cardMain}>
           <div className="col-auto">
             <div className="dropdown">
-              <label htmlFor="inlineFormInput">{label}</label>
+              <label htmlFor="inlineFormInput">{labelName}</label>
               <div className="input-group">
                 <input
                   type="text"
