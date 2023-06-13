@@ -7,7 +7,7 @@ class CheckBox extends React.Component {
     }
 
     render() {
-        const { className, label, id, invalid, intermediate, checked, disabled } = this.props;
+        const { className, label, id, invalid, intermediate, checked, disabled, onChange } = this.props;
         return (
             <>
                 <input
@@ -16,6 +16,7 @@ class CheckBox extends React.Component {
                     id={id}
                     checked={checked}
                     disabled={disabled}
+                    onChange={onChange}
                 />
                 <label className={`${styles.label}`} htmlFor={id}>
                     <span
