@@ -5,6 +5,7 @@ $btn-hover-color: rgba(0, 178, 157, 0.3);
 
 .main_div{
   width: 100%;
+  height: auto;
 }
 
 @mixin buttonStyles {
@@ -81,4 +82,22 @@ $btn-hover-color: rgba(0, 178, 157, 0.3);
   border: 1px solid #D8D8D8;
   margin: 0 5px;
   display: inline-block;
+  vertical-align: middle;
+}
+
+
+.mediumSize{
+  .btnStyle {
+    font-size: 10px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.largeSize{
+  .btnStyle {
+    font-size: 12px;
+    width: 34px;
+    height: 34px;
+  }
 }

@@ -148,85 +148,88 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const { next, last, arrows, className } = this.props;
+    const { next, last, arrows, className, size } = this.props;
     const { activeButton } = this.state;
 
     return (
-      <div className={`${styles.main_div}  ${className? className: ''}`}>
-        {last ? (
-          <>
-          <button
-            className={`${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `}
-            onClick={() => this.handleClick('first')}
-          >
-            First
-          </button>
+      <div className={`${styles.main_div}  ${className ? className : ''}`}>
+        <div className={`${size === 'medium' ? styles.mediumSize : ''}  ${size === 'large' ? styles.largeSize : ''}`}>
 
-          {next && <div className={styles.line}></div>}
-          </>
-        ) : arrows && (
-          <button
-            className={`${styles.btnStyle} ${activeButton === '<<' ? styles.activeBtn : ''}`}
-            onClick={() => this.handleClick('<<')}
-          >
-            &lt;&lt;
-          </button>
-        )}
+          {last ? (
+            <>
+              <button
+                className={`${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `}
+                onClick={() => this.handleClick('first')}
+              >
+                First
+              </button>
 
-        {next ? (
-          <button
-            className={`${styles.btnStyle} ${activeButton === 'prev' ? styles.activeBtn : ''}`}
-            onClick={() => this.handleClick('prev')}
-          >
-            Prev
-          </button>
-        ) : arrows &&  (
-          <button
-            className={`${styles.btnStyle} ${activeButton === 'prev' ? styles.activeBtn : ''}`}
-            onClick={() => this.handleClick('prev')}
-          >
-            &lt;
-          </button>
-        )}
+              {next && <div className={styles.line}></div>}
+            </>
+          ) : arrows && (
+            <button
+              className={`${styles.btnStyle} ${activeButton === '<<' ? styles.activeBtn : ''}`}
+              onClick={() => this.handleClick('<<')}
+            >
+              &lt;&lt;
+            </button>
+          )}
 
-        {this.renderButtons()}
+          {next ? (
+            <button
+              className={`${styles.btnStyle} ${activeButton === 'prev' ? styles.activeBtn : ''}`}
+              onClick={() => this.handleClick('prev')}
+            >
+              Prev
+            </button>
+          ) : arrows && (
+            <button
+              className={`${styles.btnStyle} ${activeButton === 'prev' ? styles.activeBtn : ''}`}
+              onClick={() => this.handleClick('prev')}
+            >
+              &lt;
+            </button>
+          )}
 
-        {next ? (
-          <button
-            className={`${styles.btnStyle} ${activeButton === 'next' ? styles.activeBtn : ''}`}
-            onClick={() => this.handleClick('next')}
-          >
-            Next
-          </button>
-        ) : arrows &&  (
-          <button
-            className={`${styles.btnStyle} ${activeButton === 'next' ? styles.activeBtn : ''}`}
-            onClick={() => this.handleClick('next')}
-          >
-            &gt;
-          </button>
-        )}
+          {this.renderButtons()}
 
-        {last ? (
-          <>
-          {next && <div className={styles.line}></div>}
-          <button
-            className={`${styles.btnStyle} ${activeButton === 'last' ? styles.activeBtn : ''} `}
-            onClick={() => this.handleClick('last')}
-          >
-            Last
-          </button>
-          </>
-        ) : arrows &&  (
-          <button
-            className={`${styles.btnStyle} ${activeButton === '>>' ? styles.activeBtn : ''}`}
-            onClick={() => this.handleClick('>>')}
-          >
-            &gt;&gt;
-          </button>
-          
-        )}
-        
+          {next ? (
+            <button
+              className={`${styles.btnStyle} ${activeButton === 'next' ? styles.activeBtn : ''}`}
+              onClick={() => this.handleClick('next')}
+            >
+              Next
+            </button>
+          ) : arrows && (
+            <button
+              className={`${styles.btnStyle} ${activeButton === 'next' ? styles.activeBtn : ''}`}
+              onClick={() => this.handleClick('next')}
+            >
+              &gt;
+            </button>
+          )}
+
+          {last ? (
+            <>
+              {next && <div className={styles.line}></div>}
+              <button
+                className={`${styles.btnStyle} ${activeButton === 'last' ? styles.activeBtn : ''} `}
+                onClick={() => this.handleClick('last')}
+              >
+                Last
+              </button>
+            </>
+          ) : arrows && (
+            <button
+              className={`${styles.btnStyle} ${activeButton === '>>' ? styles.activeBtn : ''}`}
+              onClick={() => this.handleClick('>>')}
+            >
+              &gt;&gt;
+            </button>
+
+          )}
+        </div>
+
       </div>
     );
   }

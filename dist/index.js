@@ -2080,7 +2080,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"main_div":"styles_main_div__Rg8tn","btnStyle":"styles_btnStyle__wvdyK","activeBtn":"styles_activeBtn__kHobu","gridStyle":"styles_gridStyle__3uQ9V","withSpace":"styles_withSpace__2LkxR","firstButton":"styles_firstButton__3oWeD","lastButton":"styles_lastButton__1rV4e","line":"styles_line__37sPe"};
+var styles = {"main_div":"styles_main_div__Rg8tn","btnStyle":"styles_btnStyle__wvdyK","activeBtn":"styles_activeBtn__kHobu","gridStyle":"styles_gridStyle__3uQ9V","withSpace":"styles_withSpace__2LkxR","firstButton":"styles_firstButton__3oWeD","lastButton":"styles_lastButton__1rV4e","line":"styles_line__37sPe","mediumSize":"styles_mediumSize__3bwJT","largeSize":"styles_largeSize__3PCDY"};
 
 class Pagination extends react.Component {
   constructor(props) {
@@ -2214,13 +2214,16 @@ class Pagination extends react.Component {
       next,
       last,
       arrows,
-      className
+      className,
+      size
     } = this.props;
     const {
       activeButton
     } = this.state;
     return react.createElement("div", {
       className: `${styles.main_div}  ${className ? className : ''}`
+    }, react.createElement("div", {
+      className: `${size === 'medium' ? styles.mediumSize : ''}  ${size === 'large' ? styles.largeSize : ''}`
     }, last ? react.createElement(react.Fragment, null, react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `,
       onClick: () => this.handleClick('first')
@@ -2249,7 +2252,7 @@ class Pagination extends react.Component {
     }, "Last")) : arrows && react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === '>>' ? styles.activeBtn : ''}`,
       onClick: () => this.handleClick('>>')
-    }, ">>"));
+    }, ">>")));
   }
 }
 
