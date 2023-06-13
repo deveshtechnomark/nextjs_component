@@ -7,13 +7,14 @@ class CheckBox extends React.Component {
     }
 
     render() {
-        const { className, label, id, invalid, intermediate, checked, disabled, onChange } = this.props;
+        const { className, label, id, invalid, intermediate, checked, disabled, name, onChange } = this.props;
         return (
             <>
                 <input
                     className={`${className} ${styles.checkBox} ${invalid && styles.checkBoxInvalid} `}
                     type="checkbox"
                     id={id}
+                    name={name}
                     checked={checked}
                     disabled={disabled}
                     onChange={onChange}

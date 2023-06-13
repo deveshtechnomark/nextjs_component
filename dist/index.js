@@ -2083,14 +2083,18 @@ class CheckBox extends react.Component {
       invalid,
       intermediate,
       checked,
-      disabled
+      disabled,
+      name,
+      onChange
     } = this.props;
     return react.createElement(react.Fragment, null, react.createElement("input", {
       className: `${className} ${styles.checkBox} ${invalid && styles.checkBoxInvalid} `,
       type: "checkbox",
       id: id,
+      name: name,
       checked: checked,
-      disabled: disabled
+      disabled: disabled,
+      onChange: onChange
     }), react.createElement("label", {
       className: `${styles.label}`,
       htmlFor: id
