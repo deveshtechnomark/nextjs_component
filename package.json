@@ -29,6 +29,8 @@
     "classnames": "^2.3.2",
     "postcss": "^8.4.24",
     "react-icons": "^4.9.0",
+    "react-select": "^5.7.3",
+    "select-dropdown-tw": "file:../select-dropdown-tw",
     "tailwindcss": "^3.3.2"
   }
 }

@@ -2064,6 +2064,88 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
+var DefaultContext = {
+  color: undefined,
+  size: undefined,
+  className: undefined,
+  style: undefined,
+  attr: undefined
+};
+var IconContext = react.createContext && react.createContext(DefaultContext);
+
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
+var __rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+function Tree2Element(tree) {
+  return tree && tree.map(function (node, i) {
+    return react.createElement(node.tag, __assign({
+      key: i
+    }, node.attr), Tree2Element(node.child));
+  });
+}
+function GenIcon(data) {
+  // eslint-disable-next-line react/display-name
+  return function (props) {
+    return react.createElement(IconBase, __assign({
+      attr: __assign({}, data.attr)
+    }, props), Tree2Element(data.child));
+  };
+}
+function IconBase(props) {
+  var elem = function (conf) {
+    var attr = props.attr,
+      size = props.size,
+      title = props.title,
+      svgProps = __rest(props, ["attr", "size", "title"]);
+    var computedSize = size || conf.size || "1em";
+    var className;
+    if (conf.className) className = conf.className;
+    if (props.className) className = (className ? className + " " : "") + props.className;
+    return react.createElement("svg", __assign({
+      stroke: "currentColor",
+      fill: "currentColor",
+      strokeWidth: "0"
+    }, conf.attr, attr, svgProps, {
+      className: className,
+      style: __assign(__assign({
+        color: props.color || conf.color
+      }, conf.style), props.style),
+      height: computedSize,
+      width: computedSize,
+      xmlns: "http://www.w3.org/2000/svg"
+    }), title && react.createElement("title", null, title), props.children);
+  };
+  return IconContext !== undefined ? react.createElement(IconContext.Consumer, null, function (conf) {
+    return elem(conf);
+  }) : elem(DefaultContext);
+}
+
+// THIS FILE IS AUTO GENERATED
+function FiChevronLeft (props) {
+  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"},"child":[{"tag":"polyline","attr":{"points":"15 18 9 12 15 6"}}]})(props);
+}function FiChevronRight (props) {
+  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"},"child":[{"tag":"polyline","attr":{"points":"9 18 15 12 9 6"}}]})(props);
+}function FiChevronsLeft (props) {
+  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"},"child":[{"tag":"polyline","attr":{"points":"11 17 6 12 11 7"}},{"tag":"polyline","attr":{"points":"18 17 13 12 18 7"}}]})(props);
+}function FiChevronsRight (props) {
+  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"},"child":[{"tag":"polyline","attr":{"points":"13 17 18 12 13 7"}},{"tag":"polyline","attr":{"points":"6 17 11 12 6 7"}}]})(props);
+}
+
 class Pagination extends react.Component {
   constructor(props) {
     super(props);
@@ -2102,39 +2184,204 @@ class Pagination extends react.Component {
       currentPage
     } = this.state;
     const {
-      totalPages
+      totalPages,
+      space,
+      variant
     } = this.props;
-    const pageNumbers = Array.from({
-      length: totalPages
-    }, (_, i) => i + 1);
-    return react.createElement("div", {
-      className: "flex items-center justify-center mt-4"
+    let pageNumbers = [];
+    if (totalPages <= 5) {
+      pageNumbers = Array.from({
+        length: totalPages
+      }, (_, i) => i + 1);
+    } else {
+      if (currentPage <= 3) {
+        pageNumbers = [1, 2, 3, 4, "...", totalPages];
+      } else if (currentPage >= totalPages - 2) {
+        pageNumbers = [1, "...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+      } else {
+        pageNumbers = [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, "...", totalPages];
+      }
+    }
+    const containerClassName = `flex items-center justify-center mt-4}`;
+
+    // for prop variant = "buttons"
+    return variant === "buttons" ?
+    // for "space" prop
+    space ? react.createElement("div", {
+      className: containerClassName
     }, react.createElement("button", {
-      className: `px-3 py-2 rounded  text-[16px] ${currentPage === 1 ? 'text-CSSecondaryGray' : 'text-CSDarkGray'}`,
+      className: `px-3 py-2 rounded text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
       onClick: () => this.handleFirstPage(),
       disabled: currentPage === 1
     }, "First"), react.createElement("span", {
       className: "text-CSPipeColor"
     }, "|"), react.createElement("button", {
-      className: `px-3 py-2 rounded text-[16px] ${currentPage === 1 ? 'text-CSSecondaryGray' : 'text-CSDarkGray'}`,
+      className: `px-3 py-2 rounded text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
       onClick: () => this.handlePrevPage(),
       disabled: currentPage === 1
     }, "Prev"), react.createElement("div", {
       className: "flex"
     }, pageNumbers.map(pageNumber => react.createElement("button", {
       key: pageNumber,
-      className: `px-3 py-2 rounded text-[16px] ${currentPage === pageNumber ? 'bg-CSlightGreen border border-CSgreen text-CSDarkGray' : 'text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor'} ml-2`,
+      className: `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded text-[14px] ${currentPage === pageNumber ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray" : "text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor"} ml-2`,
       onClick: () => this.handleClick(pageNumber),
       disabled: currentPage === pageNumber
     }, pageNumber))), react.createElement("button", {
-      className: `px-4 py-2 rounded ${currentPage === totalPages ? 'bg-gray-300' : 'bg-blue-500 text-white'} ml-2`,
+      className: `px-3 py-2 rounded ${currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"} ml-2`,
       onClick: () => this.handleNextPage(),
       disabled: currentPage === totalPages
-    }, "Next"), react.createElement("button", {
-      className: `px-4 py-2 rounded ${currentPage === totalPages ? 'bg-gray-300' : 'bg-blue-500 text-white'} ml-2`,
+    }, "Next"), react.createElement("span", {
+      className: "text-CSPipeColor"
+    }, "|"), react.createElement("button", {
+      className: `px-3 py-2 rounded ${currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
       onClick: () => this.handleLastPage(),
       disabled: currentPage === totalPages
-    }, "Last"));
+    }, "Last")) :
+    // buttons without space
+    react.createElement("div", {
+      className: containerClassName
+    }, react.createElement("button", {
+      className: `px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
+      onClick: () => this.handleFirstPage(),
+      disabled: currentPage === 1
+    }, "First"), react.createElement("span", {
+      className: "text-CSPipeColor"
+    }, "|"), react.createElement("button", {
+      className: `px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
+      onClick: () => this.handlePrevPage(),
+      disabled: currentPage === 1
+    }, "Prev"), react.createElement("div", {
+      className: "flex"
+    }, pageNumbers.map((pageNumber, index) => {
+      if (!space && index === 0) {
+        return react.createElement("button", {
+          key: pageNumber,
+          className: `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-l-lg text-[14px] ${currentPage === pageNumber ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray" : "text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor"} ml-0`,
+          onClick: () => this.handleClick(pageNumber),
+          disabled: currentPage === pageNumber
+        }, pageNumber);
+      } else if (index === pageNumbers.length - 1) {
+        return react.createElement("button", {
+          key: pageNumber,
+          className: `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-r-lg text-[14px] ${currentPage === pageNumber ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray" : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"} ml-0`,
+          onClick: () => this.handleClick(pageNumber),
+          disabled: currentPage === pageNumber
+        }, pageNumber);
+      } else {
+        return react.createElement("button", {
+          key: pageNumber,
+          className: `pt-[1px] pr-[9px] pb-[1px] pl-[9px] text-[14px] ${currentPage === pageNumber ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray" : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"}`,
+          onClick: () => this.handleClick(pageNumber),
+          disabled: currentPage === pageNumber
+        }, pageNumber);
+      }
+    })), react.createElement("button", {
+      className: `px-3 py-2 ${currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"} ml-0`,
+      onClick: () => this.handleNextPage(),
+      disabled: currentPage === totalPages
+    }, "Next"), react.createElement("span", {
+      className: "text-CSPipeColor"
+    }, "|"), react.createElement("button", {
+      className: `px-3 py-2 ${currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
+      onClick: () => this.handleLastPage(),
+      disabled: currentPage === totalPages
+    }, "Last")) :
+    // arrows with space
+    space ? react.createElement("div", {
+      className: containerClassName
+    }, react.createElement("button", {
+      className: `px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
+      onClick: () => this.handleFirstPage(),
+      disabled: currentPage === 1
+    }, react.createElement(FiChevronsLeft, {
+      size: 20
+    })), react.createElement("span", {
+      className: "text-CSPipeColor"
+    }, "|"), react.createElement("button", {
+      className: `px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
+      onClick: () => this.handlePrevPage(),
+      disabled: currentPage === 1
+    }, react.createElement(FiChevronLeft, {
+      size: 20
+    })), react.createElement("div", {
+      className: "flex"
+    }, pageNumbers.map(pageNumber => react.createElement("button", {
+      key: pageNumber,
+      className: `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded text-[14px] ${currentPage === pageNumber ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray" : "text-CSDarkGray"} ml-2`,
+      onClick: () => this.handleClick(pageNumber),
+      disabled: currentPage === pageNumber
+    }, pageNumber))), react.createElement("button", {
+      className: `px-3 py-2 ${currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"} ml-2`,
+      onClick: () => this.handleNextPage(),
+      disabled: currentPage === totalPages
+    }, react.createElement(FiChevronRight, {
+      size: 20
+    })), react.createElement("span", {
+      className: "text-CSPipeColor"
+    }, "|"), react.createElement("button", {
+      className: `px-3 py-2 ${currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
+      onClick: () => this.handleLastPage(),
+      disabled: currentPage === totalPages
+    }, react.createElement(FiChevronsRight, {
+      size: 20
+    }))) :
+    // arrows without space
+    react.createElement("div", {
+      className: containerClassName
+    }, react.createElement("button", {
+      className: `px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
+      onClick: () => this.handleFirstPage(),
+      disabled: currentPage === 1
+    }, react.createElement(FiChevronsLeft, {
+      size: 20
+    })), react.createElement("span", {
+      className: "text-CSPipeColor"
+    }, "|"), react.createElement("button", {
+      className: `px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
+      onClick: () => this.handlePrevPage(),
+      disabled: currentPage === 1
+    }, react.createElement(FiChevronLeft, {
+      size: 20
+    })), react.createElement("div", {
+      className: "flex"
+    }, pageNumbers.map((pageNumber, index) => {
+      if (!space && index === 0) {
+        return react.createElement("button", {
+          key: pageNumber,
+          className: `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-l-lg text-[14px] ${currentPage === pageNumber ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray" : "text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor"} ml-0`,
+          onClick: () => this.handleClick(pageNumber),
+          disabled: currentPage === pageNumber
+        }, pageNumber);
+      } else if (index === pageNumbers.length - 1) {
+        return react.createElement("button", {
+          key: pageNumber,
+          className: `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-r-lg text-[14px] ${currentPage === pageNumber ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray" : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"} ml-0`,
+          onClick: () => this.handleClick(pageNumber),
+          disabled: currentPage === pageNumber
+        }, pageNumber);
+      } else {
+        return react.createElement("button", {
+          key: pageNumber,
+          className: `pt-[1px] pr-[9px] pb-[1px] pl-[9px] text-[14px] ${currentPage === pageNumber ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray" : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"}`,
+          onClick: () => this.handleClick(pageNumber),
+          disabled: currentPage === pageNumber
+        }, pageNumber);
+      }
+    })), react.createElement("button", {
+      className: `px-3 py-2 ${currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"} ml-0`,
+      onClick: () => this.handleNextPage(),
+      disabled: currentPage === totalPages
+    }, react.createElement(FiChevronRight, {
+      size: 20
+    })), react.createElement("span", {
+      className: "text-CSPipeColor"
+    }, "|"), react.createElement("button", {
+      className: `px-3 py-2 ${currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"}`,
+      onClick: () => this.handleLastPage(),
+      disabled: currentPage === totalPages
+    }, react.createElement(FiChevronsRight, {
+      size: 20
+    })));
   }
 }
 
