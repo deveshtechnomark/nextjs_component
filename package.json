@@ -1,0 +1,40 @@
+{
+  "name": "storybook-components_ui_bs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@types/node": "20.3.0",
+    "@types/react": "18.2.11",
+    "@types/react-dom": "18.2.4",
+    "alert": "file:../alert_bs",
+    "bootstrap": "^5.3.0",
+    "checkbox": "file:../checkbox_bs",
+    "clipboard-copy": "^4.0.1",
+    "next": "13.4.5",
+    "pagination_lib": "file:../pagination_bs",
+    "radiobtn_lib": "file:../radiobtn_lib",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.9.0",
+    "typescript": "5.1.3",
+    "typography": "file:../typography_bs"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.20",
+    "@storybook/addon-interactions": "^7.0.20",
+    "@storybook/addon-links": "^7.0.20",
+    "@storybook/blocks": "^7.0.20",
+    "@storybook/nextjs": "^7.0.20",
+    "@storybook/react": "^7.0.20",
+    "@storybook/testing-library": "^0.0.14-next.2",
+    "storybook": "^7.0.20"
+  }
+}
