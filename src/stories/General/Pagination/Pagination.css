@@ -1,6 +1,5 @@
 .storybook-page {
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
   line-height: 24px;
   padding: 48px 20px;
   margin: 0 auto;
@@ -49,7 +48,6 @@
 }
 
 .storybook-page .tip-wrapper {
-  font-size: 13px;
   line-height: 20px;
   margin-top: 40px;
   margin-bottom: 40px;
@@ -69,7 +67,7 @@
 }
 
 .code_format {
-  padding: 5px 5px 2px 5px;
+  padding: 5px 5px 5px 5px;
   font-size: 15px !important;
   color: #1ea7fd !important;
 }

@@ -10,8 +10,8 @@ import 'typography/dist/index.css';
 
 
 export const Checkbox: React.FC = () => {
-  const importCheckbox = 'import { CheckBox } from "checkbox"';
-  const importCheckboxCSS = `import "checkbox/dist/index.css"`;
+  const importCheckbox = `import { CheckBox } from 'checkbox'`;
+  const importCheckboxCSS = `import 'checkbox/dist/index.css'`;
 
   const copyBasicDefaultCheckbox = '<CheckBox label="Default" value="default" name="default" id="default" />';
   const copyBasicSelectedCheckbox = '<CheckBox label="Selected" value="selected" name="selected" id="selected" checked/>';
@@ -68,83 +68,83 @@ export const Checkbox: React.FC = () => {
                 <div className="col">
                   <CheckBox id="invalid" label="Invalid" value="invalid" name="invalid" invalid />
                 </div>
+                <div className="col">
+                  <CheckBox id="invalidSelected" label="Invalid Selected" value="invalidSelected" name="invalidSelected" invalid checked />
+                </div>
+
               </div>
 
               <div className="row">
-                <div className="col-4">
-                  <CheckBox id="invalidSelected" label="Invalid Selected" value="invalidSelected" name="invalidSelected" invalid checked />
-                </div>
-                <div className="col-8">
+
+                <div className="col">
                   <CheckBox id="selectedDisabled" label="Selected Disabled" value="selectedDisabled" name="selectedDisabled" checked disabled />
                 </div>
-                
+
               </div>
 
             </div>
 
-            <div className="card" style={{marginTop:'10px'}}>
-                <div className="row" >
-                  <div className="col-8">
+            <div className="card" style={{ marginTop: '10px' }}>
+              <div className="row" >
+                <div className="col-8">
                   <Typography className="code_format">{copyBasicDefaultCheckbox}</Typography>
 
-                  </div>
-                  <div className="col-4">
-                    <CopyButton text={copyBasicDefaultCheckbox}  />
-                  </div>
                 </div>
+                <div className="col-4">
+                  <CopyButton text={copyBasicDefaultCheckbox} />
+                </div>
+              </div>
 
-                <div className="row" >
-                  <div className="col-8">
+              <div className="row" >
+                <div className="col-8">
                   <Typography className="code_format">{copyBasicSelectedCheckbox}</Typography>
 
-                  </div>
-                  <div className="col-4">
-                    <CopyButton text={copyBasicSelectedCheckbox}  />
-                  </div>
                 </div>
-                <div className="row" >
-                  <div className="col-8">
+                <div className="col-4">
+                  <CopyButton text={copyBasicSelectedCheckbox} />
+                </div>
+              </div>
+              <div className="row" >
+                <div className="col-8">
                   <Typography className="code_format">{copyBasicDisabledCheckbox}</Typography>
 
-                  </div>
-                  <div className="col-4">
-                    <CopyButton text={copyBasicDisabledCheckbox}  />
-                  </div>
                 </div>
-                <div className="row" >
-                  <div className="col-8">
+                <div className="col-4">
+                  <CopyButton text={copyBasicDisabledCheckbox} />
+                </div>
+              </div>
+              <div className="row" >
+                <div className="col-8">
                   <Typography className="code_format">{copyBasicInvalidCheckbox}</Typography>
 
-                  </div>
-                  <div className="col-4">
-                    <CopyButton text={copyBasicInvalidCheckbox}  />
-                  </div>
                 </div>
+                <div className="col-4">
+                  <CopyButton text={copyBasicInvalidCheckbox} />
+                </div>
+              </div>
 
-                <div className="row" >
-                  <div className="col-10">
+              <div className="row" >
+                <div className="col-10">
                   <Typography className="code_format">{copyBasicInvalidSelectedCheckbox}</Typography>
 
-                  </div>
-                  <div className="col-2">
-                    <CopyButton text={copyBasicInvalidSelectedCheckbox}  />
-                  </div>
                 </div>
-                
-                <div className="row" >
-                  <div className="col-10">
+                <div className="col-2">
+                  <CopyButton text={copyBasicInvalidSelectedCheckbox} />
+                </div>
+              </div>
+
+              <div className="row" >
+                <div className="col-10">
                   <Typography className="code_format">{copyBasicSelectedDisabledCheckbox}</Typography>
 
-                  </div>
-                  <div className="col-2">
-                    <CopyButton text={copyBasicSelectedDisabledCheckbox}  />
-                  </div>
                 </div>
-               
-      
+                <div className="col-2">
+                  <CopyButton text={copyBasicSelectedDisabledCheckbox} />
+                </div>
+              </div>
+
+
             </div>
-
-
           </p>
 
         </div>

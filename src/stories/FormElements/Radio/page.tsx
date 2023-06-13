@@ -56,7 +56,7 @@ export const Radio: React.FC = () => {
              
               <div className="row" >
                 <div className="col" >
-                  <RadioButton label="Default" name="default" id="default" />
+                <RadioButton label="Default" name="default" id="default" />
                 </div>
                 <div className="col" >
                   <RadioButton label="Selected" name="selected" id="selected" defaultChecked/>
