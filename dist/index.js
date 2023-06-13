@@ -2230,7 +2230,7 @@ class Typography extends react.Component {
     };
     const selectedStyle = typeToStyleMap[type] || Styles.bodyStyle;
     return /*#__PURE__*/react.createElement("div", {
-      className: Styles.alvish
+      className: `${className} `
     }, /*#__PURE__*/react.createElement("span", _extends({}, this.props, {
       style: {
         ...style

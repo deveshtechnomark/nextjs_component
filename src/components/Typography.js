@@ -27,7 +27,7 @@ export default class Typography extends React.Component {
         const selectedStyle = typeToStyleMap[type] || Styles.bodyStyle;
     
         return (
-          <div className={Styles.alvish}>
+          <div className={`${className} `}>
             <span
               {...this.props}
               style={{ ...style }}
@@ -41,4 +41,3 @@ export default class Typography extends React.Component {
       }
 }
 
- 
