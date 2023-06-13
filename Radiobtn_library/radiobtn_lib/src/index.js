@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from './styles.css';
-import Typography from 'typography';
-import 'typography/dist/index.css';
 
 class RadioButton extends React.Component {
   constructor(props) {
