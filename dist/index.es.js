@@ -181,12 +181,14 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 var ReactPropTypesSecret_1 = ReactPropTypesSecret;
 
+var has = Function.call.bind(Object.prototype.hasOwnProperty);
+
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
   var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
   var loggedTypeFailures = {};
-  var has = Function.call.bind(Object.prototype.hasOwnProperty);
+  var has$1 = has;
 
   printWarning = function(text) {
     var message = 'Warning: ' + text;
@@ -198,7 +200,7 @@ if (process.env.NODE_ENV !== 'production') {
       // This error was thrown as a convenience so that you can use this stack
       // to find the callsite that caused this warning to fire.
       throw new Error(message);
-    } catch (x) {}
+    } catch (x) { /**/ }
   };
 }
 
@@ -216,7 +218,7 @@ if (process.env.NODE_ENV !== 'production') {
 function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
   if (process.env.NODE_ENV !== 'production') {
     for (var typeSpecName in typeSpecs) {
-      if (has(typeSpecs, typeSpecName)) {
+      if (has$1(typeSpecs, typeSpecName)) {
         var error;
         // Prop type validation may throw. In case they do, we don't want to
         // fail the render phase where it didn't fail before. So we log it.
@@ -227,7 +229,8 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
           if (typeof typeSpecs[typeSpecName] !== 'function') {
             var err = Error(
               (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
-              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
+              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' +
+              'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.'
             );
             err.name = 'Invariant Violation';
             throw err;
@@ -2216,7 +2219,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"borderBottom":"styles_borderBottom__UgkDA","labelSelected":"styles_labelSelected__2DLuP","labelDefault":"styles_labelDefault__1a30M","placeholderSelected":"styles_placeholderSelected__1CEIU","placeholderDefault":"styles_placeholderDefault__321CE","listItem":"styles_listItem__3B4xI","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","listSpan":"styles_listSpan__fJ06z","listIcon":"styles_listIcon__2lhpx","activeItem":"styles_activeItem__1nne_","dropdownItems":"styles_dropdownItems__2T8NO","cardMain":"styles_cardMain__1_xXT","spanIcon":"styles_spanIcon__3Vyfe","spanIconRotate":"styles_spanIconRotate__3gUJv","chips":"styles_chips__1-kaG","chip":"styles_chip__GRp9n","chipClose":"styles_chipClose__3Ua3_","chipClear":"styles_chipClear__2fAYB","chipCount":"styles_chipCount__3UOy1"};
+var styles = {"placeholderSelected":"styles_placeholderSelected__1CEIU","borderBottom":"styles_borderBottom__UgkDA","labelSelected":"styles_labelSelected__2DLuP","labelDefault":"styles_labelDefault__1a30M","placeholderDefault":"styles_placeholderDefault__321CE","listItem":"styles_listItem__3B4xI","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","listSpan":"styles_listSpan__fJ06z","listIcon":"styles_listIcon__2lhpx","activeItem":"styles_activeItem__1nne_","dropdownItems":"styles_dropdownItems__2T8NO","cardMain":"styles_cardMain__1_xXT","spanIcon":"styles_spanIcon__3Vyfe","spanIconRotate":"styles_spanIconRotate__3gUJv","chips":"styles_chips__1-kaG","chip":"styles_chip__GRp9n","chipClose":"styles_chipClose__3Ua3_","chipClear":"styles_chipClear__2fAYB","chipCount":"styles_chipCount__3UOy1"};
 
 var top = 'top';
 var bottom = 'bottom';
@@ -5844,7 +5847,7 @@ var printWarning$1 = function () {};
 if (process.env.NODE_ENV !== 'production') {
   var ReactPropTypesSecret$1$1 = ReactPropTypesSecret_1$1;
   var loggedTypeFailures$1 = {};
-  var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
+  var has$2 = Function.call.bind(Object.prototype.hasOwnProperty);
   printWarning$1 = function (text) {
     var message = 'Warning: ' + text;
     if (typeof console !== 'undefined') {
@@ -5873,7 +5876,7 @@ if (process.env.NODE_ENV !== 'production') {
 function checkPropTypes$1(typeSpecs, values, location, componentName, getStack) {
   if (process.env.NODE_ENV !== 'production') {
     for (var typeSpecName in typeSpecs) {
-      if (has$1(typeSpecs, typeSpecName)) {
+      if (has$2(typeSpecs, typeSpecName)) {
         var error;
         // Prop type validation may throw. In case they do, we don't want to
         // fail the render phase where it didn't fail before. So we log it.
@@ -7643,6 +7646,20 @@ class CheckBox extends react$1.Component {
   }
 }
 
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
 function createCommonjsModule$2(fn, module) {
   return module = {
     exports: {}
@@ -8112,12 +8129,11 @@ var react_production_min$2 = {
 
 var ReactPropTypesSecret$3 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 var ReactPropTypesSecret_1$2 = ReactPropTypesSecret$3;
-var has$2 = Function.call.bind(Object.prototype.hasOwnProperty);
 var printWarning$2 = function () {};
 if (process.env.NODE_ENV !== 'production') {
   var ReactPropTypesSecret$1$2 = ReactPropTypesSecret_1$2;
   var loggedTypeFailures$2 = {};
-  var has$1$1 = has$2;
+  var has$3 = Function.call.bind(Object.prototype.hasOwnProperty);
   printWarning$2 = function (text) {
     var message = 'Warning: ' + text;
     if (typeof console !== 'undefined') {
@@ -8128,7 +8144,7 @@ if (process.env.NODE_ENV !== 'production') {
       // This error was thrown as a convenience so that you can use this stack
       // to find the callsite that caused this warning to fire.
       throw new Error(message);
-    } catch (x) {/**/}
+    } catch (x) {}
   };
 }
 
@@ -8146,7 +8162,7 @@ if (process.env.NODE_ENV !== 'production') {
 function checkPropTypes$2(typeSpecs, values, location, componentName, getStack) {
   if (process.env.NODE_ENV !== 'production') {
     for (var typeSpecName in typeSpecs) {
-      if (has$1$1(typeSpecs, typeSpecName)) {
+      if (has$3(typeSpecs, typeSpecName)) {
         var error;
         // Prop type validation may throw. In case they do, we don't want to
         // fail the render phase where it didn't fail before. So we log it.
@@ -8155,7 +8171,7 @@ function checkPropTypes$2(typeSpecs, values, location, componentName, getStack) 
           // This is intentionally an invariant that gets caught. It's the same
           // behavior as without this statement except with a better message.
           if (typeof typeSpecs[typeSpecName] !== 'function') {
-            var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' + 'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.');
+            var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.');
             err.name = 'Invariant Violation';
             throw err;
           }
@@ -9874,106 +9890,56 @@ var react$2 = createCommonjsModule$2(function (module) {
     module.exports = react_development$2;
   }
 });
-var styles$2 = {
-  "input_radio": "styles_input_radio__187QX",
-  "radio_label": "styles_radio_label__3WCLC",
-  "radio_check": "styles_radio_check__2XccI",
-  "radio_border": "styles_radio_border__1uo19",
-  "radio_dot": "styles_radio_dot__2tDFG",
-  "checked": "styles_checked__lOR0N",
-  "invalid_label": "styles_invalid_label__3U1Qx",
-  "invalid_check": "styles_invalid_check__26AHN",
-  "invalid_border": "styles_invalid_border__2hyeL",
-  "invalid_dot": "styles_invalid_dot__luQJv",
-  "clicked": "styles_clicked__2zFBq"
+var Styles = {
+  "h1Style": "typography_h1Style__qc82K",
+  "h2Style": "typography_h2Style__2wuHG",
+  "h3Style": "typography_h3Style__1ETP1",
+  "h4Style": "typography_h4Style__3TIO5",
+  "h5Style": "typography_h5Style__2v5DO",
+  "h6Style": "typography_h6Style__28eYx",
+  "titleStyle": "typography_titleStyle__3IH6E",
+  "sub_titleStyle": "typography_sub_titleStyle__3TyGJ",
+  "table_titleStyle": "typography_table_titleStyle__30yhy",
+  "labelStyle": "typography_labelStyle__2VN6z",
+  "bodyStyle": "typography_bodyStyle__1Fi1k",
+  "buttonStyle": "typography_buttonStyle__1LVsP",
+  "badgeStyle": "typography_badgeStyle__2qNY4",
+  "tool_tipStyle": "typography_tool_tipStyle__1zD8-"
 };
-class RadioButton extends react$2.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      disabled: props.disabled || false,
-      invalid: props.invalid || false,
-      name: props.name,
-      value: props.value || '',
-      checked: props.checked || false
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange() {
-    const {
-      invalid,
-      value,
-      checked
-    } = this.state;
-    this.setState({
-      invalid: checked ? invalid : false,
-      checked: !checked
-    });
-  }
+class Typography extends react$2.Component {
   render() {
     const {
-      label,
-      id,
-      disabled,
-      invalid,
+      style,
       className,
-      value,
-      defaultChecked
+      type,
+      children
     } = this.props;
-    const {
-      name
-    } = this.state;
-    const labelClassName = [styles$2.radio_label, disabled ? styles$2.disabled_label : '', invalid ? styles$2.invalid_label : '', className || ''].join(' ');
-    return /*#__PURE__*/react$2.createElement(react$2.Fragment, null, /*#__PURE__*/react$2.createElement("input", {
-      type: "radio",
-      id: id,
-      name: name,
-      className: styles$2.input_radio,
-      onChange: this.handleChange,
-      disabled: disabled,
-      value: value,
-      defaultChecked: defaultChecked
-    }), /*#__PURE__*/react$2.createElement("label", {
-      htmlFor: id,
-      className: labelClassName
-    }, /*#__PURE__*/react$2.createElement("svg", {
-      className: `${styles$2.radio_check} ${invalid ? styles$2.invalid_check : ''}`,
-      viewBox: "0 0 40 40"
-    }, /*#__PURE__*/react$2.createElement("defs", null, /*#__PURE__*/react$2.createElement("linearGradient", {
-      id: "radio_gradient",
-      x1: "0",
-      y1: "0",
-      x2: "0",
-      y2: "100%"
-    }, /*#__PURE__*/react$2.createElement("stop", {
-      offset: "0%",
-      stopColor: "#25be9b"
-    }), /*#__PURE__*/react$2.createElement("stop", {
-      offset: "100%",
-      stopColor: "#25be9b"
-    })), /*#__PURE__*/react$2.createElement("linearGradient", {
-      id: "invalid_gradient",
-      x1: "0",
-      y1: "0",
-      x2: "0",
-      y2: "100%"
-    }, /*#__PURE__*/react$2.createElement("stop", {
-      offset: "0%",
-      stopColor: "red"
-    }), /*#__PURE__*/react$2.createElement("stop", {
-      offset: "100%",
-      stopColor: "red"
-    }))), /*#__PURE__*/react$2.createElement("circle", {
-      className: `${styles$2.radio_border} ${invalid ? styles$2.invalid_border : ''}`,
-      r: "14px",
-      cx: "20px",
-      cy: "20px"
-    }), /*#__PURE__*/react$2.createElement("circle", {
-      className: `${styles$2.radio_dot} ${invalid ? styles$2.invalid_dot : ''}`,
-      r: "6px",
-      cx: "20px",
-      cy: "20px"
-    })), label));
+    const typeToStyleMap = {
+      h1: Styles.h1Style,
+      h2: Styles.h2Style,
+      h3: Styles.h3Style,
+      h4: Styles.h4Style,
+      h5: Styles.h5Style,
+      h6: Styles.h6Style,
+      title: Styles.titleStyle,
+      "sub-title": Styles.sub_titleStyle,
+      "table-title": Styles.table_titleStyle,
+      lable: Styles.labelStyle,
+      body: Styles.bodyStyle,
+      button: Styles.buttonStyle,
+      badge: Styles.badgeStyle,
+      "tool-tip": Styles.tool_tipStyle
+    };
+    const selectedStyle = typeToStyleMap[type] || Styles.bodyStyle;
+    return /*#__PURE__*/react$2.createElement("div", {
+      className: `${className} `
+    }, /*#__PURE__*/react$2.createElement("span", _extends({}, this.props, {
+      style: {
+        ...style
+      },
+      className: `${className} ${selectedStyle}`,
+      type: type
+    }), children));
   }
 }
 
@@ -10765,7 +10731,7 @@ function defineIcons(prefix, icons) {
 }
 
 var _LONG_STYLE, _PREFIXES, _PREFIXES_FOR_FAMILY;
-var styles$3 = namespace.styles,
+var styles$2 = namespace.styles,
     shims = namespace.shims;
 var LONG_STYLE = (_LONG_STYLE = {}, _defineProperty$1(_LONG_STYLE, FAMILY_CLASSIC, Object.values(PREFIX_TO_LONG_STYLE[FAMILY_CLASSIC])), _defineProperty$1(_LONG_STYLE, FAMILY_SHARP, Object.values(PREFIX_TO_LONG_STYLE[FAMILY_SHARP])), _LONG_STYLE);
 var _defaultUsablePrefix = null;
@@ -10793,7 +10759,7 @@ function getIconName(cssPrefix, cls) {
 }
 var build = function build() {
   var lookup = function lookup(reducer) {
-    return reduce(styles$3, function (o, style, prefix) {
+    return reduce(styles$2, function (o, style, prefix) {
       o[prefix] = reduce(style, reducer, {});
       return o;
     }, {});
@@ -10839,7 +10805,7 @@ var build = function build() {
   }); // If we have a Kit, we can't determine if regular is available since we
   // could be auto-fetching it. We'll have to assume that it is available.
 
-  var hasRegular = 'far' in styles$3 || config$1.autoFetchSvg;
+  var hasRegular = 'far' in styles$2 || config$1.autoFetchSvg;
   var shimLookups = reduce(shims, function (acc, shim) {
     var maybeNameMaybeUnicode = shim[0];
     var prefix = shim[1];
@@ -10951,7 +10917,7 @@ function getCanonicalIcon(values) {
   var canonical = values.reduce(function (acc, cls) {
     var iconName = getIconName(config$1.cssPrefix, cls);
 
-    if (styles$3[cls]) {
+    if (styles$2[cls]) {
       cls = LONG_STYLE[family].includes(cls) ? LONG_STYLE_TO_PREFIX[family][cls] : cls;
       givenPrefix = cls;
       acc.prefix = cls;
@@ -10977,7 +10943,7 @@ function getCanonicalIcon(values) {
       acc.iconName = shim.iconName || aliasIconName || acc.iconName;
       acc.prefix = shim.prefix || acc.prefix;
 
-      if (acc.prefix === 'far' && !styles$3['far'] && styles$3['fas'] && !config$1.autoFetchSvg) {
+      if (acc.prefix === 'far' && !styles$2['far'] && styles$2['fas'] && !config$1.autoFetchSvg) {
         // Allow a fallback from the regular style to solid if regular is not available
         // but only if we aren't auto-fetching SVGs
         acc.prefix = 'fas';
@@ -10995,7 +10961,7 @@ function getCanonicalIcon(values) {
     canonical.prefix = 'fad';
   }
 
-  if (!canonical.prefix && family === FAMILY_SHARP && (styles$3['fass'] || config$1.autoFetchSvg)) {
+  if (!canonical.prefix && family === FAMILY_SHARP && (styles$2['fass'] || config$1.autoFetchSvg)) {
     canonical.prefix = 'fass';
     canonical.iconName = byAlias(canonical.prefix, canonical.iconName) || canonical.iconName;
   }
@@ -13210,118 +13176,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var ReactPropTypesSecret$4 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-var ReactPropTypesSecret_1$3 = ReactPropTypesSecret$4;
-
-var has$3 = Function.call.bind(Object.prototype.hasOwnProperty);
-
 var printWarning$3 = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret$5 = ReactPropTypesSecret_1$3;
-  var loggedTypeFailures$3 = {};
-  var has$4 = has$3;
-
   printWarning$3 = function(text) {
-    var message = 'Warning: ' + text;
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) { /**/ }
-  };
-}
-
-/**
- * Assert that the values match with the type specs.
- * Error messages are memorized and will only be shown once.
- *
- * @param {object} typeSpecs Map of name to a ReactPropType
- * @param {object} values Runtime values that need to be type-checked
- * @param {string} location e.g. "prop", "context", "child context"
- * @param {string} componentName Name of the component for error messages.
- * @param {?Function} getStack Returns the component stack.
- * @private
- */
-function checkPropTypes$3(typeSpecs, values, location, componentName, getStack) {
-  if (process.env.NODE_ENV !== 'production') {
-    for (var typeSpecName in typeSpecs) {
-      if (has$4(typeSpecs, typeSpecName)) {
-        var error;
-        // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-        try {
-          // This is intentionally an invariant that gets caught. It's the same
-          // behavior as without this statement except with a better message.
-          if (typeof typeSpecs[typeSpecName] !== 'function') {
-            var err = Error(
-              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
-              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' +
-              'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.'
-            );
-            err.name = 'Invariant Violation';
-            throw err;
-          }
-          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$5);
-        } catch (ex) {
-          error = ex;
-        }
-        if (error && !(error instanceof Error)) {
-          printWarning$3(
-            (componentName || 'React class') + ': type specification of ' +
-            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
-            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
-            'You may have forgotten to pass an argument to the type checker ' +
-            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
-            'shape all require an argument).'
-          );
-        }
-        if (error instanceof Error && !(error.message in loggedTypeFailures$3)) {
-          // Only monitor this failure once because there tends to be a lot of the
-          // same error.
-          loggedTypeFailures$3[error.message] = true;
-
-          var stack = getStack ? getStack() : '';
-
-          printWarning$3(
-            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
-          );
-        }
-      }
-    }
-  }
-}
-
-/**
- * Resets warning cache when testing.
- *
- * @private
- */
-checkPropTypes$3.resetWarningCache = function() {
-  if (process.env.NODE_ENV !== 'production') {
-    loggedTypeFailures$3 = {};
-  }
-};
-
-var checkPropTypes_1$3 = checkPropTypes$3;
-
-var printWarning$4 = function() {};
-
-if (process.env.NODE_ENV !== 'production') {
-  printWarning$4 = function(text) {
     var message = 'Warning: ' + text;
     if (typeof console !== 'undefined') {
       console.error(message);
@@ -13481,7 +13339,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
       componentName = componentName || ANONYMOUS;
       propFullName = propFullName || propName;
 
-      if (secret !== ReactPropTypesSecret_1$3) {
+      if (secret !== ReactPropTypesSecret_1) {
         if (throwOnDirectAccess) {
           // New behavior only for users of `prop-types` package
           var err = new Error(
@@ -13499,7 +13357,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
             // Avoid spamming the console because they are often not actionable except for lib authors
             manualPropTypeWarningCount < 3
           ) {
-            printWarning$4(
+            printWarning$3(
               'You are manually calling a React.PropTypes validation ' +
               'function for the `' + propFullName + '` prop on `' + componentName + '`. This is deprecated ' +
               'and will throw in the standalone `prop-types` package. ' +
@@ -13565,7 +13423,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
         return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
       }
       for (var i = 0; i < propValue.length; i++) {
-        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret_1$3);
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret_1);
         if (error instanceof Error) {
           return error;
         }
@@ -13615,12 +13473,12 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
     if (!Array.isArray(expectedValues)) {
       if (process.env.NODE_ENV !== 'production') {
         if (arguments.length > 1) {
-          printWarning$4(
+          printWarning$3(
             'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
             'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
           );
         } else {
-          printWarning$4('Invalid argument supplied to oneOf, expected an array.');
+          printWarning$3('Invalid argument supplied to oneOf, expected an array.');
         }
       }
       return emptyFunctionThatReturnsNull;
@@ -13657,8 +13515,8 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
         return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
       }
       for (var key in propValue) {
-        if (has$3(propValue, key)) {
-          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1$3);
+        if (has(propValue, key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
           if (error instanceof Error) {
             return error;
           }
@@ -13671,14 +13529,14 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
 
   function createUnionTypeChecker(arrayOfTypeCheckers) {
     if (!Array.isArray(arrayOfTypeCheckers)) {
-      process.env.NODE_ENV !== 'production' ? printWarning$4('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+      process.env.NODE_ENV !== 'production' ? printWarning$3('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
       return emptyFunctionThatReturnsNull;
     }
 
     for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
       var checker = arrayOfTypeCheckers[i];
       if (typeof checker !== 'function') {
-        printWarning$4(
+        printWarning$3(
           'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
           'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
         );
@@ -13690,11 +13548,11 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
       var expectedTypes = [];
       for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
         var checker = arrayOfTypeCheckers[i];
-        var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret_1$3);
+        var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret_1);
         if (checkerResult == null) {
           return null;
         }
-        if (checkerResult.data && has$3(checkerResult.data, 'expectedType')) {
+        if (checkerResult.data && has(checkerResult.data, 'expectedType')) {
           expectedTypes.push(checkerResult.data.expectedType);
         }
       }
@@ -13733,7 +13591,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
         if (typeof checker !== 'function') {
           return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
         }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1$3);
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
         if (error) {
           return error;
         }
@@ -13754,7 +13612,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
       var allKeys = objectAssign({}, props[propName], shapeTypes);
       for (var key in allKeys) {
         var checker = shapeTypes[key];
-        if (has$3(shapeTypes, key) && typeof checker !== 'function') {
+        if (has(shapeTypes, key) && typeof checker !== 'function') {
           return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
         }
         if (!checker) {
@@ -13764,7 +13622,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
             '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  ')
           );
         }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1$3);
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
         if (error) {
           return error;
         }
@@ -13906,8 +13764,8 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
     return propValue.constructor.name;
   }
 
-  ReactPropTypes.checkPropTypes = checkPropTypes_1$3;
-  ReactPropTypes.resetWarningCache = checkPropTypes_1$3.resetWarningCache;
+  ReactPropTypes.checkPropTypes = checkPropTypes_1;
+  ReactPropTypes.resetWarningCache = checkPropTypes_1.resetWarningCache;
   ReactPropTypes.PropTypes = ReactPropTypes;
 
   return ReactPropTypes;
@@ -13919,7 +13777,7 @@ emptyFunctionWithReset.resetWarningCache = emptyFunction;
 
 var factoryWithThrowingShims = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
-    if (secret === ReactPropTypesSecret_1$3) {
+    if (secret === ReactPropTypesSecret_1) {
       // It is still safe when called from React.
       return;
     }
@@ -25864,11 +25722,12 @@ class MultiSelect extends react.Component {
       });
     });
     _defineProperty(this, "selectedItems", arrayItem => {
+      const items = arrayItem.map(item => item.slice(0, 5));
       let selectedElements = 2;
-      if (arrayItem.length <= selectedElements) {
-        return arrayItem.join(", ");
+      if (items.length <= selectedElements) {
+        return items.join(", ");
       } else {
-        let displayElements = arrayItem.slice(0, selectedElements);
+        let displayElements = items.slice(0, selectedElements);
         displayElements.push("...");
         return displayElements.join(", ");
       }
@@ -25884,7 +25743,7 @@ class MultiSelect extends react.Component {
       });
     });
     _defineProperty(this, "handleCheckboxChange", event => {
-      const value = event.target.id;
+      const value = event.target.name;
       const isChecked = event.target.checked;
       const {
         selectedOptions
@@ -25892,11 +25751,15 @@ class MultiSelect extends react.Component {
       if (isChecked) {
         this.setState(prevState => ({
           selectedOptions: [...prevState.selectedOptions, value]
-        }));
+        }), () => {
+          this.props.onSelect(selectedOptions);
+        });
       } else {
         this.setState(prevState => ({
           selectedOptions: prevState.selectedOptions.filter(item => item !== value)
-        }));
+        }), () => {
+          this.props.onSelect(selectedOptions);
+        });
       }
     });
     _defineProperty(this, "handleOptionClick", option => {
@@ -25920,8 +25783,7 @@ class MultiSelect extends react.Component {
     this.state = {
       isOpen: false,
       searchQuery: "",
-      selectedOptions: [],
-      checkedValues: []
+      selectedOptions: []
     };
     this.selectRef = /*#__PURE__*/react.createRef();
   }
@@ -25935,8 +25797,7 @@ class MultiSelect extends react.Component {
     const {
       isOpen,
       searchQuery,
-      selectedOptions,
-      checkedValues
+      selectedOptions
     } = this.state;
     const {
       options,
@@ -25946,15 +25807,13 @@ class MultiSelect extends react.Component {
     } = this.props;
     const filteredOptions = options.filter(option => option.toLowerCase().includes(searchQuery.toLowerCase()));
     return /*#__PURE__*/react.createElement(react.Fragment, null, type === "checkbox" ? /*#__PURE__*/react.createElement("div", {
-      className: "container1",
+      className: styles.cardMain,
       ref: this.selectRef
-    }, /*#__PURE__*/react.createElement("div", {
-      className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
       className: "col-auto"
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
-    }, /*#__PURE__*/react.createElement("label", {
+    }, /*#__PURE__*/react.createElement(Typography, {
       htmlFor: "checkboxInput",
       className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
@@ -25982,67 +25841,21 @@ class MultiSelect extends react.Component {
       className: selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`,
       htmlFor: "listInput"
     }, /*#__PURE__*/react.createElement("li", {
-      key: option,
-      onClick: () => this.handleOptionClick(option)
+      key: option
     }, /*#__PURE__*/react.createElement(CheckBox, {
       id: option,
       label: option,
       name: option,
-      onChange: this.handleCheckboxChange
-    }))))))))) : type === "radio" ? /*#__PURE__*/react.createElement("div", {
-      className: "container1",
+      onChange: this.handleCheckboxChange,
+      checked: selectedOptions.includes(option)
+    })))))))) : type === "icon" ? /*#__PURE__*/react.createElement("div", {
+      className: styles.cardMain,
       ref: this.selectRef
-    }, /*#__PURE__*/react.createElement("div", {
-      className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
       className: "col-auto"
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
-    }, /*#__PURE__*/react.createElement("label", {
-      htmlFor: "radioInput",
-      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
-    }, labelName), /*#__PURE__*/react.createElement("div", {
-      className: `input-group ${styles.borderBottom}`
-    }, /*#__PURE__*/react.createElement("input", {
-      type: "text",
-      id: "radioInput",
-      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
-      placeholder: selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select",
-      value: searchQuery,
-      onChange: this.handleSearchChange,
-      onClick: this.toggleDropdown
-    }), /*#__PURE__*/react.createElement("div", {
-      className: styles.spanIcon,
-      onClick: this.toggleDropdown
-    }, this.optionLength(selectedOptions), /*#__PURE__*/react.createElement(FontAwesomeIcon, {
-      icon: faChevronDown,
-      className: `${isOpen && styles.spanIconRotate}`,
-      size: "sm"
-    }))), isOpen && /*#__PURE__*/react.createElement("ul", {
-      className: `${styles.dropdownItems} col-12`
-    }, filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
-      key: option,
-      className: selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`,
-      htmlFor: "listInput"
-    }, /*#__PURE__*/react.createElement("li", {
-      key: option,
-      onClick: () => this.handleOptionClick(option)
-    }, /*#__PURE__*/react.createElement(RadioButton, {
-      label: option,
-      name: option,
-      id: option,
-      className: styles.dropdownCheckbox,
-      onChange: this.handleCheckboxChange
-    }))))))))) : type === "icon" ? /*#__PURE__*/react.createElement("div", {
-      className: "container1",
-      ref: this.selectRef
-    }, /*#__PURE__*/react.createElement("div", {
-      className: styles.cardMain
-    }, /*#__PURE__*/react.createElement("div", {
-      className: "col-auto"
-    }, /*#__PURE__*/react.createElement("div", {
-      className: "dropdown"
-    }, /*#__PURE__*/react.createElement("label", {
+    }, /*#__PURE__*/react.createElement(Typography, {
       htmlFor: "iconInput",
       className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
@@ -26080,16 +25893,14 @@ class MultiSelect extends react.Component {
       size: "lg",
       className: styles.listIcon,
       color: "black"
-    }), option)))))))))) : type === "chip" ? /*#__PURE__*/react.createElement("div", {
-      className: "container1",
+    }), option))))))))) : type === "chip" ? /*#__PURE__*/react.createElement("div", {
+      className: styles.cardMain,
       ref: this.selectRef
-    }, /*#__PURE__*/react.createElement("div", {
-      className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
       className: "col-auto"
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
-    }, /*#__PURE__*/react.createElement("label", {
+    }, /*#__PURE__*/react.createElement(Typography, {
       htmlFor: "chipInput",
       className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
@@ -26099,7 +25910,7 @@ class MultiSelect extends react.Component {
     }, selectedOptions.slice(0, 2).map(option => /*#__PURE__*/react.createElement("div", {
       className: styles.chip,
       key: option
-    }, option, /*#__PURE__*/react.createElement("span", {
+    }, option.slice(0, 5), /*#__PURE__*/react.createElement("span", {
       className: styles.chipClose,
       onClick: () => this.handleOptionClick(option)
     }, "\xD7"))), this.optionLength(selectedOptions) ? /*#__PURE__*/react.createElement("div", {
@@ -26129,14 +25940,14 @@ class MultiSelect extends react.Component {
       className: selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`,
       htmlFor: "listInput"
     }, /*#__PURE__*/react.createElement("li", {
-      key: option,
-      onClick: () => this.handleOptionClick(option)
+      key: option
     }, /*#__PURE__*/react.createElement(CheckBox, {
       id: option,
       label: option,
       name: option,
-      onChange: this.handleCheckboxChange
-    }))))))))) : "Invalid option");
+      onChange: this.handleCheckboxChange,
+      checked: selectedOptions.includes(option)
+    })))))))) : "Invalid option");
   }
 }
 
@@ -26178,10 +25989,6 @@ class Select extends react.Component {
     this.selectRef = /*#__PURE__*/react.createRef();
   }
   componentDidMount() {
-    console.log();
-    window.addEventListener("click", this.handleCliclOutSide);
-  }
-  componentWillMount() {
     window.addEventListener("click", this.handleCliclOutSide);
   }
   render() {
@@ -26198,15 +26005,13 @@ class Select extends react.Component {
     } = this.props;
     const filteredOptions = options.filter(option => option.toLowerCase().includes(searchQuery.toLowerCase()));
     return /*#__PURE__*/react.createElement("div", {
-      className: "container1",
+      className: styles.cardMain,
       ref: this.selectRef
-    }, /*#__PURE__*/react.createElement("div", {
-      className: styles.cardMain
     }, /*#__PURE__*/react.createElement("div", {
       className: "col-auto"
     }, /*#__PURE__*/react.createElement("div", {
       className: "dropdown"
-    }, /*#__PURE__*/react.createElement("label", {
+    }, /*#__PURE__*/react.createElement(Typography, {
       htmlFor: "inlineFormInput",
       className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
@@ -26237,7 +26042,7 @@ class Select extends react.Component {
       },
       className: `dropdown-item ${option === activeOption ? styles.activeItem : ""}`,
       onClick: () => this.handleSingleOptionClick(option)
-    }, option))))))));
+    }, option)))))));
   }
 }
 
