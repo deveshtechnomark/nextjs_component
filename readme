@@ -1,0 +1,14 @@
+"use client"
+
+import Typography from "typography"
+import "typography/dist/index.css"
+
+
+export default function Home() {
+  return (
+    <>
+  <Typography type="h1">The quick</Typography>
+  {/* <Typography type="h2">The quick</Typography> */}
+  </>
+  )
+}
