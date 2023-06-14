@@ -1,6 +1,7 @@
 import React from "react";
 import { BiChevronDown, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import "../styles/styles.css";
 
 // importing another custom library
@@ -69,7 +70,7 @@ class MultiSelectSearch extends React.Component {
   };
 
   render() {
-    const { options, label, type } = this.props;
+    const { options, label, type, id } = this.props;
     const { open, inputValue, selectedValues } = this.state;
 
     return (
@@ -82,15 +83,15 @@ class MultiSelectSearch extends React.Component {
             "text-[14px] font-normal font-proxima text-CSSecondaryGray",
             open && "text-CSgreen"
           )}
-          htmlFor="select"
+          htmlFor={ id }
         >
-          <Typography type="label">{label}*</Typography>
+          <Typography type="label">{label ? label : "label"}*</Typography>
         </label>
 
 
         <div className="flex flex-row items-center justify-center relative mt-0.5">
           <input
-            id="select"
+            id={ id }
             onClick={this.handleToggleOpen} // Updated event handler
             onChange={this.handleInputChange}
             readOnly={!open}
@@ -176,3 +177,9 @@ class MultiSelectSearch extends React.Component {
 }
 
 export { MultiSelectSearch };
+
+MultiSelectSearch.propTypes = {
+  id: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired
+}

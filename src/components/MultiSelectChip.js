@@ -1,6 +1,7 @@
 import React from "react";
 import { BiChevronDown, BiX, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import "../styles/styles.css";
 
 // importing another custom library
@@ -79,13 +80,13 @@ class MultiSelectChip extends React.Component {
   };
 
   render() {
-    const { options, label, type } = this.props;
+    const { options, label, type, id } = this.props;
     const { selected, open } = this.state;
 
     const selectedDisplay =
-    selected.length > 0 ? (
-      <div className="flex flex-wrap items-center">
-        {selected.slice(0, 2).map((option) => (
+      selected.length > 0 ? (
+        <div className="flex flex-wrap items-center">
+          {selected.slice(0, 2).map((option) => (
             <div
               key={option}
               className={classNames(
@@ -121,17 +122,16 @@ class MultiSelectChip extends React.Component {
         ref={this.selectRef}
       >
         <label
+          onClick={this.handleToggleOpen}
           className={classNames(
             "text-[14px] font-normal font-proxima text-CSSecondaryGray",
             open && "text-CSgreen"
           )}
-          htmlFor="select"
         >
-          <Typography type="label">{label}*</Typography>
+          <Typography type="label">{label ? label : "label"}*</Typography>
         </label>
         <div
           onClick={this.handleToggleOpen}
-          id="select"
           className={classNames(
             "flex justify-between bg-white border-b border-gray-300 text-CSDarkGray pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300",
             selected.length === 0 && "text-CSDarkGray",
@@ -204,3 +204,8 @@ class MultiSelectChip extends React.Component {
 }
 
 export { MultiSelectChip };
+
+MultiSelectChip.propTypes = {
+  options: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired
+}
