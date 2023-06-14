@@ -1,0 +1,17 @@
+'use client'
+import './globals.css'
+
+import { Breadcrumb } from 'breadcrumb';
+import 'breadcrumb/dist/index.css'
+
+const items = [
+  { url: '/home', label: 'Home' },
+  { url: '/about', label: 'About' },
+  { url: '/contact', label: 'Contact' }
+];
+
+export default function Home() {
+  return (
+    <Breadcrumb items={items} />
+  )
+}
