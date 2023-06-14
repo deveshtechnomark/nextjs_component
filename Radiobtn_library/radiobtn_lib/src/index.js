@@ -20,6 +20,10 @@ class RadioButton extends React.Component {
       invalid: checked ? invalid : false,
       checked: !checked,
     });
+  
+    if (this.props.onChange) {
+      this.props.onChange(value); 
+    }
   }
 
   render() {
@@ -40,6 +44,7 @@ class RadioButton extends React.Component {
           id={id}
           name={name}
           onChange={this.handleChange}
+          className={styles.input_style_radio}
           disabled={disabled}
           value={value}
           defaultChecked={defaultChecked}

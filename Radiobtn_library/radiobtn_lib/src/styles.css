@@ -1,54 +1,6 @@
-/* Reset default margin, display, and font properties */
-body {
-  margin: 0;
-  display: flex;
-  min-height: 30vh;
-  flex-direction: column;
-  font: 400 0.90rem sans-serif;
-  color: #7a7a8c;
-  background-position: 0 0, 25px 25px; /* Background position */
-}
-
-/* Remove underline from links and set link color */
-a {
-  text-decoration: none;
-  color: #7a7a8c;
-}
-
-/* Style for the name section */
-.name {
-  margin-bottom: 0.675rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* Styles for the gear icon */
-svg.gear {
-  order: 1;
-  margin-left: 1.35rem;
-  cursor: help;
-}
-
-/* Styles for the button */
-.btn {
-  position: absolute;
-  bottom: 1.35rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* Styles for the label */
-label {
-  position: relative;
-  margin: 0.675rem 1.35rem;
-  display: flex;
-  width: auto;
-  align-items: center;
-  cursor: pointer;
-}
 
 /* Hide the radio input */
-input {
+.input_style_radio {
   display: none;
 }
 
@@ -122,8 +74,15 @@ input[disabled]+label {
 /* Styles for disabled radio border */
 input[disabled]+label .radio_border {
   stroke: #ccc;
-  box-shadow: 0 0 8px rgba(241, 240, 240, 0.4);
-  outline: 4px solid rgba(240, 238, 238, 0.4);
+  box-shadow: 0 0 8px rgba(235, 235, 235, 0.4);
+  outline: 4px solid rgba(246, 246, 246, 0.4);
+  border-radius: 50%;
+}
+
+input[disabled]+label:hover .radio_border {
+  stroke: #ccc;
+  box-shadow: 0 0 8px rgba(235, 235, 235, 0.4);
+  outline: 4px solid rgba(246, 246, 246, 0.4);
   border-radius: 50%;
 }
 
@@ -184,7 +143,6 @@ input[disabled]+label.invalid_label .radio_dot {
 .invalid_check .invalid_dot {
   fill: url(#invalid_gradient);
   transform: scale(0);
-
   transform-origin: 50% 50%;
 }
 
