@@ -1,0 +1,15 @@
+"use client";
+
+import { Alert } from "alertlib";
+import "alertlib/dist/styles.css"
+
+export default function Home() {
+  return (
+    <div>
+      <Alert variant="success" message="Operation completed successfully!" />
+      <Alert variant="error" message="An error occurred!" />
+      <Alert variant="warning" message="Warning trouble connecting" />
+      <Alert variant="info" message="This is an informational message." />
+    </div>
+  );
+}

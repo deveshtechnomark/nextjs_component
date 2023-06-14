@@ -127,7 +127,7 @@ class Alert extends React.Component {
           >
             <div className="flex">
               {icon}
-              <span className="ml-2">{message}</span>
+              <span className="ml-2 mr-6">{message}</span>
             </div>
             <button
               type="button"
