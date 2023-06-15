@@ -1,0 +1,18 @@
+"use client"
+
+import React from 'react';
+import { Accordion, MultiAccordion } from 'accordion';
+import 'accordion/dist/index.css';
+
+export default function Home() {
+  return (
+    <>
+
+      <Accordion heading="Accordion 1" description="Description 1" id="accordion1"  />
+      <Accordion heading="Accordion 2" description="Description 2" id="accordion2" icon="plus"  />
+
+      <MultiAccordion heading="Accordion 1" description="Description 1"/>
+      <MultiAccordion heading="Accordion 2" description="Description 2" icon="plus" />
+    </>
+  );
+}
