@@ -2223,7 +2223,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"placeholderSelected":"styles_placeholderSelected__1CEIU","borderBottom":"styles_borderBottom__UgkDA","labelSelected":"styles_labelSelected__2DLuP","labelDefault":"styles_labelDefault__1a30M","placeholderDefault":"styles_placeholderDefault__321CE","listItem":"styles_listItem__3B4xI","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","listSpan":"styles_listSpan__fJ06z","listIcon":"styles_listIcon__2lhpx","activeItem":"styles_activeItem__1nne_","dropdownItems":"styles_dropdownItems__2T8NO","cardMain":"styles_cardMain__1_xXT","spanIcon":"styles_spanIcon__3Vyfe","spanIconRotate":"styles_spanIconRotate__3gUJv","chips":"styles_chips__1-kaG","chip":"styles_chip__GRp9n","chipClose":"styles_chipClose__3Ua3_","chipClear":"styles_chipClear__2fAYB","chipCount":"styles_chipCount__3UOy1"};
+var styles = {"tabView":"styles_tabView__VNRUu","listItem":"styles_listItem__3B4xI","chip":"styles_chip__GRp9n","chipCount":"styles_chipCount__3UOy1","chipClose":"styles_chipClose__3Ua3_","chipClear":"styles_chipClear__2fAYB","borderBottom":"styles_borderBottom__UgkDA","labelSelected":"styles_labelSelected__2DLuP","labelDefault":"styles_labelDefault__1a30M","placeholderSelected":"styles_placeholderSelected__1CEIU","placeholderDefault":"styles_placeholderDefault__321CE","dropdownCheckbox":"styles_dropdownCheckbox__1CTS0","listSpan":"styles_listSpan__fJ06z","listIcon":"styles_listIcon__2lhpx","activeItem":"styles_activeItem__1nne_","dropdownItems":"styles_dropdownItems__2T8NO","cardMain":"styles_cardMain__1_xXT","spanIcon":"styles_spanIcon__3Vyfe","spanIconRotate":"styles_spanIconRotate__3gUJv","chips":"styles_chips__1-kaG"};
 
 var top = 'top';
 var bottom = 'bottom';
@@ -25754,13 +25754,15 @@ class MultiSelect extends react.Component {
       } = this.state;
       if (isChecked) {
         this.setState(prevState => ({
-          selectedOptions: [...prevState.selectedOptions, value]
+          selectedOptions: [...prevState.selectedOptions, value],
+          searchQuery: ""
         }), () => {
           this.props.onSelect(selectedOptions);
         });
       } else {
         this.setState(prevState => ({
-          selectedOptions: prevState.selectedOptions.filter(item => item !== value)
+          selectedOptions: prevState.selectedOptions.filter(item => item !== value),
+          searchQuery: ""
         }), () => {
           this.props.onSelect(selectedOptions);
         });
@@ -25772,13 +25774,15 @@ class MultiSelect extends react.Component {
       } = this.state;
       if (selectedOptions.includes(option)) {
         this.setState({
-          selectedOptions: selectedOptions.filter(item => item !== option)
+          selectedOptions: selectedOptions.filter(item => item !== option),
+          searchQuery: ""
         }, () => {
           this.props.onSelect(selectedOptions);
         });
       } else {
         this.setState({
-          selectedOptions: [...selectedOptions, option]
+          selectedOptions: [...selectedOptions, option],
+          searchQuery: ""
         }, () => {
           this.props.onSelect(selectedOptions);
         });
@@ -25819,19 +25823,20 @@ class MultiSelect extends react.Component {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement(Typography, {
       htmlFor: "checkboxInput",
-      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
+      type: "h6",
+      className: isOpen === true ? `${styles.labelSelected} ${styles.tabView}` : `${styles.labelDefault} ${styles.tabView}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
       className: `input-group ${styles.borderBottom}`
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "checkboxInput",
-      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
+      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault} ${styles.tabView}`,
       placeholder: selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,
       onClick: this.toggleDropdown
     }), /*#__PURE__*/react.createElement("div", {
-      className: styles.spanIcon,
+      className: `${styles.spanIcon} ${styles.tabView}`,
       onClick: this.toggleDropdown
     }, this.optionLength(selectedOptions), /*#__PURE__*/react.createElement(FontAwesomeIcon, {
       icon: faChevronDown,
@@ -25845,8 +25850,12 @@ class MultiSelect extends react.Component {
       className: selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`,
       htmlFor: "listInput"
     }, /*#__PURE__*/react.createElement("li", {
-      key: option
+      key: option,
+      id: "listInput"
     }, /*#__PURE__*/react.createElement(CheckBox, {
+      style: {
+        width: "15px"
+      },
       id: option,
       label: option,
       name: option,
@@ -25861,19 +25870,20 @@ class MultiSelect extends react.Component {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement(Typography, {
       htmlFor: "iconInput",
-      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
+      type: "h6",
+      className: isOpen === true ? `${styles.labelSelected} ${styles.tabView}` : `${styles.labelDefault} ${styles.tabView}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
       className: `input-group ${styles.borderBottom}`
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "iconInput",
-      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
+      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault} ${styles.tabView}`,
       placeholder: selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,
       onClick: this.toggleDropdown
     }), /*#__PURE__*/react.createElement("div", {
-      className: styles.spanIcon,
+      className: `${styles.spanIcon} ${styles.tabView}`,
       onClick: this.toggleDropdown
     }, this.optionLength(selectedOptions), /*#__PURE__*/react.createElement(FontAwesomeIcon, {
       icon: faChevronDown,
@@ -25885,7 +25895,7 @@ class MultiSelect extends react.Component {
       className: `${styles.dropdownItems} col-12`
     }, filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
       key: option,
-      className: selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`
+      className: selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem} ${styles.tabView}` : `${styles.listItem} ${styles.tabView}`
     }, /*#__PURE__*/react.createElement("li", {
       key: option,
       className: `dropdown-item`,
@@ -25906,7 +25916,8 @@ class MultiSelect extends react.Component {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement(Typography, {
       htmlFor: "chipInput",
-      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
+      type: "h6",
+      className: isOpen === true ? `${styles.labelSelected} ${styles.tabView}` : `${styles.labelDefault} ${styles.tabView}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
       className: `input-group ${styles.borderBottom}`
     }, selectedOptions.length > 0 && /*#__PURE__*/react.createElement("div", {
@@ -25918,17 +25929,17 @@ class MultiSelect extends react.Component {
       className: styles.chipClose,
       onClick: () => this.handleOptionClick(option)
     }, "\xD7"))), this.optionLength(selectedOptions) ? /*#__PURE__*/react.createElement("div", {
-      className: styles.chipCount
+      className: `${styles.chipCount} ${styles.tabView}`
     }, this.optionLength(selectedOptions)) : ''), /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "chipInput",
-      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
+      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault} ${styles.tabView}`,
       placeholder: selectedOptions.length > 0 ? '' : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,
       onClick: this.toggleDropdown
     }), /*#__PURE__*/react.createElement("div", {
-      className: styles.spanIcon,
+      className: `${styles.spanIcon} ${styles.tabView}`,
       onClick: this.toggleDropdown
     }, /*#__PURE__*/react.createElement(FontAwesomeIcon, {
       icon: faChevronDown,
@@ -25937,7 +25948,7 @@ class MultiSelect extends react.Component {
     }))), isOpen && /*#__PURE__*/react.createElement("ul", {
       className: `${styles.dropdownItems} col-12`
     }, /*#__PURE__*/react.createElement("span", {
-      className: `${styles.chipClear} ${styles.listItem}`,
+      className: `${styles.chipClear} ${styles.listItem} ${styles.tabView}`,
       onClick: this.clearSelectedOptions
     }, "Clear All"), filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
       key: option,
@@ -25979,7 +25990,8 @@ class Select extends react.Component {
       this.setState({
         singleSelect: option,
         activeOption: option,
-        isOpen: false
+        isOpen: false,
+        searchQuery: ""
       }, () => {
         this.props.onSelect(option);
       });
@@ -26017,19 +26029,20 @@ class Select extends react.Component {
       className: "dropdown"
     }, /*#__PURE__*/react.createElement(Typography, {
       htmlFor: "inlineFormInput",
-      className: isOpen === true ? `${styles.labelSelected}` : `${styles.labelDefault}`
+      type: "h6",
+      className: isOpen === true ? `${styles.labelSelected} ${styles.tabView}` : `${styles.labelDefault} ${styles.tabView}`
     }, labelName), /*#__PURE__*/react.createElement("div", {
       className: `input-group ${styles.borderBottom}`
     }, /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "inlineFormInput",
-      className: isOpen === true ? `form-control mb-2 border-0 rounded-0 ${styles.placeholderSelected}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault}`,
+      className: isOpen === true ? `form-control mb-2 border-0 rounded-0 ${styles.placeholderSelected} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault} ${styles.tabView}`,
       placeholder: singleSelect !== "" ? singleSelect : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,
       onClick: this.toggleDropdown
     }), /*#__PURE__*/react.createElement("div", {
-      className: styles.spanIcon,
+      className: `${styles.spanIcon} ${styles.tabView}`,
       onClick: this.toggleDropdown
     }, /*#__PURE__*/react.createElement(FontAwesomeIcon, {
       icon: faChevronDown,
@@ -26038,7 +26051,7 @@ class Select extends react.Component {
     }))), isOpen && /*#__PURE__*/react.createElement("ul", {
       className: `${styles.dropdownItems} col-12`
     }, filteredOptions.map(option => /*#__PURE__*/react.createElement("div", {
-      className: styles.listItem,
+      className: `${styles.listItem} ${styles.tabView}`,
       key: option
     }, /*#__PURE__*/react.createElement("li", {
       style: {
