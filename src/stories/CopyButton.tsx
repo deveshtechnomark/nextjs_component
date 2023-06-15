@@ -2,8 +2,10 @@ import { useState } from 'react';
 import './CopyButton.css'
 import { HiOutlineClipboardDocument } from 'react-icons/hi2';
 import { BsCheck } from 'react-icons/bs';
+import './bootstrap-custom.css'
 
 const CopyButton: React.FC<{ text: string }> = ({ text }) => {
+  
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -20,9 +22,11 @@ const CopyButton: React.FC<{ text: string }> = ({ text }) => {
   };
 
   return (
-    <button className="copy-button" onClick={handleCopy}>
-      {copied ? <BsCheck/> : <HiOutlineClipboardDocument/>}
-    </button>
+    <>
+      <button className="copy-button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top" onClick={handleCopy}>
+        {copied ? <BsCheck /> : <HiOutlineClipboardDocument />}
+      </button>
+    </>
   );
 };
 

@@ -3,7 +3,12 @@
     float: right;
     color: #504e4e;
     font-size: 16px;
+    padding: 5px 5px 5px 5px;
     cursor: pointer;
     background-color: #fff;
     border-radius: 20px;
 }
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+

@@ -8,7 +8,6 @@
   color: #333;
 }
 
-
 .storybook-page h2 {
   font-weight: 700;
   font-size: 32px;
@@ -75,9 +74,14 @@
   color: #0c7abe !important;
 }
 
-.line_format{
-  padding: 8px 0 5px 0 !important;
+.line_format {
+  padding: 8px 0 5px 0 !important ;
 }
-.title_format{
+
+.title_format {
   padding: 10px 0 5px 0 !important;
+}
+
+.types_styling{
+  color: rgb(129, 126, 126) !important;
 }

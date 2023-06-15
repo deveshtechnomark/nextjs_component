@@ -3,7 +3,6 @@ import React from 'react';
 import './Tooltip.css';
 import '../../bootstrap-custom.css'
 
-
 export const Tooltip: React.FC = () => {
 
   return (
