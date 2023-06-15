@@ -14,11 +14,11 @@ export default class CheckBox extends React.Component {
     super(props);
   }
   render() {
-    const { variant, variant2, className, label, id } = this.props;
+    const { variant, variant2, label, id } = this.props;
     return (
-      <>
+      <div>
         <input
-          className={`${className} ${styles.__checkBox} ${
+          className={`${styles.__checkBox} ${
             variant === "invalid" && styles.__checkBoxInvalid
           } `}
           type="checkbox"
@@ -33,7 +33,7 @@ export default class CheckBox extends React.Component {
           ></span>
           <Typography>{label}</Typography>
         </label>
-      </>
+      </div>
     );
   }
 }

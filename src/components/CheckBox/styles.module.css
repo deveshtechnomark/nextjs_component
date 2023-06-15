@@ -11,9 +11,10 @@
 }
 
 .__checkBox + .__label {
-  position: relative;
   display: flex;
   cursor: pointer;
+  position: relative;
+  /* background-color: #dc3545; */
 }
 
 .__checkBox + .__label > .__checkBoxDiv {
@@ -52,7 +53,7 @@
 
 .__checkBox:checked + .__label > .intermediate:before {
   top: 0;
-  left: 0.4em;
+  left: 0.6em;
   border-right: 0.125rem solid transparent;
   border-bottom: none;
   transform: rotate(90deg);

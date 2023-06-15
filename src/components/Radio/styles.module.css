@@ -18,7 +18,7 @@
 }
 
 .check {
-  margin: 2px 5px;
+  margin: 2px 10px;
   margin-right: 0.3em;
   width: 18px;
   height: 18px;
@@ -53,7 +53,7 @@
   position: absolute;
 }
 
-.__radio:hover + label > .check #border {
+.__radio:hover:not(:disabled) + label > .check #border {
   stroke: #02b89d;
 }
 
@@ -84,7 +84,7 @@
   stroke: #dc3545;
 }
 
-.__radio:hover + label > .invalidCheck #border {
+.__radio:hover:not(:disabled) + label > .invalidCheck #border {
   stroke: #dc3545;
 }
 
