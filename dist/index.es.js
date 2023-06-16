@@ -2078,7 +2078,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"main_div":"styles_main_div__Rg8tn","btnStyle":"styles_btnStyle__wvdyK","activeBtn":"styles_activeBtn__kHobu","gridStyle":"styles_gridStyle__3uQ9V","withSpace":"styles_withSpace__2LkxR","firstButton":"styles_firstButton__3oWeD","lastButton":"styles_lastButton__1rV4e","line":"styles_line__37sPe","mediumSize":"styles_mediumSize__3bwJT","largeSize":"styles_largeSize__3PCDY"};
+var styles = {"main_div":"styles_main_div__Rg8tn","btnStyle":"styles_btnStyle__wvdyK","gridStyle":"styles_gridStyle__3uQ9V","activeBtn":"styles_activeBtn__kHobu","withSpace":"styles_withSpace__2LkxR","firstButton":"styles_firstButton__3oWeD","lastButton":"styles_lastButton__1rV4e","line":"styles_line__37sPe","mediumSize":"styles_mediumSize__3bwJT","largeSize":"styles_largeSize__3PCDY","firstLastColor":"styles_firstLastColor__1O698"};
 
 class Pagination extends react.Component {
   constructor(props) {
@@ -2092,15 +2092,17 @@ class Pagination extends react.Component {
           total
         } = this.props;
         if (activeButton <= total) {
-          if (this.last == activeButton) {
+          if (this.last === activeButton) {
             if (activeButton !== this.total) {
               this.prevLimit = this.limit;
               this.initial = +activeButton + 1;
             }
           }
-          this.setState(prevState => ({
-            activeButton: +prevState.activeButton + 1
-          }));
+          if (activeButton !== total) {
+            this.setState(prevState => ({
+              activeButton: +prevState.activeButton + 1
+            }));
+          }
         }
       } else if (i === 'prev') {
         const {
@@ -2196,7 +2198,7 @@ class Pagination extends react.Component {
       }
     }
     buttons.push(react.createElement("button", {
-      className: `${activeButton === this.total ? styles.activeBtn : ''} ${styles.btnStyle} ${grid ? styles.gridStyle : ''} ${withSpace ? styles.withSpace : ''} ${applyBorder === true ? styles.lastButton : ''}`,
+      className: `${grid ? styles.gridStyle : ''} ${activeButton === this.total ? styles.activeBtn : ''} ${styles.btnStyle} ${withSpace ? styles.withSpace : ''} ${applyBorder === true ? styles.lastButton : ''}`,
       key: this.total,
       value: this.total,
       onClick: e => this.handleClick(this.total, e.target.value)
@@ -2209,7 +2211,8 @@ class Pagination extends react.Component {
       last,
       arrows,
       className,
-      size
+      size,
+      total
     } = this.props;
     const {
       activeButton
@@ -2219,7 +2222,7 @@ class Pagination extends react.Component {
     }, react.createElement("div", {
       className: `${size === 'medium' ? styles.mediumSize : ''}  ${size === 'large' ? styles.largeSize : ''}`
     }, last ? react.createElement(react.Fragment, null, react.createElement("button", {
-      className: `${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `,
+      className: `${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} ${styles.firstLastColor}`,
       onClick: () => this.handleClick('first')
     }, "First"), next && react.createElement("div", {
       className: styles.line
@@ -2241,7 +2244,7 @@ class Pagination extends react.Component {
     }, ">"), last ? react.createElement(react.Fragment, null, next && react.createElement("div", {
       className: styles.line
     }), react.createElement("button", {
-      className: `${styles.btnStyle} ${activeButton === 'last' ? styles.activeBtn : ''} `,
+      className: `${styles.btnStyle} ${activeButton === 'last' ? styles.activeBtn : ''} ${styles.firstLastColor} `,
       onClick: () => this.handleClick('last')
     }, "Last")) : arrows && react.createElement("button", {
       className: `${styles.btnStyle} ${activeButton === '>>' ? styles.activeBtn : ''}`,

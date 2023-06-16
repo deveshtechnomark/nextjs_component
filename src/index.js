@@ -21,13 +21,15 @@ class Pagination extends React.Component {
       const { total } = this.props;
 
       if (activeButton <= total) {
-        if (this.last == activeButton) {
+        if (this.last === activeButton) {
           if (activeButton !== this.total) {
             this.prevLimit = this.limit
             this.initial = +activeButton + 1
           }
         }
+        if(activeButton !== total){
         this.setState((prevState) => ({ activeButton: +prevState.activeButton + 1 }));
+        }
       }
     }
 
@@ -131,8 +133,7 @@ class Pagination extends React.Component {
 
     buttons.push(
       <button
-        className={`${activeButton === this.total ? styles.activeBtn : ''} ${styles.btnStyle} ${grid ? styles.gridStyle : ''
-          } ${withSpace ? styles.withSpace : ''} ${applyBorder === true ? styles.lastButton : ''}`}
+        className={`${grid ? styles.gridStyle : ''} ${activeButton === this.total ? styles.activeBtn : ''} ${styles.btnStyle} ${withSpace ? styles.withSpace : ''} ${applyBorder === true ? styles.lastButton : ''}`}
         key={this.total}
         value={this.total}
         onClick={(e) => this.handleClick(this.total, e.target.value)}
@@ -145,7 +146,7 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const { next, last, arrows, className, size } = this.props;
+    const { next, last, arrows, className, size, total } = this.props;
     const { activeButton } = this.state;
 
     return (
@@ -155,7 +156,7 @@ class Pagination extends React.Component {
           {last ? (
             <>
               <button
-                className={`${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} `}
+                className={`${styles.btnStyle} ${activeButton === 'first' ? styles.activeBtn : ''} ${styles.firstLastColor}`}
                 onClick={() => this.handleClick('first')}
               >
                 First
@@ -210,7 +211,7 @@ class Pagination extends React.Component {
             <>
               {next && <div className={styles.line}></div>}
               <button
-                className={`${styles.btnStyle} ${activeButton === 'last' ? styles.activeBtn : ''} `}
+                className={`${styles.btnStyle} ${activeButton === 'last' ? styles.activeBtn : ''} ${styles.firstLastColor} `}
                 onClick={() => this.handleClick('last')}
               >
                 Last
