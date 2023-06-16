@@ -1,0 +1,29 @@
+@import "./mixins";
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .tabView {
+        font-size: $input-tabview-font-size;
+    }
+
+    .listItem {
+        height: $input-listitem-height !important;
+        font-size: $input-listitem-font-size !important;
+    }
+
+    .chip {
+        padding: $input-chip-padding !important;
+        font-size: $input-chip-font-size !important;
+    }
+
+    .chipCount {
+        font-size: $input-tabview-font-size !important;
+    }
+
+    .chipClose {
+        margin-left: $input-chipclose-margin-left !important;
+    }
+
+    .chipClear {
+        padding-left: $input-chipclear-padding-left !important;
+    }
+}
