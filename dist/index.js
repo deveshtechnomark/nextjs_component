@@ -2093,11 +2093,7 @@ class Pagination extends react.Component {
         const {
           total
         } = this.props;
-        if (activeButton === null) {
-          this.setState({
-            activeButton: 1
-          });
-        } else if (activeButton <= total) {
+        if (activeButton <= total) {
           if (this.last == activeButton) {
             if (activeButton !== this.total) {
               this.prevLimit = this.limit;
@@ -2140,7 +2136,7 @@ class Pagination extends react.Component {
       }
     });
     this.state = {
-      activeButton: null
+      activeButton: 1
     };
     this.limit = this.props.limit;
     this.total = this.props.total;
