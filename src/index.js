@@ -9,7 +9,7 @@ class ToolTip extends React.Component {
   tooltipInstance = null;
 
   componentDidMount() {
-    if (this.tooltipRef.current) {
+     if (typeof window !== 'undefined' && this.tooltipRef.current) {
       this.tooltipInstance = new Tooltip(this.tooltipRef.current);
     }
   }
@@ -24,19 +24,11 @@ class ToolTip extends React.Component {
     const { title, position, children, className } = this.props;
     console.log(title)
     return (
-      <div>
-        <button ref={this.tooltipRef} data-bs-toggle="tooltip"  data-bs-custom-class={styles.custom_tooltip} data-bs-placement={position} title={title} >{children}</button>
-      </div>
-
+      <span ref={this.tooltipRef} className={`${className}`} data-bs-toggle="tooltip" data-bs-custom-class={styles.custom_tooltip} data-bs-placement={position} title={title}>
+      {children}
+      </span>
     )
 
-    // return (
-    //   <div className={styles.tooltip}>
-    //     <span className={`${className}  ${position === "top" ? styles.tooltipTextTop : ''} ${position === "bottom" ? styles.tooltipTextBottom : ''}  ${position === "left" ? styles.tooltipTextLeft : ''}
-    //     ${position === "right" ? styles.tooltipTextRight : ''}`}>{message}</span>
-    //     <span>{children}</span>
-    //   </div>
-    // );
   }
 }
 

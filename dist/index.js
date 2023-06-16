@@ -2203,7 +2203,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 });
 
-var styles = {"tooltip":"styles_tooltip__aTFde"};
+var styles = {"custom_tooltip":"styles_custom_tooltip__1d2Ho"};
 
 var top = 'top';
 var bottom = 'bottom';
@@ -8491,7 +8491,7 @@ class ToolTip extends react.Component {
     _defineProperty(this, "tooltipInstance", null);
   }
   componentDidMount() {
-    if (this.tooltipRef.current) {
+    if (typeof window !== 'undefined' && this.tooltipRef.current) {
       this.tooltipInstance = new Tooltip(this.tooltipRef.current);
     }
   }
@@ -8508,21 +8508,14 @@ class ToolTip extends react.Component {
       className
     } = this.props;
     console.log(title);
-    return react.createElement("div", null, react.createElement("button", {
+    return react.createElement("span", {
       ref: this.tooltipRef,
+      className: `${className}`,
       "data-bs-toggle": "tooltip",
       "data-bs-custom-class": styles.custom_tooltip,
       "data-bs-placement": position,
       title: title
-    }, children));
-
-    // return (
-    //   <div className={styles.tooltip}>
-    //     <span className={`${className}  ${position === "top" ? styles.tooltipTextTop : ''} ${position === "bottom" ? styles.tooltipTextBottom : ''}  ${position === "left" ? styles.tooltipTextLeft : ''}
-    //     ${position === "right" ? styles.tooltipTextRight : ''}`}>{message}</span>
-    //     <span>{children}</span>
-    //   </div>
-    // );
+    }, children);
   }
 }
 

@@ -1,5 +1,10 @@
-.tooltip{
-    background-color: red;
-    font-size: xx-large
-}
 @import url('bootstrap/dist/css/bootstrap.min.css');
+
+.custom_tooltip {
+    --bs-tooltip-bg: #BCF1E8;
+    border: 1px solid #02B89D !important;
+    border-radius: 5px;
+    --bs-tooltip-color: #333333 !important;
+    --bs-tooltip-border-style: solid !important;
+    --bs-tooltip-border-radius: 4px;
+}
