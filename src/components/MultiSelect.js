@@ -144,7 +144,7 @@ class MultiSelect extends React.Component {
                                                 className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
                                                 htmlFor="listInput">
                                                 <li key={option} id="listInput">
-                                                    <CheckBox style={{ width: "15px" }} id={option} label={option} name={option} onChange={this.handleCheckboxChange} checked={selectedOptions.includes(option)} />
+                                                    <CheckBox style={{ width: "15px" }} id={option} label={option.length > 15 ? `${option.slice(0, 15)}...` : option} name={option} onChange={this.handleCheckboxChange} checked={selectedOptions.includes(option)} />
                                                 </li>
                                             </div>
                                         ))}
@@ -181,7 +181,7 @@ class MultiSelect extends React.Component {
                                                                 className={`dropdown-item`}
                                                                 onClick={() => this.handleOptionClick(option)}
                                                             >
-                                                                <span className={styles.listSpan}> <FontAwesomeIcon icon={Icon[iconName]} size="lg" className={styles.listIcon} color="black" />{option}</span>
+                                                                <span className={styles.listSpan}> <FontAwesomeIcon icon={Icon[iconName]} size="lg" className={styles.listIcon} color="black" />{option.length > 15 ? `${option.slice(0, 15)}...` : option}</span>
                                                             </li>
                                                         </div>
                                                     ))}
@@ -236,7 +236,7 @@ class MultiSelect extends React.Component {
                                                     <div key={option} className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
                                                         htmlFor="listInput">
                                                         <li key={option}>
-                                                            <CheckBox id={option} label={option} name={option} onChange={this.handleCheckboxChange} checked={selectedOptions.includes(option)} />
+                                                            <CheckBox id={option} label={option.length > 15 ? `${option.slice(0, 15)}...` : option} name={option} onChange={this.handleCheckboxChange} checked={selectedOptions.includes(option)} />
                                                         </li>
                                                     </div>
                                                 ))}

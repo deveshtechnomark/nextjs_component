@@ -80,7 +80,7 @@ class Select extends React.Component {
                       <li style={{ padding: "5px" }}
                         className={`dropdown-item ${option === activeOption ? styles.activeItem : ""}`}
                         onClick={() => this.handleSingleOptionClick(option)}>
-                        {option}
+                        {option.length > 20 ? `${option.slice(0, 20)}...` : option}
                       </li>
                     </div>
                   ))}

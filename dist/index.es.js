@@ -7630,7 +7630,7 @@ class CheckBox extends react$1.Component {
       onChange
     } = this.props;
     return /*#__PURE__*/react$1.createElement(react$1.Fragment, null, /*#__PURE__*/react$1.createElement("input", {
-      className: `${className} ${styles$1.checkBox} ${invalid && styles$1.checkBoxInvalid} `,
+      className: `${className} ${styles$1.checkBox} ${invalid && styles$1.checkBoxInvalid}`,
       type: "checkbox",
       id: id,
       name: name,
@@ -25853,7 +25853,7 @@ class MultiSelect extends react.Component {
         width: "15px"
       },
       id: option,
-      label: option,
+      label: option.length > 15 ? `${option.slice(0, 15)}...` : option,
       name: option,
       onChange: this.handleCheckboxChange,
       checked: selectedOptions.includes(option)
@@ -25903,7 +25903,7 @@ class MultiSelect extends react.Component {
       size: "lg",
       className: styles.listIcon,
       color: "black"
-    }), option))))))))) : type === "chip" ? /*#__PURE__*/react.createElement("div", {
+    }), option.length > 15 ? `${option.slice(0, 15)}...` : option))))))))) : type === "chip" ? /*#__PURE__*/react.createElement("div", {
       className: styles.cardMain,
       ref: this.selectRef
     }, /*#__PURE__*/react.createElement("div", {
@@ -25954,7 +25954,7 @@ class MultiSelect extends react.Component {
       key: option
     }, /*#__PURE__*/react.createElement(CheckBox, {
       id: option,
-      label: option,
+      label: option.length > 15 ? `${option.slice(0, 15)}...` : option,
       name: option,
       onChange: this.handleCheckboxChange,
       checked: selectedOptions.includes(option)
@@ -26055,7 +26055,7 @@ class Select extends react.Component {
       },
       className: `dropdown-item ${option === activeOption ? styles.activeItem : ""}`,
       onClick: () => this.handleSingleOptionClick(option)
-    }, option)))))));
+    }, option.length > 20 ? `${option.slice(0, 20)}...` : option)))))));
   }
 }
 
