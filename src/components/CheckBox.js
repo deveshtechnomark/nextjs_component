@@ -1,5 +1,8 @@
 import React from 'react';
 import styles from "../scss/styles.module.scss";
+import "../bootstrap/bootstrap-custom.css";
+
+// import Typography  from 'typography';
 
 class CheckBox extends React.Component {
     constructor(props) {
@@ -26,6 +29,7 @@ class CheckBox extends React.Component {
                     >
                     </span>
                     {label}
+                    {/* <Typography type="h6">{label}</Typography> */}
                 </label>
             </>
         );
