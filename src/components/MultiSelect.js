@@ -3,7 +3,6 @@ import styles from "../scss/styles.scss";
 import "../css/bootstrapCustom.css";
 import "bootstrap/js/dist/dropdown";
 import { CheckBox } from "checkbox";
-import Typography from "typography";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
 
@@ -42,6 +41,7 @@ class MultiSelect extends React.Component {
     handleSearchChange = (e) => {
         this.setState({
             searchQuery: e.target.value,
+            isOpen: e.target.value !== ""
         });
     };
 
@@ -119,23 +119,30 @@ class MultiSelect extends React.Component {
 
         return (
             <>
-
                 {type === "checkbox" ?
                     <div className={styles.cardMain} ref={this.selectRef}>
                         <div className="col-auto">
                             <div className="dropdown">
-                                <Typography htmlFor="checkboxInput" type="h6" className={isOpen === true ? `${styles.labelSelected} ${styles.tabView}` : `${styles.labelDefault} ${styles.tabView}`}>{labelName}</Typography>
+                                <label htmlFor="checkboxInput" className={isOpen === true ? `${styles.selectedColor} ${styles.tabView}` : `${styles.defaultColor} ${styles.tabView}`}>{labelName}</label>
                                 <div className={`input-group ${styles.borderBottom}`}>
                                     <input
                                         type="text"
                                         id="checkboxInput"
-                                        className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault} ${styles.tabView}`}
+                                        className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.selectedColor} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.defaultColor} ${styles.tabView}`}
                                         placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select"}
                                         value={searchQuery}
                                         onChange={this.handleSearchChange}
                                         onClick={this.toggleDropdown}
+                                        onFocus={this.toggleDropdown}
                                     />
-                                    <div className={`${styles.spanIcon} ${styles.tabView}`} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={Icon.faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
+                                    <div className={`${styles.spanIcon} ${styles.tabView}`} onClick={this.toggleDropdown}>
+                                        <span className={isOpen === true ? `${styles.selectedColor} ${styles.tabView}` : `${styles.defaultColor} ${styles.tabView}`}>{this.optionLength(selectedOptions)}</span>
+                                        <FontAwesomeIcon
+                                            icon={Icon.faChevronDown}
+                                            className={`${isOpen && styles.spanIconRotate}`}
+                                            size="sm"
+                                        />
+                                    </div>
                                 </div>
                                 {isOpen && (
                                     <ul className={`${styles.dropdownItems} col-12`} htmlFor="listInput">
@@ -144,7 +151,7 @@ class MultiSelect extends React.Component {
                                                 className={selectedOptions.includes(option) ? `${styles.listItem} ${styles.activeItem}` : `${styles.listItem}`}
                                                 htmlFor="listInput">
                                                 <li key={option} id="listInput">
-                                                    <CheckBox style={{ width: "15px" }} id={option} label={option.length > 15 ? `${option.slice(0, 15)}...` : option} name={option} onChange={this.handleCheckboxChange} checked={selectedOptions.includes(option)} />
+                                                    <CheckBox className={`${styles.tabView}`} id={option} label={option.length > 15 ? `${option.slice(0, 15)}...` : option} name={option} onChange={this.handleCheckboxChange} checked={selectedOptions.includes(option)} />
                                                 </li>
                                             </div>
                                         ))}
@@ -158,18 +165,25 @@ class MultiSelect extends React.Component {
                         <div className={styles.cardMain} ref={this.selectRef}>
                             <div className="col-auto">
                                 <div className="dropdown">
-                                    <Typography htmlFor="iconInput" type="h6" className={isOpen === true ? `${styles.labelSelected} ${styles.tabView}` : `${styles.labelDefault} ${styles.tabView}`}>{labelName}</Typography>
+                                    <label htmlFor="iconInput" className={isOpen === true ? `${styles.selectedColor} ${styles.tabView}` : `${styles.defaultColor} ${styles.tabView}`}>{labelName}</label>
                                     <div className={`input-group ${styles.borderBottom}`}>
                                         <input
                                             type="text"
                                             id="iconInput"
-                                            className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault} ${styles.tabView}`}
+                                            className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.selectedColor} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.defaultColor} ${styles.tabView}`}
                                             placeholder={selectedOptions.length > 0 ? this.selectedItems(selectedOptions) : "Please Select"}
                                             value={searchQuery}
                                             onChange={this.handleSearchChange}
                                             onClick={this.toggleDropdown}
                                         />
-                                        <div className={`${styles.spanIcon} ${styles.tabView}`} onClick={this.toggleDropdown}>{this.optionLength(selectedOptions)}<FontAwesomeIcon icon={Icon.faChevronDown} className={`${isOpen && styles.spanIconRotate}`} size="sm" /></div>
+                                        <div className={`${styles.spanIcon} ${styles.tabView}`} onClick={this.toggleDropdown}>
+                                            <span className={isOpen === true ? `${styles.selectedColor} ${styles.tabView}` : `${styles.defaultColor} ${styles.tabView}`}>{this.optionLength(selectedOptions)}</span>
+                                            <FontAwesomeIcon
+                                                icon={Icon.faChevronDown}
+                                                className={`${isOpen && styles.spanIconRotate}`}
+                                                size="sm"
+                                            />
+                                        </div>
                                     </div>
                                     {isOpen && (
                                         <ul className={`${styles.dropdownItems} col-12`}>
@@ -197,7 +211,7 @@ class MultiSelect extends React.Component {
                             <div className={styles.cardMain} ref={this.selectRef}>
                                 <div className="col-auto">
                                     <div className="dropdown">
-                                        <Typography htmlFor="chipInput" type="h6" className={isOpen === true ? `${styles.labelSelected} ${styles.tabView}` : `${styles.labelDefault} ${styles.tabView}`}>{labelName}</Typography>
+                                        <label htmlFor="chipInput" className={isOpen === true ? `${styles.selectedColor} ${styles.tabView}` : `${styles.defaultColor} ${styles.tabView}`}>{labelName}</label>
                                         <div className={`input-group ${styles.borderBottom}`}>
                                             {selectedOptions.length > 0 && (
                                                 <div className={styles.chips}>
@@ -217,7 +231,7 @@ class MultiSelect extends React.Component {
                                             <input
                                                 type="text"
                                                 id="chipInput"
-                                                className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.placeholderSelected} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault} ${styles.tabView}`}
+                                                className={isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.selectedColor} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.defaultColor} ${styles.tabView}`}
                                                 placeholder={selectedOptions.length > 0 ? '' : "Please Select"}
                                                 value={searchQuery}
                                                 onChange={this.handleSearchChange}

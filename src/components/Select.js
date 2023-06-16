@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../scss/styles.scss";
 import "../css/bootstrapCustom.css";
 import "bootstrap/js/dist/dropdown";
-import Typography from "typography";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
 class Select extends React.Component {
@@ -35,6 +34,7 @@ class Select extends React.Component {
   handleSearchChange = (e) => {
     this.setState({
       searchQuery: e.target.value,
+      isOpen: e.target.value !== ""
     });
   };
 
@@ -59,12 +59,12 @@ class Select extends React.Component {
       <div className={styles.cardMain} ref={this.selectRef}>
         <div className="col-auto">
           <div className="dropdown">
-            <Typography htmlFor="inlineFormInput" type="h6" className={isOpen === true ? `${styles.labelSelected} ${styles.tabView}` : `${styles.labelDefault} ${styles.tabView}`}>{labelName}</Typography>
+            <label htmlFor="inlineFormInput" className={isOpen === true ? `${styles.selectedColor} ${styles.tabView}` : `${styles.defaultColor} ${styles.tabView}`}>{labelName}</label>
             <div className={`input-group ${styles.borderBottom}`}>
               <input
                 type="text"
                 id="inlineFormInput"
-                className={isOpen === true ? `form-control mb-2 border-0 rounded-0 ${styles.placeholderSelected} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault} ${styles.tabView}`}
+                className={isOpen === true ? `form-control mb-2 border-0 rounded-0 ${styles.selectedColor} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.defaultColor} ${styles.tabView}`}
                 placeholder={singleSelect !== "" ? (singleSelect.length > 10 ? singleSelect.slice(0, 10) + '...' : singleSelect) : "Please Select"}
                 value={searchQuery}
                 onChange={this.handleSearchChange}
