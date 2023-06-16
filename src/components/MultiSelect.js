@@ -46,7 +46,7 @@ class MultiSelect extends React.Component {
     };
 
     selectedItems = (arrayItem) => {
-        const items = arrayItem.map(item => item.slice(0, 5));
+        const items = arrayItem.map((item) => (item.length > 5 ? item.slice(0, 5) + '...' : item));
         let selectedElements = 2;
         if (items.length <= selectedElements) {
             return items.join(", ");
@@ -203,7 +203,7 @@ class MultiSelect extends React.Component {
                                                 <div className={styles.chips}>
                                                     {selectedOptions.slice(0, 2).map((option) => (
                                                         <div className={styles.chip} key={option}>
-                                                            {option.slice(0, 5)}
+                                                            {option.length > 5 ? `${option.slice(0, 5)}...` : option}
                                                             <span className={styles.chipClose} onClick={() => this.handleOptionClick(option)}>
                                                                 &times;
                                                             </span>

@@ -25726,7 +25726,7 @@ class MultiSelect extends react.Component {
       });
     });
     _defineProperty(this, "selectedItems", arrayItem => {
-      const items = arrayItem.map(item => item.slice(0, 5));
+      const items = arrayItem.map(item => item.length > 5 ? item.slice(0, 5) + '...' : item);
       let selectedElements = 2;
       if (items.length <= selectedElements) {
         return items.join(", ");
@@ -25925,7 +25925,7 @@ class MultiSelect extends react.Component {
     }, selectedOptions.slice(0, 2).map(option => /*#__PURE__*/react.createElement("div", {
       className: styles.chip,
       key: option
-    }, option.slice(0, 5), /*#__PURE__*/react.createElement("span", {
+    }, option.length > 5 ? `${option.slice(0, 5)}...` : option, /*#__PURE__*/react.createElement("span", {
       className: styles.chipClose,
       onClick: () => this.handleOptionClick(option)
     }, "\xD7"))), this.optionLength(selectedOptions) ? /*#__PURE__*/react.createElement("div", {
