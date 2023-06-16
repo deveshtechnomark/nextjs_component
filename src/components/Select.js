@@ -43,7 +43,7 @@ class Select extends React.Component {
       singleSelect: option,
       activeOption: option,
       isOpen: false,
-      searchQuery: "", 
+      searchQuery: "",
     }, () => {
       this.props.onSelect(option)
     });
@@ -65,7 +65,7 @@ class Select extends React.Component {
                 type="text"
                 id="inlineFormInput"
                 className={isOpen === true ? `form-control mb-2 border-0 rounded-0 ${styles.placeholderSelected} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.placeholderDefault} ${styles.tabView}`}
-                placeholder={singleSelect !== "" ? singleSelect : "Please Select"}
+                placeholder={singleSelect !== "" ? (singleSelect.length > 10 ? singleSelect.slice(0, 10) + '...' : singleSelect) : "Please Select"}
                 value={searchQuery}
                 onChange={this.handleSearchChange}
                 onClick={this.toggleDropdown}
