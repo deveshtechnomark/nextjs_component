@@ -10,7 +10,7 @@
 }
 
 .h1Style {
-    @include fonts-source($size: 40px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2% );
+    @include fonts-source($size: 40px, $weight: 400, $colour: color(pure-black), $ls: 0.02em );
 
     @include mini-screen {
         @include fonts-source($size: 40px);
@@ -22,7 +22,7 @@
 }
 
 .h2Style {
-    @include fonts-source($size: 32px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2% );
+    @include fonts-source($size: 32px, $weight: 400, $colour: color(pure-black), $ls: 0.02em );
 
     @include mini-screen {
         @include fonts-source($size: 32px);
@@ -34,7 +34,7 @@
 }
 
 .h3Style {
-    @include fonts-source($size: 28px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%);
+    @include fonts-source($size: 28px, $weight: 400, $colour: color(pure-black), $ls: 0.02em);
 
     @include mini-screen {
         @include fonts-source($size: 28px);
@@ -46,7 +46,7 @@
 }
 
 .h4Style {
-    @include fonts-source($size: 24px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%);
+    @include fonts-source($size: 24px, $weight: 400, $colour: color(pure-black), $ls: 0.02em);
 
     @include mini-screen {
         @include fonts-source($size: 24px);
@@ -58,7 +58,7 @@
 }
 
 .h5Style {
-    @include fonts-source($size: 20px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%);
+    @include fonts-source($size: 20px, $weight: 400, $colour: color(pure-black), $ls: 0.02em);
 
     @include mini-screen {
         @include fonts-source($size: 20px);
@@ -70,7 +70,7 @@
 }
 
 .h6Style {
-    @include fonts-source($size: 16px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%);
+    @include fonts-source($size: 16px, $weight: 400, $colour: color(pure-black), $ls: 0.02em);
     @include mini-screen {
         @include fonts-source($size: 16px);
     }
@@ -81,7 +81,7 @@
 }
 
 .titleStyle {
-    @include fonts-source($size: 20px, $weight: 500, $colour: color(pure-black), $lh: 120%, $ls: 2%);
+    @include fonts-source($size: 20px, $weight: 500, $colour: color(pure-black), $ls: 0.02em);
 
     @include mini-screen {
         @include fonts-source($size: 20px);
@@ -93,7 +93,7 @@
 }
 
 .sub_titleStyle {
-    @include fonts-source($size: 16px, $weight: 500, $colour: color(pure-black), $lh: 120%, $ls: 2%);
+    @include fonts-source($size: 16px, $weight: 500, $colour: color(pure-black), $ls: 0.02em);
 
     @include mini-screen {
         @include fonts-source($size: 16px);
@@ -105,7 +105,7 @@
 }
 
 .table_titleStyle {
-    @include fonts-source($size: 16px, $weight: 700, $colour: color(pure-black), $lh: 17.5px, $ls: 2%);
+    @include fonts-source($size: 16px, $weight: 700, $colour: color(pure-black), $ls: 0.02em);
 
     @include mini-screen {
         @include fonts-source($size: 16px);
@@ -117,30 +117,30 @@
 }
 
 .labelStyle {
-    @include fonts-source($size: 14px, $weight: 400, $colour: color(pure-black), $lh: 150%, $ls: 2%);
+    @include fonts-source($size: 14px, $weight: 400, $colour: color(pure-black), $ls: 0.02em);
     @include mini-screen {
         @include fonts-source($size: 14px);
     }
 
     @include tab-view {
-        @include fonts-source($size: 12px, $lh: 18px);
+        @include fonts-source($size: 12px);
     }
 }
 
 .bodyStyle {
-    @include fonts-source($size: 16px, $weight: 400, $colour: color(pure-black), $lh: 150%, $ls: 2%);
+    @include fonts-source($size: 16px, $weight: 400, $colour: color(pure-black), $ls: 0.02em);
 
     @include mini-screen {
         @include fonts-source($size: 16px);
     }
 
     @include tab-view {
-        @include fonts-source($size: 14px, $lh: 120%);
+        @include fonts-source($size: 14px);
     }
 }
 
 .buttonStyle {
-    @include fonts-source($size: 16px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%);
+    @include fonts-source($size: 16px, $weight: 400, $colour: color(pure-black), $ls: 0.02em);
 
     @include mini-screen {
         @include fonts-source($size: 16px);
@@ -152,7 +152,7 @@
 }
 
 .badgeStyle {
-    @include fonts-source($size: 10px, $weight: 400, $colour: color(pure-black), $lh: 120%, $ls: 2%);
+    @include fonts-source($size: 10px, $weight: 400, $colour: color(pure-black), $ls: 0.02em);
 
     @include mini-screen {
         @include fonts-source($size: 10px);
@@ -164,13 +164,13 @@
 }
 
 .tool_tipStyle {
-    @include fonts-source($size: 14px, $weight: 700, $colour: color(pure-black), $lh: 150%, $ls: 2%);
+    @include fonts-source($size: 14px, $weight: 700, $colour: color(pure-black), $ls: 0.02em);
     @include mini-screen {
         @include fonts-source($size: 14px);
     }
 
     @include tab-view {
-        @include fonts-source($size: 16px, $lh: 120%);
+        @include fonts-source($size: 16px);
     }
 }
 
