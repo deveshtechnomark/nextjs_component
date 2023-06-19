@@ -7606,7 +7606,8 @@ var react$1 = createCommonjsModule$1(function (module) {
 });
 var styles$1 = {
   "checkBox": "styles-module_checkBox__2Bi4A",
-  "label": "styles-module_label__21sLJ",
+  "checkboxLabel": "styles-module_checkboxLabel__1t-TV",
+  "checkBoxDivLabel": "styles-module_checkBoxDivLabel__2n5DK",
   "checkBoxDiv": "styles-module_checkBoxDiv__JcnAF",
   "checkboxCheck": "styles-module_checkboxCheck__qfE4v",
   "intermediate": "styles-module_intermediate__1CW6p",
@@ -7638,10 +7639,10 @@ class CheckBox extends react$1.Component {
       disabled: disabled,
       onChange: onChange
     }), /*#__PURE__*/react$1.createElement("label", {
-      className: `${styles$1.label}`,
+      className: `${styles$1.checkboxLabel}`,
       htmlFor: id
     }, /*#__PURE__*/react$1.createElement("span", {
-      className: `${styles$1.checkBoxDiv} ${intermediate && styles$1.intermediate}`
+      className: `${styles$1.checkBoxDiv} ${styles$1.checkBoxDivLabel} ${intermediate && styles$1.intermediate}`
     }), label));
   }
 }
@@ -23557,7 +23558,7 @@ class MultiSelect extends react.Component {
     }, /*#__PURE__*/react.createElement(CheckBox, {
       className: `${styles.tabView}`,
       id: option,
-      label: option.length > 15 ? `${option.slice(0, 15)}...` : option,
+      label: option.length > 10 ? `${option.slice(0, 10)}...` : option,
       name: option,
       onChange: this.handleCheckboxChange,
       checked: selectedOptions.includes(option)
@@ -23608,7 +23609,7 @@ class MultiSelect extends react.Component {
       size: "lg",
       className: styles.listIcon,
       color: "black"
-    }), option.length > 15 ? `${option.slice(0, 15)}...` : option))))))))) : type === "chip" ? /*#__PURE__*/react.createElement("div", {
+    }), option.length > 10 ? `${option.slice(0, 10)}...` : option))))))))) : type === "chip" ? /*#__PURE__*/react.createElement("div", {
       className: styles.cardMain,
       ref: this.selectRef
     }, /*#__PURE__*/react.createElement("div", {
@@ -23633,7 +23634,7 @@ class MultiSelect extends react.Component {
     }, this.optionLength(selectedOptions)) : ''), /*#__PURE__*/react.createElement("input", {
       type: "text",
       id: "chipInput",
-      className: isOpen === true ? `form-control mb-2 border-0  border-bottom rounded-0 ${styles.selectedColor} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.defaultColor} ${styles.tabView}`,
+      className: isOpen === true ? `form-control border-0 mb-2 rounded-0 ${styles.selectedColor} ${styles.tabView}` : `form-control mb-2 border-0 border-bottom rounded-0 ${styles.defaultColor} ${styles.tabView}`,
       placeholder: selectedOptions.length > 0 ? '' : "Please Select",
       value: searchQuery,
       onChange: this.handleSearchChange,
@@ -23658,7 +23659,7 @@ class MultiSelect extends react.Component {
       key: option
     }, /*#__PURE__*/react.createElement(CheckBox, {
       id: option,
-      label: option.length > 15 ? `${option.slice(0, 15)}...` : option,
+      label: option.length > 10 ? `${option.slice(0, 10)}...` : option,
       name: option,
       onChange: this.handleCheckboxChange,
       checked: selectedOptions.includes(option)
