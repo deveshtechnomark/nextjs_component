@@ -1,0 +1,58 @@
+$form-width: 50%;
+
+.form {
+  width: $form-width;
+  margin: 0 auto;
+}
+
+.selectedColor {
+  color: #1abc9c;
+
+  &::placeholder {
+    color: #1abc9c;
+  }
+}
+
+.defaultColor {
+  color: #050505;
+}
+
+.inputStyle {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 10px 5px;
+  background: white no-repeat;
+  color: #1abc9c;
+  background-image: linear-gradient(to bottom, #1abc9c, #1abc9c), linear-gradient(to bottom, silver, silver);
+  background-size: 0 2px, 100% 1px;
+  background-position: 0 100%;
+  transition: background-size 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+  &:focus {
+    background-size: 100% 2px, 100% 1px;
+    outline: none;
+  }
+}
+
+.errorInput {
+  border-bottom: 2px solid red;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  color: red;
+  background: white no-repeat;
+
+  &::placeholder {
+    color: red;
+  }
+}
+
+.errorLabel,
+.error {
+  color: red;
+
+  &::placeholder {
+    color: red;
+  }
+}
