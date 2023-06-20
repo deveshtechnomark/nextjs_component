@@ -1,0 +1,35 @@
+{
+  "name": "Breadcrumb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.ts",
+  "module": "dist/index.es.ts",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "next": "^9.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rollup": "^3.25.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^4.0.2"
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "^7.22.5",
+    "@types/react": "^18.2.13",
+    "postcss": "^8.4.24",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "tailwindcss": "^3.3.2",
+    "tslib": "^2.5.3",
+    "typescript": "^5.1.3"
+  }
+}
