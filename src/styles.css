@@ -1,0 +1,9 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.my_input{
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
