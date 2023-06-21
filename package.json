@@ -2,23 +2,24 @@
   "name": "tooltip",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.ts",
-  "module": "dist/index.es.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "rollup -c -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:css": "tailwind build ./src/styles/globals.css -o ./dist/styles.css --watch"
+    "build:clean": "rimraf dist",
+    "build": "npm run build:clean && rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "next": "^9.0.2",
     "@babel/core": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.15.0",
+    "next": "^9.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "rollup": "^3.25.1",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.0.1",
@@ -32,6 +33,7 @@
     "@babel/preset-env": "^7.22.5",
     "@types/react": "^18.2.12",
     "postcss": "^8.4.24",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.2",
+    "Typography": "file:../Typography"
   }
 }

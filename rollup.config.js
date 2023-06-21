@@ -7,17 +7,19 @@ module.exports = {
   input: "src/index.tsx",
   output: [
     {
-      file: "dist/index.ts",
+      file: "dist/index.js",
       format: "cjs",
       exports: "auto",
     },
     {
-      file: "dist/index.es.ts",
+      file: "dist/index.es.js",
       format: "esm",
     },
   ],
   plugins: [
-    typescript(),
+    typescript({
+      tsconfig: "./tsconfig.json",
+    }),
     babel({
       extensions: [".js", ".jsx", ".ts", ".tsx"],
       presets: [
