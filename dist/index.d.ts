@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import "Typography/dist/index.css";
 interface AlertProps {
     variant: "success" | "error" | "warning" | "info";
     message: string;

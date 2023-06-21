@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+'use strict';
+
+var React = require('react');
+var Typography = require('Typography');
+require('Typography/dist/index.css');
 
 var Alert = function Alert(_a) {
   var variant = _a.variant,
     message = _a.message;
-  var _b = useState(true),
+  var _b = React.useState(true),
     visible = _b[0],
     setVisible = _b[1];
   var handleClose = function handleClose() {
@@ -88,8 +92,10 @@ var Alert = function Alert(_a) {
       }));
       break;
   }
-  return React.createElement(React.Fragment, null, visible && React.createElement("div", {
-    className: "flex flex-col text-base m-[6px] p-[12px] px-[16px] rounded-md text-white font-semibold min-w-15rem relative ".concat(alertClass),
+  return React.createElement(React.Fragment, null, React.createElement(Typography.Typography, {
+    type: "sub-title"
+  }, visible && React.createElement("div", {
+    className: "flex flex-col m-[6px] p-[12px] px-[16px] rounded-md text-white min-w-15rem relative ".concat(alertClass),
     role: "alert"
   }, React.createElement("div", {
     className: "flex"
@@ -99,7 +105,8 @@ var Alert = function Alert(_a) {
     type: "button",
     className: "absolute top-1/4 right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10",
     onClick: handleClose
-  }, "X")));
+  }, "X"))));
 };
 
-export { Alert };
+exports.Alert = Alert;
+//# sourceMappingURL=index.js.map

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
+import { Typography } from "Typography";
+import "Typography/dist/index.css";
 
 interface AlertProps {
   variant: "success" | "error" | "warning" | "info";
@@ -116,24 +118,26 @@ const Alert: React.FC<AlertProps> = ({ variant, message }) => {
 
   return (
     <>
-      {visible && (
-        <div
-          className={`flex flex-col text-base m-[6px] p-[12px] px-[16px] rounded-md text-white font-semibold min-w-15rem relative ${alertClass}`}
-          role="alert"
-        >
-          <div className="flex">
-            {icon}
-            <span className="ml-2 mr-6">{message}</span>
-          </div>
-          <button
-            type="button"
-            className="absolute top-1/4 right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10"
-            onClick={handleClose}
+      <Typography type="sub-title">
+        {visible && (
+          <div
+            className={`flex flex-col m-[6px] p-[12px] px-[16px] rounded-md text-white min-w-15rem relative ${alertClass}`}
+            role="alert"
           >
-            X
-          </button>
-        </div>
-      )}
+            <div className="flex">
+              {icon}
+              <span className="ml-2 mr-6">{message}</span>
+            </div>
+            <button
+              type="button"
+              className="absolute top-1/4 right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10"
+              onClick={handleClose}
+            >
+              X
+            </button>
+          </div>
+        )}
+      </Typography>
     </>
   );
 };
