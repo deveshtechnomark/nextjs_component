@@ -74,7 +74,9 @@ export default class Typography extends React.Component<TypographyProps> {
 
     const combinedClassName = `${styles} ${className}`;
     return (
+      <>
       <div className="mx-auto p-0 box-border">
+        
         <span
           {...this.props}
           style={style}
@@ -83,6 +85,7 @@ export default class Typography extends React.Component<TypographyProps> {
           {children}
         </span>
       </div>
+      </>
     );
   }
 }
