@@ -1,8 +1,8 @@
-'use strict';
-
-var React = require('react');
-var bs = require('react-icons/bs');
-var fi = require('react-icons/fi');
+import React, { useState } from 'react';
+import { BsChevronUp, BsPlusLg, BsChevronDown } from 'react-icons/bs';
+import { FiMinus } from 'react-icons/fi';
+import { Typography } from 'Typography';
+import 'Typography/dist/index.css';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -36,7 +36,7 @@ var Accordion = function Accordion(_a) {
     label = _a.label,
     icon = _a.icon,
     one = _a.one;
-  var _b = React.useState([]),
+  var _b = useState([]),
     activeAccordions = _b[0],
     setActiveAccordions = _b[1];
   var toggleAccordion = function toggleAccordion(index) {
@@ -57,14 +57,16 @@ var Accordion = function Accordion(_a) {
   };
   return React.createElement("div", {
     className: "px-10 py-5 mx-auto"
-  }, label && React.createElement("div", {
-    className: "text-md md:text-xl font-semibold"
-  }, label), React.createElement("div", {
+  }, label && React.createElement("div", null, React.createElement(Typography, {
+    type: "label"
+  }, label)), React.createElement("div", {
     className: "w-full"
   }, dataCollection.map(function (item, index) {
-    return React.createElement("div", {
+    return React.createElement(Typography, {
+      type: "h6"
+    }, React.createElement("div", {
       key: index,
-      className: "border border-transparent text-[14px] md:text-[16px] ".concat(activeAccordions.includes(index) ? "border-b-textColor" : "border-b-gray-300", " cursor-pointer"),
+      className: "border border-transparent ".concat(activeAccordions.includes(index) ? "border-b-textColor" : "border-b-gray-300", " cursor-pointer"),
       onClick: one ? function () {
         return toggleAccordionOne(index);
       } : function () {
@@ -76,10 +78,11 @@ var Accordion = function Accordion(_a) {
       className: "".concat(activeAccordions.includes(index) ? "text-textColor " : "text-textColor", " font-medium")
     }, item.question), React.createElement("span", {
       className: "flex justify-center items-center ml-6"
-    }, activeAccordions.includes(index) ? React.createElement("span", null, icon ? React.createElement(fi.FiMinus, null) : React.createElement(bs.BsChevronUp, null)) : React.createElement("span", null, icon ? React.createElement(bs.BsPlusLg, null) : React.createElement(bs.BsChevronDown, null)))), React.createElement("div", null, React.createElement("p", {
+    }, activeAccordions.includes(index) ? React.createElement("span", null, icon ? React.createElement(FiMinus, null) : React.createElement(BsChevronUp, null)) : React.createElement("span", null, icon ? React.createElement(BsPlusLg, null) : React.createElement(BsChevronDown, null)))), React.createElement("div", null, React.createElement("p", {
       className: "text-textColor px-3 ".concat(activeAccordions.includes(index) ? "my-2 transition-all duration-300" : "")
-    }, activeAccordions.includes(index) ? "".concat(item.answer) : "")));
+    }, activeAccordions.includes(index) ? "".concat(item.answer) : ""))));
   })));
 };
 
-exports.Accordion = Accordion;
+export { Accordion };
+//# sourceMappingURL=index.es.js.map

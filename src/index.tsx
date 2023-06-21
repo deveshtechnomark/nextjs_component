@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./index.css";
 import { BsChevronDown, BsChevronUp, BsPlusLg } from "react-icons/bs";
 import { FiMinus } from "react-icons/fi";
+import { Typography } from "Typography";
+import "Typography/dist/index.css";
 
 interface AccordionItem {
   question: string;
@@ -41,54 +43,62 @@ const Accordion: React.FC<AccordionProps> = ({
 
   return (
     <div className="px-10 py-5 mx-auto">
-      {label && <div className="text-md md:text-xl font-semibold">{label}</div>}
+      {label && (
+        <div>
+          <Typography type="label">{label}</Typography>
+        </div>
+      )}
       <div className="w-full">
         {dataCollection.map((item, index) => (
-          <div
-            key={index}
-            className={`border border-transparent text-[14px] md:text-[16px] ${
-              activeAccordions.includes(index)
-                ? "border-b-textColor"
-                : "border-b-gray-300"
-            } cursor-pointer`}
-            onClick={
-              one
-                ? () => toggleAccordionOne(index)
-                : () => toggleAccordion(index)
-            }
-          >
+          <Typography type="h6">
             <div
-              className={`flex justify-between py-4 px-3 hover:bg-hoverColor ${
-                activeAccordions.includes(index) ? "bg-bgColor" : ""
-              }`}
+              key={index}
+              className={`border border-transparent ${
+                activeAccordions.includes(index)
+                  ? "border-b-textColor"
+                  : "border-b-gray-300"
+              } cursor-pointer`}
+              onClick={
+                one
+                  ? () => toggleAccordionOne(index)
+                  : () => toggleAccordion(index)
+              }
             >
-              <p
-                className={`${
-                  activeAccordions.includes(index)
-                    ? "text-textColor "
-                    : "text-textColor"
-                } font-medium`}
-              >
-                {item.question}
-              </p>
-              <span className="flex justify-center items-center ml-6">
-                {activeAccordions.includes(index) ? (
-                  <span>{icon ? <FiMinus /> : <BsChevronUp />}</span>
-                ) : (
-                  <span>{icon ? <BsPlusLg /> : <BsChevronDown />}</span>
-                )}
-              </span>
-            </div>
-            <div>
-              <p
-                className={`text-textColor px-3 ${
-                  activeAccordions.includes(index) ? "my-2 transition-all duration-300" : ""
+              <div
+                className={`flex justify-between py-4 px-3 hover:bg-hoverColor ${
+                  activeAccordions.includes(index) ? "bg-bgColor" : ""
                 }`}
               >
-                {activeAccordions.includes(index) ? `${item.answer}` : ""}
-              </p>
+                <p
+                  className={`${
+                    activeAccordions.includes(index)
+                      ? "text-textColor "
+                      : "text-textColor"
+                  } font-medium`}
+                >
+                  {item.question}
+                </p>
+                <span className="flex justify-center items-center ml-6">
+                  {activeAccordions.includes(index) ? (
+                    <span>{icon ? <FiMinus /> : <BsChevronUp />}</span>
+                  ) : (
+                    <span>{icon ? <BsPlusLg /> : <BsChevronDown />}</span>
+                  )}
+                </span>
+              </div>
+              <div>
+                <p
+                  className={`text-textColor px-3 ${
+                    activeAccordions.includes(index)
+                      ? "my-2 transition-all duration-300"
+                      : ""
+                  }`}
+                >
+                  {activeAccordions.includes(index) ? `${item.answer}` : ""}
+                </p>
+              </div>
             </div>
-          </div>
+          </Typography>
         ))}
       </div>
     </div>

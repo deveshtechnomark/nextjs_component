@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import "Typography/dist/index.css";
 interface AccordionItem {
     question: string;
     answer: string;
