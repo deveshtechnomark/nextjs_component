@@ -4,6 +4,6 @@
       "allowSyntheticDefaultImports": true,
       "declaration": true,
     "declarationDir": "dist/types"
-    }
+    },
   }
   

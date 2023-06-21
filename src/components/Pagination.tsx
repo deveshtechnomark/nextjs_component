@@ -11,10 +11,13 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = (props) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const handleClick = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    props.onChangePage(pageNumber);
-  };
+const handleClick = (pageNumber: number | string) => {
+  if (pageNumber === "...") {
+    return; 
+  }
+  setCurrentPage(Number(pageNumber));
+  props.onChangePage(Number(pageNumber));
+};
 
   const handleFirstPage = () => {
     if (currentPage !== 1) {
@@ -103,7 +106,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                                     : "text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor"
                                 } ml-2`}
                             onClick={() => handleClick(Number(pageNumber))}
-                            disabled={currentPage === pageNumber}
+                            disabled={currentPage === pageNumber || pageNumber === "..."}
                         >
                             {pageNumber}
                         </button>
@@ -163,7 +166,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                                             : "text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor"
                                         } ml-0`}
                                     onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber}
+                                    disabled={currentPage === pageNumber || pageNumber === "..."}
                                 >
                                     {pageNumber}
                                 </button>
@@ -177,7 +180,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                                             : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"
                                         } ml-0`}
                                     onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber}
+                                    disabled={currentPage === pageNumber || pageNumber === "..."}
                                 >
                                     {pageNumber}
                                 </button>
@@ -191,7 +194,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                                             : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"
                                         }`}
                                     onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber}
+                                    disabled={currentPage === pageNumber || pageNumber === "..."}
                                 >
                                     {pageNumber}
                                 </button>
@@ -251,7 +254,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                                     : "text-CSDarkGray"
                                 } ml-2`}
                             onClick={() => handleClick(Number(pageNumber))}
-                            disabled={currentPage === pageNumber}
+                            disabled={currentPage === pageNumber || pageNumber === "..."}
                         >
                             {pageNumber}
                         </button>
@@ -310,7 +313,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                                             : "text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor"
                                         } ml-0`}
                                     onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber}
+                                    disabled={currentPage === pageNumber || pageNumber === "..."}
                                 >
                                     {pageNumber}
                                 </button>
@@ -324,7 +327,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                                             : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"
                                         } ml-0`}
                                     onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber}
+                                    disabled={currentPage === pageNumber || pageNumber === "..."}
                                 >
                                     {pageNumber}
                                 </button>
@@ -338,7 +341,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                                             : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"
                                         }`}
                                     onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber}
+                                    disabled={currentPage === pageNumber || pageNumber === "..."}
                                 >
                                     {pageNumber}
                                 </button>

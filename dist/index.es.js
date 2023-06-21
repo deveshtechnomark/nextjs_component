@@ -1,15 +1,16 @@
-'use strict';
-
-var React = require('react');
-var fi = require('react-icons/fi');
+import React, { useState } from 'react';
+import { FiChevronsLeft, FiChevronLeft, FiChevronRight, FiChevronsRight } from 'react-icons/fi';
 
 var Pagination = function Pagination(props) {
-  var _a = React.useState(1),
+  var _a = useState(1),
     currentPage = _a[0],
     setCurrentPage = _a[1];
   var handleClick = function handleClick(pageNumber) {
-    setCurrentPage(pageNumber);
-    props.onChangePage(pageNumber);
+    if (pageNumber === "...") {
+      return;
+    }
+    setCurrentPage(Number(pageNumber));
+    props.onChangePage(Number(pageNumber));
   };
   var handleFirstPage = function handleFirstPage() {
     if (currentPage !== 1) {
@@ -79,7 +80,7 @@ var Pagination = function Pagination(props) {
       onClick: function onClick() {
         return handleClick(Number(pageNumber));
       },
-      disabled: currentPage === pageNumber
+      disabled: currentPage === pageNumber || pageNumber === "..."
     }, pageNumber);
   })), React.createElement("button", {
     className: "px-3 py-2 rounded font-proxima ".concat(currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray", " ml-2"),
@@ -123,7 +124,7 @@ var Pagination = function Pagination(props) {
         onClick: function onClick() {
           return handleClick(Number(pageNumber));
         },
-        disabled: currentPage === pageNumber
+        disabled: currentPage === pageNumber || pageNumber === "..."
       }, pageNumber);
     } else if (index === pageNumbers.length - 1) {
       return React.createElement("button", {
@@ -132,7 +133,7 @@ var Pagination = function Pagination(props) {
         onClick: function onClick() {
           return handleClick(Number(pageNumber));
         },
-        disabled: currentPage === pageNumber
+        disabled: currentPage === pageNumber || pageNumber === "..."
       }, pageNumber);
     } else {
       return React.createElement("button", {
@@ -141,7 +142,7 @@ var Pagination = function Pagination(props) {
         onClick: function onClick() {
           return handleClick(Number(pageNumber));
         },
-        disabled: currentPage === pageNumber
+        disabled: currentPage === pageNumber || pageNumber === "..."
       }, pageNumber);
     }
   })), React.createElement("button", {
@@ -168,7 +169,7 @@ var Pagination = function Pagination(props) {
       return handleFirstPage();
     },
     disabled: currentPage === 1
-  }, React.createElement(fi.FiChevronsLeft, {
+  }, React.createElement(FiChevronsLeft, {
     size: 20
   })), React.createElement("span", {
     className: "text-CSPipeColor"
@@ -178,7 +179,7 @@ var Pagination = function Pagination(props) {
       return handlePrevPage();
     },
     disabled: currentPage === 1
-  }, React.createElement(fi.FiChevronLeft, {
+  }, React.createElement(FiChevronLeft, {
     size: 20
   })), React.createElement("div", {
     className: "flex"
@@ -189,7 +190,7 @@ var Pagination = function Pagination(props) {
       onClick: function onClick() {
         return handleClick(Number(pageNumber));
       },
-      disabled: currentPage === pageNumber
+      disabled: currentPage === pageNumber || pageNumber === "..."
     }, pageNumber);
   })), React.createElement("button", {
     className: "px-3 py-2 ".concat(currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray", " ml-2"),
@@ -197,7 +198,7 @@ var Pagination = function Pagination(props) {
       return handleNextPage();
     },
     disabled: currentPage === totalPages
-  }, React.createElement(fi.FiChevronRight, {
+  }, React.createElement(FiChevronRight, {
     size: 20
   })), React.createElement("span", {
     className: "text-CSPipeColor"
@@ -207,7 +208,7 @@ var Pagination = function Pagination(props) {
       return handleLastPage();
     },
     disabled: currentPage === totalPages
-  }, React.createElement(fi.FiChevronsRight, {
+  }, React.createElement(FiChevronsRight, {
     size: 20
   }))) :
   // arrows without space
@@ -219,7 +220,7 @@ var Pagination = function Pagination(props) {
       return handleFirstPage();
     },
     disabled: currentPage === 1
-  }, React.createElement(fi.FiChevronsLeft, {
+  }, React.createElement(FiChevronsLeft, {
     size: 20
   })), React.createElement("span", {
     className: "text-CSPipeColor"
@@ -229,7 +230,7 @@ var Pagination = function Pagination(props) {
       return handlePrevPage();
     },
     disabled: currentPage === 1
-  }, React.createElement(fi.FiChevronLeft, {
+  }, React.createElement(FiChevronLeft, {
     size: 20
   })), React.createElement("div", {
     className: "flex"
@@ -241,7 +242,7 @@ var Pagination = function Pagination(props) {
         onClick: function onClick() {
           return handleClick(Number(pageNumber));
         },
-        disabled: currentPage === pageNumber
+        disabled: currentPage === pageNumber || pageNumber === "..."
       }, pageNumber);
     } else if (index === pageNumbers.length - 1) {
       return React.createElement("button", {
@@ -250,7 +251,7 @@ var Pagination = function Pagination(props) {
         onClick: function onClick() {
           return handleClick(Number(pageNumber));
         },
-        disabled: currentPage === pageNumber
+        disabled: currentPage === pageNumber || pageNumber === "..."
       }, pageNumber);
     } else {
       return React.createElement("button", {
@@ -259,7 +260,7 @@ var Pagination = function Pagination(props) {
         onClick: function onClick() {
           return handleClick(Number(pageNumber));
         },
-        disabled: currentPage === pageNumber
+        disabled: currentPage === pageNumber || pageNumber === "..."
       }, pageNumber);
     }
   })), React.createElement("button", {
@@ -268,7 +269,7 @@ var Pagination = function Pagination(props) {
       return handleNextPage();
     },
     disabled: currentPage === totalPages
-  }, React.createElement(fi.FiChevronRight, {
+  }, React.createElement(FiChevronRight, {
     size: 20
   })), React.createElement("span", {
     className: "text-CSPipeColor"
@@ -278,9 +279,10 @@ var Pagination = function Pagination(props) {
       return handleLastPage();
     },
     disabled: currentPage === totalPages
-  }, React.createElement(fi.FiChevronsRight, {
+  }, React.createElement(FiChevronsRight, {
     size: 20
   })));
 };
 
-module.exports = Pagination;
+export { Pagination as default };
+//# sourceMappingURL=index.es.js.map
