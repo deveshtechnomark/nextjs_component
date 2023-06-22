@@ -2,13 +2,14 @@
   "name": "closebutton",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.ts",
-  "module": "dist/index.es.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "rollup -c -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:css": "tailwind build ./src/styles/globals.css -o ./dist/styles.css --watch"
+    "build:clean": "rimraf dist",
+    "build": "npm run build:clean && rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +33,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.22.5",
     "@types/react": "^18.2.12",
-    "postcss": "^8.4.24"
+    "postcss": "^8.4.24",
+    "tooltip": "file:../tooltip"
   }
 }

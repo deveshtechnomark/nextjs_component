@@ -6,17 +6,21 @@ module.exports = {
   input: "src/index.tsx",
   output: [
     {
-      file: "dist/index.ts",
+      file: "dist/index.js",
       format: "cjs",
       exports: "auto",
+      sourcemap: true,
     },
     {
-      file: "dist/index.es.ts",
+      file: "dist/index.es.js",
       format: "esm",
+      sourcemap: true,
     },
   ],
   plugins: [
-    typescript(),
+    typescript({
+      tsconfig: "./tsconfig.json",
+    }),
     babel({
       extensions: [".js", ".jsx", ".ts", ".tsx"],
       presets: [
