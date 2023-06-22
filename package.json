@@ -28,6 +28,7 @@
     "@types/react": "^18.2.13",
     "postcss": "^8.4.24",
     "rollup-plugin-typescript2": "^0.34.1",
+    "sass": "^1.63.5",
     "tailwindcss": "^3.3.2",
     "tslib": "^2.5.3",
     "typescript": "^5.1.3"

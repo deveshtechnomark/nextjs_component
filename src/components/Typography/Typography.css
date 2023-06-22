@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 @import url('/public/styles/fonts/font.css');
+
+.width-max-content {
+    width: max-content;
+}
