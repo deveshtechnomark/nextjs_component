@@ -1,9 +1,7 @@
-'use strict';
-
-var React = require('react');
-var bi = require('react-icons/bi');
-var classNames = require('classnames');
-var PropTypes = require('prop-types');
+import React, { useState, useRef, useEffect } from 'react';
+import { BiChevronDown, BiUserCircle, BiX } from 'react-icons/bi';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 var Select = function Select(_a) {
   var id = _a.id,
@@ -11,14 +9,14 @@ var Select = function Select(_a) {
     onSelect = _a.onSelect,
     type = _a.type,
     label = _a.label;
-  var _b = React.useState(""),
+  var _b = useState(""),
     inputValue = _b[0],
     setInputValue = _b[1];
-  var _c = React.useState(false),
+  var _c = useState(false),
     open = _c[0],
     setOpen = _c[1];
-  var selectRef = React.useRef(null);
-  React.useEffect(function () {
+  var selectRef = useRef(null);
+  useEffect(function () {
     window.addEventListener("click", handleOutsideClick);
     return function () {
       window.removeEventListener("click", handleOutsideClick);
@@ -64,7 +62,7 @@ var Select = function Select(_a) {
       width: "191px"
     },
     className: classNames("flex-grow outline-none bg-white text-CSDarkGray p-2 text-[16px] font-normal font-proxima", !inputValue && "text-CSDarkGray", open && "text-CSgreen", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen")
-  }), React.createElement(bi.BiChevronDown, {
+  }), React.createElement(BiChevronDown, {
     size: 24,
     color: "#333333",
     onClick: handleToggleOpen,
@@ -89,7 +87,7 @@ var Select = function Select(_a) {
       }
     }, type === "icons" && React.createElement("span", {
       className: "mr-2 flex-shrink-0 items-center"
-    }, React.createElement(bi.BiUserCircle, {
+    }, React.createElement(BiUserCircle, {
       size: 20,
       color: "#333333"
     })), option.label);
@@ -134,17 +132,17 @@ var MultiSelect = function MultiSelect(_a) {
     onSelect = _a.onSelect,
     label = _a.label,
     type = _a.type;
-  var selectRef = React.useRef(null);
-  var _b = React.useState([]),
+  var selectRef = useRef(null);
+  var _b = useState([]),
     selectedValues = _b[0],
     setSelectedValues = _b[1];
-  var _c = React.useState(""),
+  var _c = useState(""),
     inputValue = _c[0],
     setInputValue = _c[1];
-  var _d = React.useState(false),
+  var _d = useState(false),
     open = _d[0],
     setOpen = _d[1];
-  React.useEffect(function () {
+  useEffect(function () {
     var handleOutsideClick = function handleOutsideClick(event) {
       if (selectRef.current && !selectRef.current.contains(event.target)) {
         setOpen(false);
@@ -198,7 +196,7 @@ var MultiSelect = function MultiSelect(_a) {
       width: "191px"
     },
     className: classNames("flex-grow bg-white outline-none text-CSDarkGray p-2 text-[16px] font-normal font-proxima", !inputValue && "text-CSDarkGray", open && "text-CSgreen", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen")
-  }), React.createElement(bi.BiChevronDown, {
+  }), React.createElement(BiChevronDown, {
     size: 24,
     color: "#333333",
     onClick: handleToggleOpen,
@@ -223,7 +221,7 @@ var MultiSelect = function MultiSelect(_a) {
       }
     }, type === "icons" && React.createElement("span", {
       className: "mr-2 flex-shrink-0 items-center"
-    }, React.createElement(bi.BiUserCircle, {
+    }, React.createElement(BiUserCircle, {
       size: 20,
       color: "#333333"
     })), type === "checkbox" && React.createElement("input", {
@@ -249,14 +247,14 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     label = _a.label,
     type = _a.type;
     _a.id;
-  var _b = React.useState(defaultValue || []),
+  var _b = useState(defaultValue || []),
     selected = _b[0],
     setSelected = _b[1];
-  var _c = React.useState(false),
+  var _c = useState(false),
     open = _c[0],
     setOpen = _c[1];
-  var selectRef = React.useRef(null);
-  React.useEffect(function () {
+  var selectRef = useRef(null);
+  useEffect(function () {
     window.addEventListener("click", handleOutsideClick);
     return function () {
       window.removeEventListener("click", handleOutsideClick);
@@ -297,7 +295,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       className: classNames("flex items-center badge bg-CSChipBG text-CSGrayChip border border-CSChipBorder rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima", option.length > 8 && "max-w-[100px]")
     }, React.createElement("span", {
       title: option
-    }, option.length > 8 ? option.substring(0, 8) + "..." : option), React.createElement(bi.BiX, {
+    }, option.length > 8 ? option.substring(0, 8) + "..." : option), React.createElement(BiX, {
       size: 12,
       className: "ml-1 cursor-pointer",
       onClick: function onClick() {
@@ -326,7 +324,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     }, {
       "text-CSgreen": open
     }, !open ? "cursor-pointer" : "cursor-default", "hover:border-CSgreen")
-  }, selectedDisplay, React.createElement(bi.BiChevronDown, {
+  }, selectedDisplay, React.createElement(BiChevronDown, {
     size: 24,
     color: "black",
     className: classNames({
@@ -350,7 +348,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       }
     }, type === "icons" && React.createElement("span", {
       className: "mr-2 flex-shrink-0 items-center"
-    }, React.createElement(bi.BiUserCircle, {
+    }, React.createElement(BiUserCircle, {
       size: 20,
       color: "#333333"
     })), type === "checkbox" && React.createElement("input", {
@@ -366,6 +364,5 @@ MultiSelectChip.propTypes = {
   onSelect: PropTypes.func.isRequired
 };
 
-exports.MultiSelect = MultiSelect;
-exports.MultiSelectChip = MultiSelectChip;
-exports.Select = Select;
+export { MultiSelect, MultiSelectChip, Select };
+//# sourceMappingURL=index.es.js.map
