@@ -17,7 +17,7 @@ var Alert = function Alert(_a) {
   var icon = null;
   switch (variant) {
     case "success":
-      alertClass = "!bg-teal-500 !text-white";
+      alertClass = "!bg-success !text-successText";
       icon = React.createElement("svg", {
         xmlns: "http://www.w3.org/2000/svg",
         fill: "none",
@@ -32,7 +32,7 @@ var Alert = function Alert(_a) {
       }));
       break;
     case "error":
-      alertClass = "!bg-rose-200 !text-red-500";
+      alertClass = "!bg-error !text-errorText";
       icon = React.createElement("svg", {
         xmlns: "http://www.w3.org/2000/svg",
         fill: "none",
@@ -47,7 +47,7 @@ var Alert = function Alert(_a) {
       }));
       break;
     case "warning":
-      alertClass = "!bg-amber-100 !text-yellow-900";
+      alertClass = "!bg-warning !text-warningText";
       icon = React.createElement("svg", {
         xmlns: "http://www.w3.org/2000/svg",
         fill: "none",
@@ -62,7 +62,7 @@ var Alert = function Alert(_a) {
       }));
       break;
     case "info":
-      alertClass = "!bg-indigo-50 !text-blue-700";
+      alertClass = "!bg-info !text-infoText";
       icon = React.createElement("svg", {
         xmlns: "http://www.w3.org/2000/svg",
         fill: "none",
@@ -77,7 +77,7 @@ var Alert = function Alert(_a) {
       }));
       break;
     default:
-      alertClass = "!bg-teal-500 !text-white";
+      alertClass = "!bg-success !text-successText";
       icon = React.createElement("svg", {
         xmlns: "http://www.w3.org/2000/svg",
         fill: "none",

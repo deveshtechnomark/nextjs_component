@@ -20,7 +20,7 @@ const Alert: React.FC<AlertProps> = ({ variant, message }) => {
 
   switch (variant) {
     case "success":
-      alertClass = "!bg-teal-500 !text-white";
+      alertClass = "!bg-success !text-successText";
       icon = (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +39,7 @@ const Alert: React.FC<AlertProps> = ({ variant, message }) => {
       );
       break;
     case "error":
-      alertClass = "!bg-rose-200 !text-red-500";
+      alertClass = "!bg-error !text-errorText";
       icon = (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ const Alert: React.FC<AlertProps> = ({ variant, message }) => {
       );
       break;
     case "warning":
-      alertClass = "!bg-amber-100 !text-yellow-900";
+      alertClass = "!bg-warning !text-warningText";
       icon = (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@ const Alert: React.FC<AlertProps> = ({ variant, message }) => {
       );
       break;
     case "info":
-      alertClass = "!bg-indigo-50 !text-blue-700";
+      alertClass = "!bg-info !text-infoText";
       icon = (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ const Alert: React.FC<AlertProps> = ({ variant, message }) => {
       );
       break;
     default:
-      alertClass = "!bg-teal-500 !text-white";
+      alertClass = "!bg-success !text-successText";
       icon = (
         <svg
           xmlns="http://www.w3.org/2000/svg"
