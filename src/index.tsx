@@ -1,17 +1,12 @@
 import React, { useRef, useState } from "react";
 import "./index.css";
 
-interface TextareaProps {
+interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   className?: string;
-  id?: string;
-  name?: string;
-  value?: string;
-  rows?: string | number;
   required?: boolean;
   validate?: boolean;
-  onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   errorMessage?: string;
 }
 
