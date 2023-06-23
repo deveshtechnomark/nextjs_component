@@ -1,0 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.avatar-group .avatar:not(:first-child) {
+  margin-left: -1.5rem;
+}
