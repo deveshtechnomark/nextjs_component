@@ -38,6 +38,8 @@ var generateDate = function generateDate(month, year) {
 };
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+var styles = {"rippleAnimation":"styles-module_rippleAnimation__NpkAM","ripple":"styles-module_ripple__WQDCI","divAnimation":"styles-module_divAnimation__MGrYY"};
+
 var Calendar = function Calendar(props) {
   var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   var currentDate = dayjs();
@@ -62,7 +64,7 @@ var Calendar = function Calendar(props) {
   var _f = useState(1),
     currentPage = _f[0],
     setCurrentPage = _f[1];
-  var _g = useState(true),
+  var _g = useState(false),
     toggleOpen = _g[0],
     setToggleOpen = _g[1];
   var yearsPerPage = 16;
@@ -243,7 +245,7 @@ var Calendar = function Calendar(props) {
     }, date.date()), date.isSame(selectedDate, 'day') && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
       className: "absolute flex inset-0 rounded-full overflow-visible"
     }, /*#__PURE__*/React.createElement("span", {
-      className: "ripple-animation absolute w-full h-full rounded-full bg-CSgreen opacity-50"
+      className: "".concat(styles.rippleAnimation, " absolute rounded-full bg-CSgreen opacity-50")
     }))));
   })))))));
 };
@@ -450,11 +452,11 @@ var CalendarYear = function CalendarYear(props) {
       className: classNames(currentMonth ? "" : "text-gray-400", "h-[40px] w-[40px] grid place-content-center rounded-full cursor-pointer z-10", {
         "bg-CSgreen text-white": date.isSame(selectedDate, 'day')
       })
-    }, date.date()), date.isSame(selectedDate, 'day') && /*#__PURE__*/React.createElement("span", {
+    }, date.date()), date.isSame(selectedDate, 'day') && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
       className: "absolute flex inset-0 rounded-full overflow-visible"
     }, /*#__PURE__*/React.createElement("span", {
-      className: "ripple-animation absolute w-full h-full rounded-full bg-CSgreen opacity-50"
-    })));
+      className: "".concat(styles.rippleAnimation, " absolute rounded-full bg-CSgreen opacity-50")
+    }))));
   })))))));
 };
 

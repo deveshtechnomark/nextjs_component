@@ -1,14 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* @import url('../../../public/styles/fonts/font.css'); */
-
-.ripple-animation {
+.rippleAnimation {
     animation: ripple 2.0s infinite;
     width: 50%;
-    height: 45%;
-    top: 28%;
+    height: 50%;
+    top: 27%;
     left: 24%;
 }
 

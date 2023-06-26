@@ -4,6 +4,8 @@ import classNames from "classnames";
 import React, { useEffect, useState, useRef } from 'react';
 import { GrFormNext, GrFormPrevious, GrCalendar } from "react-icons/gr";
 
+import styles from "./css/styles.module.css";
+
 interface CalendarDate {
     date: Dayjs;
     currentMonth: boolean;
@@ -228,9 +230,11 @@ const CalendarYear = (props): JSX.Element => {
                                                                 {date.date()}
                                                             </h1>
                                                             {date.isSame(selectedDate, 'day') && (
-                                                                <span className="absolute flex inset-0 rounded-full overflow-visible">
-                                                                    <span className="ripple-animation absolute w-full h-full rounded-full bg-CSgreen opacity-50"></span>
-                                                                </span>
+                                                                <>
+                                                                    <span className="absolute flex inset-0 rounded-full overflow-visible">
+                                                                        <span className={`${styles.rippleAnimation} absolute rounded-full bg-CSgreen opacity-50`}></span>
+                                                                    </span>
+                                                                </>
                                                             )}
                                                         </div>
                                                     )

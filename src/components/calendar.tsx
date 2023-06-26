@@ -4,6 +4,8 @@ import classNames from "classnames";
 import React, { useEffect, useState, useRef } from 'react';
 import { GrFormNext, GrFormPrevious, GrCalendar } from "react-icons/gr";
 
+import styles from "./css/styles.module.css";
+
 interface CalendarDate {
     date: Dayjs;
     currentMonth: boolean;
@@ -24,7 +26,7 @@ const Calendar = (props): JSX.Element => {
     const [selectedDate, setSelectedDate] = useState<Dayjs>(currentDate);
     const [fullDate, setFullDate] = useState<String>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [toggleOpen, setToggleOpen] = useState<boolean>(true);
+    const [toggleOpen, setToggleOpen] = useState<boolean>(false);
 
     const yearsPerPage: number = 16;
     const totalPages: number = Math.ceil((endYear - startYear + 1) / yearsPerPage);
@@ -230,7 +232,7 @@ const Calendar = (props): JSX.Element => {
                                                             {date.isSame(selectedDate, 'day') && (
                                                                 <>
                                                                     <span className="absolute flex inset-0 rounded-full overflow-visible">
-                                                                        <span className="ripple-animation absolute w-full h-full rounded-full bg-CSgreen opacity-50"></span>
+                                                                        <span className={`${styles.rippleAnimation} absolute rounded-full bg-CSgreen opacity-50`}></span>
                                                                     </span>
                                                                 </>
                                                             )}
