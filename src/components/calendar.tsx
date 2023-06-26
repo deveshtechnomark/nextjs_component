@@ -4,7 +4,7 @@ import classNames from "classnames";
 import React, { useEffect, useState, useRef } from 'react';
 import { GrFormNext, GrFormPrevious, GrCalendar } from "react-icons/gr";
 
-import styles from "./css/styles.module.css";
+import styles from "./css/datepicker.module.css";
 
 interface CalendarDate {
     date: Dayjs;

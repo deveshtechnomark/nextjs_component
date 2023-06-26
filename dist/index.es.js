@@ -38,7 +38,7 @@ var generateDate = function generateDate(month, year) {
 };
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-var styles = {"rippleAnimation":"styles-module_rippleAnimation__NpkAM","ripple":"styles-module_ripple__WQDCI","divAnimation":"styles-module_divAnimation__MGrYY"};
+var styles = {"rippleAnimation":"datepicker-module_rippleAnimation__KEpJD","ripple":"datepicker-module_ripple__e0Nun","divAnimation":"datepicker-module_divAnimation__jj5dZ"};
 
 var Calendar = function Calendar(props) {
   var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
