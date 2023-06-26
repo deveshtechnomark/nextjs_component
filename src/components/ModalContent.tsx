@@ -7,7 +7,7 @@ interface ModalContentProps {
 const ModalContent: React.FC<ModalContentProps> = ({ children }) => {
   return (
     <div className="p-2 mb-5 flex-auto">
-      <div className="text-slate-500 text-lg leading-relaxed">
+      <div className="text-CsModalBlack leading-relaxed">
         {children || 'Modal Content'}
       </div>
     </div>

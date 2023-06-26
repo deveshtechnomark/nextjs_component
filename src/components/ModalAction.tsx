@@ -17,7 +17,7 @@ const ModalAction: React.FC<ModalActionProps> = ({ children, position }) => {
   }
   return (
     <div
-      className={`p-4 flex flex-wrap items-center border-t border-solid border-slate-200 rounded-b ${justifyClasses}`}
+      className={`p-4 flex flex-wrap items-center border-t border-solid border-CsModalGray rounded-b ${justifyClasses}`}
     >
       {children || "Modal Action"}
     </div>

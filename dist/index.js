@@ -27,14 +27,14 @@ var Modal = function Modal(_a) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative my-6 mx-auto ".concat(getSizeClasses())
   }, /*#__PURE__*/React.createElement("div", {
-    className: "border-2 rounded-lg shadow-lg relative flex flex-col bg-white outline-none focus:outline-none"
+    className: "border-2 rounded-lg relative flex flex-col bg-CsModalWhite outline-none focus:outline-none"
   }, children)));
 };
 
 var ModalTitle = function ModalTitle(_a) {
   var children = _a.children;
   return /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center justify-between p-3 border-b border-solid border-slate-200 rounded-t"
+    className: "text-CsModalBlack flex items-center justify-between p-3 border-b border-solid border-CsModalGray rounded-t"
   }, children);
 };
 
@@ -43,7 +43,7 @@ var ModalContent = function ModalContent(_a) {
   return /*#__PURE__*/React.createElement("div", {
     className: "p-2 mb-5 flex-auto"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "text-slate-500 text-lg leading-relaxed"
+    className: "text-CsModalBlack leading-relaxed"
   }, children || 'Modal Content'));
 };
 
@@ -59,7 +59,7 @@ var ModalAction = function ModalAction(_a) {
     justifyClasses = "justify-end";
   }
   return /*#__PURE__*/React.createElement("div", {
-    className: "p-4 flex flex-wrap items-center border-t border-solid border-slate-200 rounded-b ".concat(justifyClasses)
+    className: "p-4 flex flex-wrap items-center border-t border-solid border-CsModalGray rounded-b ".concat(justifyClasses)
   }, children || "Modal Action");
 };
 
