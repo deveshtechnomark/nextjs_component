@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.scss";
+import styles from "./index.module.scss";
 import { Tooltip } from "tooltip";
 import "tooltip/dist/index.css";
 
@@ -7,9 +7,9 @@ const Close: React.FC = () => {
   return (
     <>
       <Tooltip position="top" text="Close">
-        <div className="main">
+        <div className={styles.main}>
           <button
-            className="fromMiddle circle scaleUp"
+            className={`${styles.fromMiddle} ${styles.circle} ${styles.scaleUp}`}
             data-animation="minimize"
           >
             <span></span>
