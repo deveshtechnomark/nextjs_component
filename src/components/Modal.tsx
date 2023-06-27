@@ -32,6 +32,7 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   return (
+    <>
     <div className="justify-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
       <div className={`relative my-6 mx-auto ${getSizeClasses()}`}>
         <div className="border-2 rounded-lg relative flex flex-col bg-CsModalWhite outline-none focus:outline-none">
@@ -39,6 +40,7 @@ const Modal: React.FC<ModalProps> = ({
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,6 +1,8 @@
 'use strict';
 
 var React = require('react');
+var typographyTs = require('typography-ts');
+require('typography-ts/dist/index.css');
 
 var Modal = function Modal(_a) {
   var isOpen = _a.isOpen;
@@ -22,27 +24,29 @@ var Modal = function Modal(_a) {
         return "w-full";
     }
   };
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "justify-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative my-6 mx-auto ".concat(getSizeClasses())
   }, /*#__PURE__*/React.createElement("div", {
     className: "border-2 rounded-lg relative flex flex-col bg-CsModalWhite outline-none focus:outline-none"
-  }, children)));
+  }, children))));
 };
 
 var ModalTitle = function ModalTitle(_a) {
   var children = _a.children;
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(typographyTs.Typography, {
+    type: 'body',
     className: "text-CsModalBlack flex items-center justify-between p-3 border-b border-solid border-CsModalGray rounded-t"
-  }, children);
+  }, children || 'Modal Title'));
 };
 
 var ModalContent = function ModalContent(_a) {
   var children = _a.children;
   return /*#__PURE__*/React.createElement("div", {
     className: "p-2 mb-5 flex-auto"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(typographyTs.Typography, {
+    type: 'body',
     className: "text-CsModalBlack leading-relaxed"
   }, children || 'Modal Content'));
 };
@@ -58,7 +62,8 @@ var ModalAction = function ModalAction(_a) {
   } else {
     justifyClasses = "justify-end";
   }
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(typographyTs.Typography, {
+    type: 'body',
     className: "p-4 flex flex-wrap items-center border-t border-solid border-CsModalGray rounded-b ".concat(justifyClasses)
   }, children || "Modal Action");
 };
