@@ -70,36 +70,48 @@ var TextField = function TextField(_a) {
     valid = _e[0],
     setValid = _e[1];
   var _f = useState(false),
-    emailError = _f[0],
-    setEmailError = _f[1];
+    showEmailError = _f[0],
+    setShowEmailError = _f[1];
   var handleFocus = function handleFocus() {
     setFocus(true);
   };
   var handleBlur = function handleBlur(e) {
-    if (validate && (value === "" || !value)) {
+    if (validate && required && (e.target.value === "" || !e.target.value)) {
       setErr(true);
-    } else if (type === "email" && value && !validateEmail(value)) {
-      setEmailError(true);
+    } else if (validate && type === "email" && !validateEmail(e.target.value)) {
       setErr(true);
-      setValid(false);
+      setShowEmailError(true);
     } else {
-      setEmailError(false);
       setErr(false);
+      setShowEmailError(false);
     }
     setFocus(false);
     if (onBlur) {
       onBlur(e);
     }
   };
+  var validateEmail = function validateEmail(email) {
+    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
   var handleInputChange = function handleInputChange(e) {
     var inputValue = e.target.value;
     if (onChange) {
       onChange(e);
     }
-    if (validate && type === "email") {
+    if (validate && type === "text") {
+      if (inputValue.length < 0) {
+        setValid(true);
+        setErr(false);
+      } else {
+        setValid(false);
+        setErr(false);
+      }
+    } else if (validate && type === "email") {
       if (inputValue && validateEmail(inputValue)) {
         setValid(true);
         setErr(false);
+        setShowEmailError(false);
       } else {
         setValid(false);
       }
@@ -107,10 +119,6 @@ var TextField = function TextField(_a) {
       setErr(false);
       setValid(false);
     }
-  };
-  var validateEmail = function validateEmail(email) {
-    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
   };
   var handleClear = function handleClear() {
     if (onChange) {
@@ -122,14 +130,17 @@ var TextField = function TextField(_a) {
     }
     setErr(false);
     setValid(false);
+    setShowEmailError(false);
   };
-  var inputClassName = classnames(className, "py-2 px-3 border-b outline-none duration-300", !err && !disabled && "hover:border-b-CSgreen", err ? "border-b-CSError" : focus ? "border-b-CSgreen" : "border-b-CSSecondaryGray", valid && "text-CSEmailSuccess font-normal text-[14px] font-proxima", emailError && "text-CSError");
+  var inputClassName = classnames(className, "py-1 px-3 border-b outline-none transition duration-600 w-full", err ? "border-b-CSError" : focus ? "border-b-CSgreen" : "border-b-CSSecondaryGray", valid && "text-CSEmailSuccess font-normal text-[14px] font-proxima", showEmailError && "text-CSError");
   var labelClassName = classnames(err ? "text-CSError" : focus ? "text-CSgreen" : "text-CSSecondaryGray");
   return React.createElement("div", {
     className: "flex flex-col text-[14px] laptop:text-base relative font-proxima"
   }, label && React.createElement("label", {
     className: labelClassName
-  }, label, required && "*"), React.createElement("input", __assign({
+  }, label, required && "*"), React.createElement("div", {
+    className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-CSgreen before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
+  }, React.createElement("input", __assign({
     className: inputClassName,
     ref: inputRef,
     type: type,
@@ -140,7 +151,7 @@ var TextField = function TextField(_a) {
     onChange: handleInputChange,
     onFocus: handleFocus,
     disabled: disabled
-  }, props)), err && React.createElement("span", {
+  }, props))), err && React.createElement("span", {
     className: "text-CSError absolute right-0 top-0 mt-5 mr-3 cursor-pointer",
     onClick: handleClear
   }, React.createElement(ClearIcon, null)), valid && focus && React.createElement("span", {

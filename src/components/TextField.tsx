@@ -39,22 +39,21 @@ const TextField: React.FC<TextFieldProps> = ({
   const [err, setErr] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
   const [valid, setValid] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<boolean>(false);
+  const [showEmailError, setShowEmailError] = useState<boolean>(false);
 
   const handleFocus = () => {
     setFocus(true);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    if (validate && (value === "" || !value)) {
+    if (validate && required && (e.target.value === "" || !e.target.value)) {
       setErr(true);
-    } else if (type === "email" && value && !validateEmail(value)) {
-      setEmailError(true);
+    } else if (validate && type === "email" && !validateEmail(e.target.value)) {
       setErr(true);
-      setValid(false);
+      setShowEmailError(true);
     } else {
-      setEmailError(false);
       setErr(false);
+      setShowEmailError(false);
     }
     setFocus(false);
     if (onBlur) {
@@ -62,15 +61,29 @@ const TextField: React.FC<TextFieldProps> = ({
     }
   };
 
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     if (onChange) {
       onChange(e);
     }
-    if (validate && type === "email") {
+    if (validate && type === "text") {
+      if (inputValue.length < 0) {
+        setValid(true);
+        setErr(false);
+      } else {
+        setValid(false);
+        setErr(false);
+      }
+    } else if (validate && type === "email") {
       if (inputValue && validateEmail(inputValue)) {
         setValid(true);
         setErr(false);
+        setShowEmailError(false);
       } else {
         setValid(false);
       }
@@ -78,11 +91,6 @@ const TextField: React.FC<TextFieldProps> = ({
       setErr(false);
       setValid(false);
     }
-  };
-
-  const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
   };
 
   const handleClear = () => {
@@ -93,19 +101,19 @@ const TextField: React.FC<TextFieldProps> = ({
     }
     setErr(false);
     setValid(false);
+    setShowEmailError(false);
   };
 
   const inputClassName = classnames(
     className,
-    "py-2 px-3 border-b outline-none duration-300",
-    !err && !disabled && "hover:border-b-CSgreen",
+    "py-1 px-3 border-b outline-none transition duration-600 w-full",
     err
       ? "border-b-CSError"
       : focus
       ? "border-b-CSgreen"
       : "border-b-CSSecondaryGray",
     valid && "text-CSEmailSuccess font-normal text-[14px] font-proxima",
-    emailError && "text-CSError"
+    showEmailError && "text-CSError"
   );
 
   const labelClassName = classnames(
@@ -120,19 +128,26 @@ const TextField: React.FC<TextFieldProps> = ({
           {required && "*"}
         </label>
       )}
-      <input
-        className={inputClassName}
-        ref={inputRef}
-        type={type}
-        id={id}
-        name={name}
-        value={value}
-        onBlur={handleBlur}
-        onChange={handleInputChange}
-        onFocus={handleFocus}
-        disabled={disabled}
-        {...props}
-      />
+      <div
+        className={`${
+          !err &&
+          "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-CSgreen before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
+        }`}
+      >
+        <input
+          className={inputClassName}
+          ref={inputRef}
+          type={type}
+          id={id}
+          name={name}
+          value={value}
+          onBlur={handleBlur}
+          onChange={handleInputChange}
+          onFocus={handleFocus}
+          disabled={disabled}
+          {...props}
+        />
+      </div>
       {err && (
         <span
           className="text-CSError absolute right-0 top-0 mt-5 mr-3 cursor-pointer"
