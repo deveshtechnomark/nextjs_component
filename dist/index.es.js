@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BiChevronDown, BiUserCircle, BiX } from 'react-icons/bi';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import { CheckBox } from 'form-elements';
 import 'form-elements/dist/index.css';
 
@@ -94,11 +93,6 @@ var Select = function Select(_a) {
       color: "#333333"
     })), option.label);
   }))));
-};
-Select.propTypes = {
-  id: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired
 };
 
 /******************************************************************************
@@ -233,13 +227,6 @@ var MultiSelect = function MultiSelect(_a) {
     }), type !== "checkbox" && option.label);
   })));
 };
-MultiSelect.propTypes = {
-  id: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired,
-  label: PropTypes.string,
-  type: PropTypes.string
-};
 
 var MultiSelectChip = function MultiSelectChip(_a) {
   var options = _a.options,
@@ -359,10 +346,6 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       readOnly: true
     }), option.label);
   })));
-};
-MultiSelectChip.propTypes = {
-  options: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired
 };
 
 export { MultiSelect, MultiSelectChip, Select };

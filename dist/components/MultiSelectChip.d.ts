@@ -6,9 +6,9 @@ interface MultiSelectChipProps {
     }[];
     defaultValue?: string[];
     onSelect: (selected: string[]) => void;
+    id?: string;
     label?: string;
     type?: string;
-    id?: string;
 }
 declare const MultiSelectChip: React.FC<MultiSelectChipProps>;
 export { MultiSelectChip };

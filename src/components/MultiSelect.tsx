@@ -155,6 +155,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 </span>
               )}
               {type === "checkbox" && (
+                
                 <CheckBox
                   id={option.value}
                   label={option.label}
@@ -164,6 +165,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                       : handleSelect(option.value);
                   }}
                 />
+              
               )}
               {type !== "checkbox" && option.label}
             </li>

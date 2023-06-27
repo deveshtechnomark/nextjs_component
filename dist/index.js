@@ -3,7 +3,6 @@
 var React = require('react');
 var bi = require('react-icons/bi');
 var classNames = require('classnames');
-var PropTypes = require('prop-types');
 var formElements = require('form-elements');
 require('form-elements/dist/index.css');
 
@@ -96,11 +95,6 @@ var Select = function Select(_a) {
       color: "#333333"
     })), option.label);
   }))));
-};
-Select.propTypes = {
-  id: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired
 };
 
 /******************************************************************************
@@ -235,13 +229,6 @@ var MultiSelect = function MultiSelect(_a) {
     }), type !== "checkbox" && option.label);
   })));
 };
-MultiSelect.propTypes = {
-  id: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired,
-  label: PropTypes.string,
-  type: PropTypes.string
-};
 
 var MultiSelectChip = function MultiSelectChip(_a) {
   var options = _a.options,
@@ -361,10 +348,6 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       readOnly: true
     }), option.label);
   })));
-};
-MultiSelectChip.propTypes = {
-  options: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired
 };
 
 exports.MultiSelect = MultiSelect;
