@@ -125,7 +125,7 @@ const Alert: React.FC<AlertProps> = ({ variant, message }) => {
             role="alert"
           >
             <div className="flex">
-              {icon}
+              <span>{icon}</span>
               <span className="ml-2 mr-6">{message}</span>
             </div>
             <button

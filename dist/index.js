@@ -99,7 +99,7 @@ var Alert = function Alert(_a) {
     role: "alert"
   }, React.createElement("div", {
     className: "flex"
-  }, icon, React.createElement("span", {
+  }, React.createElement("span", null, icon), React.createElement("span", {
     className: "ml-2 mr-6"
   }, message)), React.createElement("button", {
     type: "button",
