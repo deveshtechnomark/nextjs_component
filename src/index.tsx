@@ -29,7 +29,7 @@ const Textarea: React.FC<TextareaProps> = ({
   const [focus, setFocus] = useState<boolean>(false);
 
   const validateInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.target.value === "") {
+    if (e.target.value.trim() === "") {
       setErr(true);
     } else {
       setErr(false);

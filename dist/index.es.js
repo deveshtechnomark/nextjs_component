@@ -63,7 +63,7 @@ var Textarea = function Textarea(_a) {
     focus = _e[0],
     setFocus = _e[1];
   var validateInput = function validateInput(e) {
-    if (e.target.value === "") {
+    if (e.target.value.trim() === "") {
       setErr(true);
     } else {
       setErr(false);
