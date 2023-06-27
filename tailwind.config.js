@@ -7,6 +7,7 @@ module.exports = {
         textColor: "#333333",
         hoverColor: "#F6F6F6",
         borderColor: "#02B89D",
+        borderBottomColor: "#DCDCDC",
       },
       screens: {
         sm: "1360px",

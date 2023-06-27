@@ -65,10 +65,11 @@ var Accordion = function Accordion(_a) {
     className: "w-full"
   }, dataCollection.map(function (item, index) {
     return React.createElement(Typography.Typography, {
-      type: "h6"
+      type: "h6",
+      key: index
     }, React.createElement("div", {
       key: index,
-      className: "border border-transparent ".concat(activeAccordions.includes(index) ? "border-b-textColor" : "border-b-gray-300", " cursor-pointer"),
+      className: "border border-transparent ".concat(activeAccordions.includes(index) ? "border-b-textColor" : "border-b-borderBottomColor", " cursor-pointer"),
       onClick: one ? function () {
         return toggleAccordionOne(index);
       } : function () {

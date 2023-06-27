@@ -50,13 +50,13 @@ const Accordion: React.FC<AccordionProps> = ({
       )}
       <div className="w-full">
         {dataCollection.map((item, index) => (
-          <Typography type="h6">
+          <Typography type="h6" key={index}>
             <div
               key={index}
               className={`border border-transparent ${
                 activeAccordions.includes(index)
                   ? "border-b-textColor"
-                  : "border-b-gray-300"
+                  : "border-b-borderBottomColor"
               } cursor-pointer`}
               onClick={
                 one
