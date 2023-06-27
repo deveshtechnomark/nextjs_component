@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import { BiChevronDown, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
-import PropTypes from "prop-types";
-// import "./style.css"
+
+import { CheckBox } from "form-elements";
+import "form-elements/dist/index.css";
 
 interface MultiSelectProps {
   id: string;
@@ -55,16 +56,16 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     const index = updatedValues.indexOf(value);
 
     if (index > -1) {
-      updatedValues.splice(index, 1); // Remove the value if already selected
+      updatedValues.splice(index, 1);
     } else {
-      updatedValues.push(value); // Add the value if not selected
+      updatedValues.push(value);
     }
 
     setSelectedValues(updatedValues);
     setInputValue("");
 
     console.log(updatedValues);
-    onSelect(updatedValues); // Calling the onSelect callback prop
+    onSelect(updatedValues);
   };
 
   return (
@@ -138,11 +139,15 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                   hidden: !option.label.toLowerCase().startsWith(inputValue),
                 }
               )}
-              onClick={() => {
-                if (option.value !== inputValue) {
-                  handleSelect(option.value);
-                }
-              }}
+              onClick={
+                type !== "checkbox"
+                  ? () => {
+                      if (option.value !== inputValue) {
+                        handleSelect(option.value);
+                      }
+                    }
+                  : undefined
+              }
             >
               {type === "icons" && (
                 <span className="mr-2 flex-shrink-0 items-center">
@@ -150,14 +155,17 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 </span>
               )}
               {type === "checkbox" && (
-                <input
-                  type="checkbox"
-                  className="mr-2"
-                  checked={selectedValues.includes(option.value)}
-                  readOnly
+                <CheckBox
+                  id={option.value}
+                  label={option.label}
+                  onChange={(e: any) => {
+                    e.target.checked
+                      ? handleSelect(option.value)
+                      : handleSelect(option.value);
+                  }}
                 />
               )}
-              {option.label}
+              {type !== "checkbox" && option.label}
             </li>
           ))}
       </ul>
@@ -166,11 +174,3 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 };
 
 export { MultiSelect };
-
-MultiSelect.propTypes = {
-  id: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired,
-  label: PropTypes.string,
-  type: PropTypes.string,
-};

@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BiChevronDown, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
-import PropTypes from "prop-types";
-// import "./style.css"
 
 interface Option {
   value: string;
@@ -152,8 +150,3 @@ const Select: React.FC<SelectProps> = ({
 
 export { Select };
 
-Select.propTypes = {
-  id: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired
-};

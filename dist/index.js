@@ -4,6 +4,8 @@ var React = require('react');
 var bi = require('react-icons/bi');
 var classNames = require('classnames');
 var PropTypes = require('prop-types');
+var formElements = require('form-elements');
+require('form-elements/dist/index.css');
 
 var Select = function Select(_a) {
   var id = _a.id,
@@ -168,17 +170,15 @@ var MultiSelect = function MultiSelect(_a) {
     var updatedValues = __spreadArray([], selectedValues, true);
     var index = updatedValues.indexOf(value);
     if (index > -1) {
-      updatedValues.splice(index, 1); // Remove the value if already selected
+      updatedValues.splice(index, 1);
     } else {
-      updatedValues.push(value); // Add the value if not selected
+      updatedValues.push(value);
     }
-
     setSelectedValues(updatedValues);
     setInputValue("");
     console.log(updatedValues);
-    onSelect(updatedValues); // Calling the onSelect callback prop
+    onSelect(updatedValues);
   };
-
   return React.createElement("div", {
     className: "relative font-medium w-full flex-row border-b border-gray-300 hover:border-CSgreen transition-colors duration-300",
     ref: selectRef
@@ -216,22 +216,23 @@ var MultiSelect = function MultiSelect(_a) {
         "bg-CSListHover": selectedValues.includes(option.value),
         hidden: !option.label.toLowerCase().startsWith(inputValue)
       }),
-      onClick: function onClick() {
+      onClick: type !== "checkbox" ? function () {
         if (option.value !== inputValue) {
           handleSelect(option.value);
         }
-      }
+      } : undefined
     }, type === "icons" && React.createElement("span", {
       className: "mr-2 flex-shrink-0 items-center"
     }, React.createElement(bi.BiUserCircle, {
       size: 20,
       color: "#333333"
-    })), type === "checkbox" && React.createElement("input", {
-      type: "checkbox",
-      className: "mr-2",
-      checked: selectedValues.includes(option.value),
-      readOnly: true
-    }), option.label);
+    })), type === "checkbox" && React.createElement(formElements.CheckBox, {
+      id: option.value,
+      label: option.label,
+      onChange: function onChange(e) {
+        e.target.checked ? handleSelect(option.value) : handleSelect(option.value);
+      }
+    }), type !== "checkbox" && option.label);
   })));
 };
 MultiSelect.propTypes = {

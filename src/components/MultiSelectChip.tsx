@@ -1,16 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BiChevronDown, BiX, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
-import PropTypes from "prop-types";
-// import "./style.css"
 
 interface MultiSelectChipProps {
   options: { value: string; label: string }[];
   defaultValue?: string[];
   onSelect: (selected: string[]) => void;
+  id?: string;
   label?: string;
   type?: string;
-  id?: string;
 }
 
 const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
@@ -187,8 +185,3 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
 };
 
 export { MultiSelectChip };
-
-MultiSelectChip.propTypes = {
-  options: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired,
-};

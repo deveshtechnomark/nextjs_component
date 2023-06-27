@@ -32,9 +32,10 @@
     "@babel/preset-env": "^7.22.5",
     "@types/react": "^18.2.12",
     "classnames": "^2.3.2",
+    "form-elements": "file:../checkbox",
     "postcss": "^8.4.24",
-    "prop-types": "^15.8.1",
     "react-icons": "^4.9.0",
+    "sass": "^1.63.6",
     "tailwindcss": "^3.3.2"
   }
 }
