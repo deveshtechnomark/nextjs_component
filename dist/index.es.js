@@ -62,10 +62,7 @@ var Accordion = function Accordion(_a) {
   }, label)), React.createElement("div", {
     className: "w-full"
   }, dataCollection.map(function (item, index) {
-    return React.createElement(Typography, {
-      type: "h6",
-      key: index
-    }, React.createElement("div", {
+    return React.createElement("div", {
       key: index,
       className: "border border-transparent ".concat(activeAccordions.includes(index) ? "border-b-textColor" : "border-b-borderBottomColor", " cursor-pointer"),
       onClick: one ? function () {
@@ -75,13 +72,15 @@ var Accordion = function Accordion(_a) {
       }
     }, React.createElement("div", {
       className: "flex justify-between py-4 px-3 hover:bg-hoverColor ".concat(activeAccordions.includes(index) ? "bg-bgColor" : "")
-    }, React.createElement("p", {
-      className: "".concat(activeAccordions.includes(index) ? "text-textColor " : "text-textColor", " font-medium")
+    }, React.createElement(Typography, {
+      type: "h6",
+      className: "".concat(activeAccordions.includes(index) ? "text-textColor " : "text-textColor")
     }, item.question), React.createElement("span", {
       className: "flex justify-center items-center ml-6"
-    }, activeAccordions.includes(index) ? React.createElement("span", null, icon ? React.createElement(FiMinus, null) : React.createElement(BsChevronUp, null)) : React.createElement("span", null, icon ? React.createElement(BsPlusLg, null) : React.createElement(BsChevronDown, null)))), React.createElement("div", null, React.createElement("p", {
+    }, activeAccordions.includes(index) ? React.createElement("span", null, icon ? React.createElement(FiMinus, null) : React.createElement(BsChevronUp, null)) : React.createElement("span", null, icon ? React.createElement(BsPlusLg, null) : React.createElement(BsChevronDown, null)))), React.createElement("div", null, React.createElement(Typography, {
+      type: "h6",
       className: "text-textColor px-3 ".concat(activeAccordions.includes(index) ? "my-2 transition-all duration-300" : "")
-    }, activeAccordions.includes(index) ? "".concat(item.answer) : ""))));
+    }, activeAccordions.includes(index) ? "".concat(item.answer) : "")));
   })));
 };
 

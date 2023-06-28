@@ -50,55 +50,55 @@ const Accordion: React.FC<AccordionProps> = ({
       )}
       <div className="w-full">
         {dataCollection.map((item, index) => (
-          <Typography type="h6" key={index}>
+          <div
+            key={index}
+            className={`border border-transparent ${
+              activeAccordions.includes(index)
+                ? "border-b-textColor"
+                : "border-b-borderBottomColor"
+            } cursor-pointer`}
+            onClick={
+              one
+                ? () => toggleAccordionOne(index)
+                : () => toggleAccordion(index)
+            }
+          >
             <div
-              key={index}
-              className={`border border-transparent ${
-                activeAccordions.includes(index)
-                  ? "border-b-textColor"
-                  : "border-b-borderBottomColor"
-              } cursor-pointer`}
-              onClick={
-                one
-                  ? () => toggleAccordionOne(index)
-                  : () => toggleAccordion(index)
-              }
+              className={`flex justify-between py-4 px-3 hover:bg-hoverColor ${
+                activeAccordions.includes(index) ? "bg-bgColor" : ""
+              }`}
             >
-              <div
-                className={`flex justify-between py-4 px-3 hover:bg-hoverColor ${
-                  activeAccordions.includes(index) ? "bg-bgColor" : ""
+              <Typography
+                type="h6"
+                className={`${
+                  activeAccordions.includes(index)
+                    ? "text-textColor "
+                    : "text-textColor"
                 }`}
               >
-                <p
-                  className={`${
-                    activeAccordions.includes(index)
-                      ? "text-textColor "
-                      : "text-textColor"
-                  } font-medium`}
-                >
-                  {item.question}
-                </p>
-                <span className="flex justify-center items-center ml-6">
-                  {activeAccordions.includes(index) ? (
-                    <span>{icon ? <FiMinus /> : <BsChevronUp />}</span>
-                  ) : (
-                    <span>{icon ? <BsPlusLg /> : <BsChevronDown />}</span>
-                  )}
-                </span>
-              </div>
-              <div>
-                <p
-                  className={`text-textColor px-3 ${
-                    activeAccordions.includes(index)
-                      ? "my-2 transition-all duration-300"
-                      : ""
-                  }`}
-                >
-                  {activeAccordions.includes(index) ? `${item.answer}` : ""}
-                </p>
-              </div>
+                {item.question}
+              </Typography>
+              <span className="flex justify-center items-center ml-6">
+                {activeAccordions.includes(index) ? (
+                  <span>{icon ? <FiMinus /> : <BsChevronUp />}</span>
+                ) : (
+                  <span>{icon ? <BsPlusLg /> : <BsChevronDown />}</span>
+                )}
+              </span>
             </div>
-          </Typography>
+            <div>
+              <Typography
+                type="h6"
+                className={`text-textColor px-3 ${
+                  activeAccordions.includes(index)
+                    ? "my-2 transition-all duration-300"
+                    : ""
+                }`}
+              >
+                {activeAccordions.includes(index) ? `${item.answer}` : ""}
+              </Typography>
+            </div>
+          </div>
         ))}
       </div>
     </div>
