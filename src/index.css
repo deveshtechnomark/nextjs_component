@@ -2,34 +2,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.button {
-  @apply bg-white text-[#6E6D7A] relative overflow-hidden py-[6px] px-[15px] text-base;
-}
-.btn-sm {
-  @apply py-[3.5px] px-[10px] text-sm;
-}
-.btn-lg {
-  @apply py-[12px] px-[20px];
-}
 
-.btn-outline {
-  @apply !text-[#6E6D7A] border border-[#6E6D7A];
-}
-.btn-outline-primary {
-  @apply !text-[#02B89D] hover:!text-[#029882] border border-[#02B89D] hover:border-[#029882];
-}
-.btn-outline-secondary {
-  @apply !text-[#069CDE] hover:!text-[#0281B9] border border-[#069CDE] hover:border-[#0281B9];
-}
-.btn-outline-success {
-  @apply !text-[#198754] hover:!text-[#146C43] border border-[#198754] hover:border-[#146C43];
-}
-.btn-outline-error {
-  @apply !text-[#DC3545] hover:!text-[#B02A37] border border-[#DC3545] hover:border-[#B02A37];
-}
-.btn-outline-warning {
-  @apply !text-[#FFC107] hover:!text-[#CC9A06] border border-[#FFC107] hover:border-[#CC9A06];
-}
+@import url('../public//styles//fonts/font.css');
 
 @keyframes ripple {
   to {
