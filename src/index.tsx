@@ -47,9 +47,9 @@ const Button: React.FC<ButtonProps> = ({
         ref={ref}
         style={style}
         className={`${className} ${
-          className.includes("btn-sm") && "py-[3.5px] px-[10px] text-sm"
+          className?.includes("btn-sm") && "py-[3.5px] px-[10px] text-sm"
         } ${
-          className.includes("btn-lg") && "py-[12px] px-[20px]"
+          className?.includes("btn-lg") && "py-[12px] px-[20px]"
         } bg-white text-[#6E6D7A] relative overflow-hidden py-[6px] px-[15px] text-base group ${
           variant === "btn" && "!bg-[#D8D8D8] !text-[#6E6D7A]"
         } ${
