@@ -2,14 +2,16 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import url("../public/styles/fonts/font.css");
+
 .tooltip_animateSlideDown:hover::after {
-  animation: slideDownafter 0.5s ease-out both;
+  animation: tooltip_slideDownafter 0.5s ease-out both;
 }
 .tooltip_animateSlideDown:hover::before {
-  animation: slideDown 0.5s ease-out both;
+  animation: tooltip_slideDown 0.5s ease-out both;
 }
 
-@keyframes slideDown {
+@keyframes tooltip_slideDown {
   0% {
     transform: translate(-50%, -50%);
   }
@@ -17,7 +19,7 @@
     transform: translate(-50%, 0);
   }
 }
-@keyframes slideDownafter {
+@keyframes tooltip_slideDownafter {
   0% {
     transform: translate(-50%, -150%) rotate(135deg);
   }
@@ -27,13 +29,13 @@
 }
 
 .tooltip_animateSlideUp:hover::after {
-  animation: slideUpafter 0.5s ease-out both;
+  animation: tooltip_slideUpafter 0.5s ease-out both;
 }
 .tooltip_animateSlideUp:hover::before {
-  animation: slideUp 0.5s ease-out both;
+  animation: tooltip_slideUp 0.5s ease-out both;
 }
 
-@keyframes slideUp {
+@keyframes tooltip_slideUp {
   0% {
     transform: translate(-50%, 50%);
   }
@@ -41,7 +43,7 @@
     transform: translate(-50%, 0);
   }
 }
-@keyframes slideUpafter {
+@keyframes tooltip_slideUpafter {
   0% {
     transform: translate(-50%, 150%) rotate(-45deg);
   }
@@ -51,13 +53,13 @@
 }
 
 .tooltip_animateSlideRight:hover::after {
-  animation: slideRightafter 0.5s ease-out both;
+  animation: tooltip_slideRightafter 0.5s ease-out both;
 }
 .tooltip_animateSlideRight:hover::before {
-  animation: slideRight 0.5s ease-out both;
+  animation: tooltip_slideRight 0.5s ease-out both;
 }
 
-@keyframes slideRight {
+@keyframes tooltip_slideRight {
   0% {
     transform: translate(-12%, -50%);
   }
@@ -65,7 +67,7 @@
     transform: translate(0, -50%);
   }
 }
-@keyframes slideRightafter {
+@keyframes tooltip_slideRightafter {
   0% {
     transform: translate(-150%, -50%) rotate(45deg);
   }
@@ -75,13 +77,13 @@
 }
 
 .tooltip_animateSlideLeft:hover::after {
-  animation: slideLeftafter 0.5s ease-out both;
+  animation: tooltip_slideLeftafter 0.5s ease-out both;
 }
 .tooltip_animateSlideLeft:hover::before {
-  animation: slideLeft 0.5s ease-out both;
+  animation: tooltip_slideLeft 0.5s ease-out both;
 }
 
-@keyframes slideLeft {
+@keyframes tooltip_slideLeft {
   0% {
     transform: translate(12%, -50%);
   }
@@ -89,7 +91,7 @@
     transform: translate(0, -50%);
   }
 }
-@keyframes slideLeftafter {
+@keyframes tooltip_slideLeftafter {
   0% {
     transform: translate(150%, -50%) rotate(-135deg);
   }
