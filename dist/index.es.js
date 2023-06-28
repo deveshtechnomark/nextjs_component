@@ -52,12 +52,12 @@ var Toast = /** @class */function (_super) {
     });
     var messageElement = document.createElement("span");
     messageElement.className = "flex flex-start items-center mr-20";
-    messageElement.innerHTML = "\n     <span className=\"text-xs sm:text-base\">".concat(type === "error" ? errorIcon : type === "warning" ? warningIcon : type === "info" ? infoIcon : successIcon, "</span>\n     <Typography type=\"h6\"><span style=\"padding-left:5px\">").concat(message, "</span></Typography>");
+    messageElement.innerHTML = "\n     <span style=\"padding-right:5px\">".concat(type === "error" ? errorIcon : type === "warning" ? warningIcon : type === "info" ? infoIcon : successIcon, "</span>\n     <Typography type=\"h6\">").concat(message, "</Typography>");
     toastElement.appendChild(messageElement);
     toastElement.appendChild(closeButton);
     var textElement = document.createElement("span");
     textElement.className = "flex flex-start items-center ml-[22px] sm:ml-[30px] font-normal";
-    textElement.innerHTML = "\n    <Typography type=\"label\"><span>".concat(text, "</span></Typography>");
+    textElement.innerHTML = "\n    <Typography type=\"label\">".concat(text, "</Typography>");
     {
       text && toastElement.appendChild(textElement);
     }

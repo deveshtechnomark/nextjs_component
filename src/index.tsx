@@ -61,7 +61,7 @@ class Toast extends React.Component<ToastProps> {
     const messageElement = document.createElement("span");
     messageElement.className = "flex flex-start items-center mr-20";
     messageElement.innerHTML = `
-     <span className="text-xs sm:text-base">${
+     <span style="padding-right:5px">${
        type === "error"
          ? errorIcon
          : type === "warning"
@@ -70,7 +70,7 @@ class Toast extends React.Component<ToastProps> {
          ? infoIcon
          : successIcon
      }</span>
-     <Typography type="h6"><span style="padding-left:5px">${message}</span></Typography>`;
+     <Typography type="h6">${message}</Typography>`;
 
     toastElement.appendChild(messageElement);
     toastElement.appendChild(closeButton);
@@ -79,7 +79,7 @@ class Toast extends React.Component<ToastProps> {
     textElement.className =
       "flex flex-start items-center ml-[22px] sm:ml-[30px] font-normal";
     textElement.innerHTML = `
-    <Typography type="label"><span>${text}</span></Typography>`;
+    <Typography type="label">${text}</Typography>`;
     {
       text && toastElement.appendChild(textElement);
     }
