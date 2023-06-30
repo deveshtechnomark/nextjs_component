@@ -54,9 +54,11 @@ var Textarea = function Textarea(_a) {
     validate = _a.validate,
     onBlur = _a.onBlur,
     onChange = _a.onChange,
-    _c = _a.errorMessage,
+    supportingText = _a.supportingText;
+    _a.disabled;
+    var _c = _a.errorMessage,
     errorMessage = _c === void 0 ? "This is a required field!" : _c,
-    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "required", "validate", "onBlur", "onChange", "errorMessage"]);
+    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "required", "validate", "onBlur", "onChange", "supportingText", "disabled", "errorMessage"]);
   var textAreaRef = React.useRef(null);
   var _d = React.useState(false),
     err = _d[0],
@@ -69,6 +71,7 @@ var Textarea = function Textarea(_a) {
       setErr(true);
     } else {
       setErr(false);
+      setFocus(false);
     }
   };
   var handleFocus = function handleFocus() {
@@ -87,8 +90,10 @@ var Textarea = function Textarea(_a) {
     className: "flex flex-col text-sm laptop:text-base"
   }, label && React.createElement("label", {
     className: "".concat(err ? "text-error" : focus ? "text-success" : "text-defaultColor")
-  }, label, required && "*"), React.createElement("textarea", __assign({
-    className: "".concat(className, " py-2 px-3 border-b-2 outline-none ").concat(err ? "border-b-error" : focus ? "border-b-success" : "hover:border-b-success"),
+  }, label, required && "*"), React.createElement("div", {
+    className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-[1.5px] before:left-0 before:block before:w-0 before:h-px before:bg-success before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
+  }, React.createElement("textarea", __assign({
+    className: "".concat(className, " py-1 px-3 border-b outline-none transition duration-600 w-full ").concat(err ? "border-b-error" : focus ? "border-b-success" : "border-b-defaultColor"),
     ref: textAreaRef,
     rows: parsedRows,
     id: id,
@@ -97,7 +102,9 @@ var Textarea = function Textarea(_a) {
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
     onChange: handleInputChange,
     onFocus: handleFocus
-  }, props)), err && React.createElement("span", {
+  }, props))), !err && supportingText && React.createElement("span", {
+    className: "text-defaultColor"
+  }, supportingText), err && React.createElement("span", {
     className: "text-error"
   }, errorMessage));
 };
