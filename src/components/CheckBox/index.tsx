@@ -1,7 +1,6 @@
 import React, { InputHTMLAttributes } from "react";
 
 import style from "./styles.module.scss";
-import style2 from "./styles2.module.scss";
 
 interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -18,7 +17,9 @@ const CheckBox = ({
   ...props
 }: CheckBoxProps) => {
   return (
-    <div className={`m-0 p-0 relative flex justify-start items-center`}>
+    <div
+      className={`m-0 p-0 w-full min-w-fit bg-red-400 relative flex justify-start items-center`}
+    >
       {!variant2 ? (
         <>
           <input
@@ -30,11 +31,11 @@ const CheckBox = ({
             {...props}
           />
           <label
-            className={`${style.checkBoxLabel} h-6 w-full flex items-center`}
+            className={`${style.checkBoxLabel} h-6 flex items-center`}
             htmlFor={id}
           >
             <span className={style.checkBoxSpan}></span>
-            {label?.split(" ")}
+            {label}
             {/* <Typography>{label}</Typography> */}
           </label>
         </>
