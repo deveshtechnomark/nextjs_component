@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./index.css";
+import { Typography } from "Typography";
+import "Typography/dist/index.css";
 
 interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -37,7 +39,6 @@ const Textarea: React.FC<TextareaProps> = ({
       setErr(true);
     } else {
       setErr(false);
-      setFocus(false);
     }
   };
 
@@ -57,15 +58,17 @@ const Textarea: React.FC<TextareaProps> = ({
   const parsedRows = rows as number;
 
   return (
-    <div className="flex flex-col text-sm laptop:text-base">
+    <div className="flex flex-col w-full text-sm laptop:text-base">
       {label && (
         <label
           className={`${
             err ? "text-error" : focus ? "text-success" : "text-defaultColor"
           }`}
         >
-          {label}
-          {required && "*"}
+          <Typography type="label">
+            {label}
+            {required && "*"}
+          </Typography>
         </label>
       )}
       <div
@@ -74,29 +77,37 @@ const Textarea: React.FC<TextareaProps> = ({
           "animated-input relative inline-block before:absolute before:bottom-[1.5px] before:left-0 before:block before:w-0 before:h-px before:bg-success before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
         }`}
       >
-        <textarea
-          className={`${className} py-1 px-3 border-b outline-none transition duration-600 w-full ${
-            err
-              ? "border-b-error"
-              : focus
-              ? "border-b-success"
-              : "border-b-defaultColor"
-          }`}
-          ref={textAreaRef}
-          rows={parsedRows}
-          id={id}
-          name={name}
-          value={value}
-          onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
-          onChange={handleInputChange}
-          onFocus={handleFocus}
-          {...props}
-        />
+        <Typography type="h6">
+          <textarea
+            className={`${className} py-1 px-3 border-b outline-none transition duration-600 w-full ${
+              err
+                ? "border-b-error"
+                : focus
+                ? "border-b-success"
+                : "border-b-defaultColor"
+            }`}
+            ref={textAreaRef}
+            rows={parsedRows}
+            id={id}
+            name={name}
+            value={value}
+            onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
+            onChange={handleInputChange}
+            onFocus={handleFocus}
+            {...props}
+          />
+        </Typography>
       </div>
       {!err && supportingText && (
-        <span className="text-defaultColor">{supportingText}</span>
+        <Typography type="h6">
+          <span className="text-defaultColor">{supportingText}</span>
+        </Typography>
       )}
-      {err && <span className="text-error">{errorMessage}</span>}
+      {err && (
+        <Typography type="h6">
+          <span className="text-error">{errorMessage}</span>
+        </Typography>
+      )}
     </div>
   );
 };

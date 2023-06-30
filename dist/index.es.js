@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react';
+import { Typography } from 'Typography';
+import 'Typography/dist/index.css';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -69,7 +71,6 @@ var Textarea = function Textarea(_a) {
       setErr(true);
     } else {
       setErr(false);
-      setFocus(false);
     }
   };
   var handleFocus = function handleFocus() {
@@ -85,11 +86,15 @@ var Textarea = function Textarea(_a) {
   };
   var parsedRows = rows;
   return React.createElement("div", {
-    className: "flex flex-col text-sm laptop:text-base"
+    className: "flex flex-col w-full text-sm laptop:text-base"
   }, label && React.createElement("label", {
     className: "".concat(err ? "text-error" : focus ? "text-success" : "text-defaultColor")
-  }, label, required && "*"), React.createElement("div", {
+  }, React.createElement(Typography, {
+    type: "label"
+  }, label, required && "*")), React.createElement("div", {
     className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-[1.5px] before:left-0 before:block before:w-0 before:h-px before:bg-success before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
+  }, React.createElement(Typography, {
+    type: "h6"
   }, React.createElement("textarea", __assign({
     className: "".concat(className, " py-1 px-3 border-b outline-none transition duration-600 w-full ").concat(err ? "border-b-error" : focus ? "border-b-success" : "border-b-defaultColor"),
     ref: textAreaRef,
@@ -100,11 +105,15 @@ var Textarea = function Textarea(_a) {
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
     onChange: handleInputChange,
     onFocus: handleFocus
-  }, props))), !err && supportingText && React.createElement("span", {
+  }, props)))), !err && supportingText && React.createElement(Typography, {
+    type: "h6"
+  }, React.createElement("span", {
     className: "text-defaultColor"
-  }, supportingText), err && React.createElement("span", {
+  }, supportingText)), err && React.createElement(Typography, {
+    type: "h6"
+  }, React.createElement("span", {
     className: "text-error"
-  }, errorMessage));
+  }, errorMessage)));
 };
 
 export { Textarea };
