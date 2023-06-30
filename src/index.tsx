@@ -32,11 +32,11 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   onBlur,
   onChange,
+  onClick,
   onFocus,
   onSubmit,
   ...props
 }) => {
-  const handleClick = () => {};
   const ref = useRef(null);
   const ripples = useRipple(ref);
 
@@ -95,10 +95,10 @@ const Button: React.FC<ButtonProps> = ({
         onChange={onChange}
         onFocus={onFocus}
         onSubmit={onSubmit}
-        onClick={handleClick}
+        onClick={onClick}
       >
         {ripples}
-        <span className="relative" onClick={handleClick}>
+        <span className="relative">
           {children}
         </span>
       </button>

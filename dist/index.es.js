@@ -109,26 +109,25 @@ var Button = function Button(_a) {
     disabled = _a.disabled,
     onBlur = _a.onBlur,
     onChange = _a.onChange,
+    onClick = _a.onClick,
     onFocus = _a.onFocus,
     onSubmit = _a.onSubmit,
-    props = __rest(_a, ["className", "variant", "style", "type", "children", "disabled", "onBlur", "onChange", "onFocus", "onSubmit"]);
-  var handleClick = function handleClick() {};
+    props = __rest(_a, ["className", "variant", "style", "type", "children", "disabled", "onBlur", "onChange", "onClick", "onFocus", "onSubmit"]);
   var ref = useRef(null);
   var ripples = useRipple(ref);
   return React.createElement(React.Fragment, null, React.createElement("button", __assign({}, props, {
     ref: ref,
     style: style,
-    className: "".concat(className, " ").concat(className.includes("btn-sm") && "py-[3.5px] px-[10px] text-sm", " ").concat(className.includes("btn-lg") && "py-[12px] px-[20px]", " bg-white text-[#6E6D7A] relative overflow-hidden py-[6px] px-[15px] text-base group ").concat(variant === "btn" && "!bg-[#D8D8D8] !text-[#6E6D7A]", " ").concat(variant === "btn-primary" && "!bg-[#02B89D] !text-white hover:!bg-[#029882]", " ").concat(variant === "btn-secondary" && "!bg-[#069CDE] !text-white hover:!bg-[#0281B9]", " ").concat(variant === "btn-success" && "!bg-[#198754] !text-white hover:!bg-[#146C43]", " ").concat(variant === "btn-error" && "!bg-[#DC3545] !text-white hover:!bg-[#B02A37]", " ").concat(variant === "btn-warning" && "!bg-[#FFC107] !text-white hover:!bg-[#CC9A06]", " ").concat(variant === "primary" && "!text-[#02B89D]", " ").concat(variant === "secondary" && "!text-[#069CDE]", " ").concat(variant === "success" && "!text-[#198754]", " ").concat(variant === "error" && "!text-[#DC3545]", " ").concat(variant === "warning" && "!text-[#FFC107]", " ").concat(variant === "btn-outline" && "!text-[#6E6D7A] border border-[#6E6D7A]", " ").concat(variant === "btn-outline-primary" && "!text-[#02B89D] hover:!text-[#029882] border border-[#02B89D] hover:border-[#029882] hover:!bg-[#E0F8F4]", " ").concat(variant === "btn-outline-secondary" && "!text-[#069CDE] hover:!text-[#0281B9] border border-[#069CDE] hover:border-[#0281B9] hover:!bg-[#E5F5FC]", " ").concat(variant === "btn-outline-success" && "!text-[#198754] hover:!text-[#146C43] border border-[#198754] hover:border-[#146C43] hover:!bg-[#D1E7DD]", " ").concat(variant === "btn-outline-error" && "!text-[#DC3545] hover:!text-[#B02A37] border border-[#DC3545] hover:border-[#B02A37] hover:!bg-[#F8D7DA]", " ").concat(variant === "btn-outline-warning" && "!text-[#FFC107] hover:!text-[#CC9A06] border border-[#FFC107] hover:border-[#CC9A06] hover:!bg-[#FFF3CD]"),
+    className: "".concat(className, " ").concat((className === null || className === void 0 ? void 0 : className.includes("btn-sm")) && "py-[3.5px] px-[10px] text-sm", " ").concat((className === null || className === void 0 ? void 0 : className.includes("btn-lg")) && "py-[12px] px-[20px]", " bg-white text-[#6E6D7A] relative overflow-hidden py-[6px] px-[15px] text-base group ").concat(variant === "btn" && "!bg-[#D8D8D8] !text-[#6E6D7A]", " ").concat(variant === "btn-primary" && "!bg-[#02B89D] !text-white hover:!bg-[#029882]", " ").concat(variant === "btn-secondary" && "!bg-[#069CDE] !text-white hover:!bg-[#0281B9]", " ").concat(variant === "btn-success" && "!bg-[#198754] !text-white hover:!bg-[#146C43]", " ").concat(variant === "btn-error" && "!bg-[#DC3545] !text-white hover:!bg-[#B02A37]", " ").concat(variant === "btn-warning" && "!bg-[#FFC107] !text-white hover:!bg-[#CC9A06]", " ").concat(variant === "primary" && "!text-[#02B89D]", " ").concat(variant === "secondary" && "!text-[#069CDE]", " ").concat(variant === "success" && "!text-[#198754]", " ").concat(variant === "error" && "!text-[#DC3545]", " ").concat(variant === "warning" && "!text-[#FFC107]", " ").concat(variant === "btn-outline" && "!text-[#6E6D7A] border border-[#6E6D7A]", " ").concat(variant === "btn-outline-primary" && "!text-[#02B89D] hover:!text-[#029882] border border-[#02B89D] hover:border-[#029882] hover:!bg-[#E0F8F4]", " ").concat(variant === "btn-outline-secondary" && "!text-[#069CDE] hover:!text-[#0281B9] border border-[#069CDE] hover:border-[#0281B9] hover:!bg-[#E5F5FC]", " ").concat(variant === "btn-outline-success" && "!text-[#198754] hover:!text-[#146C43] border border-[#198754] hover:border-[#146C43] hover:!bg-[#D1E7DD]", " ").concat(variant === "btn-outline-error" && "!text-[#DC3545] hover:!text-[#B02A37] border border-[#DC3545] hover:border-[#B02A37] hover:!bg-[#F8D7DA]", " ").concat(variant === "btn-outline-warning" && "!text-[#FFC107] hover:!text-[#CC9A06] border border-[#FFC107] hover:border-[#CC9A06] hover:!bg-[#FFF3CD]"),
     type: type,
     disabled: disabled,
     onBlur: onBlur,
     onChange: onChange,
     onFocus: onFocus,
     onSubmit: onSubmit,
-    onClick: handleClick
+    onClick: onClick
   }), ripples, React.createElement("span", {
-    className: "relative",
-    onClick: handleClick
+    className: "relative"
   }, children)));
 };
 
