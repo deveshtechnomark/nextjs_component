@@ -10,9 +10,7 @@ interface RadioPropsTypes extends InputHTMLAttributes<HTMLInputElement> {
 
 const Radio = ({ id, label, variant, ...props }: RadioPropsTypes) => {
   return (
-    <div
-      className={`${styles.container} relative min-w-fit w-full bg-slate-600 flex`}
-    >
+    <div className={`${styles.container} relative min-w-fit w-full flex`}>
       <input
         className={`${styles.__radio} absolute left-5`}
         type="radio"

@@ -18,7 +18,7 @@ const CheckBox = ({
 }: CheckBoxProps) => {
   return (
     <div
-      className={`m-0 p-0 w-full min-w-fit bg-red-400 relative flex justify-start items-center`}
+      className={`m-0 p-0 w-full min-w-fit relative flex justify-start items-center`}
     >
       {!variant2 ? (
         <>
