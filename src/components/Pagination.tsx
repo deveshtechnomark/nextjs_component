@@ -1,23 +1,47 @@
-import React, { useState } from "react";
-import { FiChevronsLeft, FiChevronsRight, FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import React, { useEffect, useState } from "react";
+import {
+  FiChevronsLeft,
+  FiChevronsRight,
+  FiChevronRight,
+  FiChevronLeft,
+} from "react-icons/fi";
 
 interface PaginationProps {
   totalPages: number;
-  space: boolean | String; 
-  variant: any; 
+  space: boolean | String;
+  variant: any;
   onChangePage: (pageNumber: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = (props) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-const handleClick = (pageNumber: number | string) => {
-  if (pageNumber === "...") {
-    return; 
-  }
-  setCurrentPage(Number(pageNumber));
-  props.onChangePage(Number(pageNumber));
-};
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
+
+  const handleScreenSizeChange = () => {
+    if (window.innerWidth <= 768) {
+      setIsSmallScreen(true);
+    } else {
+      setIsSmallScreen(false);
+    }
+  };
+
+  // for screen changing
+  useEffect(() => {
+    handleScreenSizeChange();
+    window.addEventListener("resize", handleScreenSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleScreenSizeChange);
+    };
+  }, []);
+
+  const handleClick = (pageNumber: number | string) => {
+    if (pageNumber === "...") {
+      return;
+    }
+    setCurrentPage(Number(pageNumber));
+    props.onChangePage(Number(pageNumber));
+  };
 
   const handleFirstPage = () => {
     if (currentPage !== 1) {
@@ -73,306 +97,369 @@ const handleClick = (pageNumber: number | string) => {
     }
   }
 
-  const containerClassName = `flex items-center justify-center mt-4`;
+  // page changing conditions for small screens
+  if (isSmallScreen) {
+    if (currentPage <= 2) {
+      pageNumbers = [1, 2, "...", totalPages];
+    } else if (currentPage >= totalPages - 1) {
+      pageNumbers = [1, "...", totalPages - 1, totalPages];
+    } else {
+      pageNumbers = [1, currentPage, "...", totalPages];
+    }
+  }
 
-    // for prop variant = "buttons"
-    return variant === "buttons" ? (
-        // for "space" prop
-        space ? (
-            <div className={containerClassName}>
-                <button
-                    className={`px-3 py-2 rounded text-[14px] font-proxima ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handleFirstPage()}
-                    disabled={currentPage === 1}
-                >
-                    First
-                </button>
-                <span className="text-CSPipeColor">|</span>
-                <button
-                    className={`px-3 py-2 rounded text-[14px] font-proxima ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handlePrevPage()}
-                    disabled={currentPage === 1}
-                >
-                    Prev
-                </button>
-                <div className="flex">
-                    {pageNumbers.map((pageNumber) => (
-                        <button
-                            key={pageNumber}
-                            className={`pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded text-[14px] font-proxima ${currentPage === pageNumber
-                                    ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray"
-                                    : "text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor"
-                                } ml-2`}
-                            onClick={() => handleClick(Number(pageNumber))}
-                            disabled={currentPage === pageNumber || pageNumber === "..."}
-                        >
-                            {pageNumber}
-                        </button>
-                    ))}
-                </div>
+  //Style for main container
+  const containerClassName = `flex items-center mt-4`;
 
-                <button
-                    className={`px-3 py-2 rounded font-proxima ${currentPage === totalPages
-                            ? "text-CSSecondaryGray"
-                            : "text-CSDarkGray"
-                        } ml-2`}
-                    onClick={() => handleNextPage()}
-                    disabled={currentPage === totalPages}
-                >
-                    Next
-                </button>
-                <span className="text-CSPipeColor">|</span>
-                <button
-                    className={`px-3 py-2 rounded font-proxima ${currentPage === totalPages
-                            ? "text-CSSecondaryGray"
-                            : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handleLastPage()}
-                    disabled={currentPage === totalPages}
-                >
-                    Last
-                </button>
-            </div>
-        ) : (
-            // buttons without space
-            <div className={containerClassName}>
-                <button
-                    className={`px-3 py-2 text-[14px] font-proxima ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handleFirstPage()}
-                    disabled={currentPage === 1}
-                >
-                    First
-                </button>
-                <span className="text-CSPipeColor">|</span>
-                <button
-                    className={`px-3 py-2 text-[14px] font-proxima ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handlePrevPage()}
-                    disabled={currentPage === 1}
-                >
-                    Prev
-                </button>
-                <div className="flex">
-                    {pageNumbers.map((pageNumber, index) => {
-                        if (!space && index === 0) {
-                            return (
-                                <button
-                                    key={pageNumber}
-                                    className={`pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-l-lg text-[14px] font-proxima ${currentPage === pageNumber
-                                            ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray"
-                                            : "text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor"
-                                        } ml-0`}
-                                    onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber || pageNumber === "..."}
-                                >
-                                    {pageNumber}
-                                </button>
-                            );
-                        } else if (index === pageNumbers.length - 1) {
-                            return (
-                                <button
-                                    key={pageNumber}
-                                    className={`pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-r-lg text-[14px] font-proxima ${currentPage === pageNumber
-                                            ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray"
-                                            : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"
-                                        } ml-0`}
-                                    onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber || pageNumber === "..."}
-                                >
-                                    {pageNumber}
-                                </button>
-                            );
-                        } else {
-                            return (
-                                <button
-                                    key={pageNumber}
-                                    className={`pt-[1px] pr-[9px] pb-[1px] pl-[9px] text-[14px] font-proxima ${currentPage === pageNumber
-                                            ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray"
-                                            : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"
-                                        }`}
-                                    onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber || pageNumber === "..."}
-                                >
-                                    {pageNumber}
-                                </button>
-                            );
-                        }
-                    })}
-                </div>
-                <button
-                    className={`px-3 py-2  font-proxima ${currentPage === totalPages
-                            ? "text-CSSecondaryGray"
-                            : "text-CSDarkGray"
-                        } ml-0`}
-                    onClick={() => handleNextPage()}
-                    disabled={currentPage === totalPages}
-                >
-                    Next
-                </button>
-                <span className="text-CSPipeColor">|</span>
-                <button
-                    className={`px-3 py-2 font-proxima ${currentPage === totalPages
-                            ? "text-CSSecondaryGray"
-                            : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handleLastPage()}
-                    disabled={currentPage === totalPages}
-                >
-                    Last
-                </button>
-            </div>
-        )
-    ) : // arrows with space
-        space ? (
-            <div className={containerClassName}>
-                <button
-                    className={`px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handleFirstPage()}
-                    disabled={currentPage === 1}
-                >
-                    <FiChevronsLeft size={20} />
-                </button>
-                <span className="text-CSPipeColor">|</span>
-                <button
-                    className={`px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handlePrevPage()}
-                    disabled={currentPage === 1}
-                >
-                    <FiChevronLeft size={20} />
-                </button>
-                <div className="flex">
-                    {pageNumbers.map((pageNumber) => (
-                        <button
-                            key={pageNumber}
-                            className={`pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded text-[14px] font-proxima ${currentPage === pageNumber
-                                    ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray"
-                                    : "text-CSDarkGray"
-                                } ml-2`}
-                            onClick={() => handleClick(Number(pageNumber))}
-                            disabled={currentPage === pageNumber || pageNumber === "..."}
-                        >
-                            {pageNumber}
-                        </button>
-                    ))}
-                </div>
-                <button
-                    className={`px-3 py-2 ${currentPage === totalPages
-                            ? "text-CSSecondaryGray"
-                            : "text-CSDarkGray"
-                        } ml-2`}
-                    onClick={() => handleNextPage()}
-                    disabled={currentPage === totalPages}
-                >
-                    <FiChevronRight size={20} />
-                </button>
-                <span className="text-CSPipeColor">|</span>
-                <button
-                    className={`px-3 py-2 ${currentPage === totalPages
-                            ? "text-CSSecondaryGray"
-                            : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handleLastPage()}
-                    disabled={currentPage === totalPages}
-                >
-                    <FiChevronsRight size={20} />
-                </button>
-            </div>
-        ) : (
-            // arrows without space
-            <div className={containerClassName}>
-                <button
-                    className={`px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handleFirstPage()}
-                    disabled={currentPage === 1}
-                >
-                    <FiChevronsLeft size={20} />
-                </button>
-                <span className="text-CSPipeColor">|</span>
-                <button
-                    className={`px-3 py-2 text-[14px] ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handlePrevPage()}
-                    disabled={currentPage === 1}
-                >
-                    <FiChevronLeft size={20} />
-                </button>
-                <div className="flex">
-                    {pageNumbers.map((pageNumber, index) => {
-                        if (!space && index === 0) {
-                            return (
-                                <button
-                                    key={pageNumber}
-                                    className={`pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-l-lg text-[14px] font-proxima ${currentPage === pageNumber
-                                            ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray"
-                                            : "text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor"
-                                        } ml-0`}
-                                    onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber || pageNumber === "..."}
-                                >
-                                    {pageNumber}
-                                </button>
-                            );
-                        } else if (index === pageNumbers.length - 1) {
-                            return (
-                                <button
-                                    key={pageNumber}
-                                    className={`pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-r-lg text-[14px] font-proxima ${currentPage === pageNumber
-                                            ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray"
-                                            : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"
-                                        } ml-0`}
-                                    onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber || pageNumber === "..."}
-                                >
-                                    {pageNumber}
-                                </button>
-                            );
-                        } else {
-                            return (
-                                <button
-                                    key={pageNumber}
-                                    className={`pt-[1px] pr-[9px] pb-[1px] pl-[9px] text-[14px] font-proxima ${currentPage === pageNumber
-                                            ? "bg-CSlightGreen border border-CSgreen text-CSDarkGray"
-                                            : "text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor"
-                                        }`}
-                                    onClick={() => handleClick(Number(pageNumber))}
-                                    disabled={currentPage === pageNumber || pageNumber === "..."}
-                                >
-                                    {pageNumber}
-                                </button>
-                            );
-                        }
-                    })}
-                </div>
-                <button
-                    className={`px-3 py-2 ${currentPage === totalPages
-                            ? "text-CSSecondaryGray"
-                            : "text-CSDarkGray"
-                        } ml-0`}
-                    onClick={() => handleNextPage()}
-                    disabled={currentPage === totalPages}
-                >
-                    <FiChevronRight size={20} />
-                </button>
-                <span className="text-CSPipeColor">|</span>
-                <button
-                    className={`px-3 py-2 ${currentPage === totalPages
-                            ? "text-CSSecondaryGray"
-                            : "text-CSDarkGray"
-                        }`}
-                    onClick={() => handleLastPage()}
-                    disabled={currentPage === totalPages}
-                >
-                    <FiChevronsRight size={20} />
-                </button>
-            </div>
-        );
-}
+  // Common style for normal (Next, Prev) buttons
+  const buttonStyles = `${
+    isSmallScreen ? "px-2" : "px-3"
+  } py-2 text-[14px] font-proxima`;
 
+  // Common style for arrow buttons
+  const arrowButtonStyle = `${isSmallScreen ? "px-2" : "px-3"} py-2`;
+
+  // common style for pages button in space variant
+  const pagesSpaceStyle = `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded text-[14px] font-proxima`;
+
+  // Common Style for first page number in variant - without space
+  const firstPageNumStyle = `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-l-lg text-[14px] font-proxima`;
+
+  // Common style for last page number in variant - without space
+  const lastPageNumStyle = `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-r-lg text-[14px] font-proxima`;
+
+  // common Style for Middle page numbers for variant without space
+  const middlePageNumStyle = `pt-[1px] pr-[9px] pb-[1px] pl-[9px] text-[14px] font-proxima`;
+
+  // Styel for current page number
+  const currentPageNumStyle = `bg-CSlightGreen border border-CSgreen text-CSDarkGray`;
+
+  // Style for default Page Numbers with variant space
+  const defaultPageNumSpaceStyle = `text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor`;
+
+  // Style for default page numbers for variant without space
+  const defaultPageNumStyle = `text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor`;
+
+  // for prop variant = "buttons"
+  return variant === "buttons" ? (
+    // for "space" prop
+    space ? (
+      <div className={containerClassName}>
+        <button
+          className={`${buttonStyles} ${
+            currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          }`}
+          onClick={() => handleFirstPage()}
+          disabled={currentPage === 1}
+        >
+          First
+        </button>
+        <span className="text-CSPipeColor">|</span>
+        <button
+          className={`${buttonStyles} ${
+            currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          }`}
+          onClick={() => handlePrevPage()}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+        <div className="flex">
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              className={`${pagesSpaceStyle} ${
+                currentPage === pageNumber
+                  ? currentPageNumStyle
+                  : defaultPageNumSpaceStyle
+              } ${isSmallScreen ? "ml-1" : "ml-2"}`}
+              onClick={() => handleClick(Number(pageNumber))}
+              disabled={currentPage === pageNumber || pageNumber === "..."}
+            >
+              {pageNumber}
+            </button>
+          ))}
+        </div>
+        <button
+          className={`${buttonStyles} ${
+            currentPage === totalPages
+              ? "text-CSSecondaryGray"
+              : "text-CSDarkGray"
+          }`}
+          onClick={() => handleNextPage()}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+        <span className="text-CSPipeColor">|</span>
+        <button
+          className={`${buttonStyles} ${
+            currentPage === totalPages
+              ? "text-CSSecondaryGray"
+              : "text-CSDarkGray"
+          }`}
+          onClick={() => handleLastPage()}
+          disabled={currentPage === totalPages}
+        >
+          Last
+        </button>
+      </div>
+    ) : (
+      // buttons without space
+      <div className={containerClassName}>
+        <button
+          className={`${buttonStyles} ${
+            currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          }`}
+          onClick={() => handleFirstPage()}
+          disabled={currentPage === 1}
+        >
+          First
+        </button>
+        <span className="text-CSPipeColor">|</span>
+        <button
+          className={`${buttonStyles} ${
+            currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          }`}
+          onClick={() => handlePrevPage()}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+        <div className="flex">
+          {pageNumbers.map((pageNumber, index) => {
+            if (!space && index === 0) {
+              return (
+                <button
+                  key={pageNumber}
+                  className={`${firstPageNumStyle} ${
+                    currentPage === pageNumber
+                      ? currentPageNumStyle
+                      : defaultPageNumSpaceStyle
+                  }`}
+                  onClick={() => handleClick(Number(pageNumber))}
+                  disabled={currentPage === pageNumber || pageNumber === "..."}
+                >
+                  {pageNumber}
+                </button>
+              );
+            } else if (index === pageNumbers.length - 1) {
+              return (
+                <button
+                  key={pageNumber}
+                  className={`${lastPageNumStyle} ${
+                    currentPage === pageNumber
+                      ? currentPageNumStyle
+                      : defaultPageNumStyle
+                  }`}
+                  onClick={() => handleClick(Number(pageNumber))}
+                  disabled={currentPage === pageNumber || pageNumber === "..."}
+                >
+                  {pageNumber}
+                </button>
+              );
+            } else {
+              return (
+                <button
+                  key={pageNumber}
+                  className={`${middlePageNumStyle} ${
+                    currentPage === pageNumber
+                      ? currentPageNumStyle
+                      : defaultPageNumStyle
+                  }`}
+                  onClick={() => handleClick(Number(pageNumber))}
+                  disabled={currentPage === pageNumber || pageNumber === "..."}
+                >
+                  {pageNumber}
+                </button>
+              );
+            }
+          })}
+        </div>
+        <button
+          className={`${buttonStyles} ${
+            currentPage === totalPages
+              ? "text-CSSecondaryGray"
+              : "text-CSDarkGray"
+          }`}
+          onClick={() => handleNextPage()}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+        <span className="text-CSPipeColor">|</span>
+        <button
+          className={`${buttonStyles} ${
+            currentPage === totalPages
+              ? "text-CSSecondaryGray"
+              : "text-CSDarkGray"
+          }`}
+          onClick={() => handleLastPage()}
+          disabled={currentPage === totalPages}
+        >
+          Last
+        </button>
+      </div>
+    )
+  ) : // arrows with space
+  space ? (
+    <div className={containerClassName}>
+      <button
+        className={`${arrowButtonStyle} ${
+          currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+        }`}
+        onClick={() => handleFirstPage()}
+        disabled={currentPage === 1}
+      >
+        <FiChevronsLeft size={20} />
+      </button>
+      <span className="text-CSPipeColor">|</span>
+      <button
+        className={`${arrowButtonStyle} ${
+          currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+        }`}
+        onClick={() => handlePrevPage()}
+        disabled={currentPage === 1}
+      >
+        <FiChevronLeft size={20} />
+      </button>
+      <div className="flex">
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            className={`${pagesSpaceStyle} ${
+              currentPage === pageNumber
+                ? currentPageNumStyle
+                : "text-CSDarkGray"
+            } ${isSmallScreen ? "ml-1" : "ml-2"}`}
+            onClick={() => handleClick(Number(pageNumber))}
+            disabled={currentPage === pageNumber || pageNumber === "..."}
+          >
+            {pageNumber}
+          </button>
+        ))}
+      </div>
+      <button
+        className={`${arrowButtonStyle} ${
+          currentPage === totalPages
+            ? "text-CSSecondaryGray"
+            : "text-CSDarkGray"
+        } ${isSmallScreen ? "ml-1" : "ml-2"}`}
+        onClick={() => handleNextPage()}
+        disabled={currentPage === totalPages}
+      >
+        <FiChevronRight size={20} />
+      </button>
+      <span className="text-CSPipeColor">|</span>
+      <button
+        className={`${arrowButtonStyle} ${
+          currentPage === totalPages
+            ? "text-CSSecondaryGray"
+            : "text-CSDarkGray"
+        }`}
+        onClick={() => handleLastPage()}
+        disabled={currentPage === totalPages}
+      >
+        <FiChevronsRight size={20} />
+      </button>
+    </div>
+  ) : (
+    // arrows without space
+    <div className={containerClassName}>
+      <button
+        className={`${arrowButtonStyle} ${
+          currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+        }`}
+        onClick={() => handleFirstPage()}
+        disabled={currentPage === 1}
+      >
+        <FiChevronsLeft size={20} />
+      </button>
+      <span className="text-CSPipeColor">|</span>
+      <button
+        className={`${arrowButtonStyle} ${
+          currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+        }`}
+        onClick={() => handlePrevPage()}
+        disabled={currentPage === 1}
+      >
+        <FiChevronLeft size={20} />
+      </button>
+      <div className="flex">
+        {pageNumbers.map((pageNumber, index) => {
+          if (!space && index === 0) {
+            return (
+              <button
+                key={pageNumber}
+                className={`${firstPageNumStyle} ${
+                  currentPage === pageNumber
+                    ? currentPageNumStyle
+                    : defaultPageNumSpaceStyle
+                }`}
+                onClick={() => handleClick(Number(pageNumber))}
+                disabled={currentPage === pageNumber || pageNumber === "..."}
+              >
+                {pageNumber}
+              </button>
+            );
+          } else if (index === pageNumbers.length - 1) {
+            return (
+              <button
+                key={pageNumber}
+                className={`${lastPageNumStyle} ${
+                  currentPage === pageNumber
+                    ? currentPageNumStyle
+                    : defaultPageNumStyle
+                }`}
+                onClick={() => handleClick(Number(pageNumber))}
+                disabled={currentPage === pageNumber || pageNumber === "..."}
+              >
+                {pageNumber}
+              </button>
+            );
+          } else {
+            return (
+              <button
+                key={pageNumber}
+                className={`${middlePageNumStyle} ${
+                  currentPage === pageNumber
+                    ? currentPageNumStyle
+                    : defaultPageNumStyle
+                }`}
+                onClick={() => handleClick(Number(pageNumber))}
+                disabled={currentPage === pageNumber || pageNumber === "..."}
+              >
+                {pageNumber}
+              </button>
+            );
+          }
+        })}
+      </div>
+      <button
+        className={`${arrowButtonStyle} ${
+          currentPage === totalPages
+            ? "text-CSSecondaryGray"
+            : "text-CSDarkGray"
+        }`}
+        onClick={() => handleNextPage()}
+        disabled={currentPage === totalPages}
+      >
+        <FiChevronRight size={20} />
+      </button>
+      <span className="text-CSPipeColor">|</span>
+      <button
+        className={`${arrowButtonStyle} ${
+          currentPage === totalPages
+            ? "text-CSSecondaryGray"
+            : "text-CSDarkGray"
+        }`}
+        onClick={() => handleLastPage()}
+        disabled={currentPage === totalPages}
+      >
+        <FiChevronsRight size={20} />
+      </button>
+    </div>
+  );
+};
 
 export default Pagination;
