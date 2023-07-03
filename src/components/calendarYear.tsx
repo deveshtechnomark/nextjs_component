@@ -106,7 +106,7 @@ const CalendarYear = (props): JSX.Element => {
             <div className="relative flex" ref={inputRef}>
                 <input
                     type={toggleOpen ? "month" : "text"}
-                    className="peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 appearance-none"
+                    className="peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 appearance-none"
                     placeholder="Select a date"
                     onClick={calendarShow}
                     defaultValue={fullDate.toString()}
@@ -232,7 +232,7 @@ const CalendarYear = (props): JSX.Element => {
                                                             {date.isSame(selectedDate, 'day') && (
                                                                 <>
                                                                     <span className="absolute flex inset-0 rounded-full overflow-visible">
-                                                                        <span className={`${styles.rippleAnimation} absolute rounded-full bg-CSgreen opacity-50`}></span>
+                                                                        <span className={`rippleAnimation absolute rounded-full bg-CSgreen opacity-50`}></span>
                                                                     </span>
                                                                 </>
                                                             )}

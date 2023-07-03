@@ -25,6 +25,53 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const utilities = {
+        '.rippleAnimation': {
+          animation: 'ripple 2.0s infinite',
+          width: '50%',
+          height: '50%',
+          top: '27%',
+          left: '24%',
+        },
+        '@keyframes ripple': {
+          '0%': {
+            transform: 'scale(1)',
+            opacity: '0.5',
+          },
+          '25%': {
+            transform: 'scale(1.5)',
+            opacity: '0.4',
+          },
+          '50%': {
+            transform: 'scale(2)',
+            opacity: '0.3',
+          },
+          '75%': {
+            transform: 'scale(2.5)',
+            opacity: '0.2',
+          },
+          '100%': {
+            transform: 'scale(3)',
+            opacity: '0',
+          },
+        },
+        '.divAnimation': {
+          animation: 'divAnimation 1s ease-in-out',
+        },
+        '@keyframes divAnimation': {
+          '0%': {
+            transform: 'translateY(10%)',
+          },
+          '30%': {
+            transform: 'translateY(0)',
+          },
+        },
+      };
+
+      addUtilities(utilities);
+    },
+  ],
 }
 

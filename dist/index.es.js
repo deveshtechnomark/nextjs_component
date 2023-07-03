@@ -38,8 +38,6 @@ var generateDate = function generateDate(month, year) {
 };
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-var styles = {"rippleAnimation":"datepicker-module_rippleAnimation__KEpJD","ripple":"datepicker-module_ripple__e0Nun","divAnimation":"datepicker-module_divAnimation__jj5dZ"};
-
 var Calendar = function Calendar(props) {
   var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   var currentDate = dayjs();
@@ -138,7 +136,7 @@ var Calendar = function Calendar(props) {
     ref: inputRef
   }, /*#__PURE__*/React.createElement("input", {
     type: toggleOpen ? "date" : "text",
-    className: "peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 appearance-none",
+    className: "peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 appearance-none text-black",
     placeholder: "Select a date",
     onClick: calendarShow,
     defaultValue: fullDate.toString()
@@ -245,7 +243,7 @@ var Calendar = function Calendar(props) {
     }, date.date()), date.isSame(selectedDate, 'day') && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
       className: "absolute flex inset-0 rounded-full overflow-visible"
     }, /*#__PURE__*/React.createElement("span", {
-      className: "".concat(styles.rippleAnimation, " absolute rounded-full bg-CSgreen opacity-50")
+      className: "rippleAnimation absolute rounded-full bg-CSgreen opacity-50"
     }))));
   })))))));
 };
@@ -348,7 +346,7 @@ var CalendarYear = function CalendarYear(props) {
     ref: inputRef
   }, /*#__PURE__*/React.createElement("input", {
     type: toggleOpen ? "month" : "text",
-    className: "peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 appearance-none",
+    className: "peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 appearance-none",
     placeholder: "Select a date",
     onClick: calendarShow,
     defaultValue: fullDate.toString()
@@ -455,7 +453,7 @@ var CalendarYear = function CalendarYear(props) {
     }, date.date()), date.isSame(selectedDate, 'day') && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
       className: "absolute flex inset-0 rounded-full overflow-visible"
     }, /*#__PURE__*/React.createElement("span", {
-      className: "".concat(styles.rippleAnimation, " absolute rounded-full bg-CSgreen opacity-50")
+      className: "rippleAnimation absolute rounded-full bg-CSgreen opacity-50"
     }))));
   })))))));
 };
