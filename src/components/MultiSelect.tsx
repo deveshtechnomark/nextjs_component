@@ -1,6 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
-import { BiChevronDown, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
+
+// Icons Componnents
+import ChevronDown from "./icons/ChevronDown.js";
+import UserIcon from "./icons/UserIcon.js";
 
 import { CheckBox } from "form-elements";
 import "form-elements/dist/index.css";
@@ -108,13 +111,17 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen"
           )}
         />
-
-        <BiChevronDown
-          size={24}
-          color="#333333"
+        <div
           onClick={handleToggleOpen}
-          className={classNames({ "rotate-180": open }, "cursor-pointer")}
-        />
+          className={classNames(
+            "text-[1.5rem] text-CSDarkGray cursor-pointer",
+            {
+              "rotate-180": open,
+            }
+          )}
+        >
+          <ChevronDown />
+        </div>
       </div>
 
       <ul
@@ -150,12 +157,11 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
               }
             >
               {type === "icons" && (
-                <span className="mr-2 flex-shrink-0 items-center">
-                  <BiUserCircle size={20} color="#333333" />
-                </span>
+                <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray">
+                  <UserIcon />
+                </div>
               )}
               {type === "checkbox" && (
-                
                 <CheckBox
                   id={option.value}
                   label={option.label}
@@ -165,7 +171,6 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                       : handleSelect(option.value);
                   }}
                 />
-              
               )}
               {type !== "checkbox" && option.label}
             </li>

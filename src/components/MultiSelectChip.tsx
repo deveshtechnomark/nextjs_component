@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { BiChevronDown, BiX, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
+
+// Icon Components
+import CrossIcon from "./icons/CrossIcon.js";
+import ChevronDown from "./icons/ChevronDown.js";
+import UserIcon from "./icons/UserIcon.js";
+
+import { CheckBox } from "form-elements";
+import "form-elements/dist/index.css";
 
 interface MultiSelectChipProps {
   options: { value: string; label: string }[];
@@ -82,11 +89,17 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
             <span title={option}>
               {option.length > 8 ? option.substring(0, 8) + "..." : option}
             </span>
-            <BiX
+            {/* <BiX
               size={12}
               className="ml-1 cursor-pointer"
               onClick={() => handleSelect(option)}
-            />
+            /> */}
+            <div
+              onClick={() => handleSelect(option)}
+              className="ml-1 cursor-pointer"
+            >
+              <CrossIcon />
+            </div>
           </div>
         ))}
         {selected.length > 2 && (
@@ -127,13 +140,18 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
         )}
       >
         {selectedDisplay}
-        <BiChevronDown
-          size={24}
-          color="black"
-          className={classNames({
-            "rotate-180": open,
-          })}
-        />
+
+        <div
+          onClick={handleToggleOpen}
+          className={classNames(
+            "text-[1.5rem] text-CSDarkGray cursor-pointer",
+            {
+              "rotate-180": open,
+            }
+          )}
+        >
+          <ChevronDown />
+        </div>
       </div>
 
       <ul
@@ -161,22 +179,30 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
                 "p-3 text-[16px] hover:bg-CSListHover font-normal font-proxima cursor-pointer flex",
                 { "bg-CSListHover": selected.includes(option.value) }
               )}
-              onClick={() => handleSelect(option.value)}
+              onClick={
+                type !== "checkbox"
+                  ? () => handleSelect(option.value)
+                  : undefined
+              }
             >
               {type === "icons" && (
-                <span className="mr-2 flex-shrink-0 items-center">
-                  <BiUserCircle size={20} color="#333333" />
-                </span>
+                <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray">
+                  <UserIcon />
+                </div>
               )}
               {type === "checkbox" && (
-                <input
-                  type="checkbox"
-                  className="mr-2"
+                <CheckBox
+                  id={option.value}
+                  label={option.label}
                   checked={selected.includes(option.value)}
-                  readOnly
+                  onChange={(e: any) => {
+                    e.target.checked
+                      ? handleSelect(option.value)
+                      : handleSelect(option.value);
+                  }}
                 />
               )}
-              {option.label}
+              {type !== "checkbox" && option.label}
             </li>
           ))}
       </ul>

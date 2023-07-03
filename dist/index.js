@@ -1,10 +1,39 @@
 'use strict';
 
 var React = require('react');
-var bi = require('react-icons/bi');
 var classNames = require('classnames');
 var formElements = require('form-elements');
 require('form-elements/dist/index.css');
+
+function ChevronDown() {
+  return React.createElement("div", null, React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    strokeWidth: "0",
+    viewBox: "0 0 24 24",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    d: "M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+  })));
+}
+
+function UserIcon() {
+  return React.createElement("div", null, React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    strokeWidth: "0",
+    viewBox: "0 0 24 24",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    d: "M12 2A10.13 10.13 0 0 0 2 12a10 10 0 0 0 4 7.92V20h.1a9.7 9.7 0 0 0 11.8 0h.1v-.08A10 10 0 0 0 22 12 10.13 10.13 0 0 0 12 2zM8.07 18.93A3 3 0 0 1 11 16.57h2a3 3 0 0 1 2.93 2.36 7.75 7.75 0 0 1-7.86 0zm9.54-1.29A5 5 0 0 0 13 14.57h-2a5 5 0 0 0-4.61 3.07A8 8 0 0 1 4 12a8.1 8.1 0 0 1 8-8 8.1 8.1 0 0 1 8 8 8 8 0 0 1-2.39 5.64z"
+  }), React.createElement("path", {
+    d: "M12 6a3.91 3.91 0 0 0-4 4 3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4zm0 6a1.91 1.91 0 0 1-2-2 1.91 1.91 0 0 1 2-2 1.91 1.91 0 0 1 2 2 1.91 1.91 0 0 1-2 2z"
+  })));
+}
 
 var Select = function Select(_a) {
   var id = _a.id,
@@ -65,14 +94,12 @@ var Select = function Select(_a) {
       width: "191px"
     },
     className: classNames("flex-grow outline-none bg-white text-CSDarkGray p-2 text-[16px] font-normal font-proxima", !inputValue && "text-CSDarkGray", open && "text-CSgreen", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen")
-  }), React.createElement(bi.BiChevronDown, {
-    size: 24,
-    color: "#333333",
+  }), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames({
+    className: classNames("text-[1.5rem] text-CSDarkGray cursor-pointer", {
       "rotate-180": open
-    }, "cursor-pointer")
-  })), React.createElement("ul", {
+    })
+  }, React.createElement(ChevronDown, null))), React.createElement("ul", {
     className: classNames("absolute z-10 w-full bg-CSDropDownBG mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
     })
@@ -88,12 +115,9 @@ var Select = function Select(_a) {
           handleSelect(option.value);
         }
       }
-    }, type === "icons" && React.createElement("span", {
-      className: "mr-2 flex-shrink-0 items-center"
-    }, React.createElement(bi.BiUserCircle, {
-      size: 20,
-      color: "#333333"
-    })), option.label);
+    }, type === "icons" && React.createElement("div", {
+      className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray"
+    }, React.createElement(UserIcon, null)), option.label);
   }))));
 };
 
@@ -192,14 +216,12 @@ var MultiSelect = function MultiSelect(_a) {
       width: "191px"
     },
     className: classNames("flex-grow bg-white outline-none text-CSDarkGray p-2 text-[16px] font-normal font-proxima", !inputValue && "text-CSDarkGray", open && "text-CSgreen", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen")
-  }), React.createElement(bi.BiChevronDown, {
-    size: 24,
-    color: "#333333",
+  }), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames({
+    className: classNames("text-[1.5rem] text-CSDarkGray cursor-pointer", {
       "rotate-180": open
-    }, "cursor-pointer")
-  })), React.createElement("ul", {
+    })
+  }, React.createElement(ChevronDown, null))), React.createElement("ul", {
     className: classNames("absolute z-10 w-full bg-CSDropDownBG mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
     })
@@ -215,12 +237,9 @@ var MultiSelect = function MultiSelect(_a) {
           handleSelect(option.value);
         }
       } : undefined
-    }, type === "icons" && React.createElement("span", {
-      className: "mr-2 flex-shrink-0 items-center"
-    }, React.createElement(bi.BiUserCircle, {
-      size: 20,
-      color: "#333333"
-    })), type === "checkbox" && React.createElement(formElements.CheckBox, {
+    }, type === "icons" && React.createElement("div", {
+      className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray"
+    }, React.createElement(UserIcon, null)), type === "checkbox" && React.createElement(formElements.CheckBox, {
       id: option.value,
       label: option.label,
       onChange: function onChange(e) {
@@ -229,6 +248,20 @@ var MultiSelect = function MultiSelect(_a) {
     }), type !== "checkbox" && option.label);
   })));
 };
+
+function CrossIcon() {
+  return React.createElement("div", null, React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    strokeWidth: "0",
+    viewBox: "0 0 24 24",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    d: "m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"
+  })));
+}
 
 var MultiSelectChip = function MultiSelectChip(_a) {
   var options = _a.options,
@@ -285,13 +318,12 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       className: classNames("flex items-center badge bg-CSChipBG text-CSGrayChip border border-CSChipBorder rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima", option.length > 8 && "max-w-[100px]")
     }, React.createElement("span", {
       title: option
-    }, option.length > 8 ? option.substring(0, 8) + "..." : option), React.createElement(bi.BiX, {
-      size: 12,
-      className: "ml-1 cursor-pointer",
+    }, option.length > 8 ? option.substring(0, 8) + "..." : option), React.createElement("div", {
       onClick: function onClick() {
         return handleSelect(option);
-      }
-    }));
+      },
+      className: "ml-1 cursor-pointer"
+    }, React.createElement(CrossIcon, null)));
   }), selected.length > 2 && React.createElement("div", {
     className: "flex items-center badge bg-CSChipBG text-CSDarkGray border border-CSChipBorder rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima"
   }, "+", selected.length - 2)) : React.createElement("div", {
@@ -314,13 +346,12 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     }, {
       "text-CSgreen": open
     }, !open ? "cursor-pointer" : "cursor-default", "hover:border-CSgreen")
-  }, selectedDisplay, React.createElement(bi.BiChevronDown, {
-    size: 24,
-    color: "black",
-    className: classNames({
+  }, selectedDisplay, React.createElement("div", {
+    onClick: handleToggleOpen,
+    className: classNames("text-[1.5rem] text-CSDarkGray cursor-pointer", {
       "rotate-180": open
     })
-  })), React.createElement("ul", {
+  }, React.createElement(ChevronDown, null))), React.createElement("ul", {
     className: classNames("absolute z-10 w-full bg-CSDropDownBG mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
     })
@@ -333,20 +364,19 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       className: classNames("p-3 text-[16px] hover:bg-CSListHover font-normal font-proxima cursor-pointer flex", {
         "bg-CSListHover": selected.includes(option.value)
       }),
-      onClick: function onClick() {
+      onClick: type !== "checkbox" ? function () {
         return handleSelect(option.value);
-      }
-    }, type === "icons" && React.createElement("span", {
-      className: "mr-2 flex-shrink-0 items-center"
-    }, React.createElement(bi.BiUserCircle, {
-      size: 20,
-      color: "#333333"
-    })), type === "checkbox" && React.createElement("input", {
-      type: "checkbox",
-      className: "mr-2",
+      } : undefined
+    }, type === "icons" && React.createElement("div", {
+      className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray"
+    }, React.createElement(UserIcon, null)), type === "checkbox" && React.createElement(formElements.CheckBox, {
+      id: option.value,
+      label: option.label,
       checked: selected.includes(option.value),
-      readOnly: true
-    }), option.label);
+      onChange: function onChange(e) {
+        e.target.checked ? handleSelect(option.value) : handleSelect(option.value);
+      }
+    }), type !== "checkbox" && option.label);
   })));
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import "form-elements/dist/index.css";
 interface MultiSelectChipProps {
     options: {
         value: string;

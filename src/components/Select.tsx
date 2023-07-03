@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { BiChevronDown, BiUserCircle } from "react-icons/bi";
 import classNames from "classnames";
+
+// Icon Components
+import ChevronDown from "./icons/ChevronDown.js";
+import UserIcon from "./icons/UserIcon.js";
 
 interface Option {
   value: string;
@@ -20,7 +23,7 @@ const Select: React.FC<SelectProps> = ({
   options,
   onSelect,
   type,
-  label
+  label,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [open, setOpen] = useState(false);
@@ -97,13 +100,17 @@ const Select: React.FC<SelectProps> = ({
               !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen"
             )}
           />
-
-          <BiChevronDown
-            size={24}
-            color="#333333"
+          <div
             onClick={handleToggleOpen}
-            className={classNames({ "rotate-180": open }, "cursor-pointer")}
-          />
+            className={classNames(
+              "text-[1.5rem] text-CSDarkGray cursor-pointer",
+              {
+                "rotate-180": open,
+              }
+            )}
+          >
+            <ChevronDown />
+          </div>
         </div>
 
         <ul
@@ -113,7 +120,7 @@ const Select: React.FC<SelectProps> = ({
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
             {
-              "ease-out": open
+              "ease-out": open,
             }
           )}
         >
@@ -125,7 +132,7 @@ const Select: React.FC<SelectProps> = ({
                   "p-[10px] text-[16px] font-proxima hover:bg-CSListHover font-normal cursor-pointer flex",
                   {
                     "bg-CSListHover": option.value === inputValue,
-                    hidden: !option.label.toLowerCase().startsWith(inputValue)
+                    hidden: !option.label.toLowerCase().startsWith(inputValue),
                   }
                 )}
                 onClick={() => {
@@ -135,9 +142,9 @@ const Select: React.FC<SelectProps> = ({
                 }}
               >
                 {type === "icons" && (
-                  <span className="mr-2 flex-shrink-0 items-center">
-                    <BiUserCircle size={20} color="#333333" />
-                  </span>
+                  <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray">
+                    <UserIcon />
+                  </div>
                 )}
                 {option.label}
               </li>
@@ -149,4 +156,3 @@ const Select: React.FC<SelectProps> = ({
 };
 
 export { Select };
-
