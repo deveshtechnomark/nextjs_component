@@ -247,7 +247,6 @@ const Password: React.FC<PasswordProps> = ({
             }`}
             type={type}
             id="password-input"
-            placeholder="Create password"
             value={password}
             onChange={handlePasswordChange}
             onBlur={onBlur ? onBlur : validate ? validateInput : undefined}

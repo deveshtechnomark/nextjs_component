@@ -188,7 +188,6 @@ var Password = function Password(_a) {
     className: "".concat(className, " py-2 px-3 border-b outline-none w-full ").concat(err ? "border-error" : focus ? "border-textExcellent" : "border-defaultColor"),
     type: type,
     id: "password-input",
-    placeholder: "Create password",
     value: password,
     onChange: handlePasswordChange,
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
