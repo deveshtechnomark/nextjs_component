@@ -2,7 +2,6 @@
 
 var React = require('react');
 var bs = require('react-icons/bs');
-var fi = require('react-icons/fi');
 var Typography = require('Typography');
 require('Typography/dist/index.css');
 
@@ -79,7 +78,13 @@ var Accordion = function Accordion(_a) {
       className: "".concat(activeAccordions.includes(index) ? "text-textColor " : "text-textColor")
     }, item.question), React.createElement("span", {
       className: "flex justify-center items-center ml-6"
-    }, activeAccordions.includes(index) ? React.createElement("span", null, icon ? React.createElement(fi.FiMinus, null) : React.createElement(bs.BsChevronUp, null)) : React.createElement("span", null, icon ? React.createElement(bs.BsPlusLg, null) : React.createElement(bs.BsChevronDown, null)))), React.createElement("div", null, React.createElement(Typography.Typography, {
+    }, icon ? React.createElement("div", null, React.createElement("div", {
+      className: "w-[16px] h-[2px] bg-textColor"
+    }), React.createElement("div", {
+      className: "w-[16px] bg-textColor transition-all duration-500 ".concat(activeAccordions.includes(index) ? "plus h-0" : "transform translate-x-0 -translate-y-0.5 -rotate-90 h-[2px]")
+    })) : React.createElement("span", {
+      className: "transition-all duration-500 ".concat(activeAccordions.includes(index) ? "default active -rotate-180" : "default")
+    }, React.createElement(bs.BsChevronDown, null)))), React.createElement("div", null, React.createElement(Typography.Typography, {
       type: "h6",
       className: "text-textColor px-3 ".concat(activeAccordions.includes(index) ? "my-2 transition-all duration-300" : "")
     }, activeAccordions.includes(index) ? "".concat(item.answer) : "")));

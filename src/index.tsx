@@ -79,10 +79,27 @@ const Accordion: React.FC<AccordionProps> = ({
                 {item.question}
               </Typography>
               <span className="flex justify-center items-center ml-6">
-                {activeAccordions.includes(index) ? (
-                  <span>{icon ? <FiMinus /> : <BsChevronUp />}</span>
+                {icon ? (
+                  <div>
+                    <div className="w-[16px] h-[2px] bg-textColor"></div>
+                    <div
+                      className={`w-[16px] bg-textColor transition-all duration-500 ${
+                        activeAccordions.includes(index)
+                          ? "plus h-0"
+                          : "transform translate-x-0 -translate-y-0.5 -rotate-90 h-[2px]"
+                      }`}
+                    ></div>
+                  </div>
                 ) : (
-                  <span>{icon ? <BsPlusLg /> : <BsChevronDown />}</span>
+                  <span
+                    className={`transition-all duration-500 ${
+                      activeAccordions.includes(index)
+                        ? "default active -rotate-180"
+                        : "default"
+                    }`}
+                  >
+                    <BsChevronDown />
+                  </span>
                 )}
               </span>
             </div>
