@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { Typography } from "typography-ts";
+import 'typography-ts/dist/index.css';
 
 interface ModalActionProps {
   children: ReactNode;
@@ -17,7 +18,7 @@ const ModalAction: React.FC<ModalActionProps> = ({ children, position }) => {
     justifyClasses = "justify-end";
   }
   return (
-    <Typography type='body' className={`p-4 flex flex-wrap items-center border-t border-solid border-CsModalGray rounded-b ${justifyClasses}`}>
+    <Typography type='body' className={`p-4 flex flex-wrap items-center border-t border-solid border-lightSilver rounded-b ${justifyClasses}`}>
       {children || "Modal Action"}
     </Typography>
   );

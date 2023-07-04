@@ -3,10 +3,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        CsModalWhite: '#ffffff',
-        CsModalGray: '#D8D8D8',
-        CsModalBlack: '#000000',
-       
+        pureWhite: '#ffffff',
+        pureBlack: '#000000',
+        lightSilver: '#D8D8D8',
+
       },
     },
   },
