@@ -127,13 +127,13 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   const middlePageNumStyle = `pt-[1px] pr-[9px] pb-[1px] pl-[9px] text-[14px] font-proxima`;
 
   // Styel for current page number
-  const currentPageNumStyle = `bg-CSlightGreen border border-CSgreen text-CSDarkGray`;
+  const currentPageNumStyle = `bg-pgLightTeal border border-primary text-textColor`;
 
   // Style for default Page Numbers with variant space
-  const defaultPageNumSpaceStyle = `text-CSDarkGray bg-CSDropDownBG border border-CSPipeColor`;
+  const defaultPageNumSpaceStyle = `text-textColor bg-pureWhite border border-[]`;
 
   // Style for default page numbers for variant without space
-  const defaultPageNumStyle = `text-CSDarkGray bg-CSDropDownBG border-t border-r border-b border-CSPipeColor`;
+  const defaultPageNumStyle = `text-textColor bg-pureWhite border-t border-r border-b border-lightSilver`;
 
   // for prop variant = "buttons"
   return variant === "buttons" ? (
@@ -141,16 +141,16 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     space ? (
       <div className={containerClassName}>
         <button
-          className={`${buttonStyles} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          className={`${buttonStyles} ${currentPage === 1 ? "text-labelColor" : "text-textColor"
             }`}
           onClick={() => handleFirstPage()}
           disabled={currentPage === 1}
         >
           First
         </button>
-        <span className="text-CSPipeColor">|</span>
+        <span className="text-lightSilver">|</span>
         <button
-          className={`${buttonStyles} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          className={`${buttonStyles} ${currentPage === 1 ? "text-labelColor" : "text-textColor"
             }`}
           onClick={() => handlePrevPage()}
           disabled={currentPage === 1}
@@ -174,19 +174,19 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         </div>
         <button
           className={`${buttonStyles} ${currentPage === totalPages
-              ? "text-CSSecondaryGray"
-              : "text-CSDarkGray"
+              ? "text-labelColor"
+              : "text-textColor"
             }`}
           onClick={() => handleNextPage()}
           disabled={currentPage === totalPages}
         >
           Next
         </button>
-        <span className="text-CSPipeColor">|</span>
+        <span className="text-lightSilver">|</span>
         <button
           className={`${buttonStyles} ${currentPage === totalPages
-              ? "text-CSSecondaryGray"
-              : "text-CSDarkGray"
+              ? "text-labelColor"
+              : "text-textColor"
             }`}
           onClick={() => handleLastPage()}
           disabled={currentPage === totalPages}
@@ -198,16 +198,16 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       // buttons without space
       <div className={containerClassName}>
         <button
-          className={`${buttonStyles} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          className={`${buttonStyles} ${currentPage === 1 ? "text-labelColor" : "text-textColor"
             }`}
           onClick={() => handleFirstPage()}
           disabled={currentPage === 1}
         >
           First
         </button>
-        <span className="text-CSPipeColor">|</span>
+        <span className="text-lightSilver">|</span>
         <button
-          className={`${buttonStyles} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          className={`${buttonStyles} ${currentPage === 1 ? "text-labelColor" : "text-textColor"
             }`}
           onClick={() => handlePrevPage()}
           disabled={currentPage === 1}
@@ -263,19 +263,19 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         </div>
         <button
           className={`${buttonStyles} ${currentPage === totalPages
-              ? "text-CSSecondaryGray"
-              : "text-CSDarkGray"
+              ? "text-labelColor"
+              : "text-textColor"
             }`}
           onClick={() => handleNextPage()}
           disabled={currentPage === totalPages}
         >
           Next
         </button>
-        <span className="text-CSPipeColor">|</span>
+        <span className="text-lightSilver">|</span>
         <button
           className={`${buttonStyles} ${currentPage === totalPages
-              ? "text-CSSecondaryGray"
-              : "text-CSDarkGray"
+              ? "text-labelColor"
+              : "text-textColor"
             }`}
           onClick={() => handleLastPage()}
           disabled={currentPage === totalPages}
@@ -288,7 +288,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     space ? (
       <div className={containerClassName}>
         <button
-          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-labelColor" : "text-textColor"
             }`}
           onClick={() => handleFirstPage()}
           disabled={currentPage === 1}
@@ -299,9 +299,9 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           </div>
 
         </button>
-        <span className="text-CSPipeColor">|</span>
+        <span className="text-lightSilver">|</span>
         <button
-          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-labelColor" : "text-textColor"
             }`}
           onClick={() => handlePrevPage()}
           disabled={currentPage === 1}
@@ -317,7 +317,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
               key={pageNumber}
               className={`${pagesSpaceStyle} ${currentPage === pageNumber
                   ? currentPageNumStyle
-                  : "text-CSDarkGray"
+                  : "text-textColor"
                 } ${isSmallScreen ? "ml-1" : "ml-2"}`}
               onClick={() => handleClick(Number(pageNumber))}
               disabled={currentPage === pageNumber || pageNumber === "..."}
@@ -328,8 +328,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         </div>
         <button
           className={`${arrowButtonStyle} ${currentPage === totalPages
-              ? "text-CSSecondaryGray"
-              : "text-CSDarkGray"
+              ? "text-labelColor"
+              : "text-textColor"
             } ${isSmallScreen ? "ml-1" : "ml-2"}`}
           onClick={() => handleNextPage()}
           disabled={currentPage === totalPages}
@@ -339,11 +339,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           </div>
 
         </button>
-        <span className="text-CSPipeColor">|</span>
+        <span className="text-lightSilver">|</span>
         <button
           className={`${arrowButtonStyle} ${currentPage === totalPages
-              ? "text-CSSecondaryGray"
-              : "text-CSDarkGray"
+              ? "text-labelColor"
+              : "text-textColor"
             }`}
           onClick={() => handleLastPage()}
           disabled={currentPage === totalPages}
@@ -357,7 +357,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       // arrows without space
       <div className={containerClassName}>
         <button
-          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-labelColor" : "text-textColor"
             }`}
           onClick={() => handleFirstPage()}
           disabled={currentPage === 1}
@@ -367,9 +367,9 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           </div>
 
         </button>
-        <span className="text-CSPipeColor">|</span>
+        <span className="text-lightSilver">|</span>
         <button
-          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-labelColor" : "text-textColor"
             }`}
           onClick={() => handlePrevPage()}
           disabled={currentPage === 1}
@@ -427,8 +427,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         </div>
         <button
           className={`${arrowButtonStyle} ${currentPage === totalPages
-              ? "text-CSSecondaryGray"
-              : "text-CSDarkGray"
+              ? "text-labelColor"
+              : "text-textColor"
             }`}
           onClick={() => handleNextPage()}
           disabled={currentPage === totalPages}
@@ -438,11 +438,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           </div>
 
         </button>
-        <span className="text-CSPipeColor">|</span>
+        <span className="text-lightSilver">|</span>
         <button
           className={`${arrowButtonStyle} ${currentPage === totalPages
-              ? "text-CSSecondaryGray"
-              : "text-CSDarkGray"
+              ? "text-labelColor"
+              : "text-textColor"
             }`}
           onClick={() => handleLastPage()}
           disabled={currentPage === totalPages}
@@ -450,6 +450,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           <div className="text-[20px] rotate-180">
             <ChevronsLeft />
           </div>
+
         </button>
       </div>
     );

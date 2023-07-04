@@ -1,21 +1,17 @@
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
-      proxima: ['Proxima Nova'],
+      proxima: ["Proxima Nova"],
     },
     extend: {
       colors: {
-        CSgreen: "#02B89D",
-        CSlightGreen: "#A9ECE1",
-        CSDarkGray: "#333333",
-        CSSecondaryGray: "#6E6D7A",
-        CSGrayChip: "#212529",
-        CSDropDownBG: "#FFFFFF",
-        CSListHover: "#F6F6F6",
-        CSChipBG: "#E9ECEF",
-        CSChipBorder: "#CED4DA",
-        CSPipeColor: "#D8D8D8",
+        primary: "#02B89D",
+        textColor: "#333333",
+        labelColor: "#6E6D7A",
+        pgLightTeal: "#A9ECE1",
+        pureWhite: "#FFF",
+        lightSilver: "#D8D8D8",
       },
     },
   },
@@ -23,4 +19,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};
