@@ -1,37 +1,53 @@
 import React, { ReactNode } from "react";
+import styles from "./style.module.scss";
 import "./index.css";
 
 interface TooltipProps {
-  text: string;
-  position?: "top" | "bottom" | "left" | "right";
+  content?: ReactNode;
+  position: "top" | "bottom" | "left" | "right";
   children: ReactNode;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({
-  text,
-  position = "top",
-  children,
-}) => {
+const Tooltip: React.FC<TooltipProps> = ({ content, position, children }) => {
+  const text = content?.toString();
+  const textLength = text ? text.length : 0;
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div
-        className={`relative before:z-10 before:absolute before:w-max before:max-w-xs before:bg-bgColor before:border before:border-borderColor before:text-textColor  before:invisible before:content-[attr(data-tip)] after:z-10 after:absolute after:h-3 after:w-3 after:bg-bgColor after:border after:border-transparent after:invisible  after:border-t-borderColor after:border-r-borderColor hover:before:visible hover:after:visible md:text-2xl ${
+    <div
+      className={`${styles.tooltip} relative cursor-pointer p-2 text-2xl max-w-fit`}
+    >
+      <span
+        className={`${
+          styles.tool
+        } flex justify-center items-center min-w-[300px] ${
+          textLength <= 6 && "!min-w-[100px]"
+        } tooltipText absolute bg-[#bcf1e8] text-[#333333] whitespace-nowrap px-[10px] py-[15px] border border-[#02b89d] rounded-md opacity-0 before:absolute before:w-3 before:h-3 before:bg-[#bcf1e8] before:border-t before:border-[#02b89d] before:border-r ${
           position === "top" &&
-          "tooltip_animateSlideDown before:left-1/2 before:-top-[45px] before:-translate-x-1/2 before:-translate-y-full before:rounded-lg before:px-2 before:py-1.5 after:left-1/2 after:-top-[8px] after:-translate-x-1/2 after:mt-[-6px]"
-        } ${
+          `${styles.top} left-1/2 transform -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 before:bottom-[-7px] before:transform before:rotate-[135deg]`
+        } 
+        ${
           position === "bottom" &&
-          "tooltip_animateSlideUp before:left-1/2 before:-bottom-[45px] before:-translate-x-1/2 before:translate-y-full before:rounded-lg before:px-2 before:py-1.5 after:left-1/2 after:-bottom-[8px] after:-translate-x-1/2 after:mb-[-6px]"
-        } ${
+          `${styles.bottom} left-1/2 transform -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 before:top-[-7px] before:transform before:rotate-[-45deg]`
+        } 
+        ${
           position === "left" &&
-          "tooltip_animateSlideRight before:-left-[150px] before:top-1/2 before:-translate-x-full before:-translate-y-1/2 before:rounded-md before:px-3 before:py-2 after:left-[1px] after:top-1/2 after:translate-x-0 after:-translate-y-1/2 after:ml-[-6px]"
-        } ${
+          `${
+            styles.left
+          } top-1/2 transform -translate-y-1/2 before:top-1/2 before:-translate-y-1/2 before:right-[-2.2%] ${
+            textLength <= 6 && "before:right-[-7%]"
+          } before:transform before:rotate-[45deg]`
+        } 
+        ${
           position === "right" &&
-          "tooltip_animateSlideLeft before:-right-[160px] before:top-1/2 before:translate-x-full before:-translate-y-1/2 before:rounded-md before:px-3 before:py-2 after:-right-[-2px] after:top-1/2 after:translate-x-0 after:-translate-y-1/2 after:mr-[-6px]"
+          `${
+            styles.right
+          } top-1/2 transform -translate-y-1/2 before:top-1/2 before:-translate-y-1/2 before:left-[-2.2%] ${
+            textLength <= 6 && "before:left-[-7%]"
+          } before:transform before:rotate-[-135deg]`
         }`}
-        data-tip={text}
       >
-        {children}
-      </div>
+        {content}
+      </span>
+      <span>{children}</span>
     </div>
   );
 };
