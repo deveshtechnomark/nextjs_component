@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { BsChevronDown } from 'react-icons/bs';
 import { Typography } from 'Typography';
 import 'Typography/dist/index.css';
 
@@ -28,6 +27,21 @@ function __spreadArray(to, from, pack) {
         }
     }
     return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function ChevronDown() {
+  return React.createElement("div", null, React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    strokeWidth: "0",
+    viewBox: "0 0 16 16",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    fillRule: "evenodd",
+    d: "M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+  })));
 }
 
 var Accordion = function Accordion(_a) {
@@ -63,14 +77,14 @@ var Accordion = function Accordion(_a) {
   }, dataCollection.map(function (item, index) {
     return React.createElement("div", {
       key: index,
-      className: "border border-transparent ".concat(activeAccordions.includes(index) ? "border-b-textColor" : "border-b-borderBottomColor", " cursor-pointer"),
+      className: "border border-transparent ".concat(activeAccordions.includes(index) ? "border-b-textColor" : "border-b-borderColor", " cursor-pointer"),
       onClick: one ? function () {
         return toggleAccordionOne(index);
       } : function () {
         return toggleAccordion(index);
       }
     }, React.createElement("div", {
-      className: "flex justify-between py-4 px-3 hover:bg-hoverColor ".concat(activeAccordions.includes(index) ? "bg-bgColor" : "")
+      className: "flex justify-between py-4 px-3 hover:bg-lightSilver ".concat(activeAccordions.includes(index) ? "bg-lightSilver" : "")
     }, React.createElement(Typography, {
       type: "h6",
       className: "".concat(activeAccordions.includes(index) ? "text-textColor " : "text-textColor")
@@ -81,10 +95,10 @@ var Accordion = function Accordion(_a) {
     }), React.createElement("div", {
       className: "w-[16px] bg-textColor transition-all duration-500 ".concat(activeAccordions.includes(index) ? "plus h-0" : "transform translate-x-0 -translate-y-0.5 -rotate-90 h-[2px]")
     })) : React.createElement("span", {
-      className: "transition-all duration-500 ".concat(activeAccordions.includes(index) ? "default active -rotate-180" : "default")
-    }, React.createElement(BsChevronDown, null)))), React.createElement("div", null, React.createElement(Typography, {
+      className: "transition-all duration-500 ".concat(activeAccordions.includes(index) ? "-rotate-180" : "")
+    }, React.createElement(ChevronDown, null)))), React.createElement("div", null, React.createElement(Typography, {
       type: "h6",
-      className: "text-textColor px-3 ".concat(activeAccordions.includes(index) ? "my-2 transition-all duration-300" : "")
+      className: "text-textColor px-3 transition-all duration-[600ms] ".concat(activeAccordions.includes(index) ? "my-2" : "")
     }, activeAccordions.includes(index) ? "".concat(item.answer) : "")));
   })));
 };

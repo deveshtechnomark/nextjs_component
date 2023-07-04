@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./index.css";
-import { BsChevronDown, BsChevronUp, BsPlusLg } from "react-icons/bs";
-import { FiMinus } from "react-icons/fi";
 import { Typography } from "Typography";
 import "Typography/dist/index.css";
+
+import ChevronDown from "./icons/ChevronDown";
 
 interface AccordionItem {
   question: string;
@@ -55,7 +55,7 @@ const Accordion: React.FC<AccordionProps> = ({
             className={`border border-transparent ${
               activeAccordions.includes(index)
                 ? "border-b-textColor"
-                : "border-b-borderBottomColor"
+                : "border-b-borderColor"
             } cursor-pointer`}
             onClick={
               one
@@ -64,8 +64,8 @@ const Accordion: React.FC<AccordionProps> = ({
             }
           >
             <div
-              className={`flex justify-between py-4 px-3 hover:bg-hoverColor ${
-                activeAccordions.includes(index) ? "bg-bgColor" : ""
+              className={`flex justify-between py-4 px-3 hover:bg-lightSilver ${
+                activeAccordions.includes(index) ? "bg-lightSilver" : ""
               }`}
             >
               <Typography
@@ -93,12 +93,10 @@ const Accordion: React.FC<AccordionProps> = ({
                 ) : (
                   <span
                     className={`transition-all duration-500 ${
-                      activeAccordions.includes(index)
-                        ? "default active -rotate-180"
-                        : "default"
+                      activeAccordions.includes(index) ? "-rotate-180" : ""
                     }`}
                   >
-                    <BsChevronDown />
+                    <ChevronDown />
                   </span>
                 )}
               </span>
@@ -106,10 +104,8 @@ const Accordion: React.FC<AccordionProps> = ({
             <div>
               <Typography
                 type="h6"
-                className={`text-textColor px-3 ${
-                  activeAccordions.includes(index)
-                    ? "my-2 transition-all duration-300"
-                    : ""
+                className={`text-textColor px-3 transition-all duration-[600ms] ${
+                  activeAccordions.includes(index) ? "my-2" : ""
                 }`}
               >
                 {activeAccordions.includes(index) ? `${item.answer}` : ""}

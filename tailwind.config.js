@@ -3,11 +3,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bgColor: "rgba(217, 217, 217, 0.5);",
         textColor: "#333333",
-        hoverColor: "#F6F6F6",
-        borderColor: "#02B89D",
-        borderBottomColor: "#DCDCDC",
+        lightSilver: "#F6F6F6",
+        borderColor: "#D8D8D8",
       },
       screens: {
         sm: "1360px",
