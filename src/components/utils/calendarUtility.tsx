@@ -1,47 +1,50 @@
-import dayjs, { Dayjs } from "dayjs";
-
 interface CalendarDate {
 	currentMonth: boolean;
-	date: Dayjs;
+	date: Date;
 	today?: boolean;
 }
 
+const isToday = (date: Date): boolean => {
+	const today = new Date();
+	return (
+		date.getDate() === today.getDate() &&
+		date.getMonth() === today.getMonth() &&
+		date.getFullYear() === today.getFullYear()
+	);
+};
+
 export const generateDate = (
-	month: number = dayjs().month(),
-	year: number = dayjs().year()
+	month: number = new Date().getMonth(),
+	year: number = new Date().getFullYear()
 ): CalendarDate[] => {
-	const firstDateOfMonth = dayjs().year(year).month(month).startOf("month");
-	const lastDateOfMonth = dayjs().year(year).month(month).endOf("month");
+	const firstDateOfMonth = new Date(year, month, 1);
+	const lastDateOfMonth = new Date(year, month + 1, 0);
 
 	const arrayOfDate: CalendarDate[] = [];
 
-	for (let i = 0; i < firstDateOfMonth.day(); i++) {
-		const date = firstDateOfMonth.day(i);
+	for (let i = 0; i < firstDateOfMonth.getDay(); i++) {
+		const date = new Date(year, month, -i);
 		arrayOfDate.push({
 			currentMonth: false,
 			date,
 		});
 	}
 
-	for (let i = firstDateOfMonth.date(); i <= lastDateOfMonth.date(); i++) {
+	for (let i = 1; i <= lastDateOfMonth.getDate(); i++) {
+		const date = new Date(year, month, i);
 		arrayOfDate.push({
 			currentMonth: true,
-			date: firstDateOfMonth.date(i),
-			today:
-				firstDateOfMonth.date(i).toDate().toDateString() ===
-				dayjs().toDate().toDateString(),
+			date,
+			today: isToday(date),
 		});
 	}
 
 	const remaining = 42 - arrayOfDate.length;
-	for (
-		let i = lastDateOfMonth.date() + 1;
-		i <= lastDateOfMonth.date() + remaining;
-		i++
-	) {
+	for (let i = 1; i <= remaining; i++) {
+		const date = new Date(year, month + 1, i);
 		arrayOfDate.push({
 			currentMonth: false,
-			date: lastDateOfMonth.date(i),
+			date,
 		});
 	}
 	return arrayOfDate;

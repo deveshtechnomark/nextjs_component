@@ -1,13 +1,11 @@
-import dayjs, { Dayjs } from "dayjs";
 import { generateDate, months } from "./utils/calendarUtility";
 import classNames from "classnames";
 import React, { useEffect, useState, useRef } from 'react';
-import { GrFormNext, GrFormPrevious, GrCalendar } from "react-icons/gr";
 
-import styles from "./css/datepicker.module.css";
+import ChevronLeftIcon from "./icons/ChevronLeft.js";
 
 interface CalendarDate {
-    date: Dayjs;
+    date: Date;
     currentMonth: boolean;
     today: boolean;
     startYear: Number;
@@ -16,17 +14,17 @@ interface CalendarDate {
 
 const Calendar = (props): JSX.Element => {
     const days: string[] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const currentDate: Dayjs = dayjs();
+    const currentDate: Date = new Date();
     const { startYear, endYear } = props;
     const inputRef = useRef(null);
 
-    const [today, setToday] = useState<Dayjs>(currentDate);
+    const [today, setToday] = useState<Date>(currentDate);
     const [showMonthList, setShowMonthList] = useState<boolean>(false);
     const [showYearList, setShowYearList] = useState<boolean>(false);
-    const [selectedDate, setSelectedDate] = useState<Dayjs>(currentDate);
+    const [selectedDate, setSelectedDate] = useState<Date>(currentDate);
     const [fullDate, setFullDate] = useState<String>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [toggleOpen, setToggleOpen] = useState<boolean>(false);
+    const [toggleOpen, setToggleOpen] = useState<boolean>(true);
 
     const yearsPerPage: number = 16;
     const totalPages: number = Math.ceil((endYear - startYear + 1) / yearsPerPage);
@@ -41,7 +39,9 @@ const Calendar = (props): JSX.Element => {
     };
 
     const selectMonth = (month: number) => {
-        setToday(today.month(month));
+        const newDate = new Date(today);
+        newDate.setMonth(month);
+        setToday(newDate);
         setShowMonthList(false);
     };
 
@@ -50,15 +50,19 @@ const Calendar = (props): JSX.Element => {
     };
 
     const selectYear = (year: number) => {
-        setToday(today.year(year));
+        const newDate = new Date(today);
+        newDate.setFullYear(year);
+        setToday(newDate);
         setShowYearList(false);
     };
 
-    const handleDateClick = (date: Dayjs) => {
-        setToday(date.startOf('month'));
+    const handleDateClick = (date: Date) => {
+        const newDate = new Date(date);
+        setToday(newDate);
         setSelectedDate(date);
-        const fullDate = date.format("YYYY-MM-DD");
-        setFullDate(fullDate);
+        newDate.setDate(date.getDate() + 1);
+        const formattedDate = newDate.toISOString().slice(0, 10);
+        setFullDate(formattedDate);
     };
 
     const goToNextPage = () => {
@@ -106,18 +110,11 @@ const Calendar = (props): JSX.Element => {
             <div className="relative flex" ref={inputRef}>
                 <input
                     type={toggleOpen ? "date" : "text"}
-                    className="peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 appearance-none text-black"
+                    className="peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 text-black"
                     placeholder="Select a date"
                     onClick={calendarShow}
                     defaultValue={fullDate.toString()}
                 />
-
-                <span className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
-                    <GrCalendar
-                        color="#FF0000"
-                        className="w-5 h-5 cursor-pointer"
-                        onClick={calendarShow} />
-                </span>
             </div>
             {toggleOpen && (
                 <div className={`relative ${toggleOpen ? "divAnimation" : ""}`}>
@@ -127,7 +124,7 @@ const Calendar = (props): JSX.Element => {
                                 <div className="flex flex-row ">
                                     {showMonthList === true ? "" : showYearList === true ? "" :
                                         (<h1 className="font-proxima text-[14px] font-semibold cursor-pointer" onClick={toggleMonthList}>
-                                            {months[today.month()]}
+                                            {months[today.getMonth()]}
                                         </h1>)}
                                     {showYearList === true && showMonthList === false ?
                                         (<h1 className="font-proxima text-[14px] font-semibold ml-1">
@@ -135,36 +132,46 @@ const Calendar = (props): JSX.Element => {
                                         </h1>
                                         ) :
                                         (<h1 className={`font-proxima text-[14px] font-semibold ml-1 cursor-pointer ${showMonthList ? 'pointer-events-none' : ''}`} onClick={toggleYearList}>
-                                            {today.year()}
+                                            {today.getFullYear()}
                                         </h1>)
                                     }
                                 </div>
                                 <div className="flex items-center gap-5">
                                     {showYearList === false ?
                                         <>
-                                            <GrFormPrevious
-                                                color="#848A95"
-                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${showMonthList ? "hidden" : ""}`}
+                                            <div color="#848A95"
+                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${showMonthList ? "hidden" : ""} text-[20px]`}
                                                 onClick={() => {
-                                                    setToday((prevToday) => prevToday.month(prevToday.month() - 1));
-                                                }} />
-                                            <GrFormNext
+                                                    const newDate = new Date(today);
+                                                    newDate.setMonth(newDate.getMonth() - 1);
+                                                    setToday(newDate);
+                                                }} >
+                                                <ChevronLeftIcon />
+                                            </div>
+                                            <div
                                                 color="#848A95"
-                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${showMonthList ? "hidden" : ""}`}
+                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${showMonthList ? "hidden" : ""} rotate-180 text-[20px]`}
                                                 onClick={() => {
-                                                    setToday((prevToday) => prevToday.month(prevToday.month() + 1));
-                                                }} />
+                                                    const newDate = new Date(today);
+                                                    newDate.setMonth(newDate.getMonth() + 1);
+                                                    setToday(newDate);
+                                                }}>
+                                                <ChevronLeftIcon />
+                                            </div>
                                         </>
                                         : <>
                                             {currentPage <= totalPages && (<>
-                                                <GrFormPrevious
+                                                <div color="#848A95"
+                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${currentPage === 1 ? "opacity-50 pointer-events-none" : ""} text-[20px]`}
+                                                    onClick={currentPage === 1 ? undefined : goToPreviousPage}>
+                                                    <ChevronLeftIcon />
+                                                </div>
+                                                <div
                                                     color="#848A95"
-                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${currentPage === 1 ? "opacity-50 pointer-events-none" : ""}`}
-                                                    onClick={currentPage === 1 ? undefined : goToPreviousPage} />
-                                                <GrFormNext
-                                                    color="#848A95"
-                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${currentPage === totalPages ? "opacity-50 pointer-events-none" : ""}`}
-                                                    onClick={currentPage === totalPages ? undefined : goToNextPage} />
+                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${currentPage === totalPages ? "opacity-50 pointer-events-none" : ""} rotate-180 text-[20px]`}
+                                                    onClick={currentPage === totalPages ? undefined : goToNextPage}>
+                                                    <ChevronLeftIcon />
+                                                </div>
                                             </>)}
                                         </>
                                     }
@@ -214,31 +221,37 @@ const Calendar = (props): JSX.Element => {
                                                 ))}
                                             </div>
                                             <div className="w-full h-full grid grid-cols-7">
-                                                {generateDate(today.month(), today.year()).map(
-                                                    ({ date, currentMonth }: CalendarDate, index: number) => (
-                                                        <div
-                                                            key={index}
-                                                            className="h-full w-full grid place-content-center text-sm text-CSDarkGray font-proxima relative"
-                                                            onClick={() => handleDateClick(date)}>
-                                                            <h1
-                                                                className={classNames(
-                                                                    currentMonth ? "" : "text-gray-400",
-                                                                    "h-[40px] w-[40px] grid place-content-center rounded-full cursor-pointer z-10",
-                                                                    {
-                                                                        "bg-CSgreen text-white": date.isSame(selectedDate, 'day')
-                                                                    }
-                                                                )}>
-                                                                {date.date()}
-                                                            </h1>
-                                                            {date.isSame(selectedDate, 'day') && (
-                                                                <>
-                                                                    <span className="absolute flex inset-0 rounded-full overflow-visible">
-                                                                        <span className={`rippleAnimation absolute rounded-full bg-CSgreen opacity-50`}></span>
-                                                                    </span>
-                                                                </>
-                                                            )}
-                                                        </div>
-                                                    )
+                                                {generateDate(today.getMonth(), today.getFullYear()).map(
+                                                    ({ date, currentMonth }: CalendarDate, index: number) => {
+                                                        const currentDate = new Date(date);
+                                                        const isSameDay = currentDate.getDate() === selectedDate.getDate() && currentDate.getMonth() === selectedDate.getMonth();
+                                                        return (
+                                                            <div
+                                                                key={index}
+                                                                className="h-full w-full grid place-content-center text-sm text-CSDarkGray font-proxima relative"
+                                                                onClick={() => handleDateClick(currentDate)}
+                                                            >
+                                                                <h1
+                                                                    className={classNames(
+                                                                        currentMonth ? "" : "text-gray-400",
+                                                                        "h-[40px] w-[40px] grid place-content-center rounded-full cursor-pointer z-10",
+                                                                        {
+                                                                            "bg-CSgreen text-white": isSameDay,
+                                                                        }
+                                                                    )}
+                                                                >
+                                                                    {currentDate.getDate()}
+                                                                </h1>
+                                                                {isSameDay && (
+                                                                    <>
+                                                                        <span className="absolute flex inset-0 rounded-full overflow-visible">
+                                                                            <span className="rippleAnimation absolute rounded-full bg-CSgreen opacity-50"></span>
+                                                                        </span>
+                                                                    </>
+                                                                )}
+                                                            </div>
+                                                        );
+                                                    }
                                                 )}
                                             </div>
                                         </>

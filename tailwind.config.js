@@ -32,7 +32,7 @@ module.exports = {
           animation: 'ripple 2.0s infinite',
           width: '50%',
           height: '50%',
-          top: '27%',
+          top: '26%',
           left: '24%',
         },
         '@keyframes ripple': {

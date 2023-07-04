@@ -1,7 +1,6 @@
-import { Dayjs } from "dayjs";
 interface CalendarDate {
     currentMonth: boolean;
-    date: Dayjs;
+    date: Date;
     today?: boolean;
 }
 export declare const generateDate: (month?: number, year?: number) => CalendarDate[];

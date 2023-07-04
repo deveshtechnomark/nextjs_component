@@ -1,7 +1,0 @@
-input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-}
-
-input[type="month"]::-webkit-calendar-picker-indicator {
-    display: none;
-}
