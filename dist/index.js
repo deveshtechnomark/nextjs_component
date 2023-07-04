@@ -2,6 +2,8 @@
 
 var React = require('react');
 
+var styles = {"avatarGroup":"index-module_avatarGroup__pGxEK","avatar":"index-module_avatar__6S1Wo"};
+
 var Avatar = function Avatar(_a) {
   var imageUrl = _a.imageUrl,
     name = _a.name,
@@ -17,7 +19,7 @@ var Avatar = function Avatar(_a) {
   var Green = ["C", "H", "M", "R", "W"];
   var Purple = ["D", "I", "N", "S", "X"];
   return React.createElement("div", {
-    className: "avatar"
+    className: styles.avatar
   }, imageUrl ? React.createElement("img", {
     className: "w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] display-block object-fit-cover border-2 border-borderColor ".concat(avatarTypeClass, " ").concat(className),
     src: imageUrl,
@@ -45,7 +47,7 @@ var AvatarGroup = function AvatarGroup(_a) {
     var remainingCount = React.Children.count(children) - show;
     var visibleChildren = React.Children.toArray(children).slice(0, show);
     return React.createElement("div", {
-      className: "avatar-group flex items-center justify-center"
+      className: "".concat(styles.avatarGroup, " flex items-center justify-center")
     }, visibleChildren.map(function (child, index) {
       return React.createElement(Avatar, {
         key: index,
