@@ -3,13 +3,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        success: "#02B89D",
-        successText: "#FFFFFF",
-        error: "#F8D7DA",
+        primary: "#02B89D",
+        pureWhite: "#FFFFFF",
+        errorColor: "#F8D7DA",
         errorText: "#DC3545",
-        warning: "#FFF3CD",
+        warningColor: "#FFF3CD",
         warningText: "#664D03",
-        info: "#E7F1FF",
+        infoColor: "#E7F1FF",
         infoText: "#0A58CA",
       },
       screens: {
