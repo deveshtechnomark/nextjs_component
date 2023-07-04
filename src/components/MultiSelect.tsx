@@ -149,10 +149,10 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
               onClick={
                 type !== "checkbox"
                   ? () => {
-                      if (option.value !== inputValue) {
-                        handleSelect(option.value);
-                      }
+                    if (option.value !== inputValue) {
+                      handleSelect(option.value);
                     }
+                  }
                   : undefined
               }
             >
