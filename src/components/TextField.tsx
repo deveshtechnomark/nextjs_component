@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
-import ClearIcon from "@mui/icons-material/Clear";
-import CheckIcon from "@mui/icons-material/Check";
-import classnames from "classnames";
+import ClearIcon from "./icons/ClearIcon";
+import CheckIcon from "./icons/CheckIcon";
 
 interface TextFieldProps {
   label?: string;
@@ -104,21 +103,18 @@ const TextField: React.FC<TextFieldProps> = ({
     setShowEmailError(false);
   };
 
-  const inputClassName = classnames(
-    className,
-    "py-1 px-3 border-b outline-none transition duration-600 w-full",
-    err
-      ? "border-b-CSError"
-      : focus
-      ? "border-b-CSgreen"
-      : "border-b-CSSecondaryGray",
-    valid && "text-CSEmailSuccess font-normal text-[14px] font-proxima",
-    showEmailError && "text-CSError"
-  );
+  const inputClassName = `
+  ${className}
+  py-1 px-3 border-b outline-none transition duration-600 w-full
+  ${err ? "border-b-CSError" : focus ? "border-b-CSgreen" : "border-b-CSSecondaryGray"}
+  ${valid && "text-CSEmailSuccess font-normal text-[14px] font-proxima"}
+  ${showEmailError && "text-CSError"}
+`;
 
-  const labelClassName = classnames(
-    err ? "text-CSError" : focus ? "text-CSgreen" : "text-CSSecondaryGray"
-  );
+  const labelClassName = `
+  ${err ? "text-CSError" : focus ? "text-CSgreen" : "text-CSSecondaryGray"}
+`;
+
 
   return (
     <div className="flex flex-col text-[14px] laptop:text-base relative font-proxima">
@@ -129,10 +125,9 @@ const TextField: React.FC<TextFieldProps> = ({
         </label>
       )}
       <div
-        className={`${
-          !err &&
+        className={`${!err &&
           "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-CSgreen before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
-        }`}
+          }`}
       >
         <input
           className={inputClassName}
@@ -153,11 +148,14 @@ const TextField: React.FC<TextFieldProps> = ({
           className="text-CSError absolute right-0 top-0 mt-5 mr-3 cursor-pointer"
           onClick={handleClear}
         >
-          <ClearIcon />
+          <div className="text-[20px]">
+            <ClearIcon />
+          </div>
+
         </span>
       )}
       {valid && focus && (
-        <span className="text-CSgreen absolute right-0 top-0 mt-5 mr-3">
+        <span className="text-CSgreen text-[20px] absolute right-0 top-0 mt-5 mr-3">
           <CheckIcon />
         </span>
       )}

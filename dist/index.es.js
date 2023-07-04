@@ -1,7 +1,4 @@
 import React, { useRef, useState } from 'react';
-import ClearIcon from '@mui/icons-material/Clear';
-import CheckIcon from '@mui/icons-material/Check';
-import classnames from 'classnames';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -41,6 +38,37 @@ function __rest(s, e) {
                 t[p[i]] = s[p[i]];
         }
     return t;
+}
+
+function ClearIcon() {
+  return React.createElement("div", null, React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    strokeWidth: "0",
+    viewBox: "0 0 24 24",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    fill: "none",
+    d: "M0 0h24v24H0V0z"
+  }), React.createElement("path", {
+    d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+  })));
+}
+
+function CheckIcon() {
+  return React.createElement("div", null, React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    strokeWidth: "0",
+    viewBox: "0 0 16 16",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    d: "M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+  })));
 }
 
 var TextField = function TextField(_a) {
@@ -132,8 +160,8 @@ var TextField = function TextField(_a) {
     setValid(false);
     setShowEmailError(false);
   };
-  var inputClassName = classnames(className, "py-1 px-3 border-b outline-none transition duration-600 w-full", err ? "border-b-CSError" : focus ? "border-b-CSgreen" : "border-b-CSSecondaryGray", valid && "text-CSEmailSuccess font-normal text-[14px] font-proxima", showEmailError && "text-CSError");
-  var labelClassName = classnames(err ? "text-CSError" : focus ? "text-CSgreen" : "text-CSSecondaryGray");
+  var inputClassName = "\n  ".concat(className, "\n  py-1 px-3 border-b outline-none transition duration-600 w-full\n  ").concat(err ? "border-b-CSError" : focus ? "border-b-CSgreen" : "border-b-CSSecondaryGray", "\n  ").concat(valid && "text-CSEmailSuccess font-normal text-[14px] font-proxima", "\n  ").concat(showEmailError && "text-CSError", "\n");
+  var labelClassName = "\n  ".concat(err ? "text-CSError" : focus ? "text-CSgreen" : "text-CSSecondaryGray", "\n");
   return React.createElement("div", {
     className: "flex flex-col text-[14px] laptop:text-base relative font-proxima"
   }, label && React.createElement("label", {
@@ -154,8 +182,10 @@ var TextField = function TextField(_a) {
   }, props))), err && React.createElement("span", {
     className: "text-CSError absolute right-0 top-0 mt-5 mr-3 cursor-pointer",
     onClick: handleClear
-  }, React.createElement(ClearIcon, null)), valid && focus && React.createElement("span", {
-    className: "text-CSgreen absolute right-0 top-0 mt-5 mr-3"
+  }, React.createElement("div", {
+    className: "text-[20px]"
+  }, React.createElement(ClearIcon, null))), valid && focus && React.createElement("span", {
+    className: "text-CSgreen text-[20px] absolute right-0 top-0 mt-5 mr-3"
   }, React.createElement(CheckIcon, null)), err && React.createElement("span", {
     className: "text-CSError"
   }, errorMessage), !err && supportingText && React.createElement("span", {
