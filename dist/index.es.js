@@ -114,7 +114,7 @@ var Password = function Password(_a) {
         key: item.index,
         className: "".concat(requirementItemClass, " flex items-center justify-left text-xs passwordsm:text-base passwordmd:text-lg")
       }, isValid ? React.createElement(BsCheckLg, {
-        className: "text-teal-500 ml-[5px] my-[6px]"
+        className: "text-success ml-[5px] my-[6px]"
       }) : React.createElement(BsDot, {
         className: "text-gray-500 text-3xl"
       }), React.createElement("span", {
@@ -157,6 +157,7 @@ var Password = function Password(_a) {
       setErrorMes("Please fill details according to the requirements.");
     } else {
       setErr(false);
+      setFocus(false);
     }
   };
   var handleFocus = function handleFocus() {
@@ -213,7 +214,7 @@ var Password = function Password(_a) {
   }, React.createElement("div", {
     className: "relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-textDefault"
   }, React.createElement("span", {
-    className: "absolute rounded-l-lg h-[5px] ".concat(data.match(/[^A-Za-z0-9]/) && data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.match(/.{8,}/) ? "bg-textExcellent w-[150px] sm:w-[180px] rounded-lg" : data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) ? "bg-textGood w-[85px] sm:w-[100px]" : password.length >= 3 && data.match(/[a-z]/) ? "bg-textWeek  w-[30px] sm:w-[45px]" : "bg-textDefault")
+    className: "absolute rounded-l-lg h-[5px] ".concat(data.match(/[^A-Za-z0-9]/) && data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.match(/.{8,}/) ? "bg-success w-[150px] sm:w-[180px] rounded-lg" : data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) ? "bg-textGood w-[85px] sm:w-[100px]" : password.length >= 3 && data.match(/[a-z]/) ? "bg-textWeek  w-[30px] sm:w-[45px]" : "bg-textDefault")
   })), React.createElement("span", {
     className: "ml-4 text-xs sm:text-sm"
   }, getPasswordStrength())), err && React.createElement(Typography, {

@@ -126,7 +126,7 @@ const Password: React.FC<PasswordProps> = ({
             className={`${requirementItemClass} flex items-center justify-left text-xs passwordsm:text-base passwordmd:text-lg`}
           >
             {isValid ? (
-              <BsCheckLg className="text-teal-500 ml-[5px] my-[6px]" />
+              <BsCheckLg className="text-success ml-[5px] my-[6px]" />
             ) : (
               <BsDot className="text-gray-500 text-3xl" />
             )}
@@ -181,6 +181,7 @@ const Password: React.FC<PasswordProps> = ({
       setErrorMes("Please fill details according to the requirements.");
     } else {
       setErr(false);
+      setFocus(false);
     }
   };
 
@@ -295,7 +296,7 @@ const Password: React.FC<PasswordProps> = ({
                 data.match(/[0-9]/) &&
                 !data.match(/\s/) &&
                 data.match(/.{8,}/)
-                  ? "bg-textExcellent w-[150px] sm:w-[180px] rounded-lg"
+                  ? "bg-success w-[150px] sm:w-[180px] rounded-lg"
                   : data.match(/[A-Z]/) &&
                     data.match(/[a-z]/) &&
                     data.match(/[0-9]/)

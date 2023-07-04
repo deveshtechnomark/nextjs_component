@@ -8,7 +8,8 @@ module.exports = {
         textGood: "#FFBF00",
         textWeek: "#DC3545",
         textDefault: "#979797",
-        defaultColor: "#CED4DA",
+        success: "#198754",
+        defaultColor: "#6E6D7A",
       },
       screens: {
         passwordsm: "800px",
