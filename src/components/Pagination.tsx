@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  FiChevronsLeft,
-  FiChevronsRight,
-  FiChevronRight,
-  FiChevronLeft,
-} from "react-icons/fi";
+import ChevronsLeft from "./icons/ChevronsLeft";
+import ChevronLeft from "./icons/ChevronLeft";
 
 interface PaginationProps {
   totalPages: number;
@@ -112,9 +108,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   const containerClassName = `flex items-center mt-4`;
 
   // Common style for normal (Next, Prev) buttons
-  const buttonStyles = `${
-    isSmallScreen ? "px-2" : "px-3"
-  } py-2 text-[14px] font-proxima`;
+  const buttonStyles = `${isSmallScreen ? "px-2" : "px-3"
+    } py-2 text-[14px] font-proxima`;
 
   // Common style for arrow buttons
   const arrowButtonStyle = `${isSmallScreen ? "px-2" : "px-3"} py-2`;
@@ -146,9 +141,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     space ? (
       <div className={containerClassName}>
         <button
-          className={`${buttonStyles} ${
-            currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-          }`}
+          className={`${buttonStyles} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+            }`}
           onClick={() => handleFirstPage()}
           disabled={currentPage === 1}
         >
@@ -156,9 +150,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         </button>
         <span className="text-CSPipeColor">|</span>
         <button
-          className={`${buttonStyles} ${
-            currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-          }`}
+          className={`${buttonStyles} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+            }`}
           onClick={() => handlePrevPage()}
           disabled={currentPage === 1}
         >
@@ -168,11 +161,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           {pageNumbers.map((pageNumber) => (
             <button
               key={pageNumber}
-              className={`${pagesSpaceStyle} ${
-                currentPage === pageNumber
+              className={`${pagesSpaceStyle} ${currentPage === pageNumber
                   ? currentPageNumStyle
                   : defaultPageNumSpaceStyle
-              } ${isSmallScreen ? "ml-1" : "ml-2"}`}
+                } ${isSmallScreen ? "ml-1" : "ml-2"}`}
               onClick={() => handleClick(Number(pageNumber))}
               disabled={currentPage === pageNumber || pageNumber === "..."}
             >
@@ -181,11 +173,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           ))}
         </div>
         <button
-          className={`${buttonStyles} ${
-            currentPage === totalPages
+          className={`${buttonStyles} ${currentPage === totalPages
               ? "text-CSSecondaryGray"
               : "text-CSDarkGray"
-          }`}
+            }`}
           onClick={() => handleNextPage()}
           disabled={currentPage === totalPages}
         >
@@ -193,11 +184,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         </button>
         <span className="text-CSPipeColor">|</span>
         <button
-          className={`${buttonStyles} ${
-            currentPage === totalPages
+          className={`${buttonStyles} ${currentPage === totalPages
               ? "text-CSSecondaryGray"
               : "text-CSDarkGray"
-          }`}
+            }`}
           onClick={() => handleLastPage()}
           disabled={currentPage === totalPages}
         >
@@ -208,9 +198,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       // buttons without space
       <div className={containerClassName}>
         <button
-          className={`${buttonStyles} ${
-            currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-          }`}
+          className={`${buttonStyles} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+            }`}
           onClick={() => handleFirstPage()}
           disabled={currentPage === 1}
         >
@@ -218,9 +207,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         </button>
         <span className="text-CSPipeColor">|</span>
         <button
-          className={`${buttonStyles} ${
-            currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-          }`}
+          className={`${buttonStyles} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+            }`}
           onClick={() => handlePrevPage()}
           disabled={currentPage === 1}
         >
@@ -232,11 +220,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
               return (
                 <button
                   key={pageNumber}
-                  className={`${firstPageNumStyle} ${
-                    currentPage === pageNumber
+                  className={`${firstPageNumStyle} ${currentPage === pageNumber
                       ? currentPageNumStyle
                       : defaultPageNumSpaceStyle
-                  }`}
+                    }`}
                   onClick={() => handleClick(Number(pageNumber))}
                   disabled={currentPage === pageNumber || pageNumber === "..."}
                 >
@@ -247,11 +234,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
               return (
                 <button
                   key={pageNumber}
-                  className={`${lastPageNumStyle} ${
-                    currentPage === pageNumber
+                  className={`${lastPageNumStyle} ${currentPage === pageNumber
                       ? currentPageNumStyle
                       : defaultPageNumStyle
-                  }`}
+                    }`}
                   onClick={() => handleClick(Number(pageNumber))}
                   disabled={currentPage === pageNumber || pageNumber === "..."}
                 >
@@ -262,11 +248,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
               return (
                 <button
                   key={pageNumber}
-                  className={`${middlePageNumStyle} ${
-                    currentPage === pageNumber
+                  className={`${middlePageNumStyle} ${currentPage === pageNumber
                       ? currentPageNumStyle
                       : defaultPageNumStyle
-                  }`}
+                    }`}
                   onClick={() => handleClick(Number(pageNumber))}
                   disabled={currentPage === pageNumber || pageNumber === "..."}
                 >
@@ -277,11 +262,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           })}
         </div>
         <button
-          className={`${buttonStyles} ${
-            currentPage === totalPages
+          className={`${buttonStyles} ${currentPage === totalPages
               ? "text-CSSecondaryGray"
               : "text-CSDarkGray"
-          }`}
+            }`}
           onClick={() => handleNextPage()}
           disabled={currentPage === totalPages}
         >
@@ -289,11 +273,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         </button>
         <span className="text-CSPipeColor">|</span>
         <button
-          className={`${buttonStyles} ${
-            currentPage === totalPages
+          className={`${buttonStyles} ${currentPage === totalPages
               ? "text-CSSecondaryGray"
               : "text-CSDarkGray"
-          }`}
+            }`}
           onClick={() => handleLastPage()}
           disabled={currentPage === totalPages}
         >
@@ -302,164 +285,174 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       </div>
     )
   ) : // arrows with space
-  space ? (
-    <div className={containerClassName}>
-      <button
-        className={`${arrowButtonStyle} ${
-          currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-        }`}
-        onClick={() => handleFirstPage()}
-        disabled={currentPage === 1}
-      >
-        <FiChevronsLeft size={20} />
-      </button>
-      <span className="text-CSPipeColor">|</span>
-      <button
-        className={`${arrowButtonStyle} ${
-          currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-        }`}
-        onClick={() => handlePrevPage()}
-        disabled={currentPage === 1}
-      >
-        <FiChevronLeft size={20} />
-      </button>
-      <div className="flex">
-        {pageNumbers.map((pageNumber) => (
-          <button
-            key={pageNumber}
-            className={`${pagesSpaceStyle} ${
-              currentPage === pageNumber
-                ? currentPageNumStyle
-                : "text-CSDarkGray"
+    space ? (
+      <div className={containerClassName}>
+        <button
+          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+            }`}
+          onClick={() => handleFirstPage()}
+          disabled={currentPage === 1}
+        >
+          {/* Left Icon */}
+          <div className="text-[20px]">
+            <ChevronsLeft />
+          </div>
+
+        </button>
+        <span className="text-CSPipeColor">|</span>
+        <button
+          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+            }`}
+          onClick={() => handlePrevPage()}
+          disabled={currentPage === 1}
+        >
+          <div className="text-[20px]">
+            <ChevronLeft />
+          </div>
+
+        </button>
+        <div className="flex">
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              className={`${pagesSpaceStyle} ${currentPage === pageNumber
+                  ? currentPageNumStyle
+                  : "text-CSDarkGray"
+                } ${isSmallScreen ? "ml-1" : "ml-2"}`}
+              onClick={() => handleClick(Number(pageNumber))}
+              disabled={currentPage === pageNumber || pageNumber === "..."}
+            >
+              {pageNumber}
+            </button>
+          ))}
+        </div>
+        <button
+          className={`${arrowButtonStyle} ${currentPage === totalPages
+              ? "text-CSSecondaryGray"
+              : "text-CSDarkGray"
             } ${isSmallScreen ? "ml-1" : "ml-2"}`}
-            onClick={() => handleClick(Number(pageNumber))}
-            disabled={currentPage === pageNumber || pageNumber === "..."}
-          >
-            {pageNumber}
-          </button>
-        ))}
+          onClick={() => handleNextPage()}
+          disabled={currentPage === totalPages}
+        >
+          <div className="text-[20px] rotate-180">
+            <ChevronLeft />
+          </div>
+
+        </button>
+        <span className="text-CSPipeColor">|</span>
+        <button
+          className={`${arrowButtonStyle} ${currentPage === totalPages
+              ? "text-CSSecondaryGray"
+              : "text-CSDarkGray"
+            }`}
+          onClick={() => handleLastPage()}
+          disabled={currentPage === totalPages}
+        >
+          <div className="text-[20px] rotate-180">
+            <ChevronsLeft />
+          </div>
+        </button>
       </div>
-      <button
-        className={`${arrowButtonStyle} ${
-          currentPage === totalPages
-            ? "text-CSSecondaryGray"
-            : "text-CSDarkGray"
-        } ${isSmallScreen ? "ml-1" : "ml-2"}`}
-        onClick={() => handleNextPage()}
-        disabled={currentPage === totalPages}
-      >
-        <FiChevronRight size={20} />
-      </button>
-      <span className="text-CSPipeColor">|</span>
-      <button
-        className={`${arrowButtonStyle} ${
-          currentPage === totalPages
-            ? "text-CSSecondaryGray"
-            : "text-CSDarkGray"
-        }`}
-        onClick={() => handleLastPage()}
-        disabled={currentPage === totalPages}
-      >
-        <FiChevronsRight size={20} />
-      </button>
-    </div>
-  ) : (
-    // arrows without space
-    <div className={containerClassName}>
-      <button
-        className={`${arrowButtonStyle} ${
-          currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-        }`}
-        onClick={() => handleFirstPage()}
-        disabled={currentPage === 1}
-      >
-        <FiChevronsLeft size={20} />
-      </button>
-      <span className="text-CSPipeColor">|</span>
-      <button
-        className={`${arrowButtonStyle} ${
-          currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
-        }`}
-        onClick={() => handlePrevPage()}
-        disabled={currentPage === 1}
-      >
-        <FiChevronLeft size={20} />
-      </button>
-      <div className="flex">
-        {pageNumbers.map((pageNumber, index) => {
-          if (!space && index === 0) {
-            return (
-              <button
-                key={pageNumber}
-                className={`${firstPageNumStyle} ${
-                  currentPage === pageNumber
-                    ? currentPageNumStyle
-                    : defaultPageNumSpaceStyle
-                }`}
-                onClick={() => handleClick(Number(pageNumber))}
-                disabled={currentPage === pageNumber || pageNumber === "..."}
-              >
-                {pageNumber}
-              </button>
-            );
-          } else if (index === pageNumbers.length - 1) {
-            return (
-              <button
-                key={pageNumber}
-                className={`${lastPageNumStyle} ${
-                  currentPage === pageNumber
-                    ? currentPageNumStyle
-                    : defaultPageNumStyle
-                }`}
-                onClick={() => handleClick(Number(pageNumber))}
-                disabled={currentPage === pageNumber || pageNumber === "..."}
-              >
-                {pageNumber}
-              </button>
-            );
-          } else {
-            return (
-              <button
-                key={pageNumber}
-                className={`${middlePageNumStyle} ${
-                  currentPage === pageNumber
-                    ? currentPageNumStyle
-                    : defaultPageNumStyle
-                }`}
-                onClick={() => handleClick(Number(pageNumber))}
-                disabled={currentPage === pageNumber || pageNumber === "..."}
-              >
-                {pageNumber}
-              </button>
-            );
-          }
-        })}
+    ) : (
+      // arrows without space
+      <div className={containerClassName}>
+        <button
+          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+            }`}
+          onClick={() => handleFirstPage()}
+          disabled={currentPage === 1}
+        >
+          <div className="text-[20px]">
+            <ChevronsLeft />
+          </div>
+
+        </button>
+        <span className="text-CSPipeColor">|</span>
+        <button
+          className={`${arrowButtonStyle} ${currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"
+            }`}
+          onClick={() => handlePrevPage()}
+          disabled={currentPage === 1}
+        >
+          <div className="text-[20px]">
+            <ChevronLeft />
+          </div>
+        </button>
+        <div className="flex">
+          {pageNumbers.map((pageNumber, index) => {
+            if (!space && index === 0) {
+              return (
+                <button
+                  key={pageNumber}
+                  className={`${firstPageNumStyle} ${currentPage === pageNumber
+                      ? currentPageNumStyle
+                      : defaultPageNumSpaceStyle
+                    }`}
+                  onClick={() => handleClick(Number(pageNumber))}
+                  disabled={currentPage === pageNumber || pageNumber === "..."}
+                >
+                  {pageNumber}
+                </button>
+              );
+            } else if (index === pageNumbers.length - 1) {
+              return (
+                <button
+                  key={pageNumber}
+                  className={`${lastPageNumStyle} ${currentPage === pageNumber
+                      ? currentPageNumStyle
+                      : defaultPageNumStyle
+                    }`}
+                  onClick={() => handleClick(Number(pageNumber))}
+                  disabled={currentPage === pageNumber || pageNumber === "..."}
+                >
+                  {pageNumber}
+                </button>
+              );
+            } else {
+              return (
+                <button
+                  key={pageNumber}
+                  className={`${middlePageNumStyle} ${currentPage === pageNumber
+                      ? currentPageNumStyle
+                      : defaultPageNumStyle
+                    }`}
+                  onClick={() => handleClick(Number(pageNumber))}
+                  disabled={currentPage === pageNumber || pageNumber === "..."}
+                >
+                  {pageNumber}
+                </button>
+              );
+            }
+          })}
+        </div>
+        <button
+          className={`${arrowButtonStyle} ${currentPage === totalPages
+              ? "text-CSSecondaryGray"
+              : "text-CSDarkGray"
+            }`}
+          onClick={() => handleNextPage()}
+          disabled={currentPage === totalPages}
+        >
+          <div className="text-[20px] rotate-180">
+            <ChevronLeft />
+          </div>
+
+        </button>
+        <span className="text-CSPipeColor">|</span>
+        <button
+          className={`${arrowButtonStyle} ${currentPage === totalPages
+              ? "text-CSSecondaryGray"
+              : "text-CSDarkGray"
+            }`}
+          onClick={() => handleLastPage()}
+          disabled={currentPage === totalPages}
+        >
+          <div className="text-[20px] rotate-180">
+            <ChevronsLeft />
+          </div>
+        </button>
       </div>
-      <button
-        className={`${arrowButtonStyle} ${
-          currentPage === totalPages
-            ? "text-CSSecondaryGray"
-            : "text-CSDarkGray"
-        }`}
-        onClick={() => handleNextPage()}
-        disabled={currentPage === totalPages}
-      >
-        <FiChevronRight size={20} />
-      </button>
-      <span className="text-CSPipeColor">|</span>
-      <button
-        className={`${arrowButtonStyle} ${
-          currentPage === totalPages
-            ? "text-CSSecondaryGray"
-            : "text-CSDarkGray"
-        }`}
-        onClick={() => handleLastPage()}
-        disabled={currentPage === totalPages}
-      >
-        <FiChevronsRight size={20} />
-      </button>
-    </div>
-  );
+    );
 };
 
 export default Pagination;

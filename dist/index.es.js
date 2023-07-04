@@ -1,5 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { FiChevronsLeft, FiChevronLeft, FiChevronRight, FiChevronsRight } from 'react-icons/fi';
+
+function ChevronsLeft() {
+  return React.createElement("div", null, React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "none",
+    strokeWidth: "2",
+    viewBox: "0 0 24 24",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("polyline", {
+    points: "11 17 6 12 11 7"
+  }), React.createElement("polyline", {
+    points: "18 17 13 12 18 7"
+  })));
+}
+
+function ChevronLeft() {
+  return React.createElement("div", null, React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "none",
+    strokeWidth: "2",
+    viewBox: "0 0 24 24",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("polyline", {
+    points: "15 18 9 12 15 6"
+  })));
+}
 
 var Pagination = function Pagination(props) {
   var _a = useState(1),
@@ -216,9 +249,9 @@ var Pagination = function Pagination(props) {
       return handleFirstPage();
     },
     disabled: currentPage === 1
-  }, React.createElement(FiChevronsLeft, {
-    size: 20
-  })), React.createElement("span", {
+  }, React.createElement("div", {
+    className: "text-[20px]"
+  }, React.createElement(ChevronsLeft, null))), React.createElement("span", {
     className: "text-CSPipeColor"
   }, "|"), React.createElement("button", {
     className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"),
@@ -226,9 +259,9 @@ var Pagination = function Pagination(props) {
       return handlePrevPage();
     },
     disabled: currentPage === 1
-  }, React.createElement(FiChevronLeft, {
-    size: 20
-  })), React.createElement("div", {
+  }, React.createElement("div", {
+    className: "text-[20px]"
+  }, React.createElement(ChevronLeft, null))), React.createElement("div", {
     className: "flex"
   }, pageNumbers.map(function (pageNumber) {
     return React.createElement("button", {
@@ -245,9 +278,9 @@ var Pagination = function Pagination(props) {
       return handleNextPage();
     },
     disabled: currentPage === totalPages
-  }, React.createElement(FiChevronRight, {
-    size: 20
-  })), React.createElement("span", {
+  }, React.createElement("div", {
+    className: "text-[20px] rotate-180"
+  }, React.createElement(ChevronLeft, null))), React.createElement("span", {
     className: "text-CSPipeColor"
   }, "|"), React.createElement("button", {
     className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"),
@@ -255,9 +288,9 @@ var Pagination = function Pagination(props) {
       return handleLastPage();
     },
     disabled: currentPage === totalPages
-  }, React.createElement(FiChevronsRight, {
-    size: 20
-  }))) :
+  }, React.createElement("div", {
+    className: "text-[20px] rotate-180"
+  }, React.createElement(ChevronsLeft, null)))) :
   // arrows without space
   React.createElement("div", {
     className: containerClassName
@@ -267,9 +300,9 @@ var Pagination = function Pagination(props) {
       return handleFirstPage();
     },
     disabled: currentPage === 1
-  }, React.createElement(FiChevronsLeft, {
-    size: 20
-  })), React.createElement("span", {
+  }, React.createElement("div", {
+    className: "text-[20px]"
+  }, React.createElement(ChevronsLeft, null))), React.createElement("span", {
     className: "text-CSPipeColor"
   }, "|"), React.createElement("button", {
     className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-CSSecondaryGray" : "text-CSDarkGray"),
@@ -277,9 +310,9 @@ var Pagination = function Pagination(props) {
       return handlePrevPage();
     },
     disabled: currentPage === 1
-  }, React.createElement(FiChevronLeft, {
-    size: 20
-  })), React.createElement("div", {
+  }, React.createElement("div", {
+    className: "text-[20px]"
+  }, React.createElement(ChevronLeft, null))), React.createElement("div", {
     className: "flex"
   }, pageNumbers.map(function (pageNumber, index) {
     if (!space && index === 0) {
@@ -316,9 +349,9 @@ var Pagination = function Pagination(props) {
       return handleNextPage();
     },
     disabled: currentPage === totalPages
-  }, React.createElement(FiChevronRight, {
-    size: 20
-  })), React.createElement("span", {
+  }, React.createElement("div", {
+    className: "text-[20px] rotate-180"
+  }, React.createElement(ChevronLeft, null))), React.createElement("span", {
     className: "text-CSPipeColor"
   }, "|"), React.createElement("button", {
     className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-CSSecondaryGray" : "text-CSDarkGray"),
@@ -326,9 +359,9 @@ var Pagination = function Pagination(props) {
       return handleLastPage();
     },
     disabled: currentPage === totalPages
-  }, React.createElement(FiChevronsRight, {
-    size: 20
-  })));
+  }, React.createElement("div", {
+    className: "text-[20px] rotate-180"
+  }, React.createElement(ChevronsLeft, null))));
 };
 
 export { Pagination as default };
