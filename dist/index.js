@@ -9,7 +9,7 @@ var styles = {"main":"index-module_main__7DdGM","circle":"index-module_circle__G
 var Close = function Close() {
   return React.createElement(React.Fragment, null, React.createElement(tooltip.Tooltip, {
     position: "top",
-    text: "Close"
+    content: "Close"
   }, React.createElement("div", {
     className: styles.main
   }, React.createElement("button", {

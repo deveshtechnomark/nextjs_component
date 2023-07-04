@@ -6,7 +6,7 @@ import "tooltip/dist/index.css";
 const Close: React.FC = () => {
   return (
     <>
-      <Tooltip position="top" text="Close">
+      <Tooltip position="top" content="Close">
         <div className={styles.main}>
           <button
             className={`${styles.fromMiddle} ${styles.circle} ${styles.scaleUp}`}
