@@ -79,14 +79,14 @@ var Accordion = function Accordion(_a) {
   }, dataCollection.map(function (item, index) {
     return React.createElement("div", {
       key: index,
-      className: "border border-transparent ".concat(activeAccordions.includes(index) ? "border-b-textColor" : "border-b-borderColor", " cursor-pointer"),
+      className: "border border-transparent border-b-lightSilver cursor-pointer",
       onClick: one ? function () {
         return toggleAccordionOne(index);
       } : function () {
         return toggleAccordion(index);
       }
     }, React.createElement("div", {
-      className: "flex justify-between py-4 px-3 hover:bg-lightSilver ".concat(activeAccordions.includes(index) ? "bg-lightSilver" : "")
+      className: "flex justify-between py-4 px-3 hover:bg-whiteSmoke ".concat(activeAccordions.includes(index) ? "bg-whiteSmoke" : "")
     }, React.createElement(Typography.Typography, {
       type: "h6",
       className: "".concat(activeAccordions.includes(index) ? "text-textColor " : "text-textColor")

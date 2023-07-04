@@ -52,11 +52,7 @@ const Accordion: React.FC<AccordionProps> = ({
         {dataCollection.map((item, index) => (
           <div
             key={index}
-            className={`border border-transparent ${
-              activeAccordions.includes(index)
-                ? "border-b-textColor"
-                : "border-b-borderColor"
-            } cursor-pointer`}
+            className={`border border-transparent border-b-lightSilver cursor-pointer`}
             onClick={
               one
                 ? () => toggleAccordionOne(index)
@@ -64,8 +60,8 @@ const Accordion: React.FC<AccordionProps> = ({
             }
           >
             <div
-              className={`flex justify-between py-4 px-3 hover:bg-lightSilver ${
-                activeAccordions.includes(index) ? "bg-lightSilver" : ""
+              className={`flex justify-between py-4 px-3 hover:bg-whiteSmoke ${
+                activeAccordions.includes(index) ? "bg-whiteSmoke" : ""
               }`}
             >
               <Typography

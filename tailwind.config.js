@@ -4,8 +4,8 @@ module.exports = {
     extend: {
       colors: {
         textColor: "#333333",
-        lightSilver: "#F6F6F6",
-        borderColor: "#D8D8D8",
+        whiteSmoke: "#F6F6F6",
+        lightSilver: "#D8D8D8",
       },
       screens: {
         sm: "1360px",
