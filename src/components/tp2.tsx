@@ -1,0 +1,182 @@
+import React, { useState, useEffect } from 'react';
+import styles from "./styles/timepicker.module.css";
+
+interface TimepickerProps { }
+
+const Timepicker: React.FC<TimepickerProps> = () => {
+    const hourDigits: number[] = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const minuteDigits: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+
+    const [selectedHourDigit, setSelectedHourDigit] = useState<number>(12);
+    const [selectedMinuteDigit, setSelectedMinuteDigit] = useState<number>(0);
+    const [isAM, setIsAM] = useState<boolean>(true);
+    const [showHourDigits, setShowHourDigits] = useState<boolean>(true);
+    const [showMinuteDigits, setShowMinuteDigits] = useState<boolean>(false);
+
+    const handleHourSelectDigit = (digit: number) => {
+        setSelectedHourDigit(digit);
+        const timer = setTimeout(() => {
+            setShowMinuteDigits(true);
+        }, 3000);
+        return () => {
+            clearTimeout(timer);
+        };
+    };
+
+    const handleMinuteSelectDigit = (digit: number) => {
+        setSelectedMinuteDigit(digit);
+    };
+
+    const toggleSetAM = () => {
+        setIsAM(!isAM);
+    };
+
+    const showHourClock = () => {
+        setShowHourDigits((showHourDigits) => !showHourDigits);
+        setShowMinuteDigits(false);
+    };
+
+    const showMinuteClock = () => {
+        setShowMinuteDigits(!showMinuteDigits);
+        setShowHourDigits(false);
+    };
+
+    const renderHourDigits = hourDigits.map((digit, index) => (
+        <div
+            key={digit}
+            className={`absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit === selectedHourDigit ? 'text-white' : 'text-black'
+                }`}
+            style={{
+                transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)`,
+                top: '46%',
+                left: '47%'
+            }}
+            onClick={() => handleHourSelectDigit(digit)}
+        >
+            {digit}
+        </div>
+    ));
+
+    const renderMinuteDigits = minuteDigits.map((digit, index) => {
+        const formattedDigit = digit < 10 ? `0${digit}` : digit;
+        return (
+            <div
+                key={digit}
+                className={`absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit === selectedMinuteDigit ? 'text-white' : 'text-black'
+                    }`}
+                style={{
+                    transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)`,
+                    top: '46%',
+                    left: '47%'
+                }}
+                onClick={() => setSelectedMinuteDigit(digit)}
+            >
+                {formattedDigit}
+            </div>
+        );
+    });
+
+    return (
+        <>
+            <div className="flex flex-col items-center justify-center mt-3">
+                <div className="flex items-center mb-4">
+                    <div className="flex items-center space-x-1">
+                        <input
+                            className={`w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showHourDigits === true ? 'bg-CSHoverGreen text-CSgreen' : 'bg-CSLightGray'
+                                }`}
+                            type="text"
+                            placeholder="00"
+                            readOnly
+                            defaultValue={`${selectedHourDigit < 10 ? `0${selectedHourDigit}` : selectedHourDigit !== 12 ? selectedHourDigit : '00'}`}
+                            onClick={showHourClock}
+                            style={{ outline: 'none' }}
+                        />
+                        <span className="text-gray-600">:</span>
+                        <input
+                            className={`w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showMinuteDigits === true ? 'bg-CSHoverGreen text-CSgreen' : 'bg-CSLightGray'
+                                }`}
+                            type="text"
+                            placeholder="00"
+                            readOnly
+                            defaultValue={`${selectedMinuteDigit < 10 ? `0${selectedMinuteDigit}` : selectedMinuteDigit}`}
+                            onClick={showMinuteClock}
+                            style={{ outline: 'none' }}
+                        />
+                    </div>
+                    <div className="grid grid-cols-2 ml-10 border border-gray-300 rounded-md">
+                        <div
+                            className={`w-10 h-8 ${isAM && 'bg-CSHoverGreen text-CSgreen'} transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer`}
+                            onClick={toggleSetAM}
+                        >
+                            AM
+                        </div>
+                        <div
+                            className={`w-10 h-8 ${!isAM && 'bg-CSHoverGreen text-CSgreen'} transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer`}
+                            onClick={toggleSetAM}
+                        >
+                            PM
+                        </div>
+                    </div>
+                </div>
+                {!showMinuteDigits && showHourDigits && (
+                    <div className="w-56 h-56 bg-CSLightGray rounded-full relative flex items-center justify-center">
+                        <div className={`w-full h-full relative -left-1 ${styles.scaleDownDiv}`}>
+                            {renderHourDigits}
+                            {hourDigits.map((digit, index) =>
+                                digit === selectedHourDigit && (
+                                    <React.Fragment key={digit}>
+                                        <div
+                                            className={`${styles.divAnimation} absolute w-10 h-10 bg-CSgreen rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
+                                            style={{ top: '41%', left: '42.6%', transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` }}
+                                            onClick={() => handleHourSelectDigit(selectedHourDigit === 12 ? 1 : selectedHourDigit + 1)}
+                                        ></div>
+                                        <div 
+                                            className="absolute w-0.5 h-[90px] bg-CSgreen transform -translate-x-1/2 -translate-y-1/2"
+                                            style={{
+                                                top: '51%',
+                                                left: '52%',
+                                                transformOrigin: 'center top',
+                                                transform: `translateX(-50%) rotate(${index * 30}deg) translateY(-90px)`
+                                            }}
+                                        ></div>
+                                    </React.Fragment>
+                                )
+                            )}
+                            <div className="absolute w-2 h-2 bg-CSgreen rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56.3%', left: '52%' }}></div>
+                        </div>
+                    </div>
+                )}
+                {showMinuteDigits && (
+                    <div className="w-56 h-56 bg-CSLightGray rounded-full relative flex items-center justify-center">
+                        <div className={`w-full h-full relative -left-1 ${styles.scaleUpDiv}`}>
+                            {renderMinuteDigits}
+                            {minuteDigits.map((digit, index) =>
+                                digit === selectedMinuteDigit && (
+                                    <React.Fragment key={digit}>
+                                        <div
+                                            className={`${styles.divAnimation} absolute w-10 h-10 bg-CSgreen rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
+                                            style={{ top: '41%', left: '42.6%', transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` }}
+                                            onClick={() => handleMinuteSelectDigit(selectedMinuteDigit === 0 ? 1 : selectedMinuteDigit + 1)}
+                                        ></div>
+                                        <div
+                                            className="absolute w-0.5 h-[90px] bg-CSgreen transform -translate-x-1/2 -translate-y-1/2"
+                                            style={{
+                                                top: '51%',
+                                                left: '52%',
+                                                transformOrigin: 'center top',
+                                                transform: `translateX(-50%) rotate(${index * 30}deg) translateY(-90px)`
+                                            }}
+                                        ></div>
+                                    </React.Fragment>
+                                )
+                            )}
+                            <div className="absolute w-2 h-2 bg-CSgreen rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56.3%', left: '52%' }}></div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </>
+    );
+};
+
+export { Timepicker };
