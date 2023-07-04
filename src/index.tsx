@@ -39,6 +39,7 @@ const Textarea: React.FC<TextareaProps> = ({
       setErr(true);
     } else {
       setErr(false);
+      setFocus(false);
     }
   };
 
@@ -58,7 +59,7 @@ const Textarea: React.FC<TextareaProps> = ({
   const parsedRows = rows as number;
 
   return (
-    <div className="flex flex-col w-full text-sm laptop:text-base">
+    <div className="flex flex-col w-full text-sm sm:text-base">
       {label && (
         <label
           className={`${
@@ -74,7 +75,7 @@ const Textarea: React.FC<TextareaProps> = ({
       <div
         className={`${
           !err &&
-          "animated-input relative inline-block before:absolute before:bottom-[1.5px] before:left-0 before:block before:w-0 before:h-px before:bg-success before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
+          "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-success before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
         }`}
       >
         <Typography type="h6">

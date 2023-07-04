@@ -71,6 +71,7 @@ var Textarea = function Textarea(_a) {
       setErr(true);
     } else {
       setErr(false);
+      setFocus(false);
     }
   };
   var handleFocus = function handleFocus() {
@@ -86,13 +87,13 @@ var Textarea = function Textarea(_a) {
   };
   var parsedRows = rows;
   return React.createElement("div", {
-    className: "flex flex-col w-full text-sm laptop:text-base"
+    className: "flex flex-col w-full text-sm sm:text-base"
   }, label && React.createElement("label", {
     className: "".concat(err ? "text-error" : focus ? "text-success" : "text-defaultColor")
   }, React.createElement(Typography, {
     type: "label"
   }, label, required && "*")), React.createElement("div", {
-    className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-[1.5px] before:left-0 before:block before:w-0 before:h-px before:bg-success before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
+    className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-success before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement(Typography, {
     type: "h6"
   }, React.createElement("textarea", __assign({
