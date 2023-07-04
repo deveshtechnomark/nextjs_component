@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styles from "./style.module.scss";
+import styles from "./index.module.scss";
 import "./index.css";
 
 interface TooltipProps {
@@ -13,14 +13,14 @@ const Tooltip: React.FC<TooltipProps> = ({ content, position, children }) => {
   const textLength = text ? text.length : 0;
   return (
     <div
-      className={`${styles.tooltip} relative cursor-pointer p-2 text-2xl max-w-fit`}
+      className={`${styles.tooltip} relative cursor-pointer p-2 text-sm sm:text-base max-w-fit`}
     >
       <span
         className={`${
           styles.tool
         } flex justify-center items-center min-w-[300px] ${
-          textLength <= 6 && "!min-w-[100px]"
-        } tooltipText absolute bg-[#bcf1e8] text-[#333333] whitespace-nowrap px-[10px] py-[15px] border border-[#02b89d] rounded-md opacity-0 before:absolute before:w-3 before:h-3 before:bg-[#bcf1e8] before:border-t before:border-[#02b89d] before:border-r ${
+          textLength <= 6 && "!min-w-[80px]"
+        } tooltipText absolute bg-[#bcf1e8] text-[#333333] whitespace-nowrap p-[10px] border border-[#02b89d] rounded-md opacity-0 before:absolute before:w-3 before:h-3 before:bg-[#bcf1e8] before:border-t before:border-[#02b89d] before:border-r ${
           position === "top" &&
           `${styles.top} left-1/2 transform -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 before:bottom-[-7px] before:transform before:rotate-[135deg]`
         } 

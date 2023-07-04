@@ -8,7 +8,7 @@ module.exports = {
         borderColor: "#02B89D",
       },
       screens: {
-        sm: "1300px",
+        sm: "1360px",
         md: "1920px",
       },
       fontFamily: {
