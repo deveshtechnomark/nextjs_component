@@ -89,18 +89,18 @@ var Accordion = function Accordion(_a) {
       className: "flex justify-between py-4 px-3 hover:bg-whiteSmoke ".concat(activeAccordions.includes(index) ? "bg-whiteSmoke" : "")
     }, React.createElement(Typography.Typography, {
       type: "h6",
-      className: "".concat(activeAccordions.includes(index) ? "text-textColor " : "text-textColor")
+      className: "".concat(activeAccordions.includes(index) ? "text-darkCharcoal " : "text-darkCharcoal")
     }, item.question), React.createElement("span", {
       className: "flex justify-center items-center ml-6"
     }, icon ? React.createElement("div", null, React.createElement("div", {
-      className: "w-[16px] h-[2px] bg-textColor"
+      className: "w-[16px] h-[2px] bg-darkCharcoal"
     }), React.createElement("div", {
-      className: "w-[16px] bg-textColor transition-all duration-500 ".concat(activeAccordions.includes(index) ? "plus h-0" : "transform translate-x-0 -translate-y-0.5 -rotate-90 h-[2px]")
+      className: "w-[16px] bg-darkCharcoal transition-all duration-500 ".concat(activeAccordions.includes(index) ? "plus h-0" : "transform translate-x-0 -translate-y-0.5 -rotate-90 h-[2px]")
     })) : React.createElement("span", {
       className: "transition-all duration-500 ".concat(activeAccordions.includes(index) ? "-rotate-180" : "")
     }, React.createElement(ChevronDown, null)))), React.createElement("div", null, React.createElement(Typography.Typography, {
       type: "h6",
-      className: "text-textColor px-3 transition-all duration-[600ms] ".concat(activeAccordions.includes(index) ? "my-2" : "")
+      className: "text-darkCharcoal px-3 transition-all duration-[600ms] ".concat(activeAccordions.includes(index) ? "my-2" : "")
     }, activeAccordions.includes(index) ? "".concat(item.answer) : "")));
   })));
 };

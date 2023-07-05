@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./index.css";
 import { Typography } from "Typography";
 import "Typography/dist/index.css";
-
 import ChevronDown from "./icons/ChevronDown";
 
 interface AccordionItem {
@@ -68,8 +67,8 @@ const Accordion: React.FC<AccordionProps> = ({
                 type="h6"
                 className={`${
                   activeAccordions.includes(index)
-                    ? "text-textColor "
-                    : "text-textColor"
+                    ? "text-darkCharcoal "
+                    : "text-darkCharcoal"
                 }`}
               >
                 {item.question}
@@ -77,9 +76,9 @@ const Accordion: React.FC<AccordionProps> = ({
               <span className="flex justify-center items-center ml-6">
                 {icon ? (
                   <div>
-                    <div className="w-[16px] h-[2px] bg-textColor"></div>
+                    <div className="w-[16px] h-[2px] bg-darkCharcoal"></div>
                     <div
-                      className={`w-[16px] bg-textColor transition-all duration-500 ${
+                      className={`w-[16px] bg-darkCharcoal transition-all duration-500 ${
                         activeAccordions.includes(index)
                           ? "plus h-0"
                           : "transform translate-x-0 -translate-y-0.5 -rotate-90 h-[2px]"
@@ -100,7 +99,7 @@ const Accordion: React.FC<AccordionProps> = ({
             <div>
               <Typography
                 type="h6"
-                className={`text-textColor px-3 transition-all duration-[600ms] ${
+                className={`text-darkCharcoal px-3 transition-all duration-[600ms] ${
                   activeAccordions.includes(index) ? "my-2" : ""
                 }`}
               >
