@@ -19,13 +19,13 @@ var Alert = function Alert(_a) {
       alertClass = "!bg-primary !text-pureWhite";
       break;
     case "error":
-      alertClass = "!bg-errorColor !text-errorText";
+      alertClass = "!bg-errorColor !text-darkRed";
       break;
     case "warning":
-      alertClass = "!bg-warningColor !text-warningText";
+      alertClass = "!bg-warningColor !text-darkOrange";
       break;
     case "info":
-      alertClass = "!bg-infoColor !text-infoText";
+      alertClass = "!bg-infoColor !text-darkBlue";
       break;
     default:
       alertClass = "!bg-primary !text-pureWhite";

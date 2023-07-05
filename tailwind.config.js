@@ -4,13 +4,13 @@ module.exports = {
     extend: {
       colors: {
         primary: "#02B89D",
-        pureWhite: "#FFFFFF",
+        pureWhite: "#FFF",
         errorColor: "#F8D7DA",
-        errorText: "#DC3545",
+        darkRed: "#DC3545",
         warningColor: "#FFF3CD",
-        warningText: "#664D03",
+        darkOrange: "#664D03",
         infoColor: "#E7F1FF",
-        infoText: "#0A58CA",
+        darkBlue: "#0A58CA",
       },
       screens: {
         sm: "1360px",
