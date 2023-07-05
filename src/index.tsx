@@ -128,7 +128,7 @@ const Password: React.FC<PasswordProps> = ({
             <span
               className={`${
                 isValid &&
-                "line-through ml-[7px] decoration-gray-500 text-gray-500"
+                "line-through ml-[7px] decoration-[#979797] text-[#979797]"
               }`}
             >
               {requirementList[item.index]}
