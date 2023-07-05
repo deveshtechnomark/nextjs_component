@@ -50,44 +50,44 @@ const Button: React.FC<ButtonProps> = ({
           className?.includes("btn-sm") && "py-[3.5px] px-[10px] text-sm"
         } ${
           className?.includes("btn-lg") && "py-[12px] px-[20px]"
-        } bg-white text-[#6E6D7A] relative overflow-hidden py-[6px] px-[15px] text-base group ${
-          variant === "btn" && "!bg-[#D8D8D8] !text-[#6E6D7A]"
+        } bg-pureWhite text-slatyGrey relative overflow-hidden py-[6px] px-[15px] text-base group ${
+          variant === "btn" && "!bg-lightSilver !text-slatyGrey"
         } ${
           variant === "btn-primary" &&
-          "!bg-[#02B89D] !text-white hover:!bg-[#029882]"
+          "!bg-primary !text-pureWhite hover:!bg-darkPrimary"
         } ${
           variant === "btn-secondary" &&
-          "!bg-[#069CDE] !text-white hover:!bg-[#0281B9]"
+          "!bg-blueColor !text-pureWhite hover:!bg-darkBlue"
         } ${
           variant === "btn-success" &&
-          "!bg-[#198754] !text-white hover:!bg-[#146C43]"
+          "!bg-successColor !text-pureWhite hover:!bg-darkSuccess"
         } ${
           variant === "btn-error" &&
-          "!bg-[#DC3545] !text-white hover:!bg-[#B02A37]"
+          "!bg-defaultRed !text-pureWhite hover:!bg-darkRed"
         } ${
           variant === "btn-warning" &&
-          "!bg-[#FFC107] !text-white hover:!bg-[#CC9A06]"
-        } ${variant === "primary" && "!text-[#02B89D]"} ${
-          variant === "secondary" && "!text-[#069CDE]"
-        } ${variant === "success" && "!text-[#198754]"} ${
-          variant === "error" && "!text-[#DC3545]"
-        } ${variant === "warning" && "!text-[#FFC107]"} ${
-          variant === "btn-outline" && "!text-[#6E6D7A] border border-[#6E6D7A]"
+          "!bg-yellowColor !text-pureWhite hover:!bg-darkYellow"
+        } ${variant === "primary" && "!text-primary"} ${
+          variant === "secondary" && "!text-blueColor"
+        } ${variant === "success" && "!text-successColor"} ${
+          variant === "error" && "!text-defaultRed"
+        } ${variant === "warning" && "!text-yellowColor"} ${
+          variant === "btn-outline" && "!text-slatyGrey border border-slatyGrey"
         } ${
           variant === "btn-outline-primary" &&
-          "!text-[#02B89D] hover:!text-[#029882] border border-[#02B89D] hover:border-[#029882] hover:!bg-[#E0F8F4]"
+          "!text-primary hover:!text-darkPrimary border border-primary hover:border-darkPrimary hover:!bg-[#E0F8F4]"
         } ${
           variant === "btn-outline-secondary" &&
-          "!text-[#069CDE] hover:!text-[#0281B9] border border-[#069CDE] hover:border-[#0281B9] hover:!bg-[#E5F5FC]"
+          "!text-blueColor hover:!text-darkBlue border border-blueColor hover:border-darkBlue hover:!bg-[#E5F5FC]"
         } ${
           variant === "btn-outline-success" &&
-          "!text-[#198754] hover:!text-[#146C43] border border-[#198754] hover:border-[#146C43] hover:!bg-[#D1E7DD]"
+          "!text-successColor hover:!text-darkSuccess border border-successColor hover:border-darkSuccess hover:!bg-[#D1E7DD]"
         } ${
           variant === "btn-outline-error" &&
-          "!text-[#DC3545] hover:!text-[#B02A37] border border-[#DC3545] hover:border-[#B02A37] hover:!bg-[#F8D7DA]"
+          "!text-defaultRed hover:!text-darkRed border border-defaultRed hover:border-darkRed hover:!bg-[#F8D7DA]"
         } ${
           variant === "btn-outline-warning" &&
-          "!text-[#FFC107] hover:!text-[#CC9A06] border border-[#FFC107] hover:border-[#CC9A06] hover:!bg-[#FFF3CD]"
+          "!text-yellowColor hover:!text-darkYellow border border-yellowColor hover:border-darkYellow hover:!bg-[#FFF3CD]"
         }`}
         type={type}
         disabled={disabled}
