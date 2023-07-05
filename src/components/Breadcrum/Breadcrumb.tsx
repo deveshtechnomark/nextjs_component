@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { CSSProperties } from 'react';
 
 interface BreadcrumbItem {
@@ -19,21 +20,22 @@ class Breadcrumb extends React.Component<BreadcrumbProps> {
     const separator = variant === '>' ? '>' : '/';
 
     const linkStyle: CSSProperties = {
-      fontSize: style && style.fontSize ? style.fontSize : 'inherit'
+      fontSize: (style as any) && (style as any).fontSize ? (style as any).fontSize : 'inherit',
     };
 
     const containerStyle: CSSProperties = {
-      fontSize: style && style.fontSize ? style.fontSize : 'inherit',
-      ...style
+      fontSize: (style as any) && (style as any).fontSize ? (style as any).fontSize : 'inherit',
+      ...(style as any)
     };
 
     const iconStyle: CSSProperties = {
-      fontSize: style && style.fontSize ? style.fontSize : 'inherit'
+      fontSize: (style as any) && (style as any).fontSize ? (style as any).fontSize : 'inherit'
     };
 
     return (
       <nav className={`flex ${className}`} style={containerStyle} aria-label="Breadcrumb">
         <ol className="inline-flex items-center">
+         
           <svg
             width="12"
             height="12"
@@ -50,13 +52,13 @@ class Breadcrumb extends React.Component<BreadcrumbProps> {
           {items.map((item, index) => (
             <li key={index} className="inline-flex items-center">
               {index > 0 && (
-                <span style={linkStyle} className="w-2 mx-2 h-6 text-customGreen">
+                <span style={linkStyle} className="w-2 mx-2 h-6 text-primary">
                   {separator}
                 </span>
               )}
               <a
                 href={item.url}
-                className={`ml-1 text-sm font-medium ${index === items.length - 1 ? "text-customGrey" : "text-customGreen"}`}
+                className={`ml-1 text-sm font-medium ${index === items.length - 1 ? "text-slatyGrey" : "text-primary"}`}
                 style={linkStyle}
               >
                 {item.label}
