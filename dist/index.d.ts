@@ -1,4 +1,5 @@
 import React from "react";
+import 'typography-ts/dist/index.css';
 import "./styles.css";
 interface InputMaskProps {
     type: string;
@@ -7,7 +8,6 @@ interface InputMaskProps {
     setDelimiter?: string[];
     splitLengths?: number[];
     US: boolean;
-    id: string;
     label?: string;
 }
 declare const InputMask: React.FC<InputMaskProps>;

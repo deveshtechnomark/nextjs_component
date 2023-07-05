@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Typography } from "typography-ts";
+import 'typography-ts/dist/index.css';
 import "./styles.css";
 
 interface InputMaskProps {
@@ -8,7 +10,6 @@ interface InputMaskProps {
   setDelimiter?: string[];
   splitLengths?: number[];
   US: boolean;
-  id: string;
   label?: string;
 }
 
@@ -18,7 +19,6 @@ const InputMask: React.FC<InputMaskProps> = ({
   className,
   setDelimiter,
   splitLengths,
-  id,
   US,
   label,
 }) => {
@@ -216,13 +216,12 @@ const InputMask: React.FC<InputMaskProps> = ({
 
   return (
     <>
-      <label className="block text-xs text-gray-600" htmlFor={id}>
+      <Typography type='label' className="block text-slatyGrey">
         {label || defaultLabel}
-      </label>
+      </Typography>
       <input
         type="text"
-        id={id}
-        className={`${className} block w-auto text-xs border-b-2 border-gray-300 outline-none bg-transparent`}
+        className={`${className} block w-full border-b-[1px] border-lightSilver outline-none bg-transparent`}
         onChange={changeHandler}
         value={value}
         placeholder={defaultPlaceholder}

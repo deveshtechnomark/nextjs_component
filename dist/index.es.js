@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Typography } from 'typography-ts';
+import 'typography-ts/dist/index.css';
 
 var InputMask = function InputMask(_a) {
   var type = _a.type,
@@ -6,7 +8,6 @@ var InputMask = function InputMask(_a) {
     className = _a.className,
     setDelimiter = _a.setDelimiter,
     splitLengths = _a.splitLengths,
-    id = _a.id,
     US = _a.US,
     label = _a.label;
   setPrefix ? setPrefix.split("") : [];
@@ -176,13 +177,12 @@ var InputMask = function InputMask(_a) {
   };
   var defaultLabel = getDefaultLabel(type);
   var defaultPlaceholder = getDefaultPlaceholder(type);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("label", {
-    className: "block text-xs text-gray-600",
-    htmlFor: id
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Typography, {
+    type: 'label',
+    className: "block text-slatyGrey"
   }, label || defaultLabel), /*#__PURE__*/React.createElement("input", {
     type: "text",
-    id: id,
-    className: "".concat(className, " block w-auto text-xs border-b-2 border-gray-300 outline-none bg-transparent"),
+    className: "".concat(className, " block w-full border-b-[1px] border-lightSilver outline-none bg-transparent"),
     onChange: changeHandler,
     value: value,
     placeholder: defaultPlaceholder
