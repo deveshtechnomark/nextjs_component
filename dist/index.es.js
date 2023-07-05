@@ -94,10 +94,8 @@ var Textarea = function Textarea(_a) {
     type: "label"
   }, label, required && "*")), React.createElement("div", {
     className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
-  }, React.createElement(Typography, {
-    type: "h6"
   }, React.createElement("textarea", __assign({
-    className: "".concat(className, " py-1 px-3 border-b outline-none transition duration-600 w-full ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-slatyGrey"),
+    className: "".concat(className, " py-1 px-3 border-b outline-none transition duration-600 w-full h-[100%] ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-slatyGrey"),
     ref: textAreaRef,
     rows: parsedRows,
     id: id,
@@ -106,7 +104,7 @@ var Textarea = function Textarea(_a) {
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
     onChange: handleInputChange,
     onFocus: handleFocus
-  }, props)))), !err && supportingText && React.createElement(Typography, {
+  }, props))), !err && supportingText && React.createElement(Typography, {
     type: "h6"
   }, React.createElement("span", {
     className: "text-slatyGrey"
