@@ -106,13 +106,13 @@ const TextField: React.FC<TextFieldProps> = ({
   const inputClassName = `
   ${className}
   py-1 px-3 border-b outline-none transition duration-600 w-full
-  ${err ? "border-b-CSError" : focus ? "border-b-CSgreen" : "border-b-CSSecondaryGray"}
-  ${valid && "text-CSEmailSuccess font-normal text-[14px] font-proxima"}
-  ${showEmailError && "text-CSError"}
+  ${err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-slatyGrey"}
+  ${valid && "text-successColor font-normal text-[14px] font-proxima"}
+  ${showEmailError && "text-defaultRed"}
 `;
 
   const labelClassName = `
-  ${err ? "text-CSError" : focus ? "text-CSgreen" : "text-CSSecondaryGray"}
+  ${err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"}
 `;
 
 
@@ -126,7 +126,7 @@ const TextField: React.FC<TextFieldProps> = ({
       )}
       <div
         className={`${!err &&
-          "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-CSgreen before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
+          "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
           }`}
       >
         <input
@@ -145,23 +145,23 @@ const TextField: React.FC<TextFieldProps> = ({
       </div>
       {err && (
         <span
-          className="text-CSError absolute right-0 top-0 mt-5 mr-3 cursor-pointer"
-          onClick={handleClear}
+          className="text-defaultRed absolute right-0 top-0 mt-5 mr-3 cursor-pointer"
+          
         >
-          <div className="text-[20px]">
+          <div className="text-[20px]" onClick={handleClear}>
             <ClearIcon />
           </div>
 
         </span>
       )}
-      {valid && focus && (
-        <span className="text-CSgreen text-[20px] absolute right-0 top-0 mt-5 mr-3">
+      {valid && (
+        <span className="text-primary text-[20px] absolute right-0 top-0 mt-5 mr-3">
           <CheckIcon />
         </span>
       )}
-      {err && <span className="text-CSError">{errorMessage}</span>}
+      {err && <span className="text-defaultRed">{errorMessage}</span>}
       {!err && supportingText && (
-        <span className="text-CSSecondaryGray">{supportingText}</span>
+        <span className="text-slatyGrey">{supportingText}</span>
       )}
     </div>
   );

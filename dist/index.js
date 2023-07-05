@@ -162,14 +162,14 @@ var TextField = function TextField(_a) {
     setValid(false);
     setShowEmailError(false);
   };
-  var inputClassName = "\n  ".concat(className, "\n  py-1 px-3 border-b outline-none transition duration-600 w-full\n  ").concat(err ? "border-b-CSError" : focus ? "border-b-CSgreen" : "border-b-CSSecondaryGray", "\n  ").concat(valid && "text-CSEmailSuccess font-normal text-[14px] font-proxima", "\n  ").concat(showEmailError && "text-CSError", "\n");
-  var labelClassName = "\n  ".concat(err ? "text-CSError" : focus ? "text-CSgreen" : "text-CSSecondaryGray", "\n");
+  var inputClassName = "\n  ".concat(className, "\n  py-1 px-3 border-b outline-none transition duration-600 w-full\n  ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-slatyGrey", "\n  ").concat(valid && "text-successColor font-normal text-[14px] font-proxima", "\n  ").concat(showEmailError && "text-defaultRed", "\n");
+  var labelClassName = "\n  ".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey", "\n");
   return React.createElement("div", {
     className: "flex flex-col text-[14px] laptop:text-base relative font-proxima"
   }, label && React.createElement("label", {
     className: labelClassName
   }, label, required && "*"), React.createElement("div", {
-    className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-CSgreen before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
+    className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
     className: inputClassName,
     ref: inputRef,
@@ -182,16 +182,16 @@ var TextField = function TextField(_a) {
     onFocus: handleFocus,
     disabled: disabled
   }, props))), err && React.createElement("span", {
-    className: "text-CSError absolute right-0 top-0 mt-5 mr-3 cursor-pointer",
-    onClick: handleClear
+    className: "text-defaultRed absolute right-0 top-0 mt-5 mr-3 cursor-pointer"
   }, React.createElement("div", {
-    className: "text-[20px]"
-  }, React.createElement(ClearIcon, null))), valid && focus && React.createElement("span", {
-    className: "text-CSgreen text-[20px] absolute right-0 top-0 mt-5 mr-3"
+    className: "text-[20px]",
+    onClick: handleClear
+  }, React.createElement(ClearIcon, null))), valid && React.createElement("span", {
+    className: "text-primary text-[20px] absolute right-0 top-0 mt-5 mr-3"
   }, React.createElement(CheckIcon, null)), err && React.createElement("span", {
-    className: "text-CSError"
+    className: "text-defaultRed"
   }, errorMessage), !err && supportingText && React.createElement("span", {
-    className: "text-CSSecondaryGray"
+    className: "text-slatyGrey"
   }, supportingText));
 };
 

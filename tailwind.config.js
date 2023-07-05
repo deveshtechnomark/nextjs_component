@@ -7,18 +7,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        CSgreen: "#02B89D",
-        CSlightGreen: "#A9ECE1",
-        CSDarkGray: "#333333",
-        CSSecondaryGray: "#6E6D7A",
-        CSGrayChip: "#212529",
-        CSDropDownBG: "#FFFFFF",
-        CSListHover: "#F6F6F6",
-        CSChipBG: "#E9ECEF",
-        CSChipBorder: "#CED4DA",
-        CSPipeColor: "#D8D8D8",
-        CSError: "#DC3545",
-        CSEmailSuccess: "#198754",
+        primary: "#02B89D",
+        slatyGrey: "#6E6D7A",
+        defaultRed: "#DC3545",
+        successColor: "#198754"
       },
     },
   },
