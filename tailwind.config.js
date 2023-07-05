@@ -3,14 +3,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        borderColor: "#FFFFFF",
+        pureWhite: "#FFF",
         add: "#FECBA1",
         addText: "#CA6510",
-        blue: "#3266a8",
-        red: "#DC3545",
-        yellow: "#827c23",
-        green: "#02B89D",
-        purple: "#672496",
+        defaultBlue: "#0A58CA",
+        defaultRed: "#DC3545",
+        defaultOrange: "#664D03",
+        primary: "#02B89D",
+        skyBlue: "#0DCAF0",
       },
       screens: {
         sm: "1360px",
