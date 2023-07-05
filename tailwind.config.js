@@ -6,10 +6,9 @@ module.exports = {
     },
     extend: { 
       colors: {
-        CSLightGray: "#F4F4F4",
-        CSgreen: "#02B89D",
-        CSgreen: "#02B89D",
-        CSHoverGreen: '#CCF1EB'
+        lightGray: "#F4F4F4",
+        primary: "#02B89D",
+        slatyGreen: '#CCF1EB'
       }
     },
   },

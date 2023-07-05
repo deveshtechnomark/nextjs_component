@@ -94,7 +94,7 @@ const Timepicker: React.FC<TimepickerProps> = () => {
                     <div className="flex items-center space-x-1">
 
                         <input
-                            className={`w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showHourDigits === true ? 'bg-CSHoverGreen text-CSgreen' : 'bg-CSLightGray'
+                            className={`w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'
                                 }`}
                             type="text"
                             placeholder="00"
@@ -105,7 +105,7 @@ const Timepicker: React.FC<TimepickerProps> = () => {
                         />
                         <span className="text-gray-600">:</span>
                         <input
-                            className={`w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showMinuteDigits === true ? 'bg-CSHoverGreen text-CSgreen' : 'bg-CSLightGray'
+                            className={`w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'
                                 }`}
                             type="text"
                             placeholder="00"
@@ -117,13 +117,13 @@ const Timepicker: React.FC<TimepickerProps> = () => {
                     </div>
                     <div className="grid grid-cols-2 ml-10 border border-gray-300 rounded-md">
                         <div
-                            className={`w-10 h-8 ${isAM && 'bg-CSHoverGreen text-CSgreen'} transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer`}
+                            className={`w-10 h-8 ${isAM && 'bg-slatyGreen text-primary'} transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer`}
                             onClick={toggleSetAM}
                         >
                             AM
                         </div>
                         <div
-                            className={`w-10 h-8 ${!isAM && 'bg-CSHoverGreen text-CSgreen'} transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer`}
+                            className={`w-10 h-8 ${!isAM && 'bg-slatyGreen text-primary'} transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer`}
                             onClick={toggleSetAM}
                         >
                             PM
@@ -131,14 +131,14 @@ const Timepicker: React.FC<TimepickerProps> = () => {
                     </div>
                 </div>
                 {!showMinuteDigits && showHourDigits && (
-                    <div className="w-56 h-56 bg-CSLightGray rounded-full relative flex items-center justify-center">
+                    <div className="w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center">
                         <div className={`w-full h-full relative -left-1`}>
                             {renderHourDigits}
                             {hourDigits.map((digit, index) =>
                                 digit === selectedHourDigit && (
                                     <React.Fragment key={digit}>
                                         <div
-                                            className={`absolute w-10 h-10 bg-CSgreen rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
+                                            className={`absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
                                             style={{
                                                 top: '41%',
                                                 left: '42.6%',
@@ -148,7 +148,7 @@ const Timepicker: React.FC<TimepickerProps> = () => {
                                         >
                                         </div>
                                         <div
-                                            className="absolute w-0.5 h-[90px] bg-CSgreen transform -translate-x-1/2 -translate-y-1/2"
+                                            className="absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
                                             style={{
                                                 top: '51%',
                                                 left: '52%',
@@ -159,24 +159,24 @@ const Timepicker: React.FC<TimepickerProps> = () => {
                                     </React.Fragment>
                                 )
                             )}
-                            <div className="absolute w-2 h-2 bg-CSgreen rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56.3%', left: '52%' }}></div>
+                            <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56.3%', left: '52%' }}></div>
                         </div>
                     </div>
                 )} 
                 {showMinuteDigits && (
-                    <div className="w-56 h-56 bg-CSLightGray rounded-full relative flex items-center justify-center">
+                    <div className="w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center">
                         <div className={`w-full h-full relative -left-1 ${styles.scaleUpDiv}`}>
                             {renderMinuteDigits}
                             {minuteDigits.map((digit, index) =>
                                 digit === selectedMinuteDigit && (
                                     <React.Fragment key={digit}>
                                         <div
-                                            className={`absolute w-10 h-10 bg-CSgreen rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
+                                            className={`absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
                                             style={{ top: '41%', left: '42.6%', transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` }}
                                             onClick={() => handleMinuteSelectDigit(selectedMinuteDigit === 0 ? 1 : selectedMinuteDigit + 1)}
                                         ></div>
                                         <div
-                                            className="absolute w-0.5 h-[90px] bg-CSgreen transform -translate-x-1/2 -translate-y-1/2"
+                                            className="absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
                                             style={{
                                                 top: '51%',
                                                 left: '52%',
@@ -187,7 +187,7 @@ const Timepicker: React.FC<TimepickerProps> = () => {
                                     </React.Fragment>
                                 )
                             )}
-                            <div className="absolute w-2 h-2 bg-CSgreen rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56.3%', left: '52%' }}></div>
+                            <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56.3%', left: '52%' }}></div>
                         </div>
                     </div>
                 )}

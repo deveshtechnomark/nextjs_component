@@ -90,7 +90,7 @@ var Timepicker = function Timepicker() {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-1"
   }, /*#__PURE__*/React.createElement("input", {
-    className: "w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ".concat(showHourDigits === true ? 'bg-CSHoverGreen text-CSgreen' : 'bg-CSLightGray'),
+    className: "w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ".concat(showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'),
     type: "text",
     placeholder: "00",
     readOnly: true,
@@ -102,7 +102,7 @@ var Timepicker = function Timepicker() {
   }), /*#__PURE__*/React.createElement("span", {
     className: "text-gray-600"
   }, ":"), /*#__PURE__*/React.createElement("input", {
-    className: "w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ".concat(showMinuteDigits === true ? 'bg-CSHoverGreen text-CSgreen' : 'bg-CSLightGray'),
+    className: "w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ".concat(showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'),
     type: "text",
     placeholder: "00",
     readOnly: true,
@@ -114,20 +114,20 @@ var Timepicker = function Timepicker() {
   })), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-2 ml-10 border border-gray-300 rounded-md"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-10 h-8 ".concat(isAM && 'bg-CSHoverGreen text-CSgreen', " transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer"),
+    className: "w-10 h-8 ".concat(isAM && 'bg-slatyGreen text-primary', " transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer"),
     onClick: toggleSetAM
   }, "AM"), /*#__PURE__*/React.createElement("div", {
-    className: "w-10 h-8 ".concat(!isAM && 'bg-CSHoverGreen text-CSgreen', " transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer"),
+    className: "w-10 h-8 ".concat(!isAM && 'bg-slatyGreen text-primary', " transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer"),
     onClick: toggleSetAM
   }, "PM"))), !showMinuteDigits && showHourDigits && /*#__PURE__*/React.createElement("div", {
-    className: "w-56 h-56 bg-CSLightGray rounded-full relative flex items-center justify-center"
+    className: "w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-full h-full relative -left-1"
   }, renderHourDigits, hourDigits.map(function (digit, index) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-CSgreen rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
       style: {
         top: '41%',
         left: '42.6%',
@@ -137,7 +137,7 @@ var Timepicker = function Timepicker() {
         return handleHourSelectDigit(selectedHourDigit === 12 ? 1 : selectedHourDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-0.5 h-[90px] bg-CSgreen transform -translate-x-1/2 -translate-y-1/2",
+      className: "absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
       style: {
         top: '51%',
         left: '52%',
@@ -146,20 +146,20 @@ var Timepicker = function Timepicker() {
       }
     }));
   }), /*#__PURE__*/React.createElement("div", {
-    className: "absolute w-2 h-2 bg-CSgreen rounded-full transform -translate-x-1/2 -translate-y-4",
+    className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
     style: {
       top: '56.3%',
       left: '52%'
     }
   }))), showMinuteDigits && /*#__PURE__*/React.createElement("div", {
-    className: "w-56 h-56 bg-CSLightGray rounded-full relative flex items-center justify-center"
+    className: "w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-full h-full relative -left-1 ".concat(styles.scaleUpDiv)
   }, renderMinuteDigits, minuteDigits.map(function (digit, index) {
     return digit === selectedMinuteDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-CSgreen rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
       style: {
         top: '41%',
         left: '42.6%',
@@ -169,7 +169,7 @@ var Timepicker = function Timepicker() {
         return handleMinuteSelectDigit(selectedMinuteDigit === 0 ? 1 : selectedMinuteDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-0.5 h-[90px] bg-CSgreen transform -translate-x-1/2 -translate-y-1/2",
+      className: "absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
       style: {
         top: '51%',
         left: '52%',
@@ -178,7 +178,7 @@ var Timepicker = function Timepicker() {
       }
     }));
   }), /*#__PURE__*/React.createElement("div", {
-    className: "absolute w-2 h-2 bg-CSgreen rounded-full transform -translate-x-1/2 -translate-y-4",
+    className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
     style: {
       top: '56.3%',
       left: '52%'
@@ -262,7 +262,7 @@ var Timepicker24 = function Timepicker24() {
       key: digit,
       className: "absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(digit === selectedHourDigit ? 'text-white' : 'text-black', " ").concat(isDigit12 ? "text-black" : "text-gray-400"),
       style: {
-        transform: "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)"),
+        transform: "".concat(isDigit12 ? "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)") : "rotate(".concat(index * 30, "deg) translate(0, -55px) rotate(").concat(-index * 30, "deg)")),
         top: '46%',
         left: '47%'
       },
@@ -274,11 +274,11 @@ var Timepicker24 = function Timepicker24() {
   var renderHourDigits24 = hourDigits24.map(function (digit, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: digit,
-      className: "absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-4 flex items-center  justify-center ".concat(isDigit24 ? "text-black" : "text-gray-400", "  ").concat(digit === selectedHourDigit ? 'text-white' : 'text-gray', " "),
+      className: "absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(isDigit24 ? "text-black" : "text-gray-400", "  ").concat(digit === selectedHourDigit ? 'text-white' : 'text-gray', " "),
       style: {
-        transform: "rotate(".concat(index * 30, "deg) translate(0,").concat(isHour24Selected ? "-90px" : "-55px", ") rotate(").concat(-index * 30, "deg)"),
-        top: '46%',
-        left: '48%'
+        transform: "".concat(isDigit24 ? "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)") : "rotate(".concat(index * 30, "deg) translate(0,").concat(isHour24Selected ? "-90px" : "-55px", ") rotate(").concat(-index * 30, "deg)")),
+        top: "46%",
+        left: '47%'
       },
       onClick: function onClick() {
         return handleHourSelectDigit(digit);
@@ -307,7 +307,7 @@ var Timepicker24 = function Timepicker24() {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center space-x-1"
   }, /*#__PURE__*/React.createElement("input", {
-    className: "w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ".concat(showHourDigits === true ? 'bg-CSHoverGreen text-CSgreen' : 'bg-CSLightGray'),
+    className: "w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ".concat(showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'),
     type: "text",
     placeholder: "00",
     readOnly: true,
@@ -319,7 +319,7 @@ var Timepicker24 = function Timepicker24() {
   }), /*#__PURE__*/React.createElement("span", {
     className: "text-gray-600"
   }, ":"), /*#__PURE__*/React.createElement("input", {
-    className: "w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ".concat(showMinuteDigits === true ? 'bg-CSHoverGreen text-CSgreen' : 'bg-CSLightGray'),
+    className: "w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ".concat(showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'),
     type: "text",
     placeholder: "00",
     readOnly: true,
@@ -331,20 +331,20 @@ var Timepicker24 = function Timepicker24() {
   })), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-2 ml-10 border border-gray-300 rounded-md opacity-50"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-10 h-8 ".concat(isAM && 'bg-CSHoverGreen text-CSgreen', " transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer pointer-events-none "),
+    className: "w-10 h-8 ".concat(isAM && 'bg-slatyGreen text-primary', " transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer pointer-events-none "),
     onClick: toggleSetAM
   }, "AM"), /*#__PURE__*/React.createElement("div", {
-    className: "w-10 h-8 ".concat(!isAM && 'bg-CSHoverGreen text-CSgreen', " transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer pointer-events-none"),
+    className: "w-10 h-8 ".concat(!isAM && 'bg-slatyGreen text-primary', " transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer pointer-events-none"),
     onClick: toggleSetAM
   }, "PM"))), !showMinuteDigits && showHourDigits && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "w-56 h-56 bg-CSLightGray rounded-full relative flex items-center justify-center"
+    className: "w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center"
   }, !isHour24Selected && /*#__PURE__*/React.createElement("div", {
     className: "w-full h-full relative -left-1"
   }, renderHourDigits12, hourDigits12.map(function (digit, index) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-CSgreen rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
       style: {
         top: '41%',
         left: '42.6%',
@@ -354,7 +354,7 @@ var Timepicker24 = function Timepicker24() {
         return handleHourSelectDigit(selectedHourDigit === 12 ? 1 : selectedHourDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-0.5 h-[90px] bg-CSgreen transform -translate-x-1/2 -translate-y-1/2",
+      className: "absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
       style: {
         top: '51%',
         left: '52%',
@@ -363,20 +363,20 @@ var Timepicker24 = function Timepicker24() {
       }
     }));
   }), /*#__PURE__*/React.createElement("div", {
-    className: "absolute w-2 h-2 bg-CSgreen rounded-full transform -translate-x-1/2 -translate-y-4",
+    className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
     style: {
       top: '56.3%',
       left: '52%'
     }
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(isHour24Selected ? "w-56 h-56 -top-56 ".concat(styles.scaleUpDiv, " ") : "w-32  h-32 -top-[179px] -left-[1px] bg-transparent ", "  bg-CSLightGray rounded-full relative flex items-center justify-center")
+    className: "".concat(isHour24Selected ? "w-56 h-56 -top-56 ".concat(styles.scaleUpDiv, " ") : "w-32  h-32 ".concat(!isDigit24 ? "-top-[179px] -left-[2px]" : "-top-[180px] left-[1px]", " bg-transparent "), "  bg-lightGray rounded-full relative flex items-center justify-center")
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-full h-full relative -left-1"
   }, renderHourDigits24, hourDigits24.map(function (digit, index) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-CSgreen rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
       style: {
         top: '41%',
         left: '43%',
@@ -386,7 +386,7 @@ var Timepicker24 = function Timepicker24() {
         return handleHourSelectDigit(selectedHourDigit === 24 ? 1 : selectedHourDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-0.5 h-[90px] bg-CSgreen transform -translate-x-1/2 -translate-y-1/2",
+      className: "absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
       style: {
         top: '51%',
         left: '52%',
@@ -395,20 +395,20 @@ var Timepicker24 = function Timepicker24() {
       }
     }));
   }), isHour24Selected && /*#__PURE__*/React.createElement("div", {
-    className: "absolute w-2 h-2 bg-CSgreen rounded-full transform -translate-x-1/2 -translate-y-4",
+    className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
     style: {
       top: '56.3%',
       left: '52%'
     }
   })))), showMinuteDigits && /*#__PURE__*/React.createElement("div", {
-    className: "w-56 h-56 bg-CSLightGray rounded-full relative flex items-center justify-center"
+    className: "w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-full h-full relative -left-1 ".concat(styles.scaleUpDiv)
   }, renderMinuteDigits, minuteDigits.map(function (digit, index) {
     return digit === selectedMinuteDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-CSgreen rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
       style: {
         top: '41%',
         left: '42.6%',
@@ -418,7 +418,7 @@ var Timepicker24 = function Timepicker24() {
         return handleMinuteSelectDigit(selectedMinuteDigit === 0 ? 1 : selectedMinuteDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-0.5 h-[90px] bg-CSgreen transform -translate-x-1/2 -translate-y-1/2",
+      className: "absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
       style: {
         top: '51%',
         left: '52%',
@@ -427,7 +427,7 @@ var Timepicker24 = function Timepicker24() {
       }
     }));
   }), /*#__PURE__*/React.createElement("div", {
-    className: "absolute w-2 h-2 bg-CSgreen rounded-full transform -translate-x-1/2 -translate-y-4",
+    className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
     style: {
       top: '56.3%',
       left: '52%'
