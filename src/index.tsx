@@ -42,12 +42,12 @@ class Toast extends React.Component<ToastProps> {
     const toastElement = document.createElement("div");
     toastElement.className = `flex flex-col text-xs sm:text-base m-[6px] p-[12px] px-[16px] rounded-md text-white font-semibold min-w-15rem relative ${
       type === "error"
-        ? "bg-error !text-errorText"
+        ? "bg-errorColor !text-darkRed"
         : type === "warning"
-        ? "bg-warning !text-warningText"
+        ? "bg-warningColor !text-darkOrange"
         : type === "info"
-        ? "bg-info !text-infoText"
-        : "bg-success !text-successText"
+        ? "bg-infoColor !text-darkBlue"
+        : "bg-primary !text-pureWhite"
     }`;
 
     const closeButton = document.createElement("span");
