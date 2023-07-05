@@ -28,16 +28,9 @@ export const generateDate = (
 		arrayOfDate.push({
 			currentMonth: false,
 			date,
+			
 		});
 	}
-
-	// for (let i = 0; i < firstDateOfMonth.getDay(); i++) {
-	// 	const date = new Date(year, month, -i);
-	// 	arrayOfDate.push({
-	// 		currentMonth: false,
-	// 		date,
-	// 	});
-	// }
 
 	for (let i = 1; i <= lastDateOfMonth.getDate(); i++) {
 		const date = new Date(year, month, i);

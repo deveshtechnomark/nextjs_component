@@ -20,7 +20,7 @@ module.exports = {
   plugins: [
     function ({ addUtilities }) {
       const utilities = {
-        
+
         '.rippleAnimation': {
           animation: 'ripple 2.0s infinite',
           width: '50%',
@@ -51,10 +51,10 @@ module.exports = {
           },
         },
 
-        '.divAnimation': {
-          animation: 'divAnimation 1s ease-in-out',
+        '.bottomAnimation': {
+          animation: 'bottomAnimation .5s ease-in-out',
         },
-        '@keyframes divAnimation': {
+        '@keyframes bottomAnimation': {
           '0%': {
             transform: 'translateY(10%)',
           },
@@ -63,27 +63,48 @@ module.exports = {
           },
         },
 
-        '.topBottomAnimation': {
-          animation: 'topBottomAnimation 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both',
+        '.topAnimation': {
+          animation: 'topAnimation .5s ease forwards',
         },
-        '@keyframes topBottomAnimation': {
+        '@keyframes topAnimation': {
           '0%': {
-            transform: 'scaleY(0.4)',
-            transformOrigin: '100% 0%'
-          },
+            transform: 'translateY(-30%)',
+            opacity: '0'
+          },        
           '100%': {
-            transform: 'scaleY(1)',
-            transformOrigin: '100% 0%'
+            transform: 'translateY(0)',
+            opacity: '1'
           }
         },
 
-        '.divAnimation2': {
-          animation: 'divAnimation2 1s ease-in-out',
-          
+        '.slideLeftAnimation': {
+          animation: 'slideLeftAnimation .3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+
         },
-        '@keyframes divAnimation2': {
-          '0%': { left: '0' },
-          '10%': { left: '10%' },
+        '@keyframes slideLeftAnimation': {
+          "0%": {
+            transform: "translateX(-100px)",
+          },
+          "100%": {
+            transform: "translateX(0)",
+          }
+        },
+
+        '.slideRightAnimation': {
+          animation: 'slideRightAnimation .3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+
+        },
+        '@keyframes slideRightAnimation': {
+          "0%": {
+            transform: "translateX(100px)",
+            visibility: "hidden",
+            opacity:"0"
+          },
+          "100%": {
+            transform: "translateX(0px)",
+            visibility: "visible",
+            opacity:"1"
+          }
         },
       };
       addUtilities(utilities);

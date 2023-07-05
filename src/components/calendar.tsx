@@ -23,8 +23,8 @@ const Calendar = (props: any): JSX.Element => {
     const [selectedDate, setSelectedDate] = useState<Date>(currentDate);
     const [fullDate, setFullDate] = useState<String>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [toggleOpen, setToggleOpen] = useState<boolean>(true);
-    const [animate, setAnimate] = useState(false);
+    const [toggleOpen, setToggleOpen] = useState<boolean>(false);
+    const [animate, setAnimate] = useState<String>('');
 
     const currentMonth = today.getMonth();
     const [selectedMonth, setSelectedMonth] = useState<number>(currentMonth);
@@ -49,6 +49,15 @@ const Calendar = (props: any): JSX.Element => {
         setToday(newDate);
         setShowMonthList(false);
         setSelectedMonth(month);
+
+        if (selectedMonth) {
+            setAnimate('slideLeftAnimation');
+        } else {
+            setAnimate('');
+        }
+
+        setShowMonthList(false);
+        setSelectedMonth(month);
     };
 
     const toggleYearList = () => {
@@ -65,6 +74,11 @@ const Calendar = (props: any): JSX.Element => {
         setToday(newDate);
         setShowYearList(false);
         setSelectedYear(year);
+        setTimeout(() => {
+            setAnimate('');
+            setShowMonthList(true);
+        }, 0);
+
     };
 
     const handleDateClick = (date: Date) => {
@@ -74,6 +88,7 @@ const Calendar = (props: any): JSX.Element => {
         newDate.setDate(date.getDate() + 1);
         const formattedDate = newDate.toISOString().slice(0, 10);
         setFullDate(formattedDate);
+        setToggleOpen(false);
     };
 
     const goToNextPage = () => {
@@ -107,11 +122,10 @@ const Calendar = (props: any): JSX.Element => {
         setSelectedYear(year);
         setToday(newDate);
 
-        setAnimate(true);
-
+        setAnimate(isNextMonth ? 'slideRightAnimation' : 'slideLeftAnimation');
         setTimeout(() => {
-            setAnimate(false);
-        }, 1000);
+            setAnimate('');
+        }, 100);
 
     };
     useEffect(() => {
@@ -122,7 +136,7 @@ const Calendar = (props: any): JSX.Element => {
         const handleOutsideClick = (event: any) => {
             const target = event.target;
             const isInputClick = inputRef.current && inputRef.current.contains(target);
-            const isCalendarClick = target.closest(".divAnimation");
+            const isCalendarClick = target.closest(".bottomAnimation");
             if (!isInputClick && !isCalendarClick) {
                 setToggleOpen(false);
             }
@@ -150,11 +164,11 @@ const Calendar = (props: any): JSX.Element => {
                 />
             </div>
             {toggleOpen && (
-                <div className={`relative ${toggleOpen ? "divAnimation" : ""}`}>
+                <div className={`relative ${toggleOpen ? "bottomAnimation" : ""}`}>
                     <div className="flex  mx-auto  items-center">
-                        <div className="shadow-md">
+                        <div className="shadow-md overflow-hidden">
                             <div className="flex justify-between border-b-2 border-borderColor py-[12px] px-[12px]">
-                                <div className={`flex flex-row`}>
+                                <div className={`flex flex-row  ${animate}`}>
                                     {showMonthList === true ? "" : showYearList === true ? "" :
                                         (<h1 className="proxima text-[14px] font-semibold cursor-pointer" onClick={toggleMonthList}>
                                             {months[currentMonth]}
@@ -187,7 +201,8 @@ const Calendar = (props: any): JSX.Element => {
                                             {currentPage <= totalPages && (<>
                                                 <div
                                                     className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${currentPage === 1 ? "opacity-50 pointer-events-none" : ""} text-[20px]`}
-                                                    onClick={currentPage === 1 ? undefined : goToPreviousPage}>
+                                                    onClick={currentPage === 1 ? undefined : goToPreviousPage}
+                                                >
                                                     <ChevronLeftIcon />
                                                 </div>
                                                 <div
@@ -201,43 +216,47 @@ const Calendar = (props: any): JSX.Element => {
                                 </div>
                             </div>
                             {showMonthList === true ? (
-                                <div className="topBottomAnimation w-full h-full">
-                                    <div className="grid grid-cols-4 place-content-center overflow-hidden proxima">
-                                        {months.map((month, index) => (
-                                            <div
-                                                key={index}
-                                                className={`py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer `}
-                                                onClick={() => selectMonth(index)}
-                                            >
-                                                <div className={`w-14 h-12 hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${index === selectedMonth ? 'bg-lightGreen text-primary' : ''
-                                                    }`}>
-                                                    {month.length > 5 ? month.slice(0, 3) : month}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )
-                                : showYearList === true ? (
-                                    <div className="topBottomAnimation w-full">
-                                        <div className="grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima">
-                                            {displayedYears.map((year) => (
+                                <div className="overflow-hidden">
+                                    <div className="topAnimation w-full h-full">
+                                        <div className="grid grid-cols-4 place-content-center overflow-hidden proxima">
+                                            {months.map((month, index) => (
                                                 <div
-                                                    key={year}
-                                                    className="py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer"
-                                                    onClick={() => selectYear(year)}>
-                                                    <div className={`py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${year === selectedYear ? 'bg-lightGreen text-primary' : ''
+                                                    key={index}
+                                                    className={`py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer `}
+                                                    onClick={() => selectMonth(index)}
+                                                >
+                                                    <div className={`w-14 h-12 hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${index === selectedMonth ? 'bg-lightGreen text-primary' : ''
                                                         }`}>
-                                                        {year}
+                                                        {month.length > 5 ? month.slice(0, 3) : month}
                                                     </div>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
+                                </div>
+                            )
+                                : showYearList === true ? (
+                                    <div className="overflow-hidden">
+                                        <div className="topAnimation w-full">
+                                            <div className="grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima">
+                                                {displayedYears.map((year) => (
+                                                    <div
+                                                        key={year}
+                                                        className={`py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer`}
+                                                        onClick={() => selectYear(year)}>
+                                                        <div className={`py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${year === selectedYear ? 'bg-lightGreen text-primary' : ''
+                                                            }`}>
+                                                            {year}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
                                 )
                                     : (
                                         <>
-                                            <div className="w-full grid grid-cols-7 proxima ">
+                                            <div className={`w-full grid grid-cols-7 proxima  ${animate}`}>
                                                 {days.map((day, index) => (
                                                     <h1
                                                         key={index}
@@ -246,7 +265,7 @@ const Calendar = (props: any): JSX.Element => {
                                                     </h1>
                                                 ))}
                                             </div>
-                                            <div className="w-full h-full grid grid-cols-7">
+                                            <div className={` w-full h-full grid grid-cols-7 ${animate}`}>
                                                 {generateDate(today.getMonth(), today.getFullYear()).map(
                                                     ({ date, currentMonth }: CalendarDate, index: number) => {
                                                         const currentDate = new Date(date);
