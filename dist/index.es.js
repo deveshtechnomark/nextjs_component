@@ -89,15 +89,15 @@ var Textarea = function Textarea(_a) {
   return React.createElement("div", {
     className: "flex flex-col w-full text-sm sm:text-base"
   }, label && React.createElement("label", {
-    className: "".concat(err ? "text-error" : focus ? "text-success" : "text-defaultColor")
+    className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
   }, React.createElement(Typography, {
     type: "label"
   }, label, required && "*")), React.createElement("div", {
-    className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-success before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
+    className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement(Typography, {
     type: "h6"
   }, React.createElement("textarea", __assign({
-    className: "".concat(className, " py-1 px-3 border-b outline-none transition duration-600 w-full ").concat(err ? "border-b-error" : focus ? "border-b-success" : "border-b-defaultColor"),
+    className: "".concat(className, " py-1 px-3 border-b outline-none transition duration-600 w-full ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-slatyGrey"),
     ref: textAreaRef,
     rows: parsedRows,
     id: id,
@@ -109,11 +109,11 @@ var Textarea = function Textarea(_a) {
   }, props)))), !err && supportingText && React.createElement(Typography, {
     type: "h6"
   }, React.createElement("span", {
-    className: "text-defaultColor"
+    className: "text-slatyGrey"
   }, supportingText)), err && React.createElement(Typography, {
     type: "h6"
   }, React.createElement("span", {
-    className: "text-error"
+    className: "text-defaultRed"
   }, errorMessage)));
 };
 

@@ -63,7 +63,7 @@ const Textarea: React.FC<TextareaProps> = ({
       {label && (
         <label
           className={`${
-            err ? "text-error" : focus ? "text-success" : "text-defaultColor"
+            err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"
           }`}
         >
           <Typography type="label">
@@ -75,17 +75,17 @@ const Textarea: React.FC<TextareaProps> = ({
       <div
         className={`${
           !err &&
-          "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-success before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
+          "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
         }`}
       >
         <Typography type="h6">
           <textarea
             className={`${className} py-1 px-3 border-b outline-none transition duration-600 w-full ${
               err
-                ? "border-b-error"
+                ? "border-b-defaultRed"
                 : focus
-                ? "border-b-success"
-                : "border-b-defaultColor"
+                ? "border-b-primary"
+                : "border-b-slatyGrey"
             }`}
             ref={textAreaRef}
             rows={parsedRows}
@@ -101,12 +101,12 @@ const Textarea: React.FC<TextareaProps> = ({
       </div>
       {!err && supportingText && (
         <Typography type="h6">
-          <span className="text-defaultColor">{supportingText}</span>
+          <span className="text-slatyGrey">{supportingText}</span>
         </Typography>
       )}
       {err && (
         <Typography type="h6">
-          <span className="text-error">{errorMessage}</span>
+          <span className="text-defaultRed">{errorMessage}</span>
         </Typography>
       )}
     </div>
