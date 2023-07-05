@@ -65,14 +65,14 @@ const Select: React.FC<SelectProps> = ({
     <>
       <div
         className={classNames(
-          "relative font-medium w-full flex-row border-b border-gray-300 hover:border-CSgreen transition-colors duration-300"
+          "relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300"
         )}
         ref={selectRef}
       >
         <label
           className={classNames(
-            "text-[14px] font-normal font-proxima text-CSSecondaryGray",
-            open && "text-CSgreen"
+            "text-[14px] font-normal font-proxima text-slatyGrey",
+            open && "text-primary"
           )}
           htmlFor={id}
         >
@@ -93,17 +93,17 @@ const Select: React.FC<SelectProps> = ({
             }
             style={{ width: "191px" }}
             className={classNames(
-              "flex-grow outline-none bg-white text-CSDarkGray p-2 text-[16px] font-normal font-proxima",
-              !inputValue && "text-CSDarkGray",
-              open && "text-CSgreen",
+              "flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima",
+              !inputValue && "text-darkCharcoal",
+              open && "text-primary",
               !open ? "cursor-pointer" : "cursor-default",
-              !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen"
+              !open ? "placeholder-darkCharcoal" : "placeholder-primary"
             )}
           />
           <div
             onClick={handleToggleOpen}
             className={classNames(
-              "text-[1.5rem] text-CSDarkGray cursor-pointer",
+              "text-[1.5rem] text-darkCharcoal cursor-pointer",
               {
                 "rotate-180": open,
               }
@@ -115,7 +115,7 @@ const Select: React.FC<SelectProps> = ({
 
         <ul
           className={classNames(
-            "absolute z-10 w-full bg-CSDropDownBG mt-[1px] overflow-y-auto shadow-md transition-transform",
+            "absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform",
             open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
@@ -129,9 +129,9 @@ const Select: React.FC<SelectProps> = ({
               <li
                 key={option.value}
                 className={classNames(
-                  "p-[10px] text-[16px] font-proxima hover:bg-CSListHover font-normal cursor-pointer flex",
+                  "p-[10px] text-[16px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex",
                   {
-                    "bg-CSListHover": option.value === inputValue,
+                    "bg-whiteSmoke": option.value === inputValue,
                     hidden: !option.label.toLowerCase().startsWith(inputValue),
                   }
                 )}
@@ -142,7 +142,7 @@ const Select: React.FC<SelectProps> = ({
                 }}
               >
                 {type === "icons" && (
-                  <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray">
+                  <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
                     <UserIcon />
                   </div>
                 )}

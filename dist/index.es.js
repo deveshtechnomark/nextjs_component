@@ -74,10 +74,10 @@ var Select = function Select(_a) {
   };
 
   return React.createElement(React.Fragment, null, React.createElement("div", {
-    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-CSgreen transition-colors duration-300"),
+    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300"),
     ref: selectRef
   }, React.createElement("label", {
-    className: classNames("text-[14px] font-normal font-proxima text-CSSecondaryGray", open && "text-CSgreen"),
+    className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", open && "text-primary"),
     htmlFor: id
   }, label ? label : "label", "*"), React.createElement("div", {
     className: "flex flex-row items-center justify-center relative mt-0.5"
@@ -91,21 +91,21 @@ var Select = function Select(_a) {
     style: {
       width: "191px"
     },
-    className: classNames("flex-grow outline-none bg-white text-CSDarkGray p-2 text-[16px] font-normal font-proxima", !inputValue && "text-CSDarkGray", open && "text-CSgreen", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen")
+    className: classNames("flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames("text-[1.5rem] text-CSDarkGray cursor-pointer", {
+    className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
       "rotate-180": open
     })
   }, React.createElement(ChevronDown, null))), React.createElement("ul", {
-    className: classNames("absolute z-10 w-full bg-CSDropDownBG mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
+    className: classNames("absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
     })
   }, options && options.map(function (option) {
     return React.createElement("li", {
       key: option.value,
-      className: classNames("p-[10px] text-[16px] font-proxima hover:bg-CSListHover font-normal cursor-pointer flex", {
-        "bg-CSListHover": option.value === inputValue,
+      className: classNames("p-[10px] text-[16px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex", {
+        "bg-whiteSmoke": option.value === inputValue,
         hidden: !option.label.toLowerCase().startsWith(inputValue)
       }),
       onClick: function onClick() {
@@ -114,7 +114,7 @@ var Select = function Select(_a) {
         }
       }
     }, type === "icons" && React.createElement("div", {
-      className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray"
+      className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal"
     }, React.createElement(UserIcon, null)), option.label);
   }))));
 };
@@ -196,10 +196,10 @@ var MultiSelect = function MultiSelect(_a) {
     onSelect(updatedValues);
   };
   return React.createElement("div", {
-    className: "relative font-medium w-full flex-row border-b border-gray-300 hover:border-CSgreen transition-colors duration-300",
+    className: "relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300",
     ref: selectRef
   }, React.createElement("label", {
-    className: classNames("text-[14px] font-normal font-proxima text-CSSecondaryGray", open && "text-CSgreen"),
+    className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", open && "text-primary"),
     htmlFor: id
   }, label ? label : "label", "*"), React.createElement("div", {
     className: "flex flex-row items-center justify-center relative mt-0.5"
@@ -213,21 +213,21 @@ var MultiSelect = function MultiSelect(_a) {
     style: {
       width: "191px"
     },
-    className: classNames("flex-grow bg-white outline-none text-CSDarkGray p-2 text-[16px] font-normal font-proxima", !inputValue && "text-CSDarkGray", open && "text-CSgreen", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-CSDarkGray" : "placeholder-CSgreen")
+    className: classNames("flex-grow bg-white outline-none text-darkCharcoal p-2 text-[16px] font-normal font-proxima", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames("text-[1.5rem] text-CSDarkGray cursor-pointer", {
+    className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
       "rotate-180": open
     })
   }, React.createElement(ChevronDown, null))), React.createElement("ul", {
-    className: classNames("absolute z-10 w-full bg-CSDropDownBG mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
+    className: classNames("absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
     })
   }, options && options.map(function (option) {
     return React.createElement("li", {
       key: option.value,
-      className: classNames("p-[10px] text-[16px] hover:bg-CSListHover font-normal font-proxima cursor-pointer flex", {
-        "bg-CSListHover": selectedValues.includes(option.value),
+      className: classNames("p-[10px] text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
+        "bg-whiteSmoke": selectedValues.includes(option.value),
         hidden: !option.label.toLowerCase().startsWith(inputValue)
       }),
       onClick: type !== "checkbox" ? function () {
@@ -236,7 +236,7 @@ var MultiSelect = function MultiSelect(_a) {
         }
       } : undefined
     }, type === "icons" && React.createElement("div", {
-      className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray"
+      className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal"
     }, React.createElement(UserIcon, null)), type === "checkbox" && React.createElement(CheckBox, {
       id: option.value,
       label: option.label,
@@ -313,7 +313,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   }, selected.slice(0, 2).map(function (option) {
     return React.createElement("div", {
       key: option,
-      className: classNames("flex items-center badge bg-CSChipBG text-CSGrayChip border border-CSChipBorder rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima", option.length > 8 && "max-w-[100px]")
+      className: classNames("flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima", option.length > 8 && "max-w-[100px]")
     }, React.createElement("span", {
       title: option
     }, option.length > 8 ? option.substring(0, 8) + "..." : option), React.createElement("div", {
@@ -323,10 +323,10 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       className: "ml-1 cursor-pointer"
     }, React.createElement(CrossIcon, null)));
   }), selected.length > 2 && React.createElement("div", {
-    className: "flex items-center badge bg-CSChipBG text-CSDarkGray border border-CSChipBorder rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima"
+    className: "flex items-center badge bg-[#E9ECEF] text-darkCharcoal border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima"
   }, "+", selected.length - 2)) : React.createElement("div", {
-    className: classNames("text-CSDarkGray pb-2 font-proxima", {
-      "text-CSgreen": open
+    className: classNames("text-darkCharcoal pb-2 font-proxima", {
+      "text-primary": open
     })
   }, "Please Select...");
   return React.createElement("div", {
@@ -334,39 +334,39 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     ref: selectRef
   }, React.createElement("label", {
     onClick: handleToggleOpen,
-    className: classNames("text-[14px] font-normal font-proxima text-CSSecondaryGray", {
-      "text-CSgreen": open
+    className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", {
+      "text-primary": open
     })
   }, label ? label : "label", "*"), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames("flex justify-between bg-white border-b border-gray-300 text-CSDarkGray pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300", {
-      "text-CSDarkGray": selected.length === 0
+    className: classNames("flex justify-between bg-white border-b border-gray-300 text-darkCharcoal pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300", {
+      "text-darkCharcoal": selected.length === 0
     }, {
-      "text-CSgreen": open
-    }, !open ? "cursor-pointer" : "cursor-default", "hover:border-CSgreen")
+      "text-primary": open
+    }, !open ? "cursor-pointer" : "cursor-default", "hover:border-primary")
   }, selectedDisplay, React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames("text-[1.5rem] text-CSDarkGray cursor-pointer", {
+    className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
       "rotate-180": open
     })
   }, React.createElement(ChevronDown, null))), React.createElement("ul", {
-    className: classNames("absolute z-10 w-full bg-CSDropDownBG mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
+    className: classNames("absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
     })
   }, React.createElement("li", {
-    className: classNames("pt-3 pl-3 text-[16px] font-normal font-proxima text-CSgreen cursor-pointer flex"),
+    className: classNames("pt-3 pl-3 text-[16px] font-normal font-proxima text-primary cursor-pointer flex"),
     onClick: handleClearAll
   }, "Clear All"), options && options.map(function (option) {
     return React.createElement("li", {
       key: option.value,
-      className: classNames("p-3 text-[16px] hover:bg-CSListHover font-normal font-proxima cursor-pointer flex", {
-        "bg-CSListHover": selected.includes(option.value)
+      className: classNames("p-3 text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
+        "bg-whiteSmoke": selected.includes(option.value)
       }),
       onClick: type !== "checkbox" ? function () {
         return handleSelect(option.value);
       } : undefined
     }, type === "icons" && React.createElement("div", {
-      className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-CSDarkGray"
+      className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal"
     }, React.createElement(UserIcon, null)), type === "checkbox" && React.createElement(CheckBox, {
       id: option.value,
       label: option.label,
