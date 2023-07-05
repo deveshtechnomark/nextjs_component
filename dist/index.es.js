@@ -129,7 +129,7 @@ var Pagination = function Pagination(props) {
   // Styel for current page number
   var currentPageNumStyle = "bg-lightPrimary border border-primary text-darkCharcoal";
   // Style for default Page Numbers with variant space
-  var defaultPageNumSpaceStyle = "text-darkCharcoal bg-pureWhite border border-[]";
+  var defaultPageNumSpaceStyle = "text-darkCharcoal bg-pureWhite border border-lightSilver";
   // Style for default page numbers for variant without space
   var defaultPageNumStyle = "text-darkCharcoal bg-pureWhite border-t border-r border-b border-lightSilver";
   // for prop variant = "buttons"

@@ -130,7 +130,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   const currentPageNumStyle = `bg-lightPrimary border border-primary text-darkCharcoal`;
 
   // Style for default Page Numbers with variant space
-  const defaultPageNumSpaceStyle = `text-darkCharcoal bg-pureWhite border border-[]`;
+  const defaultPageNumSpaceStyle = `text-darkCharcoal bg-pureWhite border border-lightSilver`;
 
   // Style for default page numbers for variant without space
   const defaultPageNumStyle = `text-darkCharcoal bg-pureWhite border-t border-r border-b border-lightSilver`;
