@@ -61,41 +61,47 @@ const Textarea: React.FC<TextareaProps> = ({
   return (
     <div className="flex flex-col w-full text-sm sm:text-base">
       {label && (
-        <label
+        <Typography
+          type="label"
           className={`${
-            err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"
+            err
+              ? "text-defaultRed w-full"
+              : focus
+              ? "text-primary w-full"
+              : "text-slatyGrey w-full"
           }`}
         >
-          <Typography type="label">
-            {label}
-            {required && "*"}
-          </Typography>
-        </label>
+          {label}
+
+          {required && "*"}
+        </Typography>
       )}
+
       <div
         className={`${
-          !err &&
-          "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
+          !err
+            ? "flex w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
+            : "w-full"
         }`}
       >
-          <textarea
-            className={`${className} py-1 px-3 border-b outline-none transition duration-600 w-full h-[100%] ${
-              err
-                ? "border-b-defaultRed"
-                : focus
-                ? "border-b-primary"
-                : "border-b-slatyGrey"
-            }`}
-            ref={textAreaRef}
-            rows={parsedRows}
-            id={id}
-            name={name}
-            value={value}
-            onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
-            onChange={handleInputChange}
-            onFocus={handleFocus}
-            {...props}
-          />
+        <textarea
+          className={`${className} py-1 px-3 border-b outline-none transition duration-600 w-full h-full ${
+            err
+              ? "border-b-defaultRed"
+              : focus
+              ? "border-b-primary"
+              : "border-b-slatyGrey"
+          }`}
+          ref={textAreaRef}
+          rows={parsedRows}
+          id={id}
+          name={name}
+          value={value}
+          onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
+          onChange={handleInputChange}
+          onFocus={handleFocus}
+          {...props}
+        />
       </div>
       {!err && supportingText && (
         <Typography type="h6">
