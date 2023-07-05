@@ -7,11 +7,11 @@ module.exports = {
     extend: {
       colors: {
         primary: "#02B89D",
-        textColor: "#333333",
-        labelColor: "#6E6D7A",
-        pgLightTeal: "#A9ECE1",
         pureWhite: "#FFF",
         lightSilver: "#D8D8D8",
+        darkCharcoal: "#333333",
+        slatyGrey: "#6E6D7A",
+        lightPrimary: "#A9ECE1",
       },
     },
   },

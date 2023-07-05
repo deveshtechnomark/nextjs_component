@@ -129,18 +129,18 @@ var Pagination = function Pagination(props) {
   // common Style for Middle page numbers for variant without space
   var middlePageNumStyle = "pt-[1px] pr-[9px] pb-[1px] pl-[9px] text-[14px] font-proxima";
   // Styel for current page number
-  var currentPageNumStyle = "bg-pgLightTeal border border-primary text-textColor";
+  var currentPageNumStyle = "bg-lightPrimary border border-primary text-darkCharcoal";
   // Style for default Page Numbers with variant space
-  var defaultPageNumSpaceStyle = "text-textColor bg-pureWhite border border-[]";
+  var defaultPageNumSpaceStyle = "text-darkCharcoal bg-pureWhite border border-[]";
   // Style for default page numbers for variant without space
-  var defaultPageNumStyle = "text-textColor bg-pureWhite border-t border-r border-b border-lightSilver";
+  var defaultPageNumStyle = "text-darkCharcoal bg-pureWhite border-t border-r border-b border-lightSilver";
   // for prop variant = "buttons"
   return variant === "buttons" ?
   // for "space" prop
   space ? React.createElement("div", {
     className: containerClassName
   }, React.createElement("button", {
-    className: "".concat(buttonStyles, " ").concat(currentPage === 1 ? "text-labelColor" : "text-textColor"),
+    className: "".concat(buttonStyles, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleFirstPage();
     },
@@ -148,7 +148,7 @@ var Pagination = function Pagination(props) {
   }, "First"), React.createElement("span", {
     className: "text-lightSilver"
   }, "|"), React.createElement("button", {
-    className: "".concat(buttonStyles, " ").concat(currentPage === 1 ? "text-labelColor" : "text-textColor"),
+    className: "".concat(buttonStyles, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handlePrevPage();
     },
@@ -165,7 +165,7 @@ var Pagination = function Pagination(props) {
       disabled: currentPage === pageNumber || pageNumber === "..."
     }, pageNumber);
   })), React.createElement("button", {
-    className: "".concat(buttonStyles, " ").concat(currentPage === totalPages ? "text-labelColor" : "text-textColor"),
+    className: "".concat(buttonStyles, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleNextPage();
     },
@@ -173,7 +173,7 @@ var Pagination = function Pagination(props) {
   }, "Next"), React.createElement("span", {
     className: "text-lightSilver"
   }, "|"), React.createElement("button", {
-    className: "".concat(buttonStyles, " ").concat(currentPage === totalPages ? "text-labelColor" : "text-textColor"),
+    className: "".concat(buttonStyles, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleLastPage();
     },
@@ -183,7 +183,7 @@ var Pagination = function Pagination(props) {
   React.createElement("div", {
     className: containerClassName
   }, React.createElement("button", {
-    className: "".concat(buttonStyles, " ").concat(currentPage === 1 ? "text-labelColor" : "text-textColor"),
+    className: "".concat(buttonStyles, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleFirstPage();
     },
@@ -191,7 +191,7 @@ var Pagination = function Pagination(props) {
   }, "First"), React.createElement("span", {
     className: "text-lightSilver"
   }, "|"), React.createElement("button", {
-    className: "".concat(buttonStyles, " ").concat(currentPage === 1 ? "text-labelColor" : "text-textColor"),
+    className: "".concat(buttonStyles, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handlePrevPage();
     },
@@ -228,7 +228,7 @@ var Pagination = function Pagination(props) {
       }, pageNumber);
     }
   })), React.createElement("button", {
-    className: "".concat(buttonStyles, " ").concat(currentPage === totalPages ? "text-labelColor" : "text-textColor"),
+    className: "".concat(buttonStyles, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleNextPage();
     },
@@ -236,7 +236,7 @@ var Pagination = function Pagination(props) {
   }, "Next"), React.createElement("span", {
     className: "text-lightSilver"
   }, "|"), React.createElement("button", {
-    className: "".concat(buttonStyles, " ").concat(currentPage === totalPages ? "text-labelColor" : "text-textColor"),
+    className: "".concat(buttonStyles, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleLastPage();
     },
@@ -246,7 +246,7 @@ var Pagination = function Pagination(props) {
   space ? React.createElement("div", {
     className: containerClassName
   }, React.createElement("button", {
-    className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-labelColor" : "text-textColor"),
+    className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleFirstPage();
     },
@@ -256,7 +256,7 @@ var Pagination = function Pagination(props) {
   }, React.createElement(ChevronsLeft, null))), React.createElement("span", {
     className: "text-lightSilver"
   }, "|"), React.createElement("button", {
-    className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-labelColor" : "text-textColor"),
+    className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handlePrevPage();
     },
@@ -268,14 +268,14 @@ var Pagination = function Pagination(props) {
   }, pageNumbers.map(function (pageNumber) {
     return React.createElement("button", {
       key: pageNumber,
-      className: "".concat(pagesSpaceStyle, " ").concat(currentPage === pageNumber ? currentPageNumStyle : "text-textColor", " ").concat(isSmallScreen ? "ml-1" : "ml-2"),
+      className: "".concat(pagesSpaceStyle, " ").concat(currentPage === pageNumber ? currentPageNumStyle : "text-darkCharcoal", " ").concat(isSmallScreen ? "ml-1" : "ml-2"),
       onClick: function onClick() {
         return handleClick(Number(pageNumber));
       },
       disabled: currentPage === pageNumber || pageNumber === "..."
     }, pageNumber);
   })), React.createElement("button", {
-    className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-labelColor" : "text-textColor", " ").concat(isSmallScreen ? "ml-1" : "ml-2"),
+    className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal", " ").concat(isSmallScreen ? "ml-1" : "ml-2"),
     onClick: function onClick() {
       return handleNextPage();
     },
@@ -285,7 +285,7 @@ var Pagination = function Pagination(props) {
   }, React.createElement(ChevronLeft, null))), React.createElement("span", {
     className: "text-lightSilver"
   }, "|"), React.createElement("button", {
-    className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-labelColor" : "text-textColor"),
+    className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleLastPage();
     },
@@ -297,7 +297,7 @@ var Pagination = function Pagination(props) {
   React.createElement("div", {
     className: containerClassName
   }, React.createElement("button", {
-    className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-labelColor" : "text-textColor"),
+    className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleFirstPage();
     },
@@ -307,7 +307,7 @@ var Pagination = function Pagination(props) {
   }, React.createElement(ChevronsLeft, null))), React.createElement("span", {
     className: "text-lightSilver"
   }, "|"), React.createElement("button", {
-    className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-labelColor" : "text-textColor"),
+    className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handlePrevPage();
     },
@@ -346,7 +346,7 @@ var Pagination = function Pagination(props) {
       }, pageNumber);
     }
   })), React.createElement("button", {
-    className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-labelColor" : "text-textColor"),
+    className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleNextPage();
     },
@@ -356,7 +356,7 @@ var Pagination = function Pagination(props) {
   }, React.createElement(ChevronLeft, null))), React.createElement("span", {
     className: "text-lightSilver"
   }, "|"), React.createElement("button", {
-    className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-labelColor" : "text-textColor"),
+    className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleLastPage();
     },
