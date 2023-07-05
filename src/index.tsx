@@ -51,7 +51,7 @@ const Accordion: React.FC<AccordionProps> = ({
         {dataCollection.map((item, index) => (
           <div
             key={index}
-            className={`border border-transparent border-b-lightSilver cursor-pointer`}
+            className={`border border-[#fff] border-b-lightSilver cursor-pointer`}
             onClick={
               one
                 ? () => toggleAccordionOne(index)
