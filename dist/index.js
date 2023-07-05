@@ -64,7 +64,7 @@ var AvatarGroup = function AvatarGroup(_a) {
         className: className
       });
     }), React.createElement(Avatar, {
-      className: "!text-addText !bg-add ".concat(className),
+      className: "!text-[#CA6510] !bg-[#FECBA1] ".concat(className),
       name: "+".concat(remainingCount),
       type: type
     }));

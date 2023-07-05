@@ -4,8 +4,6 @@ module.exports = {
     extend: {
       colors: {
         pureWhite: "#FFF",
-        add: "#FECBA1",
-        addText: "#CA6510",
         defaultBlue: "#0A58CA",
         defaultRed: "#DC3545",
         defaultOrange: "#664D03",

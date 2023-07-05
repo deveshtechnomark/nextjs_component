@@ -105,7 +105,7 @@ const AvatarGroup: FC<AvatarGroupProps> = ({
           />
         ))}
         <Avatar
-          className={`!text-addText !bg-add ${className}`}
+          className={`!text-[#CA6510] !bg-[#FECBA1] ${className}`}
           name={`+${remainingCount}`}
           type={type}
         />
