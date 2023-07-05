@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var bs = require('react-icons/bs');
 var Typography = require('Typography');
 require('Typography/dist/index.css');
 
@@ -36,6 +35,65 @@ var __assign = function() {
 typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
     var e = new Error(message);
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+
+var Dot = function Dot() {
+  return React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    strokeWidth: "0",
+    viewBox: "0 0 16 16",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg",
+    className: "text-gray-500 text-3xl"
+  }, React.createElement("path", {
+    d: "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+  }));
+};
+var Check = function Check() {
+  return React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    "stroke-width": "0",
+    viewBox: "0 0 16 16",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg",
+    className: "text-successColor ml-[5px] my-[6px]"
+  }, React.createElement("path", {
+    d: "M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+  }));
+};
+var EyeOpen = function EyeOpen() {
+  return React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    "stroke-width": "0",
+    viewBox: "0 0 16 16",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    d: "M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"
+  }), React.createElement("path", {
+    d: "M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
+  }));
+};
+var EyeClose = function EyeClose() {
+  return React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    "stroke-width": "0",
+    viewBox: "0 0 16 16",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    d: "m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"
+  }), React.createElement("path", {
+    d: "M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"
+  }));
 };
 
 var Password = function Password(_a) {
@@ -115,11 +173,7 @@ var Password = function Password(_a) {
       }, React.createElement("li", {
         key: item.index,
         className: "".concat(requirementItemClass, " flex items-center justify-left text-xs passwordsm:text-base passwordmd:text-lg")
-      }, isValid ? React.createElement(bs.BsCheckLg, {
-        className: "text-success ml-[5px] my-[6px]"
-      }) : React.createElement(bs.BsDot, {
-        className: "text-gray-500 text-3xl"
-      }), React.createElement("span", {
+      }, isValid ? React.createElement(Check, null) : React.createElement(Dot, null), React.createElement("span", {
         className: "".concat(isValid && "line-through ml-[7px] decoration-gray-500 text-gray-500")
       }, requirementList[item.index])));
     });
@@ -180,15 +234,15 @@ var Password = function Password(_a) {
   return React.createElement("div", {
     className: "relative flex flex-col text-sm sm:text-base mb-6 w-full"
   }, label && React.createElement("label", {
-    className: "".concat(err ? "text-error" : focus ? "text-textExcellent" : "text-defaultColor")
+    className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
   }, React.createElement(Typography.Typography, {
     type: "label"
   }, label, required && "*")), React.createElement("div", {
-    className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-textExcellent before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
+    className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement(Typography.Typography, {
     type: "h6"
   }, React.createElement("input", __assign({
-    className: "".concat(className, " py-2 px-3 border-b outline-none w-full ").concat(err ? "border-error" : focus ? "border-textExcellent" : "border-defaultColor"),
+    className: "".concat(className, " py-2 px-3 border-b outline-none w-full ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-slatyGrey"),
     type: type,
     id: "password-input",
     value: password,
@@ -196,16 +250,16 @@ var Password = function Password(_a) {
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
     onFocus: handleFocus
   }, props)))), type === "password" ? React.createElement("span", {
-    className: "absolute top-9 right-1 text-md sm:text-lg ".concat(err ? "text-error" : "text-textDefault"),
+    className: "absolute top-9 right-1 text-md sm:text-lg ".concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
       return setType("text");
     }
-  }, React.createElement(bs.BsFillEyeSlashFill, null)) : React.createElement("span", {
-    className: "absolute top-9 right-1 text-md sm:text-lg ".concat(err ? "text-error" : "text-textDefault"),
+  }, React.createElement(EyeClose, null)) : React.createElement("span", {
+    className: "absolute top-9 right-1 text-md sm:text-lg ".concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
       return setType("password");
     }
-  }, React.createElement(bs.BsFillEyeFill, null)), open && React.createElement(React.Fragment, null, React.createElement("div", {
+  }, React.createElement(EyeOpen, null)), open && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "absolute bottom-[90px] left-0 bg-white shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit"
   }, React.createElement("ul", {
     className: "requirement-list"
@@ -214,15 +268,15 @@ var Password = function Password(_a) {
   })), password && React.createElement("div", {
     className: "absolute top-[60px] mt-2 flex items-center"
   }, React.createElement("div", {
-    className: "relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-textDefault"
+    className: "relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]"
   }, React.createElement("span", {
-    className: "absolute rounded-l-lg h-[5px] ".concat(data.match(/[^A-Za-z0-9]/) && data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.match(/.{8,}/) ? "bg-success w-[150px] sm:w-[180px] rounded-lg" : data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) ? "bg-textGood w-[85px] sm:w-[100px]" : password.length >= 3 && data.match(/[a-z]/) ? "bg-textWeek  w-[30px] sm:w-[45px]" : "bg-textDefault")
+    className: "absolute rounded-l-lg h-[5px] ".concat(data.match(/[^A-Za-z0-9]/) && data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.match(/.{8,}/) ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg" : data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) ? "bg-[#FFBF00] w-[85px] sm:w-[100px]" : password.length >= 3 && data.match(/[a-z]/) ? "bg-defaultRed  w-[30px] sm:w-[45px]" : "bg-[#979797]")
   })), React.createElement("span", {
     className: "ml-4 text-xs sm:text-sm"
   }, getPasswordStrength())), err && React.createElement(Typography.Typography, {
     type: "h6"
   }, React.createElement("span", {
-    className: "absolute ".concat(password ? "top-[90px]" : "top-[65px]", " text-error")
+    className: "absolute ".concat(password ? "top-[90px]" : "top-[65px]", " text-defaultRed")
   }, errorMes)));
 };
 

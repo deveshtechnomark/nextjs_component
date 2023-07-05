@@ -3,13 +3,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        error: "#DC3545",
-        textExcellent: "#02B89D",
+        defaultRed: "#DC3545",
+        successColor: "#198754",
+        slatyGrey: "#6E6D7A",
+        defaultRed: "#DC3545",
+        primary: "#02B89D",
         textGood: "#FFBF00",
-        textWeek: "#DC3545",
         textDefault: "#979797",
-        success: "#198754",
-        defaultColor: "#6E6D7A",
       },
       screens: {
         passwordsm: "800px",

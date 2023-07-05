@@ -6,12 +6,7 @@ import React, {
   MouseEvent,
 } from "react";
 import "./index.css";
-import {
-  BsFillEyeFill,
-  BsFillEyeSlashFill,
-  BsCheckLg,
-  BsDot,
-} from "react-icons/bs";
+import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
 import { Typography } from "Typography";
 import "Typography/dist/index.css";
 
@@ -126,9 +121,9 @@ const Password: React.FC<PasswordProps> = ({
             className={`${requirementItemClass} flex items-center justify-left text-xs passwordsm:text-base passwordmd:text-lg`}
           >
             {isValid ? (
-              <BsCheckLg className="text-success ml-[5px] my-[6px]" />
+              <Check />
             ) : (
-              <BsDot className="text-gray-500 text-3xl" />
+              <Dot />
             )}
             <span
               className={`${
@@ -218,11 +213,7 @@ const Password: React.FC<PasswordProps> = ({
       {label && (
         <label
           className={`${
-            err
-              ? "text-error"
-              : focus
-              ? "text-textExcellent"
-              : "text-defaultColor"
+            err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"
           }`}
         >
           <Typography type="label">
@@ -234,17 +225,17 @@ const Password: React.FC<PasswordProps> = ({
       <div
         className={`${
           !err &&
-          "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-textExcellent before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
+          "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
         }`}
       >
         <Typography type="h6">
           <input
             className={`${className} py-2 px-3 border-b outline-none w-full ${
               err
-                ? "border-error"
+                ? "border-defaultRed"
                 : focus
-                ? "border-textExcellent"
-                : "border-defaultColor"
+                ? "border-primary"
+                : "border-slatyGrey"
             }`}
             type={type}
             id="password-input"
@@ -259,20 +250,20 @@ const Password: React.FC<PasswordProps> = ({
       {type === "password" ? (
         <span
           className={`absolute top-9 right-1 text-md sm:text-lg ${
-            err ? "text-error" : "text-textDefault"
+            err ? "text-defaultRed" : "text-[#979797]"
           }`}
           onClick={() => setType("text")}
         >
-          <BsFillEyeSlashFill />
+          <EyeClose />
         </span>
       ) : (
         <span
           className={`absolute top-9 right-1 text-md sm:text-lg ${
-            err ? "text-error" : "text-textDefault"
+            err ? "text-defaultRed" : "text-[#979797]"
           }`}
           onClick={() => setType("password")}
         >
-          <BsFillEyeFill />
+          <EyeOpen />
         </span>
       )}
 
@@ -287,7 +278,7 @@ const Password: React.FC<PasswordProps> = ({
 
       {password && (
         <div className="absolute top-[60px] mt-2 flex items-center">
-          <div className="relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-textDefault">
+          <div className="relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]">
             <span
               className={`absolute rounded-l-lg h-[5px] ${
                 data.match(/[^A-Za-z0-9]/) &&
@@ -296,14 +287,14 @@ const Password: React.FC<PasswordProps> = ({
                 data.match(/[0-9]/) &&
                 !data.match(/\s/) &&
                 data.match(/.{8,}/)
-                  ? "bg-success w-[150px] sm:w-[180px] rounded-lg"
+                  ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg"
                   : data.match(/[A-Z]/) &&
                     data.match(/[a-z]/) &&
                     data.match(/[0-9]/)
-                  ? "bg-textGood w-[85px] sm:w-[100px]"
+                  ? "bg-[#FFBF00] w-[85px] sm:w-[100px]"
                   : password.length >= 3 && data.match(/[a-z]/)
-                  ? "bg-textWeek  w-[30px] sm:w-[45px]"
-                  : "bg-textDefault"
+                  ? "bg-defaultRed  w-[30px] sm:w-[45px]"
+                  : "bg-[#979797]"
               }`}
             ></span>
           </div>
@@ -317,7 +308,7 @@ const Password: React.FC<PasswordProps> = ({
           <span
             className={`absolute ${
               password ? "top-[90px]" : "top-[65px]"
-            } text-error`}
+            } text-defaultRed`}
           >
             {errorMes}
           </span>
