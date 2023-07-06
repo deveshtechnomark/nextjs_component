@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from "./styles/timepicker.module.css";
 
 interface TimepickerProps { }
 
-const Timepicker: React.FC<TimepickerProps> = () => {
+const Timepicker: React.FC<TimepickerProps> = (props: any) => {
     const hourDigits: number[] = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     const minuteDigits: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
 
@@ -12,9 +12,16 @@ const Timepicker: React.FC<TimepickerProps> = () => {
     const [isAM, setIsAM] = useState<boolean>(true);
     const [showHourDigits, setShowHourDigits] = useState<boolean>(true);
     const [showMinuteDigits, setShowMinuteDigits] = useState<boolean>(false);
+    const [animateHour, setAnimateHour] = useState<String>('');
+    const [animateMinute, setAnimateMinute] = useState<String>('');
 
     const handleHourSelectDigit = (digit: number) => {
         setSelectedHourDigit(digit);
+        digit ? setAnimateHour('topAnimation') : setAnimateHour('');
+        setTimeout(() => {
+            setAnimateHour('');
+        }, 300);
+
         const timer = setTimeout(() => {
             setShowMinuteDigits(true);
             setShowHourDigits(false);
@@ -26,6 +33,10 @@ const Timepicker: React.FC<TimepickerProps> = () => {
 
     const handleMinuteSelectDigit = (digit: number) => {
         setSelectedMinuteDigit(digit);
+        digit ? setAnimateMinute('topAnimation') : setAnimateMinute('');
+        setTimeout(() => {
+            setAnimateMinute('');
+        }, 300);
     };
 
     const toggleSetAM = () => {
@@ -80,40 +91,46 @@ const Timepicker: React.FC<TimepickerProps> = () => {
                     top: '46%',
                     left: '47%'
                 }}
-                onClick={() => setSelectedMinuteDigit(digit)}
+                onClick={() => handleMinuteSelectDigit(digit)}
             >
                 {formattedDigit}
             </div>
         );
     });
 
+    useEffect(() => {
+        let fullTime = selectedHourDigit + ':' + selectedMinuteDigit + ' ' + (isAM ? "AM" : "PM");
+        props.onSelectedTime(fullTime);
+    }, [selectedHourDigit, selectedMinuteDigit, isAM]);
     return (
         <>
             <div className="flex flex-col items-center justify-center mt-3">
                 <div className="flex items-center mb-4">
                     <div className="flex items-center space-x-1">
-
-                        <input
-                            className={`w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'
-                                }`}
-                            type="text"
-                            placeholder="00"
-                            readOnly
-                            defaultValue={`${selectedHourDigit < 10 ? `0${selectedHourDigit}` : selectedHourDigit !== 12 ? selectedHourDigit : '00'}`}
-                            onClick={showHourClock}
-                            style={{ outline: 'none' }}
-                        />
+                        <div className='border border-gray-300 rounded bg-slatyGreen overflow-hidden'>
+                            <input
+                                className={`${animateHour} w-9 h-8 py-1 font-semibold text-lg border rounded text-center cursor-pointer ${showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'}`}
+                                type="text"
+                                placeholder="00"
+                                readOnly
+                                defaultValue={`${selectedHourDigit < 10 ? `0${selectedHourDigit}` : selectedHourDigit}`}
+                                onClick={showHourClock}
+                                style={{ outline: 'none' }}
+                            />
+                        </div>
                         <span className="text-gray-600">:</span>
-                        <input
-                            className={`w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'
-                                }`}
-                            type="text"
-                            placeholder="00"
-                            readOnly
-                            defaultValue={`${selectedMinuteDigit < 10 ? `0${selectedMinuteDigit}` : selectedMinuteDigit}`}
-                            onClick={showMinuteClock}
-                            style={{ outline: 'none' }}
-                        />
+                        <div className='border border-gray-300 rounded bg-slatyGreen overflow-hidden'>
+                            <input
+                                className={`${animateMinute} w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'
+                                    }`}
+                                type="text"
+                                placeholder="00"
+                                readOnly
+                                defaultValue={`${selectedMinuteDigit < 10 ? `0${selectedMinuteDigit}` : selectedMinuteDigit}`}
+                                onClick={showMinuteClock}
+                                style={{ outline: 'none' }}
+                            />
+                        </div>
                     </div>
                     <div className="grid grid-cols-2 ml-10 border border-gray-300 rounded-md">
                         <div
@@ -162,10 +179,10 @@ const Timepicker: React.FC<TimepickerProps> = () => {
                             <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56.3%', left: '52%' }}></div>
                         </div>
                     </div>
-                )} 
+                )}
                 {showMinuteDigits && (
                     <div className="w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center">
-                        <div className={`w-full h-full relative -left-1 ${styles.scaleUpDiv}`}>
+                        <div className={`w-full h-full relative -left-1 scaleUpAnimation`}>
                             {renderMinuteDigits}
                             {minuteDigits.map((digit, index) =>
                                 digit === selectedMinuteDigit && (
