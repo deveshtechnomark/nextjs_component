@@ -49,15 +49,7 @@ const CalendarYear = (props: any): JSX.Element => {
         setToday(newDate);
         setShowMonthList(false);
         setSelectedMonth(month);
-
-        if (selectedMonth) {
-            setAnimate('slideLeftAnimation');
-        } else {
-            setAnimate('');
-        }
-
-        setShowMonthList(false);
-        setSelectedMonth(month);
+        selectedMonth ? setAnimate('slideLeftAnimation') : setAnimate('')
     };
 
     const toggleYearList = () => {
@@ -78,7 +70,6 @@ const CalendarYear = (props: any): JSX.Element => {
             setAnimate('');
             setShowMonthList(true);
         }, 0);
-
     };
 
     const handleDateClick = (date: Date) => {
@@ -92,15 +83,11 @@ const CalendarYear = (props: any): JSX.Element => {
     };
 
     const goToNextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-        }
+        currentPage < totalPages ? setCurrentPage(currentPage + 1) : currentPage
     };
 
     const goToPreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
+        currentPage > 1 ? setCurrentPage(currentPage - 1) : currentPage
     };
 
     const calendarShow = () => {
@@ -157,7 +144,7 @@ const CalendarYear = (props: any): JSX.Element => {
             <div className="relative flex" ref={inputRef}>
                 <input
                     type={toggleOpen ? "month" : "text"}
-                    className="peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 text-black"
+                    className="peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 text-black border-lightSilver"
                     placeholder="Select a date"
                     onClick={calendarShow}
                     defaultValue={fullDate.toString()}
@@ -167,18 +154,18 @@ const CalendarYear = (props: any): JSX.Element => {
                 <div className={`relative ${toggleOpen ? "bottomAnimation" : ""}`}>
                     <div className="flex  mx-auto  items-center">
                         <div className="shadow-md overflow-hidden">
-                            <div className="flex justify-between border-b-2 border-borderColor py-[12px] px-[12px]">
+                            <div className="flex justify-between border-b-2 border-lightSilver py-[12px] px-[12px]">
                                 <div className={`flex flex-row  ${animate}`}>
                                     {showMonthList === true ? "" : showYearList === true ? "" :
-                                        (<h1 className="proxima text-[14px] font-semibold cursor-pointer" onClick={toggleMonthList}>
+                                        (<h1 className="proxima text-[14px] font-semibold cursor-pointer text-slatyBlue" onClick={toggleMonthList}>
                                             {months[currentMonth]}
                                         </h1>)}
                                     {showYearList === true && showMonthList === false ?
-                                        (<h1 className="proxima text-[14px] font-semibold ml-1">
+                                        (<h1 className="proxima text-[14px] font-semibold ml-1 text-slatyBlue">
                                             {startYear + ' - ' + endYear}
                                         </h1>
                                         ) :
-                                        (<h1 className={`proxima text-[14px] font-semibold ml-1 cursor-pointer ${showMonthList ? 'pointer-events-none' : ''}`} onClick={toggleYearList}>
+                                        (<h1 className={`proxima text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ${showMonthList ? 'pointer-events-none' : ''}`} onClick={toggleYearList}>
                                             {currentYear}
                                         </h1>)
                                     }
@@ -187,12 +174,12 @@ const CalendarYear = (props: any): JSX.Element => {
                                     {showYearList === false ?
                                         <>
                                             <div
-                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${showMonthList ? "hidden" : ""} text-[20px]`}
+                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${showMonthList ? "hidden" : ""} text-[20px]`}
                                                 onClick={() => handleIconClick(false)} >
                                                 <ChevronLeftIcon />
                                             </div>
                                             <div
-                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${showMonthList ? "hidden" : ""} rotate-180 text-[20px]`}
+                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${showMonthList ? "hidden" : ""} rotate-180 text-[20px]`}
                                                 onClick={() => handleIconClick(true)}>
                                                 <ChevronLeftIcon />
                                             </div>
@@ -200,13 +187,13 @@ const CalendarYear = (props: any): JSX.Element => {
                                         : <>
                                             {currentPage <= totalPages && (<>
                                                 <div
-                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${currentPage === 1 ? "opacity-50 pointer-events-none" : ""} text-[20px]`}
+                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${currentPage === 1 ? "opacity-40 pointer-events-none" : ""} text-[20px]`}
                                                     onClick={currentPage === 1 ? undefined : goToPreviousPage}
                                                 >
                                                     <ChevronLeftIcon />
                                                 </div>
                                                 <div
-                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all ${currentPage === totalPages ? "opacity-50 pointer-events-none" : ""} rotate-180 text-[20px]`}
+                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${currentPage === totalPages ? "opacity-40 pointer-events-none" : ""} rotate-180 text-[20px]`}
                                                     onClick={currentPage === totalPages ? undefined : goToNextPage}>
                                                     <ChevronLeftIcon />
                                                 </div>

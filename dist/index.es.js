@@ -116,13 +116,7 @@ var Calendar = function Calendar(props) {
     setToday(newDate);
     setShowMonthList(false);
     setSelectedMonth(month);
-    if (selectedMonth) {
-      setAnimate('slideLeftAnimation');
-    } else {
-      setAnimate('');
-    }
-    setShowMonthList(false);
-    setSelectedMonth(month);
+    selectedMonth ? setAnimate('slideLeftAnimation') : setAnimate('');
   };
   var toggleYearList = function toggleYearList() {
     if (!showYearList && !showMonthList) {
@@ -153,14 +147,10 @@ var Calendar = function Calendar(props) {
     setToggleOpen(false);
   };
   var goToNextPage = function goToNextPage() {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
+    currentPage < totalPages ? setCurrentPage(currentPage + 1) : currentPage;
   };
   var goToPreviousPage = function goToPreviousPage() {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
+    currentPage > 1 ? setCurrentPage(currentPage - 1) : currentPage;
   };
   var calendarShow = function calendarShow() {
     setToggleOpen(!toggleOpen);
@@ -211,7 +201,7 @@ var Calendar = function Calendar(props) {
     ref: inputRef
   }, /*#__PURE__*/React.createElement("input", {
     type: toggleOpen ? "date" : "text",
-    className: "peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 text-black",
+    className: "peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 text-black border-lightSilver",
     placeholder: "Select a date",
     onClick: calendarShow,
     defaultValue: fullDate.toString()
@@ -222,34 +212,34 @@ var Calendar = function Calendar(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "shadow-md overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between border-b-2 border-borderColor py-[12px] px-[12px]"
+    className: "flex justify-between border-b-2 border-lightSilver py-[12px] px-[12px]"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row  ".concat(animate)
   }, showMonthList === true ? "" : showYearList === true ? "" : /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold cursor-pointer",
+    className: "proxima text-[14px] font-semibold cursor-pointer text-slatyBlue",
     onClick: toggleMonthList
   }, months[currentMonth]), showYearList === true && showMonthList === false ? /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold ml-1"
+    className: "proxima text-[14px] font-semibold ml-1 text-slatyBlue"
   }, startYear + ' - ' + endYear) : /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold ml-1 cursor-pointer ".concat(showMonthList ? 'pointer-events-none' : ''),
+    className: "proxima text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
     onClick: toggleYearList
   }, currentYear)), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-5"
   }, showYearList === false ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all ".concat(showMonthList ? "hidden" : "", " text-[20px]"),
+    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(showMonthList ? "hidden" : "", " text-[20px]"),
     onClick: function onClick() {
       return handleIconClick(false);
     }
   }, /*#__PURE__*/React.createElement(ChevronLeft, null)), /*#__PURE__*/React.createElement("div", {
-    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all ".concat(showMonthList ? "hidden" : "", " rotate-180 text-[20px]"),
+    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(showMonthList ? "hidden" : "", " rotate-180 text-[20px]"),
     onClick: function onClick() {
       return handleIconClick(true);
     }
   }, /*#__PURE__*/React.createElement(ChevronLeft, null))) : /*#__PURE__*/React.createElement(React.Fragment, null, currentPage <= totalPages && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all ".concat(currentPage === 1 ? "opacity-50 pointer-events-none" : "", " text-[20px]"),
+    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(currentPage === 1 ? "opacity-40 pointer-events-none" : "", " text-[20px]"),
     onClick: currentPage === 1 ? undefined : goToPreviousPage
   }, /*#__PURE__*/React.createElement(ChevronLeft, null)), /*#__PURE__*/React.createElement("div", {
-    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all ".concat(currentPage === totalPages ? "opacity-50 pointer-events-none" : "", " rotate-180 text-[20px]"),
+    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(currentPage === totalPages ? "opacity-40 pointer-events-none" : "", " rotate-180 text-[20px]"),
     onClick: currentPage === totalPages ? undefined : goToNextPage
   }, /*#__PURE__*/React.createElement(ChevronLeft, null)))))), showMonthList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"
@@ -371,13 +361,7 @@ var CalendarYear = function CalendarYear(props) {
     setToday(newDate);
     setShowMonthList(false);
     setSelectedMonth(month);
-    if (selectedMonth) {
-      setAnimate('slideLeftAnimation');
-    } else {
-      setAnimate('');
-    }
-    setShowMonthList(false);
-    setSelectedMonth(month);
+    selectedMonth ? setAnimate('slideLeftAnimation') : setAnimate('');
   };
   var toggleYearList = function toggleYearList() {
     if (!showYearList && !showMonthList) {
@@ -408,14 +392,10 @@ var CalendarYear = function CalendarYear(props) {
     setToggleOpen(false);
   };
   var goToNextPage = function goToNextPage() {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
+    currentPage < totalPages ? setCurrentPage(currentPage + 1) : currentPage;
   };
   var goToPreviousPage = function goToPreviousPage() {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
+    currentPage > 1 ? setCurrentPage(currentPage - 1) : currentPage;
   };
   var calendarShow = function calendarShow() {
     setToggleOpen(!toggleOpen);
@@ -466,7 +446,7 @@ var CalendarYear = function CalendarYear(props) {
     ref: inputRef
   }, /*#__PURE__*/React.createElement("input", {
     type: toggleOpen ? "month" : "text",
-    className: "peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 text-black",
+    className: "peer block min-h-[auto] pl-1 w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-1 text-black border-lightSilver",
     placeholder: "Select a date",
     onClick: calendarShow,
     defaultValue: fullDate.toString()
@@ -477,34 +457,34 @@ var CalendarYear = function CalendarYear(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "shadow-md overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-between border-b-2 border-borderColor py-[12px] px-[12px]"
+    className: "flex justify-between border-b-2 border-lightSilver py-[12px] px-[12px]"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row  ".concat(animate)
   }, showMonthList === true ? "" : showYearList === true ? "" : /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold cursor-pointer",
+    className: "proxima text-[14px] font-semibold cursor-pointer text-slatyBlue",
     onClick: toggleMonthList
   }, months[currentMonth]), showYearList === true && showMonthList === false ? /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold ml-1"
+    className: "proxima text-[14px] font-semibold ml-1 text-slatyBlue"
   }, startYear + ' - ' + endYear) : /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold ml-1 cursor-pointer ".concat(showMonthList ? 'pointer-events-none' : ''),
+    className: "proxima text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
     onClick: toggleYearList
   }, currentYear)), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-5"
   }, showYearList === false ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all ".concat(showMonthList ? "hidden" : "", " text-[20px]"),
+    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(showMonthList ? "hidden" : "", " text-[20px]"),
     onClick: function onClick() {
       return handleIconClick(false);
     }
   }, /*#__PURE__*/React.createElement(ChevronLeft, null)), /*#__PURE__*/React.createElement("div", {
-    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all ".concat(showMonthList ? "hidden" : "", " rotate-180 text-[20px]"),
+    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(showMonthList ? "hidden" : "", " rotate-180 text-[20px]"),
     onClick: function onClick() {
       return handleIconClick(true);
     }
   }, /*#__PURE__*/React.createElement(ChevronLeft, null))) : /*#__PURE__*/React.createElement(React.Fragment, null, currentPage <= totalPages && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all ".concat(currentPage === 1 ? "opacity-50 pointer-events-none" : "", " text-[20px]"),
+    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(currentPage === 1 ? "opacity-40 pointer-events-none" : "", " text-[20px]"),
     onClick: currentPage === 1 ? undefined : goToPreviousPage
   }, /*#__PURE__*/React.createElement(ChevronLeft, null)), /*#__PURE__*/React.createElement("div", {
-    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all ".concat(currentPage === totalPages ? "opacity-50 pointer-events-none" : "", " rotate-180 text-[20px]"),
+    className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(currentPage === totalPages ? "opacity-40 pointer-events-none" : "", " rotate-180 text-[20px]"),
     onClick: currentPage === totalPages ? undefined : goToNextPage
   }, /*#__PURE__*/React.createElement(ChevronLeft, null)))))), showMonthList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"

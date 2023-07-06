@@ -11,9 +11,11 @@ module.exports = {
       colors: {
         primary: "#02B89D",
         textColor: "#333333",
-        borderColor: '#D8D8D8',
+        lightSilver: '#D8D8D8',
         lightGreen: '#E6F8F6',
         whiteSmoke: "#F6F6F6",
+        slatyBlue: '#0F2552',
+        darkGray: '#848a95'
       },
     },
   },
@@ -70,7 +72,7 @@ module.exports = {
           '0%': {
             transform: 'translateY(-30%)',
             opacity: '0'
-          },        
+          },
           '100%': {
             transform: 'translateY(0)',
             opacity: '1'
@@ -98,12 +100,12 @@ module.exports = {
           "0%": {
             transform: "translateX(100px)",
             visibility: "hidden",
-            opacity:"0"
+            opacity: "0"
           },
           "100%": {
             transform: "translateX(0px)",
             visibility: "visible",
-            opacity:"1"
+            opacity: "1"
           }
         },
       };
