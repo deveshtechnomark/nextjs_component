@@ -1,10 +1,5 @@
-<code>
-  <Badge
-    variant="{dot|pill}"
-    badgetype="{dark|secondary|graph|success|warning|error|primary}"
-    text="string"
-  />
-</code>
+> <Badge variant="{dot|pill}" badgetype="{dark|secondary|graph|success|warning|error|primary}" text="string"/>
+
 <ul>
   <li>variant: mandatory prop, it can be either dot or pill.</li>
   <li>
@@ -15,10 +10,8 @@
 </ul>
 <br /><br />
 
-<code>
-<ProgressStep total={number} current={number} label={string[]}
-  customized={boolean} icon={JSX/TSX-Element} />
-  </code>
+> <ProgressStep total={number} current={number} label={string[]} customized={boolean} icon={JSX/TSX-Element} />
+
 <ul>
   <li>total: mandatory prop, which includes the total no. of steps.</li>
   <li>label: optional prop, that includes array of label.</li>
