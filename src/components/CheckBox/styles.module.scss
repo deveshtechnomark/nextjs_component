@@ -1,5 +1,5 @@
-$color_1: #02b89d;
-$color_2: #dc3545;
+$primary: #02b89d;
+$defaultRed: #dc3545;
 
 @keyframes shrink-bounce {
   0% {
@@ -59,9 +59,9 @@ $color_2: #dc3545;
       }
       &:hover {
         cursor: pointer;
-        color: $color_1;
+        color: $primary;
         > .checkBoxSpan {
-          border-color: $color_1;
+          border-color: $primary;
         }
       }
     }
@@ -70,7 +70,7 @@ $color_2: #dc3545;
     + {
       .checkBoxLabel {
         > .checkBoxSpan {
-          box-shadow: 0 0 8px $color_1;
+          box-shadow: 0 0 8px $primary;
         }
       }
     }
@@ -87,7 +87,7 @@ $color_2: #dc3545;
     + {
       .checkBoxLabel {
         > .checkBoxSpan {
-          border: 0.58em solid $color_1;
+          border: 0.58em solid $primary;
           animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
           &:before {
             content: "";
@@ -114,7 +114,7 @@ $color_2: #dc3545;
   + {
     .checkBoxLabel {
       margin-right: 0.5em;
-      color: $color_2;
+      color: $defaultRed;
       display: flex;
       user-select: none;
       > .checkBoxSpan {
@@ -122,16 +122,16 @@ $color_2: #dc3545;
         width: 1.125em;
         height: 1.125em;
         background: transparent;
-        border: 2px solid $color_2;
+        border: 2px solid $defaultRed;
         border-radius: 2px;
         cursor: pointer;
         transition: all 250ms cubic-bezier(0.4, 0, 0.23, 1);
       }
       &:hover {
         cursor: pointer;
-        color: $color_2;
+        color: $defaultRed;
         > .checkBoxSpan {
-          border-color: $color_2;
+          border-color: $defaultRed;
         }
       }
     }
@@ -140,7 +140,7 @@ $color_2: #dc3545;
     + {
       .checkBoxLabel {
         > .checkBoxSpan {
-          box-shadow: 0 0 8px $color_2;
+          box-shadow: 0 0 8px $defaultRed;
         }
       }
     }
@@ -157,7 +157,7 @@ $color_2: #dc3545;
     + {
       .checkBoxLabel {
         > .checkBoxSpan {
-          border: 0.58em solid $color_2;
+          border: 0.58em solid $defaultRed;
           animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
           &:before {
             content: "";
@@ -215,9 +215,9 @@ $color_2: #dc3545;
       }
       &:hover {
         cursor: pointer;
-        color: $color_1;
+        color: $primary;
         > .i__checkBoxSpan {
-          border-color: $color_1;
+          border-color: $primary;
         }
       }
     }
@@ -226,7 +226,7 @@ $color_2: #dc3545;
     + {
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
-          box-shadow: 0 0 8px $color_1;
+          box-shadow: 0 0 8px $primary;
         }
       }
     }
@@ -243,7 +243,7 @@ $color_2: #dc3545;
     + {
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
-          border: 0.58em solid $color_1;
+          border: 0.58em solid $primary;
           &:before {
             content: "";
             position: absolute;
@@ -269,22 +269,22 @@ $color_2: #dc3545;
       margin-right: 0.5em;
       display: flex;
       user-select: none;
-      color: $color_2;
+      color: $defaultRed;
       > .i__checkBoxSpan {
         margin: 0em 0.3em;
         width: 1.125em;
         height: 1.125em;
         background-color: white;
-        border: 2px solid $color_2;
+        border: 2px solid $defaultRed;
         border-radius: 2px;
         cursor: pointer;
         transition: all 250ms cubic-bezier(0.4, 0, 0.23, 1);
       }
       &:hover {
         cursor: pointer;
-        color: $color_2;
+        color: $defaultRed;
         > .i__checkBoxSpan {
-          border-color: $color_2;
+          border-color: $defaultRed;
         }
       }
     }
@@ -293,7 +293,7 @@ $color_2: #dc3545;
     + {
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
-          box-shadow: 0 0 8px $color_2;
+          box-shadow: 0 0 8px $defaultRed;
         }
       }
     }
@@ -310,7 +310,7 @@ $color_2: #dc3545;
     + {
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
-          border: 0.58em solid $color_2;
+          border: 0.58em solid $defaultRed;
           &:before {
             content: "";
             position: absolute;

@@ -1,8 +1,8 @@
-import React from "react";
 import "./styles.css";
 
+import Badge from "./components/Badge";
 import Radio from "./components/Radio";
 import CheckBox from "./components/CheckBox";
-import Badge from "./components/Badge";
+import ProgressStep from "./components/ProgressStep";
 
-export { CheckBox, Radio, Badge };
+export { CheckBox, Radio, Badge, ProgressStep };
