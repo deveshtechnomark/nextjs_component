@@ -1,4 +1,3 @@
-```html
 <code>
   <Badge
     variant="{dot|pill}"
@@ -16,10 +15,10 @@
 </ul>
 <br /><br />
 
-<code
-  ><ProgressStep total={number} current={number} label={string[]}
-  customized={boolean} icon={JSX/TSX-Element} /></code
->
+<code>
+<ProgressStep total={number} current={number} label={string[]}
+  customized={boolean} icon={JSX/TSX-Element} />
+  </code>
 <ul>
   <li>total: mandatory prop, which includes the total no. of steps.</li>
   <li>label: optional prop, that includes array of label.</li>
@@ -32,4 +31,3 @@
     will only work with "customized" prop.
   </li>
 </ul>
-```
