@@ -1,7 +1,7 @@
 ```html
 <Badge
-  variant="{dot|pill}"
-  badgetype="{dark|secondary|graph|success|warning|error|primary}"
+  variant="dot|pill"
+  badgetype="dark|secondary|graph|success|warning|error|primary"
   text="string"
 />
 ```
@@ -9,16 +9,28 @@
 <ul>
   <li>variant: mandatory prop, it can be either dot or pill.</li>
   <li>
-    badgetype: mandatory prop, it can be either
-    dark,secondary,graph,success,error,warning or primary.
+    badgetype: mandatory prop, it can be either dark, secondary, graph, success, error, warning or primary.
   </li>
   <li>text: optional prop, it indicates label for badge.</li>
 </ul>
-<br /><br />
 
 ```html
-<ProgressStep total={number} current={number} label={string[]}
-customized={boolean} icon={JSX/TSX-Element} />
+<CheckBox id="string" label="string" variant="invalid" intermediate />
+```
+
+<ul>
+  <li>id: mandatory prop, it must be unique.</li>
+  <li>
+    label: optional prop, it will be used to show label beside checkbox.
+  </li>
+  <li>variant: optional prop, it indicates the checkbox with invalidity i.e. danger/error.</li>
+  <li>intermediate: optional prop, it will take boolean value & render the intermediate checkbox.</li>
+  <li>Other props applicable to html input checkbox type can be applied as per requirement.</li>
+</ul>
+
+```html
+<ProgressStep total={number} current={number} label={string[]} customized
+icon={JSX/TSX-Element} />
 ```
 
 <ul>
@@ -26,11 +38,23 @@ customized={boolean} icon={JSX/TSX-Element} />
   <li>label: optional prop, that includes array of label.</li>
   <li>current: mandatory prop, which indicates the active step.</li>
   <li>
-    customized: optional prop, use if user wants to define icon inside steps.
+    customized: optional prop, it will take boolean value & used if user wants to define custom icon inside steps.
   </li>
   <li>
     icon: optional prop, that must contain "JSX/TSX Element" as an icon & it
     will only work with "customized" prop.
   </li>
 </ul>
+
+```html
+<Radio id="string" label="string" variant="invalid" />
 ```
+
+<ul>
+  <li>id: mandatory prop, it must be unique.</li>
+  <li>
+    label: optional prop, it will be used to show label beside radio.
+  </li>
+  <li>variant: optional prop, it indicates the radio with invalidity i.e. danger/error.</li>
+  <li>Other props applicable to html input radio type can be applied as per requirement.</li>
+</ul>

@@ -6,7 +6,7 @@ interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
   variant?: "invalid";
-  intermediate: boolean;
+  intermediate?: boolean;
 }
 
 const CheckBox = ({
