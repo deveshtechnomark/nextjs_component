@@ -12,6 +12,7 @@ interface Props {
   icon?: string;
   selected?: string;
   editable?: boolean;
+  rateId: string;
 }
 
 const ratings: RatingItem[] = [
@@ -27,7 +28,12 @@ const ratings: RatingItem[] = [
   { value: "0.5", isHalf: true },
 ];
 
-const Rating: React.FC<Props> = ({ icon, selected, editable = true }) => {
+const Rating: React.FC<Props> = ({
+  icon,
+  selected,
+  editable = true,
+  rateId,
+}) => {
   const [rating, setRating] = useState("0");
 
   useEffect(() => {
@@ -40,6 +46,7 @@ const Rating: React.FC<Props> = ({ icon, selected, editable = true }) => {
     if (editable !== false) {
       setRating(event.target.value);
     }
+    console.log(event.target.name);
   };
 
   return (
@@ -54,9 +61,9 @@ const Rating: React.FC<Props> = ({ icon, selected, editable = true }) => {
                 icon === "heart" ? styles.comment_stars_input_heart : ""
               } hidden`}
               type="radio"
-              name="rating"
+              name={`rating-${item.value}-${rateId}`}
               value={item.value}
-              id={`rating-${item.value}`}
+              id={`rating-${item.value}-${rateId}`}
               checked={rating === item.value}
               onChange={handleRatingChange}
               disabled={!editable}
@@ -65,7 +72,7 @@ const Rating: React.FC<Props> = ({ icon, selected, editable = true }) => {
               className={`${styles.comment_stars_view} ${
                 item.isHalf ? styles.is_half : ""
               } ${icon === "heart" ? styles.comment_stars_view_heart : ""}`}
-              htmlFor={`rating-${item.value}`}
+              htmlFor={`rating-${item.value}-${rateId}`}
             >
               <svg className="icon icon-star">
                 {icon === "heart" ? <Heart /> : <Star />}

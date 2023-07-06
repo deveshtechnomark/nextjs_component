@@ -64,7 +64,8 @@ var Rating = function Rating(_a) {
   var icon = _a.icon,
     selected = _a.selected,
     _b = _a.editable,
-    editable = _b === void 0 ? true : _b;
+    editable = _b === void 0 ? true : _b,
+    rateId = _a.rateId;
   var _c = useState("0"),
     rating = _c[0],
     setRating = _c[1];
@@ -77,6 +78,7 @@ var Rating = function Rating(_a) {
     if (editable !== false) {
       setRating(event.target.value);
     }
+    console.log(event.target.name);
   };
   return React.createElement("div", {
     className: "flex"
@@ -88,15 +90,15 @@ var Rating = function Rating(_a) {
     }, React.createElement("input", {
       className: "".concat(styles.comment_stars_input, " ").concat(item.isHalf ? styles.is_half : "", " ").concat(icon === "heart" ? styles.comment_stars_input_heart : "", " hidden"),
       type: "radio",
-      name: "rating",
+      name: "rating-".concat(item.value, "-").concat(rateId),
       value: item.value,
-      id: "rating-".concat(item.value),
+      id: "rating-".concat(item.value, "-").concat(rateId),
       checked: rating === item.value,
       onChange: handleRatingChange,
       disabled: !editable
     }), React.createElement("label", {
       className: "".concat(styles.comment_stars_view, " ").concat(item.isHalf ? styles.is_half : "", " ").concat(icon === "heart" ? styles.comment_stars_view_heart : ""),
-      htmlFor: "rating-".concat(item.value)
+      htmlFor: "rating-".concat(item.value, "-").concat(rateId)
     }, React.createElement("svg", {
       className: "icon icon-star"
     }, icon === "heart" ? React.createElement(Heart, null) : React.createElement(Star, null))));
