@@ -4,12 +4,12 @@ import "./style.css";
 
 interface ColorPickerProps {
   name?: string;
-  onRgbaColorValueChange: (rgbaColorValue: string) => void;
+  value?: (value: string) => void;
 }
 
 export const ColorPicker: React.FC<ColorPickerProps> = ({
   name,
-  onRgbaColorValueChange,
+  value,
 }: ColorPickerProps) => {
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -343,7 +343,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   }`;
 
   useEffect(() => {
-    onRgbaColorValueChange(colorBoxValue || rgbaColorValue);
+    value(colorBoxValue || rgbaColorValue);
   }, [colorBoxValue, rgbaColorValue]);
 
   return (
