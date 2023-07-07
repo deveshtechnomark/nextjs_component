@@ -16,6 +16,8 @@ interface MultiSelectChipProps {
   id?: string;
   label?: string;
   type?: string;
+  className?: string;
+  validate?: boolean;
 }
 
 const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
@@ -25,6 +27,8 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
   label,
   type,
   id,
+  className,
+  validate = false,
 }) => {
   const [selected, setSelected] = useState<string[]>(defaultValue || []);
   const [open, setOpen] = useState(false);
@@ -89,11 +93,6 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
             <span title={option}>
               {option.length > 8 ? option.substring(0, 8) + "..." : option}
             </span>
-            {/* <BiX
-              size={12}
-              className="ml-1 cursor-pointer"
-              onClick={() => handleSelect(option)}
-            /> */}
             <div
               onClick={() => handleSelect(option)}
               className="ml-1 cursor-pointer"
@@ -120,24 +119,27 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
 
   return (
     <div className="relative w-full font-medium flex-row" ref={selectRef}>
-      <label
-        onClick={handleToggleOpen}
-        className={classNames(
-          "text-[14px] font-normal font-proxima text-slatyGrey",
-          { "text-primary": open }
-        )}
-      >
-        {label ? label : "label"}*
-      </label>
+      {label && (
+        <label
+          onClick={handleToggleOpen}
+          className={classNames(
+            "text-[14px] font-normal font-proxima text-slatyGrey",
+            { "text-primary": open }
+          )}
+        >
+          {label}
+          {validate && "*"}
+        </label>
+      )}
       <div
         onClick={handleToggleOpen}
-        className={classNames(
-          "flex justify-between bg-white border-b border-gray-300 text-darkCharcoal pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300",
+        className={`${classNames(
+          "flex justify-between bg-white border-b border-lightSilver text-darkCharcoal pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300",
           { "text-darkCharcoal": selected.length === 0 },
           { "text-primary": open },
           !open ? "cursor-pointer" : "cursor-default",
           "hover:border-primary"
-        )}
+        )} ${className}`}
       >
         {selectedDisplay}
 
@@ -156,12 +158,14 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
 
       <ul
         className={classNames(
-          "absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform",
+          "absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform",
           open
             ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
             : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
           { "ease-out": open }
         )}
+        // Setting the width inline style based on the client width of the parent div
+        style={{ width: selectRef.current?.clientWidth }}
       >
         <li
           className={classNames(

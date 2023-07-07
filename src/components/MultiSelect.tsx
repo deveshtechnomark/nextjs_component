@@ -14,6 +14,7 @@ interface MultiSelectProps {
   onSelect: (selectedValues: string[]) => void;
   label?: string;
   type?: string;
+  className?: string;
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
@@ -22,6 +23,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   onSelect,
   label,
   type,
+  className
 }) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
@@ -73,7 +75,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
   return (
     <div
-      className="relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300"
+      className={`relative font-medium w-full flex-row border-b border-lightSilver hover:border-primary transition-colors duration-300 ${className}`}
       ref={selectRef}
     >
       <label

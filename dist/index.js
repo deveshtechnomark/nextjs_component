@@ -36,33 +36,45 @@ function UserIcon() {
 }
 
 var Select = function Select(_a) {
+  var _b;
   var id = _a.id,
     options = _a.options,
     onSelect = _a.onSelect,
     type = _a.type,
-    label = _a.label;
-  var _b = React.useState(""),
-    inputValue = _b[0],
-    setInputValue = _b[1];
-  var _c = React.useState(false),
-    open = _c[0],
-    setOpen = _c[1];
+    label = _a.label,
+    className = _a.className,
+    _c = _a.search,
+    search = _c === void 0 ? false : _c,
+    _d = _a.validate,
+    validate = _d === void 0 ? false : _d;
+  var _e = React.useState(""),
+    inputValue = _e[0],
+    setInputValue = _e[1];
+  var _f = React.useState(false),
+    open = _f[0],
+    setOpen = _f[1];
+  var _g = React.useState(false),
+    error = _g[0],
+    setError = _g[1];
   var selectRef = React.useRef(null);
   React.useEffect(function () {
-    window.addEventListener("click", handleOutsideClick);
+    document.addEventListener("mousedown", handleDocumentClick);
     return function () {
-      window.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener("mousedown", handleDocumentClick);
     };
   }, []);
-  var handleOutsideClick = function handleOutsideClick(event) {
+  var handleDocumentClick = function handleDocumentClick(event) {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
       setOpen(false);
+      validateInput();
     }
   };
   var handleToggleOpen = function handleToggleOpen() {
     setOpen(function (prevOpen) {
       return !prevOpen;
     });
+    // Clear the error state when opening the dropdown again
+    setError(false);
   };
   var handleInputChange = function handleInputChange(e) {
     var inputValue = e.target.value.toLowerCase();
@@ -72,43 +84,54 @@ var Select = function Select(_a) {
     setInputValue(value);
     setOpen(false);
     console.log(value);
-    onSelect(value); // Calling the onSelect callback prop for fetching value
+    onSelect(value);
+    // Call the validation function on select
+    validateInput();
   };
-
+  var validateInput = function validateInput() {
+    if (validate && !inputValue) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  };
   return React.createElement(React.Fragment, null, React.createElement("div", {
-    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300"),
+    className: "".concat(classNames("font-medium w-full flex-row border-b ".concat(error && !inputValue ? "border-defaultRed" : "border-lightSilver hover:border-primary transition-colors duration-300")), " ").concat(className),
     ref: selectRef
-  }, React.createElement("label", {
-    className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", open && "text-primary"),
+  }, label && React.createElement("label", {
+    className: classNames("text-[14px] font-normal font-proxima", open && "text-primary", error && !inputValue ? "text-defaultRed" : "text-slatyGrey"),
     htmlFor: id
-  }, label ? label : "label", "*"), React.createElement("div", {
-    className: "flex flex-row items-center justify-center relative mt-0.5"
+  }, label, validate && "*"), React.createElement("div", {
+    className: "flex flex-row items-center relative mt-0.5 w-full"
   }, React.createElement("input", {
     id: id,
     onClick: handleToggleOpen,
     onChange: handleInputChange,
-    readOnly: !open,
+    readOnly: open && !search,
     placeholder: "Please Select...",
     value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
-    style: {
-      width: "191px"
-    },
-    className: classNames("flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: classNames("flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima w-full", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
       "rotate-180": open
     })
-  }, React.createElement(ChevronDown, null))), React.createElement("ul", {
-    className: classNames("absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
+  }, React.createElement(ChevronDown, null))), error && !inputValue && React.createElement("span", {
+    className: "absolute text-defaultRed text-[14px] font-proxima ml-1"
+  }, "Please select a value"), React.createElement("ul", {
+    className: classNames("absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
-    })
+    }),
+    // Setting the width inline style based on the client width of the parent div
+    style: {
+      width: (_b = selectRef.current) === null || _b === void 0 ? void 0 : _b.clientWidth
+    }
   }, options && options.map(function (option) {
     return React.createElement("li", {
       key: option.value,
       className: classNames("p-[10px] text-[16px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex", {
         "bg-whiteSmoke": option.value === inputValue,
-        hidden: !option.label.toLowerCase().startsWith(inputValue)
+        hidden: search && !option.label.toLowerCase().startsWith(inputValue)
       }),
       onClick: function onClick() {
         if (option.value !== inputValue) {
@@ -153,7 +176,8 @@ var MultiSelect = function MultiSelect(_a) {
     options = _a.options,
     onSelect = _a.onSelect,
     label = _a.label,
-    type = _a.type;
+    type = _a.type,
+    className = _a.className;
   var selectRef = React.useRef(null);
   var _b = React.useState([]),
     selectedValues = _b[0],
@@ -198,7 +222,7 @@ var MultiSelect = function MultiSelect(_a) {
     onSelect(updatedValues);
   };
   return React.createElement("div", {
-    className: "relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300",
+    className: "relative font-medium w-full flex-row border-b border-lightSilver hover:border-primary transition-colors duration-300 ".concat(className),
     ref: selectRef
   }, React.createElement("label", {
     className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", open && "text-primary"),
@@ -264,18 +288,22 @@ function CrossIcon() {
 }
 
 var MultiSelectChip = function MultiSelectChip(_a) {
+  var _b;
   var options = _a.options,
     defaultValue = _a.defaultValue,
     onSelect = _a.onSelect,
     label = _a.label,
     type = _a.type;
     _a.id;
-  var _b = React.useState(defaultValue || []),
-    selected = _b[0],
-    setSelected = _b[1];
-  var _c = React.useState(false),
-    open = _c[0],
-    setOpen = _c[1];
+    var className = _a.className,
+    _c = _a.validate,
+    validate = _c === void 0 ? false : _c;
+  var _d = React.useState(defaultValue || []),
+    selected = _d[0],
+    setSelected = _d[1];
+  var _e = React.useState(false),
+    open = _e[0],
+    setOpen = _e[1];
   var selectRef = React.useRef(null);
   React.useEffect(function () {
     window.addEventListener("click", handleOutsideClick);
@@ -334,27 +362,31 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   return React.createElement("div", {
     className: "relative w-full font-medium flex-row",
     ref: selectRef
-  }, React.createElement("label", {
+  }, label && React.createElement("label", {
     onClick: handleToggleOpen,
     className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", {
       "text-primary": open
     })
-  }, label ? label : "label", "*"), React.createElement("div", {
+  }, label, validate && "*"), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames("flex justify-between bg-white border-b border-gray-300 text-darkCharcoal pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300", {
+    className: "".concat(classNames("flex justify-between bg-white border-b border-lightSilver text-darkCharcoal pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300", {
       "text-darkCharcoal": selected.length === 0
     }, {
       "text-primary": open
-    }, !open ? "cursor-pointer" : "cursor-default", "hover:border-primary")
+    }, !open ? "cursor-pointer" : "cursor-default", "hover:border-primary"), " ").concat(className)
   }, selectedDisplay, React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
       "rotate-180": open
     })
   }, React.createElement(ChevronDown, null))), React.createElement("ul", {
-    className: classNames("absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
+    className: classNames("absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
-    })
+    }),
+    // Setting the width inline style based on the client width of the parent div
+    style: {
+      width: (_b = selectRef.current) === null || _b === void 0 ? void 0 : _b.clientWidth
+    }
   }, React.createElement("li", {
     className: classNames("pt-3 pl-3 text-[16px] font-normal font-proxima text-primary cursor-pointer flex"),
     onClick: handleClearAll

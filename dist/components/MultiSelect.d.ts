@@ -9,6 +9,7 @@ interface MultiSelectProps {
     onSelect: (selectedValues: string[]) => void;
     label?: string;
     type?: string;
+    className?: string;
 }
 declare const MultiSelect: React.FC<MultiSelectProps>;
 export { MultiSelect };

@@ -10,6 +10,8 @@ interface MultiSelectChipProps {
     id?: string;
     label?: string;
     type?: string;
+    className?: string;
+    validate?: boolean;
 }
 declare const MultiSelectChip: React.FC<MultiSelectChipProps>;
 export { MultiSelectChip };

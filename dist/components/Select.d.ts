@@ -9,6 +9,9 @@ interface SelectProps {
     onSelect: (value: string) => void;
     type?: string;
     label?: string;
+    className?: string;
+    search?: boolean;
+    validate?: boolean;
 }
 declare const Select: React.FC<SelectProps>;
 export { Select };
