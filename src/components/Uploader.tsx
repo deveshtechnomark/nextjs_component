@@ -10,6 +10,7 @@ import WordIcon from "./icons/WordIcon";
 import ExcelIcon from "./icons/ExcelIcon";
 import ClearIcon from "./icons/ClearIcon.js";
 import ImageIcon from "./icons/ImageIcon.js";
+import CheckIcon from "./icons/CheckIcon.js";
 
 const extensionToIconMap = {
   pdf: <PdfIcon />,
@@ -25,11 +26,24 @@ const extensionToIconMap = {
 interface UploaderProps {
   multiSelect?: boolean;
   variant?: string;
+  type?: string;
 }
 
-function Uploader({ multiSelect, variant }: UploaderProps) {
+interface UploadedFile {
+  url: string;
+  uploadedAt: string;
+}
+
+function Uploader({ multiSelect, variant, type }: UploaderProps) {
   const [fileNames, setFileNames] = useState<string[]>([]);
   const [uploaded, setUploaded] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  // for Url Uploader
+  const [rootUrl, setRootUrl] = useState("");
+  const [mainUrl, setMainUrl] = useState("");
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -47,8 +61,12 @@ function Uploader({ multiSelect, variant }: UploaderProps) {
     setFileNames(names);
 
     setTimeout(() => {
+      setIsChecked(true);
+    }, 1600);
+
+    setTimeout(() => {
       setUploaded(true);
-    }, 1500);
+    }, 2300);
   };
 
   const handleBrowseClick = () => {
@@ -88,43 +106,109 @@ function Uploader({ multiSelect, variant }: UploaderProps) {
     return icon || <FileIcon />;
   };
 
-  return (
-    <div>
-      <div
-        className={`upload-container w-full flex items-center justify-center ${
-          variant === "small" ? "h-[36px]" : "flex-col h-[230px]"
-        } justify-center items-centerborder transition-all duration-200 ease-in 
-        border border-dashed border-lightSilver hover:border-primary hover:bg-[#EDFFFC] cursor-pointer rounded-[4px]`}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        onClick={handleBrowseClick}
-      >
-        <input
-          type="file"
-          multiple={multiSelect}
-          ref={fileInputRef}
-          className="input-field hidden"
-          onChange={handleFileInputChange}
-        />
-        <div
-          className={`text-[15px] text-slatyGrey ${
-            variant === "small"
-              ? ""
-              : "border-2 border-lightSilver rounded-[4px] p-2"
-          }`}
-        >
-          <UploadIcon />
-        </div>
+  // for url uploader
+  const handleRootUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRootUrl(e.target.value);
+  };
 
-        <p
-          className={`${
-            variant === "small" ? "ml-[10px]" : "mt-4"
-          } text-[14px] text-darkCharcoal font-proxima`}
+  const handleMainUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMainUrl(e.target.value);
+  };
+
+  const handleUpload = () => {
+    if (mainUrl) {
+      let fileUrl = mainUrl;
+
+      if (rootUrl) {
+        fileUrl = rootUrl + mainUrl;
+      }
+
+      // Perform upload logic using the fileUrl
+      console.log("Uploading file from URL:", fileUrl);
+      // Add your upload logic here
+
+      // Store uploaded file information
+      const uploadedFile: UploadedFile = {
+        url: fileUrl,
+        uploadedAt: new Date().toISOString(),
+      };
+
+      // Add uploaded file to the list
+      setUploadedFiles((prevUploadedFiles) => [
+        ...prevUploadedFiles,
+        uploadedFile,
+      ]);
+
+      // Reset the input fields after upload
+      setRootUrl("");
+      setMainUrl("");
+    }
+  };
+
+  return type === "url" ? (
+    <div className="flex flex-row justify-center items-center h-[36px] border border-dashed border-lightSilver rounded-[4px]">
+      <input
+        className="outline-none border-r border-r-lightSilver w-1/6 ml-2 text-[14px] font-proxima text-darkCharcoal placeholder:text-[14px]"
+        type="url"
+        value={rootUrl}
+        onChange={handleRootUrlChange}
+        placeholder="Enter root URL"
+      />
+      <input
+        className="outline-none w-4/6 ml-2 text-[14px] font-proxima text-pureBlack placeholder:text-[14px]"
+        type="url"
+        value={mainUrl}
+        onChange={handleMainUrlChange}
+        placeholder="Enter main URL"
+      />
+      <span className="w-1/6 relative">
+        <button
+          onClick={handleUpload}
+          className="absolute bottom-[-12px] right-5 text-[16px] px-[20px] text-slatyGrey font-proxima hover:bg-[#EDFFFC] hover:text-primary rounded-[5px]"
         >
-          Drag and Drop or <span className="text-teal-500">Browse</span> to
           Upload
-        </p>
-      </div>
+        </button>
+      </span>
+    </div>
+  ) : (
+    <div>
+      {(multiSelect || !variant) && (
+        <div
+          className={`upload-container w-full flex items-center justify-center ${
+            variant === "small" ? "h-[36px]" : "flex-col h-[230px]"
+          } justify-center items-centerborder transition-all duration-200 ease-in 
+        border border-dashed border-lightSilver hover:border-primary hover:bg-[#EDFFFC] cursor-pointer rounded-[4px]`}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          onClick={handleBrowseClick}
+        >
+          <input
+            type="file"
+            multiple={multiSelect}
+            ref={fileInputRef}
+            className="input-field hidden"
+            onChange={handleFileInputChange}
+          />
+          <div
+            className={`text-[15px] text-slatyGrey ${
+              variant === "small"
+                ? ""
+                : "border-2 border-lightSilver rounded-[4px] p-2"
+            }`}
+          >
+            <UploadIcon />
+          </div>
+
+          <p
+            className={`${
+              variant === "small" ? "ml-[10px]" : "mt-4"
+            } text-[14px] text-darkCharcoal font-proxima`}
+          >
+            Drag and Drop or <span className="text-teal-500">Browse</span> to
+            Upload
+          </p>
+        </div>
+      )}
 
       {multiSelect ? (
         <section className="mt-2 flex flex-col justify-between p-2 border border-lightSilver w-full h-[105px] rounded-[4px] overflow-y-auto">
@@ -174,17 +258,33 @@ function Uploader({ multiSelect, variant }: UploaderProps) {
                 {uploaded ? "Uploaded" : "Uploading..."}
               </span>
               <ProgressBar variant="primary" progressDigit={false} label={""} />
+
+              <span className=" ml-2 text-primary text-[20px]">
+                {isChecked && <CheckIcon />}
+              </span>
             </div>
           )}
         </section>
       ) : (
-        <section className="mt-2 flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]">
+        <section
+          className={`${
+            variant === "small"
+              ? fileNames.length > 0 &&
+                "flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]"
+              : "mt-2 flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]"
+          }`}
+        >
           {fileNames.length > 0 && !uploaded ? (
             <>
               <label className="text-[12px] italic mr-[10px] text-slatyGrey font-proxima">
                 {!uploaded ? "Uploading..." : "Uploaded"}
               </label>
+
               <ProgressBar variant="primary" progressDigit={false} label={""} />
+
+              <span className=" ml-2 text-primary text-[20px]">
+                {isChecked && <CheckIcon />}
+              </span>
             </>
           ) : uploaded ? (
             <>
@@ -208,6 +308,42 @@ function Uploader({ multiSelect, variant }: UploaderProps) {
                 <ClearIcon />
               </span>
             </>
+          ) : variant === "small" ? (
+            <div
+              className="upload-container w-full flex justify-center h-[36px]
+                  items-center transition-all duration-200 ease-in 
+                border border-dashed border-lightSilver hover:border-primary hover:bg-[#EDFFFC] 
+                cursor-pointer rounded-[4px]"
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+              onClick={handleBrowseClick}
+            >
+              <input
+                type="file"
+                multiple={multiSelect}
+                ref={fileInputRef}
+                className="input-field hidden"
+                onChange={handleFileInputChange}
+              />
+              <div
+                className={`text-[15px] text-slatyGrey ${
+                  variant === "small"
+                    ? ""
+                    : "border-2 border-lightSilver rounded-[4px] p-2"
+                }`}
+              >
+                <UploadIcon />
+              </div>
+
+              <p
+                className={`${
+                  variant === "small" ? "ml-[10px]" : "mt-4"
+                } text-[14px] text-darkCharcoal font-proxima`}
+              >
+                Drag and Drop or <span className="text-teal-500">Browse</span>{" "}
+                to Upload
+              </p>
+            </div>
           ) : (
             <div className="flex flex-row items-center">
               <FileIcon />

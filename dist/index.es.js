@@ -211,6 +211,20 @@ function ImageIcon() {
   })))));
 }
 
+function CheckIcon() {
+  return React.createElement("div", null, React.createElement("svg", {
+    stroke: "currentColor",
+    fill: "currentColor",
+    strokeWidth: "0",
+    viewBox: "0 0 16 16",
+    height: "1em",
+    width: "1em",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    d: "M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
+  })));
+}
+
 var extensionToIconMap = {
   pdf: React.createElement(PdfIcon, null),
   doc: React.createElement(WordIcon, null),
@@ -223,13 +237,27 @@ var extensionToIconMap = {
 };
 function Uploader(_a) {
   var multiSelect = _a.multiSelect,
-    variant = _a.variant;
+    variant = _a.variant,
+    type = _a.type;
   var _b = useState([]),
     fileNames = _b[0],
     setFileNames = _b[1];
   var _c = useState(false),
     uploaded = _c[0],
     setUploaded = _c[1];
+  var _d = useState(false),
+    isChecked = _d[0],
+    setIsChecked = _d[1];
+  // for Url Uploader
+  var _e = useState(""),
+    rootUrl = _e[0],
+    setRootUrl = _e[1];
+  var _f = useState(""),
+    mainUrl = _f[0],
+    setMainUrl = _f[1];
+  var _g = useState([]);
+    _g[0];
+    var setUploadedFiles = _g[1];
   var fileInputRef = useRef(null);
   var handleDragOver = function handleDragOver(e) {
     e.preventDefault();
@@ -245,8 +273,11 @@ function Uploader(_a) {
     });
     setFileNames(names);
     setTimeout(function () {
+      setIsChecked(true);
+    }, 1600);
+    setTimeout(function () {
       setUploaded(true);
-    }, 1500);
+    }, 2300);
   };
   var handleBrowseClick = function handleBrowseClick() {
     var _a;
@@ -277,7 +308,56 @@ function Uploader(_a) {
     var icon = extensionToIconMap[extension];
     return icon || React.createElement(FileIcon, null);
   };
-  return React.createElement("div", null, React.createElement("div", {
+  // for url uploader
+  var handleRootUrlChange = function handleRootUrlChange(e) {
+    setRootUrl(e.target.value);
+  };
+  var handleMainUrlChange = function handleMainUrlChange(e) {
+    setMainUrl(e.target.value);
+  };
+  var handleUpload = function handleUpload() {
+    if (mainUrl) {
+      var fileUrl = mainUrl;
+      if (rootUrl) {
+        fileUrl = rootUrl + mainUrl;
+      }
+      // Perform upload logic using the fileUrl
+      console.log("Uploading file from URL:", fileUrl);
+      // Add your upload logic here
+      // Store uploaded file information
+      var uploadedFile_1 = {
+        url: fileUrl,
+        uploadedAt: new Date().toISOString()
+      };
+      // Add uploaded file to the list
+      setUploadedFiles(function (prevUploadedFiles) {
+        return __spreadArray(__spreadArray([], prevUploadedFiles, true), [uploadedFile_1], false);
+      });
+      // Reset the input fields after upload
+      setRootUrl("");
+      setMainUrl("");
+    }
+  };
+  return type === "url" ? React.createElement("div", {
+    className: "flex flex-row justify-center items-center h-[36px] border border-dashed border-lightSilver rounded-[4px]"
+  }, React.createElement("input", {
+    className: "outline-none border-r border-r-lightSilver w-1/6 ml-2 text-[14px] font-proxima text-darkCharcoal placeholder:text-[14px]",
+    type: "url",
+    value: rootUrl,
+    onChange: handleRootUrlChange,
+    placeholder: "Enter root URL"
+  }), React.createElement("input", {
+    className: "outline-none w-4/6 ml-2 text-[14px] font-proxima text-pureBlack placeholder:text-[14px]",
+    type: "url",
+    value: mainUrl,
+    onChange: handleMainUrlChange,
+    placeholder: "Enter main URL"
+  }), React.createElement("span", {
+    className: "w-1/6 relative"
+  }, React.createElement("button", {
+    onClick: handleUpload,
+    className: "absolute bottom-[-12px] right-5 text-[16px] px-[20px] text-slatyGrey font-proxima hover:bg-[#EDFFFC] hover:text-primary rounded-[5px]"
+  }, "Upload"))) : React.createElement("div", null, (multiSelect || !variant) && React.createElement("div", {
     className: "upload-container w-full flex items-center justify-center ".concat(variant === "small" ? "h-[36px]" : "flex-col h-[230px]", " justify-center items-centerborder transition-all duration-200 ease-in \n        border border-dashed border-lightSilver hover:border-primary hover:bg-[#EDFFFC] cursor-pointer rounded-[4px]"),
     onDragOver: handleDragOver,
     onDrop: handleDrop,
@@ -320,15 +400,19 @@ function Uploader(_a) {
     variant: "primary",
     progressDigit: false,
     label: ""
-  }))) : React.createElement("section", {
-    className: "mt-2 flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]"
+  }), React.createElement("span", {
+    className: " ml-2 text-primary text-[20px]"
+  }, isChecked && React.createElement(CheckIcon, null)))) : React.createElement("section", {
+    className: "".concat(variant === "small" ? fileNames.length > 0 && "flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]" : "mt-2 flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]")
   }, fileNames.length > 0 && !uploaded ? React.createElement(React.Fragment, null, React.createElement("label", {
     className: "text-[12px] italic mr-[10px] text-slatyGrey font-proxima"
   }, !uploaded ? "Uploading..." : "Uploaded"), React.createElement(ProgressBar, {
     variant: "primary",
     progressDigit: false,
     label: ""
-  })) : uploaded ? React.createElement(React.Fragment, null, React.createElement("div", {
+  }), React.createElement("span", {
+    className: " ml-2 text-primary text-[20px]"
+  }, isChecked && React.createElement(CheckIcon, null))) : uploaded ? React.createElement(React.Fragment, null, React.createElement("div", {
     className: "flex flex-row items-center"
   }, renderFileIcon(fileNames[0]), React.createElement("span", {
     className: "ml-2 text-[14px] text-darkCharcoal font-proxima"
@@ -337,7 +421,24 @@ function Uploader(_a) {
       return handleRemoveFile(0);
     },
     className: "text-[18px] text-slatyGrey cursor-pointer"
-  }, React.createElement(ClearIcon, null))) : React.createElement("div", {
+  }, React.createElement(ClearIcon, null))) : variant === "small" ? React.createElement("div", {
+    className: "upload-container w-full flex justify-center h-[36px]\n                  items-center transition-all duration-200 ease-in \n                border border-dashed border-lightSilver hover:border-primary hover:bg-[#EDFFFC] \n                cursor-pointer rounded-[4px]",
+    onDragOver: handleDragOver,
+    onDrop: handleDrop,
+    onClick: handleBrowseClick
+  }, React.createElement("input", {
+    type: "file",
+    multiple: multiSelect,
+    ref: fileInputRef,
+    className: "input-field hidden",
+    onChange: handleFileInputChange
+  }), React.createElement("div", {
+    className: "text-[15px] text-slatyGrey ".concat(variant === "small" ? "" : "border-2 border-lightSilver rounded-[4px] p-2")
+  }, React.createElement(UploadIcon, null)), React.createElement("p", {
+    className: "".concat(variant === "small" ? "ml-[10px]" : "mt-4", " text-[14px] text-darkCharcoal font-proxima")
+  }, "Drag and Drop or ", React.createElement("span", {
+    className: "text-teal-500"
+  }, "Browse"), " ", "to Upload")) : React.createElement("div", {
     className: "flex flex-row items-center"
   }, React.createElement(FileIcon, null), React.createElement("span", {
     className: "ml-2 text-[14px] text-darkCharcoal font-proxima"
