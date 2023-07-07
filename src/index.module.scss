@@ -1,11 +1,11 @@
 .tooltip:hover .top {
-  bottom: 100%;
+  bottom: 110%;
   opacity: 1;
   animation: slideDown 0.6s ease-out both;
 }
 
 .tooltip:hover .bottom {
-  top: 100%;
+  top: 110%;
   opacity: 1;
   animation: slideUp 0.6s ease-out both;
 }
@@ -20,11 +20,6 @@
   left: 110%;
   opacity: 1;
   animation: slideRight 0.6s ease-out both;
-}
-
-.tool {
-  word-wrap: break-word;
-  white-space: unset;
 }
 
 @keyframes slideDown {
