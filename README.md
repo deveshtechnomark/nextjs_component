@@ -7,6 +7,7 @@ import 'timepicker/dist/index.css';
 
 const page = () => {
   const [selected, setSelected] = useState('');
+  console.log('🚀 ~ file: page.tsx:10 ~ page ~ selected:', selected)
 
   return (
     <div className='container mx-auto'>
