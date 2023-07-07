@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import style from "./scss/timepicker.module.scss";
+import style from './scss/timepicker.module.scss';
 
 const Timepicker: React.FC = (props: any) => {
     const hourDigits: number[] = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -98,32 +98,32 @@ const Timepicker: React.FC = (props: any) => {
 
     useEffect(() => {
         
-        let fullTime = selectedHourDigit + ':' + selectedMinuteDigit + ' ' + (isAM ? "AM" : "PM");
-        props.onSelectedTime(fullTime);
+        let fullTime = selectedHourDigit + ':' + selectedMinuteDigit + ' ' + (isAM ? 'AM' : 'PM');
+        props.onChange(fullTime);
     }, [selectedHourDigit, selectedMinuteDigit, isAM]);
     return (
         <>
-            <div className="flex flex-col items-center justify-center mt-3">
-                <div className="flex items-center mb-4">
-                    <div className="flex items-center space-x-1">
+            <div className='flex flex-col items-center justify-center mt-3'>
+                <div className='flex items-center mb-4'>
+                    <div className='flex items-center space-x-1'>
                         <div className='border border-gray-300 rounded bg-slatyGreen overflow-hidden'>
                             <input
                                 className={`${animateHour} w-9 h-8 py-1 font-semibold text-lg border rounded text-center cursor-pointer ${showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'}`}
-                                type="text"
-                                placeholder="00"
+                                type='text'
+                                placeholder='00'
                                 readOnly
                                 defaultValue={`${selectedHourDigit < 10 ? `0${selectedHourDigit}` : selectedHourDigit}`}
                                 onClick={showHourClock}
                                 style={{ outline: 'none' }}
                             />
                         </div>
-                        <span className="text-gray-600">:</span>
+                        <span className='text-gray-600'>:</span>
                         <div className='border border-gray-300 rounded bg-slatyGreen overflow-hidden'>
                             <input
                                 className={`${animateMinute} w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'
                                     }`}
-                                type="text"
-                                placeholder="00"
+                                type='text'
+                                placeholder='00'
                                 readOnly
                                 defaultValue={`${selectedMinuteDigit < 10 ? `0${selectedMinuteDigit}` : selectedMinuteDigit}`}
                                 onClick={showMinuteClock}
@@ -131,7 +131,7 @@ const Timepicker: React.FC = (props: any) => {
                             />
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 ml-10 border border-gray-300 rounded-md">
+                    <div className='grid grid-cols-2 ml-10 border border-gray-300 rounded-md'>
                         <div
                             className={`w-10 h-8 ${isAM && 'bg-slatyGreen text-primary'} transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer`}
                             onClick={toggleSetAM}
@@ -147,7 +147,7 @@ const Timepicker: React.FC = (props: any) => {
                     </div>
                 </div>
                 {!showMinuteDigits && showHourDigits && (
-                    <div className="w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center">
+                    <div className='w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center'>
                         <div className={`w-full h-full relative -left-1`}>
                             {renderHourDigits}
                             {hourDigits.map((digit, index) =>
@@ -164,7 +164,7 @@ const Timepicker: React.FC = (props: any) => {
                                         >
                                         </div>
                                         <div
-                                            className="absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
+                                            className='absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2'
                                             style={{
                                                 top: '51%',
                                                 left: '52%',
@@ -175,12 +175,12 @@ const Timepicker: React.FC = (props: any) => {
                                     </React.Fragment>
                                 )
                             )}
-                            <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56.3%', left: '52%' }}></div>
+                            <div className='absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4' style={{ top: '56.3%', left: '52%' }}></div>
                         </div>
                     </div>
                 )}
                 {showMinuteDigits && (
-                    <div className="w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center">
+                    <div className='w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center'>
                         <div className={`w-full h-full relative -left-1 ${style.scaleUpAnimation}`}>
                             {renderMinuteDigits}
                             {minuteDigits.map((digit, index) =>
@@ -192,7 +192,7 @@ const Timepicker: React.FC = (props: any) => {
                                             onClick={() => handleMinuteSelectDigit(selectedMinuteDigit === 0 ? 1 : selectedMinuteDigit + 1)}
                                         ></div>
                                         <div
-                                            className="absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
+                                            className='absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2'
                                             style={{
                                                 top: '51%',
                                                 left: '52%',
@@ -203,7 +203,7 @@ const Timepicker: React.FC = (props: any) => {
                                     </React.Fragment>
                                 )
                             )}
-                            <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56.3%', left: '52%' }}></div>
+                            <div className='absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4' style={{ top: '56.3%', left: '52%' }}></div>
                         </div>
                     </div>
                 )}

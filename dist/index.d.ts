@@ -1,3 +1,3 @@
 export { Timepicker } from "./components/timepicker";
-export { Timepicker24 } from "./components/timepicker24";
+export { Timepicker24Hr } from "./components/Timepicker24Hr";
 import "./styles.css";
