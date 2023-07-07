@@ -13,6 +13,7 @@ interface Props {
   selected?: string;
   editable?: boolean;
   rateId: string;
+  change?: boolean;
 }
 
 const ratings: RatingItem[] = [
@@ -32,6 +33,7 @@ const Rating: React.FC<Props> = ({
   icon,
   selected,
   editable = true,
+  change = false,
   rateId,
 }) => {
   const [rating, setRating] = useState("0");
@@ -66,7 +68,7 @@ const Rating: React.FC<Props> = ({
               id={`rating-${item.value}-${rateId}`}
               checked={rating === item.value}
               onChange={handleRatingChange}
-              disabled={!editable}
+              disabled={change || !editable}
             />
             <label
               className={`${styles.comment_stars_view} ${
@@ -74,7 +76,7 @@ const Rating: React.FC<Props> = ({
               } ${icon === "heart" ? styles.comment_stars_view_heart : ""}`}
               htmlFor={`rating-${item.value}-${rateId}`}
             >
-              <svg className="icon icon-star">
+              <svg className={`icon icon-star ${change && "opacity-30"}`}>
                 {icon === "heart" ? <Heart /> : <Star />}
               </svg>
             </label>

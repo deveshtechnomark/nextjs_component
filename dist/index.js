@@ -67,10 +67,12 @@ var Rating = function Rating(_a) {
     selected = _a.selected,
     _b = _a.editable,
     editable = _b === void 0 ? true : _b,
+    _c = _a.change,
+    change = _c === void 0 ? false : _c,
     rateId = _a.rateId;
-  var _c = React.useState("0"),
-    rating = _c[0],
-    setRating = _c[1];
+  var _d = React.useState("0"),
+    rating = _d[0],
+    setRating = _d[1];
   React.useEffect(function () {
     if (selected) {
       setRating(selected);
@@ -97,12 +99,12 @@ var Rating = function Rating(_a) {
       id: "rating-".concat(item.value, "-").concat(rateId),
       checked: rating === item.value,
       onChange: handleRatingChange,
-      disabled: !editable
+      disabled: change || !editable
     }), React.createElement("label", {
       className: "".concat(styles.comment_stars_view, " ").concat(item.isHalf ? styles.is_half : "", " ").concat(icon === "heart" ? styles.comment_stars_view_heart : ""),
       htmlFor: "rating-".concat(item.value, "-").concat(rateId)
     }, React.createElement("svg", {
-      className: "icon icon-star"
+      className: "icon icon-star ".concat(change && "opacity-30")
     }, icon === "heart" ? React.createElement(Heart, null) : React.createElement(Star, null))));
   })));
 };
