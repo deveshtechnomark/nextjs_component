@@ -42,6 +42,8 @@ var generateDate = function generateDate(month, year) {
 };
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+var style = {"rippleAnimation":"datepicker-module_rippleAnimation__-t-q0","ripple":"datepicker-module_ripple__h-itK","bottomAnimation":"datepicker-module_bottomAnimation__nh-Ra","topAnimation":"datepicker-module_topAnimation__dx69-","slideLeftAnimation":"datepicker-module_slideLeftAnimation__gPJUh","slideRightAnimation":"datepicker-module_slideRightAnimation__BdubY"};
+
 function ChevronLeft() {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("svg", {
     stroke: "currentColor",
@@ -116,7 +118,7 @@ var Calendar = function Calendar(props) {
     setToday(newDate);
     setShowMonthList(false);
     setSelectedMonth(month);
-    selectedMonth ? setAnimate('slideLeftAnimation') : setAnimate('');
+    selectedMonth ? setAnimate(style.slideLeftAnimation) : setAnimate('');
   };
   var toggleYearList = function toggleYearList() {
     if (!showYearList && !showMonthList) {
@@ -169,7 +171,7 @@ var Calendar = function Calendar(props) {
     }
     setSelectedYear(year);
     setToday(newDate);
-    setAnimate(isNextMonth ? 'slideRightAnimation' : 'slideLeftAnimation');
+    setAnimate(isNextMonth ? style.slideRightAnimation : style.slideLeftAnimation);
     setTimeout(function () {
       setAnimate('');
     }, 100);
@@ -206,7 +208,7 @@ var Calendar = function Calendar(props) {
     onClick: calendarShow,
     defaultValue: fullDate.toString()
   })), toggleOpen && /*#__PURE__*/React.createElement("div", {
-    className: "relative ".concat(toggleOpen ? "bottomAnimation" : "")
+    className: "relative bottomAnimation ".concat(toggleOpen ? style.bottomAnimation : "")
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex  mx-auto  items-center"
   }, /*#__PURE__*/React.createElement("div", {
@@ -244,7 +246,7 @@ var Calendar = function Calendar(props) {
   }, /*#__PURE__*/React.createElement(ChevronLeft, null)))))), showMonthList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "topAnimation w-full h-full"
+    className: "".concat(style.topAnimation, " w-full h-full")
   }, /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 place-content-center overflow-hidden proxima"
   }, months.map(function (month, index) {
@@ -260,7 +262,7 @@ var Calendar = function Calendar(props) {
   })))) : showYearList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "topAnimation w-full"
+    className: "".concat(style.topAnimation, " w-full")
   }, /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima"
   }, displayedYears.map(function (year) {
@@ -298,7 +300,7 @@ var Calendar = function Calendar(props) {
     }, currentDate.getDate()), isSameDay && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
       className: "absolute flex inset-0 rounded-full overflow-visible"
     }, /*#__PURE__*/React.createElement("span", {
-      className: "rippleAnimation absolute rounded-full  bg-primary opacity-50"
+      className: "".concat(style.rippleAnimation, " absolute rounded-full  bg-primary opacity-50")
     }))));
   })))))));
 };
@@ -361,7 +363,7 @@ var CalendarYear = function CalendarYear(props) {
     setToday(newDate);
     setShowMonthList(false);
     setSelectedMonth(month);
-    selectedMonth ? setAnimate('slideLeftAnimation') : setAnimate('');
+    selectedMonth ? setAnimate(style.slideLeftAnimation) : setAnimate('');
   };
   var toggleYearList = function toggleYearList() {
     if (!showYearList && !showMonthList) {
@@ -414,7 +416,7 @@ var CalendarYear = function CalendarYear(props) {
     }
     setSelectedYear(year);
     setToday(newDate);
-    setAnimate(isNextMonth ? 'slideRightAnimation' : 'slideLeftAnimation');
+    setAnimate(isNextMonth ? style.slideRightAnimation : style.slideLeftAnimation);
     setTimeout(function () {
       setAnimate('');
     }, 100);
@@ -451,7 +453,7 @@ var CalendarYear = function CalendarYear(props) {
     onClick: calendarShow,
     defaultValue: fullDate.toString()
   })), toggleOpen && /*#__PURE__*/React.createElement("div", {
-    className: "relative ".concat(toggleOpen ? "bottomAnimation" : "")
+    className: "relative bottomAnimation ".concat(toggleOpen ? style.bottomAnimation : "")
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex  mx-auto  items-center"
   }, /*#__PURE__*/React.createElement("div", {
@@ -489,7 +491,7 @@ var CalendarYear = function CalendarYear(props) {
   }, /*#__PURE__*/React.createElement(ChevronLeft, null)))))), showMonthList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "topAnimation w-full h-full"
+    className: "".concat(style.topAnimation, " w-full h-full")
   }, /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 place-content-center overflow-hidden proxima"
   }, months.map(function (month, index) {
@@ -505,7 +507,7 @@ var CalendarYear = function CalendarYear(props) {
   })))) : showYearList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "topAnimation w-full"
+    className: "".concat(style.topAnimation, " w-full")
   }, /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima"
   }, displayedYears.map(function (year) {
@@ -543,7 +545,7 @@ var CalendarYear = function CalendarYear(props) {
     }, currentDate.getDate()), isSameDay && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
       className: "absolute flex inset-0 rounded-full overflow-visible"
     }, /*#__PURE__*/React.createElement("span", {
-      className: "rippleAnimation absolute rounded-full  bg-primary opacity-50"
+      className: "".concat(style.rippleAnimation, " absolute rounded-full  bg-primary opacity-50")
     }))));
   })))))));
 };

@@ -1,5 +1,6 @@
 import { generateDate, months } from "./utils/calendarUtility";
 import React, { useEffect, useState, useRef } from 'react';
+import style from './scss/datepicker.module.scss';
 
 import ChevronLeftIcon from "./icons/ChevronLeft.js";
 
@@ -49,7 +50,7 @@ const Calendar = (props: any): JSX.Element => {
         setToday(newDate);
         setShowMonthList(false);
         setSelectedMonth(month);
-        selectedMonth ? setAnimate('slideLeftAnimation') : setAnimate('')
+        selectedMonth ? setAnimate(style.slideLeftAnimation) : setAnimate('')
     };
 
     const toggleYearList = () => {
@@ -109,7 +110,7 @@ const Calendar = (props: any): JSX.Element => {
         setSelectedYear(year);
         setToday(newDate);
 
-        setAnimate(isNextMonth ? 'slideRightAnimation' : 'slideLeftAnimation');
+        setAnimate(isNextMonth ? style.slideRightAnimation : style.slideLeftAnimation);
         setTimeout(() => {
             setAnimate('');
         }, 100);
@@ -151,7 +152,7 @@ const Calendar = (props: any): JSX.Element => {
                 />
             </div>
             {toggleOpen && (
-                <div className={`relative ${toggleOpen ? "bottomAnimation" : ""}`}>
+                <div className={`relative bottomAnimation ${toggleOpen ? style.bottomAnimation : ""}`}>
                     <div className="flex  mx-auto  items-center">
                         <div className="shadow-md overflow-hidden">
                             <div className="flex justify-between border-b-2 border-lightSilver py-[12px] px-[12px]">
@@ -204,7 +205,7 @@ const Calendar = (props: any): JSX.Element => {
                             </div>
                             {showMonthList === true ? (
                                 <div className="overflow-hidden">
-                                    <div className="topAnimation w-full h-full">
+                                    <div className={`${style.topAnimation} w-full h-full`}>
                                         <div className="grid grid-cols-4 place-content-center overflow-hidden proxima">
                                             {months.map((month, index) => (
                                                 <div
@@ -224,7 +225,7 @@ const Calendar = (props: any): JSX.Element => {
                             )
                                 : showYearList === true ? (
                                     <div className="overflow-hidden">
-                                        <div className="topAnimation w-full">
+                                        <div className={`${style.topAnimation} w-full`}>
                                             <div className="grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima">
                                                 {displayedYears.map((year) => (
                                                     <div
@@ -271,7 +272,7 @@ const Calendar = (props: any): JSX.Element => {
                                                                 {isSameDay && (
                                                                     <>
                                                                         <span className="absolute flex inset-0 rounded-full overflow-visible">
-                                                                            <span className="rippleAnimation absolute rounded-full  bg-primary opacity-50"></span>
+                                                                            <span className={`${style.rippleAnimation} absolute rounded-full  bg-primary opacity-50`}></span>
                                                                         </span>
                                                                     </>
                                                                 )}
