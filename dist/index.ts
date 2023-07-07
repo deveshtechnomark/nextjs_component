@@ -85,7 +85,7 @@ var Breadcrumb = /*#__PURE__*/function (_React$Component) {
         fontSize: style && style.fontSize ? style.fontSize : 'inherit'
       };
       return React.createElement("nav", {
-        className: "flex ".concat(className),
+        className: "flex ".concat(className, " "),
         style: containerStyle,
         "aria-label": "Breadcrumb"
       }, React.createElement("ol", {
@@ -106,10 +106,10 @@ var Breadcrumb = /*#__PURE__*/function (_React$Component) {
           className: "inline-flex items-center"
         }, index > 0 && React.createElement("span", {
           style: linkStyle,
-          className: "w-2 mx-2 h-6 text-primary"
+          className: "w-2 mx-2 h-6 text-primary "
         }, separator), React.createElement("a", {
           href: item.url,
-          className: "ml-1 text-sm font-medium ".concat(index === items.length - 1 ? "text-slatyGrey" : "text-primary"),
+          className: "ml-1 text-sm font-medium ".concat(index === items.length - 1 ? "text-slatyGrey" : "text-primary border-b border-primary"),
           style: linkStyle
         }, item.label));
       })));

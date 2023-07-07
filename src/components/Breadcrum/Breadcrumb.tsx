@@ -33,7 +33,7 @@ class Breadcrumb extends React.Component<BreadcrumbProps> {
     };
 
     return (
-      <nav className={`flex ${className}`} style={containerStyle} aria-label="Breadcrumb">
+      <nav className={`flex ${className} `} style={containerStyle} aria-label="Breadcrumb">
         <ol className="inline-flex items-center">
          
           <svg
@@ -52,13 +52,13 @@ class Breadcrumb extends React.Component<BreadcrumbProps> {
           {items.map((item, index) => (
             <li key={index} className="inline-flex items-center">
               {index > 0 && (
-                <span style={linkStyle} className="w-2 mx-2 h-6 text-primary">
+                <span style={linkStyle} className="w-2 mx-2 h-6 text-primary ">
                   {separator}
                 </span>
               )}
               <a
                 href={item.url}
-                className={`ml-1 text-sm font-medium ${index === items.length - 1 ? "text-slatyGrey" : "text-primary"}`}
+                className={`ml-1 text-sm font-medium ${index === items.length - 1 ? "text-slatyGrey" : "text-primary border-b border-primary"}`}
                 style={linkStyle}
               >
                 {item.label}
