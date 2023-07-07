@@ -106,7 +106,7 @@ const TextField: React.FC<TextFieldProps> = ({
   const inputClassName = `
   ${className}
   py-1 px-3 border-b outline-none transition duration-600 w-full
-  ${err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-slatyGrey"}
+  ${err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver"}
   ${valid && "text-successColor font-normal text-[14px] font-proxima"}
   ${showEmailError && "text-defaultRed"}
 `;

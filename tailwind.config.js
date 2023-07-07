@@ -10,7 +10,8 @@ module.exports = {
         primary: "#02B89D",
         slatyGrey: "#6E6D7A",
         defaultRed: "#DC3545",
-        successColor: "#198754"
+        successColor: "#198754",
+        lightSilver: "#D8D8D8",
       },
     },
   },

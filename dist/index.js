@@ -162,7 +162,7 @@ var TextField = function TextField(_a) {
     setValid(false);
     setShowEmailError(false);
   };
-  var inputClassName = "\n  ".concat(className, "\n  py-1 px-3 border-b outline-none transition duration-600 w-full\n  ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-slatyGrey", "\n  ").concat(valid && "text-successColor font-normal text-[14px] font-proxima", "\n  ").concat(showEmailError && "text-defaultRed", "\n");
+  var inputClassName = "\n  ".concat(className, "\n  py-1 px-3 border-b outline-none transition duration-600 w-full\n  ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n  ").concat(valid && "text-successColor font-normal text-[14px] font-proxima", "\n  ").concat(showEmailError && "text-defaultRed", "\n");
   var labelClassName = "\n  ".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey", "\n");
   return React.createElement("div", {
     className: "flex flex-col text-[14px] laptop:text-base relative font-proxima"
