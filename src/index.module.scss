@@ -1,0 +1,98 @@
+.iconShow {
+  animation: iconShow 1s ease-out;
+}
+.left {
+  animation: slideLeft 0.3s ease-out both;
+}
+.hide {
+  animation: show 0.3s ease-out both;
+}
+.crossAnimation {
+  animation: cross 0.3s ease-out both;
+}
+.plusAnimation {
+  animation: plus 0.2s ease-out both;
+}
+
+@keyframes iconShow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(30%);
+    opacity: 0.5;
+    border-radius: 50px;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    border-radius: 50px;
+  }
+  100% {
+    opacity: 1;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+}
+
+@keyframes cross {
+  0% {
+    transform: rotate(0deg);
+  }
+  16% {
+    transform: rotate(-52.5deg);
+  }
+  32% {
+    transform: rotate(-105deg);
+  }
+  48% {
+    transform: rotate(-157.5deg);
+  }
+  64% {
+    transform: rotate(-210deg);
+  }
+  80% {
+    transform: rotate(-262.5deg);
+  }
+  100% {
+    transform: rotate(-315deg);
+  }
+}
+
+@keyframes plus {
+  0% {
+    transform: rotate(0deg);
+  }
+  16% {
+    transform: rotate(52.5deg);
+  }
+  32% {
+    transform: rotate(105deg);
+  }
+  48% {
+    transform: rotate(157.5deg);
+  }
+  64% {
+    transform: rotate(210deg);
+  }
+  80% {
+    transform: rotate(262.5deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
