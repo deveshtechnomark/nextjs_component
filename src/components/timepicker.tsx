@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import styles from "./styles/timepicker.module.css";
+import React, { useEffect, useState } from 'react';
+import style from "./scss/timepicker.module.scss";
 
-interface TimepickerProps { }
-
-const Timepicker: React.FC<TimepickerProps> = (props: any) => {
+const Timepicker: React.FC = (props: any) => {
     const hourDigits: number[] = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     const minuteDigits: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
 
@@ -17,7 +15,7 @@ const Timepicker: React.FC<TimepickerProps> = (props: any) => {
 
     const handleHourSelectDigit = (digit: number) => {
         setSelectedHourDigit(digit);
-        digit ? setAnimateHour('topAnimation') : setAnimateHour('');
+        digit ? setAnimateHour(style.topAnimation) : setAnimateHour('');
         setTimeout(() => {
             setAnimateHour('');
         }, 300);
@@ -33,7 +31,7 @@ const Timepicker: React.FC<TimepickerProps> = (props: any) => {
 
     const handleMinuteSelectDigit = (digit: number) => {
         setSelectedMinuteDigit(digit);
-        digit ? setAnimateMinute('topAnimation') : setAnimateMinute('');
+        digit ? setAnimateMinute(style.topAnimation) : setAnimateMinute('');
         setTimeout(() => {
             setAnimateMinute('');
         }, 300);
@@ -99,6 +97,7 @@ const Timepicker: React.FC<TimepickerProps> = (props: any) => {
     });
 
     useEffect(() => {
+        
         let fullTime = selectedHourDigit + ':' + selectedMinuteDigit + ' ' + (isAM ? "AM" : "PM");
         props.onSelectedTime(fullTime);
     }, [selectedHourDigit, selectedMinuteDigit, isAM]);
@@ -182,7 +181,7 @@ const Timepicker: React.FC<TimepickerProps> = (props: any) => {
                 )}
                 {showMinuteDigits && (
                     <div className="w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center">
-                        <div className={`w-full h-full relative -left-1 scaleUpAnimation`}>
+                        <div className={`w-full h-full relative -left-1 ${style.scaleUpAnimation}`}>
                             {renderMinuteDigits}
                             {minuteDigits.map((digit, index) =>
                                 digit === selectedMinuteDigit && (

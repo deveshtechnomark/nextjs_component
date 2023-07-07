@@ -1,5 +1,3 @@
 import React from 'react';
-interface TimepickerProps {
-}
-declare const Timepicker: React.FC<TimepickerProps>;
+declare const Timepicker: React.FC;
 export { Timepicker };

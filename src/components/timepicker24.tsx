@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import styles from "./styles/timepicker.module.css";
+import React, { useEffect, useState } from 'react';
+import style from "./scss/timepicker.module.scss";
 
-interface Timepicker24Props { }
-
-const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
+const Timepicker24: React.FC = (props: any) => {
     const hourDigits12: number[] = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     const hourDigits24: number[] = [24, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     const minuteDigits: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
@@ -17,7 +15,6 @@ const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
 
     const [isDigit12, setIsDigit12] = useState<boolean>(true);
     const [isDigit24, setIsDigit24] = useState<boolean>(false);
-    const [isDigit241, setIsDigit241] = useState<boolean>(true);
 
     const [animateHour, setAnimateHour] = useState<String>('');
     const [animateMinute, setAnimateMinute] = useState<String>('');
@@ -25,9 +22,7 @@ const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
     const handleHourSelectDigit = (digit: number) => {
         setSelectedHourDigit(digit);
         setIsHour24Selected(true);
-
-        digit ? setAnimateHour('topAnimation') : setAnimateHour('');
-
+        digit ? setAnimateHour(style.topAnimation) : setAnimateHour('');
         if (digit <= 12) {
             setIsDigit12(true);
             setIsDigit24(false);
@@ -38,11 +33,19 @@ const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
         setTimeout(() => {
             setAnimateHour('');
         }, 300);
+
+        const timer = setTimeout(() => {
+            setShowMinuteDigits(true);
+            setShowHourDigits(false);
+        }, 1500);
+        return () => {
+            clearTimeout(timer);
+        };
     };
 
     const handleMinuteSelectDigit = (digit: number) => {
         setSelectedMinuteDigit(digit);
-        digit ? setAnimateMinute('topAnimation') : setAnimateMinute('');
+        digit ? setAnimateMinute(style.topAnimation) : setAnimateMinute('');
         setTimeout(() => {
             setAnimateMinute('');
         }, 300);
@@ -59,7 +62,6 @@ const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
 
     const showHourClock = () => {
         setIsHour24Selected(false);
-
         if (showHourDigits) {
             setShowHourDigits(true);
             setShowMinuteDigits(false);
@@ -70,7 +72,6 @@ const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
     };
 
     const showMinuteClock = () => {
-
         if (showMinuteDigits) {
             setShowMinuteDigits(true);
             setShowHourDigits(false);
@@ -83,7 +84,7 @@ const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
     const renderHourDigits12 = hourDigits12.map((digit, index) => (
         <div
             key={digit}
-            className={`absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit === selectedHourDigit ? 'text-white' : 'text-black'} ${isDigit12 ? "text-black" : "text-gray-400"}`}
+            className={` absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ${digit === selectedHourDigit ? 'text-white' : 'text-black'} ${isDigit12 ? "text-black" : "text-gray-400"}`}
             style={{
                 transform: `${isDigit12 ? `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` : `rotate(${index * 30}deg) translate(0, -55px) rotate(${-index * 30}deg)`}`,
                 top: '46%',
@@ -101,7 +102,7 @@ const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
     const renderHourDigits24 = hourDigits24.map((digit, index) => (
         <div
             key={digit}
-            className={`absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${isDigit24 ? "text-black" : "text-gray-400"}  ${digit === selectedHourDigit ? 'text-white' : 'text-gray'} `}
+            className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ${isDigit24 ? "text-black" : "text-gray-400"}  ${digit === selectedHourDigit ? 'text-white' : 'text-gray'} `}
             style={{
                 transform: `${isDigit24 ? `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` : `rotate(${index * 30}deg) translate(0,-55px) rotate(${-index * 30}deg)`}`,
                 top: `46%`,
@@ -118,7 +119,7 @@ const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
         return (
             <div
                 key={digit}
-                className={`absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit === selectedMinuteDigit ? 'text-white' : 'text-black'
+                className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ${digit === selectedMinuteDigit ? 'text-white' : 'text-black'
                     }`}
                 style={{
                     transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)`,
@@ -179,91 +180,103 @@ const Timepicker24: React.FC<Timepicker24Props> = (props: any) => {
                 </div>
                 {!showMinuteDigits && showHourDigits && (
                     <>
-                        <div className="w-56 h-56 bg-lightGray left-0 top-0 rounded-full relative flex items-center justify-center">
+                        <div className="w-56 h-56 bg-lightGray rounded-full overflow-hidden ">
                             {!isHour24Selected &&
-                                <div className={`w-full h-full relative -left-1`}>
+                                <div className={` w-full h-full relative -left-1 ${style.scaleDownAnimation}`}>
                                     {renderHourDigits12}
                                     {hourDigits12.map((digit, index) =>
                                         digit === selectedHourDigit && (
                                             <React.Fragment key={digit}>
                                                 <div
-                                                    className={`absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
-                                                    style={{ top: '41%', left: '42.6%', transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` }}
+                                                    className={`relative w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none`}
+                                                    style={{
+                                                        top: '41%',
+                                                        left: '42.6%',
+                                                        transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)`
+                                                    }}
                                                     onClick={() => handleHourSelectDigit(selectedHourDigit === 12 ? 1 : selectedHourDigit + 1)}
                                                 ></div>
                                                 <div
-                                                    className="absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
+                                                    className="absolute w-0.5 h-[92px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
                                                     style={{
-                                                        top: '49.5%',
+                                                        top: '50.5%',
                                                         left: '52%',
                                                         transformOrigin: 'center top',
                                                         transform: `translateX(-50%) rotate(${index * 30}deg) translateY(-90px)`
                                                     }}
                                                 ></div>
+                                                <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56%', left: '52%' }}></div>
                                             </React.Fragment>
                                         )
                                     )}
-                                    <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '55%', left: '52%' }}></div>
                                 </div>}
                         </div>
-                        <div className={`${isHour24Selected ? `w-56 h-56 -top-56 scaleUpAnimation ` : `w-32  h-32 -top-[181px] left-0 bg-transparent `}  bg-lightGray rounded-full relative flex items-center justify-center`}>
+                        <div className={`${isHour24Selected ? `w-56 h-56 -top-56 ${style.scaleUpAnimation}` : ` w-32  h-32 -top-[181px] left-0 bg-transparent ${style.scaleDownAnimation}`}  bg-lightGray rounded-full relative flex items-center justify-center`}>
                             <div className={`w-full h-full relative ${isHour24Selected ? "right-1" : "-left-1.5"}`}>
                                 {renderHourDigits24}
                                 {hourDigits24.map((digit, index) =>
                                     digit === selectedHourDigit && (
                                         <React.Fragment key={digit}>
                                             <div
-                                                className={`absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
+                                                className={`relative w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none`}
                                                 style={{
-                                                    top: isDigit241 ? '38%' : '41%',
-                                                    left: isDigit241 ? '40%' : '43%',
+                                                    top: isDigit24 && !isHour24Selected ? '37%' : '41%',
+                                                    left: isDigit24 && !isHour24Selected ? '39.6%' : '42.6%',
                                                     transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)`
                                                 }}
                                                 onClick={() => handleHourSelectDigit(selectedHourDigit === 24 ? 1 : selectedHourDigit + 1)}
                                             >
                                             </div>
                                             <div
-                                                className="absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
+                                                className="absolute w-0.5 h-[92px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
                                                 style={{
-                                                    top: isDigit241 ? '50.5%' : '49.5%',
-                                                    left: isDigit241 ? '55%' : '52%',
+                                                    top: isDigit24 && !isHour24Selected ? '53.5%' : '50.5%',
+                                                    left: isDigit24 && !isHour24Selected ? '55%' : '52%',
                                                     transformOrigin: 'center top',
                                                     transform: `translateX(-50%) rotate(${index * 30}deg) translateY(-90px)`
                                                 }}
                                             ></div>
+                                            <div className="absolute w-2 h-2 z-10 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4"
+                                                style={{
+                                                    top: isDigit24 && !isHour24Selected ? '63%' : '56%',
+                                                    left: isDigit24 && !isHour24Selected ? '55%' : '52%',
+                                                }}></div>
                                         </React.Fragment>
                                     )
                                 )}
-                                {isHour24Selected && <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '55%', left: '52%' }}></div>}
                             </div>
                         </div>
                     </>
                 )}
                 {showMinuteDigits && (
-                    <div className="w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center">
-                        <div className={`w-full h-full relative right-1 scaleUpAnimation`}>
+                    <div className="w-56 h-56 bg-lightGray rounded-full  relative flex items-center justify-center overflow-hidden">
+                        <div className={`w-full h-full relative right-1  ${style.scaleUpAnimation} `}>
                             {renderMinuteDigits}
                             {minuteDigits.map((digit, index) =>
                                 digit === selectedMinuteDigit && (
                                     <React.Fragment key={digit}>
                                         <div
-                                            className={`absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
-                                            style={{ top: '41%', left: '42.6%', transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` }}
+                                            className={`relative w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none`}
+                                            style={{
+                                                top: '41%',
+                                                left: '42.6%',
+                                                transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)`
+                                            }}
                                             onClick={() => handleMinuteSelectDigit(selectedMinuteDigit === 0 ? 1 : selectedMinuteDigit + 1)}
                                         ></div>
                                         <div
-                                            className="absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
+                                            className="absolute w-0.5 h-[92px] bg-primary transform -translate-x-1/2 -translate-y-1/2"
                                             style={{
-                                                top: '49.5%',
+                                                top: '50.5%',
                                                 left: '52%',
                                                 transformOrigin: 'center top',
                                                 transform: `translateX(-50%) rotate(${index * 30}deg) translateY(-90px)`
                                             }}
                                         ></div>
+                                        <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '56%', left: '52%' }}></div>
                                     </React.Fragment>
                                 )
                             )}
-                            <div className="absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4" style={{ top: '55%', left: '52%' }}></div>
                         </div>
                     </div>
                 )}

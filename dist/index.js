@@ -2,6 +2,8 @@
 
 var React = require('react');
 
+var style = {"topAnimation":"timepicker-module_topAnimation__HIY0o","scaleUpAnimation":"timepicker-module_scaleUpAnimation__tGxyr","scaleDownAnimation":"timepicker-module_scaleDownAnimation__2dpU2"};
+
 var Timepicker = function Timepicker(props) {
   var hourDigits = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   var minuteDigits = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
@@ -28,7 +30,7 @@ var Timepicker = function Timepicker(props) {
     setAnimateMinute = _g[1];
   var handleHourSelectDigit = function handleHourSelectDigit(digit) {
     setSelectedHourDigit(digit);
-    digit ? setAnimateHour('topAnimation') : setAnimateHour('');
+    digit ? setAnimateHour(style.topAnimation) : setAnimateHour('');
     setTimeout(function () {
       setAnimateHour('');
     }, 300);
@@ -42,7 +44,7 @@ var Timepicker = function Timepicker(props) {
   };
   var handleMinuteSelectDigit = function handleMinuteSelectDigit(digit) {
     setSelectedMinuteDigit(digit);
-    digit ? setAnimateMinute('topAnimation') : setAnimateMinute('');
+    digit ? setAnimateMinute(style.topAnimation) : setAnimateMinute('');
     setTimeout(function () {
       setAnimateMinute('');
     }, 300);
@@ -176,7 +178,7 @@ var Timepicker = function Timepicker(props) {
   }))), showMinuteDigits && /*#__PURE__*/React.createElement("div", {
     className: "w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-full h-full relative -left-1 scaleUpAnimation"
+    className: "w-full h-full relative -left-1 ".concat(style.scaleUpAnimation)
   }, renderMinuteDigits, minuteDigits.map(function (digit, index) {
     return digit === selectedMinuteDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
@@ -236,19 +238,16 @@ var Timepicker24 = function Timepicker24(props) {
   var _h = React.useState(false),
     isDigit24 = _h[0],
     setIsDigit24 = _h[1];
-  var _j = React.useState(true),
-    isDigit241 = _j[0];
-    _j[1];
+  var _j = React.useState(''),
+    animateHour = _j[0],
+    setAnimateHour = _j[1];
   var _k = React.useState(''),
-    animateHour = _k[0],
-    setAnimateHour = _k[1];
-  var _l = React.useState(''),
-    animateMinute = _l[0],
-    setAnimateMinute = _l[1];
+    animateMinute = _k[0],
+    setAnimateMinute = _k[1];
   var handleHourSelectDigit = function handleHourSelectDigit(digit) {
     setSelectedHourDigit(digit);
     setIsHour24Selected(true);
-    digit ? setAnimateHour('topAnimation') : setAnimateHour('');
+    digit ? setAnimateHour(style.topAnimation) : setAnimateHour('');
     if (digit <= 12) {
       setIsDigit12(true);
       setIsDigit24(false);
@@ -259,10 +258,17 @@ var Timepicker24 = function Timepicker24(props) {
     setTimeout(function () {
       setAnimateHour('');
     }, 300);
+    var timer = setTimeout(function () {
+      setShowMinuteDigits(true);
+      setShowHourDigits(false);
+    }, 1500);
+    return function () {
+      clearTimeout(timer);
+    };
   };
   var handleMinuteSelectDigit = function handleMinuteSelectDigit(digit) {
     setSelectedMinuteDigit(digit);
-    digit ? setAnimateMinute('topAnimation') : setAnimateMinute('');
+    digit ? setAnimateMinute(style.topAnimation) : setAnimateMinute('');
     setTimeout(function () {
       setAnimateMinute('');
     }, 300);
@@ -296,7 +302,7 @@ var Timepicker24 = function Timepicker24(props) {
   var renderHourDigits12 = hourDigits12.map(function (digit, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: digit,
-      className: "absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(digit === selectedHourDigit ? 'text-white' : 'text-black', " ").concat(isDigit12 ? "text-black" : "text-gray-400"),
+      className: " absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ".concat(digit === selectedHourDigit ? 'text-white' : 'text-black', " ").concat(isDigit12 ? "text-black" : "text-gray-400"),
       style: {
         transform: "".concat(isDigit12 ? "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)") : "rotate(".concat(index * 30, "deg) translate(0, -55px) rotate(").concat(-index * 30, "deg)")),
         top: '46%',
@@ -310,7 +316,7 @@ var Timepicker24 = function Timepicker24(props) {
   var renderHourDigits24 = hourDigits24.map(function (digit, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: digit,
-      className: "absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(isDigit24 ? "text-black" : "text-gray-400", "  ").concat(digit === selectedHourDigit ? 'text-white' : 'text-gray', " "),
+      className: "absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ".concat(isDigit24 ? "text-black" : "text-gray-400", "  ").concat(digit === selectedHourDigit ? 'text-white' : 'text-gray', " "),
       style: {
         transform: "".concat(isDigit24 ? "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)") : "rotate(".concat(index * 30, "deg) translate(0,-55px) rotate(").concat(-index * 30, "deg)")),
         top: "46%",
@@ -325,7 +331,7 @@ var Timepicker24 = function Timepicker24(props) {
     var formattedDigit = digit < 10 ? "0".concat(digit) : digit;
     return /*#__PURE__*/React.createElement("div", {
       key: digit,
-      className: "absolute top-1/2 left-1/2 z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(digit === selectedMinuteDigit ? 'text-white' : 'text-black'),
+      className: "absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ".concat(digit === selectedMinuteDigit ? 'text-white' : 'text-black'),
       style: {
         transform: "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)"),
         top: '46%',
@@ -377,14 +383,14 @@ var Timepicker24 = function Timepicker24(props) {
     className: "w-10 h-8 ".concat(!isAM && 'bg-slatyGreen text-primary', " transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer pointer-events-none"),
     onClick: toggleSetAM
   }, "PM"))), !showMinuteDigits && showHourDigits && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "w-56 h-56 bg-lightGray left-0 top-0 rounded-full relative flex items-center justify-center"
+    className: "w-56 h-56 bg-lightGray rounded-full overflow-hidden "
   }, !isHour24Selected && /*#__PURE__*/React.createElement("div", {
-    className: "w-full h-full relative -left-1"
+    className: " w-full h-full relative -left-1 ".concat(style.scaleDownAnimation)
   }, renderHourDigits12, hourDigits12.map(function (digit, index) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "relative w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none",
       style: {
         top: '41%',
         left: '42.6%',
@@ -394,61 +400,61 @@ var Timepicker24 = function Timepicker24(props) {
         return handleHourSelectDigit(selectedHourDigit === 12 ? 1 : selectedHourDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
+      className: "absolute w-0.5 h-[92px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
       style: {
-        top: '49.5%',
+        top: '50.5%',
         left: '52%',
         transformOrigin: 'center top',
         transform: "translateX(-50%) rotate(".concat(index * 30, "deg) translateY(-90px)")
       }
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
+      style: {
+        top: '56%',
+        left: '52%'
+      }
     }));
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
-    style: {
-      top: '55%',
-      left: '52%'
-    }
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(isHour24Selected ? "w-56 h-56 -top-56 scaleUpAnimation " : "w-32  h-32 -top-[181px] left-0 bg-transparent ", "  bg-lightGray rounded-full relative flex items-center justify-center")
+    className: "".concat(isHour24Selected ? "w-56 h-56 -top-56 ".concat(style.scaleUpAnimation) : " w-32  h-32 -top-[181px] left-0 bg-transparent ".concat(style.scaleDownAnimation), "  bg-lightGray rounded-full relative flex items-center justify-center")
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-full h-full relative ".concat(isHour24Selected ? "right-1" : "-left-1.5")
   }, renderHourDigits24, hourDigits24.map(function (digit, index) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "relative w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none",
       style: {
-        top: isDigit241 ? '38%' : '41%',
-        left: isDigit241 ? '40%' : '43%',
+        top: isDigit24 && !isHour24Selected ? '37%' : '41%',
+        left: isDigit24 && !isHour24Selected ? '39.6%' : '42.6%',
         transform: "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)")
       },
       onClick: function onClick() {
         return handleHourSelectDigit(selectedHourDigit === 24 ? 1 : selectedHourDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
+      className: "absolute w-0.5 h-[92px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
       style: {
-        top: isDigit241 ? '50.5%' : '49.5%',
-        left: isDigit241 ? '55%' : '52%',
+        top: isDigit24 && !isHour24Selected ? '53.5%' : '50.5%',
+        left: isDigit24 && !isHour24Selected ? '55%' : '52%',
         transformOrigin: 'center top',
         transform: "translateX(-50%) rotate(".concat(index * 30, "deg) translateY(-90px)")
       }
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "absolute w-2 h-2 z-10 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
+      style: {
+        top: isDigit24 && !isHour24Selected ? '63%' : '56%',
+        left: isDigit24 && !isHour24Selected ? '55%' : '52%'
+      }
     }));
-  }), isHour24Selected && /*#__PURE__*/React.createElement("div", {
-    className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
-    style: {
-      top: '55%',
-      left: '52%'
-    }
   })))), showMinuteDigits && /*#__PURE__*/React.createElement("div", {
-    className: "w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center"
+    className: "w-56 h-56 bg-lightGray rounded-full  relative flex items-center justify-center overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-full h-full relative right-1 scaleUpAnimation"
+    className: "w-full h-full relative right-1  ".concat(style.scaleUpAnimation, " ")
   }, renderMinuteDigits, minuteDigits.map(function (digit, index) {
     return digit === selectedMinuteDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "relative w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none",
       style: {
         top: '41%',
         left: '42.6%',
@@ -458,20 +464,20 @@ var Timepicker24 = function Timepicker24(props) {
         return handleMinuteSelectDigit(selectedMinuteDigit === 0 ? 1 : selectedMinuteDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-0.5 h-[90px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
+      className: "absolute w-0.5 h-[92px] bg-primary transform -translate-x-1/2 -translate-y-1/2",
       style: {
-        top: '49.5%',
+        top: '50.5%',
         left: '52%',
         transformOrigin: 'center top',
         transform: "translateX(-50%) rotate(".concat(index * 30, "deg) translateY(-90px)")
       }
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
+      style: {
+        top: '56%',
+        left: '52%'
+      }
     }));
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4",
-    style: {
-      top: '55%',
-      left: '52%'
-    }
   })))));
 };
 
