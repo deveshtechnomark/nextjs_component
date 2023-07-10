@@ -58,3 +58,15 @@ icon={JSX/TSX-Element} />
   <li>variant: optional prop, it indicates the radio with invalidity i.e. danger/error.</li>
   <li>Other props applicable to html input radio type can be applied as per requirement.</li>
 </ul>
+
+```html
+<TabBar
+  tabs="[[{id:string,label:string}]]"
+  getTabId="{(arg1: string) => {} }"
+/>
+```
+
+<ul>
+<li>tabs: mandatory prop, it contains the array of objects containing id & label.</li>
+<li>getTabId: mandatory prop, it takes a function with one argument, to provide the selected tab id to user.</li>
+</ul>
