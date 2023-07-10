@@ -59,7 +59,12 @@ const Badge = ({ text, badgetype, variant }: BadgeProps) => {
       `}
     >
       {variant === "dot" ? (
-        <span className={style.dot__badge}>
+        <span
+          style={
+            variant === "dot" ? { borderColor: `${getColor(badgetype)}` } : {}
+          }
+          className={style.dot__badge}
+        >
           {parseInt(text) > 99 ? "99+" : text}
         </span>
       ) : (

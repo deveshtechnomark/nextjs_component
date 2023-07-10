@@ -1,7 +1,4 @@
-$primary: #02b89d;
-$lightSilver: #d8d8d8;
-
-@mixin rings($duration, $delay) {
+@mixin rings($duration, $delay, $color) {
   opacity: 0;
   display: flex;
   flex-direction: row;
@@ -11,13 +8,13 @@ $lightSilver: #d8d8d8;
   content: "";
   height: 100%;
   width: 100%;
-  border: 2px solid red;
+  border: 2px solid $color;
   border-radius: 100%;
   animation-name: badge_ripple;
   animation-duration: $duration;
   animation-delay: $delay;
   animation-iteration-count: infinite;
-  //   animation-timing-function: cubic-bezier(0.65, 0, 0.34, 1);
+  animation-timing-function: cubic-bezier(0.65, 0, 0.34, 1);
   z-index: -1;
 }
 
@@ -30,12 +27,12 @@ $lightSilver: #d8d8d8;
   align-items: center;
   display: inline-flex;
   justify-content: center;
-  border: 2px solid transparent;
+  border: 2px solid;
   &::before {
-    @include rings(2s, 0s);
+    @include rings(2s, 0s, inherit);
   }
   &::after {
-    @include rings(2s, 0.7s);
+    @include rings(2s, 0.5s, inherit);
   }
 }
 
@@ -47,7 +44,6 @@ $lightSilver: #d8d8d8;
 
   to {
     opacity: 0;
-    border: 2px solid red;
     transform: scale3d(2.5, 2.5, 1);
   }
 }
