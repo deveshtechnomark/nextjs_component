@@ -58,8 +58,13 @@ const Badge = ({ text, badgetype, variant }: BadgeProps) => {
       } flex items-center justify-center
       `}
     >
-      {variant === "dot" && <span className={style.dot__badge}></span>}
-      {variant === "dot" ? (parseInt(text) > 99 ? "99+" : text) : text}
+      {variant === "dot" ? (
+        <span className={style.dot__badge}>
+          {parseInt(text) > 99 ? "99+" : text}
+        </span>
+      ) : (
+        text
+      )}
     </div>
   );
 };

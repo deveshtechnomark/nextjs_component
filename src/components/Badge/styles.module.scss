@@ -11,13 +11,13 @@ $lightSilver: #d8d8d8;
   content: "";
   height: 100%;
   width: 100%;
-  border: 2px solid transparent;
+  border: 2px solid red;
   border-radius: 100%;
   animation-name: badge_ripple;
   animation-duration: $duration;
   animation-delay: $delay;
   animation-iteration-count: infinite;
-  animation-timing-function: cubic-bezier(0.65, 0, 0.34, 1);
+  //   animation-timing-function: cubic-bezier(0.65, 0, 0.34, 1);
   z-index: -1;
 }
 
@@ -32,22 +32,22 @@ $lightSilver: #d8d8d8;
   justify-content: center;
   border: 2px solid transparent;
   &::before {
-    @include rings(3s, 0s);
+    @include rings(2s, 0s);
   }
   &::after {
-    @include rings(3s, 0.3s);
+    @include rings(2s, 0.7s);
   }
 }
 
 @keyframes badge_ripple {
   from {
     opacity: 1;
-    transform: scale3d(1, 1);
+    transform: scale3d(1.2, 1.2);
   }
 
   to {
     opacity: 0;
     border: 2px solid red;
-    transform: scale3d(1.9, 1.9, 1);
+    transform: scale3d(2.5, 2.5, 1);
   }
 }
