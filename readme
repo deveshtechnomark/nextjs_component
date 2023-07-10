@@ -1,0 +1,15 @@
+"use client";
+
+import React from "react";
+import { Spinner } from "spinner";
+import "spinner/dist/index.css";
+
+const Home: React.FC = () => {
+  return (
+    <div>
+    <Spinner size='20px'/>
+    </div>
+  );
+};
+
+export default Home;
