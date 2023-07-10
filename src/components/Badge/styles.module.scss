@@ -1,3 +1,5 @@
+$lightSilver: #d8d8d8;
+
 @mixin rings($duration, $delay, $color) {
   opacity: 0;
   display: flex;
