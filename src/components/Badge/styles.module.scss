@@ -1,0 +1,53 @@
+$primary: #02b89d;
+$lightSilver: #d8d8d8;
+
+@mixin rings($duration, $delay) {
+  opacity: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  border: 2px solid transparent;
+  border-radius: 100%;
+  animation-name: badge_ripple;
+  animation-duration: $duration;
+  animation-delay: $delay;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.34, 1);
+  z-index: -1;
+}
+
+.dot__badge {
+  height: 18px;
+  width: 18px;
+  color: $lightSilver;
+  border-radius: 50%;
+  position: relative;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  border: 2px solid transparent;
+  &::before {
+    @include rings(3s, 0s);
+  }
+  &::after {
+    @include rings(3s, 0.3s);
+  }
+}
+
+@keyframes badge_ripple {
+  from {
+    opacity: 1;
+    transform: scale3d(1, 1);
+  }
+
+  to {
+    opacity: 0;
+    border: 2px solid red;
+    transform: scale3d(1.9, 1.9, 1);
+  }
+}

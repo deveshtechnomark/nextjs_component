@@ -83,10 +83,6 @@ $lightSilver: #d8d8d8;
   &::after {
     @include rings(3s, 0s);
   }
-
-  &::before {
-    @include rings(3s, 0.7s);
-  }
 }
 
 .step.done {

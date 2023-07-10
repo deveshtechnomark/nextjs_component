@@ -1,5 +1,7 @@
 import React from "react";
 
+import style from "./styles.module.scss";
+
 interface BadgeProps {
   text?: string;
   badgetype:
@@ -51,10 +53,12 @@ const Badge = ({ text, badgetype, variant }: BadgeProps) => {
       }
       className={`${
         variant === "pill"
-          ? `h-[27px] w-[82px] border rounded-[33px]`
+          ? `h-[27px] w-[82px] border rounded-[33px] overflow-x-hidden`
           : `h-[18px] w-[18px] border-none rounded-full text-white text-[10px]`
-      } flex items-center justify-center overflow-x-hidden`}
+      } flex items-center justify-center
+      `}
     >
+      {variant === "dot" && <span className={style.dot__badge}></span>}
       {variant === "dot" ? (parseInt(text) > 99 ? "99+" : text) : text}
     </div>
   );

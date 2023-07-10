@@ -6,6 +6,7 @@ interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
   variant?: "invalid";
+  className?: string;
   intermediate?: boolean;
 }
 
@@ -13,12 +14,13 @@ const CheckBox = ({
   id,
   label,
   variant,
+  className,
   intermediate,
   ...props
 }: CheckBoxProps) => {
   return (
     <div
-      className={`m-0 p-0 w-full min-w-fit relative flex justify-start items-center`}
+      className={`m-0 p-0 min-w-fit relative flex justify-start items-center ${className}`}
     >
       {!intermediate ? (
         <>
