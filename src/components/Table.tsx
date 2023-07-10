@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import SortingIcon from "./icons/SortingIcon.js";
 
 interface TableProps {
   data: any[];
   headers: string[];
+  sortable?: boolean;
+  sticky?: boolean;
 }
 
 const Table: React.FC<TableProps> = (props) => {
@@ -41,20 +44,20 @@ const Table: React.FC<TableProps> = (props) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full m-0 p-0 box-border">
       <table className="w-full">
         <thead>
-          <tr className="bg-pureWhite border border-t-pureBlack border-b-pureBlack h-[48px]">
+          <tr className={`${props.sticky && "sticky top-0"} bg-pureWhite border border-t-pureBlack border-b-pureBlack h-[48px]`}>
             {props.headers.map((header) => (
               <th
                 key={header}
                 className="cursor-pointer uppercase text-[16px] text-center font-proxima font-bold"
-                onClick={() => handleSort(header)}
+                onClick={() => { props.sortable && handleSort(header) }}
               >
-                {header}
-                {sortingColumn === header && (
-                  <span>{sortingOrder === "asc" ? "▲" : "▼"}</span>
-                )}
+                <span className="flex justify-center items-center">{header}
+                  {sortingColumn === header && (
+                    <span className={`ml-2 ${sortingOrder === "asc" ? "" : "rotate-180"}`}><SortingIcon /></span>
+                  )}</span>
               </th>
             ))}
           </tr>
@@ -65,8 +68,8 @@ const Table: React.FC<TableProps> = (props) => {
             <tr key={index} className="h-[56px] border border-b-lightSilver cursor-default hover:bg-whiteSmoke">
               {props.headers.map((header) => (
                 <td key={header} className="py-[19px] px-[20px] text-center text-base font-proxima font-normal">
-                  {typeof item[header] === "string" &&
-                  item[header].startsWith("http") ? (
+                  <span className="flex justify-center items-center">{typeof item[header] === "string" &&
+                    item[header].startsWith("http") ? (
                     <img
                       src={item[header]}
                       alt="Item"
@@ -74,7 +77,7 @@ const Table: React.FC<TableProps> = (props) => {
                     />
                   ) : (
                     item[header]
-                  )}
+                  )}</span>
                 </td>
               ))}
             </tr>

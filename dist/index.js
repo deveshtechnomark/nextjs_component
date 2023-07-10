@@ -29,6 +29,22 @@ function __spreadArray(to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 }
 
+function SortingIcon() {
+  return React.createElement("div", null, React.createElement("svg", {
+    width: "7",
+    height: "10",
+    viewBox: "0 0 7 10",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement("path", {
+    d: "M3.5 0L6.53109 3H0.468911L3.5 0Z",
+    fill: "#333333"
+  }), React.createElement("path", {
+    d: "M3.5 10L0.468911 7L6.53109 7L3.5 10Z",
+    fill: "#6E6D7A"
+  })));
+}
+
 var Table = function Table(props) {
   var _a = React.useState(props.data),
     filteredData = _a[0],
@@ -64,19 +80,23 @@ var Table = function Table(props) {
     setSortingOrder(newSortingOrder);
   };
   return React.createElement("div", {
-    className: "w-full"
+    className: "w-full m-0 p-0 box-border"
   }, React.createElement("table", {
     className: "w-full"
   }, React.createElement("thead", null, React.createElement("tr", {
-    className: "bg-pureWhite border border-t-pureBlack border-b-pureBlack h-[48px]"
+    className: "".concat(props.sticky && "sticky top-0", " bg-pureWhite border border-t-pureBlack border-b-pureBlack h-[48px]")
   }, props.headers.map(function (header) {
     return React.createElement("th", {
       key: header,
       className: "cursor-pointer uppercase text-[16px] text-center font-proxima font-bold",
       onClick: function onClick() {
-        return handleSort(header);
+        props.sortable && handleSort(header);
       }
-    }, header, sortingColumn === header && React.createElement("span", null, sortingOrder === "asc" ? "▲" : "▼"));
+    }, React.createElement("span", {
+      className: "flex justify-center items-center"
+    }, header, sortingColumn === header && React.createElement("span", {
+      className: "ml-2 ".concat(sortingOrder === "asc" ? "" : "rotate-180")
+    }, React.createElement(SortingIcon, null))));
   }))), React.createElement("tbody", null, filteredData.map(function (item, index) {
     return React.createElement("tr", {
       key: index,
@@ -85,11 +105,13 @@ var Table = function Table(props) {
       return React.createElement("td", {
         key: header,
         className: "py-[19px] px-[20px] text-center text-base font-proxima font-normal"
+      }, React.createElement("span", {
+        className: "flex justify-center items-center"
       }, typeof item[header] === "string" && item[header].startsWith("http") ? React.createElement("img", {
         src: item[header],
         alt: "Item",
         className: "max-w-[50px] max-h-[50px] rounded"
-      }) : item[header]);
+      }) : item[header]));
     }));
   }))));
 };
