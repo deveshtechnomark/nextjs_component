@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import style from './scss/timepicker.module.scss';
 
-const Timepicker24Hr: React.FC = (props: any) => {
+interface Timepicker24HrProps {
+    onChange: (value: string) => void;
+}
+
+const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
     const hourDigits12: number[] = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     const hourDigits24: number[] = [24, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     const minuteDigits: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];

@@ -1,3 +1,6 @@
 import React from 'react';
-declare const Timepicker: React.FC;
+interface TimepickerProps {
+    onChange: (value: string) => void;
+}
+declare const Timepicker: React.FC<TimepickerProps>;
 export { Timepicker };

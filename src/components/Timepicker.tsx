@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import style from './scss/timepicker.module.scss';
 
-const Timepicker: React.FC = (props: any) => {
+interface TimepickerProps {
+    onChange: (value: string) => void;
+}
+
+const Timepicker: React.FC<TimepickerProps> = (props: any) => {
     const hourDigits: number[] = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     const minuteDigits: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
 
@@ -97,10 +101,10 @@ const Timepicker: React.FC = (props: any) => {
     });
 
     useEffect(() => {
-        
         let fullTime = selectedHourDigit + ':' + selectedMinuteDigit + ' ' + (isAM ? 'AM' : 'PM');
         props.onChange(fullTime);
     }, [selectedHourDigit, selectedMinuteDigit, isAM]);
+
     return (
         <>
             <div className='flex flex-col items-center justify-center mt-3'>
