@@ -1,28 +1,34 @@
-.topAnimation {
-    animation: topAnimation 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-}
-@keyframes topAnimation {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-100px);
-    }
-    99% {
-        transform: translateY(-100px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
+// .topAnimation {
+//     animation: topAnimation 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+// }
+
+// @keyframes topAnimation {
+//     0% {
+//         transform: translateY(0);
+//     }
+
+//     50% {
+//         transform: translateY(-100px);
+//     }
+
+//     99% {
+//         transform: translateY(-100px);
+//     }
+
+//     100% {
+//         transform: translateY(0);
+//     }
+// }
 
 .scaleUpAnimation {
     animation: scaleUpAnimation 0.5s ease-in-out;
 }
+
 @keyframes scaleUpAnimation {
     0% {
         transform: scale(0.5, 0.5);
     }
+
     100% {
         transform: scale(1, 1);
     }
@@ -31,14 +37,35 @@
 .scaleDownAnimation {
     animation: scaleDownAnimation 0.5s ease-in-out;
 }
+
 @keyframes scaleDownAnimation {
     0% {
         transform: scale(1.3, 1.3);
     }
+
     50% {
         transform: scale(0.9, 0.9);
     }
+
     100% {
         transform: scale(1, 1);
+    }
+}
+
+.textAnimation {
+    animation: textAnimation 2s infinite ease;
+}
+
+@keyframes textAnimation {
+    0% {
+        transform: translateY(-7em);
+    }
+
+    40% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(0);
     }
 }

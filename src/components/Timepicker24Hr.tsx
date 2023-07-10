@@ -10,6 +10,9 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
     const hourDigits24: number[] = [24, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     const minuteDigits: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
 
+    const inputHourDigits12: number[] = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+
+
     const [selectedHourDigit, setSelectedHourDigit] = useState<number>(12) || useState<number>(24);
     const [selectedMinuteDigit, setSelectedMinuteDigit] = useState<number>(0);
     const [isAM, setIsAM] = useState<boolean>(false);
@@ -26,7 +29,7 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
     const handleHourSelectDigit = (digit: number) => {
         setSelectedHourDigit(digit);
         setIsHour24Selected(true);
-        digit ? setAnimateHour(style.topAnimation) : setAnimateHour('');
+        digit ? setAnimateHour(style.textAnimation) : setAnimateHour('');
         if (digit <= 12) {
             setIsDigit12(true);
             setIsDigit24(false);
@@ -38,27 +41,22 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
             setAnimateHour('');
         }, 300);
 
-        const timer = setTimeout(() => {
-            setShowMinuteDigits(true);
-            setShowHourDigits(false);
-        }, 1500);
-        return () => {
-            clearTimeout(timer);
-        };
+        // const timer = setTimeout(() => {
+        //     setShowMinuteDigits(true);
+        //     setShowHourDigits(false);
+        // }, 1500);
+        // return () => {
+        //     clearTimeout(timer);
+        // };
     };
 
     const handleMinuteSelectDigit = (digit: number) => {
         setSelectedMinuteDigit(digit);
-        digit ? setAnimateMinute(style.topAnimation) : setAnimateMinute('');
+        digit ? setAnimateMinute(style.textAnimation) : setAnimateMinute('');
         setTimeout(() => {
             setAnimateMinute('');
         }, 300);
     };
-
-    useEffect(() => {
-        let fullTime = selectedHourDigit + ':' + selectedMinuteDigit;
-        props.onChange(fullTime);
-    }, [selectedHourDigit, selectedMinuteDigit]);
 
     const toggleSetAM = () => {
         setIsAM(!isAM);
@@ -90,7 +88,9 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
             key={digit}
             className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ${digit === selectedHourDigit ? 'text-white' : 'text-black'} ${isDigit12 ? 'text-black' : 'text-gray-400'}`}
             style={{
-                transform: `${isDigit12 ? `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` : `rotate(${index * 30}deg) translate(0, -55px) rotate(${-index * 30}deg)`}`,
+                transform: `${isDigit12 ?
+                    `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` :
+                    `rotate(${index * 30}deg) translate(0, -55px) rotate(${-index * 30}deg)`}`,
                 top: '46%',
                 left: '47%'
             }}
@@ -108,7 +108,9 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
             key={digit}
             className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ${isDigit24 ? 'text-black' : 'text-gray-400'}  ${digit === selectedHourDigit ? 'text-white' : 'text-gray'} `}
             style={{
-                transform: `${isDigit24 ? `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` : `rotate(${index * 30}deg) translate(0,-55px) rotate(${-index * 30}deg)`}`,
+                transform: `${isDigit24 ?
+                    `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` :
+                    `rotate(${index * 30}deg) translate(0,-55px) rotate(${-index * 30}deg)`}`,
                 top: `46%`,
                 left: '47%'
             }}
@@ -137,34 +139,40 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
         );
     });
 
+    const renderInputHourDigit = inputHourDigits12
+        .slice(0, selectedHourDigit + 1)
+        .reverse()
+        .map((digit, index) => {
+            return (digit < 10 ? `0${digit}` : digit) + " ";
+        }).join('');
+
+    const renderInputMinuteDigit = minuteDigits
+        .filter(digit => digit <= selectedMinuteDigit)
+        .reverse()
+        .map((digit, index) => {
+            return (digit < 10 ? `0${digit}` : digit) + " ";
+        }).join('');
+
+    useEffect(() => {
+        let fullTime = selectedHourDigit + ':' + selectedMinuteDigit;
+        props.onChange(fullTime);
+    }, [selectedHourDigit, selectedMinuteDigit]);
+
     return (
         <>
             <div className='flex flex-col items-center justify-center mt-3'>
                 <div className='flex items-center mb-4'>
                     <div className='flex items-center space-x-1'>
-                        <div className='border border-gray-300 rounded bg-slatyGreen overflow-hidden'>
-                            <input
-                                className={`${animateHour} w-9 h-8 py-1 font-semibold text-lg border rounded text-center cursor-pointer ${showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'}`}
-                                type='text'
-                                placeholder='00'
-                                readOnly
-                                defaultValue={`${selectedHourDigit < 10 ? `0${selectedHourDigit}` : selectedHourDigit}`}
-                                onClick={showHourClock}
-                                style={{ outline: 'none' }}
-                            />
+                        <div className={`border w-9 h-8 border-gray-300 rounded bg-slatyGreen overflow-hidden inline-block`} onClick={showHourClock}>
+                            <div className={`${animateHour} font-semibold text-lg border border-none rounded text-center cursor-pointer ${showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'}`} >
+                                {renderInputHourDigit}
+                            </div>
                         </div>
                         <span className='text-gray-600'>:</span>
-                        <div className='border border-gray-300 rounded bg-slatyGreen overflow-hidden'>
-                            <input
-                                className={`${animateMinute} w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ${showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'
-                                    }`}
-                                type='text'
-                                placeholder='00'
-                                readOnly
-                                defaultValue={`${selectedMinuteDigit < 10 ? `0${selectedMinuteDigit}` : selectedMinuteDigit}`}
-                                onClick={showMinuteClock}
-                                style={{ outline: 'none' }}
-                            />
+                        <div className={`border w-9 h-8 border-gray-300 rounded bg-slatyGreen overflow-hidden inline-block`} onClick={showMinuteClock}>
+                            <div className={`${animateMinute} h-full font-semibold  text-lg border border-none rounded text-center cursor-pointer ${showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'}`} >
+                                {renderInputMinuteDigit}
+                            </div>
                         </div>
                     </div>
                     <div className='grid grid-cols-2 ml-10 border border-gray-300 rounded-md opacity-50'>

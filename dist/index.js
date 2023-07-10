@@ -2,11 +2,12 @@
 
 var React = require('react');
 
-var style = {"topAnimation":"timepicker-module_topAnimation__HIY0o","scaleUpAnimation":"timepicker-module_scaleUpAnimation__tGxyr","scaleDownAnimation":"timepicker-module_scaleDownAnimation__2dpU2"};
+var style = {"scaleUpAnimation":"timepicker-module_scaleUpAnimation__tGxyr","scaleDownAnimation":"timepicker-module_scaleDownAnimation__2dpU2","textAnimation":"timepicker-module_textAnimation__5-lSz"};
 
 var Timepicker = function Timepicker(props) {
   var hourDigits = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   var minuteDigits = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+  var inputHourDigits = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   var _a = React.useState(12),
     selectedHourDigit = _a[0],
     setSelectedHourDigit = _a[1];
@@ -30,7 +31,7 @@ var Timepicker = function Timepicker(props) {
     setAnimateMinute = _g[1];
   var handleHourSelectDigit = function handleHourSelectDigit(digit) {
     setSelectedHourDigit(digit);
-    digit ? setAnimateHour(style.topAnimation) : setAnimateHour('');
+    digit ? setAnimateHour(style.textAnimation) : setAnimateHour('');
     setTimeout(function () {
       setAnimateHour('');
     }, 300);
@@ -44,7 +45,7 @@ var Timepicker = function Timepicker(props) {
   };
   var handleMinuteSelectDigit = function handleMinuteSelectDigit(digit) {
     setSelectedMinuteDigit(digit);
-    digit ? setAnimateMinute(style.topAnimation) : setAnimateMinute('');
+    digit ? setAnimateMinute(style.textAnimation) : setAnimateMinute('');
     setTimeout(function () {
       setAnimateMinute('');
     }, 300);
@@ -99,6 +100,14 @@ var Timepicker = function Timepicker(props) {
       }
     }, formattedDigit);
   });
+  var renderInputHourDigit = inputHourDigits.slice(0, selectedHourDigit + 1).reverse().map(function (digit, index) {
+    return (digit < 10 ? "0".concat(digit) : digit) + " ";
+  }).join('');
+  var renderInputMinuteDigit = minuteDigits.filter(function (digit) {
+    return digit <= selectedMinuteDigit;
+  }).reverse().map(function (digit, index) {
+    return (digit < 10 ? "0".concat(digit) : digit) + " ";
+  }).join('');
   React.useEffect(function () {
     var fullTime = selectedHourDigit + ':' + selectedMinuteDigit + ' ' + (isAM ? 'AM' : 'PM');
     props.onChange(fullTime);
@@ -110,32 +119,18 @@ var Timepicker = function Timepicker(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: 'flex items-center space-x-1'
   }, /*#__PURE__*/React.createElement("div", {
-    className: 'border border-gray-300 rounded bg-slatyGreen overflow-hidden'
-  }, /*#__PURE__*/React.createElement("input", {
-    className: "".concat(animateHour, " w-9 h-8 py-1 font-semibold text-lg border rounded text-center cursor-pointer ").concat(showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'),
-    type: 'text',
-    placeholder: '00',
-    readOnly: true,
-    defaultValue: "".concat(selectedHourDigit < 10 ? "0".concat(selectedHourDigit) : selectedHourDigit),
-    onClick: showHourClock,
-    style: {
-      outline: 'none'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
+    className: "border w-9 h-8 border-gray-300 rounded bg-slatyGreen overflow-hidden inline-block",
+    onClick: showHourClock
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "".concat(animateHour, " font-semibold text-lg border border-none rounded text-center cursor-pointer ").concat(showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray')
+  }, renderInputHourDigit)), /*#__PURE__*/React.createElement("span", {
     className: 'text-gray-600'
   }, ":"), /*#__PURE__*/React.createElement("div", {
-    className: 'border border-gray-300 rounded bg-slatyGreen overflow-hidden'
-  }, /*#__PURE__*/React.createElement("input", {
-    className: "".concat(animateMinute, " w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ").concat(showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'),
-    type: 'text',
-    placeholder: '00',
-    readOnly: true,
-    defaultValue: "".concat(selectedMinuteDigit < 10 ? "0".concat(selectedMinuteDigit) : selectedMinuteDigit),
-    onClick: showMinuteClock,
-    style: {
-      outline: 'none'
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+    className: "border w-9 h-8 border-gray-300 rounded bg-slatyGreen overflow-hidden inline-block",
+    onClick: showMinuteClock
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "".concat(animateMinute, " h-full font-semibold  text-lg border border-none rounded text-center cursor-pointer ").concat(showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray')
+  }, renderInputMinuteDigit))), /*#__PURE__*/React.createElement("div", {
     className: 'grid grid-cols-2 ml-10 border border-gray-300 rounded-md'
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-10 h-8 ".concat(isAM && 'bg-slatyGreen text-primary', " transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer"),
@@ -214,6 +209,7 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
   var hourDigits12 = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   var hourDigits24 = [24, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
   var minuteDigits = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+  var inputHourDigits12 = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
   var _a = React.useState(12) || React.useState(24),
     selectedHourDigit = _a[0],
     setSelectedHourDigit = _a[1];
@@ -247,7 +243,7 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
   var handleHourSelectDigit = function handleHourSelectDigit(digit) {
     setSelectedHourDigit(digit);
     setIsHour24Selected(true);
-    digit ? setAnimateHour(style.topAnimation) : setAnimateHour('');
+    digit ? setAnimateHour(style.textAnimation) : setAnimateHour('');
     if (digit <= 12) {
       setIsDigit12(true);
       setIsDigit24(false);
@@ -258,25 +254,22 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     setTimeout(function () {
       setAnimateHour('');
     }, 300);
-    var timer = setTimeout(function () {
-      setShowMinuteDigits(true);
-      setShowHourDigits(false);
-    }, 1500);
-    return function () {
-      clearTimeout(timer);
-    };
+    // const timer = setTimeout(() => {
+    //     setShowMinuteDigits(true);
+    //     setShowHourDigits(false);
+    // }, 1500);
+    // return () => {
+    //     clearTimeout(timer);
+    // };
   };
+
   var handleMinuteSelectDigit = function handleMinuteSelectDigit(digit) {
     setSelectedMinuteDigit(digit);
-    digit ? setAnimateMinute(style.topAnimation) : setAnimateMinute('');
+    digit ? setAnimateMinute(style.textAnimation) : setAnimateMinute('');
     setTimeout(function () {
       setAnimateMinute('');
     }, 300);
   };
-  React.useEffect(function () {
-    var fullTime = selectedHourDigit + ':' + selectedMinuteDigit;
-    props.onChange(fullTime);
-  }, [selectedHourDigit, selectedMinuteDigit]);
   var toggleSetAM = function toggleSetAM() {
     setIsAM(!isAM);
   };
@@ -342,6 +335,18 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
       }
     }, formattedDigit);
   });
+  var renderInputHourDigit = inputHourDigits12.slice(0, selectedHourDigit + 1).reverse().map(function (digit, index) {
+    return (digit < 10 ? "0".concat(digit) : digit) + " ";
+  }).join('');
+  var renderInputMinuteDigit = minuteDigits.filter(function (digit) {
+    return digit <= selectedMinuteDigit;
+  }).reverse().map(function (digit, index) {
+    return (digit < 10 ? "0".concat(digit) : digit) + " ";
+  }).join('');
+  React.useEffect(function () {
+    var fullTime = selectedHourDigit + ':' + selectedMinuteDigit;
+    props.onChange(fullTime);
+  }, [selectedHourDigit, selectedMinuteDigit]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: 'flex flex-col items-center justify-center mt-3'
   }, /*#__PURE__*/React.createElement("div", {
@@ -349,32 +354,18 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: 'flex items-center space-x-1'
   }, /*#__PURE__*/React.createElement("div", {
-    className: 'border border-gray-300 rounded bg-slatyGreen overflow-hidden'
-  }, /*#__PURE__*/React.createElement("input", {
-    className: "".concat(animateHour, " w-9 h-8 py-1 font-semibold text-lg border rounded text-center cursor-pointer ").concat(showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'),
-    type: 'text',
-    placeholder: '00',
-    readOnly: true,
-    defaultValue: "".concat(selectedHourDigit < 10 ? "0".concat(selectedHourDigit) : selectedHourDigit),
-    onClick: showHourClock,
-    style: {
-      outline: 'none'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
+    className: "border w-9 h-8 border-gray-300 rounded bg-slatyGreen overflow-hidden inline-block",
+    onClick: showHourClock
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "".concat(animateHour, " font-semibold text-lg border border-none rounded text-center cursor-pointer ").concat(showHourDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray')
+  }, renderInputHourDigit)), /*#__PURE__*/React.createElement("span", {
     className: 'text-gray-600'
   }, ":"), /*#__PURE__*/React.createElement("div", {
-    className: 'border border-gray-300 rounded bg-slatyGreen overflow-hidden'
-  }, /*#__PURE__*/React.createElement("input", {
-    className: "".concat(animateMinute, " w-9 h-8 py-1 font-semibold text-lg border border-gray-300 rounded text-center cursor-pointer ").concat(showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray'),
-    type: 'text',
-    placeholder: '00',
-    readOnly: true,
-    defaultValue: "".concat(selectedMinuteDigit < 10 ? "0".concat(selectedMinuteDigit) : selectedMinuteDigit),
-    onClick: showMinuteClock,
-    style: {
-      outline: 'none'
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+    className: "border w-9 h-8 border-gray-300 rounded bg-slatyGreen overflow-hidden inline-block",
+    onClick: showMinuteClock
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "".concat(animateMinute, " h-full font-semibold  text-lg border border-none rounded text-center cursor-pointer ").concat(showMinuteDigits === true ? 'bg-slatyGreen text-primary' : 'bg-lightGray')
+  }, renderInputMinuteDigit))), /*#__PURE__*/React.createElement("div", {
     className: 'grid grid-cols-2 ml-10 border border-gray-300 rounded-md opacity-50'
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-10 h-8 ".concat(isAM && 'bg-slatyGreen text-primary', " transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer pointer-events-none "),
