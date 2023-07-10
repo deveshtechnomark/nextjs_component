@@ -49,7 +49,7 @@ const Button: React.FC<ButtonProps> = ({
         className={`${className} ${
           className?.includes("btn-sm") && "py-[3.5px] px-[10px] text-sm"
         } ${
-          className?.includes("btn-lg") && "py-[12px] px-[20px]"
+          className?.includes("btn-lg") && "py-[14.5px] px-[20px]"
         } bg-pureWhite text-slatyGrey relative overflow-hidden py-[6px] px-[15px] text-base group ${
           variant === "btn" && "!bg-lightSilver !text-slatyGrey"
         } ${
