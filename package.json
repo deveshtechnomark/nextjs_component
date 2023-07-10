@@ -32,6 +32,7 @@
     "@babel/preset-env": "^7.22.5",
     "@types/react": "^18.2.12",
     "classnames": "^2.3.2",
+    "form-elements": "file:../checkbox",
     "postcss": "^8.4.24",
     "postcss-modules": "^6.0.0",
     "prop-types": "^15.8.1",

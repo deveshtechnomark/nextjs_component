@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { CheckBox } from 'form-elements';
+import 'form-elements/dist/index.css';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -53,6 +55,13 @@ var Table = function Table(props) {
   var _c = useState("asc"),
     sortingOrder = _c[0],
     setSortingOrder = _c[1];
+  var _d = useState([]),
+    isAllChecked = _d[0];
+    _d[1];
+  var _e = useState(false);
+    _e[0];
+    _e[1];
+  console.log("from app", filteredData);
   var handleSort = function handleSort(column) {
     var sortedData = __spreadArray([], filteredData, true);
     var newSortingOrder = "asc";
@@ -78,12 +87,14 @@ var Table = function Table(props) {
     setSortingOrder(newSortingOrder);
   };
   return React.createElement("div", {
-    className: "w-full m-0 p-0 box-border"
+    className: "w-full"
   }, React.createElement("table", {
     className: "w-full"
   }, React.createElement("thead", null, React.createElement("tr", {
-    className: "".concat(props.sticky && "sticky top-0", " bg-pureWhite border border-t-pureBlack border-b-pureBlack h-[48px]")
-  }, props.headers.map(function (header) {
+    className: "".concat(props.sticky ? "sticky top-0 z-10 drop-shadow" : "border border-b-pureBlack border-t-pureBlack", " bg-pureWhite h-[48px]")
+  }, props.selected && React.createElement("th", null, React.createElement(CheckBox, {
+    id: props.data.toString()
+  })), props.headers.map(function (header) {
     return React.createElement("th", {
       key: header,
       className: "cursor-pointer uppercase text-[16px] text-center font-proxima font-bold",
@@ -95,11 +106,19 @@ var Table = function Table(props) {
     }, header, sortingColumn === header && React.createElement("span", {
       className: "ml-2 ".concat(sortingOrder === "asc" ? "" : "rotate-180")
     }, React.createElement(SortingIcon, null))));
-  }))), React.createElement("tbody", null, filteredData.map(function (item, index) {
+  }), props.action && React.createElement("th", {
+    className: "cursor-pointer uppercase text-[16px] text-center font-proxima font-bold"
+  }, "Actions"))), React.createElement("tbody", null, filteredData.map(function (item, index) {
     return React.createElement("tr", {
       key: index,
       className: "h-[56px] border border-b-lightSilver cursor-default hover:bg-whiteSmoke"
-    }, props.headers.map(function (header) {
+    }, props.selected && React.createElement("td", null, React.createElement(CheckBox, {
+      id: index.toString(),
+      checked: isAllChecked[index],
+      onChange: function onChange(e) {
+        e.target.checked ? !e.target.checked : e.target.checked;
+      }
+    })), props.headers.map(function (header) {
       return React.createElement("td", {
         key: header,
         className: "py-[19px] px-[20px] text-center text-base font-proxima font-normal"
@@ -110,6 +129,11 @@ var Table = function Table(props) {
         alt: "Item",
         className: "max-w-[50px] max-h-[50px] rounded"
       }) : item[header]));
+    }), props.action && props.actions.map(function (action) {
+      return React.createElement("td", {
+        key: action,
+        className: "text-center"
+      }, action);
     }));
   }))));
 };
