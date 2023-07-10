@@ -20,7 +20,7 @@ const CheckBox = ({
 }: CheckBoxProps) => {
   return (
     <div
-      className={`m-0 p-0 min-w-fit relative flex justify-start items-center ${className}`}
+      className={`m-0 p-0 w-fit relative flex justify-start items-center ${className}`}
     >
       {!intermediate ? (
         <>
