@@ -41,13 +41,13 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
             setAnimateHour('');
         }, 300);
 
-        // const timer = setTimeout(() => {
-        //     setShowMinuteDigits(true);
-        //     setShowHourDigits(false);
-        // }, 1500);
-        // return () => {
-        //     clearTimeout(timer);
-        // };
+        const timer = setTimeout(() => {
+            setShowMinuteDigits(true);
+            setShowHourDigits(false);
+        }, 1500);
+        return () => {
+            clearTimeout(timer);
+        };
     };
 
     const handleMinuteSelectDigit = (digit: number) => {
