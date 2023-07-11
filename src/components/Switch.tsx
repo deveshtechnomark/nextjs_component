@@ -1,71 +1,76 @@
 import React, { useState, useEffect } from "react";
-import "./Switch.css";
+import "../style.css";
 
-type SwitchProps = {
+interface SwitchProps {
   checked?: boolean;
   disabled?: boolean;
-  primary?: boolean;
-  secondary?: boolean;
-  success?: boolean;
-  info?: boolean;
-  warning?: boolean;
-  error?: boolean;
-};
+  variant?: "primary" | "invalid";
+}
 
-const Switch: React.FC<SwitchProps> = ({
-  checked = false,
-  disabled = false,
-  primary = false,
-  secondary = false,
-  success = false,
-  info = false,
-  warning = false,
-  error = false,
-}) => {
-  const [isChecked, setIsChecked] = useState(checked);
+const Switch: React.FC<SwitchProps> = ({ checked, disabled, variant }) => {
+
+  const [isChecked, setIsChecked] = useState(checked || false);
+
+  const handleClick = () => {
+    if (!disabled) {
+      setIsChecked((prevChecked) => !prevChecked);
+    }
+  };
 
   useEffect(() => {
-    setIsChecked(checked);
+    setIsChecked(checked || false);
   }, [checked]);
 
-  useEffect(() => {
-    if (error || primary || success || secondary || info || warning) {
-      setIsChecked(true);
+  const getColorClasses = () => {
+    switch (variant) {
+      case "invalid":
+        return "bg-defaultRed";
+      default:
+      case "primary":
+        return "bg-primary";
     }
-  }, [primary, success, secondary, info, warning, error]);
-
-  const handleChange = () => {
-    setIsChecked(!isChecked);
   };
 
   return (
-    <label className="relative inline-flex items-center cursor-pointer">
-      <input
-        type="checkbox"
-        value=""
-        className="sr-only peer"
-        checked={isChecked}
-        disabled={disabled}
-        onChange={handleChange}
-      />
-      <div
-        className={`w-11 h-6 bg-csSwitchGray ${
-          disabled
-            ? "cursor-not-allowed"
-            : "cursor-pointer peer-focus:outline-none"
-        } rounded-full ${
-          isChecked ? "peer-checked:after:translate-x-full" : ""
-        } peer-checked:after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-csSwitchWhite after:rounded-full after:h-5 after:w-5 after:transition-all  ${
-          isChecked ? "peer-checked:bg-csSwitchDefalut" : ""
-        } ${primary ? "peer-checked:bg-csSwitchDefalut" : ""} ${
-          secondary ? "peer-checked:bg-csSwitchSecondary" : ""
-        } ${success ? "peer-checked:bg-csSwitchSuccess" : ""} ${
-          info ? "peer-checked:bg-csSwitchInfo" : ""
-        } ${warning ? "peer-checked:bg-csSwitchWarning" : ""} ${
-          error ? "peer-checked:bg-csSwitchError" : ""
+    <>
+      <button
+        className={`group relative border-[1.5px] border-lightSilver ${
+          variant === "invalid"
+            ? "hover:border-defaultRed"
+            : "hover:border-primary"
+        } focus:outline-none bg-white rounded-full shadow-sm h-[22px] overflow-hidden w-[40px] relative ${
+          disabled ? "cursor-not-allowed opacity-60 pointer-events-none" : ""
         }`}
-      ></div>
-    </label>
+        id="btn"
+        onClick={handleClick}
+        disabled={disabled}
+      >
+        <div
+          className={`rounded-full ${getColorClasses()} absolute top-[4px] h-[13px] w-[13px] left-[4px] transition-transform duration-[800ms] linear`}
+          style={{
+            transform: isChecked ? "scale(4.5)" : "scale(1)",
+          }}
+        ></div>
+        <div
+          className="rounded-full bg-white absolute top-[4px] h-[13px] w-[13px] right-[4px] transition-transform duration-[800ms] linear"
+          style={{
+            transform: isChecked ? "scale(1)" : "scale(1)",
+          }}
+        ></div>
+        <div
+          className={`absolute rounded-full ${
+            variant === "invalid"
+              ? "group-hover:delay-0 group-hover:bg-defaultRed"
+              : " group-hover:delay-0 group-hover:bg-primary"
+          } absolute top-[20%] h-[13px] w-[13px] left-[4px] ${
+            isChecked ? { getColorClasses } : "delay-[450ms] bg-pinkSwan"
+          }`}
+        ></div>
+        <div
+          className={`rounded-full bg-white absolute top-[4px] h-[13px] w-[13px] right-[4px]`}
+        ></div>
+      </button>
+    </>
   );
 };
 

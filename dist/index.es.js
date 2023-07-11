@@ -1,48 +1,53 @@
 import React, { useState, useEffect } from 'react';
 
 var Switch = function Switch(_a) {
-  var _b = _a.checked,
-    checked = _b === void 0 ? false : _b,
-    _c = _a.disabled,
-    disabled = _c === void 0 ? false : _c,
-    _d = _a.primary,
-    primary = _d === void 0 ? false : _d,
-    _e = _a.secondary,
-    secondary = _e === void 0 ? false : _e,
-    _f = _a.success,
-    success = _f === void 0 ? false : _f,
-    _g = _a.info,
-    info = _g === void 0 ? false : _g,
-    _h = _a.warning,
-    warning = _h === void 0 ? false : _h,
-    _j = _a.error,
-    error = _j === void 0 ? false : _j;
-  var _k = useState(checked),
-    isChecked = _k[0],
-    setIsChecked = _k[1];
-  useEffect(function () {
-    setIsChecked(checked);
-  }, [checked]);
-  useEffect(function () {
-    if (error || primary || success || secondary || info || warning) {
-      setIsChecked(true);
+  var checked = _a.checked,
+    disabled = _a.disabled,
+    variant = _a.variant;
+  var _b = useState(checked || false),
+    isChecked = _b[0],
+    setIsChecked = _b[1];
+  var handleClick = function handleClick() {
+    if (!disabled) {
+      setIsChecked(function (prevChecked) {
+        return !prevChecked;
+      });
     }
-  }, [primary, success, secondary, info, warning, error]);
-  var handleChange = function handleChange() {
-    setIsChecked(!isChecked);
   };
-  return /*#__PURE__*/React.createElement("label", {
-    className: "relative inline-flex items-center cursor-pointer"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "checkbox",
-    value: "",
-    className: "sr-only peer",
-    checked: isChecked,
-    disabled: disabled,
-    onChange: handleChange
+  useEffect(function () {
+    setIsChecked(checked || false);
+  }, [checked]);
+  var getColorClasses = function getColorClasses() {
+    switch (variant) {
+      case "invalid":
+        return "bg-defaultRed";
+      default:
+      case "primary":
+        return "bg-primary";
+    }
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    className: "group relative border-[1.5px] border-lightSilver ".concat(variant === "invalid" ? "hover:border-defaultRed" : "hover:border-primary", " focus:outline-none bg-white rounded-full shadow-sm h-[22px] overflow-hidden w-[40px] relative ").concat(disabled ? "cursor-not-allowed opacity-60 pointer-events-none" : ""),
+    id: "btn",
+    onClick: handleClick,
+    disabled: disabled
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rounded-full ".concat(getColorClasses(), " absolute top-[4px] h-[13px] w-[13px] left-[4px] transition-transform duration-[800ms] linear"),
+    style: {
+      transform: isChecked ? "scale(4.5)" : "scale(1)"
+    }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "w-11 h-6 bg-csSwitchGray ".concat(disabled ? "cursor-not-allowed" : "cursor-pointer peer-focus:outline-none", " rounded-full ").concat(isChecked ? "peer-checked:after:translate-x-full" : "", " peer-checked:after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-csSwitchWhite after:rounded-full after:h-5 after:w-5 after:transition-all  ").concat(isChecked ? "peer-checked:bg-csSwitchDefalut" : "", " ").concat(primary ? "peer-checked:bg-csSwitchDefalut" : "", " ").concat(secondary ? "peer-checked:bg-csSwitchSecondary" : "", " ").concat(success ? "peer-checked:bg-csSwitchSuccess" : "", " ").concat(info ? "peer-checked:bg-csSwitchInfo" : "", " ").concat(warning ? "peer-checked:bg-csSwitchWarning" : "", " ").concat(error ? "peer-checked:bg-csSwitchError" : "")
-  }));
+    className: "rounded-full bg-white absolute top-[4px] h-[13px] w-[13px] right-[4px] transition-transform duration-[800ms] linear",
+    style: {
+      transform: isChecked ? "scale(1)" : "scale(1)"
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute rounded-full ".concat(variant === "invalid" ? "group-hover:delay-0 group-hover:bg-defaultRed" : " group-hover:delay-0 group-hover:bg-primary", " absolute top-[20%] h-[13px] w-[13px] left-[4px] ").concat(isChecked ? {
+      getColorClasses: getColorClasses
+    } : "delay-[450ms] bg-pinkSwan")
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "rounded-full bg-white absolute top-[4px] h-[13px] w-[13px] right-[4px]"
+  })));
 };
 
 export { Switch };

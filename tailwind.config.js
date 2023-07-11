@@ -3,17 +3,12 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'csSwitchBlack': '#0000000',
-                'csSwitchWhite': '#ffffff',
-                'csSwitchGray': '#D8D8D8',
-                'csSwitchDefalut': '#007bff',
-                'csSwitchSecondary': '#6c757d',
-                'csSwitchSuccess': '#198754',
-                'csSwitchDanger': '#DC3545',
-                'csSwitchWarning': '#FFC107',
-                'csSwitchInfo': '#0DCAF0',
-                'csSwitchError': '#ff3333'
-            },
+                'pureWhite': '#ffffff',
+                'lightSilver': '#D8D8D8',
+                'primary': '#02B89D',
+                'pinkSwan': '#B7B7B7',
+                'defaultRed': '#DC3545'
+              },
         },
     },
     variants: {
