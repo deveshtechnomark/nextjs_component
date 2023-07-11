@@ -112,7 +112,7 @@ const TextField: React.FC<TextFieldProps> = ({
 `;
 
   const labelClassName = `
-  ${err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"}
+  ${err ? "text-defaultRed" : focus || value ? "text-primary" : "text-slatyGrey"}
 `;
 
 
@@ -130,7 +130,13 @@ const TextField: React.FC<TextFieldProps> = ({
           }`}
       >
         <input
-          className={inputClassName}
+          className={`
+          ${className}
+          py-1 px-3 border-b outline-none transition duration-600 w-full
+          ${err ? "border-b-defaultRed" : value || focus ? "border-b-primary" : "border-b-lightSilver"}
+          ${valid && "text-successColor font-normal text-[14px] font-proxima"}
+          ${showEmailError && "text-defaultRed"}
+        `}
           ref={inputRef}
           type={type}
           id={id}
@@ -155,7 +161,7 @@ const TextField: React.FC<TextFieldProps> = ({
         </span>
       )}
       {valid && (
-        <span className="text-primary text-[20px] absolute right-0 top-0 mt-5 mr-3">
+        <span className="text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3">
           <CheckIcon />
         </span>
       )}

@@ -160,8 +160,7 @@ var TextField = function TextField(_a) {
     setValid(false);
     setShowEmailError(false);
   };
-  var inputClassName = "\n  ".concat(className, "\n  py-1 px-3 border-b outline-none transition duration-600 w-full\n  ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n  ").concat(valid && "text-successColor font-normal text-[14px] font-proxima", "\n  ").concat(showEmailError && "text-defaultRed", "\n");
-  var labelClassName = "\n  ".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey", "\n");
+  var labelClassName = "\n  ".concat(err ? "text-defaultRed" : focus || value ? "text-primary" : "text-slatyGrey", "\n");
   return React.createElement("div", {
     className: "flex flex-col text-[14px] laptop:text-base relative font-proxima"
   }, label && React.createElement("label", {
@@ -169,7 +168,7 @@ var TextField = function TextField(_a) {
   }, label, required && "*"), React.createElement("div", {
     className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
-    className: inputClassName,
+    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full\n          ").concat(err ? "border-b-defaultRed" : value || focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid && "text-successColor font-normal text-[14px] font-proxima", "\n          ").concat(showEmailError && "text-defaultRed", "\n        "),
     ref: inputRef,
     type: type,
     id: id,
@@ -185,7 +184,7 @@ var TextField = function TextField(_a) {
     className: "text-[20px]",
     onClick: handleClear
   }, React.createElement(ClearIcon, null))), valid && React.createElement("span", {
-    className: "text-primary text-[20px] absolute right-0 top-0 mt-5 mr-3"
+    className: "text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3"
   }, React.createElement(CheckIcon, null)), err && React.createElement("span", {
     className: "text-defaultRed"
   }, errorMessage), !err && supportingText && React.createElement("span", {
