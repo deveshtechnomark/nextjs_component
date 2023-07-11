@@ -517,7 +517,7 @@ var ColorPicker = function ColorPicker(props) {
     fill: "none",
     viewBox: "0 0 14 14"
   }, /*#__PURE__*/React.createElement("path", {
-    stroke: hex,
+    stroke: "currentcolor",
     strokeLinecap: "round",
     strokeLinejoin: "round",
     strokeWidth: "2",

@@ -505,7 +505,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
                 viewBox="0 0 14 14"
               >
                 <path
-                  stroke={hex}
+                  stroke="currentcolor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
