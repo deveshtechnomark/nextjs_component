@@ -37,7 +37,7 @@ const Avatar: FC<AvatarProps> = ({
   const Yellow = ["E", "J", "O", "T", "Y"];
 
   return (
-    <div className={`${styles.avatar} relative`}>
+    <div className={`${styles.avatar} relative w-fit`}>
       {imageUrl ? (
         <img
           className={`w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] display-block object-fit-cover border-2 border-pureWhite ${avatarTypeClass} ${className}`}

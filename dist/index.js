@@ -23,7 +23,7 @@ var Avatar = function Avatar(_a) {
   var Green = ["C", "H", "M", "R", "W"];
   var SkyBlue = ["D", "I", "N", "S", "X"];
   return React.createElement("div", {
-    className: "".concat(styles.avatar, " relative")
+    className: "".concat(styles.avatar, " relative w-fit")
   }, imageUrl ? React.createElement("img", {
     className: "w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] display-block object-fit-cover border-2 border-pureWhite ".concat(avatarTypeClass, " ").concat(className),
     src: imageUrl,
