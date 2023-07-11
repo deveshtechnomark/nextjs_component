@@ -10,6 +10,7 @@ module.exports = {
         primary: "#02B89D",
         textGood: "#FFBF00",
         textDefault: "#979797",
+        lightSilver: "#D8D8D8"
       },
       screens: {
         passwordsm: "800px",

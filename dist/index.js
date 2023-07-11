@@ -45,8 +45,7 @@ var Dot = function Dot() {
     viewBox: "0 0 16 16",
     height: "1em",
     width: "1em",
-    xmlns: "http://www.w3.org/2000/svg",
-    className: "text-gray-500 text-3xl"
+    xmlns: "http://www.w3.org/2000/svg"
   }, React.createElement("path", {
     d: "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
   }));
@@ -55,12 +54,11 @@ var Check = function Check() {
   return React.createElement("svg", {
     stroke: "currentColor",
     fill: "currentColor",
-    "stroke-width": "0",
+    strokeWidth: "0",
     viewBox: "0 0 16 16",
     height: "1em",
     width: "1em",
-    xmlns: "http://www.w3.org/2000/svg",
-    className: "text-successColor ml-[5px] my-[6px]"
+    xmlns: "http://www.w3.org/2000/svg"
   }, React.createElement("path", {
     d: "M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
   }));
@@ -69,7 +67,7 @@ var EyeOpen = function EyeOpen() {
   return React.createElement("svg", {
     stroke: "currentColor",
     fill: "currentColor",
-    "stroke-width": "0",
+    strokeWidth: "0",
     viewBox: "0 0 16 16",
     height: "1em",
     width: "1em",
@@ -84,7 +82,7 @@ var EyeClose = function EyeClose() {
   return React.createElement("svg", {
     stroke: "currentColor",
     fill: "currentColor",
-    "stroke-width": "0",
+    strokeWidth: "0",
     viewBox: "0 0 16 16",
     height: "1em",
     width: "1em",
@@ -173,7 +171,11 @@ var Password = function Password(_a) {
       }, React.createElement("li", {
         key: item.index,
         className: "".concat(requirementItemClass, " flex items-center justify-left text-xs passwordsm:text-base passwordmd:text-lg")
-      }, isValid ? React.createElement(Check, null) : React.createElement(Dot, null), React.createElement("span", {
+      }, isValid ? React.createElement("span", {
+        className: "text-teal-500 ml-[5px] my-[6px]"
+      }, React.createElement(Check, null)) : React.createElement("span", {
+        className: "text-gray-500 text-3xl"
+      }, React.createElement(Dot, null)), React.createElement("span", {
         className: "".concat(isValid && "line-through ml-[7px] decoration-gray-500 text-gray-500")
       }, requirementList[item.index])));
     });
@@ -213,7 +215,6 @@ var Password = function Password(_a) {
       setErrorMes("Please fill details according to the requirements.");
     } else {
       setErr(false);
-      setFocus(false);
     }
   };
   var handleFocus = function handleFocus() {
@@ -239,17 +240,15 @@ var Password = function Password(_a) {
     type: "label"
   }, label, required && "*")), React.createElement("div", {
     className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
-  }, React.createElement(Typography.Typography, {
-    type: "h6"
   }, React.createElement("input", __assign({
-    className: "".concat(className, " py-2 px-3 border-b outline-none w-full ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-slatyGrey"),
+    className: "".concat(className, " py-2 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
     type: type,
     id: "password-input",
     value: password,
     onChange: handlePasswordChange,
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
     onFocus: handleFocus
-  }, props)))), type === "password" ? React.createElement("span", {
+  }, props))), type === "password" ? React.createElement("span", {
     className: "absolute top-9 right-1 text-md sm:text-lg ".concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
       return setType("text");

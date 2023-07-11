@@ -121,14 +121,18 @@ const Password: React.FC<PasswordProps> = ({
             className={`${requirementItemClass} flex items-center justify-left text-xs passwordsm:text-base passwordmd:text-lg`}
           >
             {isValid ? (
-              <Check />
+              <span className="text-teal-500 ml-[5px] my-[6px]">
+                <Check />
+              </span>
             ) : (
-              <Dot />
+              <span className="text-gray-500 text-3xl">
+                <Dot />
+              </span>
             )}
             <span
               className={`${
                 isValid &&
-                "line-through ml-[7px] decoration-[#979797] text-[#979797]"
+                "line-through ml-[7px] decoration-gray-500 text-gray-500"
               }`}
             >
               {requirementList[item.index]}
@@ -176,7 +180,6 @@ const Password: React.FC<PasswordProps> = ({
       setErrorMes("Please fill details according to the requirements.");
     } else {
       setErr(false);
-      setFocus(false);
     }
   };
 
@@ -228,14 +231,13 @@ const Password: React.FC<PasswordProps> = ({
           "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
         }`}
       >
-        <Typography type="h6">
           <input
-            className={`${className} py-2 px-3 border-b outline-none w-full ${
+            className={`${className} py-2 px-3 border-b outline-none w-full pr-10 ${
               err
                 ? "border-defaultRed"
                 : focus
                 ? "border-primary"
-                : "border-slatyGrey"
+                : "border-lightSilver"
             }`}
             type={type}
             id="password-input"
@@ -245,7 +247,6 @@ const Password: React.FC<PasswordProps> = ({
             onFocus={handleFocus}
             {...props}
           />
-        </Typography>
       </div>
       {type === "password" ? (
         <span
