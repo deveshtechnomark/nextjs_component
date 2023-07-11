@@ -58,12 +58,26 @@ var Table = function Table(props) {
     sortingOrder = _c[0],
     setSortingOrder = _c[1];
   var _d = React.useState([]),
-    isAllChecked = _d[0];
-    _d[1];
-  var _e = React.useState(false);
-    _e[0];
-    _e[1];
-  console.log("from app", filteredData);
+    isAllChecked = _d[0],
+    setIsAllChecked = _d[1];
+  var _e = React.useState(false),
+    isChecked = _e[0],
+    setIsChecked = _e[1];
+  // function for handling select and deselect all
+  var handleSelectAll = function handleSelectAll(e) {
+    var checked = e.target.checked;
+    var updatedArray = filteredData.map(function (_item, index) {
+      return checked;
+    });
+    setIsAllChecked(updatedArray);
+    setIsChecked(checked);
+  };
+  // function for selecting single row
+  var handleCheckRow = function handleCheckRow(index, checked) {
+    var updatedArray = __spreadArray([], isAllChecked, true);
+    updatedArray[index] = checked;
+    setIsAllChecked(updatedArray);
+  };
   var handleSort = function handleSort(column) {
     var sortedData = __spreadArray([], filteredData, true);
     var newSortingOrder = "asc";
@@ -95,7 +109,9 @@ var Table = function Table(props) {
   }, React.createElement("thead", null, React.createElement("tr", {
     className: "".concat(props.sticky ? "sticky top-0 z-10 drop-shadow" : "border border-b-pureBlack border-t-pureBlack", " bg-pureWhite h-[48px]")
   }, props.selected && React.createElement("th", null, React.createElement(formElements.CheckBox, {
-    id: props.data.toString()
+    id: "selectAll",
+    checked: isChecked,
+    onChange: handleSelectAll
   })), props.headers.map(function (header) {
     return React.createElement("th", {
       key: header,
@@ -118,7 +134,7 @@ var Table = function Table(props) {
       id: index.toString(),
       checked: isAllChecked[index],
       onChange: function onChange(e) {
-        e.target.checked ? !e.target.checked : e.target.checked;
+        return handleCheckRow(index, e.target.checked);
       }
     })), props.headers.map(function (header) {
       return React.createElement("td", {

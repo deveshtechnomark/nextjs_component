@@ -21,7 +21,20 @@ const Table: React.FC<TableProps> = (props) => {
   const [isAllChecked, setIsAllChecked] = useState<boolean[]>([]);
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  console.log("from app", filteredData);
+  // function for handling select and deselect all
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    const updatedArray = filteredData.map((_item, index) => checked);
+    setIsAllChecked(updatedArray);
+    setIsChecked(checked);
+  };
+
+  // function for selecting single row
+  const handleCheckRow = (index: number, checked: boolean) => {
+    const updatedArray = [...isAllChecked];
+    updatedArray[index] = checked;
+    setIsAllChecked(updatedArray);
+  };
 
   const handleSort = (column: string) => {
     const sortedData = [...filteredData];
@@ -58,12 +71,19 @@ const Table: React.FC<TableProps> = (props) => {
       <table className="w-full">
         <thead>
           <tr
-            className={`${props.sticky ? "sticky top-0 z-10 drop-shadow" : "border border-b-pureBlack border-t-pureBlack"
-              } bg-pureWhite h-[48px]`}
+            className={`${
+              props.sticky
+                ? "sticky top-0 z-10 drop-shadow"
+                : "border border-b-pureBlack border-t-pureBlack"
+            } bg-pureWhite h-[48px]`}
           >
             {props.selected && (
               <th>
-                <CheckBox id={props.data.toString()} />
+                <CheckBox
+                  id="selectAll"
+                  checked={isChecked}
+                  onChange={handleSelectAll}
+                />
               </th>
             )}
             {props.headers.map((header) => (
@@ -78,8 +98,9 @@ const Table: React.FC<TableProps> = (props) => {
                   {header}
                   {sortingColumn === header && (
                     <span
-                      className={`ml-2 ${sortingOrder === "asc" ? "" : "rotate-180"
-                        }`}
+                      className={`ml-2 ${
+                        sortingOrder === "asc" ? "" : "rotate-180"
+                      }`}
                     >
                       <SortingIcon />
                     </span>
@@ -106,9 +127,7 @@ const Table: React.FC<TableProps> = (props) => {
                   <CheckBox
                     id={index.toString()}
                     checked={isAllChecked[index]}
-                    onChange={(e) => {
-                      e.target.checked ? !e.target.checked : e.target.checked;
-                    }}
+                    onChange={(e) => handleCheckRow(index, e.target.checked)}
                   />
                 </td>
               )}
@@ -119,7 +138,7 @@ const Table: React.FC<TableProps> = (props) => {
                 >
                   <span className="flex justify-center items-center">
                     {typeof item[header] === "string" &&
-                      item[header].startsWith("http") ? (
+                    item[header].startsWith("http") ? (
                       <img
                         src={item[header]}
                         alt="Item"
