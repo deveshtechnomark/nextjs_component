@@ -1,15 +1,26 @@
 import React, { FC, ReactNode, SyntheticEvent } from "react";
 import "./index.css";
 import styles from "./index.module.scss";
+import { Badge } from "form-elements";
+import "form-elements/dist/index.css";
 
 interface AvatarProps {
   imageUrl?: string;
   name?: string;
   className?: string;
   type?: string;
+  badge?: boolean;
+  badgeText?: string;
 }
 
-const Avatar: FC<AvatarProps> = ({ imageUrl, name, className, type }) => {
+const Avatar: FC<AvatarProps> = ({
+  imageUrl,
+  name,
+  className,
+  type,
+  badge,
+  badgeText,
+}) => {
   const avatarTypeClass = type === "square" ? "rounded-none" : "rounded-full";
 
   const handleOnError = (e: SyntheticEvent<HTMLImageElement>): void => {
@@ -26,7 +37,7 @@ const Avatar: FC<AvatarProps> = ({ imageUrl, name, className, type }) => {
   const Yellow = ["E", "J", "O", "T", "Y"];
 
   return (
-    <div className={styles.avatar}>
+    <div className={`${styles.avatar} relative`}>
       {imageUrl ? (
         <img
           className={`w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] display-block object-fit-cover border-2 border-pureWhite ${avatarTypeClass} ${className}`}
@@ -90,6 +101,15 @@ const Avatar: FC<AvatarProps> = ({ imageUrl, name, className, type }) => {
               fill="#ADB5BD"
             />
           </svg>
+        </span>
+      )}
+      {badge && (
+        <span
+          className={`absolute ${
+            type === "square" ? "-top-1 -right-2" : "top-0 -right-1"
+          }`}
+        >
+          <Badge badgetype="primary" variant="dot" text={badgeText} />
         </span>
       )}
     </div>

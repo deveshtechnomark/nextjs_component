@@ -33,6 +33,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.22.5",
     "@types/react": "^18.2.12",
+    "form-elements": "file:../radio_checkbox",
     "postcss": "^8.4.24",
     "react-icons": "^4.10.1",
     "sass": "^1.63.6",

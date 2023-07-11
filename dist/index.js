@@ -1,6 +1,8 @@
 'use strict';
 
 var React = require('react');
+var formElements = require('form-elements');
+require('form-elements/dist/index.css');
 
 var styles = {"avatarGroup":"index-module_avatarGroup__pGxEK","avatar":"index-module_avatar__6S1Wo"};
 
@@ -8,7 +10,9 @@ var Avatar = function Avatar(_a) {
   var imageUrl = _a.imageUrl,
     name = _a.name,
     className = _a.className,
-    type = _a.type;
+    type = _a.type,
+    badge = _a.badge,
+    badgeText = _a.badgeText;
   var avatarTypeClass = type === "square" ? "rounded-none" : "rounded-full";
   var handleOnError = function handleOnError(e) {
     e.currentTarget.src = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/20625/avatar-bg.png";
@@ -19,7 +23,7 @@ var Avatar = function Avatar(_a) {
   var Green = ["C", "H", "M", "R", "W"];
   var SkyBlue = ["D", "I", "N", "S", "X"];
   return React.createElement("div", {
-    className: styles.avatar
+    className: "".concat(styles.avatar, " relative")
   }, imageUrl ? React.createElement("img", {
     className: "w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] display-block object-fit-cover border-2 border-pureWhite ".concat(avatarTypeClass, " ").concat(className),
     src: imageUrl,
@@ -55,7 +59,13 @@ var Avatar = function Avatar(_a) {
   }), React.createElement("path", {
     d: "M29.3013 36.9526C28.4543 31.3666 27.6073 25.7806 26.7593 20.1956C26.4513 18.1676 26.1543 16.0306 26.8953 14.1176C27.6353 12.2046 29.8073 10.6816 31.7283 11.3996C30.9593 7.51364 35.2583 4.64365 39.0043 3.35465C45.2813 1.19365 52.0123 0.0936451 58.5953 0.944645C65.1793 1.79565 71.6073 4.70764 76.0453 9.64464C77.4503 11.2076 78.6603 12.9826 79.3293 14.9736C80.6173 18.8066 79.7973 22.9896 78.9673 26.9466C78.3073 30.0906 77.6483 33.2346 76.9883 36.3786C76.8383 37.0966 76.6693 37.8496 76.1793 38.3956C75.3983 39.2656 74.0813 39.3306 72.9123 39.3326C60.4203 39.3596 47.9273 39.3866 35.4353 39.4136C33.0863 39.4186 30.0203 38.8396 29.7103 36.5116",
     fill: "#ADB5BD"
-  }))));
+  }))), badge && React.createElement("span", {
+    className: "absolute ".concat(type === "square" ? "-top-1 -right-2" : "top-0 -right-1")
+  }, React.createElement(formElements.Badge, {
+    badgetype: "primary",
+    variant: "dot",
+    text: badgeText
+  })));
 };
 var AvatarGroup = function AvatarGroup(_a) {
   var children = _a.children,
