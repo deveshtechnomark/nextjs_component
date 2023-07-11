@@ -1,16 +1,12 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
 import Styles from "./styles.module.scss";
 import "./style.css";
 
-interface ColorPickerProps {
-  name?: string;
-  value?: (value: string) => void;
+interface ColorPickerProps  {
+  onChange?: (value: string) => void;
 }
 
-export const ColorPicker: React.FC<ColorPickerProps> = ({
-  name,
-  value,
-}: ColorPickerProps) => {
+export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [colorBoxValue, setColorBoxValue] = useState("");
@@ -309,7 +305,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
     const newOpacity = parseFloat(e.target.value);
     setOpacity(newOpacity);
 
-    if (name === "a") {
+    if (props.name === "a") {
       const newOpacity1 = parseFloat(e.target.value);
       setOpacity(newOpacity1);
     }
@@ -343,8 +339,9 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   }`;
 
   useEffect(() => {
-    value(colorBoxValue || rgbaColorValue);
-  }, [colorBoxValue, rgbaColorValue]);
+    console.log(colorBoxValue); 
+    props.onChange(colorBoxValue || rgbaColorValue);
+  }, [colorBoxValue,rgbaColorValue]);
 
   return (
     <>
