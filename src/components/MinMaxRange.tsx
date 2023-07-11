@@ -2,21 +2,27 @@ import React, { useState, ChangeEvent } from "react";
 import styles from "./range.module.scss";
 
 interface MinMaxRangeProps {
-  minValue?: number;
-  maxValue?: number;
+  variant?: string;
+  minValue: number;
+  maxValue: number;
   minRange: number;
   maxRange: number;
   number?: boolean;
+  gap?: number;
+  getValue: (arg1: number, arg2: number) => void;
 }
 
 const MinMaxRange: React.FC<MinMaxRangeProps> = ({
-  minValue,
-  maxValue,
+  variant = "dot",
+  minValue=0,
+  maxValue=100,
   minRange,
   maxRange,
   number,
+  getValue,
+  gap = 10,
 }) => {
-  const gap = (maxRange - minRange) / 10;
+  const gapValue = (maxRange - minRange) / gap;
 
   const [minValueRange, setMinValueRange] = useState<number>(minRange);
   const [maxValueRange, setMaxValueRange] = useState<number>(maxRange);
@@ -24,19 +30,20 @@ const MinMaxRange: React.FC<MinMaxRangeProps> = ({
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === "min") {
-      if (maxValueRange - Number(value) < gap) {
-        setMinValueRange(maxValueRange - gap);
+      if (maxValueRange - Number(value) < gapValue) {
+        setMinValueRange(maxValueRange - gapValue);
       } else {
         setMinValueRange(Number(value));
       }
     } else {
-      if (Number(value) - minValueRange < gap) {
-        setMaxValueRange(minValueRange + gap);
+      if (Number(value) - minValueRange < gapValue) {
+        setMaxValueRange(minValueRange + gapValue);
       } else {
         setMaxValueRange(Number(value));
       }
     }
   };
+  getValue(minValueRange, maxValueRange);
 
   const progressStyle = {
     left: `${((minValueRange - minValue) / (maxValue - minValue)) * 100}%`,
@@ -45,15 +52,29 @@ const MinMaxRange: React.FC<MinMaxRangeProps> = ({
     }%`,
   };
 
-  const numbers = Math.ceil((maxValue - minValue) / 10);
+  const numbers = Math.ceil((maxValue - minValue) / gap);
 
-  let totalSteps = Array.apply(null, new Array(11)).map(function (_el, i) {
+  let totalSteps = Array.apply(null, new Array(gap + 1)).map(function (_el, i) {
     return i++;
   });
 
   return (
     <div className={styles.container}>
       <div className={styles.range_slider}>
+        <div
+          className={`flex items-center justify-between w-full absolute ${
+            variant === "dot" && "top-[1.2px]"
+          }`}
+        >
+          {totalSteps.map((i, index) => (
+            <span
+              className={`${
+                variant === "line" ? `${styles.line}` : `${styles.dot}`
+              }`}
+              key={index}
+            />
+          ))}
+        </div>
         <div className={styles.progress} style={progressStyle}></div>
         <input
           type="range"

@@ -1,14 +1,3 @@
-@mixin bullet($right) {
-  position: absolute;
-  top: 1.3px;
-  right: $right;
-  display: inline-block;
-  width: 3px;
-  height: 3px;
-  background: #6e6d7a;
-  border-radius: 50%;
-}
-
 .range {
   position: relative;
 
@@ -51,9 +40,9 @@
     background: #02b89d;
     display: inline-block;
     transition: 0.2s;
-    -webkit-box-shadow: 0px 3px 50px 15px rgba(184, 184, 184, 1);
-    -moz-box-shadow: 0px 3px 50px 15px rgba(184, 184, 184, 1);
-    box-shadow: 0px 3px 50px 15px rgba(184, 184, 184, 1);
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(184, 184, 184, 1);
+    -moz-box-shadow: 0px 0px 0px 1px rgba(184, 184, 184, 1);
+    box-shadow: 0px 0px 0px 1px rgba(184, 184, 184, 1);
   }
 
   .range_value {
@@ -76,52 +65,20 @@
     background: #d8d8d8;
     display: block;
   }
-}
-
-.range_dot {
-  &::before {
-    @include bullet(6px);
-
-    content: "";
+  .dot {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    background: #6e6d7a;
+    border-radius: 50%;
+    margin-right: 2px;
   }
-
-  .bullet {
-    @include bullet(10%);
-
-    &_1 {
-      @include bullet(20%);
-    }
-
-    &_2 {
-      @include bullet(30%);
-    }
-
-    &_3 {
-      @include bullet(40%);
-    }
-
-    &_4 {
-      @include bullet(50%);
-    }
-
-    &_5 {
-      @include bullet(60%);
-    }
-
-    &_6 {
-      @include bullet(70%);
-    }
-
-    &_7 {
-      @include bullet(80%);
-    }
-
-    &_8 {
-      @include bullet(90%);
-    }
-
-    &_9 {
-      @include bullet(100%);
-    }
+  .line {
+    display: inline-block;
+    width: 1px;
+    height: 6px;
+    background: #6e6d7a;
+    border-radius: 50%;
+    margin: 0 2px;
   }
 }
