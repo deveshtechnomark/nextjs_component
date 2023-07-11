@@ -39,7 +39,6 @@ const Textarea: React.FC<TextareaProps> = ({
       setErr(true);
     } else {
       setErr(false);
-      setFocus(false);
     }
   };
 
@@ -90,7 +89,7 @@ const Textarea: React.FC<TextareaProps> = ({
               ? "border-b-defaultRed"
               : focus
               ? "border-b-primary"
-              : "border-b-slatyGrey"
+              : "border-b-lightSilver"
           }`}
           ref={textAreaRef}
           rows={parsedRows}
