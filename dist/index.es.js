@@ -124,9 +124,9 @@ var Select = function Select(_a) {
     style: {
       width: (_b = selectRef.current) === null || _b === void 0 ? void 0 : _b.clientWidth
     }
-  }, options && options.map(function (option) {
+  }, options && options.map(function (option, index) {
     return React.createElement("li", {
-      key: option.value,
+      key: index,
       className: classNames("p-[10px] text-[16px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex", {
         "bg-whiteSmoke": option.value === inputValue,
         hidden: search && !option.label.toLowerCase().startsWith(inputValue)

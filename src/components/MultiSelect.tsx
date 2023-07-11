@@ -138,9 +138,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         )}
       >
         {options &&
-          options.map((option) => (
+          options.map((option, index) => (
             <li
-              key={option.value}
+              key={index}
               className={classNames(
                 "p-[10px] text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex",
                 {

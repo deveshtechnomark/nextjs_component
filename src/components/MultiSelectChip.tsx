@@ -176,9 +176,9 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
           Clear All
         </li>
         {options &&
-          options.map((option) => (
+          options.map((option, index) => (
             <li
-              key={option.value}
+              key={index}
               className={classNames(
                 "p-3 text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex",
                 { "bg-whiteSmoke": selected.includes(option.value) }
