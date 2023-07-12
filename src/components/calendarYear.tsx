@@ -50,7 +50,7 @@ const CalendarYear = (props: any): JSX.Element => {
         setToday(newDate);
         setShowMonthList(false);
         setSelectedMonth(month);
-        selectedMonth ? setAnimate(style.slideLeftAnimation) : setAnimate('')
+        selectedMonth ? setAnimate(style.slideRightAnimation) : setAnimate('')
     };
 
     const toggleYearList = () => {
@@ -78,17 +78,17 @@ const CalendarYear = (props: any): JSX.Element => {
         setToday(newDate);
         setSelectedDate(date);
         newDate.setDate(date.getDate() + 1);
-        const formattedDate = newDate.toISOString().slice(0, 7);
+        const formattedDate = newDate.toISOString().slice(0, 10);
         setFullDate(formattedDate);
         setToggleOpen(false);
     };
 
     const goToNextPage = () => {
-        currentPage < totalPages ? setCurrentPage(currentPage + 1) : currentPage
+        currentPage < totalPages ? setCurrentPage(currentPage + 1) : currentPage;
     };
 
     const goToPreviousPage = () => {
-        currentPage > 1 ? setCurrentPage(currentPage - 1) : currentPage
+        currentPage > 1 ? setCurrentPage(currentPage - 1) : currentPage;
     };
 
     const calendarShow = () => {
@@ -156,7 +156,7 @@ const CalendarYear = (props: any): JSX.Element => {
                     <div className="flex  mx-auto  items-center">
                         <div className="shadow-md overflow-hidden">
                             <div className="flex justify-between border-b-2 border-lightSilver py-[12px] px-[12px]">
-                                <div className={`flex flex-row  ${animate}`}>
+                                <div className={`flex flex-row  ${showYearList ? "" : animate}`}>
                                     {showMonthList === true ? "" : showYearList === true ? "" :
                                         (<h1 className="proxima text-[14px] font-semibold cursor-pointer text-slatyBlue" onClick={toggleMonthList}>
                                             {months[currentMonth]}
@@ -189,13 +189,25 @@ const CalendarYear = (props: any): JSX.Element => {
                                             {currentPage <= totalPages && (<>
                                                 <div
                                                     className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${currentPage === 1 ? "opacity-40 pointer-events-none" : ""} text-[20px]`}
-                                                    onClick={currentPage === 1 ? undefined : goToPreviousPage}
+                                                    onClick={() => {
+                                                        if (currentPage === 1) {
+                                                            return;
+                                                        }
+                                                        goToPreviousPage();
+                                                        handleIconClick(false);
+                                                    }}
                                                 >
                                                     <ChevronLeftIcon />
                                                 </div>
                                                 <div
                                                     className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${currentPage === totalPages ? "opacity-40 pointer-events-none" : ""} rotate-180 text-[20px]`}
-                                                    onClick={currentPage === totalPages ? undefined : goToNextPage}>
+                                                    onClick={() => {
+                                                        if (currentPage === totalPages) {
+                                                            return;
+                                                        }
+                                                        goToNextPage();
+                                                        handleIconClick(true);
+                                                    }}>
                                                     <ChevronLeftIcon />
                                                 </div>
                                             </>)}
@@ -205,7 +217,7 @@ const CalendarYear = (props: any): JSX.Element => {
                             </div>
                             {showMonthList === true ? (
                                 <div className="overflow-hidden">
-                                    <div className={`${style.topAnimation} w-full h-full`}>
+                                    <div className={`${style.topAnimation}  w-full h-full`}>
                                         <div className="grid grid-cols-4 place-content-center overflow-hidden proxima">
                                             {months.map((month, index) => (
                                                 <div
@@ -225,19 +237,21 @@ const CalendarYear = (props: any): JSX.Element => {
                             )
                                 : showYearList === true ? (
                                     <div className="overflow-hidden">
-                                        <div className={`${style.topAnimation} w-full`}>
-                                            <div className="grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima">
-                                                {displayedYears.map((year) => (
-                                                    <div
-                                                        key={year}
-                                                        className={`py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer`}
-                                                        onClick={() => selectYear(year)}>
-                                                        <div className={`py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${year === selectedYear ? 'bg-lightGreen text-primary' : ''
-                                                            }`}>
-                                                            {year}
+                                        <div className={`${style.topAnimation}`}>
+                                            <div className={`${animate}  w-full`}>
+                                                <div className="grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima">
+                                                    {displayedYears.map((year) => (
+                                                        <div
+                                                            key={year}
+                                                            className={`py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer`}
+                                                            onClick={() => selectYear(year)}>
+                                                            <div className={`py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${year === selectedYear ? 'bg-lightGreen text-primary' : ''
+                                                                }`}>
+                                                                {year}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                ))}
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -285,7 +299,7 @@ const CalendarYear = (props: any): JSX.Element => {
                                     )}
                         </div>
                     </div>
-                </div>)
+                </div >)
             }
         </>
     );
