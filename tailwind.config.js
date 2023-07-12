@@ -10,7 +10,8 @@ module.exports = {
       textGood: "#FFBF00",
       textDefault: "#979797",
       lightSilver: "#D8D8D8",
-      darkCharcoal: "#333333"
+      darkCharcoal: "#333333",
+      pureWhite: "#fff"
     },
     screens: {
       passwordsm: "800px",

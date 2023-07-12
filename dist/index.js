@@ -231,7 +231,7 @@ var Password = function Password(_a) {
     return strength;
   };
   return React.createElement("div", {
-    className: "relative flex flex-col text-sm sm:text-base w-full font-proxima"
+    className: "relative flex flex-col text-sm sm:text-base w-full"
   }, label && React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
   }, label, required && "*"), React.createElement("div", {
@@ -255,11 +255,11 @@ var Password = function Password(_a) {
       return setType("password");
     }
   }, React.createElement(EyeOpen, null)), open && React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "absolute bottom-[70px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit"
+    className: "absolute ".concat(err ? "bottom-[90px]" : "bottom-[70px]", " z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit")
   }, React.createElement("ul", {
     className: "requirement-list"
   }, validatePassword())), React.createElement("span", {
-    className: "w-2 h-2 bg-pureWhite z-10 absolute bottom-[65px] left-[20px] rotate-[45deg]"
+    className: "w-2 h-2 bg-pureWhite z-10 absolute ".concat(err ? "bottom-[86px]" : "bottom-[66px]", " left-[20px] rotate-[45deg]")
   })), password && React.createElement("div", {
     className: "absolute top-[60px] mt-2 flex items-center"
   }, React.createElement("div", {
@@ -269,7 +269,7 @@ var Password = function Password(_a) {
   })), React.createElement("span", {
     className: "ml-4 text-xs sm:text-sm"
   }, getPasswordStrength())), err && React.createElement("span", {
-    className: "absolute ".concat(password ? "top-[82px]" : "top-[65px]", " text-defaultRed")
+    className: "text-defaultRed"
   }, errorMes));
 };
 

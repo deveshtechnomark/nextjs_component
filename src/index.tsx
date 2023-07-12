@@ -5,7 +5,7 @@ import React, {
   KeyboardEvent,
   MouseEvent,
 } from "react";
-import "./index.css";
+import "./index.css"
 import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
 
 interface PasswordProps {
@@ -208,7 +208,7 @@ const Password: React.FC<PasswordProps> = ({
   };
 
   return (
-    <div className="relative flex flex-col text-sm sm:text-base w-full font-proxima">
+    <div className="relative flex flex-col text-sm sm:text-base w-full">
       {label && (
         <label
           className={`${
@@ -264,10 +264,18 @@ const Password: React.FC<PasswordProps> = ({
 
       {open && (
         <>
-          <div className="absolute bottom-[70px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit">
+          <div
+            className={`absolute ${
+              err ? "bottom-[90px]" : "bottom-[70px]"
+            } z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit`}
+          >
             <ul className="requirement-list">{validatePassword()}</ul>
           </div>
-          <span className="w-2 h-2 bg-pureWhite z-10 absolute bottom-[65px] left-[20px] rotate-[45deg]"></span>
+          <span
+            className={`w-2 h-2 bg-pureWhite z-10 absolute ${
+              err ? "bottom-[86px]" : "bottom-[66px]"
+            } left-[20px] rotate-[45deg]`}
+          ></span>
         </>
       )}
 
@@ -298,15 +306,7 @@ const Password: React.FC<PasswordProps> = ({
           </span>
         </div>
       )}
-      {err && (
-        <span
-          className={`absolute ${
-            password ? "top-[82px]" : "top-[65px]"
-          } text-defaultRed`}
-        >
-          {errorMes}
-        </span>
-      )}
+      {err && <span className={`text-defaultRed`}>{errorMes}</span>}
     </div>
   );
 };
