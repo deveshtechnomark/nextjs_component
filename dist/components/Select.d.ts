@@ -12,6 +12,7 @@ interface SelectProps {
     className?: string;
     search?: boolean;
     required?: boolean;
+    defaultValue?: string;
 }
 declare const Select: React.FC<SelectProps>;
 export { Select };

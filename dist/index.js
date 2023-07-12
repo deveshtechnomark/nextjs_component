@@ -41,12 +41,13 @@ var Select = function Select(_a) {
     options = _a.options,
     onSelect = _a.onSelect,
     type = _a.type,
-    label = _a.label;
-    _a.className;
-    var _c = _a.search,
+    label = _a.label,
+    className = _a.className,
+    _c = _a.search,
     search = _c === void 0 ? false : _c,
     _d = _a.required,
-    required = _d === void 0 ? false : _d;
+    required = _d === void 0 ? false : _d,
+    defaultValue = _a.defaultValue;
   var _e = React.useState(""),
     inputValue = _e[0],
     setInputValue = _e[1];
@@ -80,7 +81,7 @@ var Select = function Select(_a) {
     onSelect(value);
   };
   return React.createElement(React.Fragment, null, React.createElement("div", {
-    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300"),
+    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ".concat(className)),
     ref: selectRef
   }, label && React.createElement("label", {
     className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : "text-slatyGrey"),
@@ -91,8 +92,8 @@ var Select = function Select(_a) {
     id: id,
     onClick: handleToggleOpen,
     onChange: handleInputChange,
-    readOnly: open && !search,
-    placeholder: "Please Select...",
+    readOnly: !search,
+    placeholder: defaultValue || "Please select",
     value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
     className: classNames("flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima w-full", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
@@ -161,7 +162,8 @@ var MultiSelect = function MultiSelect(_a) {
     type = _a.type,
     className = _a.className,
     _b = _a.required,
-    required = _b === void 0 ? false : _b;
+    required = _b === void 0 ? false : _b,
+    defaultValue = _a.defaultValue;
   var selectRef = React.useRef(null);
   var _c = React.useState([]),
     selectedValues = _c[0],
@@ -218,7 +220,7 @@ var MultiSelect = function MultiSelect(_a) {
     onClick: handleToggleOpen,
     onChange: handleInputChange,
     readOnly: !open,
-    placeholder: selectedValues.length > 0 ? "".concat(selectedValues.length, " selected") : "Please Select...",
+    placeholder: selectedValues.length > 0 ? "".concat(selectedValues.length, " selected") : defaultValue || "Please select",
     value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
     style: {
       width: "191px"

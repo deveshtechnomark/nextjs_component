@@ -16,6 +16,7 @@ interface MultiSelectProps {
   type?: string;
   className?: string;
   required?: boolean;
+  defaultValue?: string;
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
@@ -26,6 +27,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   type,
   className,
   required = false,
+  defaultValue,
 }) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
@@ -99,7 +101,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           placeholder={
             selectedValues.length > 0
               ? `${selectedValues.length} selected`
-              : "Please Select..."
+              :  (defaultValue || "Please select")
           }
           value={
             inputValue.length > 25

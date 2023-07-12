@@ -11,6 +11,7 @@ interface MultiSelectProps {
     type?: string;
     className?: string;
     required?: boolean;
+    defaultValue?: string;
 }
 declare const MultiSelect: React.FC<MultiSelectProps>;
 export { MultiSelect };
