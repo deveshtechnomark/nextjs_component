@@ -11,7 +11,7 @@ interface SelectProps {
     label?: string;
     className?: string;
     search?: boolean;
-    validate?: boolean;
+    required?: boolean;
 }
 declare const Select: React.FC<SelectProps>;
 export { Select };

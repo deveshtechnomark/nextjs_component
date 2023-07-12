@@ -18,7 +18,7 @@ interface SelectProps {
   label?: string;
   className?: string;
   search?: boolean;
-  validate?: boolean;
+  required?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -29,35 +29,31 @@ const Select: React.FC<SelectProps> = ({
   label,
   className,
   search = false,
-  validate = false,
+  required = false,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleDocumentClick);
+    window.addEventListener("click", handleOutsideClick);
 
     return () => {
-      document.removeEventListener("mousedown", handleDocumentClick);
+      window.removeEventListener("click", handleOutsideClick);
     };
   }, []);
 
-  const handleDocumentClick = (event: MouseEvent) => {
+  const handleOutsideClick = (event: MouseEvent) => {
     if (
       selectRef.current &&
       !selectRef.current.contains(event.target as Node)
     ) {
       setOpen(false);
-      validateInput();
     }
   };
 
   const handleToggleOpen = () => {
     setOpen((prevOpen) => !prevOpen);
-    // Clear the error state when opening the dropdown again
-    setError(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,43 +64,27 @@ const Select: React.FC<SelectProps> = ({
   const handleSelect = (value: string) => {
     setInputValue(value);
     setOpen(false);
-    console.log(value);
     onSelect(value);
-    // Call the validation function on select
-    validateInput();
-  };
-
-  const validateInput = () => {
-    if (validate && !inputValue) {
-      setError(true);
-    } else {
-      setError(false);
-    }
   };
 
   return (
     <>
       <div
-        className={`${classNames(
-          `font-medium w-full flex-row border-b ${
-            error && !inputValue
-              ? "border-defaultRed"
-              : "border-lightSilver hover:border-primary transition-colors duration-300"
-          }`
-        )} ${className}`}
+        className={classNames(
+          "relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300"
+        )}
         ref={selectRef}
       >
         {label && (
           <label
-            className={classNames(
-              "text-[14px] font-normal font-proxima",
-              open && "text-primary",
-              error && !inputValue ? "text-defaultRed" : "text-slatyGrey"
-            )}
+          className={classNames(
+            "text-[14px] font-normal font-proxima",
+            open ? "text-primary" : "text-slatyGrey",
+          )}
             htmlFor={id}
           >
             {label}
-            {validate && "*"}
+            {required && "*"}
           </label>
         )}
 
@@ -140,12 +120,6 @@ const Select: React.FC<SelectProps> = ({
             <ChevronDown />
           </div>
         </div>
-
-        {error && !inputValue && (
-          <span className="absolute text-defaultRed text-[14px] font-proxima ml-1">
-            Please select a value
-          </span>
-        )}
 
         <ul
           className={classNames(

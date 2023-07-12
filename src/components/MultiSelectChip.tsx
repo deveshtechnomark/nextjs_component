@@ -17,7 +17,7 @@ interface MultiSelectChipProps {
   label?: string;
   type?: string;
   className?: string;
-  validate?: boolean;
+  required?: boolean;
 }
 
 const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
@@ -28,7 +28,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
   type,
   id,
   className,
-  validate = false,
+  required = false,
 }) => {
   const [selected, setSelected] = useState<string[]>(defaultValue || []);
   const [open, setOpen] = useState(false);
@@ -128,7 +128,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
           )}
         >
           {label}
-          {validate && "*"}
+          {required && "*"}
         </label>
       )}
       <div

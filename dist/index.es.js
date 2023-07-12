@@ -39,40 +39,34 @@ var Select = function Select(_a) {
     options = _a.options,
     onSelect = _a.onSelect,
     type = _a.type,
-    label = _a.label,
-    className = _a.className,
-    _c = _a.search,
+    label = _a.label;
+    _a.className;
+    var _c = _a.search,
     search = _c === void 0 ? false : _c,
-    _d = _a.validate,
-    validate = _d === void 0 ? false : _d;
+    _d = _a.required,
+    required = _d === void 0 ? false : _d;
   var _e = useState(""),
     inputValue = _e[0],
     setInputValue = _e[1];
   var _f = useState(false),
     open = _f[0],
     setOpen = _f[1];
-  var _g = useState(false),
-    error = _g[0],
-    setError = _g[1];
   var selectRef = useRef(null);
   useEffect(function () {
-    document.addEventListener("mousedown", handleDocumentClick);
+    window.addEventListener("click", handleOutsideClick);
     return function () {
-      document.removeEventListener("mousedown", handleDocumentClick);
+      window.removeEventListener("click", handleOutsideClick);
     };
   }, []);
-  var handleDocumentClick = function handleDocumentClick(event) {
+  var handleOutsideClick = function handleOutsideClick(event) {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
       setOpen(false);
-      validateInput();
     }
   };
   var handleToggleOpen = function handleToggleOpen() {
     setOpen(function (prevOpen) {
       return !prevOpen;
     });
-    // Clear the error state when opening the dropdown again
-    setError(false);
   };
   var handleInputChange = function handleInputChange(e) {
     var inputValue = e.target.value.toLowerCase();
@@ -81,25 +75,15 @@ var Select = function Select(_a) {
   var handleSelect = function handleSelect(value) {
     setInputValue(value);
     setOpen(false);
-    console.log(value);
     onSelect(value);
-    // Call the validation function on select
-    validateInput();
-  };
-  var validateInput = function validateInput() {
-    if (validate && !inputValue) {
-      setError(true);
-    } else {
-      setError(false);
-    }
   };
   return React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "".concat(classNames("font-medium w-full flex-row border-b ".concat(error && !inputValue ? "border-defaultRed" : "border-lightSilver hover:border-primary transition-colors duration-300")), " ").concat(className),
+    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300"),
     ref: selectRef
   }, label && React.createElement("label", {
-    className: classNames("text-[14px] font-normal font-proxima", open && "text-primary", error && !inputValue ? "text-defaultRed" : "text-slatyGrey"),
+    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : "text-slatyGrey"),
     htmlFor: id
-  }, label, validate && "*"), React.createElement("div", {
+  }, label, required && "*"), React.createElement("div", {
     className: "flex flex-row items-center relative mt-0.5 w-full"
   }, React.createElement("input", {
     id: id,
@@ -114,9 +98,7 @@ var Select = function Select(_a) {
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
       "rotate-180": open
     })
-  }, React.createElement(ChevronDown, null))), error && !inputValue && React.createElement("span", {
-    className: "absolute text-defaultRed text-[14px] font-proxima ml-1"
-  }, "Please select a value"), React.createElement("ul", {
+  }, React.createElement(ChevronDown, null))), React.createElement("ul", {
     className: classNames("absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
     }),
@@ -175,17 +157,19 @@ var MultiSelect = function MultiSelect(_a) {
     onSelect = _a.onSelect,
     label = _a.label,
     type = _a.type,
-    className = _a.className;
+    className = _a.className,
+    _b = _a.required,
+    required = _b === void 0 ? false : _b;
   var selectRef = useRef(null);
-  var _b = useState([]),
-    selectedValues = _b[0],
-    setSelectedValues = _b[1];
-  var _c = useState(""),
-    inputValue = _c[0],
-    setInputValue = _c[1];
-  var _d = useState(false),
-    open = _d[0],
-    setOpen = _d[1];
+  var _c = useState([]),
+    selectedValues = _c[0],
+    setSelectedValues = _c[1];
+  var _d = useState(""),
+    inputValue = _d[0],
+    setInputValue = _d[1];
+  var _e = useState(false),
+    open = _e[0],
+    setOpen = _e[1];
   useEffect(function () {
     var handleOutsideClick = function handleOutsideClick(event) {
       if (selectRef.current && !selectRef.current.contains(event.target)) {
@@ -225,7 +209,7 @@ var MultiSelect = function MultiSelect(_a) {
   }, React.createElement("label", {
     className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", open && "text-primary"),
     htmlFor: id
-  }, label ? label : "label", "*"), React.createElement("div", {
+  }, label ? label : "label", required && "*"), React.createElement("div", {
     className: "flex flex-row items-center justify-center relative mt-0.5"
   }, React.createElement("input", {
     id: id,
@@ -247,9 +231,9 @@ var MultiSelect = function MultiSelect(_a) {
     className: classNames("absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
     })
-  }, options && options.map(function (option) {
+  }, options && options.map(function (option, index) {
     return React.createElement("li", {
-      key: option.value,
+      key: index,
       className: classNames("p-[10px] text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
         "bg-whiteSmoke": selectedValues.includes(option.value),
         hidden: !option.label.toLowerCase().startsWith(inputValue)
@@ -294,8 +278,8 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     type = _a.type;
     _a.id;
     var className = _a.className,
-    _c = _a.validate,
-    validate = _c === void 0 ? false : _c;
+    _c = _a.required,
+    required = _c === void 0 ? false : _c;
   var _d = useState(defaultValue || []),
     selected = _d[0],
     setSelected = _d[1];
@@ -365,7 +349,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", {
       "text-primary": open
     })
-  }, label, validate && "*"), React.createElement("div", {
+  }, label, required && "*"), React.createElement("div", {
     onClick: handleToggleOpen,
     className: "".concat(classNames("flex justify-between bg-white border-b border-lightSilver text-darkCharcoal pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300", {
       "text-darkCharcoal": selected.length === 0
@@ -388,9 +372,9 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   }, React.createElement("li", {
     className: classNames("pt-3 pl-3 text-[16px] font-normal font-proxima text-primary cursor-pointer flex"),
     onClick: handleClearAll
-  }, "Clear All"), options && options.map(function (option) {
+  }, "Clear All"), options && options.map(function (option, index) {
     return React.createElement("li", {
-      key: option.value,
+      key: index,
       className: classNames("p-3 text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
         "bg-whiteSmoke": selected.includes(option.value)
       }),

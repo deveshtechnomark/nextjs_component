@@ -15,6 +15,7 @@ interface MultiSelectProps {
   label?: string;
   type?: string;
   className?: string;
+  required?: boolean;
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
@@ -23,7 +24,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   onSelect,
   label,
   type,
-  className
+  className,
+  required = false,
 }) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
@@ -85,7 +87,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         )}
         htmlFor={id}
       >
-        {label ? label : "label"}*
+        {label ? label : "label"}{required && "*"}
       </label>
 
       <div className="flex flex-row items-center justify-center relative mt-0.5">

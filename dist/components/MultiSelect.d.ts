@@ -10,6 +10,7 @@ interface MultiSelectProps {
     label?: string;
     type?: string;
     className?: string;
+    required?: boolean;
 }
 declare const MultiSelect: React.FC<MultiSelectProps>;
 export { MultiSelect };
