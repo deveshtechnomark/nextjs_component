@@ -1,8 +1,6 @@
 'use strict';
 
 var React = require('react');
-var Typography = require('Typography');
-require('Typography/dist/index.css');
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -45,7 +43,8 @@ var Dot = function Dot() {
     viewBox: "0 0 16 16",
     height: "1em",
     width: "1em",
-    xmlns: "http://www.w3.org/2000/svg"
+    xmlns: "http://www.w3.org/2000/svg",
+    className: "text-lightSilver text-3xl"
   }, React.createElement("path", {
     d: "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
   }));
@@ -58,7 +57,8 @@ var Check = function Check() {
     viewBox: "0 0 16 16",
     height: "1em",
     width: "1em",
-    xmlns: "http://www.w3.org/2000/svg"
+    xmlns: "http://www.w3.org/2000/svg",
+    className: "text-successColor text-[18px]"
   }, React.createElement("path", {
     d: "M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"
   }));
@@ -166,18 +166,16 @@ var Password = function Password(_a) {
       if (!isValid) {
         isAllValid = false;
       }
-      return React.createElement(Typography.Typography, {
-        type: "h6"
-      }, React.createElement("li", {
+      return React.createElement("li", {
         key: item.index,
-        className: "".concat(requirementItemClass, " flex items-center justify-left text-xs passwordsm:text-base passwordmd:text-lg")
+        className: "".concat(requirementItemClass, " flex items-center justify-left text-darkCharcoal text-xs passwordsm:text-base passwordmd:text-lg")
       }, isValid ? React.createElement("span", {
-        className: "text-teal-500 ml-[5px] my-[6px]"
+        className: "ml-[5px] my-[6px] text-[18px] text-successColor"
       }, React.createElement(Check, null)) : React.createElement("span", {
-        className: "text-gray-500 text-3xl"
+        className: "text-3xl text-lightSilver"
       }, React.createElement(Dot, null)), React.createElement("span", {
-        className: "".concat(isValid && "line-through ml-[7px] decoration-gray-500 text-gray-500")
-      }, requirementList[item.index])));
+        className: "".concat(isValid && "line-through ml-[7px] decoration-slatyGrey text-slatyGrey")
+      }, requirementList[item.index]));
     });
     if (isAllValid) {
       setOpen(false);
@@ -233,15 +231,13 @@ var Password = function Password(_a) {
     return strength;
   };
   return React.createElement("div", {
-    className: "relative flex flex-col text-sm sm:text-base mb-6 w-full"
+    className: "relative flex flex-col text-sm sm:text-base w-full font-proxima"
   }, label && React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, React.createElement(Typography.Typography, {
-    type: "label"
-  }, label, required && "*")), React.createElement("div", {
+  }, label, required && "*"), React.createElement("div", {
     className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
-    className: "".concat(className, " py-2 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
+    className: "".concat(className, " py-1 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
     type: type,
     id: "password-input",
     value: password,
@@ -259,11 +255,11 @@ var Password = function Password(_a) {
       return setType("password");
     }
   }, React.createElement(EyeOpen, null)), open && React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "absolute bottom-[90px] left-0 bg-white shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit"
+    className: "absolute bottom-[70px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit"
   }, React.createElement("ul", {
     className: "requirement-list"
   }, validatePassword())), React.createElement("span", {
-    className: "w-2 h-2 bg-white absolute bottom-[85px] left-[20px] rotate-[45deg]"
+    className: "w-2 h-2 bg-pureWhite z-10 absolute bottom-[65px] left-[20px] rotate-[45deg]"
   })), password && React.createElement("div", {
     className: "absolute top-[60px] mt-2 flex items-center"
   }, React.createElement("div", {
@@ -272,11 +268,9 @@ var Password = function Password(_a) {
     className: "absolute rounded-l-lg h-[5px] ".concat(data.match(/[^A-Za-z0-9]/) && data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.match(/.{8,}/) ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg" : data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) ? "bg-[#FFBF00] w-[85px] sm:w-[100px]" : password.length >= 3 && data.match(/[a-z]/) ? "bg-defaultRed  w-[30px] sm:w-[45px]" : "bg-[#979797]")
   })), React.createElement("span", {
     className: "ml-4 text-xs sm:text-sm"
-  }, getPasswordStrength())), err && React.createElement(Typography.Typography, {
-    type: "h6"
-  }, React.createElement("span", {
-    className: "absolute ".concat(password ? "top-[90px]" : "top-[65px]", " text-defaultRed")
-  }, errorMes)));
+  }, getPasswordStrength())), err && React.createElement("span", {
+    className: "absolute ".concat(password ? "top-[82px]" : "top-[65px]", " text-defaultRed")
+  }, errorMes));
 };
 
 exports.Password = Password;

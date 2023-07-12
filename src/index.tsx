@@ -7,8 +7,6 @@ import React, {
 } from "react";
 import "./index.css";
 import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
-import { Typography } from "Typography";
-import "Typography/dist/index.css";
 
 interface PasswordProps {
   label?: string;
@@ -115,30 +113,28 @@ const Password: React.FC<PasswordProps> = ({
       }
 
       return (
-        <Typography type="h6">
-          <li
-            key={item.index}
-            className={`${requirementItemClass} flex items-center justify-left text-xs passwordsm:text-base passwordmd:text-lg`}
-          >
-            {isValid ? (
-              <span className="text-teal-500 ml-[5px] my-[6px]">
-                <Check />
-              </span>
-            ) : (
-              <span className="text-gray-500 text-3xl">
-                <Dot />
-              </span>
-            )}
-            <span
-              className={`${
-                isValid &&
-                "line-through ml-[7px] decoration-gray-500 text-gray-500"
-              }`}
-            >
-              {requirementList[item.index]}
+        <li
+          key={item.index}
+          className={`${requirementItemClass} flex items-center justify-left text-darkCharcoal text-xs passwordsm:text-base passwordmd:text-lg`}
+        >
+          {isValid ? (
+            <span className="ml-[5px] my-[6px] text-[18px] text-successColor">
+              <Check />
             </span>
-          </li>
-        </Typography>
+          ) : (
+            <span className="text-3xl text-lightSilver">
+              <Dot />
+            </span>
+          )}
+          <span
+            className={`${
+              isValid &&
+              "line-through ml-[7px] decoration-slatyGrey text-slatyGrey"
+            }`}
+          >
+            {requirementList[item.index]}
+          </span>
+        </li>
       );
     });
 
@@ -212,17 +208,15 @@ const Password: React.FC<PasswordProps> = ({
   };
 
   return (
-    <div className="relative flex flex-col text-sm sm:text-base mb-6 w-full">
+    <div className="relative flex flex-col text-sm sm:text-base w-full font-proxima">
       {label && (
         <label
           className={`${
             err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"
           }`}
         >
-          <Typography type="label">
-            {label}
-            {required && "*"}
-          </Typography>
+          {label}
+          {required && "*"}
         </label>
       )}
       <div
@@ -231,22 +225,22 @@ const Password: React.FC<PasswordProps> = ({
           "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
         }`}
       >
-          <input
-            className={`${className} py-2 px-3 border-b outline-none w-full pr-10 ${
-              err
-                ? "border-defaultRed"
-                : focus
-                ? "border-primary"
-                : "border-lightSilver"
-            }`}
-            type={type}
-            id="password-input"
-            value={password}
-            onChange={handlePasswordChange}
-            onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
-            onFocus={handleFocus}
-            {...props}
-          />
+        <input
+          className={`${className} py-1 px-3 border-b outline-none w-full pr-10 ${
+            err
+              ? "border-defaultRed"
+              : focus
+              ? "border-primary"
+              : "border-lightSilver"
+          }`}
+          type={type}
+          id="password-input"
+          value={password}
+          onChange={handlePasswordChange}
+          onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
+          onFocus={handleFocus}
+          {...props}
+        />
       </div>
       {type === "password" ? (
         <span
@@ -270,10 +264,10 @@ const Password: React.FC<PasswordProps> = ({
 
       {open && (
         <>
-          <div className="absolute bottom-[90px] left-0 bg-white shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit">
+          <div className="absolute bottom-[70px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit">
             <ul className="requirement-list">{validatePassword()}</ul>
           </div>
-          <span className="w-2 h-2 bg-white absolute bottom-[85px] left-[20px] rotate-[45deg]"></span>
+          <span className="w-2 h-2 bg-pureWhite z-10 absolute bottom-[65px] left-[20px] rotate-[45deg]"></span>
         </>
       )}
 
@@ -305,15 +299,13 @@ const Password: React.FC<PasswordProps> = ({
         </div>
       )}
       {err && (
-        <Typography type="h6">
-          <span
-            className={`absolute ${
-              password ? "top-[90px]" : "top-[65px]"
-            } text-defaultRed`}
-          >
-            {errorMes}
-          </span>
-        </Typography>
+        <span
+          className={`absolute ${
+            password ? "top-[82px]" : "top-[65px]"
+          } text-defaultRed`}
+        >
+          {errorMes}
+        </span>
       )}
     </div>
   );

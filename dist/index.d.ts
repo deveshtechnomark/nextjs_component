@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent } from "react";
 import "./index.css";
-import "Typography/dist/index.css";
 interface PasswordProps {
     label?: string;
     required?: boolean;
