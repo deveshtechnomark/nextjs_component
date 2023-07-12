@@ -23,11 +23,13 @@ import { ProgressBar } from "./components/Progressbar/Progressbar";
 import ProgressStep from "./components/Progressstep/Progressstep";
 import Radio from "./components/Radio/Radio";
 import { Rating } from "./components/Rating/Rating";
+import { ScrollSpy } from "./components/Scrollspy/Scrollspy";
 import { Select } from "./components/Selectdropdown/Select";
 import { MultiSelect } from "./components/Selectdropdown/MultiSelect";
 import { MultiSelectChip } from "./components/Selectdropdown/MultiSelectChip";
 import { SpeedDial } from "./components/Speeddial/Speeddial";
 import { Spinner } from "./components/Spinner/Spinner";
+import { Switch } from "./components/Switch/Switch";
 import TabBar from "./components/Tab/Tab";
 import Table from "./components/Table/Table";
 import { Tel } from "./components/Tel/Tel";
@@ -66,11 +68,13 @@ export {
     ProgressStep,
     Radio,
     Rating,
+    ScrollSpy,
     Select,
     MultiSelect,
     MultiSelectChip,
     SpeedDial,
     Spinner,
+    Switch,
     TabBar,
     Table,
     Tel,

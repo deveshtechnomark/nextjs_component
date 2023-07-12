@@ -654,7 +654,7 @@ var Close = function Close() {
   }, /*#__PURE__*/React.createElement("span", null)))));
 };
 
-var Styles = {"saturation":"Colorpicker-module_saturation__nX6yN","cursor":"Colorpicker-module_cursor__0eqEO","color_picker__color_block":"Colorpicker-module_color_picker__color_block__lK3j2","color_picker__cursor":"Colorpicker-module_color_picker__cursor__I2-ST","color_picker__grid":"Colorpicker-module_color_picker__grid__4Xmw9","color_picker__label":"Colorpicker-module_color_picker__label__KlZ9k","color_picker__input":"Colorpicker-module_color_picker__input__GvpM2","color_picker__rgba":"Colorpicker-module_color_picker__rgba__z3Zwz","color_box":"Colorpicker-module_color_box__Di-GI","color_box_white":"Colorpicker-module_color_box_white__m5meP","color_box_gray":"Colorpicker-module_color_box_gray__gzrwT","color_box_primary":"Colorpicker-module_color_box_primary__0TORT","color_box_info":"Colorpicker-module_color_box_info__GB9j9","color_box_success":"Colorpicker-module_color_box_success__-caPp","color_box_warning":"Colorpicker-module_color_box_warning__lbAja","color_box_danger":"Colorpicker-module_color_box_danger__Ap0n7","color_box_secondary":"Colorpicker-module_color_box_secondary__odotp","color_box_dark":"Colorpicker-module_color_box_dark__OHAWG","wrapper":"Colorpicker-module_wrapper__vatjH"};
+var Styles$1 = {"saturation":"Colorpicker-module_saturation__nX6yN","cursor":"Colorpicker-module_cursor__0eqEO","color_picker__color_block":"Colorpicker-module_color_picker__color_block__lK3j2","color_picker__cursor":"Colorpicker-module_color_picker__cursor__I2-ST","color_picker__grid":"Colorpicker-module_color_picker__grid__4Xmw9","color_picker__label":"Colorpicker-module_color_picker__label__KlZ9k","color_picker__input":"Colorpicker-module_color_picker__input__GvpM2","color_picker__rgba":"Colorpicker-module_color_picker__rgba__z3Zwz","color_box":"Colorpicker-module_color_box__Di-GI","color_box_white":"Colorpicker-module_color_box_white__m5meP","color_box_gray":"Colorpicker-module_color_box_gray__gzrwT","color_box_primary":"Colorpicker-module_color_box_primary__0TORT","color_box_info":"Colorpicker-module_color_box_info__GB9j9","color_box_success":"Colorpicker-module_color_box_success__-caPp","color_box_warning":"Colorpicker-module_color_box_warning__lbAja","color_box_danger":"Colorpicker-module_color_box_danger__Ap0n7","color_box_secondary":"Colorpicker-module_color_box_secondary__odotp","color_box_dark":"Colorpicker-module_color_box_dark__OHAWG","wrapper":"Colorpicker-module_wrapper__vatjH"};
 
 var ColorPicker = function ColorPicker(props) {
   var colorPickerRef = useRef(null);
@@ -1022,31 +1022,31 @@ var ColorPicker = function ColorPicker(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex gap-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_box, " ").concat(Styles.color_box_white),
+    className: "".concat(Styles$1.color_box, " ").concat(Styles$1.color_box_white),
     onClick: function onClick() {
       setColorBoxValue("#FFFFFF");
       setOpen(false);
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_box, " ").concat(Styles.color_box_gray),
+    className: "".concat(Styles$1.color_box, " ").concat(Styles$1.color_box_gray),
     onClick: function onClick() {
       setColorBoxValue("#D8D8D8");
       setOpen(false);
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_box, " ").concat(Styles.color_box_primary),
+    className: "".concat(Styles$1.color_box, " ").concat(Styles$1.color_box_primary),
     onClick: function onClick() {
       setColorBoxValue("#02B89D");
       setOpen(false);
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_box, " ").concat(Styles.color_box_secondary),
+    className: "".concat(Styles$1.color_box, " ").concat(Styles$1.color_box_secondary),
     onClick: function onClick() {
       setColorBoxValue("#069CDE");
       setOpen(false);
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_box, " ").concat(Styles.color_box_success),
+    className: "".concat(Styles$1.color_box, " ").concat(Styles$1.color_box_success),
     onClick: function onClick() {
       setColorBoxValue("#135736");
       setOpen(false);
@@ -1054,31 +1054,31 @@ var ColorPicker = function ColorPicker(props) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_box, " ").concat(Styles.color_box_danger),
+    className: "".concat(Styles$1.color_box, " ").concat(Styles$1.color_box_danger),
     onClick: function onClick() {
       setColorBoxValue("#DC3545");
       setOpen(false);
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_box, " ").concat(Styles.color_box_warning),
+    className: "".concat(Styles$1.color_box, " ").concat(Styles$1.color_box_warning),
     onClick: function onClick() {
       setColorBoxValue("#FFC107");
       setOpen(false);
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_box, " ").concat(Styles.color_box_info),
+    className: "".concat(Styles$1.color_box, " ").concat(Styles$1.color_box_info),
     onClick: function onClick() {
       setColorBoxValue("#0DCAF0");
       setOpen(false);
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_box, " ").concat(Styles.color_box_dark),
+    className: "".concat(Styles$1.color_box, " ").concat(Styles$1.color_box_dark),
     onClick: function onClick() {
       setColorBoxValue("#333333");
       setOpen(false);
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.wrapper),
+    className: "".concat(Styles$1.wrapper),
     onClick: function onClick() {
       setColorBoxValue("");
       setHex("");
@@ -1125,7 +1125,7 @@ var ColorPicker = function ColorPicker(props) {
       height: "370px"
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_picker__color_block),
+    className: "".concat(Styles$1.color_picker__color_block),
     ref: colorPickerRef
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1153,9 +1153,9 @@ var ColorPicker = function ColorPicker(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold text-xl mb-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_picker__gradient)
+    className: "".concat(Styles$1.color_picker__gradient)
   }, /*#__PURE__*/React.createElement("canvas", {
-    className: "".concat(Styles.color_picker__color_block),
+    className: "".concat(Styles$1.color_picker__color_block),
     ref: colorBlockRef,
     width: "322",
     height: "200",
@@ -1164,17 +1164,17 @@ var ColorPicker = function ColorPicker(props) {
       cursor: isDragging2 ? "grabbing" : "crosshair"
     }
   })), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.color_picker__cursor),
+    className: "".concat(Styles$1.color_picker__cursor),
     style: {
       left: "".concat(cursorPosition2.x, "px"),
       top: "".concat(cursorPosition2.y, "px")
     }
   })), /*#__PURE__*/React.createElement("p", null, "Hue"), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.saturation),
+    className: "".concat(Styles$1.saturation),
     ref: colorPickerRef,
     onMouseDown: handleMouseDown
   }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(Styles.cursor),
+    className: "".concat(Styles$1.cursor),
     style: {
       border: '5px solid rgb(248, 248, 248)',
       background: hex,
@@ -1214,7 +1214,7 @@ var ColorPicker = function ColorPicker(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col"
   }, /*#__PURE__*/React.createElement("span", null, "Hex"), /*#__PURE__*/React.createElement("input", {
-    className: "".concat(Styles.color_picker__input, " ").concat(isInputFocused ? "focused" : ""),
+    className: "".concat(Styles$1.color_picker__input, " ").concat(isInputFocused ? "focused" : ""),
     type: "text",
     value: "".concat(hex).concat(opacity !== 1 ? Math.round(opacity * 255).toString(16) : ""),
     onChange: handleHexChange,
@@ -1223,7 +1223,7 @@ var ColorPicker = function ColorPicker(props) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col"
   }, /*#__PURE__*/React.createElement("span", null, "R"), /*#__PURE__*/React.createElement("input", {
-    className: "".concat(Styles.color_picker__rgba, " ").concat(isInputFocused ? "focused" : ""),
+    className: "".concat(Styles$1.color_picker__rgba, " ").concat(isInputFocused ? "focused" : ""),
     type: "number",
     name: "r",
     min: 0,
@@ -1235,7 +1235,7 @@ var ColorPicker = function ColorPicker(props) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col"
   }, /*#__PURE__*/React.createElement("span", null, "G"), /*#__PURE__*/React.createElement("input", {
-    className: "".concat(Styles.color_picker__rgba, " ").concat(isInputFocused ? "focused" : ""),
+    className: "".concat(Styles$1.color_picker__rgba, " ").concat(isInputFocused ? "focused" : ""),
     type: "number",
     name: "g",
     min: 0,
@@ -1247,7 +1247,7 @@ var ColorPicker = function ColorPicker(props) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col"
   }, /*#__PURE__*/React.createElement("span", null, "B"), /*#__PURE__*/React.createElement("input", {
-    className: "".concat(Styles.color_picker__rgba, " ").concat(isInputFocused ? "focused" : ""),
+    className: "".concat(Styles$1.color_picker__rgba, " ").concat(isInputFocused ? "focused" : ""),
     type: "number",
     name: "b",
     min: 0,
@@ -1259,7 +1259,7 @@ var ColorPicker = function ColorPicker(props) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col"
   }, /*#__PURE__*/React.createElement("span", null, "A"), /*#__PURE__*/React.createElement("input", {
-    className: "".concat(Styles.color_picker__rgba),
+    className: "".concat(Styles$1.color_picker__rgba),
     type: "number",
     name: "a",
     value: rgba.a,
@@ -1387,7 +1387,7 @@ var Calendar = function Calendar(props) {
     setToday(newDate);
     setShowMonthList(false);
     setSelectedMonth(month);
-    selectedMonth ? setAnimate(style$3.slideLeftAnimation) : setAnimate('');
+    selectedMonth ? setAnimate(style$3.slideRightAnimation) : setAnimate('');
   };
   var toggleYearList = function toggleYearList() {
     if (!showYearList && !showMonthList) {
@@ -1485,7 +1485,7 @@ var Calendar = function Calendar(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between border-b-2 border-lightSilver py-[12px] px-[12px]"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex flex-row  ".concat(animate)
+    className: "flex flex-row  ".concat(showYearList ? "" : animate)
   }, showMonthList === true ? "" : showYearList === true ? "" : /*#__PURE__*/React.createElement("h1", {
     className: "proxima text-[14px] font-semibold cursor-pointer text-slatyBlue",
     onClick: toggleMonthList
@@ -1508,14 +1508,26 @@ var Calendar = function Calendar(props) {
     }
   }, /*#__PURE__*/React.createElement(ChevronLeft$1, null))) : /*#__PURE__*/React.createElement(React.Fragment, null, currentPage <= totalPages && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(currentPage === 1 ? "opacity-40 pointer-events-none" : "", " text-[20px]"),
-    onClick: currentPage === 1 ? undefined : goToPreviousPage
+    onClick: function onClick() {
+      if (currentPage === 1) {
+        return;
+      }
+      goToPreviousPage();
+      handleIconClick(false);
+    }
   }, /*#__PURE__*/React.createElement(ChevronLeft$1, null)), /*#__PURE__*/React.createElement("div", {
     className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(currentPage === totalPages ? "opacity-40 pointer-events-none" : "", " rotate-180 text-[20px]"),
-    onClick: currentPage === totalPages ? undefined : goToNextPage
+    onClick: function onClick() {
+      if (currentPage === totalPages) {
+        return;
+      }
+      goToNextPage();
+      handleIconClick(true);
+    }
   }, /*#__PURE__*/React.createElement(ChevronLeft$1, null)))))), showMonthList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(style$3.topAnimation, " w-full h-full")
+    className: "".concat(style$3.topAnimation, "  w-full h-full")
   }, /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 place-content-center overflow-hidden proxima"
   }, months.map(function (month, index) {
@@ -1531,7 +1543,9 @@ var Calendar = function Calendar(props) {
   })))) : showYearList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(style$3.topAnimation, " w-full")
+    className: "".concat(style$3.topAnimation)
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "".concat(animate, "  w-full")
   }, /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima"
   }, displayedYears.map(function (year) {
@@ -1544,7 +1558,7 @@ var Calendar = function Calendar(props) {
     }, /*#__PURE__*/React.createElement("div", {
       className: "py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ".concat(year === selectedYear ? 'bg-lightGreen text-primary' : '')
     }, year));
-  })))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }))))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "w-full grid grid-cols-7 proxima  ".concat(animate)
   }, days.map(function (day, index) {
     return /*#__PURE__*/React.createElement("h1", {
@@ -1632,7 +1646,7 @@ var CalendarYear = function CalendarYear(props) {
     setToday(newDate);
     setShowMonthList(false);
     setSelectedMonth(month);
-    selectedMonth ? setAnimate(style$3.slideLeftAnimation) : setAnimate('');
+    selectedMonth ? setAnimate(style$3.slideRightAnimation) : setAnimate('');
   };
   var toggleYearList = function toggleYearList() {
     if (!showYearList && !showMonthList) {
@@ -1730,7 +1744,7 @@ var CalendarYear = function CalendarYear(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between border-b-2 border-lightSilver py-[12px] px-[12px]"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex flex-row  ".concat(animate)
+    className: "flex flex-row  ".concat(showYearList ? "" : animate)
   }, showMonthList === true ? "" : showYearList === true ? "" : /*#__PURE__*/React.createElement("h1", {
     className: "proxima text-[14px] font-semibold cursor-pointer text-slatyBlue",
     onClick: toggleMonthList
@@ -1753,14 +1767,26 @@ var CalendarYear = function CalendarYear(props) {
     }
   }, /*#__PURE__*/React.createElement(ChevronLeft$1, null))) : /*#__PURE__*/React.createElement(React.Fragment, null, currentPage <= totalPages && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(currentPage === 1 ? "opacity-40 pointer-events-none" : "", " text-[20px]"),
-    onClick: currentPage === 1 ? undefined : goToPreviousPage
+    onClick: function onClick() {
+      if (currentPage === 1) {
+        return;
+      }
+      goToPreviousPage();
+      handleIconClick(false);
+    }
   }, /*#__PURE__*/React.createElement(ChevronLeft$1, null)), /*#__PURE__*/React.createElement("div", {
     className: "w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ".concat(currentPage === totalPages ? "opacity-40 pointer-events-none" : "", " rotate-180 text-[20px]"),
-    onClick: currentPage === totalPages ? undefined : goToNextPage
+    onClick: function onClick() {
+      if (currentPage === totalPages) {
+        return;
+      }
+      goToNextPage();
+      handleIconClick(true);
+    }
   }, /*#__PURE__*/React.createElement(ChevronLeft$1, null)))))), showMonthList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(style$3.topAnimation, " w-full h-full")
+    className: "".concat(style$3.topAnimation, "  w-full h-full")
   }, /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 place-content-center overflow-hidden proxima"
   }, months.map(function (month, index) {
@@ -1776,7 +1802,9 @@ var CalendarYear = function CalendarYear(props) {
   })))) : showYearList === true ? /*#__PURE__*/React.createElement("div", {
     className: "overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(style$3.topAnimation, " w-full")
+    className: "".concat(style$3.topAnimation)
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "".concat(animate, "  w-full")
   }, /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima"
   }, displayedYears.map(function (year) {
@@ -1789,7 +1817,7 @@ var CalendarYear = function CalendarYear(props) {
     }, /*#__PURE__*/React.createElement("div", {
       className: "py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ".concat(year === selectedYear ? 'bg-lightGreen text-primary' : '')
     }, year));
-  })))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }))))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "w-full grid grid-cols-7 proxima  ".concat(animate)
   }, days.map(function (day, index) {
     return /*#__PURE__*/React.createElement("h1", {
@@ -3290,11 +3318,11 @@ var Password = function Password(_a) {
       return setType("password");
     }
   }, /*#__PURE__*/React.createElement(EyeOpen, null)), open && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "absolute bottom-[70px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit"
+    className: "absolute ".concat(err ? "bottom-[90px]" : "bottom-[70px]", " z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit")
   }, /*#__PURE__*/React.createElement("ul", {
     className: "requirement-list"
   }, validatePassword())), /*#__PURE__*/React.createElement("span", {
-    className: "w-2 h-2 bg-pureWhite z-10 absolute bottom-[65px] left-[20px] rotate-[45deg]"
+    className: "w-2 h-2 bg-pureWhite z-10 absolute ".concat(err ? "bottom-[86px]" : "bottom-[66px]", " left-[20px] rotate-[45deg]")
   })), password && /*#__PURE__*/React.createElement("div", {
     className: "absolute top-[60px] mt-2 flex items-center"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3304,7 +3332,7 @@ var Password = function Password(_a) {
   })), /*#__PURE__*/React.createElement("span", {
     className: "ml-4 text-xs sm:text-sm"
   }, getPasswordStrength())), err && /*#__PURE__*/React.createElement("span", {
-    className: "absolute ".concat(password ? "top-[82px]" : "top-[65px]", " text-defaultRed")
+    className: "text-defaultRed"
   }, errorMes));
 };
 
@@ -3484,6 +3512,87 @@ var Rating = function Rating(_a) {
       className: "icon icon-star"
     }, icon === "heart" ? /*#__PURE__*/React.createElement(Heart, null) : /*#__PURE__*/React.createElement(Star, null))));
   })));
+};
+
+var Styles = {"ScrollSpyContainer":"Scrollspy-module_ScrollSpyContainer__Z0sM-","horizontal":"Scrollspy-module_horizontal__IviBW","verticalDrawer":"Scrollspy-module_verticalDrawer__ojqjd","vertical":"Scrollspy-module_vertical__l8HcQ","ScrollSpyItemHorizontal":"Scrollspy-module_ScrollSpyItemHorizontal__PhdUu","ScrollSpyItemVertical":"Scrollspy-module_ScrollSpyItemVertical__0bdmD","ScrollSpyItemVerticalDrawer":"Scrollspy-module_ScrollSpyItemVerticalDrawer__9zhfD","active_verticalDrawer":"Scrollspy-module_active_verticalDrawer__qvZ8D","active_horizontal":"Scrollspy-module_active_horizontal__t7JGA","active_vertical":"Scrollspy-module_active_vertical__gHv0j"};
+
+var ScrollSpy = function ScrollSpy(props) {
+  var _a = useState(props.targetIds[0]),
+    activeId = _a[0],
+    setActiveId = _a[1];
+  var observerRef = useRef(null);
+  useEffect(function () {
+    observerRef.current = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          setActiveId(entry.target.id);
+        }
+      });
+    }, {
+      threshold: 0.5
+    } // Adjust the threshold value as needed
+    );
+
+    props.targetIds.forEach(function (id) {
+      var _a;
+      var element = document.getElementById(id);
+      if (element) {
+        (_a = observerRef.current) === null || _a === void 0 ? void 0 : _a.observe(element);
+      }
+    });
+    return function () {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+    };
+  }, [props.targetIds]);
+  var handleClick = function handleClick(id) {
+    var element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop,
+        behavior: "smooth"
+      });
+      setActiveId(id);
+    }
+  };
+  var getScrollSpyItemClass = function getScrollSpyItemClass(id) {
+    var scrollSpyItemClass = "";
+    if (props.position === "verticalDrawer") {
+      scrollSpyItemClass = activeId === id ? "".concat(Styles.ScrollSpyItemVerticalDrawer, " ").concat(Styles.active_verticalDrawer) : "".concat(Styles.ScrollSpyItemVerticalDrawer);
+    } else if (props.position === "vertical") {
+      scrollSpyItemClass = activeId === id ? "".concat(Styles.ScrollSpyItemVertical, " ").concat(Styles.active_vertical) : "".concat(Styles.ScrollSpyItemVertical);
+    } else {
+      scrollSpyItemClass = activeId === id ? "".concat(Styles.ScrollSpyItemHorizontal, " ").concat(Styles.active_horizontal) : "".concat(Styles.ScrollSpyItemHorizontal);
+    }
+    return scrollSpyItemClass;
+  };
+  var positionClass = "";
+  switch (props.position) {
+    case "verticalDrawer":
+      positionClass = Styles.verticalDrawer;
+      break;
+    case "vertical":
+      positionClass = Styles.vertical;
+      break;
+    case "horizontal":
+      positionClass = Styles.horizontal;
+      break;
+    default:
+      positionClass = "";
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    className: "".concat(Styles.ScrollSpyContainer, " ").concat(positionClass)
+  }, props.targetIds.map(function (id, index) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: id,
+      className: getScrollSpyItemClass(id),
+      onClick: function onClick() {
+        return handleClick(id);
+      }
+    }, props.icons && props.icons[index], " ", /*#__PURE__*/React.createElement("span", null, props.titles[index]), " ");
+  }));
 };
 
 function ChevronDown() {
@@ -3970,6 +4079,56 @@ var Spinner = function Spinner(_a) {
     className: "".concat(Style.lower_half, " absolute text-primary indent-[-9999em] overflow-hidden w-[1em] h-[1em] rounded-full transform translate-z-0"),
     style: loaderStyle
   }, "Loading..."));
+};
+
+var Switch = function Switch(_a) {
+  var checked = _a.checked,
+    disabled = _a.disabled,
+    variant = _a.variant;
+  var _b = useState(checked || false),
+    isChecked = _b[0],
+    setIsChecked = _b[1];
+  var handleClick = function handleClick() {
+    if (!disabled) {
+      setIsChecked(function (prevChecked) {
+        return !prevChecked;
+      });
+    }
+  };
+  useEffect(function () {
+    setIsChecked(checked || false);
+  }, [checked]);
+  var getColorClasses = function getColorClasses() {
+    switch (variant) {
+      case "invalid":
+        return "bg-defaultRed";
+      default:
+      case "primary":
+        return "bg-primary";
+    }
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    className: "group relative border-[1.5px] border-lightSilver ".concat(variant === "invalid" ? "hover:border-defaultRed" : "hover:border-primary", " focus:outline-none bg-white rounded-full shadow-sm h-[22px] overflow-hidden w-[40px] relative ").concat(disabled ? "cursor-not-allowed opacity-60 pointer-events-none" : ""),
+    id: "btn",
+    onClick: handleClick,
+    disabled: disabled
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rounded-full ".concat(getColorClasses(), " absolute top-[4px] h-[13px] w-[13px] left-[4px] transition-transform duration-[800ms] linear"),
+    style: {
+      transform: isChecked ? "scale(4.5)" : "scale(1)"
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "rounded-full bg-white absolute top-[4px] h-[13px] w-[13px] right-[4px] transition-transform duration-[800ms] linear",
+    style: {
+      transform: isChecked ? "scale(1)" : "scale(1)"
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute rounded-full ".concat(variant === "invalid" ? "group-hover:delay-0 group-hover:bg-defaultRed" : " group-hover:delay-0 group-hover:bg-primary", " absolute top-[20%] h-[13px] w-[13px] left-[4px] ").concat(isChecked ? {
+      getColorClasses: getColorClasses
+    } : "delay-[450ms] bg-pinkSwan")
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "rounded-full bg-white absolute top-[4px] h-[13px] w-[13px] right-[4px]"
+  })));
 };
 
 var style$1 = {"tab":"Tab-module_tab__ShyYn","active":"Tab-module_active__tB2AH","tab__ripple":"Tab-module_tab__ripple__zQsul","ripple":"Tab-module_ripple__K3GDp"};
@@ -5712,4 +5871,4 @@ var Toast = /** @class */function (_super) {
   return Toast;
 }(React.Component);
 
-export { Accordion, Alert, Avatar, AvatarGroup, Badge, Breadcrumb, Button, Calendar, CalendarYear, CheckBox, Close, ColorPicker, InputMask, Loader, Modal, ModalAction, ModalContent, ModalTitle, MultiSelect, MultiSelectChip, Pagination, Password, ProgressBar, ProgressStep, Radio, Rating, Select, SpeedDial, Spinner, TabBar, Table, Tel, TextField, Textarea, Timepicker, Timepicker24Hr, Toast, Tooltip, Typography, Uploader };
+export { Accordion, Alert, Avatar, AvatarGroup, Badge, Breadcrumb, Button, Calendar, CalendarYear, CheckBox, Close, ColorPicker, InputMask, Loader, Modal, ModalAction, ModalContent, ModalTitle, MultiSelect, MultiSelectChip, Pagination, Password, ProgressBar, ProgressStep, Radio, Rating, ScrollSpy, Select, SpeedDial, Spinner, Switch, TabBar, Table, Tel, TextField, Textarea, Timepicker, Timepicker24Hr, Toast, Tooltip, Typography, Uploader };

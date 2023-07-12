@@ -36,7 +36,7 @@ module.exports = {
       lightYellow: '#FFC107',
       lightGray:"#F4F4F4",
       slatyGreen:"#CCF1EB",
-      
+      pinkSwan: '#B7B7B7',
     },
 
     screens: {
