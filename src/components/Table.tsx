@@ -74,7 +74,7 @@ const Table: React.FC<TableProps> = (props) => {
             className={`${
               props.sticky
                 ? "sticky top-0 z-10 drop-shadow"
-                : "border border-b-pureBlack border-t-pureBlack"
+                : "border-y border-b-pureBlack border-t-pureBlack"
             } bg-pureWhite h-[48px]`}
           >
             {props.selected && (
@@ -86,16 +86,18 @@ const Table: React.FC<TableProps> = (props) => {
                 />
               </th>
             )}
+
             {props.headers.map((header) => (
               <th
                 key={header}
-                className="cursor-pointer uppercase text-[16px] text-center font-proxima font-bold"
+                className="cursor-pointer uppercase text-[16px] text-center font-bold"
                 onClick={() => {
                   props.sortable && handleSort(header);
                 }}
               >
                 <span className="flex justify-center items-center">
                   {header}
+
                   {sortingColumn === header && (
                     <span
                       className={`ml-2 ${
@@ -108,8 +110,9 @@ const Table: React.FC<TableProps> = (props) => {
                 </span>
               </th>
             ))}
+
             {props.action && (
-              <th className="cursor-pointer uppercase text-[16px] text-center font-proxima font-bold">
+              <th className="cursor-pointer uppercase text-[16px] text-center font-bold">
                 Actions
               </th>
             )}
@@ -120,7 +123,7 @@ const Table: React.FC<TableProps> = (props) => {
           {filteredData.map((item, index) => (
             <tr
               key={index}
-              className="h-[56px] border border-b-lightSilver cursor-default hover:bg-whiteSmoke"
+              className="h-[56px] border-b border-b-lightSilver cursor-default hover:bg-whiteSmoke"
             >
               {props.selected && (
                 <td>
@@ -131,10 +134,11 @@ const Table: React.FC<TableProps> = (props) => {
                   />
                 </td>
               )}
+
               {props.headers.map((header) => (
                 <td
                   key={header}
-                  className="py-[19px] px-[20px] text-center text-base font-proxima font-normal"
+                  className="py-[19px] px-[20px] text-center text-base font-normal"
                 >
                   <span className="flex justify-center items-center">
                     {typeof item[header] === "string" &&
@@ -150,6 +154,7 @@ const Table: React.FC<TableProps> = (props) => {
                   </span>
                 </td>
               ))}
+
               {props.action &&
                 props.actions.map((action) => (
                   <td key={action} className="text-center">
