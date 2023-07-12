@@ -1,0 +1,47 @@
+$primary: #02b89d;
+$lightSilver: #d8d8d8;
+
+.tab {
+    height: auto;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 2px solid $lightSilver;
+}
+
+.tab:hover {
+    cursor: pointer;
+    color: $primary;
+    background-color: rgba(2, 184, 157, 0.116);
+    border-bottom: 2px solid $primary;
+}
+
+.active {
+    border-bottom: 2px solid $primary;
+    color: $primary;
+}
+
+.tab__ripple {
+    width: 20%;
+    opacity: 0;
+    height: 48px;
+    position: absolute;
+    transform: scale(0);
+    border-radius: 30px;
+    animation: ripple 0.7s;
+    background-color: rgba(2, 184, 157, 0.473);
+}
+
+@keyframes ripple {
+    from {
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
