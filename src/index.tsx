@@ -244,7 +244,7 @@ const Password: React.FC<PasswordProps> = ({
       </div>
       {type === "password" ? (
         <span
-          className={`absolute top-9 right-1 text-md sm:text-lg ${
+          className={`absolute top-7 right-1 text-md sm:text-lg ${
             err ? "text-defaultRed" : "text-[#979797]"
           }`}
           onClick={() => setType("text")}
@@ -253,7 +253,7 @@ const Password: React.FC<PasswordProps> = ({
         </span>
       ) : (
         <span
-          className={`absolute top-9 right-1 text-md sm:text-lg ${
+          className={`absolute top-7 right-1 text-md sm:text-lg ${
             err ? "text-defaultRed" : "text-[#979797]"
           }`}
           onClick={() => setType("password")}

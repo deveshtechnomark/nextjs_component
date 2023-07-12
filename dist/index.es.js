@@ -243,12 +243,12 @@ var Password = function Password(_a) {
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
     onFocus: handleFocus
   }, props))), type === "password" ? React.createElement("span", {
-    className: "absolute top-9 right-1 text-md sm:text-lg ".concat(err ? "text-defaultRed" : "text-[#979797]"),
+    className: "absolute top-7 right-1 text-md sm:text-lg ".concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
       return setType("text");
     }
   }, React.createElement(EyeClose, null)) : React.createElement("span", {
-    className: "absolute top-9 right-1 text-md sm:text-lg ".concat(err ? "text-defaultRed" : "text-[#979797]"),
+    className: "absolute top-7 right-1 text-md sm:text-lg ".concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
       return setType("password");
     }
