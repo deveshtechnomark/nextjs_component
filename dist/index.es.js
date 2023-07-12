@@ -184,7 +184,7 @@ var TextField = function TextField(_a) {
     className: "text-[20px]",
     onClick: handleClear
   }, React.createElement(ClearIcon, null))), valid && React.createElement("span", {
-    className: "text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3"
+    className: "text-primary bg-white text-[20px] absolute right-0 top-0 mt-[26px] mr-3"
   }, React.createElement(CheckIcon, null)), err && React.createElement("span", {
     className: "text-defaultRed"
   }, errorMessage), !err && supportingText && React.createElement("span", {

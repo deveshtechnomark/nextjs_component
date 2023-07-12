@@ -161,7 +161,7 @@ const TextField: React.FC<TextFieldProps> = ({
         </span>
       )}
       {valid && (
-        <span className="text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3">
+        <span className="text-primary bg-white text-[20px] absolute right-0 top-0 mt-[26px] mr-3">
           <CheckIcon />
         </span>
       )}
