@@ -12,6 +12,7 @@ interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
   supportingText?: string;
   disabled?: boolean;
+  countryCode?: boolean;
   getValue: (arg1: string) => void;
 }
 
@@ -27,6 +28,7 @@ const Tel: React.FC<TelInputProps> = ({
   supportingText,
   disabled,
   getValue,
+  countryCode = false,
   errorMessage = "This is a required field!",
   ...props
 }) => {
@@ -34,16 +36,15 @@ const Tel: React.FC<TelInputProps> = ({
   const [err, setErr] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
   const [value, setValue] = useState("");
-  const [selectedCountryCode, setSelectedCountryCode] = useState("");
+  const [selectedCountryCode, setSelectedCountryCode] = useState("+91");
 
   const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") {
       setErr(true);
-    } else if (e.target.value.length < 10) {
+    } else if (e.target.value.length < 12) {
       setErr(true);
     } else {
       setErr(false);
-      setFocus(false);
     }
   };
 
@@ -68,10 +69,7 @@ const Tel: React.FC<TelInputProps> = ({
     if (err) {
       setErr(false);
     }
-    if (err) {
-      setErr(false);
-    }
-    getValue(formattedValue);
+    getValue(selectedCountryCode + " " + formattedValue);
   };
 
   return (
@@ -102,15 +100,19 @@ const Tel: React.FC<TelInputProps> = ({
               : "border-b-lightSilver"
           }`}
         >
-          <div className="w-[100px]">
-            <Select
-              className="!border-none"
-              options={data}
-              id="basic"
-              validate
-              onSelect={(value: any) => setSelectedCountryCode(value)}
-            />
-          </div>
+          {countryCode && (
+            <div className="w-[100px]">
+              <Select
+                className="!border-none"
+                options={data}
+                id="basic"
+                onSelect={(value: any) => {
+                  setSelectedCountryCode(value);
+                }}
+                defaultValue="+91"
+              />
+            </div>
+          )}
           <input
             className={`${className} py-2 px-3 outline-none w-full h-full mt-[6px]`}
             ref={inputRef}

@@ -9,6 +9,7 @@ interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     errorMessage?: string;
     supportingText?: string;
     disabled?: boolean;
+    countryCode?: boolean;
     getValue: (arg1: string) => void;
 }
 declare const Tel: React.FC<TelInputProps>;

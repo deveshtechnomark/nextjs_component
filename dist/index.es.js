@@ -786,30 +786,31 @@ var Tel = function Tel(_a) {
     _a.onChange;
     var supportingText = _a.supportingText,
     disabled = _a.disabled,
-    getValue = _a.getValue;
+    getValue = _a.getValue,
+    _b = _a.countryCode,
+    countryCode = _b === void 0 ? false : _b;
     _a.errorMessage;
-    var props = __rest(_a, ["label", "className", "id", "name", "required", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "errorMessage"]);
+    var props = __rest(_a, ["label", "className", "id", "name", "required", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "countryCode", "errorMessage"]);
   var inputRef = useRef(null);
-  var _c = useState(false),
-    err = _c[0],
-    setErr = _c[1];
   var _d = useState(false),
-    focus = _d[0],
-    setFocus = _d[1];
-  var _e = useState(""),
-    value = _e[0],
-    setValue = _e[1];
-  var _f = useState("");
-    _f[0];
-    var setSelectedCountryCode = _f[1];
+    err = _d[0],
+    setErr = _d[1];
+  var _e = useState(false),
+    focus = _e[0],
+    setFocus = _e[1];
+  var _f = useState(""),
+    value = _f[0],
+    setValue = _f[1];
+  var _g = useState("+91"),
+    selectedCountryCode = _g[0],
+    setSelectedCountryCode = _g[1];
   var validateInput = function validateInput(e) {
     if (e.target.value === "") {
       setErr(true);
-    } else if (e.target.value.length < 10) {
+    } else if (e.target.value.length < 12) {
       setErr(true);
     } else {
       setErr(false);
-      setFocus(false);
     }
   };
   var handleFocus = function handleFocus() {
@@ -831,10 +832,7 @@ var Tel = function Tel(_a) {
     if (err) {
       setErr(false);
     }
-    if (err) {
-      setErr(false);
-    }
-    getValue(formattedValue);
+    getValue(selectedCountryCode + " " + formattedValue);
   };
   return React.createElement("div", {
     className: "flex flex-col w-full text-sm sm:text-base relative"
@@ -844,16 +842,16 @@ var Tel = function Tel(_a) {
     className: "flex ".concat(!err ? "w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
   }, React.createElement("div", {
     className: "flex border-b outline-none transition duration-600 w-full h-full ".concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver")
-  }, React.createElement("div", {
+  }, countryCode && React.createElement("div", {
     className: "w-[100px]"
   }, React.createElement(Select, {
     className: "!border-none",
     options: data,
     id: "basic",
-    validate: true,
     onSelect: function onSelect(value) {
-      return setSelectedCountryCode(value);
-    }
+      setSelectedCountryCode(value);
+    },
+    defaultValue: "+91"
   })), React.createElement("input", __assign({
     className: "".concat(className, " py-2 px-3 outline-none w-full h-full mt-[6px]"),
     ref: inputRef,
