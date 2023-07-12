@@ -1,6 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { Typography } from 'Typography';
-import 'Typography/dist/index.css';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -86,9 +84,8 @@ var Textarea = function Textarea(_a) {
   };
   var parsedRows = rows;
   return React.createElement("div", {
-    className: "flex flex-col w-full text-sm sm:text-base"
-  }, label && React.createElement(Typography, {
-    type: "label",
+    className: "flex flex-col w-full text-sm sm:text-base font-proxima"
+  }, label && React.createElement("label", {
     className: "".concat(err ? "text-defaultRed w-full" : focus ? "text-primary w-full" : "text-slatyGrey w-full")
   }, label, required && "*"), React.createElement("div", {
     className: "".concat(!err ? "flex w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
@@ -102,15 +99,11 @@ var Textarea = function Textarea(_a) {
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
     onChange: handleInputChange,
     onFocus: handleFocus
-  }, props))), !err && supportingText && React.createElement(Typography, {
-    type: "h6"
-  }, React.createElement("span", {
+  }, props))), !err && supportingText && React.createElement("span", {
     className: "text-slatyGrey"
-  }, supportingText)), err && React.createElement(Typography, {
-    type: "h6"
-  }, React.createElement("span", {
+  }, supportingText), err && React.createElement("span", {
     className: "text-defaultRed"
-  }, errorMessage)));
+  }, errorMessage));
 };
 
 export { Textarea };

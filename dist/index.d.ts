@@ -1,6 +1,4 @@
 import React from "react";
-import "./index.css";
-import "Typography/dist/index.css";
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     label?: string;
     className?: string;

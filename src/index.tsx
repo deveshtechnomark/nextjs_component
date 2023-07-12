@@ -1,7 +1,4 @@
 import React, { useRef, useState } from "react";
-import "./index.css";
-import { Typography } from "Typography";
-import "Typography/dist/index.css";
 
 interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -58,10 +55,9 @@ const Textarea: React.FC<TextareaProps> = ({
   const parsedRows = rows as number;
 
   return (
-    <div className="flex flex-col w-full text-sm sm:text-base">
+    <div className="flex flex-col w-full text-sm sm:text-base font-proxima">
       {label && (
-        <Typography
-          type="label"
+        <label
           className={`${
             err
               ? "text-defaultRed w-full"
@@ -73,7 +69,7 @@ const Textarea: React.FC<TextareaProps> = ({
           {label}
 
           {required && "*"}
-        </Typography>
+        </label>
       )}
 
       <div
@@ -103,15 +99,9 @@ const Textarea: React.FC<TextareaProps> = ({
         />
       </div>
       {!err && supportingText && (
-        <Typography type="h6">
-          <span className="text-slatyGrey">{supportingText}</span>
-        </Typography>
+        <span className="text-slatyGrey">{supportingText}</span>
       )}
-      {err && (
-        <Typography type="h6">
-          <span className="text-defaultRed">{errorMessage}</span>
-        </Typography>
-      )}
+      {err && <span className="text-defaultRed">{errorMessage}</span>}
     </div>
   );
 };
