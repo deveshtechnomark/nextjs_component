@@ -12,7 +12,8 @@ var Avatar = function Avatar(_a) {
     className = _a.className,
     type = _a.type,
     badge = _a.badge,
-    badgeText = _a.badgeText;
+    badgeText = _a.badgeText,
+    variant = _a.variant;
   var avatarTypeClass = type === "square" ? "rounded-none" : "rounded-full";
   var handleOnError = function handleOnError(e) {
     e.currentTarget.src = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/20625/avatar-bg.png";
@@ -25,19 +26,19 @@ var Avatar = function Avatar(_a) {
   return React.createElement("div", {
     className: "".concat(styles.avatar, " relative w-fit")
   }, imageUrl ? React.createElement("img", {
-    className: "w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] display-block object-fit-cover border-2 border-pureWhite ".concat(avatarTypeClass, " ").concat(className),
+    className: "".concat(variant === "large" ? "w-[64px] h-[64px]" : variant === "small" ? "w-[32px] h-[32px]" : variant === "x-small" ? "w-[24px] h-[24px]" : "w-[40px] h-[40px]", " display-block object-fit-cover border-2 border-pureWhite ").concat(avatarTypeClass, " ").concat(className),
     src: imageUrl,
     alt: Name,
     onError: handleOnError
   }) : Name ? React.createElement("span", {
-    className: "w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] text-pureWhite border-2 border-pureWhite text-sm sm:text-lg flex justify-center items-center ".concat(avatarTypeClass, " ").concat(Red.includes(Name.charAt(0)) ? "bg-defaultRed" : Blue.includes(Name.charAt(0)) ? "bg-defaultBlue" : Green.includes(Name.charAt(0)) ? "bg-primary" : SkyBlue.includes(Name.charAt(0)) ? "bg-infoColor" : "bg-defaultOrange", " ").concat(className)
+    className: "".concat(variant === "large" ? "w-[64px] h-[64px] text-2xl" : variant === "small" ? "w-[32px] h-[32px] text-sm" : variant === "x-small" ? "w-[24px] h-[24px] text-xs" : "w-[40px] h-[40px] text-base", " text-pureWhite border-2 border-pureWhite flex justify-center items-center ").concat(avatarTypeClass, " ").concat(Red.includes(Name.charAt(0)) ? "bg-defaultRed" : Blue.includes(Name.charAt(0)) ? "bg-defaultBlue" : Green.includes(Name.charAt(0)) ? "bg-primary" : SkyBlue.includes(Name.charAt(0)) ? "bg-infoColor" : "bg-defaultOrange", " ").concat(className)
   }, Name.length <= 2 ? Name.slice(0, 2) : Name.match(/\s/) ? Name.split(" ").map(function (word) {
     return word.charAt(0);
   }).join("") : Name.charAt(0)) : React.createElement("span", {
-    className: "w-[45px] sm:w-[55px] h-[50px] sm:h-[55px] border-2 bg-pureWhite border-pureWhite rounded-full text-sm sm:text-lg flex justify-center items-center"
+    className: "".concat(variant === "large" ? "w-[64px] h-[64px]" : variant === "small" ? "w-[32px] h-[32px]" : variant === "x-small" ? "w-[24px] h-[24px]" : "w-[40px] h-[40px]", " border-2 bg-pureWhite border-pureWhite rounded-full flex justify-center items-center")
   }, React.createElement("svg", {
-    width: "50",
-    height: "50",
+    width: "".concat(variant === "large" ? "" : variant === "small" ? "" : variant === "x-small" ? "" : "35"),
+    height: "".concat(variant === "large" ? "" : variant === "small" ? "" : variant === "x-small" ? "" : "35"),
     viewBox: "0 0 107 112",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg"
@@ -74,7 +75,8 @@ var AvatarGroup = function AvatarGroup(_a) {
     _c = _a.show,
     show = _c === void 0 ? 5 : _c,
     _d = _a.className,
-    className = _d === void 0 ? "" : _d;
+    className = _d === void 0 ? "" : _d,
+    variant = _a.variant;
   if (React.Children.count(children) > show) {
     var remainingCount = React.Children.count(children) - show;
     var visibleChildren = React.Children.toArray(children).slice(0, show);
@@ -86,12 +88,14 @@ var AvatarGroup = function AvatarGroup(_a) {
         imageUrl: child.props.imageUrl,
         name: child.props.name,
         type: type,
-        className: className
+        className: className,
+        variant: variant
       });
     }), React.createElement(Avatar, {
       className: "!text-[#CA6510] !bg-[#FECBA1] ".concat(className),
       name: "+".concat(remainingCount),
-      type: type
+      type: type,
+      variant: variant
     }));
   }
   return React.createElement("div", {

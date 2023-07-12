@@ -11,6 +11,7 @@ interface AvatarProps {
   type?: string;
   badge?: boolean;
   badgeText?: string;
+  variant?: string;
 }
 
 const Avatar: FC<AvatarProps> = ({
@@ -20,6 +21,7 @@ const Avatar: FC<AvatarProps> = ({
   type,
   badge,
   badgeText,
+  variant,
 }) => {
   const avatarTypeClass = type === "square" ? "rounded-none" : "rounded-full";
 
@@ -40,14 +42,30 @@ const Avatar: FC<AvatarProps> = ({
     <div className={`${styles.avatar} relative w-fit`}>
       {imageUrl ? (
         <img
-          className={`w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] display-block object-fit-cover border-2 border-pureWhite ${avatarTypeClass} ${className}`}
+          className={`${
+            variant === "large"
+              ? "w-[64px] h-[64px]"
+              : variant === "small"
+              ? "w-[32px] h-[32px]"
+              : variant === "x-small"
+              ? "w-[24px] h-[24px]"
+              : "w-[40px] h-[40px]"
+          } display-block object-fit-cover border-2 border-pureWhite ${avatarTypeClass} ${className}`}
           src={imageUrl}
           alt={Name}
           onError={handleOnError}
         />
       ) : Name ? (
         <span
-          className={`w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] text-pureWhite border-2 border-pureWhite text-sm sm:text-lg flex justify-center items-center ${avatarTypeClass} ${
+          className={`${
+            variant === "large"
+              ? "w-[64px] h-[64px] text-2xl"
+              : variant === "small"
+              ? "w-[32px] h-[32px] text-sm"
+              : variant === "x-small"
+              ? "w-[24px] h-[24px] text-xs"
+              : "w-[40px] h-[40px] text-base"
+          } text-pureWhite border-2 border-pureWhite flex justify-center items-center ${avatarTypeClass} ${
             Red.includes(Name.charAt(0))
               ? "bg-defaultRed"
               : Blue.includes(Name.charAt(0))
@@ -68,10 +86,36 @@ const Avatar: FC<AvatarProps> = ({
             : Name.charAt(0)}
         </span>
       ) : (
-        <span className="w-[45px] sm:w-[55px] h-[50px] sm:h-[55px] border-2 bg-pureWhite border-pureWhite rounded-full text-sm sm:text-lg flex justify-center items-center">
+        <span
+          className={`${
+            variant === "large"
+              ? "w-[64px] h-[64px]"
+              : variant === "small"
+              ? "w-[32px] h-[32px]"
+              : variant === "x-small"
+              ? "w-[24px] h-[24px]"
+              : "w-[40px] h-[40px]"
+          } border-2 bg-pureWhite border-pureWhite rounded-full flex justify-center items-center`}
+        >
           <svg
-            width="50"
-            height="50"
+            width={`${
+              variant === "large"
+                ? ""
+                : variant === "small"
+                ? ""
+                : variant === "x-small"
+                ? ""
+                : "35"
+            }`}
+            height={`${
+              variant === "large"
+                ? ""
+                : variant === "small"
+                ? ""
+                : variant === "x-small"
+                ? ""
+                : "35"
+            }`}
             viewBox="0 0 107 112"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -121,6 +165,7 @@ interface AvatarGroupProps {
   type?: string;
   show?: number;
   className?: string;
+  variant?: string;
 }
 
 const AvatarGroup: FC<AvatarGroupProps> = ({
@@ -128,6 +173,7 @@ const AvatarGroup: FC<AvatarGroupProps> = ({
   type = "circle",
   show = 5,
   className = "",
+  variant,
 }) => {
   if (React.Children.count(children) > show) {
     const remainingCount = React.Children.count(children) - show;
@@ -142,12 +188,14 @@ const AvatarGroup: FC<AvatarGroupProps> = ({
             name={(child as React.ReactElement<AvatarProps>).props.name}
             type={type}
             className={className}
+            variant={variant}
           />
         ))}
         <Avatar
           className={`!text-[#CA6510] !bg-[#FECBA1] ${className}`}
           name={`+${remainingCount}`}
           type={type}
+          variant={variant}
         />
       </div>
     );

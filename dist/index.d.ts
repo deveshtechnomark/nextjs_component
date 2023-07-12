@@ -8,6 +8,7 @@ interface AvatarProps {
     type?: string;
     badge?: boolean;
     badgeText?: string;
+    variant?: string;
 }
 declare const Avatar: FC<AvatarProps>;
 interface AvatarGroupProps {
@@ -15,6 +16,7 @@ interface AvatarGroupProps {
     type?: string;
     show?: number;
     className?: string;
+    variant?: string;
 }
 declare const AvatarGroup: FC<AvatarGroupProps>;
 export { Avatar, AvatarGroup };
