@@ -100,9 +100,9 @@ var TextField = function TextField(_a) {
   var _e = React.useState(false),
     valid = _e[0],
     setValid = _e[1];
-  var _f = React.useState(false),
-    showEmailError = _f[0],
-    setShowEmailError = _f[1];
+  var _f = React.useState(false);
+    _f[0];
+    var setShowEmailError = _f[1];
   React.useEffect(function () {
     setErr(hasError);
   }, [hasError, errorMessage]);
@@ -117,6 +117,10 @@ var TextField = function TextField(_a) {
       setErr(true);
       setShowEmailError(true);
       setFocus(false);
+    } else if (validateEmail(e.target.value)) {
+      setErr(false);
+      setShowEmailError(false);
+      setFocus(true);
     } else {
       setErr(false);
       setShowEmailError(false);
@@ -151,6 +155,7 @@ var TextField = function TextField(_a) {
         setShowEmailError(false);
       } else if (inputValue) {
         setErr(false);
+        setShowEmailError(false);
       } else {
         setValid(false);
       }
@@ -178,7 +183,7 @@ var TextField = function TextField(_a) {
   }, label, validate && "*"), React.createElement("div", {
     className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
-    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid ? "text-successColor" : "text-[#333333]", "\n          ").concat(showEmailError && "text-defaultRed", "\n        "),
+    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid && !err ? "text-successColor" : "text-[#333333]", "\n         \n        "),
     ref: inputRef,
     type: type,
     id: id,
@@ -193,7 +198,7 @@ var TextField = function TextField(_a) {
   }, React.createElement("div", {
     className: "text-[20px]",
     onClick: handleClear
-  }, React.createElement(ClearIcon, null))), valid && React.createElement("span", {
+  }, React.createElement(ClearIcon, null))), valid && !err && React.createElement("span", {
     className: "text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3"
   }, React.createElement(CheckIcon, null)), err && React.createElement("span", {
     className: "text-defaultRed text-[12px] sm:text-[14px]"

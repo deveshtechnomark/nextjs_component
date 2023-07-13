@@ -58,6 +58,10 @@ const TextField: React.FC<TextFieldProps> = ({
       setErr(true);
       setShowEmailError(true);
       setFocus(false);
+    } else if(validateEmail(e.target.value)){
+      setErr(false);
+      setShowEmailError(false);
+      setFocus(true);
     } else {
       setErr(false);
       setShowEmailError(false);
@@ -96,6 +100,7 @@ const TextField: React.FC<TextFieldProps> = ({
         setShowEmailError(false);
       } else if (inputValue) {
         setErr(false);
+        setShowEmailError(false)
       } else {
         setValid(false);
       }
@@ -147,8 +152,8 @@ const TextField: React.FC<TextFieldProps> = ({
               ? "border-b-primary"
               : "border-b-lightSilver"
           }
-          ${valid ? "text-successColor" : "text-[#333333]"}
-          ${showEmailError && "text-defaultRed"}
+          ${(valid && !err) ? "text-successColor" : "text-[#333333]"}
+         
         `}
           ref={inputRef}
           type={type}
@@ -171,7 +176,7 @@ const TextField: React.FC<TextFieldProps> = ({
         </span>
       )}
 
-      {valid && (
+      {(valid && !err) && (
         <span className="text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3">
           <CheckIcon />
         </span>
