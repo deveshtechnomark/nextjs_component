@@ -2166,10 +2166,10 @@ function Uploader(_a) {
     setFileNames(names);
     setTimeout(function () {
       setIsChecked(true);
-    }, 1600);
+    }, 2000);
     setTimeout(function () {
       setUploaded(true);
-    }, 2300);
+    }, 2500);
   };
   var handleBrowseClick = function handleBrowseClick() {
     var _a;

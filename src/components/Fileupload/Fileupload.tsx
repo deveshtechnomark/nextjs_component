@@ -61,11 +61,11 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
 
     setTimeout(() => {
       setIsChecked(true);
-    }, 1600);
+    }, 2000);
 
     setTimeout(() => {
       setUploaded(true);
-    }, 2300);
+    }, 2500);
   };
 
   const handleBrowseClick = () => {
