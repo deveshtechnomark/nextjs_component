@@ -1,19 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import data from "./data";
-import "./index.css";
+import "./index.css"
 import { Select } from "select-dropdown";
-import "select-dropdown/dist/index.css";
+import "select-dropdown/dist/index.css"
 
 interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   className?: string;
-  required?: boolean;
   validate?: boolean;
   errorMessage?: string;
   supportingText?: string;
   disabled?: boolean;
   countryCode?: boolean;
   getValue: (arg1: string) => void;
+  hasError?: boolean;
 }
 
 const Tel: React.FC<TelInputProps> = ({
@@ -21,7 +21,6 @@ const Tel: React.FC<TelInputProps> = ({
   className,
   id,
   name,
-  required,
   validate,
   onBlur,
   onChange,
@@ -29,7 +28,8 @@ const Tel: React.FC<TelInputProps> = ({
   disabled,
   getValue,
   countryCode = false,
-  errorMessage = "This is a required field!",
+  errorMessage,
+  hasError,
   ...props
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,12 +37,19 @@ const Tel: React.FC<TelInputProps> = ({
   const [focus, setFocus] = useState<boolean>(false);
   const [value, setValue] = useState("");
   const [selectedCountryCode, setSelectedCountryCode] = useState("+91");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    setErrorMsg(errorMessage);
+    setErr(hasError);
+  }, [hasError, errorMessage]);
 
   const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") {
       setErr(true);
     } else if (e.target.value.length < 12) {
       setErr(true);
+      setErrorMsg("Please Enter valid 10 digits Phone Number.");
     } else {
       setErr(false);
     }
@@ -81,7 +88,7 @@ const Tel: React.FC<TelInputProps> = ({
           }`}
         >
           {label}
-          {required && "*"}
+          {validate && "*"}
         </label>
       )}
       <div
@@ -132,6 +139,7 @@ const Tel: React.FC<TelInputProps> = ({
       {!err && supportingText && (
         <span className="text-slatyGrey">{supportingText}</span>
       )}
+      {err && <span className="text-defaultRed">{errorMsg}</span>}
     </div>
   );
 };

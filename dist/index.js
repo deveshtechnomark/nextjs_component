@@ -782,7 +782,6 @@ var Tel = function Tel(_a) {
     className = _a.className,
     id = _a.id,
     name = _a.name,
-    required = _a.required,
     validate = _a.validate,
     onBlur = _a.onBlur;
     _a.onChange;
@@ -790,27 +789,36 @@ var Tel = function Tel(_a) {
     disabled = _a.disabled,
     getValue = _a.getValue,
     _b = _a.countryCode,
-    countryCode = _b === void 0 ? false : _b;
-    _a.errorMessage;
-    var props = __rest(_a, ["label", "className", "id", "name", "required", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "countryCode", "errorMessage"]);
+    countryCode = _b === void 0 ? false : _b,
+    errorMessage = _a.errorMessage,
+    hasError = _a.hasError,
+    props = __rest(_a, ["label", "className", "id", "name", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "countryCode", "errorMessage", "hasError"]);
   var inputRef = React.useRef(null);
+  var _c = React.useState(false),
+    err = _c[0],
+    setErr = _c[1];
   var _d = React.useState(false),
-    err = _d[0],
-    setErr = _d[1];
-  var _e = React.useState(false),
-    focus = _e[0],
-    setFocus = _e[1];
-  var _f = React.useState(""),
-    value = _f[0],
-    setValue = _f[1];
-  var _g = React.useState("+91"),
-    selectedCountryCode = _g[0],
-    setSelectedCountryCode = _g[1];
+    focus = _d[0],
+    setFocus = _d[1];
+  var _e = React.useState(""),
+    value = _e[0],
+    setValue = _e[1];
+  var _f = React.useState("+91"),
+    selectedCountryCode = _f[0],
+    setSelectedCountryCode = _f[1];
+  var _g = React.useState(""),
+    errorMsg = _g[0],
+    setErrorMsg = _g[1];
+  React.useEffect(function () {
+    setErrorMsg(errorMessage);
+    setErr(hasError);
+  }, [hasError, errorMessage]);
   var validateInput = function validateInput(e) {
     if (e.target.value === "") {
       setErr(true);
     } else if (e.target.value.length < 12) {
       setErr(true);
+      setErrorMsg("Please Enter valid 10 digits Phone Number.");
     } else {
       setErr(false);
     }
@@ -840,7 +848,7 @@ var Tel = function Tel(_a) {
     className: "flex flex-col w-full text-sm sm:text-base relative"
   }, label && React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, label, required && "*"), React.createElement("div", {
+  }, label, validate && "*"), React.createElement("div", {
     className: "flex ".concat(!err ? "w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
   }, React.createElement("div", {
     className: "flex border-b outline-none transition duration-600 w-full h-full ".concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver")
@@ -868,7 +876,9 @@ var Tel = function Tel(_a) {
     placeholder: "9874 563 214"
   }, props)))), !err && supportingText && React.createElement("span", {
     className: "text-slatyGrey"
-  }, supportingText));
+  }, supportingText), err && React.createElement("span", {
+    className: "text-defaultRed"
+  }, errorMsg));
 };
 
 exports.Tel = Tel;
