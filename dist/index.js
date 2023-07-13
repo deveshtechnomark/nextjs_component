@@ -80,7 +80,6 @@ var TextField = function TextField(_a) {
     name = _a.name,
     value = _a.value,
     type = _a.type,
-    required = _a.required,
     validate = _a.validate,
     onBlur = _a.onBlur,
     onChange = _a.onChange,
@@ -88,7 +87,9 @@ var TextField = function TextField(_a) {
     errorMessage = _b === void 0 ? "This is a required field!" : _b,
     supportingText = _a.supportingText,
     disabled = _a.disabled,
-    props = __rest(_a, ["label", "className", "id", "name", "value", "type", "required", "validate", "onBlur", "onChange", "errorMessage", "supportingText", "disabled"]);
+    getValue = _a.getValue,
+    hasError = _a.hasError,
+    props = __rest(_a, ["label", "className", "id", "name", "value", "type", "validate", "onBlur", "onChange", "errorMessage", "supportingText", "disabled", "getValue", "hasError"]);
   var inputRef = React.useRef(null);
   var _c = React.useState(false),
     err = _c[0],
@@ -102,20 +103,25 @@ var TextField = function TextField(_a) {
   var _f = React.useState(false),
     showEmailError = _f[0],
     setShowEmailError = _f[1];
+  React.useEffect(function () {
+    setErr(hasError);
+  }, [hasError, errorMessage]);
   var handleFocus = function handleFocus() {
     setFocus(true);
   };
   var handleBlur = function handleBlur(e) {
-    if (validate && required && (e.target.value === "" || !e.target.value)) {
+    if (validate && (e.target.value === "" || !e.target.value)) {
       setErr(true);
+      setFocus(false);
     } else if (validate && type === "email" && !validateEmail(e.target.value)) {
       setErr(true);
       setShowEmailError(true);
+      setFocus(false);
     } else {
       setErr(false);
       setShowEmailError(false);
+      setFocus(true);
     }
-    setFocus(false);
     if (onBlur) {
       onBlur(e);
     }
@@ -126,6 +132,7 @@ var TextField = function TextField(_a) {
   };
   var handleInputChange = function handleInputChange(e) {
     var inputValue = e.target.value;
+    getValue(inputValue);
     if (onChange) {
       onChange(e);
     }
@@ -142,6 +149,8 @@ var TextField = function TextField(_a) {
         setValid(true);
         setErr(false);
         setShowEmailError(false);
+      } else if (inputValue) {
+        setErr(false);
       } else {
         setValid(false);
       }
@@ -162,15 +171,14 @@ var TextField = function TextField(_a) {
     setValid(false);
     setShowEmailError(false);
   };
-  var labelClassName = "\n  ".concat(err ? "text-defaultRed" : focus || value ? "text-primary" : "text-slatyGrey", "\n");
   return React.createElement("div", {
-    className: "flex flex-col text-[14px] laptop:text-base relative font-proxima"
+    className: "flex flex-col text-sm sm:text-base relative"
   }, label && React.createElement("label", {
-    className: labelClassName
-  }, label, required && "*"), React.createElement("div", {
+    className: "\n        ".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey", "\n      ")
+  }, label, validate && "*"), React.createElement("div", {
     className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
-    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full\n          ").concat(err ? "border-b-defaultRed" : value || focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid && "text-successColor font-normal text-[14px] font-proxima", "\n          ").concat(showEmailError && "text-defaultRed", "\n        "),
+    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid ? "text-successColor" : "text-[#333333]", "\n          ").concat(showEmailError && "text-defaultRed", "\n        "),
     ref: inputRef,
     type: type,
     id: id,
@@ -186,11 +194,11 @@ var TextField = function TextField(_a) {
     className: "text-[20px]",
     onClick: handleClear
   }, React.createElement(ClearIcon, null))), valid && React.createElement("span", {
-    className: "text-primary bg-white text-[20px] absolute right-0 top-0 mt-[26px] mr-3"
+    className: "text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3"
   }, React.createElement(CheckIcon, null)), err && React.createElement("span", {
-    className: "text-defaultRed"
+    className: "text-defaultRed text-[12px] sm:text-[14px]"
   }, errorMessage), !err && supportingText && React.createElement("span", {
-    className: "text-slatyGrey"
+    className: "text-slatyGrey text-[12px] sm:text-[14px]"
   }, supportingText));
 };
 
