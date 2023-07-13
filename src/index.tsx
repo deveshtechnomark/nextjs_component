@@ -1,14 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import "./index.css"
 
 interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   className?: string;
-  required?: boolean;
   validate?: boolean;
   errorMessage?: string;
   supportingText?: string;
   disabled?: boolean;
+  getValue: (arg1: string) => void;
+  hasError?: boolean;
 }
 
 const Textarea: React.FC<TextareaProps> = ({
@@ -18,18 +20,23 @@ const Textarea: React.FC<TextareaProps> = ({
   name,
   value,
   rows = "1",
-  required,
   validate,
   onBlur,
   onChange,
   supportingText,
   disabled,
+  getValue,
+  hasError,
   errorMessage = "This is a required field!",
   ...props
 }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [err, setErr] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
+
+  useEffect(() => {
+    setErr(hasError);
+  }, [hasError, errorMessage]);
 
   const validateInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value.trim() === "") {
@@ -44,6 +51,7 @@ const Textarea: React.FC<TextareaProps> = ({
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    getValue(e.target.value);
     if (onChange) {
       onChange(e);
     }
@@ -55,7 +63,7 @@ const Textarea: React.FC<TextareaProps> = ({
   const parsedRows = rows as number;
 
   return (
-    <div className="flex flex-col w-full text-sm sm:text-base font-proxima">
+    <div className="flex flex-col w-full text-sm sm:text-base">
       {label && (
         <label
           className={`${
@@ -68,7 +76,7 @@ const Textarea: React.FC<TextareaProps> = ({
         >
           {label}
 
-          {required && "*"}
+          {validate && "*"}
         </label>
       )}
 
@@ -99,9 +107,15 @@ const Textarea: React.FC<TextareaProps> = ({
         />
       </div>
       {!err && supportingText && (
-        <span className="text-slatyGrey">{supportingText}</span>
+        <span className="text-slatyGrey text-[12px] sm:text-[14px]">
+          {supportingText}
+        </span>
       )}
-      {err && <span className="text-defaultRed">{errorMessage}</span>}
+      {err && (
+        <span className="text-defaultRed text-[12px] sm:text-[14px]">
+          {errorMessage}
+        </span>
+      )}
     </div>
   );
 };

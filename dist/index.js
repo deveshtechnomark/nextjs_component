@@ -50,15 +50,16 @@ var Textarea = function Textarea(_a) {
     value = _a.value,
     _b = _a.rows,
     rows = _b === void 0 ? "1" : _b,
-    required = _a.required,
     validate = _a.validate,
     onBlur = _a.onBlur,
     onChange = _a.onChange,
     supportingText = _a.supportingText;
     _a.disabled;
-    var _c = _a.errorMessage,
+    var getValue = _a.getValue,
+    hasError = _a.hasError,
+    _c = _a.errorMessage,
     errorMessage = _c === void 0 ? "This is a required field!" : _c,
-    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "required", "validate", "onBlur", "onChange", "supportingText", "disabled", "errorMessage"]);
+    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "hasError", "errorMessage"]);
   var textAreaRef = React.useRef(null);
   var _d = React.useState(false),
     err = _d[0],
@@ -66,6 +67,9 @@ var Textarea = function Textarea(_a) {
   var _e = React.useState(false),
     focus = _e[0],
     setFocus = _e[1];
+  React.useEffect(function () {
+    setErr(hasError);
+  }, [hasError, errorMessage]);
   var validateInput = function validateInput(e) {
     if (e.target.value.trim() === "") {
       setErr(true);
@@ -77,6 +81,7 @@ var Textarea = function Textarea(_a) {
     setFocus(true);
   };
   var handleInputChange = function handleInputChange(e) {
+    getValue(e.target.value);
     if (onChange) {
       onChange(e);
     }
@@ -86,10 +91,10 @@ var Textarea = function Textarea(_a) {
   };
   var parsedRows = rows;
   return React.createElement("div", {
-    className: "flex flex-col w-full text-sm sm:text-base font-proxima"
+    className: "flex flex-col w-full text-sm sm:text-base"
   }, label && React.createElement("label", {
     className: "".concat(err ? "text-defaultRed w-full" : focus ? "text-primary w-full" : "text-slatyGrey w-full")
-  }, label, required && "*"), React.createElement("div", {
+  }, label, validate && "*"), React.createElement("div", {
     className: "".concat(!err ? "flex w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
   }, React.createElement("textarea", __assign({
     className: "".concat(className, " py-1 px-3 border-b outline-none transition duration-600 w-full h-full ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver"),
@@ -102,9 +107,9 @@ var Textarea = function Textarea(_a) {
     onChange: handleInputChange,
     onFocus: handleFocus
   }, props))), !err && supportingText && React.createElement("span", {
-    className: "text-slatyGrey"
+    className: "text-slatyGrey text-[12px] sm:text-[14px]"
   }, supportingText), err && React.createElement("span", {
-    className: "text-defaultRed"
+    className: "text-defaultRed text-[12px] sm:text-[14px]"
   }, errorMessage));
 };
 
