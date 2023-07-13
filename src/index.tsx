@@ -7,7 +7,7 @@ import React, {
   useEffect,
 } from "react";
 import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
-import "./index.css"
+import "./index.css";
 
 interface PasswordProps {
   label?: string;
@@ -251,7 +251,9 @@ const Password: React.FC<PasswordProps> = ({
       </div>
       {type === "password" ? (
         <span
-          className={`absolute top-7 right-1 text-md sm:text-lg ${
+          className={`absolute ${
+            !label ? "top-2" : "top-8"
+          } right-1 text-md sm:text-lg ${
             err ? "text-defaultRed" : "text-[#979797]"
           }`}
           onClick={() => setType("text")}
@@ -260,7 +262,9 @@ const Password: React.FC<PasswordProps> = ({
         </span>
       ) : (
         <span
-          className={`absolute top-7 right-1 text-md sm:text-lg ${
+          className={`absolute ${
+            !label ? "top-2" : "top-8"
+          } right-1 text-md sm:text-lg ${
             err ? "text-defaultRed" : "text-[#979797]"
           }`}
           onClick={() => setType("password")}
