@@ -4,13 +4,13 @@ import React, {
   FocusEvent,
   KeyboardEvent,
   MouseEvent,
+  useEffect,
 } from "react";
-import "./index.css"
 import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
+import "./index.css"
 
 interface PasswordProps {
   label?: string;
-  required?: boolean;
   className?: string;
   validate?: boolean;
   errorMessage?: string;
@@ -43,16 +43,19 @@ interface PasswordProps {
   onInvalid?: (event: Event) => void;
   onReset?: (event: Event) => void;
   onSubmit?: (event: Event) => void;
+  getValue: (arg1: string) => void;
+  hasError?: boolean;
   props?: any;
 }
 
 const Password: React.FC<PasswordProps> = ({
   label,
-  required,
   className,
   onBlur,
   validate,
   errorMessage = "This is a required field!",
+  getValue,
+  hasError,
   props,
 }) => {
   const [password, setPassword] = useState("");
@@ -60,8 +63,13 @@ const Password: React.FC<PasswordProps> = ({
   const [err, setErr] = useState(false);
   const [focus, setFocus] = useState(false);
   const [open, setOpen] = useState(false);
-  const [errorMes, setErrorMes] = useState("");
+  const [errorMes, setErrorMsg] = useState("");
   const [data, setData] = useState("");
+
+  useEffect(() => {
+    setErrorMsg(errorMessage);
+    setErr(hasError);
+  }, [hasError, errorMessage]);
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newData = e.target.value;
@@ -71,6 +79,7 @@ const Password: React.FC<PasswordProps> = ({
     if (err) {
       setErr(false);
     }
+    getValue(newData);
   };
 
   interface RequirementItem {
@@ -137,43 +146,41 @@ const Password: React.FC<PasswordProps> = ({
         </li>
       );
     });
-
     if (isAllValid) {
       setOpen(false);
     }
-
     return requirementsList;
   };
 
   const validateInput = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === "") {
+    if (e.target.value.trim() === "") {
       setErr(true);
       setOpen(false);
-      setErrorMes(errorMessage);
+      setErrorMsg(errorMessage);
     } else if (!e.target.value.match(/[^A-Za-z0-9]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/[A-Z]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/[a-z]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/[0-9]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (e.target.value.match(/\s/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/.{8,}/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else {
       setErr(false);
     }
@@ -216,7 +223,7 @@ const Password: React.FC<PasswordProps> = ({
           }`}
         >
           {label}
-          {required && "*"}
+          {validate && "*"}
         </label>
       )}
       <div
@@ -280,7 +287,7 @@ const Password: React.FC<PasswordProps> = ({
       )}
 
       {password && (
-        <div className="absolute top-[60px] mt-2 flex items-center">
+        <div className="mt-2 flex items-center">
           <div className="relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]">
             <span
               className={`absolute rounded-l-lg h-[5px] ${
@@ -306,7 +313,11 @@ const Password: React.FC<PasswordProps> = ({
           </span>
         </div>
       )}
-      {err && <span className={`text-defaultRed`}>{errorMes}</span>}
+      {err && (
+        <span className={`text-defaultRed text-[12px] sm:text-[14px]`}>
+          {errorMes}
+        </span>
+      )}
     </div>
   );
 };

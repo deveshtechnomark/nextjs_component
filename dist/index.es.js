@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -94,12 +94,13 @@ var EyeClose = function EyeClose() {
 
 var Password = function Password(_a) {
   var label = _a.label,
-    required = _a.required,
     className = _a.className,
     onBlur = _a.onBlur,
     validate = _a.validate,
     _b = _a.errorMessage,
     errorMessage = _b === void 0 ? "This is a required field!" : _b,
+    getValue = _a.getValue,
+    hasError = _a.hasError,
     props = _a.props;
   var _c = useState(""),
     password = _c[0],
@@ -118,10 +119,14 @@ var Password = function Password(_a) {
     setOpen = _g[1];
   var _h = useState(""),
     errorMes = _h[0],
-    setErrorMes = _h[1];
+    setErrorMsg = _h[1];
   var _j = useState(""),
     data = _j[0],
     setData = _j[1];
+  useEffect(function () {
+    setErrorMsg(errorMessage);
+    setErr(hasError);
+  }, [hasError, errorMessage]);
   var handlePasswordChange = function handlePasswordChange(e) {
     var newData = e.target.value;
     setPassword(newData);
@@ -130,6 +135,7 @@ var Password = function Password(_a) {
     if (err) {
       setErr(false);
     }
+    getValue(newData);
   };
   var requirements = [{
     regex: /[^A-Za-z0-9]/,
@@ -181,34 +187,34 @@ var Password = function Password(_a) {
     return requirementsList;
   };
   var validateInput = function validateInput(e) {
-    if (e.target.value === "") {
+    if (e.target.value.trim() === "") {
       setErr(true);
       setOpen(false);
-      setErrorMes(errorMessage);
+      setErrorMsg(errorMessage);
     } else if (!e.target.value.match(/[^A-Za-z0-9]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/[A-Z]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/[a-z]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/[0-9]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (e.target.value.match(/\s/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/.{8,}/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else {
       setErr(false);
     }
@@ -232,7 +238,7 @@ var Password = function Password(_a) {
     className: "relative flex flex-col text-sm sm:text-base w-full"
   }, label && React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, label, required && "*"), React.createElement("div", {
+  }, label, validate && "*"), React.createElement("div", {
     className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
     className: "".concat(className, " py-1 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
@@ -259,7 +265,7 @@ var Password = function Password(_a) {
   }, validatePassword())), React.createElement("span", {
     className: "w-2 h-2 bg-pureWhite z-10 absolute ".concat(err ? "bottom-[86px]" : "bottom-[66px]", " left-[20px] rotate-[45deg]")
   })), password && React.createElement("div", {
-    className: "absolute top-[60px] mt-2 flex items-center"
+    className: "mt-2 flex items-center"
   }, React.createElement("div", {
     className: "relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]"
   }, React.createElement("span", {
@@ -267,7 +273,7 @@ var Password = function Password(_a) {
   })), React.createElement("span", {
     className: "ml-4 text-xs sm:text-sm"
   }, getPasswordStrength())), err && React.createElement("span", {
-    className: "text-defaultRed"
+    className: "text-defaultRed text-[12px] sm:text-[14px]"
   }, errorMes));
 };
 
