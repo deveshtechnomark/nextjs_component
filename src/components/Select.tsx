@@ -81,13 +81,11 @@ const Select: React.FC<SelectProps> = ({
           <label
             className={classNames(
               "text-[14px] font-normal font-proxima",
-
               open ? "text-primary" : "text-slatyGrey"
             )}
             htmlFor={id}
           >
             {label}
-
             {required && "*"}
           </label>
         )}
@@ -106,13 +104,9 @@ const Select: React.FC<SelectProps> = ({
             }
             className={classNames(
               "flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima w-full",
-
               !inputValue && "text-darkCharcoal",
-
               open && "text-primary",
-
               !open ? "cursor-pointer" : "cursor-default",
-
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"
             )}
           />
@@ -121,7 +115,6 @@ const Select: React.FC<SelectProps> = ({
             onClick={handleToggleOpen}
             className={classNames(
               "text-[1.5rem] text-darkCharcoal cursor-pointer",
-
               {
                 "rotate-180": open,
               }
@@ -134,7 +127,6 @@ const Select: React.FC<SelectProps> = ({
         <ul
           className={classNames(
             "absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform",
-
             open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
@@ -143,8 +135,8 @@ const Select: React.FC<SelectProps> = ({
               "ease-out": open,
             }
           )}
-          // Setting the width inline style based on the client width of the parent div
 
+          // Setting the width inline style based on the client width of the parent div
           style={{ width: selectRef.current?.clientWidth }}
         >
           {options &&
@@ -153,10 +145,8 @@ const Select: React.FC<SelectProps> = ({
                 key={index}
                 className={classNames(
                   "p-[10px] text-[16px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex",
-
                   {
                     "bg-whiteSmoke": option.value === inputValue,
-
                     hidden:
                       search &&
                       !option.label.toLowerCase().startsWith(inputValue),
@@ -175,6 +165,7 @@ const Select: React.FC<SelectProps> = ({
                 )}
 
                 {option.label}
+
               </li>
             ))}
         </ul>
