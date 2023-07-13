@@ -481,7 +481,7 @@ var Breadcrumb = /** @class */function (_super) {
       fontSize: style && style.fontSize ? style.fontSize : 'inherit'
     };
     return /*#__PURE__*/React.createElement("nav", {
-      className: "flex ".concat(className),
+      className: "flex ".concat(className, " "),
       style: containerStyle,
       "aria-label": "Breadcrumb"
     }, /*#__PURE__*/React.createElement("ol", {
@@ -492,7 +492,8 @@ var Breadcrumb = /** @class */function (_super) {
       viewBox: "0 0 12 12",
       fill: "none",
       xmlns: "http://www.w3.org/2000/svg",
-      style: iconStyle
+      style: iconStyle,
+      className: 'mr-1'
     }, /*#__PURE__*/React.createElement("path", {
       d: "M6.66667 3.33333V0.666667C6.66667 0.477778 6.73056 0.319444 6.85833 0.191667C6.98611 0.0638889 7.14445 0 7.33333 0H11.3333C11.5222 0 11.6806 0.0638889 11.8083 0.191667C11.9361 0.319444 12 0.477778 12 0.666667V3.33333C12 3.52222 11.9361 3.68056 11.8083 3.80833C11.6806 3.93611 11.5222 4 11.3333 4H7.33333C7.14445 4 6.98611 3.93611 6.85833 3.80833C6.73056 3.68056 6.66667 3.52222 6.66667 3.33333ZM0 6V0.666667C0 0.477778 0.0638889 0.319444 0.191667 0.191667C0.319444 0.0638889 0.477778 0 0.666667 0H4.66667C4.85556 0 5.01389 0.0638889 5.14167 0.191667C5.26944 0.319444 5.33333 0.477778 5.33333 0.666667V6C5.33333 6.18889 5.26944 6.34722 5.14167 6.475C5.01389 6.60278 4.85556 6.66667 4.66667 6.66667H0.666667C0.477778 6.66667 0.319444 6.60278 0.191667 6.475C0.0638889 6.34722 0 6.18889 0 6ZM6.66667 11.3333V6C6.66667 5.81111 6.73056 5.65278 6.85833 5.525C6.98611 5.39722 7.14445 5.33333 7.33333 5.33333H11.3333C11.5222 5.33333 11.6806 5.39722 11.8083 5.525C11.9361 5.65278 12 5.81111 12 6V11.3333C12 11.5222 11.9361 11.6806 11.8083 11.8083C11.6806 11.9361 11.5222 12 11.3333 12H7.33333C7.14445 12 6.98611 11.9361 6.85833 11.8083C6.73056 11.6806 6.66667 11.5222 6.66667 11.3333ZM0 11.3333V8.66667C0 8.47778 0.0638889 8.31945 0.191667 8.19167C0.319444 8.06389 0.477778 8 0.666667 8H4.66667C4.85556 8 5.01389 8.06389 5.14167 8.19167C5.26944 8.31945 5.33333 8.47778 5.33333 8.66667V11.3333C5.33333 11.5222 5.26944 11.6806 5.14167 11.8083C5.01389 11.9361 4.85556 12 4.66667 12H0.666667C0.477778 12 0.319444 11.9361 0.191667 11.8083C0.0638889 11.6806 0 11.5222 0 11.3333ZM1.33333 5.33333H4V1.33333H1.33333V5.33333ZM8 10.6667H10.6667V6.66667H8V10.6667ZM8 2.66667H10.6667V1.33333H8V2.66667ZM1.33333 10.6667H4V9.33333H1.33333V10.6667Z",
       fill: items.length > 1 ? "#02B89D" : "#6E6D7A"
@@ -502,10 +503,10 @@ var Breadcrumb = /** @class */function (_super) {
         className: "inline-flex items-center"
       }, index > 0 && /*#__PURE__*/React.createElement("span", {
         style: linkStyle,
-        className: "w-2 mx-2 h-6 text-primary"
+        className: "mx-2 h-6 text-primary "
       }, separator), /*#__PURE__*/React.createElement("a", {
         href: item.url,
-        className: "ml-1 text-sm font-medium ".concat(index === items.length - 1 ? "text-slatyGrey" : "text-primary border-b border-primary"),
+        className: "text-sm font-medium ".concat(index === items.length - 1 ? "text-slatyGrey" : "text-primary border-b border-primary"),
         style: linkStyle
       }, item.label));
     })));
@@ -1113,7 +1114,7 @@ var ColorPicker = function ColorPicker(props) {
     fill: "none",
     viewBox: "0 0 21 21"
   }, /*#__PURE__*/React.createElement("path", {
-    stroke: 'currentcolor',
+    stroke: "currentcolor",
     strokeLinecap: "round",
     strokeLinejoin: "round",
     strokeWidth: "2",
@@ -1132,8 +1133,8 @@ var ColorPicker = function ColorPicker(props) {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       "float": "right",
-      margin: '5px 5px 5px 5px',
-      cursor: 'pointer'
+      margin: "5px 5px 5px 5px",
+      cursor: "pointer"
     },
     onClick: function onClick() {
       setOpen(false);
@@ -1178,7 +1179,7 @@ var ColorPicker = function ColorPicker(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "".concat(Styles$1.cursor),
     style: {
-      border: '5px solid rgb(248, 248, 248)',
+      border: "5px solid rgb(248, 248, 248)",
       background: hex,
       position: "absolute",
       top: "0px",
@@ -1202,6 +1203,7 @@ var ColorPicker = function ColorPicker(props) {
     onChange: handleOpacityChange,
     style: {
       WebkitAppearance: "none",
+      MozAppearance: "none",
       appearance: "none",
       width: "100%",
       height: "8px",
@@ -2188,7 +2190,10 @@ function Uploader(_a) {
     if (updatedFileNames.length === 0) {
       setUploaded(false);
     }
+    setIsChecked(false);
   };
+  // console.log(fileNames);
+  // console.log(isChecked);
   var getFileExtension = function getFileExtension(fileName) {
     var extension = fileName.slice(fileName.lastIndexOf(".") + 1).toLowerCase();
     return extension;
@@ -2231,13 +2236,13 @@ function Uploader(_a) {
   return type === "url" ? /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row justify-center items-center h-[36px] border border-dashed border-lightSilver rounded-[4px]"
   }, /*#__PURE__*/React.createElement("input", {
-    className: "outline-none border-r border-r-lightSilver w-1/6 ml-2 text-[14px]  text-darkCharcoal placeholder:text-[14px]",
+    className: "outline-none border-r border-r-lightSilver w-1/6 ml-2 text-[14px] font-proxima text-darkCharcoal placeholder:text-[14px]",
     type: "url",
     value: rootUrl,
     onChange: handleRootUrlChange,
     placeholder: "Enter root URL"
   }), /*#__PURE__*/React.createElement("input", {
-    className: "outline-none w-4/6 ml-2 text-[14px] text-pureBlack placeholder:text-[14px]",
+    className: "outline-none w-4/6 ml-2 text-[14px] font-proxima text-pureBlack placeholder:text-[14px]",
     type: "url",
     value: mainUrl,
     onChange: handleMainUrlChange,
@@ -2246,7 +2251,7 @@ function Uploader(_a) {
     className: "w-1/6 relative"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: handleUpload,
-    className: "absolute bottom-[-12px] right-5 text-[16px] px-[20px] text-slatyGrey hover:bg-[#EDFFFC] hover:text-primary rounded-[5px]"
+    className: "absolute bottom-[-12px] right-5 text-[16px] px-[20px] text-slatyGrey font-proxima hover:bg-[#EDFFFC] hover:text-primary rounded-[5px]"
   }, "Upload"))) : /*#__PURE__*/React.createElement("div", null, (multiSelect || !variant) && /*#__PURE__*/React.createElement("div", {
     className: "upload-container w-full flex items-center justify-center ".concat(variant === "small" ? "h-[36px]" : "flex-col h-[230px]", " justify-center items-centerborder transition-all duration-200 ease-in \n        border border-dashed border-lightSilver hover:border-primary hover:bg-[#EDFFFC] cursor-pointer rounded-[4px]"),
     onDragOver: handleDragOver,
@@ -2261,7 +2266,7 @@ function Uploader(_a) {
   }), /*#__PURE__*/React.createElement("div", {
     className: "text-[15px] text-slatyGrey ".concat(variant === "small" ? "" : "border-2 border-lightSilver rounded-[4px] p-2")
   }, /*#__PURE__*/React.createElement(UploadIcon, null)), /*#__PURE__*/React.createElement("p", {
-    className: "".concat(variant === "small" ? "ml-[10px]" : "mt-4", " text-[14px] text-darkCharcoal")
+    className: "".concat(variant === "small" ? "ml-[10px]" : "mt-4", " text-[14px] text-darkCharcoal font-proxima")
   }, "Drag and Drop or ", /*#__PURE__*/React.createElement("span", {
     className: "text-teal-500"
   }, "Browse"), " to Upload")), multiSelect ? /*#__PURE__*/React.createElement("section", {
@@ -2270,7 +2275,7 @@ function Uploader(_a) {
     className: "flex flex-row ml-2 flex-wrap overflow-x-auto"
   }, fileNames.length > 0 && uploaded ? fileNames.map(function (name, index) {
     return /*#__PURE__*/React.createElement("span", {
-      className: "text-[14px] text-darkCharcoal flex items-center gap-2 bg-whiteSmoke px-[2px] py-[2.5px] rounded-[2px] mr-2 mb-2",
+      className: "text-[14px] text-darkCharcoal font-proxima flex items-center gap-2 bg-whiteSmoke px-[2px] py-[2.5px] rounded-[2px] mr-2 mb-2",
       key: name
     }, /*#__PURE__*/React.createElement("span", {
       className: "text-[14px]"
@@ -2281,9 +2286,9 @@ function Uploader(_a) {
       className: "text-[14px] text-slatyGrey cursor-pointer"
     }, /*#__PURE__*/React.createElement(ClearIcon$1, null)));
   }) : !uploaded && /*#__PURE__*/React.createElement("span", {
-    className: "flex flex-row items-center gap-2 text-[14px] text-darkCharcoal"
+    className: "flex flex-row items-center gap-2 text-[14px] text-darkCharcoal font-proxima"
   }, fileNames.length === 0 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(FileIcon, null), " No selected files") : /*#__PURE__*/React.createElement(React.Fragment, null, fileNames.length, " file", fileNames.length > 1 ? "s" : "", " selected")))), fileNames.length > 0 && !uploaded && /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center text-[12px] italic text-slatyGrey flex-row"
+    className: "flex items-center text-[12px] font-proxima italic text-slatyGrey flex-row"
   }, /*#__PURE__*/React.createElement("span", {
     className: "mr-[10px]"
   }, uploaded ? "Uploaded" : "Uploading..."), /*#__PURE__*/React.createElement(ProgressBar, {
@@ -2295,7 +2300,7 @@ function Uploader(_a) {
   }, isChecked && /*#__PURE__*/React.createElement(CheckIcon$1, null)))) : /*#__PURE__*/React.createElement("section", {
     className: "".concat(variant === "small" ? fileNames.length > 0 && "flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]" : "mt-2 flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]")
   }, fileNames.length > 0 && !uploaded ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("label", {
-    className: "text-[12px] italic mr-[10px] text-slatyGrey"
+    className: "text-[12px] italic mr-[10px] text-slatyGrey font-proxima"
   }, !uploaded ? "Uploading..." : "Uploaded"), /*#__PURE__*/React.createElement(ProgressBar, {
     variant: "primary",
     progressDigit: false,
@@ -2305,7 +2310,7 @@ function Uploader(_a) {
   }, isChecked && /*#__PURE__*/React.createElement(CheckIcon$1, null))) : uploaded ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row items-center"
   }, renderFileIcon(fileNames[0]), /*#__PURE__*/React.createElement("span", {
-    className: "ml-2 text-[14px] text-darkCharcoal"
+    className: "ml-2 text-[14px] text-darkCharcoal font-proxima"
   }, fileNames[0].length > 30 ? /*#__PURE__*/React.createElement(React.Fragment, null, fileNames[0].slice(0, 26), "..", fileNames[0].substring(fileNames[0].lastIndexOf("."))) : /*#__PURE__*/React.createElement(React.Fragment, null, fileNames[0]))), /*#__PURE__*/React.createElement("span", {
     onClick: function onClick() {
       return handleRemoveFile(0);
@@ -2325,13 +2330,13 @@ function Uploader(_a) {
   }), /*#__PURE__*/React.createElement("div", {
     className: "text-[15px] text-slatyGrey ".concat(variant === "small" ? "" : "border-2 border-lightSilver rounded-[4px] p-2")
   }, /*#__PURE__*/React.createElement(UploadIcon, null)), /*#__PURE__*/React.createElement("p", {
-    className: "".concat(variant === "small" ? "ml-[10px]" : "mt-4", " text-[14px] text-darkCharcoal")
+    className: "".concat(variant === "small" ? "ml-[10px]" : "mt-4", " text-[14px] text-darkCharcoal font-proxima")
   }, "Drag and Drop or ", /*#__PURE__*/React.createElement("span", {
     className: "text-teal-500"
   }, "Browse"), " ", "to Upload")) : /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row items-center"
   }, /*#__PURE__*/React.createElement(FileIcon, null), /*#__PURE__*/React.createElement("span", {
-    className: "ml-2 text-[14px] text-darkCharcoal"
+    className: "ml-2 text-[14px] text-darkCharcoal font-proxima"
   }, "No Files Selected"))));
 }
 
@@ -3161,12 +3166,13 @@ var EyeClose = function EyeClose() {
 
 var Password = function Password(_a) {
   var label = _a.label,
-    required = _a.required,
     className = _a.className,
     onBlur = _a.onBlur,
     validate = _a.validate,
     _b = _a.errorMessage,
     errorMessage = _b === void 0 ? "This is a required field!" : _b,
+    getValue = _a.getValue,
+    hasError = _a.hasError,
     props = _a.props;
   var _c = React.useState(""),
     password = _c[0],
@@ -3185,10 +3191,14 @@ var Password = function Password(_a) {
     setOpen = _g[1];
   var _h = React.useState(""),
     errorMes = _h[0],
-    setErrorMes = _h[1];
+    setErrorMsg = _h[1];
   var _j = React.useState(""),
     data = _j[0],
     setData = _j[1];
+  React.useEffect(function () {
+    setErrorMsg(errorMessage);
+    setErr(hasError);
+  }, [hasError, errorMessage]);
   var handlePasswordChange = function handlePasswordChange(e) {
     var newData = e.target.value;
     setPassword(newData);
@@ -3197,6 +3207,7 @@ var Password = function Password(_a) {
     if (err) {
       setErr(false);
     }
+    getValue(newData);
   };
   var requirements = [{
     regex: /[^A-Za-z0-9]/,
@@ -3248,34 +3259,34 @@ var Password = function Password(_a) {
     return requirementsList;
   };
   var validateInput = function validateInput(e) {
-    if (e.target.value === "") {
+    if (e.target.value.trim() === "") {
       setErr(true);
       setOpen(false);
-      setErrorMes(errorMessage);
+      setErrorMsg(errorMessage);
     } else if (!e.target.value.match(/[^A-Za-z0-9]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/[A-Z]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/[a-z]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/[0-9]/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (e.target.value.match(/\s/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else if (!e.target.value.match(/.{8,}/)) {
       setErr(true);
       setOpen(false);
-      setErrorMes("Please fill details according to the requirements.");
+      setErrorMsg("Please fill details according to the requirements.");
     } else {
       setErr(false);
     }
@@ -3299,7 +3310,7 @@ var Password = function Password(_a) {
     className: "relative flex flex-col text-sm sm:text-base w-full"
   }, label && /*#__PURE__*/React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, label, required && "*"), /*#__PURE__*/React.createElement("div", {
+  }, label, validate && "*"), /*#__PURE__*/React.createElement("div", {
     className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, /*#__PURE__*/React.createElement("input", __assign({
     className: "".concat(className, " py-1 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
@@ -3310,12 +3321,12 @@ var Password = function Password(_a) {
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
     onFocus: handleFocus
   }, props))), type === "password" ? /*#__PURE__*/React.createElement("span", {
-    className: "absolute top-7 right-1 text-md sm:text-lg ".concat(err ? "text-defaultRed" : "text-[#979797]"),
+    className: "absolute ".concat(!label ? "top-2" : "top-8", " right-1 text-md sm:text-lg ").concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
       return setType("text");
     }
   }, /*#__PURE__*/React.createElement(EyeClose, null)) : /*#__PURE__*/React.createElement("span", {
-    className: "absolute top-7 right-1 text-md sm:text-lg ".concat(err ? "text-defaultRed" : "text-[#979797]"),
+    className: "absolute ".concat(!label ? "top-2" : "top-8", " right-1 text-md sm:text-lg ").concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
       return setType("password");
     }
@@ -3326,7 +3337,7 @@ var Password = function Password(_a) {
   }, validatePassword())), /*#__PURE__*/React.createElement("span", {
     className: "w-2 h-2 bg-pureWhite z-10 absolute ".concat(err ? "bottom-[86px]" : "bottom-[66px]", " left-[20px] rotate-[45deg]")
   })), password && /*#__PURE__*/React.createElement("div", {
-    className: "absolute top-[60px] mt-2 flex items-center"
+    className: "mt-2 flex items-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]"
   }, /*#__PURE__*/React.createElement("span", {
@@ -3334,7 +3345,7 @@ var Password = function Password(_a) {
   })), /*#__PURE__*/React.createElement("span", {
     className: "ml-4 text-xs sm:text-sm"
   }, getPasswordStrength())), err && /*#__PURE__*/React.createElement("span", {
-    className: "text-defaultRed"
+    className: "text-defaultRed text-[12px] sm:text-[14px]"
   }, errorMes));
 };
 
@@ -3637,36 +3648,31 @@ var Select = function Select(_a) {
     className = _a.className,
     _c = _a.search,
     search = _c === void 0 ? false : _c,
-    _d = _a.validate,
-    validate = _d === void 0 ? false : _d;
+    _d = _a.required,
+    required = _d === void 0 ? false : _d,
+    defaultValue = _a.defaultValue;
   var _e = React.useState(""),
     inputValue = _e[0],
     setInputValue = _e[1];
   var _f = React.useState(false),
     open = _f[0],
     setOpen = _f[1];
-  var _g = React.useState(false),
-    error = _g[0],
-    setError = _g[1];
   var selectRef = React.useRef(null);
   React.useEffect(function () {
-    document.addEventListener("mousedown", handleDocumentClick);
+    window.addEventListener("click", handleOutsideClick);
     return function () {
-      document.removeEventListener("mousedown", handleDocumentClick);
+      window.removeEventListener("click", handleOutsideClick);
     };
   }, []);
-  var handleDocumentClick = function handleDocumentClick(event) {
+  var handleOutsideClick = function handleOutsideClick(event) {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
       setOpen(false);
-      validateInput();
     }
   };
   var handleToggleOpen = function handleToggleOpen() {
     setOpen(function (prevOpen) {
       return !prevOpen;
     });
-    // Clear the error state when opening the dropdown again
-    setError(false);
   };
   var handleInputChange = function handleInputChange(e) {
     var inputValue = e.target.value.toLowerCase();
@@ -3675,42 +3681,30 @@ var Select = function Select(_a) {
   var handleSelect = function handleSelect(value) {
     setInputValue(value);
     setOpen(false);
-    console.log(value);
     onSelect(value);
-    // Call the validation function on select
-    validateInput();
-  };
-  var validateInput = function validateInput() {
-    if (validate && !inputValue) {
-      setError(true);
-    } else {
-      setError(false);
-    }
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(classNames("font-medium w-full flex-row border-b ".concat(error && !inputValue ? "border-defaultRed" : "border-lightSilver hover:border-primary transition-colors duration-300")), " ").concat(className),
+    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ".concat(className)),
     ref: selectRef
   }, label && /*#__PURE__*/React.createElement("label", {
-    className: classNames("text-[14px] font-normal", open && "text-primary", error && !inputValue ? "text-defaultRed" : "text-slatyGrey"),
+    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : "text-slatyGrey"),
     htmlFor: id
-  }, label, validate && "*"), /*#__PURE__*/React.createElement("div", {
+  }, label, required && "*"), /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row items-center relative mt-0.5 w-full"
   }, /*#__PURE__*/React.createElement("input", {
     id: id,
     onClick: handleToggleOpen,
     onChange: handleInputChange,
-    readOnly: open && !search,
-    placeholder: "Please Select...",
+    readOnly: !search,
+    placeholder: defaultValue || "Please select",
     value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
-    className: classNames("flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal w-full", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: classNames("flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima w-full", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), /*#__PURE__*/React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
       "rotate-180": open
     })
-  }, /*#__PURE__*/React.createElement(ChevronDown, null))), error && !inputValue && /*#__PURE__*/React.createElement("span", {
-    className: "absolute text-defaultRed text-[14px] ml-1"
-  }, "Please select a value"), /*#__PURE__*/React.createElement("ul", {
+  }, /*#__PURE__*/React.createElement(ChevronDown, null))), /*#__PURE__*/React.createElement("ul", {
     className: classNames("absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
       "ease-out": open
     }),
@@ -3718,10 +3712,10 @@ var Select = function Select(_a) {
     style: {
       width: (_b = selectRef.current) === null || _b === void 0 ? void 0 : _b.clientWidth
     }
-  }, options && options.map(function (option) {
+  }, options && options.map(function (option, index) {
     return /*#__PURE__*/React.createElement("li", {
-      key: option.value,
-      className: classNames("p-[10px] text-[16px] hover:bg-whiteSmoke font-normal cursor-pointer flex", {
+      key: index,
+      className: classNames("p-[10px] text-[16px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex", {
         "bg-whiteSmoke": option.value === inputValue,
         hidden: search && !option.label.toLowerCase().startsWith(inputValue)
       }),
@@ -5025,15 +5019,17 @@ var Tel = function Tel(_a) {
     className = _a.className,
     id = _a.id,
     name = _a.name,
-    required = _a.required,
     validate = _a.validate,
     onBlur = _a.onBlur;
     _a.onChange;
     var supportingText = _a.supportingText,
     disabled = _a.disabled,
-    getValue = _a.getValue;
-    _a.errorMessage;
-    var props = __rest(_a, ["label", "className", "id", "name", "required", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "errorMessage"]);
+    getValue = _a.getValue,
+    _b = _a.countryCode,
+    countryCode = _b === void 0 ? false : _b,
+    errorMessage = _a.errorMessage,
+    hasError = _a.hasError,
+    props = __rest(_a, ["label", "className", "id", "name", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "countryCode", "errorMessage", "hasError"]);
   var inputRef = React.useRef(null);
   var _c = React.useState(false),
     err = _c[0],
@@ -5044,14 +5040,22 @@ var Tel = function Tel(_a) {
   var _e = React.useState(""),
     value = _e[0],
     setValue = _e[1];
-  var _f = React.useState("");
-    _f[0];
-    var setSelectedCountryCode = _f[1];
+  var _f = React.useState("+91"),
+    selectedCountryCode = _f[0],
+    setSelectedCountryCode = _f[1];
+  var _g = React.useState(""),
+    errorMsg = _g[0],
+    setErrorMsg = _g[1];
+  React.useEffect(function () {
+    setErrorMsg(errorMessage);
+    setErr(hasError);
+  }, [hasError, errorMessage]);
   var validateInput = function validateInput(e) {
     if (e.target.value === "") {
       setErr(true);
     } else if (e.target.value.length < 12) {
       setErr(true);
+      setErrorMsg("Please Enter valid 10 digits Phone Number.");
     } else {
       setErr(false);
     }
@@ -5075,31 +5079,28 @@ var Tel = function Tel(_a) {
     if (err) {
       setErr(false);
     }
-    if (err) {
-      setErr(false);
-    }
-    getValue(formattedValue);
+    getValue(selectedCountryCode + " " + formattedValue);
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col w-full text-sm sm:text-base relative"
   }, label && /*#__PURE__*/React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, label, required && "*"), /*#__PURE__*/React.createElement("div", {
-    className: "flex ".concat(!err ? "w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px  before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
+  }, label, validate && "*"), /*#__PURE__*/React.createElement("div", {
+    className: "flex ".concat(!err ? "w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex border-b outline-none transition duration-600 w-full h-full ".concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver")
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "w-[143px]"
+  }, countryCode && /*#__PURE__*/React.createElement("div", {
+    className: "w-[100px]"
   }, /*#__PURE__*/React.createElement(Select, {
     className: "!border-none",
     options: data,
     id: "basic",
-    validate: true,
     onSelect: function onSelect(value) {
-      return setSelectedCountryCode(value);
-    }
+      setSelectedCountryCode(value);
+    },
+    defaultValue: "+91"
   })), /*#__PURE__*/React.createElement("input", __assign({
-    className: "".concat(className, " py-2 px-3 outline-none w-full h-full "),
+    className: "".concat(className, " py-2 px-3 outline-none w-full h-full mt-[6px]"),
     ref: inputRef,
     type: "tel",
     id: id,
@@ -5111,8 +5112,10 @@ var Tel = function Tel(_a) {
     disabled: disabled,
     placeholder: "9874 563 214"
   }, props)))), !err && supportingText && /*#__PURE__*/React.createElement("span", {
-    className: "text-slatyGrey"
-  }, supportingText));
+    className: "text-slatyGrey text-[12px] sm:text-[14px]"
+  }, supportingText), err && /*#__PURE__*/React.createElement("span", {
+    className: "text-defaultRed text-[12px] sm:text-[14px]"
+  }, errorMsg));
 };
 
 var Textarea = function Textarea(_a) {
@@ -5123,15 +5126,16 @@ var Textarea = function Textarea(_a) {
     value = _a.value,
     _b = _a.rows,
     rows = _b === void 0 ? "1" : _b,
-    required = _a.required,
     validate = _a.validate,
     onBlur = _a.onBlur,
     onChange = _a.onChange,
     supportingText = _a.supportingText;
     _a.disabled;
-    var _c = _a.errorMessage,
+    var getValue = _a.getValue,
+    hasError = _a.hasError,
+    _c = _a.errorMessage,
     errorMessage = _c === void 0 ? "This is a required field!" : _c,
-    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "required", "validate", "onBlur", "onChange", "supportingText", "disabled", "errorMessage"]);
+    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "hasError", "errorMessage"]);
   var textAreaRef = React.useRef(null);
   var _d = React.useState(false),
     err = _d[0],
@@ -5139,6 +5143,9 @@ var Textarea = function Textarea(_a) {
   var _e = React.useState(false),
     focus = _e[0],
     setFocus = _e[1];
+  React.useEffect(function () {
+    setErr(hasError);
+  }, [hasError, errorMessage]);
   var validateInput = function validateInput(e) {
     if (e.target.value.trim() === "") {
       setErr(true);
@@ -5150,6 +5157,7 @@ var Textarea = function Textarea(_a) {
     setFocus(true);
   };
   var handleInputChange = function handleInputChange(e) {
+    getValue(e.target.value);
     if (onChange) {
       onChange(e);
     }
@@ -5162,7 +5170,7 @@ var Textarea = function Textarea(_a) {
     className: "flex flex-col w-full text-sm sm:text-base"
   }, label && /*#__PURE__*/React.createElement("label", {
     className: "".concat(err ? "text-defaultRed w-full" : focus ? "text-primary w-full" : "text-slatyGrey w-full")
-  }, label, required && "*"), /*#__PURE__*/React.createElement("div", {
+  }, label, validate && "*"), /*#__PURE__*/React.createElement("div", {
     className: "".concat(!err ? "flex w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
   }, /*#__PURE__*/React.createElement("textarea", __assign({
     className: "".concat(className, " py-1 px-3 border-b outline-none transition duration-600 w-full h-full ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver"),
@@ -5175,9 +5183,9 @@ var Textarea = function Textarea(_a) {
     onChange: handleInputChange,
     onFocus: handleFocus
   }, props))), !err && supportingText && /*#__PURE__*/React.createElement("span", {
-    className: "text-slatyGrey"
+    className: "text-slatyGrey text-[12px] sm:text-[14px]"
   }, supportingText), err && /*#__PURE__*/React.createElement("span", {
-    className: "text-defaultRed"
+    className: "text-defaultRed text-[12px] sm:text-[14px]"
   }, errorMessage));
 };
 
@@ -5219,7 +5227,6 @@ var TextField = function TextField(_a) {
     name = _a.name,
     value = _a.value,
     type = _a.type,
-    required = _a.required,
     validate = _a.validate,
     onBlur = _a.onBlur,
     onChange = _a.onChange,
@@ -5227,7 +5234,9 @@ var TextField = function TextField(_a) {
     errorMessage = _b === void 0 ? "This is a required field!" : _b,
     supportingText = _a.supportingText,
     disabled = _a.disabled,
-    props = __rest(_a, ["label", "className", "id", "name", "value", "type", "required", "validate", "onBlur", "onChange", "errorMessage", "supportingText", "disabled"]);
+    getValue = _a.getValue,
+    hasError = _a.hasError,
+    props = __rest(_a, ["label", "className", "id", "name", "value", "type", "validate", "onBlur", "onChange", "errorMessage", "supportingText", "disabled", "getValue", "hasError"]);
   var inputRef = React.useRef(null);
   var _c = React.useState(false),
     err = _c[0],
@@ -5238,20 +5247,27 @@ var TextField = function TextField(_a) {
   var _e = React.useState(false),
     valid = _e[0],
     setValid = _e[1];
-  var _f = React.useState(false),
-    showEmailError = _f[0],
-    setShowEmailError = _f[1];
+  var _f = React.useState(false);
+    _f[0];
+    var setShowEmailError = _f[1];
+  React.useEffect(function () {
+    setErr(hasError);
+  }, [hasError, errorMessage]);
   var handleFocus = function handleFocus() {
     setFocus(true);
   };
   var handleBlur = function handleBlur(e) {
-    if (validate && required && (e.target.value === "" || !e.target.value)) {
+    if (validate && (e.target.value === "" || !e.target.value)) {
       setErr(true);
       setFocus(false);
     } else if (validate && type === "email" && !validateEmail(e.target.value)) {
       setErr(true);
       setShowEmailError(true);
       setFocus(false);
+    } else if (validateEmail(e.target.value)) {
+      setErr(false);
+      setShowEmailError(false);
+      setFocus(true);
     } else {
       setErr(false);
       setShowEmailError(false);
@@ -5267,6 +5283,7 @@ var TextField = function TextField(_a) {
   };
   var handleInputChange = function handleInputChange(e) {
     var inputValue = e.target.value;
+    getValue(inputValue);
     if (onChange) {
       onChange(e);
     }
@@ -5281,6 +5298,9 @@ var TextField = function TextField(_a) {
     } else if (validate && type === "email") {
       if (inputValue && validateEmail(inputValue)) {
         setValid(true);
+        setErr(false);
+        setShowEmailError(false);
+      } else if (inputValue) {
         setErr(false);
         setShowEmailError(false);
       } else {
@@ -5303,15 +5323,14 @@ var TextField = function TextField(_a) {
     setValid(false);
     setShowEmailError(false);
   };
-  var labelClassName = "\n  ".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey", "\n");
   return /*#__PURE__*/React.createElement("div", {
-    className: "flex flex-col text-[14px] laptop:text-base relative"
+    className: "flex flex-col text-sm sm:text-base relative"
   }, label && /*#__PURE__*/React.createElement("label", {
-    className: labelClassName
-  }, label, required && "*"), /*#__PURE__*/React.createElement("div", {
+    className: "\n        ".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey", "\n      ")
+  }, label, validate && "*"), /*#__PURE__*/React.createElement("div", {
     className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, /*#__PURE__*/React.createElement("input", __assign({
-    className: "\n\n          ".concat(className, "\n\n          py-1 px-3 border-b outline-none transition duration-600 w-full\n\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n\n          ").concat(valid && "text-successColor font-normal text-[14px] font-proxima", "\n\n          ").concat(showEmailError && "text-defaultRed", "\n\n        "),
+    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid && !err ? "text-successColor" : "text-[#333333]", "\n         \n        "),
     ref: inputRef,
     type: type,
     id: id,
@@ -5326,12 +5345,12 @@ var TextField = function TextField(_a) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-[20px]",
     onClick: handleClear
-  }, /*#__PURE__*/React.createElement(ClearIcon, null))), valid && /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(ClearIcon, null))), valid && !err && /*#__PURE__*/React.createElement("span", {
     className: "text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3"
   }, /*#__PURE__*/React.createElement(CheckIcon, null)), err && /*#__PURE__*/React.createElement("span", {
-    className: "text-defaultRed"
+    className: "text-defaultRed text-[12px] sm:text-[14px]"
   }, errorMessage), !err && supportingText && /*#__PURE__*/React.createElement("span", {
-    className: "text-slatyGrey"
+    className: "text-slatyGrey text-[12px] sm:text-[14px]"
   }, supportingText));
 };
 

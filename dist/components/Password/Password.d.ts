@@ -1,7 +1,6 @@
 import React, { ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent } from "react";
 interface PasswordProps {
     label?: string;
-    required?: boolean;
     className?: string;
     validate?: boolean;
     errorMessage?: string;
@@ -34,6 +33,8 @@ interface PasswordProps {
     onInvalid?: (event: Event) => void;
     onReset?: (event: Event) => void;
     onSubmit?: (event: Event) => void;
+    getValue: (arg1: string) => void;
+    hasError?: boolean;
     props?: any;
 }
 declare const Password: React.FC<PasswordProps>;

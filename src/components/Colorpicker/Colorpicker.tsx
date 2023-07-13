@@ -1,11 +1,18 @@
-import React, { useRef, useState, useEffect, HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+} from "react";
 import Styles from "./Colorpicker.module.scss";
 
-interface ColorPickerProps  {
+
+interface ColorPickerProps {
   onChange?: (value: string) => void;
 }
 
-export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
+export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [colorBoxValue, setColorBoxValue] = useState("");
@@ -338,9 +345,9 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
   }`;
 
   useEffect(() => {
-    console.log(colorBoxValue); 
+    console.log(colorBoxValue);
     props.onChange(colorBoxValue || rgbaColorValue);
-  }, [colorBoxValue,rgbaColorValue]);
+  }, [colorBoxValue, rgbaColorValue]);
 
   return (
     <>
@@ -368,35 +375,35 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
             <div className="flex flex-col gap-2">
               <div className="flex gap-2">
                 <div
-                   className={`${Styles.color_box} ${Styles.color_box_white}`}
+                  className={`${Styles.color_box} ${Styles.color_box_white}`}
                   onClick={() => {
                     setColorBoxValue("#FFFFFF");
                     setOpen(false);
                   }}
                 ></div>
                 <div
-                   className={`${Styles.color_box} ${Styles.color_box_gray}`}
+                  className={`${Styles.color_box} ${Styles.color_box_gray}`}
                   onClick={() => {
                     setColorBoxValue("#D8D8D8");
                     setOpen(false);
                   }}
                 ></div>
                 <div
-                   className={`${Styles.color_box} ${Styles.color_box_primary}`}
+                  className={`${Styles.color_box} ${Styles.color_box_primary}`}
                   onClick={() => {
                     setColorBoxValue("#02B89D");
                     setOpen(false);
                   }}
                 ></div>
                 <div
-                   className={`${Styles.color_box} ${Styles.color_box_secondary}`}
+                  className={`${Styles.color_box} ${Styles.color_box_secondary}`}
                   onClick={() => {
                     setColorBoxValue("#069CDE");
                     setOpen(false);
                   }}
                 ></div>
                 <div
-                   className={`${Styles.color_box} ${Styles.color_box_success}`}
+                  className={`${Styles.color_box} ${Styles.color_box_success}`}
                   onClick={() => {
                     setColorBoxValue("#135736");
                     setOpen(false);
@@ -405,7 +412,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
               </div>
               <div className="flex gap-2">
                 <div
-                   className={`${Styles.color_box} ${Styles.color_box_danger}`}
+                  className={`${Styles.color_box} ${Styles.color_box_danger}`}
                   onClick={() => {
                     setColorBoxValue("#DC3545");
                     setOpen(false);
@@ -464,7 +471,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
                         viewBox="0 0 21 21"
                       >
                         <path
-                          stroke='currentcolor'
+                          stroke="currentcolor"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
@@ -489,9 +496,16 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
             height: "370px",
           }}
         >
-          <div className={`${Styles.color_picker__color_block}`} ref={colorPickerRef}>
+          <div
+            className={`${Styles.color_picker__color_block}`}
+            ref={colorPickerRef}
+          >
             <div
-              style={{ float: "right", margin:'5px 5px 5px 5px',cursor:'pointer' }}
+              style={{
+                float: "right",
+                margin: "5px 5px 5px 5px",
+                cursor: "pointer",
+              }}
               onClick={() => {
                 setOpen(false);
               }}
@@ -545,8 +559,8 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
                 <div
                   className={`${Styles.cursor}`}
                   style={{
-                    border: '5px solid rgb(248, 248, 248)',
-                    background:hex,
+                    border: "5px solid rgb(248, 248, 248)",
+                    background: hex,
                     position: "absolute",
                     top: `0px`,
                     left: `${cursorPosition.x}px`,
@@ -567,6 +581,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props:any) => {
                 onChange={handleOpacityChange}
                 style={{
                   WebkitAppearance: "none",
+                  MozAppearance: "none",
                   appearance: "none",
                   width: "100%",
                   height: "8px",
