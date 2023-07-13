@@ -67,7 +67,7 @@ const Table: React.FC<TableProps> = (props) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-x-auto">
       <table className="w-full">
         <thead>
           <tr
@@ -78,7 +78,7 @@ const Table: React.FC<TableProps> = (props) => {
             } bg-pureWhite h-[48px]`}
           >
             {props.selected && (
-              <th>
+              <th className="sm:w-[56px]">
                 <CheckBox
                   id="selectAll"
                   checked={isChecked}
@@ -90,7 +90,7 @@ const Table: React.FC<TableProps> = (props) => {
             {props.headers.map((header) => (
               <th
                 key={header}
-                className="cursor-pointer uppercase text-[16px] text-center font-bold"
+                className="cursor-pointer text-[16px] sm:text-[14px] font-bold text-center uppercase"
                 onClick={() => {
                   props.sortable && handleSort(header);
                 }}
@@ -112,7 +112,7 @@ const Table: React.FC<TableProps> = (props) => {
             ))}
 
             {props.action && (
-              <th className="cursor-pointer uppercase text-[16px] text-center font-bold">
+              <th className="cursor-pointer text-[16px] sm:text-[14px] font-bold text-center">
                 Actions
               </th>
             )}
@@ -126,7 +126,7 @@ const Table: React.FC<TableProps> = (props) => {
               className="h-[56px] border-b border-b-lightSilver cursor-default hover:bg-whiteSmoke"
             >
               {props.selected && (
-                <td>
+                <td className="sm:w-[56px]">
                   <CheckBox
                     id={index.toString()}
                     checked={isAllChecked[index]}
@@ -138,7 +138,7 @@ const Table: React.FC<TableProps> = (props) => {
               {props.headers.map((header) => (
                 <td
                   key={header}
-                  className="py-[19px] px-[20px] text-center text-base font-normal"
+                  className="py-[19px] sm:py-[12px] px-[20px] sm:text-base text-center font-normal"
                 >
                   <span className="flex justify-center items-center">
                     {typeof item[header] === "string" &&

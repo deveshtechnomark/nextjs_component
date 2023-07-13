@@ -103,19 +103,21 @@ var Table = function Table(props) {
     setSortingOrder(newSortingOrder);
   };
   return React.createElement("div", {
-    className: "w-full"
+    className: "w-full overflow-x-auto"
   }, React.createElement("table", {
     className: "w-full"
   }, React.createElement("thead", null, React.createElement("tr", {
-    className: "".concat(props.sticky ? "sticky top-0 z-10 drop-shadow" : "border border-b-pureBlack border-t-pureBlack", " bg-pureWhite h-[48px]")
-  }, props.selected && React.createElement("th", null, React.createElement(formElements.CheckBox, {
+    className: "".concat(props.sticky ? "sticky top-0 z-10 drop-shadow" : "border-y border-b-pureBlack border-t-pureBlack", " bg-pureWhite h-[48px]")
+  }, props.selected && React.createElement("th", {
+    className: "sm:w-[56px]"
+  }, React.createElement(formElements.CheckBox, {
     id: "selectAll",
     checked: isChecked,
     onChange: handleSelectAll
   })), props.headers.map(function (header) {
     return React.createElement("th", {
       key: header,
-      className: "cursor-pointer uppercase text-[16px] text-center font-proxima font-bold",
+      className: "cursor-pointer text-[16px] sm:text-[14px] font-bold text-center uppercase",
       onClick: function onClick() {
         props.sortable && handleSort(header);
       }
@@ -125,12 +127,14 @@ var Table = function Table(props) {
       className: "ml-2 ".concat(sortingOrder === "asc" ? "" : "rotate-180")
     }, React.createElement(SortingIcon, null))));
   }), props.action && React.createElement("th", {
-    className: "cursor-pointer uppercase text-[16px] text-center font-proxima font-bold"
+    className: "cursor-pointer text-[16px] sm:text-[14px] font-bold text-center"
   }, "Actions"))), React.createElement("tbody", null, filteredData.map(function (item, index) {
     return React.createElement("tr", {
       key: index,
-      className: "h-[56px] border border-b-lightSilver cursor-default hover:bg-whiteSmoke"
-    }, props.selected && React.createElement("td", null, React.createElement(formElements.CheckBox, {
+      className: "h-[56px] border-b border-b-lightSilver cursor-default hover:bg-whiteSmoke"
+    }, props.selected && React.createElement("td", {
+      className: "sm:w-[56px]"
+    }, React.createElement(formElements.CheckBox, {
       id: index.toString(),
       checked: isAllChecked[index],
       onChange: function onChange(e) {
@@ -139,7 +143,7 @@ var Table = function Table(props) {
     })), props.headers.map(function (header) {
       return React.createElement("td", {
         key: header,
-        className: "py-[19px] px-[20px] text-center text-base font-proxima font-normal"
+        className: "py-[19px] sm:py-[12px] px-[20px] sm:text-base text-center font-normal"
       }, React.createElement("span", {
         className: "flex justify-center items-center"
       }, typeof item[header] === "string" && item[header].startsWith("http") ? React.createElement("img", {
