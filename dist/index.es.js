@@ -298,7 +298,10 @@ function Uploader(_a) {
     if (updatedFileNames.length === 0) {
       setUploaded(false);
     }
+    setIsChecked(false);
   };
+  // console.log(fileNames);
+  // console.log(isChecked);
   var getFileExtension = function getFileExtension(fileName) {
     var extension = fileName.slice(fileName.lastIndexOf(".") + 1).toLowerCase();
     return extension;

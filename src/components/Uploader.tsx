@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // ProgressBar Library
 import { ProgressBar } from "progressbar";
 import "progressbar/dist/index.css";
@@ -78,7 +78,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
     if (files) {
       handleFileChange(files);
     }
-
+    
     // Set the uploaded state to false when a new file is selected
     setUploaded(false);
   };
@@ -91,7 +91,12 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
     if (updatedFileNames.length === 0) {
       setUploaded(false);
     }
+
+    setIsChecked(false);
   };
+
+  // console.log(fileNames);
+  // console.log(isChecked);
 
   const getFileExtension = (fileName: string) => {
     const extension = fileName
@@ -257,8 +262,9 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
               <span className="mr-[10px]">
                 {uploaded ? "Uploaded" : "Uploading..."}
               </span>
+              
               <ProgressBar variant="primary" progressDigit={false} label={""} />
-
+              
               <span className=" ml-2 text-primary text-[20px]">
                 {isChecked && <CheckIcon />}
               </span>
