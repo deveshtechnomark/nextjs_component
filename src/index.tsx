@@ -137,9 +137,9 @@ const Tel: React.FC<TelInputProps> = ({
         </div>
       </div>
       {!err && supportingText && (
-        <span className="text-slatyGrey">{supportingText}</span>
+        <span className="text-slatyGrey text-[12px] sm:text-[14px]">{supportingText}</span>
       )}
-      {err && <span className="text-defaultRed">{errorMsg}</span>}
+      {err && <span className="text-defaultRed text-[12px] sm:text-[14px]">{errorMsg}</span>}
     </div>
   );
 };

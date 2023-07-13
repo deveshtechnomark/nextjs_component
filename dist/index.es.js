@@ -873,9 +873,9 @@ var Tel = function Tel(_a) {
     disabled: disabled,
     placeholder: "9874 563 214"
   }, props)))), !err && supportingText && React.createElement("span", {
-    className: "text-slatyGrey"
+    className: "text-slatyGrey text-[12px] sm:text-[14px]"
   }, supportingText), err && React.createElement("span", {
-    className: "text-defaultRed"
+    className: "text-defaultRed text-[12px] sm:text-[14px]"
   }, errorMsg));
 };
 
