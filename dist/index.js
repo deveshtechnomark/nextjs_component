@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-var style = {"scaleUpAnimation":"timepicker-module_scaleUpAnimation__tGxyr","scaleDownAnimation":"timepicker-module_scaleDownAnimation__2dpU2","textAnimation":"timepicker-module_textAnimation__5-lSz"};
+var style = {"scaleUpAnimation":"timepicker-module_scaleUpAnimation__tGxyr","textAnimation":"timepicker-module_textAnimation__5-lSz"};
 
 var Timepicker = function Timepicker(props) {
   var hourDigits = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -225,24 +225,20 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
   var _e = React.useState(false),
     showMinuteDigits = _e[0],
     setShowMinuteDigits = _e[1];
-  var _f = React.useState(false),
-    isHour24Selected = _f[0],
-    setIsHour24Selected = _f[1];
-  var _g = React.useState(true),
-    isDigit12 = _g[0],
-    setIsDigit12 = _g[1];
-  var _h = React.useState(false),
-    isDigit24 = _h[0],
-    setIsDigit24 = _h[1];
+  var _f = React.useState(true),
+    isDigit12 = _f[0],
+    setIsDigit12 = _f[1];
+  var _g = React.useState(false),
+    isDigit24 = _g[0],
+    setIsDigit24 = _g[1];
+  var _h = React.useState(''),
+    animateHour = _h[0],
+    setAnimateHour = _h[1];
   var _j = React.useState(''),
-    animateHour = _j[0],
-    setAnimateHour = _j[1];
-  var _k = React.useState(''),
-    animateMinute = _k[0],
-    setAnimateMinute = _k[1];
+    animateMinute = _j[0],
+    setAnimateMinute = _j[1];
   var handleHourSelectDigit = function handleHourSelectDigit(digit) {
     setSelectedHourDigit(digit);
-    setIsHour24Selected(true);
     digit ? setAnimateHour(style.textAnimation) : setAnimateHour('');
     if (digit <= 12) {
       setIsDigit12(true);
@@ -254,15 +250,7 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     setTimeout(function () {
       setAnimateHour('');
     }, 300);
-    // const timer = setTimeout(() => {
-    //     setShowMinuteDigits(true);
-    //     setShowHourDigits(false);
-    // }, 1500);
-    // return () => {
-    //     clearTimeout(timer);
-    // };
   };
-
   var handleMinuteSelectDigit = function handleMinuteSelectDigit(digit) {
     setSelectedMinuteDigit(digit);
     digit ? setAnimateMinute(style.textAnimation) : setAnimateMinute('');
@@ -274,7 +262,6 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     setIsAM(!isAM);
   };
   var showHourClock = function showHourClock() {
-    setIsHour24Selected(false);
     if (showHourDigits) {
       setShowHourDigits(true);
       setShowMinuteDigits(false);
@@ -299,10 +286,11 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
       style: {
         transform: "".concat(isDigit12 ? "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)") : "rotate(".concat(index * 30, "deg) translate(0, -55px) rotate(").concat(-index * 30, "deg)")),
         top: '46%',
-        left: '47%'
+        left: '47%',
+        transition: 'transform 0.3s ease-out'
       },
       onClick: function onClick() {
-        handleHourSelectDigit(digit), setIsHour24Selected(false);
+        handleHourSelectDigit(digit);
       }
     }, digit);
   });
@@ -313,7 +301,8 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
       style: {
         transform: "".concat(isDigit24 ? "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)") : "rotate(".concat(index * 30, "deg) translate(0,-55px) rotate(").concat(-index * 30, "deg)")),
         top: "46%",
-        left: '47%'
+        left: '47%',
+        transition: 'transform 0.3s ease-in'
       },
       onClick: function onClick() {
         return handleHourSelectDigit(digit);
@@ -336,12 +325,12 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     }, formattedDigit);
   });
   var renderInputHourDigit = inputHourDigits12.slice(0, selectedHourDigit + 1).reverse().map(function (digit, index) {
-    return (digit < 10 ? "0".concat(digit) : digit) + " ";
+    return (digit < 10 ? "0".concat(digit) : digit) + ' ';
   }).join('');
   var renderInputMinuteDigit = minuteDigits.filter(function (digit) {
     return digit <= selectedMinuteDigit;
   }).reverse().map(function (digit, index) {
-    return (digit < 10 ? "0".concat(digit) : digit) + " ";
+    return (digit < 10 ? "0".concat(digit) : digit) + ' ';
   }).join('');
   React.useEffect(function () {
     var fullTime = selectedHourDigit + ':' + selectedMinuteDigit;
@@ -374,9 +363,9 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     className: "w-10 h-8 ".concat(!isAM && 'bg-slatyGreen text-primary', " transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer pointer-events-none"),
     onClick: toggleSetAM
   }, "PM"))), !showMinuteDigits && showHourDigits && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: 'w-56 h-56 bg-lightGray rounded-full overflow-hidden'
-  }, !isHour24Selected && /*#__PURE__*/React.createElement("div", {
-    className: " w-full h-full relative -left-1 ".concat(style.scaleDownAnimation)
+    className: "w-56 h-56 bg-lightGray rounded-full overflow-hidden"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: " w-full h-full relative -left-1"
   }, renderHourDigits12, hourDigits12.map(function (digit, index) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
@@ -406,35 +395,35 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
       }
     }));
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(isHour24Selected ? "w-56 h-56 -top-56 ".concat(style.scaleUpAnimation) : " w-32  h-32 -top-[181px] left-0 bg-transparent ".concat(style.scaleDownAnimation), "  bg-lightGray rounded-full relative flex items-center justify-center")
+    className: "".concat(isDigit24 ? "w-56 h-56 -top-56" : " w-32  h-32 -top-[181px] left-0 bg-transparent ", " bg-lightGray rounded-full relative flex items-center justify-center")
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-full h-full relative ".concat(isHour24Selected ? 'right-1' : '-left-1.5')
+    className: "w-full h-full relative ".concat(isDigit24 ? 'right-1' : '-left-1.5')
   }, renderHourDigits24, hourDigits24.map(function (digit, index) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
       className: "relative w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none",
       style: {
-        top: isDigit24 && !isHour24Selected ? '37%' : '41%',
-        left: isDigit24 && !isHour24Selected ? '39.6%' : '42.6%',
+        top: '41%',
+        left: '42.6%',
         transform: "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)")
       },
       onClick: function onClick() {
-        return handleHourSelectDigit(selectedHourDigit === 24 ? 1 : selectedHourDigit + 1);
+        return handleHourSelectDigit(selectedHourDigit === 12 ? 1 : selectedHourDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
       className: 'absolute w-0.5 h-[92px] bg-primary transform -translate-x-1/2 -translate-y-1/2',
       style: {
-        top: isDigit24 && !isHour24Selected ? '53.5%' : '50.5%',
-        left: isDigit24 && !isHour24Selected ? '55%' : '52%',
+        top: '50.5%',
+        left: '52%',
         transformOrigin: 'center top',
         transform: "translateX(-50%) rotate(".concat(index * 30, "deg) translateY(-90px)")
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: 'absolute w-2 h-2 z-10 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4',
+      className: 'absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4',
       style: {
-        top: isDigit24 && !isHour24Selected ? '63%' : '56%',
-        left: isDigit24 && !isHour24Selected ? '55%' : '52%'
+        top: '56%',
+        left: '52%'
       }
     }));
   })))), showMinuteDigits && /*#__PURE__*/React.createElement("div", {
