@@ -75,7 +75,7 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
     const renderHourDigits12 = hourDigits12.map((digit, index) => (
         <div
             key={digit}
-            className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ${digit === selectedHourDigit ? 'text-white' : 'text-black'} ${isDigit12 ? 'text-black' : 'text-gray-400'}`}
+            className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit===selectedHourDigit ?"pointer-events-none":"cursor-pointer"}  ${digit === selectedHourDigit ? 'text-white' : 'text-black'} ${isDigit12 ? 'text-black' : 'text-gray-400'}`}
             style={{
                 transform: `${isDigit12 ?
                     `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` :
@@ -96,7 +96,7 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
     const renderHourDigits24 = hourDigits24.map((digit, index) => (
         <div
             key={digit}
-            className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ${isDigit24 ? 'text-black' : 'text-gray-400'}  ${digit === selectedHourDigit ? 'text-white' : 'text-gray'} `}
+            className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit===selectedHourDigit ?"pointer-events-none":"cursor-pointer"} ${isDigit24 ? 'text-black' : 'text-gray-400'}  ${digit === selectedHourDigit ? 'text-white' : 'text-gray'} `}
             style={{
                 transform: `${isDigit24 ?
                     `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` :
@@ -116,7 +116,7 @@ const Timepicker24Hr: React.FC<Timepicker24HrProps> = (props: any) => {
         return (
             <div
                 key={digit}
-                className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ${digit === selectedMinuteDigit ? 'text-white' : 'text-black'
+                className={`absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit===selectedMinuteDigit ?"pointer-events-none":"cursor-pointer"} ${digit === selectedMinuteDigit ? 'text-white' : 'text-black'
                     }`}
                 style={{
                     transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)`,

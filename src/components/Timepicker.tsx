@@ -70,7 +70,7 @@ const Timepicker: React.FC<TimepickerProps> = (props: any) => {
     const renderHourDigits = hourDigits.map((digit, index) => (
         <div
             key={digit}
-            className={`absolute top-1/2 left-1/2 z-10 text-sm cursor-pointer transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit === selectedHourDigit ? 'text-white' : 'text-black'
+            className={`absolute top-1/2 left-1/2 z-10 text-sm ${digit===selectedHourDigit ?"pointer-events-none":"cursor-pointer"}  transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit === selectedHourDigit ? 'text-white' : 'text-black'
                 }`}
             style={{
                 transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)`,
@@ -88,7 +88,7 @@ const Timepicker: React.FC<TimepickerProps> = (props: any) => {
         return (
             <div
                 key={digit}
-                className={`absolute top-1/2 left-1/2 z-10 text-sm cursor-pointer transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit === selectedMinuteDigit ? 'text-white' : 'text-black'
+                className={`absolute top-1/2 left-1/2 z-10 text-sm  transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ${digit===selectedMinuteDigit ?"pointer-events-none":"cursor-pointer"} ${digit === selectedMinuteDigit ? 'text-white' : 'text-black'
                     }`}
                 style={{
                     transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)`,
@@ -141,13 +141,13 @@ const Timepicker: React.FC<TimepickerProps> = (props: any) => {
                     </div>
                     <div className='grid grid-cols-2 ml-10 border border-gray-300 rounded-md'>
                         <div
-                            className={`w-10 h-8 ${isAM && 'bg-slatyGreen text-primary'} transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer`}
+                            className={`w-10 h-8 ${isAM && 'bg-slatyGreen text-primary'} ${isAM===true ?"pointer-events-none":"cursor-pointer"} transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 `}
                             onClick={toggleSetAM}
                         >
                             AM
                         </div>
                         <div
-                            className={`w-10 h-8 ${!isAM && 'bg-slatyGreen text-primary'} transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer`}
+                            className={`w-10 h-8 ${!isAM && 'bg-slatyGreen text-primary'} ${!isAM===true ?"pointer-events-none":"cursor-pointer"} transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2`}
                             onClick={toggleSetAM}
                         >
                             PM
@@ -162,7 +162,7 @@ const Timepicker: React.FC<TimepickerProps> = (props: any) => {
                                 digit === selectedHourDigit && (
                                     <React.Fragment key={digit}>
                                         <div
-                                            className={`absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
+                                            className={`absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none`}
                                             style={{
                                                 top: '41%',
                                                 left: '42.6%',
@@ -195,7 +195,7 @@ const Timepicker: React.FC<TimepickerProps> = (props: any) => {
                                 digit === selectedMinuteDigit && (
                                     <React.Fragment key={digit}>
                                         <div
-                                            className={`absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer`}
+                                            className={`absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none`}
                                             style={{ top: '41%', left: '42.6%', transform: `rotate(${index * 30}deg) translate(0, -90px) rotate(${-index * 30}deg)` }}
                                             onClick={() => handleMinuteSelectDigit(selectedMinuteDigit === 0 ? 1 : selectedMinuteDigit + 1)}
                                         ></div>
