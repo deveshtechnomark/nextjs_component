@@ -281,6 +281,7 @@ function Uploader(_a) {
       setUploaded(true);
     }, 2300);
   };
+  React.useEffect(function () {}, [fileNames]);
   var handleBrowseClick = function handleBrowseClick() {
     var _a;
     (_a = fileInputRef.current) === null || _a === void 0 ? void 0 : _a.click();
@@ -290,6 +291,7 @@ function Uploader(_a) {
     if (files) {
       handleFileChange(files);
     }
+    console.log("on CHnage", e.target.files);
     // Set the uploaded state to false when a new file is selected
     setUploaded(false);
   };
@@ -302,7 +304,7 @@ function Uploader(_a) {
     }
     setIsChecked(false);
   };
-  // console.log(fileNames);
+  console.log(fileNames);
   // console.log(isChecked);
   var getFileExtension = function getFileExtension(fileName) {
     var extension = fileName.slice(fileName.lastIndexOf(".") + 1).toLowerCase();
@@ -328,7 +330,6 @@ function Uploader(_a) {
       }
       // Perform upload logic using the fileUrl
       console.log("Uploading file from URL:", fileUrl);
-      // Add your upload logic here
       // Store uploaded file information
       var uploadedFile_1 = {
         url: fileUrl,

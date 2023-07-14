@@ -35,7 +35,7 @@ interface UploadedFile {
 }
 
 function Uploader({ multiSelect, variant, type }: UploaderProps) {
-  const [fileNames, setFileNames] = useState<string[]>([]);
+  const [fileNames, setFileNames] = useState<any[]>([]);
   const [uploaded, setUploaded] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -95,8 +95,6 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
     setIsChecked(false);
   };
 
-  // console.log(fileNames);
-  // console.log(isChecked);
 
   const getFileExtension = (fileName: string) => {
     const extension = fileName
@@ -130,7 +128,6 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
 
       // Perform upload logic using the fileUrl
       console.log("Uploading file from URL:", fileUrl);
-      // Add your upload logic here
 
       // Store uploaded file information
       const uploadedFile: UploadedFile = {
@@ -280,7 +277,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
               : "mt-2 flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]"
           }`}
         >
-          {fileNames.length > 0 && !uploaded ? (
+          {(fileNames.length > 0 && !uploaded) ? (
             <>
               <label className="text-[12px] italic mr-[10px] text-slatyGrey font-proxima">
                 {!uploaded ? "Uploading..." : "Uploaded"}
