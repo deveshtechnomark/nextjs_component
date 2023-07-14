@@ -38,7 +38,7 @@ const SpeedDial: React.FC<Props> = ({ open, large, listItems }) => {
   return (
     <div className="relative">
       <span
-        className={`absolute flex items-center justify-center ${
+        className={`absolute flex items-center justify-center z-20 ${
           large
             ? "w-fit h-fit text-xl p-[15px]"
             : "w-fit h-fit text-base p-[10px]"
@@ -54,7 +54,7 @@ const SpeedDial: React.FC<Props> = ({ open, large, listItems }) => {
 
       {!open && (
         <div
-          className={`absolute bottom-0 flex-col  gap-2 flex ${
+          className={`absolute bottom-0 flex-col  gap-2 flex z-10 ${
             isListVisible
               ? `${styles.showAnimation}`
               : `${styles.hideAnimation} ${hide && "hidden"}`

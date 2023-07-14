@@ -58,12 +58,12 @@ var SpeedDial = function SpeedDial(_a) {
   return React.createElement("div", {
     className: "relative"
   }, React.createElement("span", {
-    className: "absolute flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " ").concat(open ? "ml-2" : "mt-2", " ").concat(isListVisible ? "".concat(styles.crossAnimation, " bg-slatyGrey") : "".concat(styles.plusAnimation, " bg-[#00B0AE]"), " text-white border-none outline-none rounded-full"),
+    className: "absolute flex items-center justify-center z-20 ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " ").concat(open ? "ml-2" : "mt-2", " ").concat(isListVisible ? "".concat(styles.crossAnimation, " bg-slatyGrey") : "".concat(styles.plusAnimation, " bg-[#00B0AE]"), " text-white border-none outline-none rounded-full"),
     onClick: toggleList
   }, React.createElement(CrossIcon, {
     icon: large
   })), !open && React.createElement("div", {
-    className: "absolute bottom-0 flex-col  gap-2 flex ".concat(isListVisible ? "".concat(styles.showAnimation) : "".concat(styles.hideAnimation, " ").concat(hide && "hidden"))
+    className: "absolute bottom-0 flex-col  gap-2 flex z-10 ".concat(isListVisible ? "".concat(styles.showAnimation) : "".concat(styles.hideAnimation, " ").concat(hide && "hidden"))
   }, listItems.map(function (item, index) {
     return React.createElement("span", {
       key: index,
