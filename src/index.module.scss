@@ -1,40 +1,71 @@
-.iconShow {
-  animation: iconShow 1s ease-out;
+/* for icon animation */
+.hideAnimation {
+  animation: hide 0.3s ease-in-out both;
 }
-.left {
-  animation: slideLeft 0.3s ease-out both;
+
+.showAnimation {
+  animation: show 0.3s ease-in-out both;
 }
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(15%);
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(15%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+/* for icon Left animation */
+.hideLeftAnimation {
+  animation: hideLeft 0.3s ease-in-out both;
+}
+
+.showLeftAnimation {
+  animation: showLeft 0.3s ease-in-out both;
+}
+
+@keyframes hideLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(-2%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(3.5%);
+  }
+}
+
+@keyframes showLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(3.5%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-2%);
+  }
+}
+
+/* for icon text animation */
 .hide {
   animation: show 0.3s ease-out both;
 }
-.crossAnimation {
-  animation: cross 0.3s ease-out both;
-}
-.plusAnimation {
-  animation: plus 0.2s ease-out both;
-}
-
-@keyframes iconShow {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes slideLeft {
-  0% {
-    transform: translateX(30%);
-    opacity: 0.5;
-    border-radius: 50px;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-  }
+.left {
+  animation: slideLeft 0.3s ease-out both;
 }
 
 @keyframes show {
@@ -47,6 +78,26 @@
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
   }
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(30%);
+    border-radius: 50px;
+  }
+  100% {
+    transform: translateX(0);
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+}
+
+/* for cross icons */
+.crossAnimation {
+  animation: cross 0.3s ease-in-out both;
+}
+.plusAnimation {
+  animation: plus 0.2s ease-in-out both;
 }
 
 @keyframes cross {

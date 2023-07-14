@@ -3,11 +3,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        slatyGrey: "#6E6D7A",
         lightSilver: "#D8D8D8",
-        darkCharcoal: "#333333",
-        pureWhite: "#FFF",
+        slatyGrey: "#6E6D7A",
         primary: "#02B89D",
+        defaultRed: "#DC3545",
+        pureWhite: "#fff"
       },
       screens: {
         sm: "1360px",

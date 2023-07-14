@@ -28,7 +28,7 @@ var CrossIcon = function CrossIcon(_ref) {
   }));
 };
 
-var styles = {"iconShow":"index-module_iconShow__nJFy-","left":"index-module_left__jAupb","slideLeft":"index-module_slideLeft__9Zi9k","hide":"index-module_hide__Vy-WG","show":"index-module_show__TdlYa","crossAnimation":"index-module_crossAnimation__B8P6q","cross":"index-module_cross__QIWEY","plusAnimation":"index-module_plusAnimation__6FYrV","plus":"index-module_plus__78WbQ"};
+var styles = {"hideAnimation":"index-module_hideAnimation__4Jxx6","hide":"index-module_hide__Vy-WG","showAnimation":"index-module_showAnimation__12UqL","show":"index-module_show__TdlYa","hideLeftAnimation":"index-module_hideLeftAnimation__-ivbq","hideLeft":"index-module_hideLeft__6rXDs","showLeftAnimation":"index-module_showLeftAnimation__jeqCJ","showLeft":"index-module_showLeft__IG5xG","left":"index-module_left__jAupb","slideLeft":"index-module_slideLeft__9Zi9k","crossAnimation":"index-module_crossAnimation__B8P6q","cross":"index-module_cross__QIWEY","plusAnimation":"index-module_plusAnimation__6FYrV","plus":"index-module_plus__78WbQ"};
 
 var SpeedDial = function SpeedDial(_a) {
   var open = _a.open,
@@ -40,8 +40,12 @@ var SpeedDial = function SpeedDial(_a) {
   var _c = useState(-1),
     hoveredItemIndex = _c[0],
     setHoveredItemIndex = _c[1];
+  var _d = useState(false),
+    hide = _d[0],
+    setHide = _d[1];
   var toggleList = function toggleList() {
     setListVisible(!isListVisible);
+    setHide(!hide);
   };
   var handleItemHover = function handleItemHover(index) {
     setHoveredItemIndex(index);
@@ -51,42 +55,42 @@ var SpeedDial = function SpeedDial(_a) {
   };
   return React.createElement("div", {
     className: "relative"
-  }, React.createElement("span", null, React.createElement("span", {
+  }, React.createElement("span", {
     className: "absolute flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " ").concat(open ? "ml-2" : "mt-2", " ").concat(isListVisible ? "".concat(styles.crossAnimation, " bg-slatyGrey") : "".concat(styles.plusAnimation, " bg-[#00B0AE]"), " text-white border-none outline-none rounded-full"),
     onClick: toggleList
   }, React.createElement(CrossIcon, {
     icon: large
-  }))), isListVisible && React.createElement("div", {
-    className: "absolute ".concat(styles.iconShow, " ").concat(open ? "right-0 -top-2 gap-1" : "bottom-0 flex-col  gap-2", " flex")
+  })), !open && React.createElement("div", {
+    className: "absolute bottom-0 flex-col  gap-2 flex ".concat(isListVisible ? "".concat(styles.showAnimation) : "".concat(styles.hideAnimation, " ").concat(hide && "hidden"))
   }, listItems.map(function (item, index) {
-    if (!open) {
-      return React.createElement("span", {
-        key: index,
-        className: "flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " bg-lightSilver hover:bg-slatyGrey text-darkCharcoal hover:text-pureWhite border-none outline-none ").concat(hoveredItemIndex === index && !open ? "".concat(styles.hide) : "rounded-full"),
-        onMouseEnter: function onMouseEnter() {
-          return handleItemHover(index);
-        },
-        onMouseLeave: handleItemLeave,
-        onClick: item.action
-      }, hoveredItemIndex === index && !open && React.createElement("span", {
-        className: "absolute ".concat(styles.left, " flex w-max bg-slatyGrey text-pureWhite pl-3 pr-2 ").concat(large ? "py-[11px] right-[40px]" : "py-[6px] right-[30px]")
-      }, item.hoverText), React.createElement("span", {
-        className: "".concat(large ? "w-[20px] h-[20px]" : "w-[16px] h-[16px]")
-      }, item.icon));
-    } else {
-      return React.createElement(Tooltip, {
-        position: "top",
-        content: item.hoverText,
-        key: index
-      }, React.createElement("span", {
-        className: "flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " bg-lightSilver text-darkCharcoal border-none outline-none ").concat(hoveredItemIndex === index && !open ? "rounded-r-full" : "rounded-full"),
-        onMouseEnter: function onMouseEnter() {
-          return handleItemHover(index);
-        },
-        onMouseLeave: handleItemLeave,
-        onClick: item.action
-      }, item.icon));
-    }
+    return React.createElement("span", {
+      key: index,
+      className: "flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " bg-lightSilver hover:bg-slatyGrey text-darkCharcoal hover:text-pureWhite border-none outline-none ").concat(hoveredItemIndex === index && !open ? "".concat(styles.hide) : "rounded-full"),
+      onMouseEnter: function onMouseEnter() {
+        return handleItemHover(index);
+      },
+      onMouseLeave: handleItemLeave,
+      onClick: item.action
+    }, hoveredItemIndex === index && !open && React.createElement("span", {
+      className: "absolute ".concat(styles.left, " flex w-max bg-slatyGrey text-pureWhite pl-3 pr-2 ").concat(large ? "py-[11px] right-[40px]" : "py-[6px] right-[30px]")
+    }, item.hoverText), React.createElement("span", {
+      className: "".concat(large ? "w-[20px] h-[20px]" : "w-[16px] h-[16px]")
+    }, item.icon));
+  })), open && React.createElement("div", {
+    className: "absolute right-0 -top-2 gap-1 flex ".concat(isListVisible ? "".concat(styles.showLeftAnimation) : "".concat(styles.hideLeftAnimation, " ").concat(hide && "hidden"))
+  }, listItems.map(function (item, index) {
+    return React.createElement(Tooltip, {
+      position: "top",
+      content: item.hoverText,
+      key: index
+    }, React.createElement("span", {
+      className: "flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " bg-lightSilver text-darkCharcoal border-none outline-none ").concat(hoveredItemIndex === index && !open ? "rounded-r-full" : "rounded-full"),
+      onMouseEnter: function onMouseEnter() {
+        return handleItemHover(index);
+      },
+      onMouseLeave: handleItemLeave,
+      onClick: item.action
+    }, item.icon));
   })));
 };
 
