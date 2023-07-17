@@ -152,154 +152,156 @@ const CalendarYear = (props: any): JSX.Element => {
                 />
             </div>
             {toggleOpen && (
-                <div className={`relative bottomAnimation ${toggleOpen ? style.bottomAnimation : ""}`}>
-                    <div className="flex  mx-auto  items-center">
-                        <div className="shadow-md overflow-hidden">
-                            <div className="flex justify-between border-b-2 border-lightSilver py-[12px] px-[12px]">
-                                <div className={`flex flex-row  ${showYearList ? "" : animate}`}>
-                                    {showMonthList === true ? "" : showYearList === true ? "" :
-                                        (<h1 className=" text-[14px] font-semibold cursor-pointer text-slatyBlue" onClick={toggleMonthList}>
-                                            {months[currentMonth]}
-                                        </h1>)}
-                                    {showYearList === true && showMonthList === false ?
-                                        (<h1 className=" text-[14px] font-semibold ml-1 text-slatyBlue">
-                                            {startYear + ' - ' + endYear}
-                                        </h1>
-                                        ) :
-                                        (<h1 className={` text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ${showMonthList ? 'pointer-events-none' : ''}`} onClick={toggleYearList}>
-                                            {currentYear}
-                                        </h1>)
-                                    }
-                                </div>
-                                <div className={`flex items-center gap-5`}>
-                                    {showYearList === false ?
-                                        <>
-                                            <div
-                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${showMonthList ? "hidden" : ""} text-[20px]`}
-                                                onClick={() => handleIconClick(false)} >
-                                                <ChevronLeftIcon />
-                                            </div>
-                                            <div
-                                                className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${showMonthList ? "hidden" : ""} rotate-180 text-[20px]`}
-                                                onClick={() => handleIconClick(true)}>
-                                                <ChevronLeftIcon />
-                                            </div>
-                                        </>
-                                        : <>
-                                            {currentPage <= totalPages && (<>
+                <div className="relative">
+                    <div className={`bottomAnimation absolute z-20  bg-white ${toggleOpen ? style.bottomAnimation : ""}`}>
+                        <div className="flex mx-auto  items-center">
+                            <div className="shadow-md overflow-hidden">
+                                <div className="flex justify-between border-b-2 border-lightSilver py-[12px] px-[12px]">
+                                    <div className={`flex flex-row  ${showYearList ? "" : animate}`}>
+                                        {showMonthList === true ? "" : showYearList === true ? "" :
+                                            (<h1 className=" text-[14px] font-semibold cursor-pointer text-slatyBlue" onClick={toggleMonthList}>
+                                                {months[currentMonth]}
+                                            </h1>)}
+                                        {showYearList === true && showMonthList === false ?
+                                            (<h1 className=" text-[14px] font-semibold ml-1 text-slatyBlue">
+                                                {startYear + ' - ' + endYear}
+                                            </h1>
+                                            ) :
+                                            (<h1 className={`text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ${showMonthList ? 'pointer-events-none' : ''}`} onClick={toggleYearList}>
+                                                {currentYear}
+                                            </h1>)
+                                        }
+                                    </div>
+                                    <div className={`flex items-center gap-5`}>
+                                        {showYearList === false ?
+                                            <>
                                                 <div
-                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${currentPage === 1 ? "opacity-40 pointer-events-none" : ""} text-[20px]`}
-                                                    onClick={() => {
-                                                        if (currentPage === 1) {
-                                                            return;
-                                                        }
-                                                        goToPreviousPage();
-                                                        handleIconClick(false);
-                                                    }}
-                                                >
+                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${showMonthList ? "hidden" : ""} text-[20px]`}
+                                                    onClick={() => handleIconClick(false)} >
                                                     <ChevronLeftIcon />
                                                 </div>
                                                 <div
-                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${currentPage === totalPages ? "opacity-40 pointer-events-none" : ""} rotate-180 text-[20px]`}
-                                                    onClick={() => {
-                                                        if (currentPage === totalPages) {
-                                                            return;
-                                                        }
-                                                        goToNextPage();
-                                                        handleIconClick(true);
-                                                    }}>
+                                                    className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${showMonthList ? "hidden" : ""} rotate-180 text-[20px]`}
+                                                    onClick={() => handleIconClick(true)}>
                                                     <ChevronLeftIcon />
                                                 </div>
-                                            </>)}
-                                        </>
-                                    }
-                                </div>
-                            </div>
-                            {showMonthList === true ? (
-                                <div className="overflow-hidden">
-                                    <div className={`${style.topAnimation}  w-full h-full`}>
-                                        <div className="grid grid-cols-4 place-content-center overflow-hidden ">
-                                            {months.map((month, index) => (
-                                                <div
-                                                    key={index}
-                                                    className={`py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor  relative cursor-pointer `}
-                                                    onClick={() => selectMonth(index)}
-                                                >
-                                                    <div className={`w-14 h-12 hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${index === selectedMonth ? 'bg-lightGreen text-primary' : ''
-                                                        }`}>
-                                                        {month.length > 5 ? month.slice(0, 3) : month}
+                                            </>
+                                            : <>
+                                                {currentPage <= totalPages && (<>
+                                                    <div
+                                                        className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${currentPage === 1 ? "opacity-40 pointer-events-none" : ""} text-[20px]`}
+                                                        onClick={() => {
+                                                            if (currentPage === 1) {
+                                                                return;
+                                                            }
+                                                            goToPreviousPage();
+                                                            handleIconClick(false);
+                                                        }}
+                                                    >
+                                                        <ChevronLeftIcon />
                                                     </div>
-                                                </div>
-                                            ))}
-                                        </div>
+                                                    <div
+                                                        className={`w-5 h-5 cursor-pointer hover:scale-105 transition-all text-darkGray ${currentPage === totalPages ? "opacity-40 pointer-events-none" : ""} rotate-180 text-[20px]`}
+                                                        onClick={() => {
+                                                            if (currentPage === totalPages) {
+                                                                return;
+                                                            }
+                                                            goToNextPage();
+                                                            handleIconClick(true);
+                                                        }}>
+                                                        <ChevronLeftIcon />
+                                                    </div>
+                                                </>)}
+                                            </>
+                                        }
                                     </div>
                                 </div>
-                            )
-                                : showYearList === true ? (
+                                {showMonthList === true ? (
                                     <div className="overflow-hidden">
-                                        <div className={`${style.topAnimation}`}>
-                                            <div className={`${animate}  w-full`}>
-                                                <div className="grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden ">
-                                                    {displayedYears.map((year) => (
-                                                        <div
-                                                            key={year}
-                                                            className={`py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor  relative cursor-pointer`}
-                                                            onClick={() => selectYear(year)}>
-                                                            <div className={`py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${year === selectedYear ? 'bg-lightGreen text-primary' : ''
-                                                                }`}>
-                                                                {year}
-                                                            </div>
+                                        <div className={`${style.topAnimation}  w-full h-full`}>
+                                            <div className="grid grid-cols-4 place-content-center overflow-hidden ">
+                                                {months.map((month, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className={`py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor relative cursor-pointer `}
+                                                        onClick={() => selectMonth(index)}
+                                                    >
+                                                        <div className={`w-14 h-12 hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${index === selectedMonth ? 'bg-lightGreen text-primary' : ''
+                                                            }`}>
+                                                            {month.length > 5 ? month.slice(0, 3) : month}
                                                         </div>
-                                                    ))}
-                                                </div>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
                                 )
-                                    : (
-                                        <>
-                                            <div className={`w-full grid grid-cols-7   ${animate}`}>
-                                                {days.map((day, index) => (
-                                                    <h1
-                                                        key={index}
-                                                        className="h-14 grid place-content-center text-[12px]">
-                                                        {day}
-                                                    </h1>
-                                                ))}
-                                            </div>
-                                            <div className={` w-full h-full grid grid-cols-7 ${animate}`}>
-                                                {generateDate(today.getMonth(), today.getFullYear()).map(
-                                                    ({ date, currentMonth }: CalendarDate, index: number) => {
-                                                        const currentDate = new Date(date);
-                                                        const isSameDay = currentDate.getDate() === selectedDate.getDate() && currentDate.getMonth() === selectedDate.getMonth() && currentDate.getFullYear() === selectedDate.getFullYear();
-                                                        return (
+                                    : showYearList === true ? (
+                                        <div className="overflow-hidden">
+                                            <div className={`${style.topAnimation}`}>
+                                                <div className={`${animate}  w-full`}>
+                                                    <div className="grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden ">
+                                                        {displayedYears.map((year) => (
                                                             <div
-                                                                key={index}
-                                                                className="h-full w-full grid place-content-center text-sm text-textColor  relative "
-                                                                onClick={() => handleDateClick(currentDate)}
-                                                            >
-                                                                <h1
-                                                                    className={`h-[40px] w-[40px] grid place-content-center rounded-full cursor-pointer z-10 ${currentMonth ? "" : "text-gray-400"} ${isSameDay ? "bg-primary text-white" : "hover:bg-whiteSmoke"}`}
-                                                                >
-                                                                    {currentDate.getDate()}
-                                                                </h1>
-                                                                {isSameDay && (
-                                                                    <>
-                                                                        <span className="absolute flex inset-0 rounded-full overflow-visible">
-                                                                            <span className={`${style.rippleAnimation} absolute rounded-full  bg-primary opacity-50`}></span>
-                                                                        </span>
-                                                                    </>
-                                                                )}
+                                                                key={year}
+                                                                className={`py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor  relative cursor-pointer`}
+                                                                onClick={() => selectYear(year)}>
+                                                                <div className={`py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ${year === selectedYear ? 'bg-lightGreen text-primary' : ''
+                                                                    }`}>
+                                                                    {year}
+                                                                </div>
                                                             </div>
-                                                        );
-                                                    }
-                                                )}
+                                                        ))}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </>
-                                    )}
+                                        </div>
+                                    )
+                                        : (
+                                            <>
+                                                <div className={`w-full grid grid-cols-7   ${animate}`}>
+                                                    {days.map((day, index) => (
+                                                        <h1
+                                                            key={index}
+                                                            className="h-14 grid place-content-center text-[12px]">
+                                                            {day}
+                                                        </h1>
+                                                    ))}
+                                                </div>
+                                                <div className={` w-full h-full grid grid-cols-7 ${animate}`}>
+                                                    {generateDate(today.getMonth(), today.getFullYear()).map(
+                                                        ({ date, currentMonth }: CalendarDate, index: number) => {
+                                                            const currentDate = new Date(date);
+                                                            const isSameDay = currentDate.getDate() === selectedDate.getDate() && currentDate.getMonth() === selectedDate.getMonth() && currentDate.getFullYear() === selectedDate.getFullYear();
+                                                            return (
+                                                                <div
+                                                                    key={index}
+                                                                    className="h-full w-full grid place-content-center text-sm text-textColor  relative "
+                                                                    onClick={() => handleDateClick(currentDate)}
+                                                                >
+                                                                    <h1
+                                                                        className={`h-[40px] w-[40px] grid place-content-center rounded-full cursor-pointer z-10 ${currentMonth ? "" : "text-gray-400"} ${isSameDay ? "bg-primary text-white" : "hover:bg-whiteSmoke"}`}
+                                                                    >
+                                                                        {currentDate.getDate()}
+                                                                    </h1>
+                                                                    {isSameDay && (
+                                                                        <>
+                                                                            <span className="absolute flex inset-0 rounded-full overflow-visible">
+                                                                                <span className={`${style.rippleAnimation} absolute rounded-full  bg-primary opacity-50`}></span>
+                                                                            </span>
+                                                                        </>
+                                                                    )}
+                                                                </div>
+                                                            );
+                                                        }
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
+                            </div>
                         </div>
-                    </div>
-                </div >)
+                    </div >
+                </div>)
             }
         </>
     );

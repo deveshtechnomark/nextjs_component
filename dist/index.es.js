@@ -1479,9 +1479,11 @@ var Calendar = function Calendar(props) {
     onClick: calendarShow,
     defaultValue: fullDate.toString()
   })), toggleOpen && /*#__PURE__*/React.createElement("div", {
-    className: "relative bottomAnimation ".concat(toggleOpen ? style$3.bottomAnimation : "")
+    className: "relative"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex  mx-auto  items-center"
+    className: "bottomAnimation absolute z-20  bg-white ".concat(toggleOpen ? style$3.bottomAnimation : "")
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex mx-auto  items-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: "shadow-md overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1489,12 +1491,12 @@ var Calendar = function Calendar(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row  ".concat(showYearList ? "" : animate)
   }, showMonthList === true ? "" : showYearList === true ? "" : /*#__PURE__*/React.createElement("h1", {
-    className: "text-[14px] font-semibold cursor-pointer text-slatyBlue",
+    className: " text-[14px] font-semibold cursor-pointer text-slatyBlue",
     onClick: toggleMonthList
   }, months[currentMonth]), showYearList === true && showMonthList === false ? /*#__PURE__*/React.createElement("h1", {
-    className: "text-[14px] font-semibold ml-1 text-slatyBlue"
+    className: " text-[14px] font-semibold ml-1 text-slatyBlue"
   }, startYear + ' - ' + endYear) : /*#__PURE__*/React.createElement("h1", {
-    className: "text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
+    className: " text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
     onClick: toggleYearList
   }, currentYear)), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-5"
@@ -1531,7 +1533,7 @@ var Calendar = function Calendar(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "".concat(style$3.topAnimation, "  w-full h-full")
   }, /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-4 place-content-center overflow-hidden"
+    className: "grid grid-cols-4 place-content-center overflow-hidden "
   }, months.map(function (month, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
@@ -1549,7 +1551,7 @@ var Calendar = function Calendar(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "".concat(animate, "  w-full")
   }, /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden"
+    className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden "
   }, displayedYears.map(function (year) {
     return /*#__PURE__*/React.createElement("div", {
       key: year,
@@ -1587,7 +1589,7 @@ var Calendar = function Calendar(props) {
     }, /*#__PURE__*/React.createElement("span", {
       className: "".concat(style$3.rippleAnimation, " absolute rounded-full  bg-primary opacity-50")
     }))));
-  })))))));
+  }))))))));
 };
 
 var CalendarYear = function CalendarYear(props) {
@@ -1738,9 +1740,11 @@ var CalendarYear = function CalendarYear(props) {
     onClick: calendarShow,
     defaultValue: fullDate.toString()
   })), toggleOpen && /*#__PURE__*/React.createElement("div", {
-    className: "relative bottomAnimation ".concat(toggleOpen ? style$3.bottomAnimation : "")
+    className: "relative"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex  mx-auto  items-center"
+    className: "bottomAnimation absolute z-20  bg-white ".concat(toggleOpen ? style$3.bottomAnimation : "")
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex mx-auto  items-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: "shadow-md overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1753,7 +1757,7 @@ var CalendarYear = function CalendarYear(props) {
   }, months[currentMonth]), showYearList === true && showMonthList === false ? /*#__PURE__*/React.createElement("h1", {
     className: " text-[14px] font-semibold ml-1 text-slatyBlue"
   }, startYear + ' - ' + endYear) : /*#__PURE__*/React.createElement("h1", {
-    className: " text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
+    className: "text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
     onClick: toggleYearList
   }, currentYear)), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-5"
@@ -1794,7 +1798,7 @@ var CalendarYear = function CalendarYear(props) {
   }, months.map(function (month, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
-      className: "py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor  relative cursor-pointer ",
+      className: "py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor relative cursor-pointer ",
       onClick: function onClick() {
         return selectMonth(index);
       }
@@ -1846,7 +1850,7 @@ var CalendarYear = function CalendarYear(props) {
     }, /*#__PURE__*/React.createElement("span", {
       className: "".concat(style$3.rippleAnimation, " absolute rounded-full  bg-primary opacity-50")
     }))));
-  })))))));
+  }))))))));
 };
 
 var Style$1 = {"striped_progress_bar":"Progressbar-module_striped_progress_bar__2vJqJ","progressbar_animation":"Progressbar-module_progressbar_animation__75iSo","progress_fill":"Progressbar-module_progress_fill__5-XfA"};

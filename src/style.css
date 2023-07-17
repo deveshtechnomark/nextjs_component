@@ -5,12 +5,12 @@
 @import url("/public/styles/fonts/font.css");
 
 /* Button css */
-/* @keyframes ripple {
+@keyframes ripple {
     to {
       transform: scale(4);
       opacity: 0;
     }
-  } */
+  }
 
 .bg-transparent {
   background-color: "transparent";
