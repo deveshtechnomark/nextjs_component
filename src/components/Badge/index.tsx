@@ -13,9 +13,10 @@ interface BadgeProps {
     | "error"
     | "primary";
   variant: "pill" | "dot";
+  effect?: boolean;
 }
 
-const Badge = ({ text, badgetype, variant }: BadgeProps) => {
+const Badge = ({ text, badgetype, variant, effect }: BadgeProps) => {
   const getColor = (type: string) => {
     switch (type) {
       case "dark":
@@ -61,9 +62,11 @@ const Badge = ({ text, badgetype, variant }: BadgeProps) => {
       {variant === "dot" ? (
         <span
           style={
-            variant === "dot" ? { borderColor: `${getColor(badgetype)}` } : {}
+            variant === "dot" && effect
+              ? { borderColor: `${getColor(badgetype)}` }
+              : {}
           }
-          className={style.dot__badge}
+          className={`${effect ? style.dot__badge : ""}`}
         >
           {parseInt(text) > 99 ? "99+" : text}
         </span>

@@ -59,9 +59,9 @@ $defaultRed: #dc3545;
       }
       &:hover {
         cursor: pointer;
-        color: $primary;
+        color: $primary !important;
         > .checkBoxSpan {
-          border-color: $primary;
+          border-color: $primary !important;
         }
       }
     }
@@ -70,7 +70,7 @@ $defaultRed: #dc3545;
     + {
       .checkBoxLabel {
         > .checkBoxSpan {
-          box-shadow: 0 0 8px $primary;
+          box-shadow: 0 0 8px $primary !important;
         }
       }
     }
@@ -87,7 +87,7 @@ $defaultRed: #dc3545;
     + {
       .checkBoxLabel {
         > .checkBoxSpan {
-          border: 0.58em solid $primary;
+          border: 0.58em solid $primary !important;
           animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
           &:before {
             content: "";
@@ -215,9 +215,9 @@ $defaultRed: #dc3545;
       }
       &:hover {
         cursor: pointer;
-        color: $primary;
+        color: $primary !important;
         > .i__checkBoxSpan {
-          border-color: $primary;
+          border-color: $primary !important;
         }
       }
     }
@@ -226,7 +226,7 @@ $defaultRed: #dc3545;
     + {
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
-          box-shadow: 0 0 8px $primary;
+          box-shadow: 0 0 8px $primary !important;
         }
       }
     }
@@ -243,7 +243,7 @@ $defaultRed: #dc3545;
     + {
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
-          border: 0.58em solid $primary;
+          border: 0.58em solid $primary !important;
           &:before {
             content: "";
             position: absolute;
