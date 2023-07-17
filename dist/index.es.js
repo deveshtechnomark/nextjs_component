@@ -208,9 +208,11 @@ var Calendar = function Calendar(props) {
     onClick: calendarShow,
     defaultValue: fullDate.toString()
   })), toggleOpen && /*#__PURE__*/React.createElement("div", {
-    className: "relative bottomAnimation ".concat(toggleOpen ? style.bottomAnimation : "")
+    className: "relative"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex  mx-auto  items-center"
+    className: "bottomAnimation absolute z-20  bg-white ".concat(toggleOpen ? style.bottomAnimation : "")
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex mx-auto  items-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: "shadow-md overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
@@ -316,7 +318,7 @@ var Calendar = function Calendar(props) {
     }, /*#__PURE__*/React.createElement("span", {
       className: "".concat(style.rippleAnimation, " absolute rounded-full  bg-primary opacity-50")
     }))));
-  })))))));
+  }))))))));
 };
 
 var CalendarYear = function CalendarYear(props) {
@@ -403,7 +405,7 @@ var CalendarYear = function CalendarYear(props) {
     setToday(newDate);
     setSelectedDate(date);
     newDate.setDate(date.getDate() + 1);
-    var formattedDate = newDate.toISOString().slice(0, 10);
+    var formattedDate = newDate.toISOString().slice(0, 7);
     setFullDate(formattedDate);
     setToggleOpen(false);
   };
@@ -467,9 +469,11 @@ var CalendarYear = function CalendarYear(props) {
     onClick: calendarShow,
     defaultValue: fullDate.toString()
   })), toggleOpen && /*#__PURE__*/React.createElement("div", {
-    className: "relative bottomAnimation ".concat(toggleOpen ? style.bottomAnimation : "")
+    className: "relative"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex  mx-auto  items-center"
+    className: "bottomAnimation absolute z-20  bg-white ".concat(toggleOpen ? style.bottomAnimation : "")
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex mx-auto  items-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: "shadow-md overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
@@ -575,7 +579,7 @@ var CalendarYear = function CalendarYear(props) {
     }, /*#__PURE__*/React.createElement("span", {
       className: "".concat(style.rippleAnimation, " absolute rounded-full  bg-primary opacity-50")
     }))));
-  })))))));
+  }))))))));
 };
 
 export { Calendar, CalendarYear };
