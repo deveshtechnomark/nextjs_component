@@ -67,6 +67,11 @@ const TextField: React.FC<TextFieldProps> = ({
       setShowEmailError(false);
       setFocus(true);
     }
+
+    if (e.target.value === "") {
+      setFocus(false);
+    }
+
     if (onBlur) {
       onBlur(e);
     }

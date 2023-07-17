@@ -124,6 +124,9 @@ var TextField = function TextField(_a) {
       setShowEmailError(false);
       setFocus(true);
     }
+    if (e.target.value === "") {
+      setFocus(false);
+    }
     if (onBlur) {
       onBlur(e);
     }
