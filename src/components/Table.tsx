@@ -112,7 +112,7 @@ const Table: React.FC<TableProps> = (props) => {
             ))}
 
             {props.action && (
-              <th className="cursor-pointer text-[16px] sm:text-[14px] font-bold text-center">
+              <th className="cursor-pointer text-[16px] sm:text-[14px] font-bold text-center uppercase">
                 Actions
               </th>
             )}
