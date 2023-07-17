@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import ClearIcon from "./icons/ClearIcon";
 import CheckIcon from "./icons/CheckIcon";
 
+ 
+
 interface TextFieldProps {
   label?: string;
   className?: string;
@@ -18,6 +20,8 @@ interface TextFieldProps {
   hasError?: boolean;
   getValue: (arg1: string) => void;
 }
+
+ 
 
 const TextField: React.FC<TextFieldProps> = ({
   label,
@@ -42,13 +46,19 @@ const TextField: React.FC<TextFieldProps> = ({
   const [valid, setValid] = useState<boolean>(false);
   const [showEmailError, setShowEmailError] = useState<boolean>(false);
 
+ 
+
   useEffect(() => {
     setErr(hasError);
   }, [hasError, errorMessage]);
 
+ 
+
   const handleFocus = () => {
     setFocus(true);
   };
+
+ 
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     if (validate && (e.target.value === "" || !e.target.value)) {
@@ -67,23 +77,40 @@ const TextField: React.FC<TextFieldProps> = ({
       setShowEmailError(false);
       setFocus(true);
     }
+
+ 
+
+    if (e.target.value === "") {
+      setFocus(false);
+    }
+
+ 
+
     if (onBlur) {
       onBlur(e);
     }
   };
+
+ 
 
   const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
 
+ 
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     getValue(inputValue);
 
+ 
+
     if (onChange) {
       onChange(e);
     }
+
+ 
 
     if (validate && type === "text") {
       if (inputValue.length < 0) {
@@ -110,6 +137,8 @@ const TextField: React.FC<TextFieldProps> = ({
     }
   };
 
+ 
+
   const handleClear = () => {
     if (onChange) {
       onChange({
@@ -117,31 +146,37 @@ const TextField: React.FC<TextFieldProps> = ({
       } as React.ChangeEvent<HTMLInputElement>);
     }
 
+ 
+
     setErr(false);
     setValid(false);
     setShowEmailError(false);
   };
 
+ 
+
   return (
-    <div className="flex flex-col text-sm sm:text-base relative">
+<div className="flex flex-col text-sm sm:text-base relative">
       {label && (
-        <label
+<label
           className={`
         ${err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"}
       `}
-        >
+>
           {label}
           {validate && "*"}
-        </label>
+</label>
       )}
+
+ 
 
       <div
         className={`${
           !err &&
           "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
         }`}
-      >
-        <input
+>
+<input
           className={`
           ${className}
           py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]
@@ -153,7 +188,7 @@ const TextField: React.FC<TextFieldProps> = ({
               : "border-b-lightSilver"
           }
           ${(valid && !err) ? "text-successColor" : "text-[#333333]"}
-         
+
         `}
           ref={inputRef}
           type={type}
@@ -166,35 +201,45 @@ const TextField: React.FC<TextFieldProps> = ({
           disabled={disabled}
           {...props}
         />
-      </div>
+</div>
+
+ 
 
       {err && (
-        <span className="text-defaultRed absolute right-0 top-0 mt-5 mr-3 cursor-pointer">
-          <div className="text-[20px]" onClick={handleClear}>
-            <ClearIcon />
-          </div>
-        </span>
+<span className="text-defaultRed absolute right-0 top-0 mt-5 mr-3 cursor-pointer">
+<div className="text-[20px]" onClick={handleClear}>
+<ClearIcon />
+</div>
+</span>
       )}
+
+ 
 
       {(valid && !err) && (
-        <span className="text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3">
-          <CheckIcon />
-        </span>
+<span className="text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3">
+<CheckIcon />
+</span>
       )}
+
+ 
 
       {err && (
-        <span className="text-defaultRed text-[12px] sm:text-[14px]">
+<span className="text-defaultRed text-[12px] sm:text-[14px]">
           {errorMessage}
-        </span>
+</span>
       )}
 
+ 
+
       {!err && supportingText && (
-        <span className="text-slatyGrey text-[12px] sm:text-[14px]">
+<span className="text-slatyGrey text-[12px] sm:text-[14px]">
           {supportingText}
-        </span>
+</span>
       )}
-    </div>
+</div>
   );
 };
+
+ 
 
 export { TextField };

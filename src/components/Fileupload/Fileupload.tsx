@@ -152,14 +152,14 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
   return type === "url" ? (
     <div className="flex flex-row justify-center items-center h-[36px] border border-dashed border-lightSilver rounded-[4px]">
       <input
-        className="outline-none border-r border-r-lightSilver w-1/6 ml-2 text-[14px] font-proxima text-darkCharcoal placeholder:text-[14px]"
+        className="outline-none border-r border-r-lightSilver w-1/6 ml-2 text-[14px]  text-darkCharcoal placeholder:text-[14px]"
         type="url"
         value={rootUrl}
         onChange={handleRootUrlChange}
         placeholder="Enter root URL"
       />
       <input
-        className="outline-none w-4/6 ml-2 text-[14px] font-proxima text-pureBlack placeholder:text-[14px]"
+        className="outline-none w-4/6 ml-2 text-[14px]  text-pureBlack placeholder:text-[14px]"
         type="url"
         value={mainUrl}
         onChange={handleMainUrlChange}
@@ -168,7 +168,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
       <span className="w-1/6 relative">
         <button
           onClick={handleUpload}
-          className="absolute bottom-[-12px] right-5 text-[16px] px-[20px] text-slatyGrey font-proxima hover:bg-[#EDFFFC] hover:text-primary rounded-[5px]"
+          className="absolute bottom-[-12px] right-5 text-[16px] px-[20px] text-slatyGrey  hover:bg-[#EDFFFC] hover:text-primary rounded-[5px]"
         >
           Upload
         </button>
@@ -206,7 +206,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
           <p
             className={`${
               variant === "small" ? "ml-[10px]" : "mt-4"
-            } text-[14px] text-darkCharcoal font-proxima`}
+            } text-[14px] text-darkCharcoal `}
           >
             Drag and Drop or <span className="text-teal-500">Browse</span> to
             Upload
@@ -221,7 +221,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
               {fileNames.length > 0 && uploaded
                 ? fileNames.map((name, index) => (
                     <span
-                      className="text-[14px] text-darkCharcoal font-proxima flex items-center gap-2 bg-whiteSmoke px-[2px] py-[2.5px] rounded-[2px] mr-2 mb-2"
+                      className="text-[14px] text-darkCharcoal  flex items-center gap-2 bg-whiteSmoke px-[2px] py-[2.5px] rounded-[2px] mr-2 mb-2"
                       key={name}
                     >
                       <span className="text-[14px]">
@@ -241,7 +241,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
                     </span>
                   ))
                 : !uploaded && (
-                    <span className="flex flex-row items-center gap-2 text-[14px] text-darkCharcoal font-proxima">
+                    <span className="flex flex-row items-center gap-2 text-[14px] text-darkCharcoal ">
                       {fileNames.length === 0 ? (
                         <>
                           <FileIcon /> No selected files
@@ -257,7 +257,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
             </div>
           </div>
           {fileNames.length > 0 && !uploaded && (
-            <div className="flex items-center text-[12px] font-proxima italic text-slatyGrey flex-row">
+            <div className="flex items-center text-[12px]  italic text-slatyGrey flex-row">
               <span className="mr-[10px]">
                 {uploaded ? "Uploaded" : "Uploading..."}
               </span>
@@ -281,7 +281,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
         >
           {fileNames.length > 0 && !uploaded ? (
             <>
-              <label className="text-[12px] italic mr-[10px] text-slatyGrey font-proxima">
+              <label className="text-[12px] italic mr-[10px] text-slatyGrey ">
                 {!uploaded ? "Uploading..." : "Uploaded"}
               </label>
 
@@ -295,7 +295,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
             <>
               <div className="flex flex-row items-center">
                 {renderFileIcon(fileNames[0])}
-                <span className="ml-2 text-[14px] text-darkCharcoal font-proxima">
+                <span className="ml-2 text-[14px] text-darkCharcoal ">
                   {fileNames[0].length > 30 ? (
                     <>
                       {fileNames[0].slice(0, 26)}..
@@ -343,7 +343,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
               <p
                 className={`${
                   variant === "small" ? "ml-[10px]" : "mt-4"
-                } text-[14px] text-darkCharcoal font-proxima`}
+                } text-[14px] text-darkCharcoal `}
               >
                 Drag and Drop or <span className="text-teal-500">Browse</span>{" "}
                 to Upload
@@ -352,7 +352,7 @@ function Uploader({ multiSelect, variant, type }: UploaderProps) {
           ) : (
             <div className="flex flex-row items-center">
               <FileIcon />
-              <span className="ml-2 text-[14px] text-darkCharcoal font-proxima">
+              <span className="ml-2 text-[14px] text-darkCharcoal ">
                 No Files Selected
               </span>
             </div>

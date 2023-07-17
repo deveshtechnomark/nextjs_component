@@ -1489,12 +1489,12 @@ var Calendar = function Calendar(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row  ".concat(showYearList ? "" : animate)
   }, showMonthList === true ? "" : showYearList === true ? "" : /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold cursor-pointer text-slatyBlue",
+    className: "text-[14px] font-semibold cursor-pointer text-slatyBlue",
     onClick: toggleMonthList
   }, months[currentMonth]), showYearList === true && showMonthList === false ? /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold ml-1 text-slatyBlue"
+    className: "text-[14px] font-semibold ml-1 text-slatyBlue"
   }, startYear + ' - ' + endYear) : /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
+    className: "text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
     onClick: toggleYearList
   }, currentYear)), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-5"
@@ -1531,11 +1531,11 @@ var Calendar = function Calendar(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "".concat(style$3.topAnimation, "  w-full h-full")
   }, /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-4 place-content-center overflow-hidden proxima"
+    className: "grid grid-cols-4 place-content-center overflow-hidden"
   }, months.map(function (month, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
-      className: "py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer ",
+      className: "py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor  relative cursor-pointer ",
       onClick: function onClick() {
         return selectMonth(index);
       }
@@ -1549,11 +1549,11 @@ var Calendar = function Calendar(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "".concat(animate, "  w-full")
   }, /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima"
+    className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden"
   }, displayedYears.map(function (year) {
     return /*#__PURE__*/React.createElement("div", {
       key: year,
-      className: "py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer",
+      className: "py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor  relative cursor-pointer",
       onClick: function onClick() {
         return selectYear(year);
       }
@@ -1561,7 +1561,7 @@ var Calendar = function Calendar(props) {
       className: "py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ".concat(year === selectedYear ? 'bg-lightGreen text-primary' : '')
     }, year));
   }))))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "w-full grid grid-cols-7 proxima  ".concat(animate)
+    className: "w-full grid grid-cols-7   ".concat(animate)
   }, days.map(function (day, index) {
     return /*#__PURE__*/React.createElement("h1", {
       key: index,
@@ -1576,7 +1576,7 @@ var Calendar = function Calendar(props) {
     var isSameDay = currentDate.getDate() === selectedDate.getDate() && currentDate.getMonth() === selectedDate.getMonth() && currentDate.getFullYear() === selectedDate.getFullYear();
     return /*#__PURE__*/React.createElement("div", {
       key: index,
-      className: "h-full w-full grid place-content-center text-sm text-textColor proxima relative ",
+      className: "h-full w-full grid place-content-center text-sm text-textColor  relative ",
       onClick: function onClick() {
         return handleDateClick(currentDate);
       }
@@ -1748,12 +1748,12 @@ var CalendarYear = function CalendarYear(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row  ".concat(showYearList ? "" : animate)
   }, showMonthList === true ? "" : showYearList === true ? "" : /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold cursor-pointer text-slatyBlue",
+    className: " text-[14px] font-semibold cursor-pointer text-slatyBlue",
     onClick: toggleMonthList
   }, months[currentMonth]), showYearList === true && showMonthList === false ? /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold ml-1 text-slatyBlue"
+    className: " text-[14px] font-semibold ml-1 text-slatyBlue"
   }, startYear + ' - ' + endYear) : /*#__PURE__*/React.createElement("h1", {
-    className: "proxima text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
+    className: " text-[14px] font-semibold ml-1 cursor-pointer text-slatyBlue ".concat(showMonthList ? 'pointer-events-none' : ''),
     onClick: toggleYearList
   }, currentYear)), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-5"
@@ -1790,11 +1790,11 @@ var CalendarYear = function CalendarYear(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "".concat(style$3.topAnimation, "  w-full h-full")
   }, /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-4 place-content-center overflow-hidden proxima"
+    className: "grid grid-cols-4 place-content-center overflow-hidden "
   }, months.map(function (month, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
-      className: "py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer ",
+      className: "py-5 px-2 w-full h-full grid place-content-center text-sm text-textColor  relative cursor-pointer ",
       onClick: function onClick() {
         return selectMonth(index);
       }
@@ -1808,11 +1808,11 @@ var CalendarYear = function CalendarYear(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "".concat(animate, "  w-full")
   }, /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden proxima"
+    className: "grid grid-cols-4 grid-rows-4 gap-1 place-content-center overflow-hidden "
   }, displayedYears.map(function (year) {
     return /*#__PURE__*/React.createElement("div", {
       key: year,
-      className: "py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor proxima relative cursor-pointer",
+      className: "py-2 px-2 w-full h-full grid place-content-center text-sm text-textColor  relative cursor-pointer",
       onClick: function onClick() {
         return selectYear(year);
       }
@@ -1820,7 +1820,7 @@ var CalendarYear = function CalendarYear(props) {
       className: "py-4 px-3 w-full h-full hover:bg-lightGreen hover:text-primary transition-all duration-200 flex items-center justify-center rounded-md ".concat(year === selectedYear ? 'bg-lightGreen text-primary' : '')
     }, year));
   }))))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "w-full grid grid-cols-7 proxima  ".concat(animate)
+    className: "w-full grid grid-cols-7   ".concat(animate)
   }, days.map(function (day, index) {
     return /*#__PURE__*/React.createElement("h1", {
       key: index,
@@ -1835,7 +1835,7 @@ var CalendarYear = function CalendarYear(props) {
     var isSameDay = currentDate.getDate() === selectedDate.getDate() && currentDate.getMonth() === selectedDate.getMonth() && currentDate.getFullYear() === selectedDate.getFullYear();
     return /*#__PURE__*/React.createElement("div", {
       key: index,
-      className: "h-full w-full grid place-content-center text-sm text-textColor proxima relative ",
+      className: "h-full w-full grid place-content-center text-sm text-textColor  relative ",
       onClick: function onClick() {
         return handleDateClick(currentDate);
       }
@@ -2234,13 +2234,13 @@ function Uploader(_a) {
   return type === "url" ? /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row justify-center items-center h-[36px] border border-dashed border-lightSilver rounded-[4px]"
   }, /*#__PURE__*/React.createElement("input", {
-    className: "outline-none border-r border-r-lightSilver w-1/6 ml-2 text-[14px] font-proxima text-darkCharcoal placeholder:text-[14px]",
+    className: "outline-none border-r border-r-lightSilver w-1/6 ml-2 text-[14px]  text-darkCharcoal placeholder:text-[14px]",
     type: "url",
     value: rootUrl,
     onChange: handleRootUrlChange,
     placeholder: "Enter root URL"
   }), /*#__PURE__*/React.createElement("input", {
-    className: "outline-none w-4/6 ml-2 text-[14px] font-proxima text-pureBlack placeholder:text-[14px]",
+    className: "outline-none w-4/6 ml-2 text-[14px]  text-pureBlack placeholder:text-[14px]",
     type: "url",
     value: mainUrl,
     onChange: handleMainUrlChange,
@@ -2249,7 +2249,7 @@ function Uploader(_a) {
     className: "w-1/6 relative"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: handleUpload,
-    className: "absolute bottom-[-12px] right-5 text-[16px] px-[20px] text-slatyGrey font-proxima hover:bg-[#EDFFFC] hover:text-primary rounded-[5px]"
+    className: "absolute bottom-[-12px] right-5 text-[16px] px-[20px] text-slatyGrey  hover:bg-[#EDFFFC] hover:text-primary rounded-[5px]"
   }, "Upload"))) : /*#__PURE__*/React.createElement("div", null, (multiSelect || !variant) && /*#__PURE__*/React.createElement("div", {
     className: "upload-container w-full flex items-center justify-center ".concat(variant === "small" ? "h-[36px]" : "flex-col h-[230px]", " justify-center items-centerborder transition-all duration-200 ease-in \n        border border-dashed border-lightSilver hover:border-primary hover:bg-[#EDFFFC] cursor-pointer rounded-[4px]"),
     onDragOver: handleDragOver,
@@ -2264,7 +2264,7 @@ function Uploader(_a) {
   }), /*#__PURE__*/React.createElement("div", {
     className: "text-[15px] text-slatyGrey ".concat(variant === "small" ? "" : "border-2 border-lightSilver rounded-[4px] p-2")
   }, /*#__PURE__*/React.createElement(UploadIcon, null)), /*#__PURE__*/React.createElement("p", {
-    className: "".concat(variant === "small" ? "ml-[10px]" : "mt-4", " text-[14px] text-darkCharcoal font-proxima")
+    className: "".concat(variant === "small" ? "ml-[10px]" : "mt-4", " text-[14px] text-darkCharcoal ")
   }, "Drag and Drop or ", /*#__PURE__*/React.createElement("span", {
     className: "text-teal-500"
   }, "Browse"), " to Upload")), multiSelect ? /*#__PURE__*/React.createElement("section", {
@@ -2273,7 +2273,7 @@ function Uploader(_a) {
     className: "flex flex-row ml-2 flex-wrap overflow-x-auto"
   }, fileNames.length > 0 && uploaded ? fileNames.map(function (name, index) {
     return /*#__PURE__*/React.createElement("span", {
-      className: "text-[14px] text-darkCharcoal font-proxima flex items-center gap-2 bg-whiteSmoke px-[2px] py-[2.5px] rounded-[2px] mr-2 mb-2",
+      className: "text-[14px] text-darkCharcoal  flex items-center gap-2 bg-whiteSmoke px-[2px] py-[2.5px] rounded-[2px] mr-2 mb-2",
       key: name
     }, /*#__PURE__*/React.createElement("span", {
       className: "text-[14px]"
@@ -2284,9 +2284,9 @@ function Uploader(_a) {
       className: "text-[14px] text-slatyGrey cursor-pointer"
     }, /*#__PURE__*/React.createElement(ClearIcon$1, null)));
   }) : !uploaded && /*#__PURE__*/React.createElement("span", {
-    className: "flex flex-row items-center gap-2 text-[14px] text-darkCharcoal font-proxima"
+    className: "flex flex-row items-center gap-2 text-[14px] text-darkCharcoal "
   }, fileNames.length === 0 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(FileIcon, null), " No selected files") : /*#__PURE__*/React.createElement(React.Fragment, null, fileNames.length, " file", fileNames.length > 1 ? "s" : "", " selected")))), fileNames.length > 0 && !uploaded && /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center text-[12px] font-proxima italic text-slatyGrey flex-row"
+    className: "flex items-center text-[12px]  italic text-slatyGrey flex-row"
   }, /*#__PURE__*/React.createElement("span", {
     className: "mr-[10px]"
   }, uploaded ? "Uploaded" : "Uploading..."), /*#__PURE__*/React.createElement(ProgressBar, {
@@ -2298,7 +2298,7 @@ function Uploader(_a) {
   }, isChecked && /*#__PURE__*/React.createElement(CheckIcon$1, null)))) : /*#__PURE__*/React.createElement("section", {
     className: "".concat(variant === "small" ? fileNames.length > 0 && "flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]" : "mt-2 flex justify-between items-center border border-lightSilver h-[36px] px-[20px] rounded-[4px]")
   }, fileNames.length > 0 && !uploaded ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("label", {
-    className: "text-[12px] italic mr-[10px] text-slatyGrey font-proxima"
+    className: "text-[12px] italic mr-[10px] text-slatyGrey "
   }, !uploaded ? "Uploading..." : "Uploaded"), /*#__PURE__*/React.createElement(ProgressBar, {
     variant: "primary",
     progressDigit: false,
@@ -2308,7 +2308,7 @@ function Uploader(_a) {
   }, isChecked && /*#__PURE__*/React.createElement(CheckIcon$1, null))) : uploaded ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row items-center"
   }, renderFileIcon(fileNames[0]), /*#__PURE__*/React.createElement("span", {
-    className: "ml-2 text-[14px] text-darkCharcoal font-proxima"
+    className: "ml-2 text-[14px] text-darkCharcoal "
   }, fileNames[0].length > 30 ? /*#__PURE__*/React.createElement(React.Fragment, null, fileNames[0].slice(0, 26), "..", fileNames[0].substring(fileNames[0].lastIndexOf("."))) : /*#__PURE__*/React.createElement(React.Fragment, null, fileNames[0]))), /*#__PURE__*/React.createElement("span", {
     onClick: function onClick() {
       return handleRemoveFile(0);
@@ -2328,13 +2328,13 @@ function Uploader(_a) {
   }), /*#__PURE__*/React.createElement("div", {
     className: "text-[15px] text-slatyGrey ".concat(variant === "small" ? "" : "border-2 border-lightSilver rounded-[4px] p-2")
   }, /*#__PURE__*/React.createElement(UploadIcon, null)), /*#__PURE__*/React.createElement("p", {
-    className: "".concat(variant === "small" ? "ml-[10px]" : "mt-4", " text-[14px] text-darkCharcoal font-proxima")
+    className: "".concat(variant === "small" ? "ml-[10px]" : "mt-4", " text-[14px] text-darkCharcoal ")
   }, "Drag and Drop or ", /*#__PURE__*/React.createElement("span", {
     className: "text-teal-500"
   }, "Browse"), " ", "to Upload")) : /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row items-center"
   }, /*#__PURE__*/React.createElement(FileIcon, null), /*#__PURE__*/React.createElement("span", {
-    className: "ml-2 text-[14px] text-darkCharcoal font-proxima"
+    className: "ml-2 text-[14px] text-darkCharcoal "
   }, "No Files Selected"))));
 }
 
@@ -3525,7 +3525,7 @@ var Rating = function Rating(_a) {
   })));
 };
 
-var Styles = {"ScrollSpyContainer":"Scrollspy-module_ScrollSpyContainer__Z0sM-","horizontal":"Scrollspy-module_horizontal__IviBW","verticalDrawer":"Scrollspy-module_verticalDrawer__ojqjd","vertical":"Scrollspy-module_vertical__l8HcQ","ScrollSpyItemHorizontal":"Scrollspy-module_ScrollSpyItemHorizontal__PhdUu","ScrollSpyItemVertical":"Scrollspy-module_ScrollSpyItemVertical__0bdmD","ScrollSpyItemVerticalDrawer":"Scrollspy-module_ScrollSpyItemVerticalDrawer__9zhfD","active_verticalDrawer":"Scrollspy-module_active_verticalDrawer__qvZ8D","active_horizontal":"Scrollspy-module_active_horizontal__t7JGA","active_vertical":"Scrollspy-module_active_vertical__gHv0j"};
+var Styles = {"ScrollSpyContainer":"Scrollspy-module_ScrollSpyContainer__Z0sM-","horizontal":"Scrollspy-module_horizontal__IviBW","ScrollSpyItemHorizontal":"Scrollspy-module_ScrollSpyItemHorizontal__PhdUu","active_horizontal":"Scrollspy-module_active_horizontal__t7JGA","verticalDrawer":"Scrollspy-module_verticalDrawer__ojqjd","vertical":"Scrollspy-module_vertical__l8HcQ","ScrollSpyItemVertical":"Scrollspy-module_ScrollSpyItemVertical__0bdmD","ScrollSpyItemVerticalDrawer":"Scrollspy-module_ScrollSpyItemVerticalDrawer__9zhfD","active_verticalDrawer":"Scrollspy-module_active_verticalDrawer__qvZ8D","active_vertical":"Scrollspy-module_active_vertical__gHv0j"};
 
 var ScrollSpy = function ScrollSpy(props) {
   var _a = useState(props.targetIds[0]),
@@ -3685,7 +3685,7 @@ var Select = function Select(_a) {
     className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ".concat(className)),
     ref: selectRef
   }, label && /*#__PURE__*/React.createElement("label", {
-    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : "text-slatyGrey"),
+    className: classNames("text-[14px] font-normal ", open ? "text-primary" : "text-slatyGrey"),
     htmlFor: id
   }, label, required && "*"), /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row items-center relative mt-0.5 w-full"
@@ -3696,7 +3696,7 @@ var Select = function Select(_a) {
     readOnly: !search,
     placeholder: defaultValue || "Please select",
     value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
-    className: classNames("flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima w-full", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: classNames("flex-grow outline-none bg-white text-darkCharcoal py-[3px] px-3 text-[16px] font-normal  w-full", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), /*#__PURE__*/React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
@@ -3713,7 +3713,7 @@ var Select = function Select(_a) {
   }, options && options.map(function (option, index) {
     return /*#__PURE__*/React.createElement("li", {
       key: index,
-      className: classNames("p-[10px] text-[16px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex", {
+      className: classNames("p-[10px] text-[16px]  hover:bg-whiteSmoke font-normal cursor-pointer flex", {
         "bg-whiteSmoke": option.value === inputValue,
         hidden: search && !option.label.toLowerCase().startsWith(inputValue)
       }),
@@ -3995,7 +3995,7 @@ var CrossIcon = function CrossIcon(_ref) {
   }));
 };
 
-var styles = {"iconShow":"Speeddial-module_iconShow__0Dh4T","left":"Speeddial-module_left__t5zqk","slideLeft":"Speeddial-module_slideLeft__s6grR","hide":"Speeddial-module_hide__nxsfE","show":"Speeddial-module_show__t1AsX","crossAnimation":"Speeddial-module_crossAnimation__h3e8n","cross":"Speeddial-module_cross__DMPFG","plusAnimation":"Speeddial-module_plusAnimation__MWtqn","plus":"Speeddial-module_plus__lnGWx"};
+var styles = {"hideAnimation":"Speeddial-module_hideAnimation__tOoOb","hide":"Speeddial-module_hide__nxsfE","showAnimation":"Speeddial-module_showAnimation__m55QT","show":"Speeddial-module_show__t1AsX","hideLeftAnimation":"Speeddial-module_hideLeftAnimation__TVzMf","hideLeft":"Speeddial-module_hideLeft__wGAk-","showLeftAnimation":"Speeddial-module_showLeftAnimation__S-C5B","showLeft":"Speeddial-module_showLeft__t7GaO","left":"Speeddial-module_left__t5zqk","slideLeft":"Speeddial-module_slideLeft__s6grR","crossAnimation":"Speeddial-module_crossAnimation__h3e8n","cross":"Speeddial-module_cross__DMPFG","plusAnimation":"Speeddial-module_plusAnimation__MWtqn","plus":"Speeddial-module_plus__lnGWx"};
 
 var SpeedDial = function SpeedDial(_a) {
   var open = _a.open,
@@ -4007,8 +4007,12 @@ var SpeedDial = function SpeedDial(_a) {
   var _c = useState(-1),
     hoveredItemIndex = _c[0],
     setHoveredItemIndex = _c[1];
+  var _d = useState(false),
+    hide = _d[0],
+    setHide = _d[1];
   var toggleList = function toggleList() {
     setListVisible(!isListVisible);
+    setHide(!hide);
   };
   var handleItemHover = function handleItemHover(index) {
     setHoveredItemIndex(index);
@@ -4018,42 +4022,42 @@ var SpeedDial = function SpeedDial(_a) {
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "relative"
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
-    className: "absolute flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " ").concat(open ? "ml-2" : "mt-2", " ").concat(isListVisible ? "".concat(styles.crossAnimation, " bg-slatyGrey") : "".concat(styles.plusAnimation, " bg-[#00B0AE]"), " text-white border-none outline-none rounded-full"),
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "absolute flex items-center justify-center z-20 ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " ").concat(open ? "ml-2" : "mt-2", " ").concat(isListVisible ? "".concat(styles.crossAnimation, " bg-slatyGrey") : "".concat(styles.plusAnimation, " bg-[#00B0AE]"), " text-white border-none outline-none rounded-full"),
     onClick: toggleList
   }, /*#__PURE__*/React.createElement(CrossIcon, {
     icon: large
-  }))), isListVisible && /*#__PURE__*/React.createElement("div", {
-    className: "absolute ".concat(styles.iconShow, " ").concat(open ? "right-0 -top-2 gap-1" : "bottom-0 flex-col  gap-2", " flex")
+  })), !open && /*#__PURE__*/React.createElement("div", {
+    className: "absolute bottom-0 flex-col  gap-2 flex z-10 ".concat(isListVisible ? "".concat(styles.showAnimation) : "".concat(styles.hideAnimation, " ").concat(hide && "hidden"))
   }, listItems.map(function (item, index) {
-    if (!open) {
-      return /*#__PURE__*/React.createElement("span", {
-        key: index,
-        className: "flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " bg-lightSilver hover:bg-slatyGrey text-darkCharcoal hover:text-pureWhite border-none outline-none ").concat(hoveredItemIndex === index && !open ? "".concat(styles.hide) : "rounded-full"),
-        onMouseEnter: function onMouseEnter() {
-          return handleItemHover(index);
-        },
-        onMouseLeave: handleItemLeave,
-        onClick: item.action
-      }, hoveredItemIndex === index && !open && /*#__PURE__*/React.createElement("span", {
-        className: "absolute ".concat(styles.left, " flex w-max bg-slatyGrey text-pureWhite pl-3 pr-2 ").concat(large ? "py-[11px] right-[40px]" : "py-[6px] right-[30px]")
-      }, item.hoverText), /*#__PURE__*/React.createElement("span", {
-        className: "".concat(large ? "w-[20px] h-[20px]" : "w-[16px] h-[16px]")
-      }, item.icon));
-    } else {
-      return /*#__PURE__*/React.createElement(Tooltip, {
-        position: "top",
-        content: item.hoverText,
-        key: index
-      }, /*#__PURE__*/React.createElement("span", {
-        className: "flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " bg-lightSilver text-darkCharcoal border-none outline-none ").concat(hoveredItemIndex === index && !open ? "rounded-r-full" : "rounded-full"),
-        onMouseEnter: function onMouseEnter() {
-          return handleItemHover(index);
-        },
-        onMouseLeave: handleItemLeave,
-        onClick: item.action
-      }, item.icon));
-    }
+    return /*#__PURE__*/React.createElement("span", {
+      key: index,
+      className: "flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " bg-lightSilver hover:bg-slatyGrey text-darkCharcoal hover:text-pureWhite border-none outline-none ").concat(hoveredItemIndex === index && !open ? "".concat(styles.hide) : "rounded-full"),
+      onMouseEnter: function onMouseEnter() {
+        return handleItemHover(index);
+      },
+      onMouseLeave: handleItemLeave,
+      onClick: item.action
+    }, hoveredItemIndex === index && !open && /*#__PURE__*/React.createElement("span", {
+      className: "absolute ".concat(styles.left, " flex w-max bg-slatyGrey text-pureWhite pl-3 pr-2 ").concat(large ? "py-[11px] right-[40px]" : "py-[6px] right-[30px]")
+    }, item.hoverText), /*#__PURE__*/React.createElement("span", {
+      className: "".concat(large ? "w-[20px] h-[20px]" : "w-[16px] h-[16px]")
+    }, item.icon));
+  })), open && /*#__PURE__*/React.createElement("div", {
+    className: "absolute right-0 -top-2 gap-1 flex ".concat(isListVisible ? "".concat(styles.showLeftAnimation) : "".concat(styles.hideLeftAnimation, " ").concat(hide && "hidden"))
+  }, listItems.map(function (item, index) {
+    return /*#__PURE__*/React.createElement(Tooltip, {
+      position: "top",
+      content: item.hoverText,
+      key: index
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "flex items-center justify-center ".concat(large ? "w-fit h-fit text-xl p-[15px]" : "w-fit h-fit text-base p-[10px]", " bg-lightSilver text-darkCharcoal border-none outline-none ").concat(hoveredItemIndex === index && !open ? "rounded-r-full" : "rounded-full"),
+      onMouseEnter: function onMouseEnter() {
+        return handleItemHover(index);
+      },
+      onMouseLeave: handleItemLeave,
+      onClick: item.action
+    }, item.icon));
   })));
 };
 
@@ -5098,7 +5102,7 @@ var Tel = function Tel(_a) {
     },
     defaultValue: "+91"
   })), /*#__PURE__*/React.createElement("input", __assign({
-    className: "".concat(className, " py-2 px-3 outline-none w-full h-full mt-[6px]"),
+    className: "".concat(className, " py-[3px] px-3 outline-none w-full h-full mt-[6px]"),
     ref: inputRef,
     type: "tel",
     id: id,
@@ -5271,6 +5275,9 @@ var TextField = function TextField(_a) {
       setShowEmailError(false);
       setFocus(true);
     }
+    if (e.target.value === "") {
+      setFocus(false);
+    }
     if (onBlur) {
       onBlur(e);
     }
@@ -5328,7 +5335,7 @@ var TextField = function TextField(_a) {
   }, label, validate && "*"), /*#__PURE__*/React.createElement("div", {
     className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, /*#__PURE__*/React.createElement("input", __assign({
-    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid && !err ? "text-successColor" : "text-[#333333]", "\n         \n        "),
+    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid && !err ? "text-successColor" : "text-[#333333]", "\n\n        "),
     ref: inputRef,
     type: type,
     id: id,
@@ -5352,7 +5359,7 @@ var TextField = function TextField(_a) {
   }, supportingText));
 };
 
-var style = {"scaleUpAnimation":"Timepicker-module_scaleUpAnimation__Evlm9","scaleDownAnimation":"Timepicker-module_scaleDownAnimation__UCez3","textAnimation":"Timepicker-module_textAnimation__1IWGl"};
+var style = {"scaleUpAnimation":"Timepicker-module_scaleUpAnimation__Evlm9","textAnimation":"Timepicker-module_textAnimation__1IWGl"};
 
 var Timepicker = function Timepicker(props) {
   var hourDigits = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -5424,7 +5431,7 @@ var Timepicker = function Timepicker(props) {
   var renderHourDigits = hourDigits.map(function (digit, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: digit,
-      className: "absolute top-1/2 left-1/2 z-10 text-sm cursor-pointer transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(digit === selectedHourDigit ? 'text-white' : 'text-black'),
+      className: "absolute top-1/2 left-1/2 z-10 text-sm ".concat(digit === selectedHourDigit ? "pointer-events-none" : "cursor-pointer", "  transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ").concat(digit === selectedHourDigit ? 'text-white' : 'text-black'),
       style: {
         transform: "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)"),
         top: '46%',
@@ -5439,7 +5446,7 @@ var Timepicker = function Timepicker(props) {
     var formattedDigit = digit < 10 ? "0".concat(digit) : digit;
     return /*#__PURE__*/React.createElement("div", {
       key: digit,
-      className: "absolute top-1/2 left-1/2 z-10 text-sm cursor-pointer transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(digit === selectedMinuteDigit ? 'text-white' : 'text-black'),
+      className: "absolute top-1/2 left-1/2 z-10 text-sm  transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(digit === selectedMinuteDigit ? "pointer-events-none" : "cursor-pointer", " ").concat(digit === selectedMinuteDigit ? 'text-white' : 'text-black'),
       style: {
         transform: "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)"),
         top: '46%',
@@ -5483,10 +5490,10 @@ var Timepicker = function Timepicker(props) {
   }, renderInputMinuteDigit))), /*#__PURE__*/React.createElement("div", {
     className: 'grid grid-cols-2 ml-10 border border-gray-300 rounded-md'
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-10 h-8 ".concat(isAM && 'bg-slatyGreen text-primary', " transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer"),
+    className: "w-10 h-8 ".concat(isAM && 'bg-slatyGreen text-primary', " ").concat(isAM === true ? "pointer-events-none" : "cursor-pointer", " transition-all rounded-l-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 "),
     onClick: toggleSetAM
   }, "AM"), /*#__PURE__*/React.createElement("div", {
-    className: "w-10 h-8 ".concat(!isAM && 'bg-slatyGreen text-primary', " transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer"),
+    className: "w-10 h-8 ".concat(!isAM && 'bg-slatyGreen text-primary', " ").concat(!isAM === true ? "pointer-events-none" : "cursor-pointer", " transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2"),
     onClick: toggleSetAM
   }, "PM"))), !showMinuteDigits && showHourDigits && /*#__PURE__*/React.createElement("div", {
     className: 'w-56 h-56 bg-lightGray rounded-full relative flex items-center justify-center'
@@ -5496,7 +5503,7 @@ var Timepicker = function Timepicker(props) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none",
       style: {
         top: '41%',
         left: '42.6%',
@@ -5528,7 +5535,7 @@ var Timepicker = function Timepicker(props) {
     return digit === selectedMinuteDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
-      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 cursor-pointer",
+      className: "absolute w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none",
       style: {
         top: '41%',
         left: '42.6%',
@@ -5575,24 +5582,20 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
   var _e = useState(false),
     showMinuteDigits = _e[0],
     setShowMinuteDigits = _e[1];
-  var _f = useState(false),
-    isHour24Selected = _f[0],
-    setIsHour24Selected = _f[1];
-  var _g = useState(true),
-    isDigit12 = _g[0],
-    setIsDigit12 = _g[1];
-  var _h = useState(false),
-    isDigit24 = _h[0],
-    setIsDigit24 = _h[1];
+  var _f = useState(true),
+    isDigit12 = _f[0],
+    setIsDigit12 = _f[1];
+  var _g = useState(false),
+    isDigit24 = _g[0],
+    setIsDigit24 = _g[1];
+  var _h = useState(''),
+    animateHour = _h[0],
+    setAnimateHour = _h[1];
   var _j = useState(''),
-    animateHour = _j[0],
-    setAnimateHour = _j[1];
-  var _k = useState(''),
-    animateMinute = _k[0],
-    setAnimateMinute = _k[1];
+    animateMinute = _j[0],
+    setAnimateMinute = _j[1];
   var handleHourSelectDigit = function handleHourSelectDigit(digit) {
     setSelectedHourDigit(digit);
-    setIsHour24Selected(true);
     digit ? setAnimateHour(style.textAnimation) : setAnimateHour('');
     if (digit <= 12) {
       setIsDigit12(true);
@@ -5604,13 +5607,6 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     setTimeout(function () {
       setAnimateHour('');
     }, 300);
-    var timer = setTimeout(function () {
-      setShowMinuteDigits(true);
-      setShowHourDigits(false);
-    }, 1500);
-    return function () {
-      clearTimeout(timer);
-    };
   };
   var handleMinuteSelectDigit = function handleMinuteSelectDigit(digit) {
     setSelectedMinuteDigit(digit);
@@ -5623,7 +5619,6 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     setIsAM(!isAM);
   };
   var showHourClock = function showHourClock() {
-    setIsHour24Selected(false);
     if (showHourDigits) {
       setShowHourDigits(true);
       setShowMinuteDigits(false);
@@ -5644,25 +5639,27 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
   var renderHourDigits12 = hourDigits12.map(function (digit, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: digit,
-      className: "absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ".concat(digit === selectedHourDigit ? 'text-white' : 'text-black', " ").concat(isDigit12 ? 'text-black' : 'text-[#9ca3af]'),
+      className: "absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(digit === selectedHourDigit ? "pointer-events-none" : "cursor-pointer", "  ").concat(digit === selectedHourDigit ? 'text-white' : 'text-black', " ").concat(isDigit12 ? 'text-black' : 'text-[#9ca3af]'),
       style: {
         transform: "".concat(isDigit12 ? "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)") : "rotate(".concat(index * 30, "deg) translate(0, -55px) rotate(").concat(-index * 30, "deg)")),
         top: '46%',
-        left: '47%'
+        left: '47%',
+        transition: 'transform 0.3s ease-out'
       },
       onClick: function onClick() {
-        handleHourSelectDigit(digit), setIsHour24Selected(false);
+        handleHourSelectDigit(digit);
       }
     }, digit);
   });
   var renderHourDigits24 = hourDigits24.map(function (digit, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: digit,
-      className: "absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ".concat(isDigit24 ? 'text-black' : 'text-[#9ca3af]', "  ").concat(digit === selectedHourDigit ? 'text-white' : 'text-gray', " "),
+      className: "absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(digit === selectedHourDigit ? "pointer-events-none" : "cursor-pointer", " ").concat(isDigit24 ? 'text-black' : 'text-[#9ca3af]', "  ").concat(digit === selectedHourDigit ? 'text-white' : 'text-gray', " "),
       style: {
         transform: "".concat(isDigit24 ? "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)") : "rotate(".concat(index * 30, "deg) translate(0,-55px) rotate(").concat(-index * 30, "deg)")),
         top: "46%",
-        left: '47%'
+        left: '47%',
+        transition: 'transform 0.3s ease-in'
       },
       onClick: function onClick() {
         return handleHourSelectDigit(digit);
@@ -5673,7 +5670,7 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     var formattedDigit = digit < 10 ? "0".concat(digit) : digit;
     return /*#__PURE__*/React.createElement("div", {
       key: digit,
-      className: "absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center cursor-pointer ".concat(digit === selectedMinuteDigit ? 'text-white' : 'text-black'),
+      className: "absolute z-10 text-sm transform -translate-x-1/2 -translate-y-1/2 w-5 flex items-center justify-center ".concat(digit === selectedMinuteDigit ? "pointer-events-none" : "cursor-pointer", " ").concat(digit === selectedMinuteDigit ? 'text-white' : 'text-black'),
       style: {
         transform: "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)"),
         top: '46%',
@@ -5685,12 +5682,12 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     }, formattedDigit);
   });
   var renderInputHourDigit = inputHourDigits12.slice(0, selectedHourDigit + 1).reverse().map(function (digit, index) {
-    return (digit < 10 ? "0".concat(digit) : digit) + " ";
+    return (digit < 10 ? "0".concat(digit) : digit) + ' ';
   }).join('');
   var renderInputMinuteDigit = minuteDigits.filter(function (digit) {
     return digit <= selectedMinuteDigit;
   }).reverse().map(function (digit, index) {
-    return (digit < 10 ? "0".concat(digit) : digit) + " ";
+    return (digit < 10 ? "0".concat(digit) : digit) + ' ';
   }).join('');
   useEffect(function () {
     var fullTime = selectedHourDigit + ':' + selectedMinuteDigit;
@@ -5723,9 +5720,9 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
     className: "w-10 h-8 ".concat(!isAM && 'bg-slatyGreen text-primary', " transition-all rounded-r-md font-medium text-sm duration-200 flex items-center justify-center py-1 px-2 cursor-pointer pointer-events-none"),
     onClick: toggleSetAM
   }, "PM"))), !showMinuteDigits && showHourDigits && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: 'w-56 h-56 bg-lightGray rounded-full overflow-hidden'
-  }, !isHour24Selected && /*#__PURE__*/React.createElement("div", {
-    className: " w-full h-full relative -left-1 ".concat(style.scaleDownAnimation)
+    className: "w-56 h-56 bg-lightGray rounded-full overflow-hidden"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: " w-full h-full relative -left-1"
   }, renderHourDigits12, hourDigits12.map(function (digit, index) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
@@ -5755,38 +5752,38 @@ var Timepicker24Hr = function Timepicker24Hr(props) {
       }
     }));
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "".concat(isHour24Selected ? "w-56 h-56 -top-56 ".concat(style.scaleUpAnimation) : " w-32  h-32 -top-[181px] left-0  ".concat(style.scaleDownAnimation), "  bg-lightGray rounded-full relative flex items-center justify-ce  \n                        nter"),
+    className: "".concat(isDigit24 ? "w-56 h-56 -top-56" : " w-32  h-32 -top-[181px] left-0 bg-transparent ", " bg-lightGray rounded-full relative flex items-center justify-center"),
     style: {
       background: "transparent"
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-full h-full relative ".concat(isHour24Selected ? 'right-1' : '-left-1.5')
+    className: "w-full h-full relative ".concat(isDigit24 ? 'right-1' : '-left-1.5')
   }, renderHourDigits24, hourDigits24.map(function (digit, index) {
     return digit === selectedHourDigit && /*#__PURE__*/React.createElement(React.Fragment, {
       key: digit
     }, /*#__PURE__*/React.createElement("div", {
       className: "relative w-10 h-10 bg-primary rounded-full transform -translate-x-1/2 translate-y-16 pointer-events-none",
       style: {
-        top: isDigit24 && !isHour24Selected ? '37%' : '41%',
-        left: isDigit24 && !isHour24Selected ? '39.6%' : '42.6%',
+        top: '41%',
+        left: '42.6%',
         transform: "rotate(".concat(index * 30, "deg) translate(0, -90px) rotate(").concat(-index * 30, "deg)")
       },
       onClick: function onClick() {
-        return handleHourSelectDigit(selectedHourDigit === 24 ? 1 : selectedHourDigit + 1);
+        return handleHourSelectDigit(selectedHourDigit === 12 ? 1 : selectedHourDigit + 1);
       }
     }), /*#__PURE__*/React.createElement("div", {
       className: 'absolute w-0.5 h-[92px] bg-primary transform -translate-x-1/2 -translate-y-1/2',
       style: {
-        top: isDigit24 && !isHour24Selected ? '53.5%' : '50.5%',
-        left: isDigit24 && !isHour24Selected ? '55%' : '52%',
+        top: '50.5%',
+        left: '52%',
         transformOrigin: 'center top',
         transform: "translateX(-50%) rotate(".concat(index * 30, "deg) translateY(-90px)")
       }
     }), /*#__PURE__*/React.createElement("div", {
-      className: 'absolute w-2 h-2 z-10 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4',
+      className: 'absolute w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-4',
       style: {
-        top: isDigit24 && !isHour24Selected ? '63%' : '56%',
-        left: isDigit24 && !isHour24Selected ? '55%' : '52%'
+        top: '56%',
+        left: '52%'
       }
     }));
   })))), showMinuteDigits && /*#__PURE__*/React.createElement("div", {

@@ -80,7 +80,7 @@ const Select: React.FC<SelectProps> = ({
         {label && (
           <label
             className={classNames(
-              "text-[14px] font-normal font-proxima",
+              "text-[14px] font-normal ",
               open ? "text-primary" : "text-slatyGrey"
             )}
             htmlFor={id}
@@ -103,7 +103,7 @@ const Select: React.FC<SelectProps> = ({
                 : inputValue
             }
             className={classNames(
-              "flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima w-full",
+              "flex-grow outline-none bg-white text-darkCharcoal py-[3px] px-3 text-[16px] font-normal  w-full",
               !inputValue && "text-darkCharcoal",
               open && "text-primary",
               !open ? "cursor-pointer" : "cursor-default",
@@ -144,7 +144,7 @@ const Select: React.FC<SelectProps> = ({
               <li
                 key={index}
                 className={classNames(
-                  "p-[10px] text-[16px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex",
+                  "p-[10px] text-[16px]  hover:bg-whiteSmoke font-normal cursor-pointer flex",
                   {
                     "bg-whiteSmoke": option.value === inputValue,
                     hidden:

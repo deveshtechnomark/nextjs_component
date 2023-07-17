@@ -120,7 +120,7 @@ const Tel: React.FC<TelInputProps> = ({
             </div>
           )}
           <input
-            className={`${className} py-2 px-3 outline-none w-full h-full mt-[6px]`}
+            className={`${className} py-[3px] px-3 outline-none w-full h-full mt-[6px]`}
             ref={inputRef}
             type="tel"
             id={id}

@@ -4,22 +4,7 @@
     background-color: #ffffff;
     text-align: center;
     position: sticky;
-}
-
-.ScrollSpyContainer.verticalDrawer {
-    position: fixed;
-    height: 100vh;
-    width: 200px;
-    background-color: #ffffff;
-    padding: 5px;
-}
-
-.ScrollSpyContainer.vertical {
-    position: fixed;
-    height: 100vh;
-    width: 200px;
-    background-color: #ffffff;
-    // padding: 10px 0 10px 0;
+    top: 0;
 }
 
 .ScrollSpyItemHorizontal {
@@ -29,6 +14,30 @@
     width: 100%;
     text-align: center;
     font-size: 15px;
+}
+
+.ScrollSpyItemHorizontal.active_horizontal {
+    color: #02b89d;
+    font-weight: 400;
+    padding: 15px;
+    border-bottom: 1px solid #47b1a1;
+}
+
+.ScrollSpyContainer.verticalDrawer {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    width: 200px;
+    background-color: #ffffff;
+    padding: 5px;
+}
+
+.ScrollSpyContainer.vertical {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 200px;
+    background-color: #ffffff;
 }
 
 .ScrollSpyItemHorizontal:hover {
@@ -67,13 +76,6 @@
     font-weight: 500;
     background-color: rgb(241, 241, 241);
     border-left: 4px solid #47b1a1;
-}
-
-.ScrollSpyItemHorizontal.active_horizontal {
-    color: #02b89d;
-    font-weight: 400;
-    padding: 15px;
-    border-bottom: 1px solid #47b1a1;
 }
 
 .ScrollSpyItemVertical.active_vertical {
