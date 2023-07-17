@@ -4,6 +4,8 @@ var React = require('react');
 var typographyTs = require('typography-ts');
 require('typography-ts/dist/index.css');
 
+var Style = {"modal":"Modal-module_modal__ZBixj","modalAnimation":"Modal-module_modalAnimation__OfLMB"};
+
 var Modal = function Modal(_a) {
   var isOpen = _a.isOpen;
     _a.onClose;
@@ -24,11 +26,11 @@ var Modal = function Modal(_a) {
     }
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "justify-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+    className: "flex absolute top-[33%] overflow-x-hidden overflow-y-auto inset-0 z-50 outline-none focus:outline-none ".concat(Style.modal)
   }, /*#__PURE__*/React.createElement("div", {
-    className: "relative my-6 mx-auto ".concat(getSizeClasses())
+    className: "my-6 mx-auto ".concat(getSizeClasses())
   }, /*#__PURE__*/React.createElement("div", {
-    className: "border-2 rounded-lg relative flex flex-col bg-pureWhite outline-none focus:outline-none"
+    className: "border-2 rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
   }, children))));
 };
 
