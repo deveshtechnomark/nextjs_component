@@ -1,7 +1,5 @@
 import React, { ReactNode } from "react";
 import "./index.css";
-import { Typography } from "Typography";
-import "Typography/dist/index.css";
 
 interface ToastProps {
   position?:
@@ -13,13 +11,17 @@ interface ToastProps {
     | "bottom_center";
 }
 
-class Toast extends React.Component<ToastProps> {
+interface ToastState {
+  text?: string;
+}
+
+class Toast extends React.Component<ToastProps, ToastState> {
   static containerId = "fixed z-9999";
 
   static showToast(
     type: "success" | "error" | "warning" | "info",
     message: string,
-    text: string,
+    text?: string,
     duration?: number
   ) {
     const successIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 sm:w-6 sm:h-6">
@@ -94,19 +96,19 @@ class Toast extends React.Component<ToastProps> {
     }
   }
 
-  static success(message: string, text: string, duration?: number) {
+  static success(message: string, text?: string, duration?: number) {
     Toast.showToast("success", message, text, duration);
   }
 
-  static error(message: string, text: string, duration?: number) {
+  static error(message: string, text?: string, duration?: number) {
     Toast.showToast("error", message, text, duration);
   }
 
-  static warning(message: string, text: string, duration?: number) {
+  static warning(message: string, text?: string, duration?: number) {
     Toast.showToast("warning", message, text, duration);
   }
 
-  static info(message: string, text: string, duration?: number) {
+  static info(message: string, text?: string, duration?: number) {
     Toast.showToast("info", message, text, duration);
   }
 
@@ -118,6 +120,7 @@ class Toast extends React.Component<ToastProps> {
 
   render(): ReactNode {
     const { position = "top_right" } = this.props;
+    const { text } = this.state || {};
 
     return (
       <div
