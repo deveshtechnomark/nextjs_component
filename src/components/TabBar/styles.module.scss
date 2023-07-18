@@ -5,14 +5,14 @@ $lightSilver: #d8d8d8;
   height: auto;
   width: 25%;
   display: flex;
-  justify-content: center;
+  padding: 0 10px;
   align-items: center;
-  overflow: hidden;
+  justify-content: center;
   border-bottom: 2px solid $lightSilver;
 }
 
 .tab:hover {
-  cursor: pointer;
+  cursor: pointer !important;
   color: $primary;
   background-color: rgba(2, 184, 157, 0.116);
   border-bottom: 2px solid $primary;
@@ -24,7 +24,7 @@ $lightSilver: #d8d8d8;
 }
 
 .tab__ripple {
-  width: 20%;
+  width: 10%;
   opacity: 0;
   height: 48px;
   position: absolute;

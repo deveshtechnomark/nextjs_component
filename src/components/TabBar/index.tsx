@@ -25,9 +25,7 @@ const TabBar = ({ tabs, getTabId, className }: TabBarProps) => {
   };
 
   return (
-    <ul
-      className={`h-12 flex flex-row bg-transparent overflow-x-auto ${className}`}
-    >
+    <ul className={`h-12 flex overflow-scroll ${className}`}>
       {tabs.map((tab, index: any) => (
         <li
           key={index + 1}
