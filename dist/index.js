@@ -245,7 +245,6 @@ var Password = function Password(_a) {
   }, React.createElement("input", __assign({
     className: "".concat(className, " py-1 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
     type: type,
-    id: "password-input",
     value: password,
     onChange: handlePasswordChange,
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,

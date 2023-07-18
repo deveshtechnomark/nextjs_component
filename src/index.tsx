@@ -241,7 +241,6 @@ const Password: React.FC<PasswordProps> = ({
               : "border-lightSilver"
           }`}
           type={type}
-          id="password-input"
           value={password}
           onChange={handlePasswordChange}
           onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
