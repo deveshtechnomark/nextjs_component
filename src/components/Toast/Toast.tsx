@@ -1,24 +1,27 @@
 import React, { ReactNode } from "react";
-import  Typography  from "../Typography/Typography";
 
 
 interface ToastProps {
   position?:
-    | "top_right"
-    | "bottom_right"
-    | "top_left"
-    | "bottom_left"
-    | "top_center"
-    | "bottom_center";
+  | "top_right"
+  | "bottom_right"
+  | "top_left"
+  | "bottom_left"
+  | "top_center"
+  | "bottom_center";
 }
 
-class Toast extends React.Component<ToastProps> {
+interface ToastState {
+  text?: string;
+}
+
+class Toast extends React.Component<ToastProps, ToastState> {
   static containerId = "fixed z-9999";
 
   static showToast(
     type: "success" | "error" | "warning" | "info",
     message: string,
-    text: string,
+    text?: string,
     duration?: number
   ) {
     const successIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 sm:w-6 sm:h-6">
@@ -39,15 +42,14 @@ class Toast extends React.Component<ToastProps> {
 `;
 
     const toastElement = document.createElement("div");
-    toastElement.className = `flex flex-col text-xs sm:text-base m-[6px] p-[12px] px-[16px] rounded-md text-white font-semibold min-w-15rem relative ${
-      type === "error"
+    toastElement.className = `flex flex-col text-xs sm:text-base m-[6px] p-[12px] px-[16px] rounded-md text-white font-semibold min-w-15rem relative ${type === "error"
         ? "bg-errorColor !text-defaultRed"
         : type === "warning"
-        ? "bg-warningColor !text-defaultOrange"
-        : type === "info"
-        ? "bg-infoColor !text-defaultBlue"
-        : "bg-primary !text-pureWhite"
-    }`;
+          ? "bg-warningColor !text-defaultOrange"
+          : type === "info"
+            ? "bg-infoColor !text-defaultBlue"
+            : "bg-primary !text-pureWhite"
+      }`;
 
     const closeButton = document.createElement("span");
     closeButton.className =
@@ -60,15 +62,14 @@ class Toast extends React.Component<ToastProps> {
     const messageElement = document.createElement("span");
     messageElement.className = "flex flex-start items-center mr-20";
     messageElement.innerHTML = `
-     <span style="padding-right:5px">${
-       type === "error"
-         ? errorIcon
-         : type === "warning"
-         ? warningIcon
-         : type === "info"
-         ? infoIcon
-         : successIcon
-     }</span>
+     <span style="padding-right:5px">${type === "error"
+        ? errorIcon
+        : type === "warning"
+          ? warningIcon
+          : type === "info"
+            ? infoIcon
+            : successIcon
+      }</span>
      <Typography type="h6">${message}</Typography>`;
 
     toastElement.appendChild(messageElement);
@@ -93,19 +94,19 @@ class Toast extends React.Component<ToastProps> {
     }
   }
 
-  static success(message: string, text: string, duration?: number) {
+  static success(message: string, text?: string, duration?: number) {
     Toast.showToast("success", message, text, duration);
   }
 
-  static error(message: string, text: string, duration?: number) {
+  static error(message: string, text?: string, duration?: number) {
     Toast.showToast("error", message, text, duration);
   }
 
-  static warning(message: string, text: string, duration?: number) {
+  static warning(message: string, text?: string, duration?: number) {
     Toast.showToast("warning", message, text, duration);
   }
 
-  static info(message: string, text: string, duration?: number) {
+  static info(message: string, text?: string, duration?: number) {
     Toast.showToast("info", message, text, duration);
   }
 
@@ -117,21 +118,18 @@ class Toast extends React.Component<ToastProps> {
 
   render(): ReactNode {
     const { position = "top_right" } = this.props;
+    const { text } = this.state || {};
 
     return (
       <div
         id={Toast.containerId}
-        className={`flex flex-col fixed select-none animate-slideDown ${
-          position === "top_right" && "top-2 right-5"
-        } ${position === "bottom_right" && "bottom-2 right-5"} ${
-          position === "top_left" && "top-2 left-5"
-        } ${position === "bottom_left" && "bottom-2 left-5"} ${
-          position === "top_center" &&
+        className={`flex flex-col fixed select-none animate-slideDown ${position === "top_right" && "top-2 right-5"
+          } ${position === "bottom_right" && "bottom-2 right-5"} ${position === "top_left" && "top-2 left-5"
+          } ${position === "bottom_left" && "bottom-2 left-5"} ${position === "top_center" &&
           "left-1/2 transform -translate-x-1/2 top-2"
-        } ${
-          position === "bottom_center" &&
+          } ${position === "bottom_center" &&
           "left-1/2 transform -translate-x-1/2 bottom-2"
-        }`}
+          }`}
       >
         {/* Toast container */}
       </div>

@@ -3317,7 +3317,6 @@ var Password = function Password(_a) {
   }, /*#__PURE__*/React.createElement("input", __assign({
     className: "".concat(className, " py-1 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
     type: type,
-    id: "password-input",
     value: password,
     onChange: handlePasswordChange,
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
@@ -5882,6 +5881,7 @@ var Toast = /** @class */function (_super) {
   Toast.prototype.render = function () {
     var _a = this.props.position,
       position = _a === void 0 ? "top_right" : _a;
+    (this.state || {}).text;
     return /*#__PURE__*/React.createElement("div", {
       id: Toast.containerId,
       className: "flex flex-col fixed select-none animate-slideDown ".concat(position === "top_right" && "top-2 right-5", " ").concat(position === "bottom_right" && "bottom-2 right-5", " ").concat(position === "top_left" && "top-2 left-5", " ").concat(position === "bottom_left" && "bottom-2 left-5", " ").concat(position === "top_center" && "left-1/2 transform -translate-x-1/2 top-2", " ").concat(position === "bottom_center" && "left-1/2 transform -translate-x-1/2 bottom-2")

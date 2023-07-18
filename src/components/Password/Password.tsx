@@ -7,6 +7,7 @@ import React, {
   useEffect,
 } from "react";
 import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
+import "./icons/icons";
 
 interface PasswordProps {
   label?: string;
@@ -240,7 +241,6 @@ const Password: React.FC<PasswordProps> = ({
               : "border-lightSilver"
           }`}
           type={type}
-          id="password-input"
           value={password}
           onChange={handlePasswordChange}
           onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
