@@ -6,8 +6,8 @@ import React, {
   MouseEvent,
   useEffect,
 } from "react";
+import "./index.css"
 import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
-import "./index.css";
 
 interface PasswordProps {
   label?: string;
@@ -216,16 +216,36 @@ const Password: React.FC<PasswordProps> = ({
 
   return (
     <div className="relative flex flex-col text-sm sm:text-base w-full">
-      {label && (
-        <label
-          className={`${
-            err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"
-          }`}
-        >
-          {label}
-          {validate && "*"}
-        </label>
-      )}
+      <div className="relative w-full">
+        {open && (
+          <>
+            <div
+              className={`absolute bottom-[40px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit`}
+            >
+              <ul className="requirement-list">{validatePassword()}</ul>
+            </div>
+            <span
+              className={`w-2 h-2 bg-pureWhite z-10 absolute bottom-[36px] left-[20px] rotate-[45deg]`}
+            ></span>
+          </>
+        )}
+
+        {label && (
+          <label
+            className={`${
+              err
+                ? "text-defaultRed"
+                : focus
+                ? "text-primary"
+                : "text-slatyGrey"
+            }`}
+          >
+            {label}
+            {validate && "*"}
+          </label>
+        )}
+      </div>
+
       <div
         className={`${
           !err &&
@@ -272,55 +292,40 @@ const Password: React.FC<PasswordProps> = ({
         </span>
       )}
 
-      {open && (
-        <>
-          <div
-            className={`absolute ${
-              err ? "bottom-[90px]" : "bottom-[70px]"
-            } z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit`}
-          >
-            <ul className="requirement-list">{validatePassword()}</ul>
+      <div className="flex flex-col justify-center w-full">
+        {password && (
+          <div className="mt-2 flex items-center">
+            <div className="relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]">
+              <span
+                className={`absolute rounded-l-lg h-[5px] ${
+                  data.match(/[^A-Za-z0-9]/) &&
+                  data.match(/[A-Z]/) &&
+                  data.match(/[a-z]/) &&
+                  data.match(/[0-9]/) &&
+                  !data.match(/\s/) &&
+                  data.match(/.{8,}/)
+                    ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg"
+                    : data.match(/[A-Z]/) &&
+                      data.match(/[a-z]/) &&
+                      data.match(/[0-9]/)
+                    ? "bg-[#FFBF00] w-[85px] sm:w-[100px]"
+                    : password.length >= 3 && data.match(/[a-z]/)
+                    ? "bg-defaultRed  w-[30px] sm:w-[45px]"
+                    : "bg-[#979797]"
+                }`}
+              ></span>
+            </div>
+            <span className="ml-4 text-xs sm:text-sm">
+              {getPasswordStrength()}
+            </span>
           </div>
-          <span
-            className={`w-2 h-2 bg-pureWhite z-10 absolute ${
-              err ? "bottom-[86px]" : "bottom-[66px]"
-            } left-[20px] rotate-[45deg]`}
-          ></span>
-        </>
-      )}
-
-      {password && (
-        <div className="mt-2 flex items-center">
-          <div className="relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]">
-            <span
-              className={`absolute rounded-l-lg h-[5px] ${
-                data.match(/[^A-Za-z0-9]/) &&
-                data.match(/[A-Z]/) &&
-                data.match(/[a-z]/) &&
-                data.match(/[0-9]/) &&
-                !data.match(/\s/) &&
-                data.match(/.{8,}/)
-                  ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg"
-                  : data.match(/[A-Z]/) &&
-                    data.match(/[a-z]/) &&
-                    data.match(/[0-9]/)
-                  ? "bg-[#FFBF00] w-[85px] sm:w-[100px]"
-                  : password.length >= 3 && data.match(/[a-z]/)
-                  ? "bg-defaultRed  w-[30px] sm:w-[45px]"
-                  : "bg-[#979797]"
-              }`}
-            ></span>
-          </div>
-          <span className="ml-4 text-xs sm:text-sm">
-            {getPasswordStrength()}
+        )}
+        {err && (
+          <span className={`text-defaultRed text-[12px] sm:text-[14px]`}>
+            {errorMes}
           </span>
-        </div>
-      )}
-      {err && (
-        <span className={`text-defaultRed text-[12px] sm:text-[14px]`}>
-          {errorMes}
-        </span>
-      )}
+        )}
+      </div>
     </div>
   );
 };

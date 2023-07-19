@@ -236,9 +236,17 @@ var Password = function Password(_a) {
   };
   return React.createElement("div", {
     className: "relative flex flex-col text-sm sm:text-base w-full"
-  }, label && React.createElement("label", {
+  }, React.createElement("div", {
+    className: "relative w-full"
+  }, open && React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "absolute bottom-[40px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit"
+  }, React.createElement("ul", {
+    className: "requirement-list"
+  }, validatePassword())), React.createElement("span", {
+    className: "w-2 h-2 bg-pureWhite z-10 absolute bottom-[36px] left-[20px] rotate-[45deg]"
+  })), label && React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, label, validate && "*"), React.createElement("div", {
+  }, label, validate && "*")), React.createElement("div", {
     className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
     className: "".concat(className, " py-1 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
@@ -257,13 +265,9 @@ var Password = function Password(_a) {
     onClick: function onClick() {
       return setType("password");
     }
-  }, React.createElement(EyeOpen, null)), open && React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "absolute ".concat(err ? "bottom-[90px]" : "bottom-[70px]", " z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit")
-  }, React.createElement("ul", {
-    className: "requirement-list"
-  }, validatePassword())), React.createElement("span", {
-    className: "w-2 h-2 bg-pureWhite z-10 absolute ".concat(err ? "bottom-[86px]" : "bottom-[66px]", " left-[20px] rotate-[45deg]")
-  })), password && React.createElement("div", {
+  }, React.createElement(EyeOpen, null)), React.createElement("div", {
+    className: "flex flex-col justify-center w-full"
+  }, password && React.createElement("div", {
     className: "mt-2 flex items-center"
   }, React.createElement("div", {
     className: "relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]"
@@ -273,7 +277,7 @@ var Password = function Password(_a) {
     className: "ml-4 text-xs sm:text-sm"
   }, getPasswordStrength())), err && React.createElement("span", {
     className: "text-defaultRed text-[12px] sm:text-[14px]"
-  }, errorMes));
+  }, errorMes)));
 };
 
 export { Password };
