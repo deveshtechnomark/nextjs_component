@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import  CheckBox  from "../Checkbox/Checkbox";
+import CheckBox from "../Checkbox/Checkbox";
 import SortingIcon from "./icons/SortingIcon.js";
 
 interface TableProps {
@@ -10,6 +10,7 @@ interface TableProps {
   selected?: boolean;
   action?: boolean;
   actions?: any[];
+  actionHeading?: string | React.ReactNode;
 }
 
 const Table: React.FC<TableProps> = (props) => {
@@ -65,7 +66,7 @@ const Table: React.FC<TableProps> = (props) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-x-auto">
       <table className="w-full">
         <thead>
           <tr
@@ -76,7 +77,7 @@ const Table: React.FC<TableProps> = (props) => {
             } bg-pureWhite h-[48px]`}
           >
             {props.selected && (
-              <th>
+              <th className="sm:w-[56px]">
                 <CheckBox
                   id="selectAll"
                   checked={isChecked}
@@ -84,16 +85,18 @@ const Table: React.FC<TableProps> = (props) => {
                 />
               </th>
             )}
+
             {props.headers.map((header) => (
               <th
                 key={header}
-                className="cursor-pointer uppercase text-[16px] text-center font-bold"
+                className="cursor-pointer text-[16px] sm:text-[14px] font-bold text-center uppercase"
                 onClick={() => {
                   props.sortable && handleSort(header);
                 }}
               >
                 <span className="flex justify-center items-center">
                   {header}
+
                   {sortingColumn === header && (
                     <span
                       className={`ml-2 ${
@@ -106,9 +109,10 @@ const Table: React.FC<TableProps> = (props) => {
                 </span>
               </th>
             ))}
+
             {props.action && (
-              <th className="cursor-pointer uppercase text-[16px] text-center font-bold">
-                Actions
+              <th className="cursor-pointer text-[16px] sm:text-[14px] font-bold text-center uppercase">
+                {props.actionHeading ? props.actionHeading : "Actions"}
               </th>
             )}
           </tr>
@@ -121,7 +125,7 @@ const Table: React.FC<TableProps> = (props) => {
               className="h-[56px] border-b border-b-lightSilver cursor-default hover:bg-whiteSmoke"
             >
               {props.selected && (
-                <td>
+                <td className="sm:w-[56px]">
                   <CheckBox
                     id={index.toString()}
                     checked={isAllChecked[index]}
@@ -129,10 +133,11 @@ const Table: React.FC<TableProps> = (props) => {
                   />
                 </td>
               )}
+
               {props.headers.map((header) => (
                 <td
                   key={header}
-                  className="py-[19px] px-[20px] text-center text-base font-normal"
+                  className="py-[19px] sm:py-[12px] px-[20px] sm:text-base text-center font-normal"
                 >
                   <span className="flex justify-center items-center">
                     {typeof item[header] === "string" &&
@@ -148,6 +153,7 @@ const Table: React.FC<TableProps> = (props) => {
                   </span>
                 </td>
               ))}
+
               {props.action &&
                 props.actions.map((action) => (
                   <td key={action} className="text-center">
