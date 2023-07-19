@@ -7,6 +7,7 @@ interface TableProps {
     selected?: boolean;
     action?: boolean;
     actions?: any[];
+    actionHeading?: string | React.ReactNode;
 }
 declare const Table: React.FC<TableProps>;
 export default Table;

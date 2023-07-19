@@ -602,7 +602,7 @@ var CheckBox = function CheckBox(_a) {
     intermediate = _a.intermediate,
     props = __rest(_a, ["id", "label", "variant", "className", "intermediate"]);
   return /*#__PURE__*/React.createElement("div", {
-    className: "m-0 p-0 w-fit relative flex justify-start items-center ".concat(className)
+    className: "m-0 p-0 w-fit h-5 relative flex justify-start items-center ".concat(className)
   }, !intermediate ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", __assign({
     className: "".concat(style$4.checkBox, " ").concat(variant === "invalid" && style$4.invalidcheckBox, " absolute left-3"),
     type: "checkbox",
@@ -635,7 +635,7 @@ var Tooltip = function Tooltip(_a) {
   return /*#__PURE__*/React.createElement("div", {
     className: "".concat(styles$3.tooltip, " relative cursor-pointer p-2 text-sm sm:text-base max-w-fit")
   }, /*#__PURE__*/React.createElement("span", {
-    className: "flex justify-center items-center tooltipText absolute bg-[#bcf1e8] w-max max-w-[300px] text-darkCharcoal whitespace-nowrap p-[10px] border border-primary rounded-md opacity-0 before:absolute before:w-3 before:h-3 before:bg-[#bcf1e8] before:border-t before:border-primary before:border-r ".concat(position === "top" && "".concat(styles$3.top, " left-1/2 transform -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 before:bottom-[-7px] before:transform before:rotate-[135deg]"), " \n        ").concat(position === "bottom" && "".concat(styles$3.bottom, " left-1/2 transform -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 before:top-[-7px] before:transform before:rotate-[-45deg]"), " \n        ").concat(position === "left" && "".concat(styles$3.left, " top-1/2 transform -translate-y-1/2 before:top-1/2 before:-translate-y-1/2 before:right-[-7px] before:transform before:rotate-[45deg]"), " \n        ").concat(position === "right" && "".concat(styles$3.right, " top-1/2 transform -translate-y-1/2 before:top-1/2 before:-translate-y-1/2 before:left-[-7px] before:transform before:rotate-[-135deg]")),
+    className: "flex justify-center items-center tooltipText absolute bg-[#bcf1e8] w-max max-w-[300px] text-darkCharcoal whitespace-nowrap p-[10px] border border-primary rounded-md opacity-0 before:absolute before:w-3 before:h-3 before:bg-[#bcf1e8] before:border-t before:border-primary before:border-r ".concat(position === "top" && "".concat(styles$3.top, " hidden left-1/2 transform -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 before:bottom-[-7px] before:transform before:rotate-[135deg]"), " \n        ").concat(position === "bottom" && "".concat(styles$3.bottom, " hidden left-1/2 transform -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 before:top-[-7px] before:transform before:rotate-[-45deg]"), " \n        ").concat(position === "left" && "".concat(styles$3.left, " hidden top-1/2 transform -translate-y-1/2 before:top-1/2 before:-translate-y-1/2 before:right-[-7px] before:transform before:rotate-[45deg]"), " \n        ").concat(position === "right" && "".concat(styles$3.right, " hidden top-1/2 transform -translate-y-1/2 before:top-1/2 before:-translate-y-1/2 before:left-[-7px] before:transform before:rotate-[-135deg]")),
     style: {
       wordWrap: "break-word",
       whiteSpace: "unset"
@@ -2700,12 +2700,14 @@ var Modal = function Modal(_a) {
     }
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "flex absolute top-[33%] overflow-x-hidden overflow-y-auto inset-0 z-50 outline-none focus:outline-none ".concat(Style$1.modal)
+    className: "fixed inset-0 z-50 flex items-center justify-center ".concat(Style$1.modal)
   }, /*#__PURE__*/React.createElement("div", {
     className: "my-6 mx-auto ".concat(getSizeClasses())
   }, /*#__PURE__*/React.createElement("div", {
-    className: "border-2 rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
-  }, children))));
+    className: "border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
+  }, children))), /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black bg-opacity-50 backdrop-blur-[1px]"
+  }));
 };
 
 var ModalAction = function ModalAction(_a) {
@@ -2739,7 +2741,7 @@ var ModalTitle = function ModalTitle(_a) {
   var children = _a.children;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Typography, {
     type: 'body',
-    className: "text-pureBlack flex items-center justify-between p-3 border-b border-solid border-lightSilver rounded-t"
+    className: "text-pureBlack flex items-center justify-between pl-3 border-b border-solid border-lightSilver rounded-t"
   }, children || 'Modal Title'));
 };
 
@@ -4159,7 +4161,7 @@ var TabBar = function TabBar(_a) {
     }, 700);
   };
   return /*#__PURE__*/React.createElement("ul", {
-    className: "h-12 flex flex-row bg-transparent overflow-x-auto ".concat(className)
+    className: "h-12 flex overflow-auto ".concat(className)
   }, tabs.map(function (tab, index) {
     return /*#__PURE__*/React.createElement("li", {
       key: index + 1,
@@ -4244,19 +4246,21 @@ var Table = function Table(props) {
     setSortingOrder(newSortingOrder);
   };
   return /*#__PURE__*/React.createElement("div", {
-    className: "w-full"
+    className: "w-full overflow-x-auto"
   }, /*#__PURE__*/React.createElement("table", {
     className: "w-full"
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
     className: "".concat(props.sticky ? "sticky top-0 z-10 drop-shadow" : "border-y border-b-pureBlack border-t-pureBlack", " bg-pureWhite h-[48px]")
-  }, props.selected && /*#__PURE__*/React.createElement("th", null, /*#__PURE__*/React.createElement(CheckBox, {
+  }, props.selected && /*#__PURE__*/React.createElement("th", {
+    className: "sm:w-[56px]"
+  }, /*#__PURE__*/React.createElement(CheckBox, {
     id: "selectAll",
     checked: isChecked,
     onChange: handleSelectAll
   })), props.headers.map(function (header) {
     return /*#__PURE__*/React.createElement("th", {
       key: header,
-      className: "cursor-pointer uppercase text-[16px] text-center font-bold",
+      className: "cursor-pointer text-[16px] sm:text-[14px] font-bold text-center uppercase",
       onClick: function onClick() {
         props.sortable && handleSort(header);
       }
@@ -4266,12 +4270,14 @@ var Table = function Table(props) {
       className: "ml-2 ".concat(sortingOrder === "asc" ? "" : "rotate-180")
     }, /*#__PURE__*/React.createElement(SortingIcon, null))));
   }), props.action && /*#__PURE__*/React.createElement("th", {
-    className: "cursor-pointer uppercase text-[16px] text-center font-bold"
-  }, "Actions"))), /*#__PURE__*/React.createElement("tbody", null, filteredData.map(function (item, index) {
+    className: "cursor-pointer text-[16px] sm:text-[14px] font-bold text-center uppercase"
+  }, props.actionHeading ? props.actionHeading : "Actions"))), /*#__PURE__*/React.createElement("tbody", null, filteredData.map(function (item, index) {
     return /*#__PURE__*/React.createElement("tr", {
       key: index,
       className: "h-[56px] border-b border-b-lightSilver cursor-default hover:bg-whiteSmoke"
-    }, props.selected && /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(CheckBox, {
+    }, props.selected && /*#__PURE__*/React.createElement("td", {
+      className: "sm:w-[56px]"
+    }, /*#__PURE__*/React.createElement(CheckBox, {
       id: index.toString(),
       checked: isAllChecked[index],
       onChange: function onChange(e) {
@@ -4280,7 +4286,7 @@ var Table = function Table(props) {
     })), props.headers.map(function (header) {
       return /*#__PURE__*/React.createElement("td", {
         key: header,
-        className: "py-[19px] px-[20px] text-center text-base font-normal"
+        className: "py-[19px] sm:py-[12px] px-[20px] sm:text-base text-center font-normal"
       }, /*#__PURE__*/React.createElement("span", {
         className: "flex justify-center items-center"
       }, typeof item[header] === "string" && item[header].startsWith("http") ? /*#__PURE__*/React.createElement("img", {
