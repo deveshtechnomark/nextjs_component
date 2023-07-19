@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent } from "react";
-import "./icons/icons";
 interface PasswordProps {
     label?: string;
     className?: string;

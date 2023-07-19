@@ -1853,7 +1853,7 @@ var CalendarYear = function CalendarYear(props) {
   }))))))));
 };
 
-var Style$1 = {"striped_progress_bar":"Progressbar-module_striped_progress_bar__2vJqJ","progressbar_animation":"Progressbar-module_progressbar_animation__75iSo","progress_fill":"Progressbar-module_progress_fill__5-XfA"};
+var Style$2 = {"striped_progress_bar":"Progressbar-module_striped_progress_bar__2vJqJ","progressbar_animation":"Progressbar-module_progressbar_animation__75iSo","progress_fill":"Progressbar-module_progress_fill__5-XfA"};
 
 var ProgressBar = function ProgressBar(_a) {
   var _b;
@@ -1910,12 +1910,12 @@ var ProgressBar = function ProgressBar(_a) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-full h-2 bg-lightSilver rounded"
   }, striped ? /*#__PURE__*/React.createElement("div", {
-    className: "h-full rounded ".concat(Style$1.progress_fill, " ").concat(getBackgroundColor(variant)),
+    className: "h-full rounded ".concat(Style$2.progress_fill, " ").concat(getBackgroundColor(variant)),
     style: fillStyle
   }, /*#__PURE__*/React.createElement("div", {
-    className: Style$1.striped_progress_bar
+    className: Style$2.striped_progress_bar
   })) : /*#__PURE__*/React.createElement("div", {
-    className: "h-full rounded ".concat(Style$1.progress_fill, " ").concat(getBackgroundColor(variant)),
+    className: "h-full rounded ".concat(Style$2.progress_fill, " ").concat(getBackgroundColor(variant)),
     style: fillStyle
   })), progressDigit && /*#__PURE__*/React.createElement(Typography, {
     type: "body",
@@ -2678,6 +2678,8 @@ var Loader = function Loader(_a) {
   }))));
 };
 
+var Style$1 = {"modal":"Modal-module_modal__yNG-7","modalAnimation":"Modal-module_modalAnimation__nYusG"};
+
 var Modal = function Modal(_a) {
   var isOpen = _a.isOpen;
     _a.onClose;
@@ -2698,11 +2700,11 @@ var Modal = function Modal(_a) {
     }
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "justify-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+    className: "flex absolute top-[33%] overflow-x-hidden overflow-y-auto inset-0 z-50 outline-none focus:outline-none ".concat(Style$1.modal)
   }, /*#__PURE__*/React.createElement("div", {
-    className: "relative my-6 mx-auto ".concat(getSizeClasses())
+    className: "my-6 mx-auto ".concat(getSizeClasses())
   }, /*#__PURE__*/React.createElement("div", {
-    className: "border-2 border-lightSilver rounded-lg relative flex flex-col bg-pureWhite outline-none focus:outline-none"
+    className: "border-2 rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
   }, children))));
 };
 
@@ -3310,9 +3312,17 @@ var Password = function Password(_a) {
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "relative flex flex-col text-sm sm:text-base w-full"
-  }, label && /*#__PURE__*/React.createElement("label", {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "relative w-full"
+  }, open && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "absolute bottom-[40px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit"
+  }, /*#__PURE__*/React.createElement("ul", {
+    className: "requirement-list"
+  }, validatePassword())), /*#__PURE__*/React.createElement("span", {
+    className: "w-2 h-2 bg-pureWhite z-10 absolute bottom-[36px] left-[20px] rotate-[45deg]"
+  })), label && /*#__PURE__*/React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, label, validate && "*"), /*#__PURE__*/React.createElement("div", {
+  }, label, validate && "*")), /*#__PURE__*/React.createElement("div", {
     className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, /*#__PURE__*/React.createElement("input", __assign({
     className: "".concat(className, " py-1 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
@@ -3331,13 +3341,9 @@ var Password = function Password(_a) {
     onClick: function onClick() {
       return setType("password");
     }
-  }, /*#__PURE__*/React.createElement(EyeOpen, null)), open && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "absolute ".concat(err ? "bottom-[90px]" : "bottom-[70px]", " z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit")
-  }, /*#__PURE__*/React.createElement("ul", {
-    className: "requirement-list"
-  }, validatePassword())), /*#__PURE__*/React.createElement("span", {
-    className: "w-2 h-2 bg-pureWhite z-10 absolute ".concat(err ? "bottom-[86px]" : "bottom-[66px]", " left-[20px] rotate-[45deg]")
-  })), password && /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(EyeOpen, null)), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col justify-center w-full"
+  }, password && /*#__PURE__*/React.createElement("div", {
     className: "mt-2 flex items-center"
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]"
@@ -3347,7 +3353,7 @@ var Password = function Password(_a) {
     className: "ml-4 text-xs sm:text-sm"
   }, getPasswordStrength())), err && /*#__PURE__*/React.createElement("span", {
     className: "text-defaultRed text-[12px] sm:text-[14px]"
-  }, errorMes));
+  }, errorMes)));
 };
 
 var style$2 = {"steps":"Progressstep-module_steps__f9oD4","step__span":"Progressstep-module_step__span__JWvRE","step":"Progressstep-module_step__7yj-n","active":"Progressstep-module_active__Il5T3","span_active":"Progressstep-module_span_active__I2t2G","progress_ripple":"Progressstep-module_progress_ripple__n9BJo","done":"Progressstep-module_done__Ctdtg"};
