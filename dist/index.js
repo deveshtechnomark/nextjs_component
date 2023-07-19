@@ -26,12 +26,14 @@ var Modal = function Modal(_a) {
     }
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "flex absolute top-[33%] overflow-x-hidden overflow-y-auto inset-0 z-50 outline-none focus:outline-none ".concat(Style.modal)
+    className: "fixed inset-0 z-50 flex items-center justify-center ".concat(Style.modal)
   }, /*#__PURE__*/React.createElement("div", {
     className: "my-6 mx-auto ".concat(getSizeClasses())
   }, /*#__PURE__*/React.createElement("div", {
-    className: "border-2 rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
-  }, children))));
+    className: "border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
+  }, children))), /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black bg-opacity-50 backdrop-blur-none"
+  }));
 };
 
 var ModalTitle = function ModalTitle(_a) {
