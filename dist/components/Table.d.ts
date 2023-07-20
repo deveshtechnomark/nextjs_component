@@ -8,6 +8,8 @@ interface TableProps {
     selected?: boolean;
     action?: boolean;
     actions?: any[];
+    actionHeading?: string | React.ReactNode;
+    expandable?: boolean;
 }
 declare const Table: React.FC<TableProps>;
 export default Table;
