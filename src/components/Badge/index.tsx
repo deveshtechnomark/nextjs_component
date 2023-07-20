@@ -48,28 +48,34 @@ const Badge = ({ text, badgetype, variant, effect }: BadgeProps) => {
         variant === "pill"
           ? {
               borderColor: `${getColor(badgetype)}`,
-              color: `${getColor(badgetype)}`,
+              backgroundColor: `${getColor(badgetype)}0D`,
             }
           : { backgroundColor: `${getColor(badgetype)}` }
       }
       className={`${
         variant === "pill"
           ? `h-[27px] w-[82px] border rounded-[33px] overflow-x-hidden`
-          : `h-[18px] w-[18px] border-none rounded-full text-white text-[10px]`
-      } flex items-center justify-center
+          : `h-[18px] w-[18px] border-none rounded-full text-[10px]`
+      } flex items-center justify-center text-quickSilver
       `}
     >
       {variant === "dot" ? (
-        <span
-          style={
-            variant === "dot" && effect
-              ? { borderColor: `${getColor(badgetype)}` }
-              : {}
-          }
-          className={`${effect ? style.dot__badge : ""}`}
-        >
-          {parseInt(text) > 99 ? "99+" : text}
-        </span>
+        <>
+          <span
+            style={
+              variant === "dot" && effect
+                ? {
+                    borderColor: `${getColor(badgetype)}`,
+                    boxShadow: `0 0 0 0 ${getColor(badgetype)}`,
+                  }
+                : {}
+            }
+            className={style.indicate}
+          >
+            {parseInt(text) > 99 ? "99+" : text}
+            <span className={style.indicateBorder}></span>
+          </span>
+        </>
       ) : (
         text
       )}

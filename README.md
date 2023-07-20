@@ -3,6 +3,7 @@
   variant="dot|pill"
   badgetype="dark|secondary|graph|success|warning|error|primary"
   text="string"
+  effect
 />
 ```
 
@@ -12,6 +13,7 @@
     badgetype: mandatory prop, it can be either dark, secondary, graph, success, error, warning or primary.
   </li>
   <li>text: optional prop, it indicates label for badge.</li>
+  <li>effect: optional prop, boolean, If you want animation, pass this one. By default, no animation will applied.</li>
 </ul>
 
 ```html
