@@ -598,30 +598,42 @@ var CheckBox = function CheckBox(_a) {
   var id = _a.id,
     label = _a.label,
     variant = _a.variant,
+    validate = _a.validate,
+    hasError = _a.hasError,
     className = _a.className,
     intermediate = _a.intermediate,
-    props = __rest(_a, ["id", "label", "variant", "className", "intermediate"]);
+    props = __rest(_a, ["id", "label", "variant", "validate", "hasError", "className", "intermediate"]);
+  var _b = useState(function () {
+      return hasError ? hasError : false;
+    }),
+    err = _b[0],
+    setErr = _b[1];
+  var handleBlur = function handleBlur(e) {
+    e.target.checked ? setErr(false) : setErr(true);
+  };
   return /*#__PURE__*/React.createElement("div", {
-    className: "m-0 p-0 w-fit h-5 relative flex justify-start items-center ".concat(className)
+    className: "m-0 p-0 w-fit relative flex justify-start items-center ".concat(className)
   }, !intermediate ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", __assign({
-    className: "".concat(style$4.checkBox, " ").concat(variant === "invalid" && style$4.invalidcheckBox, " absolute left-3"),
+    className: "".concat(style$4.checkBox, " ").concat((variant === "invalid" || hasError) && style$4.invalidcheckBox, " absolute left-3"),
     type: "checkbox",
-    id: id
+    id: id,
+    onBlur: validate && handleBlur
   }, props)), /*#__PURE__*/React.createElement("label", {
     className: "".concat(style$4.checkBoxLabel, " h-6 flex items-center"),
     htmlFor: id
   }, /*#__PURE__*/React.createElement("span", {
-    className: style$4.checkBoxSpan
+    className: "".concat(style$4.checkBoxSpan, " ").concat(err ? "!border-[#dc3545]" : "!border-[#9e9e9e]")
   }), label)) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", __assign({
     className: "".concat(style$4.i__checkBox, " ").concat(variant === "invalid" && style$4.i__invalidcheckBox, " absolute left-3"),
     type: "checkbox",
-    id: id
+    id: id,
+    onBlur: validate && handleBlur
   }, props)), /*#__PURE__*/React.createElement("label", {
     className: "".concat(style$4.i__checkBoxLabel, " h-6 w-full flex items-center"),
     htmlFor: id
   }, /*#__PURE__*/React.createElement("span", {
-    className: style$4.i__checkBoxSpan
-  }), label === null || label === void 0 ? void 0 : label.split(" "))));
+    className: "".concat(style$4.i__checkBoxSpan, " ").concat(err ? "!border-[#dc3545]" : "!border-[#9e9e9e]")
+  }), label)));
 };
 
 var styles$4 = {"main":"Close-module_main__UOQ-5","circle":"Close-module_circle__QXiwG","scaleUp":"Close-module_scaleUp__1yb8z","scaleDown":"Close-module_scaleDown__R1U45","minimize":"Close-module_minimize__w0Fd3","magnify":"Close-module_magnify__D9DdT","fromMiddle":"Close-module_fromMiddle__88-J9"};

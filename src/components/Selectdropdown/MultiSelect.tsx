@@ -5,7 +5,7 @@ import classNames from "classnames";
 import ChevronDown from "./icons/ChevronDown.js";
 import UserIcon from "./icons/UserIcon.js";
 
-import CheckBox from "../Checkbox/Checkbox";
+import  CheckBox  from "../Checkbox/Checkbox";
 
 
 interface MultiSelectProps {
@@ -15,6 +15,8 @@ interface MultiSelectProps {
   label?: string;
   type?: string;
   className?: string;
+  required?: boolean;
+  defaultValue?: string;
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
@@ -23,7 +25,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   onSelect,
   label,
   type,
-  className
+  className,
+  required = false,
+  defaultValue,
 }) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
@@ -75,17 +79,17 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
   return (
     <div
-      className={`relative font-medium w-full flex-row border-b border-lightSilver hover:border-primary transition-colors duration-300 ${className}`}
+      className={`relative font-medium w-full flex-row border-b  hover:border-primary transition-colors duration-300 ${selectedValues.length > 0 ? "border-primary" : "border-lightSilver"} ${className}`}
       ref={selectRef}
     >
       <label
         className={classNames(
-          "text-[14px] font-normal text-slatyGrey",
-          open && "text-primary"
+          "text-[14px] font-normal font-proxima",
+          open ? "text-primary" : selectedValues.length > 0 ? "text-primary" : "text-slatyGrey",
         )}
         htmlFor={id}
       >
-        {label ? label : "label"}*
+        {label ? label : "label"}{required && "*"}
       </label>
 
       <div className="flex flex-row items-center justify-center relative mt-0.5">
@@ -97,7 +101,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           placeholder={
             selectedValues.length > 0
               ? `${selectedValues.length} selected`
-              : "Please Select..."
+              : (defaultValue || "Please select")
           }
           value={
             inputValue.length > 25
@@ -106,8 +110,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           }
           style={{ width: "191px" }}
           className={classNames(
-            "flex-grow bg-white outline-none text-darkCharcoal p-2 text-[16px] font-normal",
-            !inputValue && "text-darkCharcoal",
+            "flex-grow bg-white outline-none text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima",
             open && "text-primary",
             !open ? "cursor-pointer" : "cursor-default",
             !open ? "placeholder-darkCharcoal" : "placeholder-primary"
@@ -138,11 +141,11 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         )}
       >
         {options &&
-          options.map((option) => (
+          options.map((option, index) => (
             <li
-              key={option.value}
+              key={index}
               className={classNames(
-                "p-[10px] text-[16px] hover:bg-whiteSmoke font-normal cursor-pointer flex",
+                "p-[10px] text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex",
                 {
                   "bg-whiteSmoke": selectedValues.includes(option.value),
                   hidden: !option.label.toLowerCase().startsWith(inputValue),

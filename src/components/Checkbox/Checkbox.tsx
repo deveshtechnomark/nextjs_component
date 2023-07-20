@@ -30,7 +30,7 @@ const CheckBox = ({
 
   return (
     <div
-      className={`m-0 p-0 w-fit relative flex justify-start items-center ${className}`}
+      className={`h-5 m-0 p-0 w-fit relative flex justify-start items-center ${className}`}
     >
       {!intermediate ? (
         <>

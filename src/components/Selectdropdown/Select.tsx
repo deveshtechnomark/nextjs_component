@@ -73,15 +73,17 @@ const Select: React.FC<SelectProps> = ({
     <>
       <div
         className={classNames(
-          `relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ${className}`
-        )}
-        ref={selectRef}
-      >
+          `relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ${className}`,
+          inputValue && "border-primary"
+          )}
+          ref={selectRef}
+          >
         {label && (
           <label
             className={classNames(
-              "text-[14px] font-normal ",
-              open ? "text-primary" : "text-slatyGrey"
+              "text-[14px] font-normal font-proxima",
+              open ? "text-primary" : inputValue ? "text-primary" : "text-slatyGrey",
+              
             )}
             htmlFor={id}
           >
@@ -90,7 +92,7 @@ const Select: React.FC<SelectProps> = ({
           </label>
         )}
 
-        <div className="flex flex-row items-center relative mt-0.5 w-full">
+        <div className="flex flex-row items-center relative w-full">
           <input
             id={id}
             onClick={handleToggleOpen}
@@ -103,8 +105,7 @@ const Select: React.FC<SelectProps> = ({
                 : inputValue
             }
             className={classNames(
-              "flex-grow outline-none bg-white text-darkCharcoal py-[3px] px-3 text-[16px] font-normal  w-full",
-              !inputValue && "text-darkCharcoal",
+              "flex-grow outline-none bg-white text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima w-full",
               open && "text-primary",
               !open ? "cursor-pointer" : "cursor-default",
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"
@@ -144,7 +145,7 @@ const Select: React.FC<SelectProps> = ({
               <li
                 key={index}
                 className={classNames(
-                  "p-[10px] text-[16px]  hover:bg-whiteSmoke font-normal cursor-pointer flex",
+                  "p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex",
                   {
                     "bg-whiteSmoke": option.value === inputValue,
                     hidden:
