@@ -6,6 +6,7 @@ import SortingIcon from "./icons/SortingIcon";
 import ChevronIcon from "./icons/ChevronIcon";
 
 interface TableProps {
+  className: any;
   data: any[];
   headers: string[];
   sortable?: boolean;
@@ -79,7 +80,7 @@ const Table: React.FC<TableProps> = (props) => {
 
   return (
     <div className="w-full overflow-x-auto">
-      <table className="w-full">
+      <table className={`w-full ${props.className}`}>
         <thead>
           <tr
             className={`${props.sticky
