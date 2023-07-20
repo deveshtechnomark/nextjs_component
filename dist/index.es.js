@@ -79,13 +79,13 @@ var Select = function Select(_a) {
     onSelect(value);
   };
   return React.createElement(React.Fragment, null, React.createElement("div", {
-    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ".concat(className)),
+    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ".concat(className), inputValue && "border-primary"),
     ref: selectRef
   }, label && React.createElement("label", {
-    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : "text-slatyGrey"),
+    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : inputValue ? "text-primary" : "text-slatyGrey"),
     htmlFor: id
   }, label, required && "*"), React.createElement("div", {
-    className: "flex flex-row items-center relative mt-0.5 w-full"
+    className: "flex flex-row items-center relative w-full"
   }, React.createElement("input", {
     id: id,
     onClick: handleToggleOpen,
@@ -93,7 +93,7 @@ var Select = function Select(_a) {
     readOnly: !search,
     placeholder: defaultValue || "Please select",
     value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
-    className: classNames("flex-grow outline-none bg-white text-darkCharcoal p-2 text-[16px] font-normal font-proxima w-full", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: classNames("flex-grow outline-none bg-white text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima w-full", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
@@ -110,7 +110,7 @@ var Select = function Select(_a) {
   }, options && options.map(function (option, index) {
     return React.createElement("li", {
       key: index,
-      className: classNames("p-[10px] text-[16px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex", {
+      className: classNames("p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex", {
         "bg-whiteSmoke": option.value === inputValue,
         hidden: search && !option.label.toLowerCase().startsWith(inputValue)
       }),
@@ -206,10 +206,10 @@ var MultiSelect = function MultiSelect(_a) {
     onSelect(updatedValues);
   };
   return React.createElement("div", {
-    className: "relative font-medium w-full flex-row border-b border-lightSilver hover:border-primary transition-colors duration-300 ".concat(className),
+    className: "relative font-medium w-full flex-row border-b  hover:border-primary transition-colors duration-300 ".concat(selectedValues.length > 0 ? "border-primary" : "border-lightSilver", " ").concat(className),
     ref: selectRef
   }, React.createElement("label", {
-    className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", open && "text-primary"),
+    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : selectedValues.length > 0 ? "text-primary" : "text-slatyGrey"),
     htmlFor: id
   }, label ? label : "label", required && "*"), React.createElement("div", {
     className: "flex flex-row items-center justify-center relative mt-0.5"
@@ -223,7 +223,7 @@ var MultiSelect = function MultiSelect(_a) {
     style: {
       width: "191px"
     },
-    className: classNames("flex-grow bg-white outline-none text-darkCharcoal p-2 text-[16px] font-normal font-proxima", !inputValue && "text-darkCharcoal", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: classNames("flex-grow bg-white outline-none text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
@@ -339,7 +339,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   }), selected.length > 2 && React.createElement("div", {
     className: "flex items-center badge bg-[#E9ECEF] text-darkCharcoal border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima"
   }, "+", selected.length - 2)) : React.createElement("div", {
-    className: classNames("text-darkCharcoal pb-2 font-proxima", {
+    className: classNames("text-darkCharcoal font-proxima", {
       "text-primary": open
     })
   }, "Please Select...");
@@ -348,16 +348,10 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     ref: selectRef
   }, label && React.createElement("label", {
     onClick: handleToggleOpen,
-    className: classNames("text-[14px] font-normal font-proxima text-slatyGrey", {
-      "text-primary": open
-    })
+    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : selected.length > 0 ? "text-primary" : "text-slatyGrey")
   }, label, required && "*"), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: "".concat(classNames("flex justify-between bg-white border-b border-lightSilver text-darkCharcoal pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300", {
-      "text-darkCharcoal": selected.length === 0
-    }, {
-      "text-primary": open
-    }, !open ? "cursor-pointer" : "cursor-default", "hover:border-primary"), " ").concat(className)
+    className: "".concat(classNames("flex justify-between bg-white border-b py-1 pl-2 text-[14px] font-normal font-proxima transition-colors duration-300", open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer", selected.length > 0 ? "border-primary" : "border-lightSilver", "hover:border-primary"), " ").concat(className)
   }, selectedDisplay, React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
@@ -372,12 +366,12 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       width: (_b = selectRef.current) === null || _b === void 0 ? void 0 : _b.clientWidth
     }
   }, React.createElement("li", {
-    className: classNames("pt-3 pl-3 text-[16px] font-normal font-proxima text-primary cursor-pointer flex"),
+    className: classNames("pt-3 pl-3 text-[14px] font-normal font-proxima text-primary cursor-pointer flex"),
     onClick: handleClearAll
   }, "Clear All"), options && options.map(function (option, index) {
     return React.createElement("li", {
       key: index,
-      className: classNames("p-3 text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
+      className: classNames("p-3 text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
         "bg-whiteSmoke": selected.includes(option.value)
       }),
       onClick: type !== "checkbox" ? function () {

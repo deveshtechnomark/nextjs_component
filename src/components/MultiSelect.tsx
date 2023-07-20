@@ -79,13 +79,13 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
   return (
     <div
-      className={`relative font-medium w-full flex-row border-b border-lightSilver hover:border-primary transition-colors duration-300 ${className}`}
+      className={`relative font-medium w-full flex-row border-b  hover:border-primary transition-colors duration-300 ${selectedValues.length > 0 ? "border-primary" : "border-lightSilver"} ${className}`}
       ref={selectRef}
     >
       <label
         className={classNames(
-          "text-[14px] font-normal font-proxima text-slatyGrey",
-          open && "text-primary"
+          "text-[14px] font-normal font-proxima",
+          open ? "text-primary" : selectedValues.length > 0 ? "text-primary" : "text-slatyGrey",
         )}
         htmlFor={id}
       >
@@ -101,7 +101,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           placeholder={
             selectedValues.length > 0
               ? `${selectedValues.length} selected`
-              :  (defaultValue || "Please select")
+              : (defaultValue || "Please select")
           }
           value={
             inputValue.length > 25
@@ -110,8 +110,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           }
           style={{ width: "191px" }}
           className={classNames(
-            "flex-grow bg-white outline-none text-darkCharcoal p-2 text-[16px] font-normal font-proxima",
-            !inputValue && "text-darkCharcoal",
+            "flex-grow bg-white outline-none text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima",
             open && "text-primary",
             !open ? "cursor-pointer" : "cursor-default",
             !open ? "placeholder-darkCharcoal" : "placeholder-primary"

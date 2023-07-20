@@ -109,7 +109,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
       </div>
     ) : (
       <div
-        className={classNames("text-darkCharcoal pb-2 font-proxima", {
+        className={classNames("text-darkCharcoal font-proxima", {
           "text-primary": open,
         })}
       >
@@ -123,8 +123,8 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
         <label
           onClick={handleToggleOpen}
           className={classNames(
-            "text-[14px] font-normal font-proxima text-slatyGrey",
-            { "text-primary": open }
+            "text-[14px] font-normal font-proxima",
+            open ? "text-primary" : selected.length > 0 ? "text-primary" : "text-slatyGrey"
           )}
         >
           {label}
@@ -134,10 +134,9 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
       <div
         onClick={handleToggleOpen}
         className={`${classNames(
-          "flex justify-between bg-white border-b border-lightSilver text-darkCharcoal pt-2 pl-2 text-[16px] font-normal font-proxima transition-colors duration-300",
-          { "text-darkCharcoal": selected.length === 0 },
-          { "text-primary": open },
-          !open ? "cursor-pointer" : "cursor-default",
+          "flex justify-between bg-white border-b py-1 pl-2 text-[14px] font-normal font-proxima transition-colors duration-300",
+          open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer",
+          selected.length > 0 ? "border-primary" : "border-lightSilver",
           "hover:border-primary"
         )} ${className}`}
       >
@@ -169,7 +168,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
       >
         <li
           className={classNames(
-            "pt-3 pl-3 text-[16px] font-normal font-proxima text-primary cursor-pointer flex"
+            "pt-3 pl-3 text-[14px] font-normal font-proxima text-primary cursor-pointer flex"
           )}
           onClick={handleClearAll}
         >
@@ -180,7 +179,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
             <li
               key={index}
               className={classNames(
-                "p-3 text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex",
+                "p-3 text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex",
                 { "bg-whiteSmoke": selected.includes(option.value) }
               )}
               onClick={
