@@ -6,7 +6,7 @@ import React, {
   MouseEvent,
   useEffect,
 } from "react";
-import "./index.css"
+import "./index.css";
 import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
 
 interface PasswordProps {
@@ -231,18 +231,20 @@ const Password: React.FC<PasswordProps> = ({
         )}
 
         {label && (
-          <label
-            className={`${
-              err
-                ? "text-defaultRed"
-                : focus
-                ? "text-primary"
-                : "text-slatyGrey"
-            }`}
-          >
-            {label}
-            {validate && "*"}
-          </label>
+          <span className="flex">
+            <label
+              className={`${
+                err
+                  ? "text-defaultRed"
+                  : focus
+                  ? "text-primary"
+                  : "text-slatyGrey"
+              }`}
+            >
+              {label}
+            </label>
+            <span className="text-defaultRed">&nbsp;*</span>
+          </span>
         )}
       </div>
 
