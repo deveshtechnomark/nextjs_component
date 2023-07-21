@@ -54,8 +54,49 @@ class Toast extends React.Component<ToastProps, ToastState> {
 
     const closeButton = document.createElement("span");
     closeButton.className =
-      "absolute top-1/4 right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10 text-xs sm:text-base";
-    closeButton.innerHTML = "X";
+      "absolute top-[50%] -translate-y-[50%] right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10 text-xs sm:text-base";
+    closeButton.innerHTML = `
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="-0.000732422"
+        y="12"
+        width="17"
+        height="2"
+        rx="1"
+        transform="rotate(-45 -0.000732422 12)"
+        fill=${
+          type === "error"
+            ? "#DC3545"
+            : type === "warning"
+            ? "#664D03"
+            : type === "info"
+            ? "#0A58CA"
+            : "#fff"
+        }
+      />
+      <rect
+        x="1.41357"
+        width="17"
+        height="2"
+        rx="1"
+        transform="rotate(45 1.41357 0)"
+        fill=${
+          type === "error"
+            ? "#DC3545"
+            : type === "warning"
+            ? "#664D03"
+            : type === "info"
+            ? "#0A58CA"
+            : "#fff"
+        }
+      />
+    </svg>`;
     closeButton.addEventListener("click", () => {
       Toast.removeToast(toastElement);
     });
