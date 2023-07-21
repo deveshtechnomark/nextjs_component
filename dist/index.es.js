@@ -79,7 +79,7 @@ var Select = function Select(_a) {
     onSelect(value);
   };
   return React.createElement(React.Fragment, null, React.createElement("div", {
-    className: classNames("relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ".concat(className), inputValue && "border-primary"),
+    className: classNames("relative font-medium w-full flex-row border-b ".concat(inputValue ? "border-primary" : "border-lightSilver", " hover:border-primary transition-colors duration-300 ").concat(className)),
     ref: selectRef
   }, label && React.createElement("label", {
     className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : inputValue ? "text-primary" : "text-slatyGrey"),
@@ -93,7 +93,7 @@ var Select = function Select(_a) {
     readOnly: !search,
     placeholder: defaultValue || "Please select",
     value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
-    className: classNames("flex-grow outline-none bg-white text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima w-full", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: classNames("flex-grow outline-none bg-white text-darkCharcoal px-2 text-[14px] font-normal font-proxima w-full", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
@@ -212,7 +212,7 @@ var MultiSelect = function MultiSelect(_a) {
     className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : selectedValues.length > 0 ? "text-primary" : "text-slatyGrey"),
     htmlFor: id
   }, label ? label : "label", required && "*"), React.createElement("div", {
-    className: "flex flex-row items-center justify-center relative mt-0.5"
+    className: "flex flex-row items-center justify-center relative"
   }, React.createElement("input", {
     id: id,
     onClick: handleToggleOpen,
@@ -223,7 +223,7 @@ var MultiSelect = function MultiSelect(_a) {
     style: {
       width: "191px"
     },
-    className: classNames("flex-grow bg-white outline-none text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: classNames("flex-grow bg-white outline-none text-darkCharcoal px-2 text-[14px] font-normal font-proxima", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
@@ -351,7 +351,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : selected.length > 0 ? "text-primary" : "text-slatyGrey")
   }, label, required && "*"), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: "".concat(classNames("flex justify-between bg-white border-b py-1 pl-2 text-[14px] font-normal font-proxima transition-colors duration-300", open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer", selected.length > 0 ? "border-primary" : "border-lightSilver", "hover:border-primary"), " ").concat(className)
+    className: "".concat(classNames("flex justify-between bg-white border-b pl-2 text-[14px] font-normal font-proxima transition-colors duration-300", open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer", selected.length > 0 ? "border-primary" : "border-lightSilver", "hover:border-primary"), " ").concat(className)
   }, selectedDisplay, React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {

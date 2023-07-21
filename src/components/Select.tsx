@@ -73,8 +73,7 @@ const Select: React.FC<SelectProps> = ({
     <>
       <div
         className={classNames(
-          `relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ${className}`,
-          inputValue && "border-primary"
+          `relative font-medium w-full flex-row border-b ${inputValue ? "border-primary" : "border-lightSilver"} hover:border-primary transition-colors duration-300 ${className}`,
           )}
           ref={selectRef}
           >
@@ -105,7 +104,7 @@ const Select: React.FC<SelectProps> = ({
                 : inputValue
             }
             className={classNames(
-              "flex-grow outline-none bg-white text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima w-full",
+              "flex-grow outline-none bg-white text-darkCharcoal px-2 text-[14px] font-normal font-proxima w-full",
               open && "text-primary",
               !open ? "cursor-pointer" : "cursor-default",
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"

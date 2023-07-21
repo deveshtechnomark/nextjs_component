@@ -92,7 +92,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         {label ? label : "label"}{required && "*"}
       </label>
 
-      <div className="flex flex-row items-center justify-center relative mt-0.5">
+      <div className="flex flex-row items-center justify-center relative">
         <input
           id={id}
           onClick={handleToggleOpen}
@@ -110,7 +110,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           }
           style={{ width: "191px" }}
           className={classNames(
-            "flex-grow bg-white outline-none text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima",
+            "flex-grow bg-white outline-none text-darkCharcoal px-2 text-[14px] font-normal font-proxima",
             open && "text-primary",
             !open ? "cursor-pointer" : "cursor-default",
             !open ? "placeholder-darkCharcoal" : "placeholder-primary"
