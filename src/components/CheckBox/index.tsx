@@ -6,28 +6,18 @@ interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
   className?: string;
-  validate?: boolean;
-  hasError?: boolean;
-  variant?: "invalid";
+  invalid?: boolean;
   intermediate?: boolean;
 }
 
 const CheckBox = ({
   id,
   label,
-  variant,
-  validate,
-  hasError,
+  invalid,
   className,
   intermediate,
   ...props
 }: CheckBoxProps) => {
-  const [err, setErr] = useState<boolean>(() => (hasError ? hasError : false));
-
-  const handleBlur = (e) => {
-    e.target.checked ? setErr(false) : setErr(true);
-  };
-
   return (
     <div
       className={`h-5 m-0 p-0 w-fit relative flex justify-start items-center ${className}`}
@@ -36,11 +26,10 @@ const CheckBox = ({
         <>
           <input
             className={`${style.checkBox} ${
-              variant === "invalid" && style.invalidcheckBox
+              invalid && style.invalidcheckBox
             } absolute left-3`}
             type="checkbox"
             id={id}
-            onBlur={validate && handleBlur}
             {...props}
           />
           <label
@@ -55,11 +44,10 @@ const CheckBox = ({
         <>
           <input
             className={`${style.i__checkBox} ${
-              variant === "invalid" && style.i__invalidcheckBox
+              invalid && style.i__invalidcheckBox
             } absolute left-3`}
             type="checkbox"
             id={id}
-            onBlur={validate && handleBlur}
             {...props}
           />
           <label
@@ -76,10 +64,3 @@ const CheckBox = ({
 };
 
 export default CheckBox;
-
-//   err ? "!border-[#dc3545]" : "!border-[#9e9e9e]"
-// }
-
-// ${
-//   err ? "!border-[#dc3545]" : "!border-[#9e9e9e]"
-// }
