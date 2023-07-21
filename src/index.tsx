@@ -47,9 +47,9 @@ const Button: React.FC<ButtonProps> = ({
         ref={ref}
         style={style}
         className={`${className} ${
-          className?.includes("btn-sm") && "py-[3.5px] px-[10px] text-sm"
+          className?.includes("btn-sm") && "!py-[3.5px] !px-[10px] text-sm"
         } ${
-          className?.includes("btn-lg") && "py-[14.5px] px-[20px]"
+          className?.includes("btn-lg") && "!py-[14.5px] !px-[20px]"
         } bg-pureWhite text-slatyGrey relative overflow-hidden py-[6px] px-[15px] text-base group ${
           variant === "btn" && "!bg-lightSilver !text-slatyGrey"
         } ${
@@ -67,11 +67,22 @@ const Button: React.FC<ButtonProps> = ({
         } ${
           variant === "btn-warning" &&
           "!bg-yellowColor !text-pureWhite hover:!bg-darkYellow"
-        } ${variant === "primary" && "!text-primary"} ${
-          variant === "secondary" && "!text-blueColor"
-        } ${variant === "success" && "!text-successColor"} ${
-          variant === "error" && "!text-defaultRed"
-        } ${variant === "warning" && "!text-yellowColor"} ${
+        } ${
+          variant === "primary" &&
+          "!text-primary hover:bg-[#E0F8F4] hover:!text-[#029882]"
+        } ${
+          variant === "secondary" &&
+          "!text-blueColor hover:bg-[#E5F5FC] hover:!text-[#0281B9]"
+        } ${
+          variant === "success" &&
+          "!text-successColor hover:bg-[#D1E7DD] hover:!text-[#146C43]"
+        } ${
+          variant === "error" &&
+          "!text-defaultRed hover:bg-[#F8D7DA] hover:!text-[#B02A37]"
+        } ${
+          variant === "warning" &&
+          "!text-yellowColor hover:bg-[#FFF3CD] hover:!text-[#CC9A06]"
+        } ${
           variant === "btn-outline" && "!text-slatyGrey border border-slatyGrey"
         } ${
           variant === "btn-outline-primary" &&
@@ -98,9 +109,7 @@ const Button: React.FC<ButtonProps> = ({
         onClick={onClick}
       >
         {ripples}
-        <span className="relative">
-          {children}
-        </span>
+        <span className="relative">{children}</span>
       </button>
     </>
   );
