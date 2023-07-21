@@ -17,6 +17,8 @@ interface TextFieldProps {
   disabled?: boolean;
   hasError?: boolean;
   getValue: (arg1: string) => void;
+  autoComplete?: string;
+  props?: any;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -34,7 +36,8 @@ const TextField: React.FC<TextFieldProps> = ({
   disabled,
   getValue,
   hasError,
-  ...props
+  autoComplete,
+  props,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [err, setErr] = useState<boolean>(false);
@@ -58,7 +61,7 @@ const TextField: React.FC<TextFieldProps> = ({
       setErr(true);
       setShowEmailError(true);
       setFocus(false);
-    } else if(validateEmail(e.target.value)){
+    } else if (validateEmail(e.target.value)) {
       setErr(false);
       setShowEmailError(false);
       setFocus(true);
@@ -105,7 +108,7 @@ const TextField: React.FC<TextFieldProps> = ({
         setShowEmailError(false);
       } else if (inputValue) {
         setErr(false);
-        setShowEmailError(false)
+        setShowEmailError(false);
       } else {
         setValid(false);
       }
@@ -121,7 +124,6 @@ const TextField: React.FC<TextFieldProps> = ({
         target: { value: "" },
       } as React.ChangeEvent<HTMLInputElement>);
     }
-
     setErr(false);
     setValid(false);
     setShowEmailError(false);
@@ -130,14 +132,20 @@ const TextField: React.FC<TextFieldProps> = ({
   return (
     <div className="flex flex-col text-sm sm:text-base relative">
       {label && (
-        <label
-          className={`
-        ${err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"}
-      `}
-        >
-          {label}
-          {validate && "*"}
-        </label>
+        <span className="flex">
+          <label
+            className={`${
+              err
+                ? "text-defaultRed"
+                : focus
+                ? "text-primary"
+                : "text-slatyGrey"
+            }`}
+          >
+            {label}
+          </label>
+          <span className="text-defaultRed">&nbsp;*</span>
+        </span>
       )}
 
       <div
@@ -157,8 +165,9 @@ const TextField: React.FC<TextFieldProps> = ({
               ? "border-b-primary"
               : "border-b-lightSilver"
           }
-          ${(valid && !err) ? "text-successColor" : "text-[#333333]"}
-         
+
+          ${valid && !err ? "text-successColor" : "text-[#333333]"}
+
         `}
           ref={inputRef}
           type={type}
@@ -169,6 +178,7 @@ const TextField: React.FC<TextFieldProps> = ({
           onChange={handleInputChange}
           onFocus={handleFocus}
           disabled={disabled}
+          autoComplete={autoComplete}
           {...props}
         />
       </div>
@@ -181,7 +191,7 @@ const TextField: React.FC<TextFieldProps> = ({
         </span>
       )}
 
-      {(valid && !err) && (
+      {valid && !err && (
         <span className="text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3">
           <CheckIcon />
         </span>

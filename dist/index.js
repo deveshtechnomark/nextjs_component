@@ -30,18 +30,6 @@ var __assign = function() {
     return __assign.apply(this, arguments);
 };
 
-function __rest(s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-}
-
 function ClearIcon() {
   return React.createElement("div", null, React.createElement("svg", {
     stroke: "currentColor",
@@ -89,7 +77,8 @@ var TextField = function TextField(_a) {
     disabled = _a.disabled,
     getValue = _a.getValue,
     hasError = _a.hasError,
-    props = __rest(_a, ["label", "className", "id", "name", "value", "type", "validate", "onBlur", "onChange", "errorMessage", "supportingText", "disabled", "getValue", "hasError"]);
+    autoComplete = _a.autoComplete,
+    props = _a.props;
   var inputRef = React.useRef(null);
   var _c = React.useState(false),
     err = _c[0],
@@ -181,12 +170,16 @@ var TextField = function TextField(_a) {
   };
   return React.createElement("div", {
     className: "flex flex-col text-sm sm:text-base relative"
-  }, label && React.createElement("label", {
-    className: "\n        ".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey", "\n      ")
-  }, label, validate && "*"), React.createElement("div", {
+  }, label && React.createElement("span", {
+    className: "flex"
+  }, React.createElement("label", {
+    className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
+  }, label), React.createElement("span", {
+    className: "text-defaultRed"
+  }, "\xA0*")), React.createElement("div", {
     className: "".concat(!err && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
-    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid && !err ? "text-successColor" : "text-[#333333]", "\n         \n        "),
+    className: "\n          ".concat(className, "\n          py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n\n          ").concat(valid && !err ? "text-successColor" : "text-[#333333]", "\n\n        "),
     ref: inputRef,
     type: type,
     id: id,
@@ -195,7 +188,8 @@ var TextField = function TextField(_a) {
     onBlur: handleBlur,
     onChange: handleInputChange,
     onFocus: handleFocus,
-    disabled: disabled
+    disabled: disabled,
+    autoComplete: autoComplete
   }, props))), err && React.createElement("span", {
     className: "text-defaultRed absolute right-0 top-0 mt-5 mr-3 cursor-pointer"
   }, React.createElement("div", {

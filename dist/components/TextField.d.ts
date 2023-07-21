@@ -14,6 +14,8 @@ interface TextFieldProps {
     disabled?: boolean;
     hasError?: boolean;
     getValue: (arg1: string) => void;
+    autoComplete?: string;
+    props?: any;
 }
 declare const TextField: React.FC<TextFieldProps>;
 export { TextField };
