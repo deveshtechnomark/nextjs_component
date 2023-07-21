@@ -2,21 +2,19 @@
   position: relative;
   width: 18px;
   height: 18px;
-  // color: #d8d8d8;
   font-size: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: inherit;
   border-radius: 100%;
-  animation: wave 1s infinite;
-  box-sizing: border-box;
+  animation: wave 2s infinite;
 }
 
 .indicateBorder {
   position: absolute;
   background: transparent;
-  animation: waveLine 1s infinite;
+  animation: waveLine 2s infinite;
   box-sizing: border-box;
   width: 18px;
   height: 18px;
@@ -27,10 +25,10 @@
 
 @keyframes wave {
   60% {
-    box-shadow: 0 0 0 12px rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 12px transparent;
   }
   100% {
-    box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0 12px transparent;
   }
 }
 

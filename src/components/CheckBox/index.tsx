@@ -36,7 +36,7 @@ const CheckBox = ({
         <>
           <input
             className={`${style.checkBox} ${
-              (variant === "invalid" || hasError) && style.invalidcheckBox
+              variant === "invalid" && style.invalidcheckBox
             } absolute left-3`}
             type="checkbox"
             id={id}
@@ -44,16 +44,11 @@ const CheckBox = ({
             {...props}
           />
           <label
-            className={`${style.checkBoxLabel} h-6 flex items-center`}
+            className={`${style.checkBoxLabel} flex items-center`}
             htmlFor={id}
           >
-            <span
-              className={`${style.checkBoxSpan} ${
-                err ? "!border-[#dc3545]" : "!border-[#9e9e9e]"
-              }`}
-            ></span>
+            <span className={`${style.checkBoxSpan}`}></span>
             {label}
-            {/* <Typography>{label}</Typography> */}
           </label>
         </>
       ) : (
@@ -71,13 +66,8 @@ const CheckBox = ({
             className={`${style.i__checkBoxLabel} h-6 w-full flex items-center`}
             htmlFor={id}
           >
-            <span
-              className={`${style.i__checkBoxSpan} ${
-                err ? "!border-[#dc3545]" : "!border-[#9e9e9e]"
-              }`}
-            ></span>
+            <span className={`${style.i__checkBoxSpan}`}></span>
             {label}
-            {/* <Typography>{label}</Typography> */}
           </label>
         </>
       )}
@@ -86,3 +76,10 @@ const CheckBox = ({
 };
 
 export default CheckBox;
+
+//   err ? "!border-[#dc3545]" : "!border-[#9e9e9e]"
+// }
+
+// ${
+//   err ? "!border-[#dc3545]" : "!border-[#9e9e9e]"
+// }

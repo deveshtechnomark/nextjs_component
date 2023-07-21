@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        quickSilver: "#d8d8d8",
+        lightSilver: "#d8d8d8",
       },
     },
   },
