@@ -37,8 +37,8 @@ var Avatar = function Avatar(_a) {
   }).join("") : Name.charAt(0)) : React.createElement("span", {
     className: "".concat(variant === "large" ? "w-[64px] h-[64px]" : variant === "small" ? "w-[32px] h-[32px]" : variant === "x-small" ? "w-[24px] h-[24px]" : "w-[40px] h-[40px]", " border-2 bg-pureWhite border-pureWhite rounded-full flex justify-center items-center")
   }, React.createElement("svg", {
-    width: "".concat(variant === "large" ? "" : variant === "small" ? "" : variant === "x-small" ? "" : "35"),
-    height: "".concat(variant === "large" ? "" : variant === "small" ? "" : variant === "x-small" ? "" : "35"),
+    width: "".concat(variant === "large" ? "35" : variant === "small" ? "35" : variant === "x-small" ? "35" : "35"),
+    height: "".concat(variant === "large" ? "35" : variant === "small" ? "35" : variant === "x-small" ? "35" : "35"),
     viewBox: "0 0 107 112",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg"

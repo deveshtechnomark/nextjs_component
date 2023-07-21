@@ -100,20 +100,20 @@ const Avatar: FC<AvatarProps> = ({
           <svg
             width={`${
               variant === "large"
-                ? ""
+                ? "35"
                 : variant === "small"
-                ? ""
+                ? "35"
                 : variant === "x-small"
-                ? ""
+                ? "35"
                 : "35"
             }`}
             height={`${
               variant === "large"
-                ? ""
+                ? "35"
                 : variant === "small"
-                ? ""
+                ? "35"
                 : variant === "x-small"
-                ? ""
+                ? "35"
                 : "35"
             }`}
             viewBox="0 0 107 112"
