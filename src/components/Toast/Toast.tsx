@@ -1,14 +1,13 @@
 import React, { ReactNode } from "react";
 
-
 interface ToastProps {
   position?:
-  | "top_right"
-  | "bottom_right"
-  | "top_left"
-  | "bottom_left"
-  | "top_center"
-  | "bottom_center";
+    | "top_right"
+    | "bottom_right"
+    | "top_left"
+    | "bottom_left"
+    | "top_center"
+    | "bottom_center";
 }
 
 interface ToastState {
@@ -42,19 +41,61 @@ class Toast extends React.Component<ToastProps, ToastState> {
 `;
 
     const toastElement = document.createElement("div");
-    toastElement.className = `flex flex-col text-xs sm:text-base m-[6px] p-[12px] px-[16px] rounded-md text-white font-semibold min-w-15rem relative ${type === "error"
+    toastElement.className = `flex flex-col text-xs sm:text-base m-[6px] p-[12px] px-[16px] rounded-md text-white font-semibold min-w-15rem relative ${
+      type === "error"
         ? "bg-errorColor !text-defaultRed"
         : type === "warning"
-          ? "bg-warningColor !text-defaultOrange"
-          : type === "info"
-            ? "bg-infoColor !text-defaultBlue"
-            : "bg-primary !text-pureWhite"
-      }`;
+        ? "bg-warningColor !text-defaultOrange"
+        : type === "info"
+        ? "bg-infoColor !text-defaultBlue"
+        : "bg-primary !text-pureWhite"
+    }`;
 
     const closeButton = document.createElement("span");
     closeButton.className =
-      "absolute top-1/4 right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10 text-xs sm:text-base";
-    closeButton.innerHTML = "X";
+      "absolute top-[50%] -translate-y-[50%] right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10 text-xs sm:text-base";
+    closeButton.innerHTML = `
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="-0.000732422"
+        y="12"
+        width="17"
+        height="2"
+        rx="1"
+        transform="rotate(-45 -0.000732422 12)"
+        fill=${
+          type === "error"
+            ? "#DC3545"
+            : type === "warning"
+            ? "#664D03"
+            : type === "info"
+            ? "#0A58CA"
+            : "#fff"
+        }
+      />
+      <rect
+        x="1.41357"
+        width="17"
+        height="2"
+        rx="1"
+        transform="rotate(45 1.41357 0)"
+        fill=${
+          type === "error"
+            ? "#DC3545"
+            : type === "warning"
+            ? "#664D03"
+            : type === "info"
+            ? "#0A58CA"
+            : "#fff"
+        }
+      />
+    </svg>`;
     closeButton.addEventListener("click", () => {
       Toast.removeToast(toastElement);
     });
@@ -62,14 +103,15 @@ class Toast extends React.Component<ToastProps, ToastState> {
     const messageElement = document.createElement("span");
     messageElement.className = "flex flex-start items-center mr-20";
     messageElement.innerHTML = `
-     <span style="padding-right:5px">${type === "error"
-        ? errorIcon
-        : type === "warning"
-          ? warningIcon
-          : type === "info"
-            ? infoIcon
-            : successIcon
-      }</span>
+     <span style="padding-right:5px">${
+       type === "error"
+         ? errorIcon
+         : type === "warning"
+         ? warningIcon
+         : type === "info"
+         ? infoIcon
+         : successIcon
+     }</span>
      <Typography type="h6">${message}</Typography>`;
 
     toastElement.appendChild(messageElement);
@@ -123,13 +165,17 @@ class Toast extends React.Component<ToastProps, ToastState> {
     return (
       <div
         id={Toast.containerId}
-        className={`flex flex-col fixed select-none animate-slideDown ${position === "top_right" && "top-2 right-5"
-          } ${position === "bottom_right" && "bottom-2 right-5"} ${position === "top_left" && "top-2 left-5"
-          } ${position === "bottom_left" && "bottom-2 left-5"} ${position === "top_center" &&
+        className={`flex flex-col fixed select-none animate-slideDown ${
+          position === "top_right" && "top-2 right-5"
+        } ${position === "bottom_right" && "bottom-2 right-5"} ${
+          position === "top_left" && "top-2 left-5"
+        } ${position === "bottom_left" && "bottom-2 left-5"} ${
+          position === "top_center" &&
           "left-1/2 transform -translate-x-1/2 top-2"
-          } ${position === "bottom_center" &&
+        } ${
+          position === "bottom_center" &&
           "left-1/2 transform -translate-x-1/2 bottom-2"
-          }`}
+        }`}
       >
         {/* Toast container */}
       </div>
