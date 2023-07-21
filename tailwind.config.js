@@ -12,6 +12,7 @@ module.exports = {
         darkCharcoal: "#333333",
         slatyGrey: "#6E6D7A",
         lightPrimary: "#A9ECE1",
+        whiteSmoke: "#F6F6F6"
       },
     },
   },

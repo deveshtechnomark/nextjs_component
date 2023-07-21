@@ -112,28 +112,28 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     } py-2 text-[14px] font-proxima`;
 
   // Common style for arrow buttons
-  const arrowButtonStyle = `${isSmallScreen ? "px-2" : "px-3"} py-2`;
+  const arrowButtonStyle = `p-[4px] hover:bg-whiteSmoke rounded cursor-pointer`;
 
   // common style for pages button in space variant
-  const pagesSpaceStyle = `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded text-[14px] font-proxima`;
+  const pagesSpaceStyle = `py-[1px] px-[9px] rounded text-[14px] font-proxima`;
 
   // Common Style for first page number in variant - without space
-  const firstPageNumStyle = `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-l-lg text-[14px] font-proxima`;
+  const firstPageNumStyle = `py-[1px] px-[9px] rounded-l-lg text-[14px] font-proxima ml-2`;
 
   // Common style for last page number in variant - without space
-  const lastPageNumStyle = `pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-r-lg text-[14px] font-proxima`;
+  const lastPageNumStyle = `py-[1px] px-[9px] rounded-r-lg text-[14px] font-proxima mr-2`;
 
   // common Style for Middle page numbers for variant without space
-  const middlePageNumStyle = `pt-[1px] pr-[9px] pb-[1px] pl-[9px] text-[14px] font-proxima`;
+  const middlePageNumStyle = `py-[1px] px-[9px] text-[14px] font-proxima`;
 
   // Styel for current page number
   const currentPageNumStyle = `bg-lightPrimary border border-primary text-darkCharcoal`;
 
   // Style for default Page Numbers with variant space
-  const defaultPageNumSpaceStyle = `text-darkCharcoal bg-pureWhite border border-lightSilver`;
+  const defaultPageNumSpaceStyle = `text-darkCharcoal bg-pureWhite border border-lightSilver hover:bg-whiteSmoke`;
 
   // Style for default page numbers for variant without space
-  const defaultPageNumStyle = `text-darkCharcoal bg-pureWhite border-t border-r border-b border-lightSilver`;
+  const defaultPageNumStyle = `text-darkCharcoal bg-pureWhite border-t border-r border-b border-lightSilver hover:bg-whiteSmoke`;
 
   // for prop variant = "buttons"
   return variant === "buttons" ? (
@@ -299,7 +299,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           </div>
 
         </button>
-        <span className="text-lightSilver">|</span>
+        {/* <span className="text-lightSilver">|</span> */}
         <button
           className={`${arrowButtonStyle} ${currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"
             }`}
@@ -317,7 +317,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
               key={pageNumber}
               className={`${pagesSpaceStyle} ${currentPage === pageNumber
                   ? currentPageNumStyle
-                  : "text-darkCharcoal"
+                  : "text-darkCharcoal hover:bg-whiteSmoke"
                 } ${isSmallScreen ? "ml-1" : "ml-2"}`}
               onClick={() => handleClick(Number(pageNumber))}
               disabled={currentPage === pageNumber || pageNumber === "..."}
@@ -339,7 +339,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           </div>
 
         </button>
-        <span className="text-lightSilver">|</span>
+        {/* <span className="text-lightSilver">|</span> */}
         <button
           className={`${arrowButtonStyle} ${currentPage === totalPages
               ? "text-slatyGrey"
@@ -367,7 +367,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           </div>
 
         </button>
-        <span className="text-lightSilver">|</span>
         <button
           className={`${arrowButtonStyle} ${currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"
             }`}
@@ -438,7 +437,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           </div>
 
         </button>
-        <span className="text-lightSilver">|</span>
+        {/* <span className="text-lightSilver">|</span> */}
         <button
           className={`${arrowButtonStyle} ${currentPage === totalPages
               ? "text-slatyGrey"

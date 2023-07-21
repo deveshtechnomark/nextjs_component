@@ -119,21 +119,21 @@ var Pagination = function Pagination(props) {
   // Common style for normal (Next, Prev) buttons
   var buttonStyles = "".concat(isSmallScreen ? "px-2" : "px-3", " py-2 text-[14px] font-proxima");
   // Common style for arrow buttons
-  var arrowButtonStyle = "".concat(isSmallScreen ? "px-2" : "px-3", " py-2");
+  var arrowButtonStyle = "p-[4px] hover:bg-whiteSmoke rounded cursor-pointer";
   // common style for pages button in space variant
-  var pagesSpaceStyle = "pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded text-[14px] font-proxima";
+  var pagesSpaceStyle = "py-[1px] px-[9px] rounded text-[14px] font-proxima";
   // Common Style for first page number in variant - without space
-  var firstPageNumStyle = "pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-l-lg text-[14px] font-proxima";
+  var firstPageNumStyle = "py-[1px] px-[9px] rounded-l-lg text-[14px] font-proxima ml-2";
   // Common style for last page number in variant - without space
-  var lastPageNumStyle = "pt-[1px] pr-[9px] pb-[1px] pl-[9px] rounded-r-lg text-[14px] font-proxima";
+  var lastPageNumStyle = "py-[1px] px-[9px] rounded-r-lg text-[14px] font-proxima mr-2";
   // common Style for Middle page numbers for variant without space
-  var middlePageNumStyle = "pt-[1px] pr-[9px] pb-[1px] pl-[9px] text-[14px] font-proxima";
+  var middlePageNumStyle = "py-[1px] px-[9px] text-[14px] font-proxima";
   // Styel for current page number
   var currentPageNumStyle = "bg-lightPrimary border border-primary text-darkCharcoal";
   // Style for default Page Numbers with variant space
-  var defaultPageNumSpaceStyle = "text-darkCharcoal bg-pureWhite border border-lightSilver";
+  var defaultPageNumSpaceStyle = "text-darkCharcoal bg-pureWhite border border-lightSilver hover:bg-whiteSmoke";
   // Style for default page numbers for variant without space
-  var defaultPageNumStyle = "text-darkCharcoal bg-pureWhite border-t border-r border-b border-lightSilver";
+  var defaultPageNumStyle = "text-darkCharcoal bg-pureWhite border-t border-r border-b border-lightSilver hover:bg-whiteSmoke";
   // for prop variant = "buttons"
   return variant === "buttons" ?
   // for "space" prop
@@ -253,9 +253,7 @@ var Pagination = function Pagination(props) {
     disabled: currentPage === 1
   }, React.createElement("div", {
     className: "text-[20px]"
-  }, React.createElement(ChevronsLeft, null))), React.createElement("span", {
-    className: "text-lightSilver"
-  }, "|"), React.createElement("button", {
+  }, React.createElement(ChevronsLeft, null))), React.createElement("button", {
     className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handlePrevPage();
@@ -268,7 +266,7 @@ var Pagination = function Pagination(props) {
   }, pageNumbers.map(function (pageNumber) {
     return React.createElement("button", {
       key: pageNumber,
-      className: "".concat(pagesSpaceStyle, " ").concat(currentPage === pageNumber ? currentPageNumStyle : "text-darkCharcoal", " ").concat(isSmallScreen ? "ml-1" : "ml-2"),
+      className: "".concat(pagesSpaceStyle, " ").concat(currentPage === pageNumber ? currentPageNumStyle : "text-darkCharcoal hover:bg-whiteSmoke", " ").concat(isSmallScreen ? "ml-1" : "ml-2"),
       onClick: function onClick() {
         return handleClick(Number(pageNumber));
       },
@@ -282,9 +280,7 @@ var Pagination = function Pagination(props) {
     disabled: currentPage === totalPages
   }, React.createElement("div", {
     className: "text-[20px] rotate-180"
-  }, React.createElement(ChevronLeft, null))), React.createElement("span", {
-    className: "text-lightSilver"
-  }, "|"), React.createElement("button", {
+  }, React.createElement(ChevronLeft, null))), React.createElement("button", {
     className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleLastPage();
@@ -304,9 +300,7 @@ var Pagination = function Pagination(props) {
     disabled: currentPage === 1
   }, React.createElement("div", {
     className: "text-[20px]"
-  }, React.createElement(ChevronsLeft, null))), React.createElement("span", {
-    className: "text-lightSilver"
-  }, "|"), React.createElement("button", {
+  }, React.createElement(ChevronsLeft, null))), React.createElement("button", {
     className: "".concat(arrowButtonStyle, " ").concat(currentPage === 1 ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handlePrevPage();
@@ -353,9 +347,7 @@ var Pagination = function Pagination(props) {
     disabled: currentPage === totalPages
   }, React.createElement("div", {
     className: "text-[20px] rotate-180"
-  }, React.createElement(ChevronLeft, null))), React.createElement("span", {
-    className: "text-lightSilver"
-  }, "|"), React.createElement("button", {
+  }, React.createElement(ChevronLeft, null))), React.createElement("button", {
     className: "".concat(arrowButtonStyle, " ").concat(currentPage === totalPages ? "text-slatyGrey" : "text-darkCharcoal"),
     onClick: function onClick() {
       return handleLastPage();
