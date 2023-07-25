@@ -824,6 +824,9 @@ var Tel = function Tel(_a) {
   var handleFocus = function handleFocus() {
     setFocus(true);
   };
+  var focusHandler = function focusHandler() {
+    setFocus(false);
+  };
   var handleInputChange = function handleInputChange(e) {
     var inputValue = e.target.value || "";
     inputValue = inputValue.replace(/\s/g, "");
@@ -871,7 +874,7 @@ var Tel = function Tel(_a) {
     id: id,
     name: name,
     value: value,
-    onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
+    onBlur: onBlur ? onBlur : validate ? validateInput : focusHandler,
     onChange: handleInputChange,
     onFocus: handleFocus,
     disabled: disabled,
