@@ -162,6 +162,11 @@ const Password: React.FC<PasswordProps> = ({
     setOpen(true);
   };
 
+  const focusHandler = () => {
+    setFocus(false);
+    setOpen(false);
+  };
+
   const getPasswordStrength = () => {
     let strength = "password";
     if (
@@ -242,7 +247,7 @@ const Password: React.FC<PasswordProps> = ({
           type={type}
           value={password}
           onChange={handlePasswordChange}
-          onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
+          onBlur={onBlur ? onBlur : validate ? validateInput : focusHandler}
           onFocus={handleFocus}
           disabled={disabled}
           {...props}

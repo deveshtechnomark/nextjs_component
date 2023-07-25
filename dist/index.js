@@ -238,6 +238,10 @@ var Password = function Password(_a) {
     setFocus(true);
     setOpen(true);
   };
+  var focusHandler = function focusHandler() {
+    setFocus(false);
+    setOpen(false);
+  };
   var getPasswordStrength = function getPasswordStrength() {
     var strength = "password";
     if (data.match(/[^A-Za-z0-9]/) && data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.match(/.{8,}/)) {
@@ -272,7 +276,7 @@ var Password = function Password(_a) {
     type: type,
     value: password,
     onChange: handlePasswordChange,
-    onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
+    onBlur: onBlur ? onBlur : validate ? validateInput : focusHandler,
     onFocus: handleFocus,
     disabled: disabled
   }, props))), type === "password" ? React.createElement("span", {
