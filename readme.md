@@ -1,4 +1,4 @@
-## how to use:-
+# How to Use it:
 
 "use client";
 
@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import Table from "table";
 import "table/dist/index.css";
 
-import AcceptIcon from "./icons/AcceptIcon";
-import DeleteIcon from "./icons/DeleteIcon";
+import AcceptIcon from "@/app/icons/AcceptIcon";
+import DeleteIcon from "@/app/icons/DeleteIcon";
+import RejectIcon from "@/app/icons/RejectIcon";
 
 export default function Home() {
 const [dummyData, setDummyData] = useState([]);
@@ -18,19 +19,66 @@ const response = await fetch("https://dummyjson.com/products");
 const resData = await response.json();
 setDummyData(resData.products);
 };
-console.log(Object.values(dummyData));
 
 useEffect(() => {
 dummyDataHandler();
 }, []);
 
-const headers = ["id", "thumbnail", "title", "price", "category"];
+const headers = [
+{
+heading: "ID",
+field: "id",
+sort: true,
+},
+{
+heading: "Title",
+field: "title",
+sort: true,
+},
+{
+heading: "Thumbnail",
+field: "thumbnail",
+sort: false,
+},
+{
+heading: "Price",
+field: "price",
+sort: true,
+},
+{
+heading: "Category",
+field: "category",
+sort: true,
+},
+];
 
-const actions: any[] | undefined = [];
+const handleAccept = (rowId: any) => {
+console.log("Accepted row with ID:", rowId);
+};
 
-const acceptButton = <button type="button">hello</button>;
+const handleDelete = (rowId: any) => {
+console.log("Deleted row with ID:", rowId);
+};
 
-actions.push(acceptButton);
+const handleReject = (rowId: any) => {
+console.log("Rejected row with ID:", rowId);
+};
+
+const actionButtons = (
+<span className="flex items-center justify-evenly">
+<span>
+<AcceptIcon />
+</span>
+<span>
+<DeleteIcon />
+</span>
+<span>
+<RejectIcon />
+</span>
+</span>
+);
+
+const actions = [actionButtons];
 
 return (
 
@@ -41,9 +89,10 @@ return (
           headers={headers}
           actions={actions}
           sortable
+          action
+          expandable
           sticky
           selected
-          action
         />
 )}
 </div>
