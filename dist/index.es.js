@@ -91,7 +91,7 @@ var Toast = /** @class */function (_super) {
     (this.state || {}).text;
     return React.createElement("div", {
       id: Toast.containerId,
-      className: "flex flex-col fixed select-none animate-slideDown ".concat(position === "top_right" && "top-2 right-5", " ").concat(position === "bottom_right" && "bottom-2 right-5", " ").concat(position === "top_left" && "top-2 left-5", " ").concat(position === "bottom_left" && "bottom-2 left-5", " ").concat(position === "top_center" && "left-1/2 transform -translate-x-1/2 top-2", " ").concat(position === "bottom_center" && "left-1/2 transform -translate-x-1/2 bottom-2")
+      className: "flex flex-col fixed select-none animate-slideDown z-[999] ".concat(position === "top_right" && "top-2 right-5", " ").concat(position === "bottom_right" && "bottom-2 right-5", " ").concat(position === "top_left" && "top-2 left-5", " ").concat(position === "bottom_left" && "bottom-2 left-5", " ").concat(position === "top_center" && "left-1/2 transform -translate-x-1/2 top-2", " ").concat(position === "bottom_center" && "left-1/2 transform -translate-x-1/2 bottom-2")
     });
   };
   Toast.containerId = "fixed z-9999";
