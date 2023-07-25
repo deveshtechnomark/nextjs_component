@@ -101,7 +101,7 @@ var Textarea = function Textarea(_a) {
   }, "\xA0*")), React.createElement("div", {
     className: "".concat(!err ? "flex w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
   }, React.createElement("textarea", __assign({
-    className: "".concat(className, " py-1 border-b outline-none transition duration-600 w-full h-full ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver"),
+    className: "".concat(className, " py-1 border-b outline-none transition duration-600 w-full h-full text-darkCharcoal ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver"),
     ref: textAreaRef,
     rows: parsedRows,
     id: id,

@@ -5,14 +5,15 @@ module.exports = {
       slatyGrey: "#6E6D7A",
       primary: "#02B89D",
       defaultRed: "#DC3545",
-      lightSilver: "#D8D8D8"
+      lightSilver: "#D8D8D8",
+      darkCharcoal: "#333333",
     },
     screens: {
       sm: "1360px",
       md: "1920px",
     },
     fontFamily: {
-      proxima: ['Proxima Nova'],
+      proxima: ["Proxima Nova"],
     },
   },
   plugins: [],
