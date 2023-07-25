@@ -867,7 +867,7 @@ var Tel = function Tel(_a) {
     },
     defaultValue: "+91"
   })), React.createElement("input", __assign({
-    className: "".concat(className, " py-1 outline-none w-full h-full"),
+    className: "".concat(className, " py-1 outline-none w-full h-full text-darkCharcoal"),
     ref: inputRef,
     type: "tel",
     id: id,
