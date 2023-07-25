@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 
 var Style = {"modal":"Modal-module_modal__ZBixj","modalAnimation":"Modal-module_modalAnimation__OfLMB"};
 
@@ -8,7 +8,6 @@ var Modal = function Modal(_a) {
     var children = _a.children,
     size = _a.size,
     width = _a.width;
-  var modalRef = useRef(null);
   if (!isOpen) return null;
   var getSizeClasses = function getSizeClasses() {
     switch (size) {
@@ -26,15 +25,6 @@ var Modal = function Modal(_a) {
         return "w-[".concat(width, "] || w-[500px]");
     }
   };
-  var handleOutsideClick = function handleOutsideClick(event) {
-    if (modalRef.current && !modalRef.current.contains(event.target)) ;
-  };
-  useEffect(function () {
-    window.addEventListener("click", handleOutsideClick);
-    return function () {
-      window.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 z-50 flex items-center justify-center ".concat(Style.modal)
   }, /*#__PURE__*/React.createElement("div", {
@@ -56,7 +46,7 @@ var ModalTitle = function ModalTitle(_a) {
 var ModalContent = function ModalContent(_a) {
   var children = _a.children;
   return /*#__PURE__*/React.createElement("div", {
-    className: "flex-auto overflow-y-scroll max-h-[500px] text-pureBlack leading-relaxed"
+    className: "flex-auto max-h-96 overflow-y-auto text-pureBlack"
   }, children || 'Modal Content');
 };
 

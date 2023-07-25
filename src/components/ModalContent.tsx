@@ -5,8 +5,11 @@ interface ModalContentProps {
 }
 
 const ModalContent: React.FC<ModalContentProps> = ({ children }) => {
+
   return (
-      <div className="flex-auto overflow-y-scroll max-h-[500px] text-pureBlack leading-relaxed">
+    <div
+    className={`flex-auto max-h-96 overflow-y-auto text-pureBlack`}
+  >
         {children || 'Modal Content'}
       </div>
   );

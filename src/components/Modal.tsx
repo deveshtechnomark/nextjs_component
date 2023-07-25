@@ -17,7 +17,7 @@ const Modal: React.FC<ModalProps> = ({
   size,
   width,
 }) => {
-  const modalRef = useRef<HTMLDivElement>(null);
+
   if (!isOpen) return null;
 
   const getSizeClasses = () => {
