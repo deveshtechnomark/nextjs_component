@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import data from "./data";
-import { Select } from "../Selectdropdown/Select";
+import  {Select}  from "../Selectdropdown/Select";
 
 interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -57,6 +57,10 @@ const Tel: React.FC<TelInputProps> = ({
     setFocus(true);
   };
 
+  const focusHandler = () => {
+    setFocus(false);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let inputValue = e.target.value || "";
     inputValue = inputValue.replace(/\s/g, "");
@@ -92,7 +96,13 @@ const Tel: React.FC<TelInputProps> = ({
           >
             {label}
           </label>
-          {validate && <span className={`${disabled ? "text-slatyGrey" : "text-defaultRed"}`}>&nbsp;*</span>}
+          {validate && (
+            <span
+              className={`${disabled ? "text-slatyGrey" : "text-defaultRed"}`}
+            >
+              &nbsp;*
+            </span>
+          )}
         </span>
       )}
       <div
@@ -131,7 +141,7 @@ const Tel: React.FC<TelInputProps> = ({
             id={id}
             name={name}
             value={value}
-            onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
+            onBlur={onBlur ? onBlur : validate ? validateInput : focusHandler}
             onChange={handleInputChange}
             onFocus={handleFocus}
             disabled={disabled}

@@ -1,47 +1,17 @@
 import React, {
   useState,
   ChangeEvent,
-  FocusEvent,
-  KeyboardEvent,
-  MouseEvent,
   useEffect,
+  InputHTMLAttributes,
 } from "react";
 import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
 
-interface PasswordProps {
+interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   className?: string;
   validate?: boolean;
   errorMessage?: string;
-  minlength?: string;
-  maxlength?: string;
-  autoComplete?: string;
-  autoFocus?: boolean;
   disabled?: boolean;
-  form?: string;
-  name?: string;
-  pattern?: string;
-  placeholder?: string;
-  readOnly?: boolean;
-  size?: number;
-  value?: string;
-  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
-  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
-  onKeyUp?: (event: KeyboardEvent<HTMLInputElement>) => void;
-  onKeyPress?: (event: KeyboardEvent<HTMLInputElement>) => void;
-  onInput?: (event: Event) => void;
-  onClick?: (event: MouseEvent<HTMLInputElement>) => void;
-  onMouseDown?: (event: MouseEvent<HTMLInputElement>) => void;
-  onMouseUp?: (event: MouseEvent<HTMLInputElement>) => void;
-  onMouseEnter?: (event: MouseEvent<HTMLInputElement>) => void;
-  onMouseLeave?: (event: MouseEvent<HTMLInputElement>) => void;
-  onMouseOver?: (event: MouseEvent<HTMLInputElement>) => void;
-  onMouseOut?: (event: MouseEvent<HTMLInputElement>) => void;
-  onInvalid?: (event: Event) => void;
-  onReset?: (event: Event) => void;
-  onSubmit?: (event: Event) => void;
   getValue: (arg1: string) => void;
   hasError?: boolean;
   props?: any;
@@ -55,7 +25,8 @@ const Password: React.FC<PasswordProps> = ({
   errorMessage = "This is a required field!",
   getValue,
   hasError,
-  props,
+  disabled,
+  ...props
 }) => {
   const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
@@ -190,6 +161,11 @@ const Password: React.FC<PasswordProps> = ({
     setOpen(true);
   };
 
+  const focusHandler = () => {
+    setFocus(false);
+    setOpen(false);
+  };
+
   const getPasswordStrength = () => {
     let strength = "password";
     if (
@@ -214,17 +190,17 @@ const Password: React.FC<PasswordProps> = ({
   };
 
   return (
-    <div className="relative flex flex-col text-sm sm:text-base w-full">
+    <div className="relative flex flex-col text-[14px] w-full">
       <div className="relative w-full">
         {open && (
           <>
             <div
-              className={`absolute bottom-[40px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit`}
+              className={`absolute bottom-[30px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit`}
             >
               <ul className="requirement-list">{validatePassword()}</ul>
             </div>
             <span
-              className={`w-2 h-2 bg-pureWhite z-10 absolute bottom-[36px] left-[20px] rotate-[45deg]`}
+              className={`w-2 h-2 bg-pureWhite z-10 absolute bottom-[26px] left-[20px] rotate-[45deg]`}
             ></span>
           </>
         )}
@@ -242,7 +218,13 @@ const Password: React.FC<PasswordProps> = ({
             >
               {label}
             </label>
-            <span className="text-defaultRed">&nbsp;*</span>
+            {validate && (
+              <span
+                className={`${disabled ? "text-slatyGrey" : "text-defaultRed"}`}
+              >
+                &nbsp;*
+              </span>
+            )}
           </span>
         )}
       </div>
@@ -254,7 +236,7 @@ const Password: React.FC<PasswordProps> = ({
         }`}
       >
         <input
-          className={`${className} py-1 px-3 border-b outline-none w-full pr-10 ${
+          className={`${className} py-1 border-b outline-none w-full pr-10 ${
             err
               ? "border-defaultRed"
               : focus
@@ -264,8 +246,9 @@ const Password: React.FC<PasswordProps> = ({
           type={type}
           value={password}
           onChange={handlePasswordChange}
-          onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
+          onBlur={onBlur ? onBlur : validate ? validateInput : focusHandler}
           onFocus={handleFocus}
+          disabled={disabled}
           {...props}
         />
       </div>
