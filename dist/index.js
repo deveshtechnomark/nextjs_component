@@ -8,25 +8,39 @@ var Modal = function Modal(_a) {
   var isOpen = _a.isOpen;
     _a.onClose;
     var children = _a.children,
-    size = _a.size;
+    size = _a.size,
+    width = _a.width;
+  var modalRef = React.useRef(null);
   if (!isOpen) return null;
   var getSizeClasses = function getSizeClasses() {
     switch (size) {
       case "sm":
-        return "w-72";
+        return "w-75";
       case "md":
-      default:
-        return "w-4/12";
+        return "w-[500px]";
       case "lg":
-        return "w-1/2";
+        return "w-[800px]";
+      case "extra-lg":
+        return "w-[1140px]";
       case "full":
         return "w-full";
+      default:
+        return "w-[".concat(width, "] || w-[500px]");
     }
   };
+  var handleOutsideClick = function handleOutsideClick(event) {
+    if (modalRef.current && !modalRef.current.contains(event.target)) ;
+  };
+  React.useEffect(function () {
+    window.addEventListener("click", handleOutsideClick);
+    return function () {
+      window.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 z-50 flex items-center justify-center ".concat(Style.modal)
   }, /*#__PURE__*/React.createElement("div", {
-    className: "my-6 mx-auto ".concat(getSizeClasses())
+    className: "my-6 mx-auto ".concat(getSizeClasses(), " ").concat(width)
   }, /*#__PURE__*/React.createElement("div", {
     className: "border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
   }, children))), /*#__PURE__*/React.createElement("div", {
@@ -44,10 +58,8 @@ var ModalTitle = function ModalTitle(_a) {
 var ModalContent = function ModalContent(_a) {
   var children = _a.children;
   return /*#__PURE__*/React.createElement("div", {
-    className: "flex-auto"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "text-pureBlack leading-relaxed"
-  }, children || 'Modal Content'));
+    className: "flex-auto overflow-y-scroll max-h-[500px] text-pureBlack leading-relaxed"
+  }, children || 'Modal Content');
 };
 
 var ModalAction = function ModalAction(_a) {
