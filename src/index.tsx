@@ -8,10 +8,18 @@ interface Props {
 const Close: React.FC<Props> = ({ variant }) => {
   return (
     <>
-      <div className={styles.main}>
+      <div
+        className={`${styles.main} ${
+          variant === "small" && styles.smallTooltip
+        } ${variant === "medium" && styles.mediumTooltip}`}
+      >
         <button
           className={`${styles.fromMiddle} ${styles.circle} ${
-            variant === "small" ? styles.small : styles.medium
+            variant === "small"
+              ? styles.small
+              : variant === "medium"
+              ? styles.medium
+              : styles.large
           } ${styles.scaleUp}`}
           data-animation="minimize"
         >
