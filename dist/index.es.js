@@ -51,9 +51,9 @@ var Textarea = function Textarea(_a) {
     validate = _a.validate,
     onBlur = _a.onBlur,
     onChange = _a.onChange,
-    supportingText = _a.supportingText;
-    _a.disabled;
-    var getValue = _a.getValue,
+    supportingText = _a.supportingText,
+    disabled = _a.disabled,
+    getValue = _a.getValue,
     hasError = _a.hasError,
     _c = _a.errorMessage,
     errorMessage = _c === void 0 ? "This is a required field!" : _c,
@@ -89,17 +89,17 @@ var Textarea = function Textarea(_a) {
   };
   var parsedRows = rows;
   return React.createElement("div", {
-    className: "flex flex-col w-full text-sm sm:text-base"
+    className: "flex flex-col w-full text-[14px]"
   }, label && React.createElement("span", {
     className: "flex"
   }, React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, label), React.createElement("span", {
-    className: "text-defaultRed"
+  }, label), validate && React.createElement("span", {
+    className: "".concat(disabled ? "text-slatyGrey" : "text-defaultRed")
   }, "\xA0*")), React.createElement("div", {
     className: "".concat(!err ? "flex w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
   }, React.createElement("textarea", __assign({
-    className: "".concat(className, " py-1 px-3 border-b outline-none transition duration-600 w-full h-full ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver"),
+    className: "".concat(className, " py-1 border-b outline-none transition duration-600 w-full h-full ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver"),
     ref: textAreaRef,
     rows: parsedRows,
     id: id,

@@ -63,7 +63,7 @@ const Textarea: React.FC<TextareaProps> = ({
   const parsedRows = rows as number;
 
   return (
-    <div className="flex flex-col w-full text-sm sm:text-base">
+    <div className="flex flex-col w-full text-[14px]">
       {label && (
         <span className="flex">
           <label
@@ -77,7 +77,7 @@ const Textarea: React.FC<TextareaProps> = ({
           >
             {label}
           </label>
-          <span className="text-defaultRed">&nbsp;*</span>
+          {validate && <span className={`${disabled ? "text-slatyGrey" : "text-defaultRed"}`}>&nbsp;*</span>}
         </span>
       )}
 
@@ -89,7 +89,7 @@ const Textarea: React.FC<TextareaProps> = ({
         }`}
       >
         <textarea
-          className={`${className} py-1 px-3 border-b outline-none transition duration-600 w-full h-full ${
+          className={`${className} py-1 border-b outline-none transition duration-600 w-full h-full ${
             err
               ? "border-b-defaultRed"
               : focus
