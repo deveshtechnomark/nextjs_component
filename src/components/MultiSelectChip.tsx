@@ -128,13 +128,13 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
           )}
         >
           {label}
-          {required && "*"}
+          {required && <span className="text-defaultRed">&nbsp;*</span>}
         </label>
       )}
       <div
         onClick={handleToggleOpen}
         className={`${classNames(
-          "flex justify-between bg-white border-b pl-2 text-[14px] font-normal font-proxima transition-colors duration-300",
+          "flex justify-between bg-white border-b text-[14px] font-normal font-proxima transition-colors duration-300",
           open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer",
           selected.length > 0 ? "border-primary" : "border-lightSilver",
           "hover:border-primary"

@@ -87,7 +87,7 @@ const Select: React.FC<SelectProps> = ({
             htmlFor={id}
           >
             {label}
-            {required && "*"}
+            {required && <span className="text-defaultRed">&nbsp;*</span>}
           </label>
         )}
 
@@ -104,7 +104,7 @@ const Select: React.FC<SelectProps> = ({
                 : inputValue
             }
             className={classNames(
-              "flex-grow outline-none bg-white text-darkCharcoal px-2 text-[14px] font-normal font-proxima w-full",
+              "flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full",
               open && "text-primary",
               !open ? "cursor-pointer" : "cursor-default",
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"

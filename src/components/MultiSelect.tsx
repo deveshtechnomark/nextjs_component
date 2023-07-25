@@ -89,7 +89,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         )}
         htmlFor={id}
       >
-        {label ? label : "label"}{required && "*"}
+        {label ? label : "label"}
+        {required && <span className="text-defaultRed">&nbsp;*</span>}
       </label>
 
       <div className="flex flex-row items-center justify-center relative">
@@ -110,7 +111,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           }
           style={{ width: "191px" }}
           className={classNames(
-            "flex-grow bg-white outline-none text-darkCharcoal px-2 text-[14px] font-normal font-proxima",
+            "flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal font-proxima",
             open && "text-primary",
             !open ? "cursor-pointer" : "cursor-default",
             !open ? "placeholder-darkCharcoal" : "placeholder-primary"
@@ -145,7 +146,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             <li
               key={index}
               className={classNames(
-                "p-[10px] text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex",
+                "p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex",
                 {
                   "bg-whiteSmoke": selectedValues.includes(option.value),
                   hidden: !option.label.toLowerCase().startsWith(inputValue),

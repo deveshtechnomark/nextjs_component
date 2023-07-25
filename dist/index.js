@@ -86,7 +86,9 @@ var Select = function Select(_a) {
   }, label && React.createElement("label", {
     className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : inputValue ? "text-primary" : "text-slatyGrey"),
     htmlFor: id
-  }, label, required && "*"), React.createElement("div", {
+  }, label, required && React.createElement("span", {
+    className: "text-defaultRed"
+  }, "\xA0*")), React.createElement("div", {
     className: "flex flex-row items-center relative w-full"
   }, React.createElement("input", {
     id: id,
@@ -95,7 +97,7 @@ var Select = function Select(_a) {
     readOnly: !search,
     placeholder: defaultValue || "Please select",
     value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
-    className: classNames("flex-grow outline-none bg-white text-darkCharcoal px-2 text-[14px] font-normal font-proxima w-full", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: classNames("flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
@@ -213,7 +215,9 @@ var MultiSelect = function MultiSelect(_a) {
   }, React.createElement("label", {
     className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : selectedValues.length > 0 ? "text-primary" : "text-slatyGrey"),
     htmlFor: id
-  }, label ? label : "label", required && "*"), React.createElement("div", {
+  }, label ? label : "label", required && React.createElement("span", {
+    className: "text-defaultRed"
+  }, "\xA0*")), React.createElement("div", {
     className: "flex flex-row items-center justify-center relative"
   }, React.createElement("input", {
     id: id,
@@ -225,7 +229,7 @@ var MultiSelect = function MultiSelect(_a) {
     style: {
       width: "191px"
     },
-    className: classNames("flex-grow bg-white outline-none text-darkCharcoal px-2 text-[14px] font-normal font-proxima", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: classNames("flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal font-proxima", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
@@ -238,7 +242,7 @@ var MultiSelect = function MultiSelect(_a) {
   }, options && options.map(function (option, index) {
     return React.createElement("li", {
       key: index,
-      className: classNames("p-[10px] text-[16px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
+      className: classNames("p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
         "bg-whiteSmoke": selectedValues.includes(option.value),
         hidden: !option.label.toLowerCase().startsWith(inputValue)
       }),
@@ -351,9 +355,11 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   }, label && React.createElement("label", {
     onClick: handleToggleOpen,
     className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : selected.length > 0 ? "text-primary" : "text-slatyGrey")
-  }, label, required && "*"), React.createElement("div", {
+  }, label, required && React.createElement("span", {
+    className: "text-defaultRed"
+  }, "\xA0*")), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: "".concat(classNames("flex justify-between bg-white border-b pl-2 text-[14px] font-normal font-proxima transition-colors duration-300", open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer", selected.length > 0 ? "border-primary" : "border-lightSilver", "hover:border-primary"), " ").concat(className)
+    className: "".concat(classNames("flex justify-between bg-white border-b text-[14px] font-normal font-proxima transition-colors duration-300", open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer", selected.length > 0 ? "border-primary" : "border-lightSilver", "hover:border-primary"), " ").concat(className)
   }, selectedDisplay, React.createElement("div", {
     onClick: handleToggleOpen,
     className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
