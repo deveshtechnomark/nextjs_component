@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-
 interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
@@ -65,19 +64,20 @@ const Textarea: React.FC<TextareaProps> = ({
   return (
     <div className="flex flex-col w-full text-sm sm:text-base">
       {label && (
-        <label
-          className={`${
-            err
-              ? "text-defaultRed w-full"
-              : focus
-              ? "text-primary w-full"
-              : "text-slatyGrey w-full"
-          }`}
-        >
-          {label}
-
-          {validate && "*"}
-        </label>
+        <span className="flex">
+          <label
+            className={`${
+              err
+                ? "text-defaultRed"
+                : focus
+                ? "text-primary"
+                : "text-slatyGrey"
+            }`}
+          >
+            {label}
+          </label>
+          <span className="text-defaultRed">&nbsp;*</span>
+        </span>
       )}
 
       <div

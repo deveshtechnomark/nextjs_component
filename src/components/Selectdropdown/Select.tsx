@@ -73,7 +73,7 @@ const Select: React.FC<SelectProps> = ({
     <>
       <div
         className={classNames(
-          `relative font-medium w-full flex-row border-b border-gray-300 hover:border-primary transition-colors duration-300 ${className}`,
+          `relative font-medium w-full flex-row border-b border-lightSilver hover:border-primary transition-colors duration-300 ${className}`,
           inputValue && "border-primary"
           )}
           ref={selectRef}
@@ -81,7 +81,7 @@ const Select: React.FC<SelectProps> = ({
         {label && (
           <label
             className={classNames(
-              "text-[14px] font-normal font-proxima",
+              "text-[14px] font-normal",
               open ? "text-primary" : inputValue ? "text-primary" : "text-slatyGrey",
               
             )}
@@ -105,7 +105,7 @@ const Select: React.FC<SelectProps> = ({
                 : inputValue
             }
             className={classNames(
-              "flex-grow outline-none bg-white text-darkCharcoal py-1 px-2 text-[14px] font-normal font-proxima w-full",
+              "flex-grow outline-none bg-white text-darkCharcoal py-1 px-2 text-[14px] font-normal w-full",
               open && "text-primary",
               !open ? "cursor-pointer" : "cursor-default",
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"
@@ -145,7 +145,7 @@ const Select: React.FC<SelectProps> = ({
               <li
                 key={index}
                 className={classNames(
-                  "p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex",
+                  "p-[10px] text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex",
                   {
                     "bg-whiteSmoke": option.value === inputValue,
                     hidden:

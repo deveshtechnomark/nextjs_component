@@ -9,9 +9,9 @@ interface ModalTitleProps {
 const ModalTitle: React.FC<ModalTitleProps> = ({ children }) => {
   return (
     <>
-    <Typography type='body' className="text-pureBlack flex items-center justify-between pl-3 border-b border-solid border-lightSilver rounded-t">
+    <div className="text-pureBlack flex items-center justify-between border-b border-solid border-lightSilver rounded-t">
       {children || 'Modal Title'}
-    </Typography>
+    </div>
     </>
   );
 };

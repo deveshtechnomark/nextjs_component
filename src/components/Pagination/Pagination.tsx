@@ -109,22 +109,22 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   // Common style for normal (Next, Prev) buttons
   const buttonStyles = `${isSmallScreen ? "px-2" : "px-3"
-    } py-2 text-[14px] font-proxima`;
+    } py-2 text-[14px] `;
 
   // Common style for arrow buttons
   const arrowButtonStyle = `p-[4px] hover:bg-whiteSmoke rounded cursor-pointer`;
 
   // common style for pages button in space variant
-  const pagesSpaceStyle = `py-[1px] px-[9px] rounded text-[14px] font-proxima`;
+  const pagesSpaceStyle = `py-[1px] px-[9px] rounded text-[14px] `;
 
   // Common Style for first page number in variant - without space
-  const firstPageNumStyle = `py-[1px] px-[9px] rounded-l-lg text-[14px] font-proxima ml-2`;
+  const firstPageNumStyle = `py-[1px] px-[9px] rounded-l-lg text-[14px]  ml-2`;
 
   // Common style for last page number in variant - without space
-  const lastPageNumStyle = `py-[1px] px-[9px] rounded-r-lg text-[14px] font-proxima mr-2`;
+  const lastPageNumStyle = `py-[1px] px-[9px] rounded-r-lg text-[14px] mr-2`;
 
   // common Style for Middle page numbers for variant without space
-  const middlePageNumStyle = `py-[1px] px-[9px] text-[14px] font-proxima`;
+  const middlePageNumStyle = `py-[1px] px-[9px] text-[14px] `;
 
   // Styel for current page number
   const currentPageNumStyle = `bg-lightPrimary border border-primary text-darkCharcoal`;

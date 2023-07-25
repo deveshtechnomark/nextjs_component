@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import data from "./data";
 import  {Select}  from "../Selectdropdown/Select";
 
-
 interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   className?: string;
@@ -81,14 +80,20 @@ const Tel: React.FC<TelInputProps> = ({
   return (
     <div className="flex flex-col w-full text-sm sm:text-base relative">
       {label && (
-        <label
-          className={`${
-            err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey"
-          }`}
-        >
-          {label}
-          {validate && "*"}
-        </label>
+        <span className="flex">
+          <label
+            className={`${
+              err
+                ? "text-defaultRed"
+                : focus
+                ? "text-primary"
+                : "text-slatyGrey"
+            }`}
+          >
+            {label}
+          </label>
+          <span className="text-defaultRed">&nbsp;*</span>
+        </span>
       )}
       <div
         className={`flex ${
@@ -120,7 +125,7 @@ const Tel: React.FC<TelInputProps> = ({
             </div>
           )}
           <input
-            className={`${className} py-[3px] px-3 outline-none w-full h-full mt-[6px]`}
+            className={`${className} px-3 outline-none w-full h-full`}
             ref={inputRef}
             type="tel"
             id={id}
@@ -136,9 +141,15 @@ const Tel: React.FC<TelInputProps> = ({
         </div>
       </div>
       {!err && supportingText && (
-        <span className="text-slatyGrey text-[12px] sm:text-[14px]">{supportingText}</span>
+        <span className="text-slatyGrey text-[12px] sm:text-[14px]">
+          {supportingText}
+        </span>
       )}
-      {err && <span className="text-defaultRed text-[12px] sm:text-[14px]">{errorMsg}</span>}
+      {err && (
+        <span className="text-defaultRed text-[12px] sm:text-[14px]">
+          {errorMsg}
+        </span>
+      )}
     </div>
   );
 };

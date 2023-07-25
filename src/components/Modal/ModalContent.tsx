@@ -9,9 +9,9 @@ interface ModalContentProps {
 const ModalContent: React.FC<ModalContentProps> = ({ children }) => {
   return (
     <div className="p-2 mb-5 flex-auto">
-      <Typography type='body' className="text-pureBlack leading-relaxed">
+      <div className="text-pureBlack leading-relaxed">
         {children || 'Modal Content'}
-      </Typography>
+      </div>
     </div>
   );
 };

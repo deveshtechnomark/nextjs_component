@@ -53,7 +53,7 @@ const Alert: React.FC<AlertProps> = ({ variant, message }) => {
             </span>
             <Typography
               type="sub-title"
-              className="ml-2 mr-6 text-xs sm:text-base"
+              className="ml-2 mr-6 text-xs sm:text-base !font-bold"
             >
               {message}
             </Typography>

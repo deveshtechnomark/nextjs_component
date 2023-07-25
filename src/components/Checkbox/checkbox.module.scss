@@ -33,150 +33,6 @@ $defaultRed: #dc3545;
   }
 }
 
-* {
-  box-sizing: border-box;
-}
-
-.checkBox {
-  appearance: none;
-  height: 0;
-  width: 0;
-  z-index: -1;
-  + {
-    .checkBoxLabel {
-      margin-right: 0.5em;
-      display: flex;
-      user-select: none;
-      > .checkBoxSpan {
-        margin: 0em 0.3em;
-        width: 1.125em;
-        height: 1.125em;
-        background-color: white;
-        border: 2px solid #9e9e9e;
-        border-radius: 2px;
-        cursor: pointer;
-        transition: all 250ms cubic-bezier(0.4, 0, 0.23, 1);
-      }
-      &:hover {
-        cursor: pointer;
-        color: $primary !important;
-        > .checkBoxSpan {
-          border-color: $primary !important;
-        }
-      }
-    }
-  }
-  &:focus {
-    + {
-      .checkBoxLabel {
-        > .checkBoxSpan {
-          box-shadow: 0 0 8px $primary !important;
-        }
-      }
-    }
-  }
-  &:disabled {
-    + {
-      .checkBoxLabel {
-        opacity: 0.5;
-        pointer-events: none;
-      }
-    }
-  }
-  &:checked {
-    + {
-      .checkBoxLabel {
-        > .checkBoxSpan {
-          border: 0.58em solid $primary !important;
-          animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
-          &:before {
-            content: "";
-            position: absolute;
-            top: 0.5em;
-            left: 0.5em;
-            border-right: 1.5px solid transparent;
-            border-bottom: 1.5px solid transparent;
-            transform: rotate(45deg);
-            transform-origin: 0% 100%;
-            animation: checkbox-check 125ms 250ms cubic-bezier(0.4, 0, 0.23, 1)
-              forwards;
-          }
-        }
-      }
-    }
-  }
-}
-
-.invalidcheckBox {
-  appearance: none;
-  height: 0;
-  width: 0;
-  + {
-    .checkBoxLabel {
-      margin-right: 0.5em;
-      color: $defaultRed;
-      display: flex;
-      user-select: none;
-      > .checkBoxSpan {
-        margin: 0em 0.3em;
-        width: 1.125em;
-        height: 1.125em;
-        background: transparent;
-        border: 2px solid $defaultRed;
-        border-radius: 2px;
-        cursor: pointer;
-        transition: all 250ms cubic-bezier(0.4, 0, 0.23, 1);
-      }
-      &:hover {
-        cursor: pointer;
-        color: $defaultRed;
-        > .checkBoxSpan {
-          border-color: $defaultRed;
-        }
-      }
-    }
-  }
-  &:focus {
-    + {
-      .checkBoxLabel {
-        > .checkBoxSpan {
-          box-shadow: 0 0 8px $defaultRed;
-        }
-      }
-    }
-  }
-  &:disabled {
-    + {
-      .checkBoxLabel {
-        opacity: 0.5;
-        pointer-events: none;
-      }
-    }
-  }
-  &:checked {
-    + {
-      .checkBoxLabel {
-        > .checkBoxSpan {
-          border: 0.58em solid $defaultRed;
-          animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
-          &:before {
-            content: "";
-            position: absolute;
-            top: 0.6em;
-            left: 0.5em;
-            border-right: 1.5px solid transparent;
-            border-bottom: 1.5px solid transparent;
-            transform: rotate(45deg);
-            transform-origin: 0% 100%;
-            animation: checkbox-check 125ms 250ms cubic-bezier(0.4, 0, 0.23, 1)
-              forwards;
-          }
-        }
-      }
-    }
-  }
-}
-
 //Intermediate
 @keyframes i-checkbox-check {
   0% {
@@ -193,6 +49,114 @@ $defaultRed: #dc3545;
   }
 }
 
+.checkBox {
+  appearance: none;
+  height: 0;
+  width: 0;
+  z-index: -1;
+  + {
+    .checkBoxLabel {
+      gap: 8px;
+      display: flex;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      user-select: none;
+      > .checkBoxSpan {
+        width: 1.125em;
+        height: 1.125em;
+        cursor: pointer;
+        background: #fff;
+        border-radius: 4px;
+        border: 2px solid #9e9e9e;
+        transition: all 250ms cubic-bezier(0.4, 0, 0.23, 1);
+      }
+      &:hover {
+        cursor: pointer;
+        > .checkBoxSpan {
+          border-color: $primary;
+        }
+      }
+    }
+  }
+  &:focus {
+    + {
+      .checkBoxLabel {
+        > .checkBoxSpan {
+          border-color: $primary;
+          box-shadow: 0 0 8px $primary;
+        }
+      }
+    }
+  }
+  &:disabled {
+    + {
+      .checkBoxLabel {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+  }
+  &:checked {
+    + {
+      .checkBoxLabel {
+        > .checkBoxSpan {
+          border: 0.58em solid $primary;
+          animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
+          &:before {
+            content: "";
+            position: absolute;
+            top: 0.5em;
+            left: 0.2em;
+            border-right: 1.5px solid transparent;
+            border-bottom: 1.5px solid transparent;
+            transform: rotate(45deg);
+            transform-origin: 0% 100%;
+            animation: checkbox-check 125ms 250ms cubic-bezier(0.4, 0, 0.23, 1)
+              forwards;
+          }
+        }
+      }
+    }
+  }
+}
+
+.invalidcheckBox {
+  + {
+    .checkBoxLabel {
+      color: $defaultRed;
+      > .checkBoxSpan {
+        border: 2px solid $defaultRed;
+      }
+      &:hover {
+        > .checkBoxSpan {
+          border-color: $defaultRed;
+        }
+      }
+    }
+  }
+  &:focus {
+    + {
+      .checkBoxLabel {
+        > .checkBoxSpan {
+          border-color: $defaultRed;
+          box-shadow: 0 0 8px $defaultRed;
+        }
+      }
+    }
+  }
+  &:checked {
+    + {
+      .checkBoxLabel {
+        > .checkBoxSpan {
+          border: 0.58em solid $defaultRed;
+        }
+      }
+    }
+  }
+}
+
+//intermediate
 .i__checkBox {
   appearance: none;
   height: 0;
@@ -200,24 +164,25 @@ $defaultRed: #dc3545;
   z-index: -1;
   + {
     .i__checkBoxLabel {
-      margin-right: 0.5em;
+      gap: 8px;
       display: flex;
-      // user-select: none;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      user-select: none;
       > .i__checkBoxSpan {
-        margin: 0em 0.3em;
         width: 1.125em;
         height: 1.125em;
-        background-color: white;
+        border-radius: 4px;
+        background: #fff;
         border: 2px solid #9e9e9e;
-        border-radius: 2px;
         cursor: pointer;
         transition: all 250ms cubic-bezier(0.4, 0, 0.23, 1);
       }
       &:hover {
         cursor: pointer;
-        color: $primary !important;
         > .i__checkBoxSpan {
-          border-color: $primary !important;
+          border-color: $primary;
         }
       }
     }
@@ -226,7 +191,8 @@ $defaultRed: #dc3545;
     + {
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
-          box-shadow: 0 0 8px $primary !important;
+          border-color: $primary;
+          box-shadow: 0 0 8px $primary;
         }
       }
     }
@@ -243,14 +209,16 @@ $defaultRed: #dc3545;
     + {
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
-          border: 0.58em solid $primary !important;
+          border: 0.58em solid $primary;
+          animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
           &:before {
             content: "";
             position: absolute;
-            top: 0.7em;
-            left: 0.55em;
-            border-bottom: 2px solid transparent;
-            animation: i-checkbox-check 200ms 250ms
+            top: 0.55em;
+            left: 0.25em;
+            border-bottom: 1.5px solid transparent;
+            border-radius: 4px;
+            animation: i-checkbox-check 125ms 250ms
               cubic-bezier(0.4, 0, 0.23, 1) forwards;
           }
         }
@@ -260,29 +228,13 @@ $defaultRed: #dc3545;
 }
 
 .i__invalidcheckBox {
-  appearance: none;
-  height: 0;
-  width: 0;
-  z-index: -1;
   + {
     .i__checkBoxLabel {
-      margin-right: 0.5em;
-      display: flex;
-      user-select: none;
       color: $defaultRed;
       > .i__checkBoxSpan {
-        margin: 0em 0.3em;
-        width: 1.125em;
-        height: 1.125em;
-        background-color: white;
         border: 2px solid $defaultRed;
-        border-radius: 2px;
-        cursor: pointer;
-        transition: all 250ms cubic-bezier(0.4, 0, 0.23, 1);
       }
       &:hover {
-        cursor: pointer;
-        color: $defaultRed;
         > .i__checkBoxSpan {
           border-color: $defaultRed;
         }
@@ -293,16 +245,9 @@ $defaultRed: #dc3545;
     + {
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
+          border-color: $defaultRed;
           box-shadow: 0 0 8px $defaultRed;
         }
-      }
-    }
-  }
-  &:disabled {
-    + {
-      .i__checkBoxLabel {
-        opacity: 0.5;
-        pointer-events: none;
       }
     }
   }
@@ -311,15 +256,6 @@ $defaultRed: #dc3545;
       .i__checkBoxLabel {
         > .i__checkBoxSpan {
           border: 0.58em solid $defaultRed;
-          &:before {
-            content: "";
-            position: absolute;
-            top: 0.7em;
-            left: 0.55em;
-            border-bottom: 2px solid transparent;
-            animation: i-checkbox-check 200ms 250ms
-              cubic-bezier(0.4, 0, 0.23, 1) forwards;
-          }
         }
       }
     }

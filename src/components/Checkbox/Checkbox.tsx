@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useState } from "react";
+import React, { InputHTMLAttributes} from "react";
 
 import style from "./checkbox.module.scss";
 
@@ -6,28 +6,18 @@ interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
   className?: string;
-  validate?: boolean;
-  hasError?: boolean;
-  variant?: "invalid";
+  invalid?: boolean;
   intermediate?: boolean;
 }
 
 const CheckBox = ({
   id,
   label,
-  variant,
-  validate,
-  hasError,
+  invalid,
   className,
   intermediate,
   ...props
 }: CheckBoxProps) => {
-  const [err, setErr] = useState<boolean>(() => (hasError ? hasError : false));
-
-  const handleBlur = (e) => {
-    e.target.checked ? setErr(false) : setErr(true);
-  };
-
   return (
     <div
       className={`h-5 m-0 p-0 w-fit relative flex justify-start items-center ${className}`}
@@ -36,48 +26,36 @@ const CheckBox = ({
         <>
           <input
             className={`${style.checkBox} ${
-              (variant === "invalid" || hasError) && style.invalidcheckBox
+              invalid && style.invalidcheckBox
             } absolute left-3`}
             type="checkbox"
             id={id}
-            onBlur={validate && handleBlur}
             {...props}
           />
           <label
-            className={`${style.checkBoxLabel} h-6 flex items-center`}
+            className={`${style.checkBoxLabel} flex items-center`}
             htmlFor={id}
           >
-            <span
-              className={`${style.checkBoxSpan} ${
-                err ? "!border-[#dc3545]" : "!border-[#9e9e9e]"
-              }`}
-            ></span>
+            <span className={`${style.checkBoxSpan}`}></span>
             {label}
-            {/* <Typography>{label}</Typography> */}
           </label>
         </>
       ) : (
         <>
           <input
             className={`${style.i__checkBox} ${
-              variant === "invalid" && style.i__invalidcheckBox
+              invalid && style.i__invalidcheckBox
             } absolute left-3`}
             type="checkbox"
             id={id}
-            onBlur={validate && handleBlur}
             {...props}
           />
           <label
             className={`${style.i__checkBoxLabel} h-6 w-full flex items-center`}
             htmlFor={id}
           >
-            <span
-              className={`${style.i__checkBoxSpan} ${
-                err ? "!border-[#dc3545]" : "!border-[#9e9e9e]"
-              }`}
-            ></span>
+            <span className={`${style.i__checkBoxSpan}`}></span>
             {label}
-            {/* <Typography>{label}</Typography> */}
           </label>
         </>
       )}
