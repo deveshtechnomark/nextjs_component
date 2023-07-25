@@ -1,3 +1,6 @@
 import React from "react";
-declare const Close: React.FC;
+interface Props {
+    variant?: string;
+}
+declare const Close: React.FC<Props>;
 export { Close };
