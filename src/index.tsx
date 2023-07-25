@@ -50,6 +50,10 @@ const Textarea: React.FC<TextareaProps> = ({
     setFocus(true);
   };
 
+  const focusHandler = () => {
+    setFocus(false)
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     getValue(e.target.value);
     if (onChange) {
@@ -107,7 +111,7 @@ const Textarea: React.FC<TextareaProps> = ({
           id={id}
           name={name}
           value={value}
-          onBlur={onBlur ? onBlur : validate ? validateInput : undefined}
+          onBlur={onBlur ? onBlur : validate ? validateInput : focusHandler}
           onChange={handleInputChange}
           onFocus={handleFocus}
           {...props}

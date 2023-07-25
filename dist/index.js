@@ -80,6 +80,9 @@ var Textarea = function Textarea(_a) {
   var handleFocus = function handleFocus() {
     setFocus(true);
   };
+  var focusHandler = function focusHandler() {
+    setFocus(false);
+  };
   var handleInputChange = function handleInputChange(e) {
     getValue(e.target.value);
     if (onChange) {
@@ -107,7 +110,7 @@ var Textarea = function Textarea(_a) {
     id: id,
     name: name,
     value: value,
-    onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
+    onBlur: onBlur ? onBlur : validate ? validateInput : focusHandler,
     onChange: handleInputChange,
     onFocus: handleFocus
   }, props))), !err && supportingText && React.createElement("span", {
