@@ -73,22 +73,21 @@ const Select: React.FC<SelectProps> = ({
     <>
       <div
         className={classNames(
-          `relative font-medium w-full flex-row border-b border-lightSilver hover:border-primary transition-colors duration-300 ${className}`,
-          inputValue && "border-primary"
+          `relative font-medium w-full flex-row border-b ${inputValue ? "border-primary" : "border-lightSilver"} hover:border-primary transition-colors duration-300 ${className}`,
           )}
           ref={selectRef}
           >
         {label && (
           <label
             className={classNames(
-              "text-[14px] font-normal",
+              "text-[14px] font-normal ",
               open ? "text-primary" : inputValue ? "text-primary" : "text-slatyGrey",
               
             )}
             htmlFor={id}
           >
             {label}
-            {required && "*"}
+            {required && <span className="text-defaultRed">&nbsp;*</span>}
           </label>
         )}
 
@@ -105,7 +104,7 @@ const Select: React.FC<SelectProps> = ({
                 : inputValue
             }
             className={classNames(
-              "flex-grow outline-none bg-white text-darkCharcoal py-1 px-2 text-[14px] font-normal w-full",
+              "flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal w-full",
               open && "text-primary",
               !open ? "cursor-pointer" : "cursor-default",
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"

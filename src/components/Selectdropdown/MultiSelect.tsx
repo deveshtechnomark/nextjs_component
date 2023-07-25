@@ -5,8 +5,7 @@ import classNames from "classnames";
 import ChevronDown from "./icons/ChevronDown.js";
 import UserIcon from "./icons/UserIcon.js";
 
-import  CheckBox  from "../Checkbox/Checkbox";
-
+import  CheckBox  from "../Checkbox/Checkbox"
 
 interface MultiSelectProps {
   id: string;
@@ -84,15 +83,16 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     >
       <label
         className={classNames(
-          "text-[14px] font-normal ",
+          "text-[14px] font-normal",
           open ? "text-primary" : selectedValues.length > 0 ? "text-primary" : "text-slatyGrey",
         )}
         htmlFor={id}
       >
-        {label ? label : "label"}{required && "*"}
+        {label ? label : "label"}
+        {required && <span className="text-defaultRed">&nbsp;*</span>}
       </label>
 
-      <div className="flex flex-row items-center justify-center relative mt-0.5">
+      <div className="flex flex-row items-center justify-center relative">
         <input
           id={id}
           onClick={handleToggleOpen}
@@ -110,7 +110,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           }
           style={{ width: "191px" }}
           className={classNames(
-            "flex-grow bg-white outline-none text-darkCharcoal py-1 px-2 text-[14px] font-normal ",
+            "flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal",
             open && "text-primary",
             !open ? "cursor-pointer" : "cursor-default",
             !open ? "placeholder-darkCharcoal" : "placeholder-primary"
@@ -145,7 +145,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             <li
               key={index}
               className={classNames(
-                "p-[10px] text-[16px] hover:bg-whiteSmoke font-normal  cursor-pointer flex",
+                "p-[10px] text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex",
                 {
                   "bg-whiteSmoke": selectedValues.includes(option.value),
                   hidden: !option.label.toLowerCase().startsWith(inputValue),

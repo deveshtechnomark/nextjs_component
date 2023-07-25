@@ -165,7 +165,7 @@ class Toast extends React.Component<ToastProps, ToastState> {
     return (
       <div
         id={Toast.containerId}
-        className={`flex flex-col fixed select-none animate-slideDown ${
+        className={`flex flex-col fixed select-none animate-slideDown z-[999] ${
           position === "top_right" && "top-2 right-5"
         } ${position === "bottom_right" && "bottom-2 right-5"} ${
           position === "top_left" && "top-2 left-5"

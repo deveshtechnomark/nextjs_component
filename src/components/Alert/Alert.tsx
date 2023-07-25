@@ -38,7 +38,7 @@ const Alert: React.FC<AlertProps> = ({ variant, message }) => {
     <>
       {visible && (
         <div
-          className={`flex flex-col m-[6px] p-[12px] px-[16px] rounded-md text-primary min-w-15rem relative ${alertClass}`}
+          className={`flex flex-col m-[6px] p-[12px] px-[16px] rounded-md text-primary min-w-15rem relative z-[999] ${alertClass}`}
           role="alert"
         >
           <div className="flex">

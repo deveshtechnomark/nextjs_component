@@ -6,7 +6,7 @@ import CrossIcon from "./icons/CrossIcon.js";
 import ChevronDown from "./icons/ChevronDown.js";
 import UserIcon from "./icons/UserIcon.js";
 
-import  CheckBox  from "../Checkbox/Checkbox";
+import  CheckBox  from "../Checkbox/Checkbox"
 
 interface MultiSelectChipProps {
   options: { value: string; label: string }[];
@@ -85,7 +85,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
           <div
             key={option}
             className={classNames(
-              "flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] ",
+              "flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px]",
               option.length > 8 && "max-w-[100px]"
             )}
           >
@@ -122,18 +122,18 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
         <label
           onClick={handleToggleOpen}
           className={classNames(
-            "text-[14px] font-normal ",
+            "text-[14px] font-normal",
             open ? "text-primary" : selected.length > 0 ? "text-primary" : "text-slatyGrey"
           )}
         >
           {label}
-          {required && "*"}
+          {required && <span className="text-defaultRed">&nbsp;*</span>}
         </label>
       )}
       <div
         onClick={handleToggleOpen}
         className={`${classNames(
-          "flex justify-between bg-white border-b py-1 pl-2 text-[14px] font-normal  transition-colors duration-300",
+          "flex justify-between bg-white border-b text-[14px] font-normal transition-colors duration-300",
           open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer",
           selected.length > 0 ? "border-primary" : "border-lightSilver",
           "hover:border-primary"

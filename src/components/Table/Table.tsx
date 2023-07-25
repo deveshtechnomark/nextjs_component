@@ -4,10 +4,16 @@ import  CheckBox  from "../Checkbox/Checkbox";
 import SortingIcon from "./icons/SortingIcon";
 import ChevronIcon from "./icons/ChevronIcon";
 
+interface TableHeader {
+  heading: string;
+  field: string;
+  sort: boolean;
+}
+
 interface TableProps {
   className?: any;
   data: any[];
-  headers: string[];
+  headers: TableHeader[];
   sortable?: boolean;
   sticky?: boolean;
   selected?: boolean;
@@ -23,7 +29,7 @@ const Table: React.FC<TableProps> = (props) => {
   const [sortingOrder, setSortingOrder] = useState<string>("asc");
   const [isAllChecked, setIsAllChecked] = useState<boolean[]>([]);
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [expandedRows, setExpandedRows] = useState<Record<number, boolean>>([]); // State to track expanded rows
+  const [expandedRows, setExpandedRows] = useState<Record<number, boolean>>([]);
 
   const toggleRowExpansion = (index: number) => {
     setExpandedRows((prevState) => ({
@@ -40,7 +46,9 @@ const Table: React.FC<TableProps> = (props) => {
     setIsChecked(checked);
   };
 
-  const handleSort = (column: string) => {
+  const handleSort = (column: string, isSortable: boolean) => {
+    if (!isSortable) return;
+
     const sortedData = [...filteredData];
 
     let newSortingOrder = "asc";
@@ -75,17 +83,24 @@ const Table: React.FC<TableProps> = (props) => {
     const updatedArray = [...isAllChecked];
     updatedArray[index] = checked;
     setIsAllChecked(updatedArray);
+
+    // Check if any of the checkboxes in the rows are unchecked
+    const anyUnchecked = updatedArray.some((value) => !value);
+
+    // Update the main checkbox state in the header accordingly
+    setIsChecked(!anyUnchecked);
   };
 
   return (
-    <div className="w-full overflow-x-auto">
-      <table className={`w-full ${props.className}`}>
+    <div className={`w-full overflow-x-auto h-screen ${props.className}`}>
+      <table className="w-full">
         <thead>
           <tr
-            className={`${props.sticky
-              ? "sticky top-0 z-10 drop-shadow"
-              : "border-y border-b-pureBlack border-t-pureBlack"
-              } bg-pureWhite h-[48px]`}
+            className={`${
+              props.sticky
+                ? "sticky top-0 z-[1] drop-shadow-md"
+                : "border-y border-b-pureBlack border-t-pureBlack"
+            } bg-pureWhite h-[48px] w-full`}
           >
             {props.expandable && <th></th>}
             {props.selected && (
@@ -100,19 +115,20 @@ const Table: React.FC<TableProps> = (props) => {
 
             {props.headers.map((header) => (
               <th
-                key={header}
+                key={header.field}
                 className="cursor-pointer text-[16px] sm:text-[14px] font-bold uppercase"
                 onClick={() => {
-                  props.sortable && handleSort(header);
+                  handleSort(header.field, header.sort);
                 }}
               >
-                <span className="flex justify-center items-center">
+                <span className="flex justify-start items-center pl-[10px]">
                   <div className="flex items-center">
-                    {header}
-                    {props.sortable && (
+                    {header.heading}
+                    {header.sort && (
                       <span
-                        className={`ml-2 ${sortingOrder === "asc" ? "" : "rotate-180"
-                          }`}
+                        className={`ml-2 ${
+                          sortingOrder === "asc" ? "" : "rotate-180"
+                        }`}
                       >
                         <SortingIcon />
                       </span>
@@ -127,7 +143,6 @@ const Table: React.FC<TableProps> = (props) => {
                 {props.actionHeading ? props.actionHeading : "Actions"}
               </th>
             )}
-
           </tr>
         </thead>
 
@@ -135,14 +150,19 @@ const Table: React.FC<TableProps> = (props) => {
           {filteredData.map((item, index) => (
             <React.Fragment key={index}>
               <tr
-                className={`h-[56px] cursor-default hover:bg-whiteSmoke ${props.expandable && expandedRows[index] ? "bg-whiteSmoke" : "border-b border-b-lightSilver"
-                  }`}
+                className={`h-[56px] cursor-default hover:bg-whiteSmoke ${
+                  props.expandable && expandedRows[index]
+                    ? "bg-whiteSmoke"
+                    : "border-b border-b-lightSilver"
+                }`}
               >
                 {props.expandable && (
                   <td className="sm:w-[56px]">
                     <button
                       onClick={() => toggleRowExpansion(index)}
-                      className={`transition-all duration-300 ${expandedRows[index] && "-rotate-180"}`}
+                      className={`transition-all duration-300 ${
+                        expandedRows[index] && "-rotate-180"
+                      }`}
                     >
                       <ChevronIcon />
                     </button>
@@ -161,51 +181,50 @@ const Table: React.FC<TableProps> = (props) => {
 
                 {props.headers.map((header) => (
                   <td
-                    key={header}
-                    className="py-[19px] sm:py-[12px] px-[20px] sm:text-base font-normal"
+                    key={header.field}
+                    className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
                   >
-                    <span className="flex justify-center items-center">
-                      {typeof item[header] === "string" &&
-                        item[header].startsWith("http") ? (
+                    <span className="flex justify-start items-center">
+                      {typeof item[header.field] === "string" &&
+                      item[header.field].startsWith("http") ? (
                         <img
-                          src={item[header]}
+                          src={item[header.field]}
                           alt="Item"
                           className="max-w-[50px] max-h-[50px] rounded"
                         />
                       ) : (
-                        item[header]
+                        item[header.field]
                       )}
                     </span>
                   </td>
                 ))}
 
                 {props.action &&
-                  props.actions.map((action) => (
-                    <td key={action}>
-                      {action}
-                    </td>
-                  ))}
+                  props.actions.map((action) => <td key={action}>{action}</td>)}
               </tr>
 
               {props.expandable && expandedRows[index] && (
                 <tr className="p-4">
+                  {/* Take a blank heading on expandable icon */}
                   {props.expandable && <th></th>}
+                  {/* Tale a blank column when select and expandable both enabled */}
+                  {props.selected && <td></td>}
 
                   {props.headers.map((header) => (
                     <td
-                      key={header}
-                      className="py-[19px] sm:py-[12px] px-[20px] sm:text-base font-normal"
+                      key={header.field}
+                      className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
                     >
-                      <span className="flex justify-center items-center">
-                        {typeof item[header] === "string" &&
-                          item[header].startsWith("http") ? (
+                      <span className="flex justify-start items-center">
+                        {typeof item[header.field] === "string" &&
+                        item[header.field].startsWith("http") ? (
                           <img
-                            src={item[header]}
+                            src={item[header.field]}
                             alt="Item"
                             className="max-w-[50px] max-h-[50px] rounded"
                           />
                         ) : (
-                          item[header]
+                          item[header.field]
                         )}
                       </span>
                     </td>
@@ -215,7 +234,6 @@ const Table: React.FC<TableProps> = (props) => {
             </React.Fragment>
           ))}
         </tbody>
-
       </table>
     </div>
   );
