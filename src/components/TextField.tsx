@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { InputHTMLAttributes, useEffect, useRef, useState } from "react";
 import ClearIcon from "./icons/ClearIcon";
 import CheckIcon from "./icons/CheckIcon";
 
-interface TextFieldProps {
+interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   className?: string;
-  id?: string;
-  name?: string;
-  value?: string;
   type?: string;
   validate?: boolean;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -17,16 +14,11 @@ interface TextFieldProps {
   disabled?: boolean;
   hasError?: boolean;
   getValue: (arg1: string) => void;
-  autoComplete?: string;
-  props?: any;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
   label,
   className,
-  id,
-  name,
-  value,
   type,
   validate,
   onBlur,
@@ -36,8 +28,7 @@ const TextField: React.FC<TextFieldProps> = ({
   disabled,
   getValue,
   hasError,
-  autoComplete,
-  props,
+  ...props
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [err, setErr] = useState<boolean>(false);
@@ -130,7 +121,7 @@ const TextField: React.FC<TextFieldProps> = ({
   };
 
   return (
-    <div className="flex flex-col text-sm sm:text-base relative">
+    <div className="flex flex-col text-[14px] relative">
       {label && (
         <span className="flex">
           <label
@@ -144,20 +135,20 @@ const TextField: React.FC<TextFieldProps> = ({
           >
             {label}
           </label>
-          <span className="text-defaultRed">&nbsp;*</span>
+          {validate && <span className={`${disabled ? "text-slatyGrey" : "text-defaultRed"}`}>&nbsp;*</span>}
         </span>
       )}
 
       <div
         className={`${
-          !err &&
+          (!err && !disabled) &&
           "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
         }`}
       >
         <input
           className={`
           ${className}
-          py-1 px-3 border-b outline-none transition duration-600 w-full font-normal text-[14px]
+          py-1 border-b outline-none transition duration-600 w-full font-normal text-[14px]
           ${
             err
               ? "border-b-defaultRed"
@@ -165,20 +156,14 @@ const TextField: React.FC<TextFieldProps> = ({
               ? "border-b-primary"
               : "border-b-lightSilver"
           }
-
           ${valid && !err ? "text-successColor" : "text-[#333333]"}
-
         `}
           ref={inputRef}
           type={type}
-          id={id}
-          name={name}
-          value={value}
           onBlur={handleBlur}
           onChange={handleInputChange}
           onFocus={handleFocus}
           disabled={disabled}
-          autoComplete={autoComplete}
           {...props}
         />
       </div>
