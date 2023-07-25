@@ -102,7 +102,7 @@ var Table = function Table(props) {
     setIsChecked = _e[1];
   var _f = useState([]),
     expandedRows = _f[0],
-    setExpandedRows = _f[1]; // State to track expanded rows
+    setExpandedRows = _f[1];
   var toggleRowExpansion = function toggleRowExpansion(index) {
     setExpandedRows(function (prevState) {
       var _a;
@@ -118,7 +118,8 @@ var Table = function Table(props) {
     setIsAllChecked(updatedArray);
     setIsChecked(checked);
   };
-  var handleSort = function handleSort(column) {
+  var handleSort = function handleSort(column, isSortable) {
+    if (!isSortable) return;
     var sortedData = __spreadArray([], filteredData, true);
     var newSortingOrder = "asc";
     if (column === sortingColumn && sortingOrder === "asc") {
@@ -147,13 +148,19 @@ var Table = function Table(props) {
     var updatedArray = __spreadArray([], isAllChecked, true);
     updatedArray[index] = checked;
     setIsAllChecked(updatedArray);
+    // Check if any of the checkboxes in the rows are unchecked
+    var anyUnchecked = updatedArray.some(function (value) {
+      return !value;
+    });
+    // Update the main checkbox state in the header accordingly
+    setIsChecked(!anyUnchecked);
   };
   return React.createElement("div", {
-    className: "w-full overflow-x-auto"
+    className: "w-full overflow-x-auto h-screen ".concat(props.className)
   }, React.createElement("table", {
     className: "w-full"
   }, React.createElement("thead", null, React.createElement("tr", {
-    className: "".concat(props.sticky ? "sticky top-0 z-10 drop-shadow" : "border-y border-b-pureBlack border-t-pureBlack", " bg-pureWhite h-[48px]")
+    className: "".concat(props.sticky ? "sticky top-0 z-[1] drop-shadow-md" : "border-y border-b-pureBlack border-t-pureBlack", " bg-pureWhite h-[48px] w-full")
   }, props.expandable && React.createElement("th", null), props.selected && React.createElement("th", {
     className: "sm:w-[56px]"
   }, React.createElement(CheckBox, {
@@ -162,16 +169,16 @@ var Table = function Table(props) {
     onChange: handleSelectAll
   })), props.headers.map(function (header) {
     return React.createElement("th", {
-      key: header,
+      key: header.field,
       className: "cursor-pointer text-[16px] sm:text-[14px] font-bold uppercase",
       onClick: function onClick() {
-        props.sortable && handleSort(header);
+        handleSort(header.field, header.sort);
       }
     }, React.createElement("span", {
-      className: "flex justify-center items-center"
+      className: "flex justify-start items-center pl-[10px]"
     }, React.createElement("div", {
       className: "flex items-center"
-    }, header, props.sortable && React.createElement("span", {
+    }, header.heading, header.sort && React.createElement("span", {
       className: "ml-2 ".concat(sortingOrder === "asc" ? "" : "rotate-180")
     }, React.createElement(SortingIcon, null)))));
   }), props.action && React.createElement("th", {
@@ -198,32 +205,32 @@ var Table = function Table(props) {
       }
     })), props.headers.map(function (header) {
       return React.createElement("td", {
-        key: header,
-        className: "py-[19px] sm:py-[12px] px-[20px] sm:text-base font-normal"
+        key: header.field,
+        className: "py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
       }, React.createElement("span", {
-        className: "flex justify-center items-center"
-      }, typeof item[header] === "string" && item[header].startsWith("http") ? React.createElement("img", {
-        src: item[header],
+        className: "flex justify-start items-center"
+      }, typeof item[header.field] === "string" && item[header.field].startsWith("http") ? React.createElement("img", {
+        src: item[header.field],
         alt: "Item",
         className: "max-w-[50px] max-h-[50px] rounded"
-      }) : item[header]));
+      }) : item[header.field]));
     }), props.action && props.actions.map(function (action) {
       return React.createElement("td", {
         key: action
       }, action);
     })), props.expandable && expandedRows[index] && React.createElement("tr", {
       className: "p-4"
-    }, props.expandable && React.createElement("th", null), props.headers.map(function (header) {
+    }, props.expandable && React.createElement("th", null), props.selected && React.createElement("td", null), props.headers.map(function (header) {
       return React.createElement("td", {
-        key: header,
-        className: "py-[19px] sm:py-[12px] px-[20px] sm:text-base font-normal"
+        key: header.field,
+        className: "py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
       }, React.createElement("span", {
-        className: "flex justify-center items-center"
-      }, typeof item[header] === "string" && item[header].startsWith("http") ? React.createElement("img", {
-        src: item[header],
+        className: "flex justify-start items-center"
+      }, typeof item[header.field] === "string" && item[header.field].startsWith("http") ? React.createElement("img", {
+        src: item[header.field],
         alt: "Item",
         className: "max-w-[50px] max-h-[50px] rounded"
-      }) : item[header]));
+      }) : item[header.field]));
     })));
   }))));
 };
