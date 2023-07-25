@@ -81,7 +81,7 @@ var Alert = function Alert(_a) {
       break;
   }
   return React.createElement(React.Fragment, null, visible && React.createElement("div", {
-    className: "flex flex-col m-[6px] p-[12px] px-[16px] rounded-md text-primary min-w-15rem relative ".concat(alertClass),
+    className: "flex flex-col m-[6px] p-[12px] px-[16px] rounded-md text-primary min-w-15rem relative z-[999] ".concat(alertClass),
     role: "alert"
   }, React.createElement("div", {
     className: "flex"
