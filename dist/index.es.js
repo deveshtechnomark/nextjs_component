@@ -252,11 +252,11 @@ var Password = function Password(_a) {
   }, React.createElement("div", {
     className: "relative w-full"
   }, open && React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "absolute bottom-[40px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit"
+    className: "absolute bottom-[30px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit"
   }, React.createElement("ul", {
     className: "requirement-list"
   }, validatePassword())), React.createElement("span", {
-    className: "w-2 h-2 bg-pureWhite z-10 absolute bottom-[36px] left-[20px] rotate-[45deg]"
+    className: "w-2 h-2 bg-pureWhite z-10 absolute bottom-[26px] left-[20px] rotate-[45deg]"
   })), label && React.createElement("span", {
     className: "flex"
   }, React.createElement("label", {
