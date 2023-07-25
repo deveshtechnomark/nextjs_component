@@ -36,19 +36,7 @@ const Modal: React.FC<ModalProps> = ({
         return `w-[${width}] || w-[500px]`;
     }
   };
-
-  const handleOutsideClick = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("click", handleOutsideClick);
-    return () => {
-      window.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
-
+  
   return (
     <>
       <div
