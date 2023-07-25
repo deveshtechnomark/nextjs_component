@@ -30,6 +30,18 @@ var __assign = function() {
     return __assign.apply(this, arguments);
 };
 
+function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
 typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
     var e = new Error(message);
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
@@ -103,7 +115,8 @@ var Password = function Password(_a) {
     errorMessage = _b === void 0 ? "This is a required field!" : _b,
     getValue = _a.getValue,
     hasError = _a.hasError,
-    props = _a.props;
+    disabled = _a.disabled,
+    props = __rest(_a, ["label", "className", "onBlur", "validate", "errorMessage", "getValue", "hasError", "disabled"]);
   var _c = React.useState(""),
     password = _c[0],
     setPassword = _c[1];
@@ -237,7 +250,7 @@ var Password = function Password(_a) {
     return strength;
   };
   return React.createElement("div", {
-    className: "relative flex flex-col text-sm sm:text-base w-full"
+    className: "relative flex flex-col text-[14px] w-full"
   }, React.createElement("div", {
     className: "relative w-full"
   }, open && React.createElement(React.Fragment, null, React.createElement("div", {
@@ -250,17 +263,18 @@ var Password = function Password(_a) {
     className: "flex"
   }, React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, label), React.createElement("span", {
-    className: "text-defaultRed"
+  }, label), validate && React.createElement("span", {
+    className: "".concat(disabled ? "text-slatyGrey" : "text-defaultRed")
   }, "\xA0*"))), React.createElement("div", {
     className: "".concat(!err && "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
-    className: "".concat(className, " py-1 px-3 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
+    className: "".concat(className, " py-1 border-b outline-none w-full pr-10 ").concat(err ? "border-defaultRed" : focus ? "border-primary" : "border-lightSilver"),
     type: type,
     value: password,
     onChange: handlePasswordChange,
     onBlur: onBlur ? onBlur : validate ? validateInput : undefined,
-    onFocus: handleFocus
+    onFocus: handleFocus,
+    disabled: disabled
   }, props))), type === "password" ? React.createElement("span", {
     className: "absolute ".concat(!label ? "top-2" : "top-8", " right-1 text-md sm:text-lg ").concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
