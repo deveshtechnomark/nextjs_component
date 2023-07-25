@@ -845,13 +845,13 @@ var Tel = function Tel(_a) {
     getValue(selectedCountryCode + " " + formattedValue);
   };
   return React.createElement("div", {
-    className: "flex flex-col w-full text-sm sm:text-base relative"
+    className: "flex flex-col w-full text-[14px] relative"
   }, label && React.createElement("span", {
     className: "flex"
   }, React.createElement("label", {
     className: "".concat(err ? "text-defaultRed" : focus ? "text-primary" : "text-slatyGrey")
-  }, label), React.createElement("span", {
-    className: "text-defaultRed"
+  }, label), validate && React.createElement("span", {
+    className: "".concat(disabled ? "text-slatyGrey" : "text-defaultRed")
   }, "\xA0*")), React.createElement("div", {
     className: "flex ".concat(!err ? "w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full" : "w-full")
   }, React.createElement("div", {
@@ -867,7 +867,7 @@ var Tel = function Tel(_a) {
     },
     defaultValue: "+91"
   })), React.createElement("input", __assign({
-    className: "".concat(className, " py-2 px-3 outline-none w-full h-full mt-[6px]"),
+    className: "".concat(className, " py-1 outline-none w-full h-full"),
     ref: inputRef,
     type: "tel",
     id: id,

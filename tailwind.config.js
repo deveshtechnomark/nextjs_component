@@ -7,6 +7,7 @@ module.exports = {
         slatyGrey: "#6E6D7A",
         primary: "#02B89D",
         defaultRed: "#DC3545",
+        slatyGrey: "#6E6D7A"
       },
       screens: {
         sm: "1360px",

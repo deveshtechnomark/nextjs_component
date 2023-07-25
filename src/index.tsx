@@ -80,7 +80,7 @@ const Tel: React.FC<TelInputProps> = ({
   };
 
   return (
-    <div className="flex flex-col w-full text-sm sm:text-base relative">
+    <div className="flex flex-col w-full text-[14px] relative">
       {label && (
         <span className="flex">
           <label
@@ -94,7 +94,7 @@ const Tel: React.FC<TelInputProps> = ({
           >
             {label}
           </label>
-          <span className="text-defaultRed">&nbsp;*</span>
+          {validate && <span className={`${disabled ? "text-slatyGrey" : "text-defaultRed"}`}>&nbsp;*</span>}
         </span>
       )}
       <div
@@ -127,7 +127,7 @@ const Tel: React.FC<TelInputProps> = ({
             </div>
           )}
           <input
-            className={`${className} py-2 px-3 outline-none w-full h-full mt-[6px]`}
+            className={`${className} py-1 outline-none w-full h-full`}
             ref={inputRef}
             type="tel"
             id={id}
