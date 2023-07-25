@@ -44,7 +44,7 @@ var ModalTitle = function ModalTitle(_a) {
 var ModalContent = function ModalContent(_a) {
   var children = _a.children;
   return /*#__PURE__*/React.createElement("div", {
-    className: "p-2 flex-auto"
+    className: "flex-auto"
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-pureBlack leading-relaxed"
   }, children || 'Modal Content'));
@@ -62,7 +62,7 @@ var ModalAction = function ModalAction(_a) {
     justifyClasses = "justify-end";
   }
   return /*#__PURE__*/React.createElement("div", {
-    className: "p-4 flex flex-wrap items-center border-t border-solid border-lightSilver rounded-b ".concat(justifyClasses)
+    className: "flex flex-wrap items-center border-t border-solid border-lightSilver rounded-b ".concat(justifyClasses)
   }, children || "Modal Action");
 };
 
