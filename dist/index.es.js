@@ -8,7 +8,7 @@ var Tooltip = function Tooltip(_a) {
     children = _a.children,
     className = _a.className;
   return React.createElement("div", {
-    className: "".concat(styles.tooltip, " relative cursor-pointer py-2 text-sm sm:text-base max-w-fit ").concat(className)
+    className: "".concat(styles.tooltip, " relative cursor-pointer p-2 text-sm sm:text-base max-w-fit ").concat(className)
   }, React.createElement("span", {
     className: "flex justify-center items-center tooltipText absolute bg-[#bcf1e8] w-max max-w-[300px] text-darkCharcoal whitespace-nowrap p-[10px] border border-primary rounded-md opacity-0 before:absolute before:w-3 before:h-3 before:bg-[#bcf1e8] before:border-t before:border-primary before:border-r ".concat(position === "top" && "".concat(styles.top, " hidden left-1/2 transform -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 before:bottom-[-7px] before:transform before:rotate-[135deg]"), " \n        ").concat(position === "bottom" && "".concat(styles.bottom, " hidden left-1/2 transform -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 before:top-[-7px] before:transform before:rotate-[-45deg]"), " \n        ").concat(position === "left" && "".concat(styles.left, " hidden top-1/2 transform -translate-y-1/2 before:top-1/2 before:-translate-y-1/2 before:right-[-7px] before:transform before:rotate-[45deg]"), " \n        ").concat(position === "right" && "".concat(styles.right, " hidden top-1/2 transform -translate-y-1/2 before:top-1/2 before:-translate-y-1/2 before:left-[-7px] before:transform before:rotate-[-135deg]")),
     style: {
