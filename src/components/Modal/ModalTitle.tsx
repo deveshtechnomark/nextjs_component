@@ -1,6 +1,4 @@
 import React, { ReactNode } from "react";
-import  Typography  from "../Typography/Typography";
-
 
 interface ModalTitleProps {
   children: ReactNode;

@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import Style from "./Modal.module.scss";
 
 interface ModalProps {
@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, size }) => {
           </div>
         </div>
       </div>
-      <div className={`fixed inset-0 bg-pureBlack bg-opacity-50 backdrop-blur-[1px]`} />
+      <div className={`fixed inset-0 bg-black bg-opacity-50 backdrop-blur-[1px]`} />
     </>
   );
 };

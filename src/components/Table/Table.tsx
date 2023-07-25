@@ -5,7 +5,7 @@ import SortingIcon from "./icons/SortingIcon";
 import ChevronIcon from "./icons/ChevronIcon";
 
 interface TableProps {
-  className: any;
+  className?: any;
   data: any[];
   headers: string[];
   sortable?: boolean;
