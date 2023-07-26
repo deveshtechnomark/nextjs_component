@@ -14,8 +14,8 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   hasError?: boolean;
   minChar?: number;
-  noNumeric?: boolean,
-  noSpecialChar?: boolean,
+  noNumeric?: boolean;
+  noSpecialChar?: boolean;
   getValue: (arg1: string) => void;
 }
 
@@ -36,7 +36,6 @@ const TextField: React.FC<TextFieldProps> = ({
   noSpecialChar,
   ...props
 }) => {
-
   const inputRef = useRef<HTMLInputElement>(null);
   const [err, setErr] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
@@ -70,8 +69,7 @@ const TextField: React.FC<TextFieldProps> = ({
     } else if (e.target.value.trim().length < minChar) {
       setErr(true);
       setErrorMsg(`Please enter minimum ${minChar} character!`);
-    }
-    else {
+    } else {
       setErr(false);
       setShowEmailError(false);
       setFocus(true);
@@ -96,12 +94,12 @@ const TextField: React.FC<TextFieldProps> = ({
 
     // Check if noNumeric prop is true and input contains numeric characters
     if (noNumeric && /\d/.test(inputValue)) {
-      return; 
+      return;
     }
 
     // Check if noSpecialChar prop is true and input contains special characters
     if (noSpecialChar && /[^a-zA-Z0-9]/.test(inputValue)) {
-      return; 
+      return;
     }
 
     getValue(inputValue);
@@ -151,36 +149,52 @@ const TextField: React.FC<TextFieldProps> = ({
       {label && (
         <span className="flex">
           <label
-            className={`${err
-              ? "text-defaultRed"
-              : focus
+            className={`${
+              err
+                ? "text-defaultRed"
+                : focus
                 ? "text-primary"
                 : "text-slatyGrey"
-              }`}
+            }`}
           >
             {label}
           </label>
-          {validate && <span className={`${disabled ? "text-slatyGrey" : "text-defaultRed"}`}>&nbsp;*</span>}
+          {validate && (
+            <span
+              className={`${disabled ? "text-slatyGrey" : "text-defaultRed"}`}
+            >
+              &nbsp;*
+            </span>
+          )}
         </span>
       )}
 
       <div
-        className={`${(!err && !disabled) &&
+        className={`${
+          !err &&
+          !disabled &&
           "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
-          }`}
+        }`}
       >
         <input
           className={`
           ${className}
           py-1 border-b outline-none transition duration-600 w-full font-normal text-[14px]
           ${type === "email" ? "pr-10" : ""}
-          ${err
+          ${
+            err
               ? "border-b-defaultRed"
               : focus
-                ? "border-b-primary"
-                : "border-b-lightSilver"
-            }
-          ${valid && !err ? "text-successColor" : "text-[#333333]"}
+              ? "border-b-primary"
+              : "border-b-lightSilver"
+          }
+          ${
+            valid && !err
+              ? "text-successColor"
+              : showEmailError
+              ? "text-defaultRed"
+              : "text-[#333333]"
+          }
         `}
           ref={inputRef}
           type={type}

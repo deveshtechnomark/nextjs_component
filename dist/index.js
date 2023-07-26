@@ -99,9 +99,9 @@ var TextField = function TextField(_a) {
   var _d = React.useState(false),
     valid = _d[0],
     setValid = _d[1];
-  var _e = React.useState(false);
-    _e[0];
-    var setShowEmailError = _e[1];
+  var _e = React.useState(false),
+    showEmailError = _e[0],
+    setShowEmailError = _e[1];
   var _f = React.useState(""),
     errorMsg = _f[0],
     setErrorMsg = _f[1];
@@ -149,13 +149,12 @@ var TextField = function TextField(_a) {
     var inputValue = e.target.value;
     // Check if noNumeric prop is true and input contains numeric characters
     if (noNumeric && /\d/.test(inputValue)) {
-      return; // Prevent further execution if numeric characters are not allowed
+      return;
     }
     // Check if noSpecialChar prop is true and input contains special characters
     if (noSpecialChar && /[^a-zA-Z0-9]/.test(inputValue)) {
-      return; // Prevent further execution if special characters are not allowed
+      return;
     }
-
     getValue(inputValue);
     if (onChange) {
       onChange(e);
@@ -207,7 +206,7 @@ var TextField = function TextField(_a) {
   }, "\xA0*")), React.createElement("div", {
     className: "".concat(!err && !disabled && "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full")
   }, React.createElement("input", __assign({
-    className: "\n          ".concat(className, "\n          py-1 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(type === "email" ? "pr-10" : "", "\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid && !err ? "text-successColor" : "text-[#333333]", "\n        "),
+    className: "\n          ".concat(className, "\n          py-1 border-b outline-none transition duration-600 w-full font-normal text-[14px]\n          ").concat(type === "email" ? "pr-10" : "", "\n          ").concat(err ? "border-b-defaultRed" : focus ? "border-b-primary" : "border-b-lightSilver", "\n          ").concat(valid && !err ? "text-successColor" : showEmailError ? "text-defaultRed" : "text-[#333333]", "\n        "),
     ref: inputRef,
     type: type,
     onBlur: handleBlur,
