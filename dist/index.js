@@ -5,16 +5,16 @@ var React = require('react');
 var Style = {"modal":"Modal-module_modal__ZBixj","modalAnimation":"Modal-module_modalAnimation__OfLMB"};
 
 var Modal = function Modal(_a) {
-  var isOpen = _a.isOpen;
-    _a.onClose;
-    var children = _a.children,
+  var isOpen = _a.isOpen,
+    onClose = _a.onClose,
+    children = _a.children,
     size = _a.size,
     width = _a.width;
   if (!isOpen) return null;
   var getSizeClasses = function getSizeClasses() {
     switch (size) {
       case "sm":
-        return "w-75";
+        return "w-[300px]";
       case "md":
         return "w-[500px]";
       case "lg":
@@ -28,14 +28,15 @@ var Modal = function Modal(_a) {
     }
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black bg-opacity-40 backdrop-blur-[1px] z-50",
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 z-50 flex items-center justify-center ".concat(Style.modal)
   }, /*#__PURE__*/React.createElement("div", {
     className: "my-6 mx-auto ".concat(getSizeClasses(), " ").concat(width)
   }, /*#__PURE__*/React.createElement("div", {
     className: "border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
-  }, children))), /*#__PURE__*/React.createElement("div", {
-    className: "fixed inset-0 bg-black bg-opacity-50 backdrop-blur-[1px]"
-  }));
+  }, children)))));
 };
 
 var ModalTitle = function ModalTitle(_a) {

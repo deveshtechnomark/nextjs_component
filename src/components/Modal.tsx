@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { ReactNode } from "react";
 import Style from "./Modal.module.scss";
 
 interface ModalProps {
@@ -17,13 +17,13 @@ const Modal: React.FC<ModalProps> = ({
   size,
   width,
 }) => {
-
   if (!isOpen) return null;
 
   const getSizeClasses = () => {
+  
     switch (size) {
       case "sm":
-        return "w-75";
+        return "w-[300px]";
       case "md":
         return "w-[500px]";
       case "lg":
@@ -36,21 +36,23 @@ const Modal: React.FC<ModalProps> = ({
         return `w-[${width}] || w-[500px]`;
     }
   };
-  
+
   return (
     <>
       <div
-        className={`fixed inset-0 z-50 flex items-center justify-center ${Style.modal}`}
+        className={`fixed inset-0 bg-black bg-opacity-40 backdrop-blur-[1px] z-50`}
+        onClick={onClose}
       >
-        <div className={`my-6 mx-auto ${getSizeClasses()} ${width}`}>
-          <div className="border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none">
-            {children}
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center ${Style.modal}`}
+        >
+          <div className={`my-6 mx-auto ${getSizeClasses()} ${width}`}>
+            <div className="border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none">
+              {children}
+            </div>
           </div>
         </div>
       </div>
-      <div
-        className={`fixed inset-0 bg-black bg-opacity-50 backdrop-blur-[1px]`}
-      />
     </>
   );
 };
