@@ -96,12 +96,12 @@ const TextField: React.FC<TextFieldProps> = ({
 
     // Check if noNumeric prop is true and input contains numeric characters
     if (noNumeric && /\d/.test(inputValue)) {
-      return; // Prevent further execution if numeric characters are not allowed
+      return; 
     }
 
     // Check if noSpecialChar prop is true and input contains special characters
     if (noSpecialChar && /[^a-zA-Z0-9]/.test(inputValue)) {
-      return; // Prevent further execution if special characters are not allowed
+      return; 
     }
 
     getValue(inputValue);
