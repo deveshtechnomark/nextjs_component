@@ -53,7 +53,7 @@ class Toast extends React.Component<ToastProps, ToastState> {
 
     const closeButton = document.createElement("span");
     closeButton.className =
-      "absolute top-[50%] -translate-y-[50%] right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10 text-xs sm:text-base";
+      "absolute top-[14px] right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10 text-xs sm:text-base";
     closeButton.innerHTML = `
     <svg
       width="14"
