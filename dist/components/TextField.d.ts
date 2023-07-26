@@ -1,10 +1,7 @@
-import React from "react";
-interface TextFieldProps {
+import React, { InputHTMLAttributes } from "react";
+interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     className?: string;
-    id?: string;
-    name?: string;
-    value?: string;
     type?: string;
     validate?: boolean;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -13,9 +10,10 @@ interface TextFieldProps {
     supportingText?: string;
     disabled?: boolean;
     hasError?: boolean;
+    minChar?: number;
+    noNumeric?: boolean;
+    noSpecialChar?: boolean;
     getValue: (arg1: string) => void;
-    autoComplete?: string;
-    props?: any;
 }
 declare const TextField: React.FC<TextFieldProps>;
 export { TextField };

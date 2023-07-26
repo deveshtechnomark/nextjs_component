@@ -13,6 +13,9 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   supportingText?: string;
   disabled?: boolean;
   hasError?: boolean;
+  minChar?: number;
+  noNumeric?: boolean,
+  noSpecialChar?: boolean,
   getValue: (arg1: string) => void;
 }
 
@@ -23,20 +26,26 @@ const TextField: React.FC<TextFieldProps> = ({
   validate,
   onBlur,
   onChange,
-  errorMessage = "This is a required field!",
+  errorMessage,
   supportingText,
   disabled,
   getValue,
   hasError,
+  minChar,
+  noNumeric,
+  noSpecialChar,
   ...props
 }) => {
+
   const inputRef = useRef<HTMLInputElement>(null);
   const [err, setErr] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
   const [valid, setValid] = useState<boolean>(false);
   const [showEmailError, setShowEmailError] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
+    setErrorMsg(errorMessage);
     setErr(hasError);
   }, [hasError, errorMessage]);
 
@@ -48,15 +57,21 @@ const TextField: React.FC<TextFieldProps> = ({
     if (validate && (e.target.value === "" || !e.target.value)) {
       setErr(true);
       setFocus(false);
+      setErrorMsg("This field is required!");
     } else if (validate && type === "email" && !validateEmail(e.target.value)) {
       setErr(true);
       setShowEmailError(true);
       setFocus(false);
+      setErrorMsg("Please Provide the correct email!");
     } else if (validateEmail(e.target.value)) {
       setErr(false);
       setShowEmailError(false);
       setFocus(true);
-    } else {
+    } else if (e.target.value.trim().length < minChar) {
+      setErr(true);
+      setErrorMsg(`Please enter minimum ${minChar} character!`);
+    }
+    else {
       setErr(false);
       setShowEmailError(false);
       setFocus(true);
@@ -72,12 +87,23 @@ const TextField: React.FC<TextFieldProps> = ({
   };
 
   const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     return regex.test(email);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
+
+    // Check if noNumeric prop is true and input contains numeric characters
+    if (noNumeric && /\d/.test(inputValue)) {
+      return; // Prevent further execution if numeric characters are not allowed
+    }
+
+    // Check if noSpecialChar prop is true and input contains special characters
+    if (noSpecialChar && /[^a-zA-Z0-9]/.test(inputValue)) {
+      return; // Prevent further execution if special characters are not allowed
+    }
+
     getValue(inputValue);
 
     if (onChange) {
@@ -125,13 +151,12 @@ const TextField: React.FC<TextFieldProps> = ({
       {label && (
         <span className="flex">
           <label
-            className={`${
-              err
-                ? "text-defaultRed"
-                : focus
+            className={`${err
+              ? "text-defaultRed"
+              : focus
                 ? "text-primary"
                 : "text-slatyGrey"
-            }`}
+              }`}
           >
             {label}
           </label>
@@ -140,22 +165,21 @@ const TextField: React.FC<TextFieldProps> = ({
       )}
 
       <div
-        className={`${
-          (!err && !disabled) &&
+        className={`${(!err && !disabled) &&
           "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
-        }`}
+          }`}
       >
         <input
           className={`
           ${className}
           py-1 border-b outline-none transition duration-600 w-full font-normal text-[14px]
-          ${
-            err
+          ${type === "email" ? "pr-10" : ""}
+          ${err
               ? "border-b-defaultRed"
               : focus
-              ? "border-b-primary"
-              : "border-b-lightSilver"
-          }
+                ? "border-b-primary"
+                : "border-b-lightSilver"
+            }
           ${valid && !err ? "text-successColor" : "text-[#333333]"}
         `}
           ref={inputRef}
@@ -169,7 +193,7 @@ const TextField: React.FC<TextFieldProps> = ({
       </div>
 
       {err && (
-        <span className="text-defaultRed absolute right-0 top-0 mt-5 mr-3 cursor-pointer">
+        <span className="text-defaultRed absolute right-0 top-0 mt-5 mr-1 cursor-pointer">
           <div className="text-[20px]" onClick={handleClear}>
             <ClearIcon />
           </div>
@@ -184,7 +208,7 @@ const TextField: React.FC<TextFieldProps> = ({
 
       {err && (
         <span className="text-defaultRed text-[12px] sm:text-[14px]">
-          {errorMessage}
+          {errorMessage ? errorMessage : errorMsg}
         </span>
       )}
 
