@@ -27,9 +27,9 @@ const CheckBox = ({
       {!intermediate ? (
         <>
           <input
-            className={`${style.checkBox} ${
-              variant === "small" && style.sm_checkBox
-            } 
+            className={`${
+              variant === "small" ? style.sm_checkBox : style.checkBox
+            }
           ${invalid && style.invalidcheckBox} absolute left-3`}
             type="checkbox"
             id={id}
@@ -46,9 +46,9 @@ const CheckBox = ({
       ) : (
         <>
           <input
-            className={`${style.i__checkBox} ${
-              invalid && style.i__invalidcheckBox
-            } absolute left-3`}
+            className={`${
+              variant === "small" ? style.sm_i__checkBox : style.i__checkBox
+            } ${invalid && style.i__invalidcheckBox} absolute left-3`}
             type="checkbox"
             id={id}
             {...props}
