@@ -5,14 +5,16 @@ import style from "./styles.module.scss";
 interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
-  className?: string;
+  variant?: string;
   invalid?: boolean;
+  className?: string;
   intermediate?: boolean;
 }
 
 const CheckBox = ({
   id,
   label,
+  variant,
   invalid,
   className,
   intermediate,
@@ -26,8 +28,9 @@ const CheckBox = ({
         <>
           <input
             className={`${style.checkBox} ${
-              invalid && style.invalidcheckBox
-            } absolute left-3`}
+              variant === "small" && style.sm_checkBox
+            } 
+          ${invalid && style.invalidcheckBox} absolute left-3`}
             type="checkbox"
             id={id}
             {...props}
