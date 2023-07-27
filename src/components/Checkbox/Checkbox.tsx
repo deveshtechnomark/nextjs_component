@@ -1,18 +1,19 @@
-import React, { InputHTMLAttributes} from "react";
-
+import React, { InputHTMLAttributes } from "react";
 import style from "./checkbox.module.scss";
 
 interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
-  className?: string;
+  variant?: string;
   invalid?: boolean;
+  className?: string;
   intermediate?: boolean;
 }
 
 const CheckBox = ({
   id,
   label,
+  variant,
   invalid,
   className,
   intermediate,
@@ -25,9 +26,10 @@ const CheckBox = ({
       {!intermediate ? (
         <>
           <input
-            className={`${style.checkBox} ${
-              invalid && style.invalidcheckBox
-            } absolute left-3`}
+            className={`${
+              variant === "small" ? style.sm_checkBox : style.checkBox
+            }
+          ${invalid && style.invalidcheckBox} absolute left-3`}
             type="checkbox"
             id={id}
             {...props}
@@ -43,9 +45,9 @@ const CheckBox = ({
       ) : (
         <>
           <input
-            className={`${style.i__checkBox} ${
-              invalid && style.i__invalidcheckBox
-            } absolute left-3`}
+            className={`${
+              variant === "small" ? style.sm_i__checkBox : style.i__checkBox
+            } ${invalid && style.i__invalidcheckBox} absolute left-3`}
             type="checkbox"
             id={id}
             {...props}

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
-import  CheckBox  from "../Checkbox/Checkbox";
+import CheckBox from "../Checkbox/Checkbox";
+
 
 import SortingIcon from "./icons/SortingIcon";
 import ChevronIcon from "./icons/ChevronIcon";
@@ -8,6 +9,7 @@ interface TableHeader {
   heading: string;
   field: string;
   sort: boolean;
+
 }
 
 interface TableProps {
@@ -21,6 +23,8 @@ interface TableProps {
   actions?: any[];
   actionHeading?: string | React.ReactNode;
   expandable?: boolean;
+  JsxComponents?: Record<string, React.ComponentType<any>> | JSX.Element | React.ReactNode;
+
 }
 
 const Table: React.FC<TableProps> = (props) => {
@@ -96,11 +100,10 @@ const Table: React.FC<TableProps> = (props) => {
       <table className="w-full">
         <thead>
           <tr
-            className={`${
-              props.sticky
-                ? "sticky top-0 z-[1] drop-shadow-md"
-                : "border-y border-b-pureBlack border-t-pureBlack"
-            } bg-pureWhite h-[48px] w-full`}
+            className={`${props.sticky
+              ? "sticky top-0 z-[1] drop-shadow-md"
+              : "border-y border-b-pureBlack border-t-pureBlack"
+              } bg-pureWhite h-[48px] w-full`}
           >
             {props.expandable && <th></th>}
             {props.selected && (
@@ -126,9 +129,8 @@ const Table: React.FC<TableProps> = (props) => {
                     {header.heading}
                     {header.sort && (
                       <span
-                        className={`ml-2 ${
-                          sortingOrder === "asc" ? "" : "rotate-180"
-                        }`}
+                        className={`ml-2 ${sortingOrder === "asc" ? "" : "rotate-180"
+                          }`}
                       >
                         <SortingIcon />
                       </span>
@@ -150,19 +152,17 @@ const Table: React.FC<TableProps> = (props) => {
           {filteredData.map((item, index) => (
             <React.Fragment key={index}>
               <tr
-                className={`h-[56px] cursor-default hover:bg-whiteSmoke ${
-                  props.expandable && expandedRows[index]
-                    ? "bg-whiteSmoke"
-                    : "border-b border-b-lightSilver"
-                }`}
+                className={`h-[56px] cursor-default hover:bg-whiteSmoke ${props.expandable && expandedRows[index]
+                  ? "bg-whiteSmoke"
+                  : "border-b border-b-lightSilver"
+                  }`}
               >
                 {props.expandable && (
                   <td className="sm:w-[56px]">
                     <button
                       onClick={() => toggleRowExpansion(index)}
-                      className={`transition-all duration-300 ${
-                        expandedRows[index] && "-rotate-180"
-                      }`}
+                      className={`transition-all duration-300 ${expandedRows[index] && "-rotate-180"
+                        }`}
                     >
                       <ChevronIcon />
                     </button>
@@ -186,14 +186,24 @@ const Table: React.FC<TableProps> = (props) => {
                   >
                     <span className="flex justify-start items-center">
                       {typeof item[header.field] === "string" &&
-                      item[header.field].startsWith("http") ? (
+                        item[header.field].startsWith("http") ? (
                         <img
                           src={item[header.field]}
                           alt="Item"
                           className="max-w-[50px] max-h-[50px] rounded"
                         />
                       ) : (
-                        item[header.field]
+                        props.JsxComponents &&
+                          props.JsxComponents[header.field] ? (
+                    
+                          <div>
+                            {React.createElement(props.JsxComponents[header.field], {
+                              data: item[header.field],
+                            })}
+                          </div>
+                        ) : (
+                          item[header.field]
+                        )
                       )}
                     </span>
                   </td>
@@ -217,7 +227,7 @@ const Table: React.FC<TableProps> = (props) => {
                     >
                       <span className="flex justify-start items-center">
                         {typeof item[header.field] === "string" &&
-                        item[header.field].startsWith("http") ? (
+                          item[header.field].startsWith("http") ? (
                           <img
                             src={item[header.field]}
                             alt="Item"
@@ -235,6 +245,7 @@ const Table: React.FC<TableProps> = (props) => {
           ))}
         </tbody>
       </table>
+
     </div>
   );
 };
