@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import CheckBox from "../Checkbox/Checkbox";
 
 
@@ -34,6 +34,8 @@ const Table: React.FC<TableProps> = (props) => {
   const [isAllChecked, setIsAllChecked] = useState<boolean[]>([]);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [expandedRows, setExpandedRows] = useState<Record<number, boolean>>([]);
+  const [actionOpen, setActionOpen] = useState(false);
+  const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
 
   const toggleRowExpansion = (index: number) => {
     setExpandedRows((prevState) => ({
@@ -41,6 +43,8 @@ const Table: React.FC<TableProps> = (props) => {
       [index]: !prevState[index],
     }));
   };
+
+
 
   // function for handling select and deselect all
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,6 +86,26 @@ const Table: React.FC<TableProps> = (props) => {
     setSortingOrder(newSortingOrder);
   };
 
+  useEffect(() => {
+    // Function to close the "Hello" message when clicking outside the action div
+    const handleOutsideClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".action-div")) {
+        setSelectedRowIndex(-1);
+      }
+    };
+
+    // Attach the event listener when the "Hello" message is open
+    if (selectedRowIndex !== -1) {
+      document.addEventListener("click", handleOutsideClick);
+    }
+
+    // Clean up the event listener when the component unmounts or the "Hello" message is closed
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [selectedRowIndex]);
+
   // function for selecting single row
   const handleCheckRow = (index: number, checked: boolean) => {
     const updatedArray = [...isAllChecked];
@@ -93,11 +117,15 @@ const Table: React.FC<TableProps> = (props) => {
 
     // Update the main checkbox state in the header accordingly
     setIsChecked(!anyUnchecked);
+
+    setSelectedRowIndex(checked ? index : -1);
   };
 
   return (
+
     <div className={`w-full overflow-x-auto h-screen ${props.className}`}>
       <table className="w-full">
+
         <thead>
           <tr
             className={`${props.sticky
@@ -211,12 +239,32 @@ const Table: React.FC<TableProps> = (props) => {
                 ))}
 
                 {props.action &&
-                  props.actions.map((action) => <td onClick={() => {
-                    if (props.getRowId) {
-                      props.getRowId(item.id);
-                    }
-                  }} key={action}>{action}</td>
-                    )}
+                  props.actions.map((action) =>
+                    <td className="cursor-pointer" onClick=
+                      {() => {
+
+                        if (props.getRowId) {
+                          props.getRowId(item.id);
+                          setActionOpen(true);
+                          setSelectedRowIndex(index);
+                        }
+                      }
+                      } key={action}>{action}
+                      {selectedRowIndex === index && (
+                        <div className="action-div  "><div className= "visible absolute z-30 right-11 w-fit h-auto py-2 border border-lightSilver rounded-md bg-white shadow-lg ">
+                        <div className="w-40 h-auto">
+                          <ul className="w-40">
+                            <li className="flex w-full h-9 px-3 hover:bg-lightGray cursor-pointer">
+                              <div className="flex justify-center items-center ml-2 cursor-pointer">
+                                <label className="inline-block text-xs ">Manage Rights</label>
+                              </div>
+                            </li>
+                          </ul>
+                        </div></div>
+                        </div>
+                      )}
+                    </td>
+                  )}
               </tr>
 
               {props.expandable && expandedRows[index] && (

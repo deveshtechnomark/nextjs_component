@@ -145,17 +145,6 @@ const TextField: React.FC<TextFieldProps> = ({
     }
   };
 
-  const handleClear = () => {
-    if (onChange) {
-      onChange({
-        target: { value: "" },
-      } as React.ChangeEvent<HTMLInputElement>);
-    }
-    setErr(false);
-    setValid(false);
-    setShowEmailError(false);
-  };
-
   return (
     <div className="flex flex-col text-[14px] relative">
       {label && (
@@ -193,7 +182,6 @@ const TextField: React.FC<TextFieldProps> = ({
           ${className}
           py-1 border-b outline-none transition duration-600 w-full font-normal text-[14px]
           ${type === "email" && "pr-10"}
-          ${err && "pr-6"}
           ${
             err
               ? "border-b-defaultRed"
@@ -219,14 +207,6 @@ const TextField: React.FC<TextFieldProps> = ({
           {...props}
         />
       </div>
-
-      {err && (
-        <span className="text-defaultRed absolute right-0 top-0 mt-6 mr-1 cursor-pointer">
-          <div className="text-[20px]" onClick={handleClear}>
-            <ClearIcon />
-          </div>
-        </span>
-      )}
 
       {valid && !err && (
         <span className="text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3">
