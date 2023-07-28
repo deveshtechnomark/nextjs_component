@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import data from "./data";
 import { Select } from "../Selectdropdown/Select";
 
-
 interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   className?: string;
@@ -143,7 +142,7 @@ const Tel: React.FC<TelInputProps> = ({
             id={id}
             name={name}
             value={value}
-            onBlur={onBlur ? onBlur : validate ? validateInput : focusHandler}
+            onBlur={onBlur ? onBlur : validate ? validateInput : validate ? focusHandler : undefined}
             onChange={handleInputChange}
             onFocus={handleFocus}
             disabled={disabled}

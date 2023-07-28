@@ -216,8 +216,7 @@ const Table: React.FC<TableProps> = (props) => {
                       props.getRowId(item.id);
                     }
                   }} key={action}>{action}</td>
-                    
-                  )}
+                    )}
               </tr>
 
               {props.expandable && expandedRows[index] && (

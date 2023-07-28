@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-
 interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
@@ -11,6 +10,8 @@ interface TextareaProps
   disabled?: boolean;
   getValue: (arg1: string) => void;
   hasError?: boolean;
+  minChar?: number;
+  maxChar?: number;
 }
 
 const Textarea: React.FC<TextareaProps> = ({
@@ -27,22 +28,34 @@ const Textarea: React.FC<TextareaProps> = ({
   disabled,
   getValue,
   hasError,
+  minChar,
+  maxChar,
   errorMessage = "This is a required field!",
   ...props
 }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [err, setErr] = useState<boolean>(false);
   const [focus, setFocus] = useState<boolean>(false);
+  const [errMsg, setErrMsg] = useState("false");
 
   useEffect(() => {
     setErr(hasError);
+    setErrMsg(errorMessage);
   }, [hasError, errorMessage]);
 
   const validateInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value.trim() === "") {
       setErr(true);
+      setErrMsg("This is a required field!");
+    } else if (e.target.value.trim().length <= minChar) {
+      setErr(true);
+      setErrMsg(`Please enter minimum ${minChar} characters.`);
+    } else if (e.target.value.trim().length >= maxChar) {
+      setErr(true);
+      setErrMsg(`You can enter maximum ${maxChar} characters.`);
     } else {
       setErr(false);
+      setErrMsg("");
     }
   };
 
@@ -51,8 +64,8 @@ const Textarea: React.FC<TextareaProps> = ({
   };
 
   const focusHandler = () => {
-    setFocus(false)
-  }
+    setFocus(false);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     getValue(e.target.value);
@@ -108,7 +121,15 @@ const Textarea: React.FC<TextareaProps> = ({
           id={id}
           name={name}
           value={value}
-          onBlur={onBlur ? onBlur : validate ? validateInput : focusHandler}
+          onBlur={
+            onBlur
+              ? onBlur
+              : validate
+                ? validateInput
+                : validate
+                  ? focusHandler
+                  : undefined
+          }
           onChange={handleInputChange}
           onFocus={handleFocus}
           {...props}
@@ -121,7 +142,7 @@ const Textarea: React.FC<TextareaProps> = ({
       )}
       {err && (
         <span className="text-defaultRed text-[12px] sm:text-[14px]">
-          {errorMessage}
+          {errMsg}
         </span>
       )}
     </div>
