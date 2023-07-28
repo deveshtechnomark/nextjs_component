@@ -228,7 +228,7 @@ const Table: React.FC<TableProps> = (props) => {
                     key={header.field}
                     className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
                   >
-                    <span className="flex justify-center items-center">
+                    <span className="flex justify-start items-center">
                       {typeof item[header.field] === "string" &&
                         item[header.field].startsWith("http") ? (
                         <img
