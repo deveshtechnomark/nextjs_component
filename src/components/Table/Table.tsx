@@ -1,7 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import CheckBox from "../Checkbox/Checkbox";
-
-
 import SortingIcon from "./icons/SortingIcon";
 import ChevronIcon from "./icons/ChevronIcon";
 
@@ -9,7 +7,6 @@ interface TableHeader {
   heading: string;
   field: string;
   sort: boolean;
-
 }
 
 interface TableProps {
@@ -24,7 +21,9 @@ interface TableProps {
   actionHeading?: string | React.ReactNode;
   expandable?: boolean;
   JsxComponents?: Record<string, React.ComponentType<any>> | JSX.Element | React.ReactNode;
+  actionDesc?: any[];
   getRowId?: (rowData: any) => void;
+  getAction?: any;
 }
 
 const Table: React.FC<TableProps> = (props) => {
@@ -43,8 +42,6 @@ const Table: React.FC<TableProps> = (props) => {
       [index]: !prevState[index],
     }));
   };
-
-
 
   // function for handling select and deselect all
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,6 +102,24 @@ const Table: React.FC<TableProps> = (props) => {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, [selectedRowIndex]);
+
+
+  const actionItem = props.actionDesc.map((name: any, index) => {
+    return (
+      <React.Fragment key={name + index}>
+        <li onClick={()=>
+        props.getAction(name)
+        } key={index} className="flex w-full h-9 px-3 hover:bg-lightGray !cursor-pointer">
+          <div className="flex justify-center items-center ml-2 cursor-pointer">
+            <label className="inline-block text-xs cursor-pointer">{name}</label>
+          </div>
+        </li>
+        </React.Fragment>
+    )
+  })
+
+
+
 
   // function for selecting single row
   const handleCheckRow = (index: number, checked: boolean) => {
@@ -178,7 +193,7 @@ const Table: React.FC<TableProps> = (props) => {
 
         <tbody>
           {filteredData.map((item, index) => (
-            <React.Fragment key={index}>
+            <React.Fragment key={item.id}>
               <tr
                 className={`h-[56px] cursor-default hover:bg-whiteSmoke ${props.expandable && expandedRows[index]
                   ? "bg-whiteSmoke"
@@ -213,7 +228,7 @@ const Table: React.FC<TableProps> = (props) => {
                     key={header.field}
                     className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
                   >
-                    <span className="flex justify-start items-center">
+                    <span className="flex justify-center items-center">
                       {typeof item[header.field] === "string" &&
                         item[header.field].startsWith("http") ? (
                         <img
@@ -240,27 +255,25 @@ const Table: React.FC<TableProps> = (props) => {
 
                 {props.action &&
                   props.actions.map((action) =>
-                    <td className="cursor-pointer" onClick=
-                      {() => {
-
+                    <td onClick=
+                      {() => 
+                        {
                         if (props.getRowId) {
                           props.getRowId(item.id);
                           setActionOpen(true);
                           setSelectedRowIndex(index);
                         }
                       }
-                      } key={action}>{action}
+                      } key={action}>
+                      {action}
                       {selectedRowIndex === index && (
-                        <div className="action-div  "><div className= "visible absolute z-30 right-11 w-fit h-auto py-2 border border-lightSilver rounded-md bg-white shadow-lg ">
-                        <div className="w-40 h-auto">
-                          <ul className="w-40">
-                            <li className="flex w-full h-9 px-3 hover:bg-lightGray cursor-pointer">
-                              <div className="flex justify-center items-center ml-2 cursor-pointer">
-                                <label className="inline-block text-xs ">Manage Rights</label>
-                              </div>
-                            </li>
-                          </ul>
-                        </div></div>
+                        <div className="action-div relative flex justify-center items-center"><div className="visible absolute top-4 right-12 w-fit h-auto py-2 border border-lightSilver rounded-md bg-white shadow-lg ">
+                          <div className="w-40 h-auto ">
+                            <ul className="w-40">
+                              {actionItem}
+                            </ul>
+                          </div>
+                          </div>
                         </div>
                       )}
                     </td>

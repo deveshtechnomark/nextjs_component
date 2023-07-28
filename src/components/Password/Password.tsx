@@ -13,6 +13,7 @@ interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
   disabled?: boolean;
   getValue: (arg1: string) => void;
+  getError: (arg1: boolean) => void;
   hasError?: boolean;
   props?: any;
   minChar?: number;
@@ -26,10 +27,11 @@ const Password: React.FC<PasswordProps> = ({
   validate,
   errorMessage = "This is a required field!",
   getValue,
+  getError,
   hasError,
   disabled,
   minChar = 8,
-  maxChar = 30, // Default to 30 characters if maxChar prop is not provided
+  maxChar = 30,
   ...props
 }) => {
   const [password, setPassword] = useState("");
@@ -112,9 +114,10 @@ const Password: React.FC<PasswordProps> = ({
             </span>
           )}
           <span
-            className={`${isValid &&
+            className={`${
+              isValid &&
               "line-through ml-[7px] decoration-slatyGrey text-slatyGrey"
-              }`}
+            }`}
           >
             {requirementList[item.index]}
           </span>
@@ -144,8 +147,10 @@ const Password: React.FC<PasswordProps> = ({
       setErr(true);
       setOpen(false);
       setErrorMsg("Please fill details according to the requirements.");
+      getError(false);
     } else {
       setErr(false);
+      getError(true);
     }
   };
 
@@ -203,12 +208,13 @@ const Password: React.FC<PasswordProps> = ({
         {label && (
           <span className="flex">
             <label
-              className={`${err
+              className={`${
+                err
                   ? "text-defaultRed"
                   : focus
-                    ? "text-primary"
-                    : "text-slatyGrey"
-                }`}
+                  ? "text-primary"
+                  : "text-slatyGrey"
+              }`}
             >
               {label}
             </label>
@@ -224,17 +230,19 @@ const Password: React.FC<PasswordProps> = ({
       </div>
 
       <div
-        className={`${!err &&
+        className={`${
+          !err &&
           "relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
-          }`}
+        }`}
       >
         <input
-          className={`${className} py-1 border-b outline-none w-full pr-10 ${err
+          className={`${className} py-1 border-b outline-none w-full pr-10 ${
+            err
               ? "border-defaultRed"
               : focus
-                ? "border-primary"
-                : "border-lightSilver"
-            }`}
+              ? "border-primary"
+              : "border-lightSilver"
+          }`}
           type={type}
           value={password}
           onChange={handlePasswordChange}
@@ -242,10 +250,10 @@ const Password: React.FC<PasswordProps> = ({
             onBlur
               ? onBlur
               : validate
-                ? validateInput
-                : validate
-                  ? focusHandler
-                  : undefined
+              ? validateInput
+              : validate
+              ? focusHandler
+              : undefined
           }
           onFocus={handleFocus}
           disabled={disabled}
@@ -254,18 +262,22 @@ const Password: React.FC<PasswordProps> = ({
       </div>
       {type === "password" ? (
         <span
-          className={`absolute ${!label ? "top-2" : "top-7"
-            } right-1 text-md sm:text-lg ${err ? "text-defaultRed" : "text-[#979797]"
-            }`}
+          className={`absolute ${
+            !label ? "top-2" : "top-7"
+          } right-1 text-md sm:text-lg ${
+            err ? "text-defaultRed" : "text-[#979797]"
+          }`}
           onClick={() => setType("text")}
         >
           <EyeClose />
         </span>
       ) : (
         <span
-          className={`absolute ${!label ? "top-2" : "top-7"
-            } right-1 text-md sm:text-lg ${err ? "text-defaultRed" : "text-[#979797]"
-            }`}
+          className={`absolute ${
+            !label ? "top-2" : "top-7"
+          } right-1 text-md sm:text-lg ${
+            err ? "text-defaultRed" : "text-[#979797]"
+          }`}
           onClick={() => setType("password")}
         >
           <EyeOpen />
@@ -277,21 +289,22 @@ const Password: React.FC<PasswordProps> = ({
           <div className="mt-2 flex items-center">
             <div className="relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]">
               <span
-                className={`absolute rounded-l-lg h-[5px] ${data.match(/[A-Z]/) &&
-                    data.match(/[a-z]/) &&
-                    data.match(/[0-9]/) &&
-                    !data.match(/\s/) &&
-                    data.length >= minChar &&
-                    data.length <= maxChar
+                className={`absolute rounded-l-lg h-[5px] ${
+                  data.match(/[A-Z]/) &&
+                  data.match(/[a-z]/) &&
+                  data.match(/[0-9]/) &&
+                  !data.match(/\s/) &&
+                  data.length >= minChar &&
+                  data.length <= maxChar
                     ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg"
                     : data.match(/[A-Z]/) &&
                       data.match(/[a-z]/) &&
                       data.match(/[0-9]/)
-                      ? "bg-[#FFBF00] sm:w-[100px]"
-                      : password.length >= 3 && data.match(/[a-z]/)
-                        ? "bg-defaultRed sm:w-[45px]"
-                        : "bg-[#979797]"
-                  }`}
+                    ? "bg-[#FFBF00] sm:w-[100px]"
+                    : password.length >= 3 && data.match(/[a-z]/)
+                    ? "bg-defaultRed sm:w-[45px]"
+                    : "bg-[#979797]"
+                }`}
               ></span>
             </div>
             <span className="ml-4 text-xs sm:text-sm">
