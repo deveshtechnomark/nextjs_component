@@ -9,6 +9,8 @@ interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
     disabled?: boolean;
     getValue: (arg1: string) => void;
     hasError?: boolean;
+    minChar?: number;
+    maxChar?: number;
 }
 declare const Textarea: React.FC<TextareaProps>;
 export { Textarea };

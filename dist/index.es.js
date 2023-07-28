@@ -55,9 +55,11 @@ var Textarea = function Textarea(_a) {
     disabled = _a.disabled,
     getValue = _a.getValue,
     hasError = _a.hasError,
+    minChar = _a.minChar,
+    maxChar = _a.maxChar,
     _c = _a.errorMessage,
     errorMessage = _c === void 0 ? "This is a required field!" : _c,
-    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "hasError", "errorMessage"]);
+    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "hasError", "minChar", "maxChar", "errorMessage"]);
   var textAreaRef = useRef(null);
   var _d = useState(false),
     err = _d[0],
@@ -65,14 +67,26 @@ var Textarea = function Textarea(_a) {
   var _e = useState(false),
     focus = _e[0],
     setFocus = _e[1];
+  var _f = useState("false"),
+    errMsg = _f[0],
+    setErrMsg = _f[1];
   useEffect(function () {
     setErr(hasError);
+    setErrMsg(errorMessage);
   }, [hasError, errorMessage]);
   var validateInput = function validateInput(e) {
     if (e.target.value.trim() === "") {
       setErr(true);
+      setErrMsg("This is a required field!");
+    } else if (e.target.value.trim().length <= minChar) {
+      setErr(true);
+      setErrMsg("Please enter minimum ".concat(minChar, " characters."));
+    } else if (e.target.value.trim().length >= maxChar) {
+      setErr(true);
+      setErrMsg("You can enter maximum ".concat(maxChar, " characters."));
     } else {
       setErr(false);
+      setErrMsg("");
     }
   };
   var handleFocus = function handleFocus() {
@@ -108,14 +122,14 @@ var Textarea = function Textarea(_a) {
     id: id,
     name: name,
     value: value,
-    onBlur: onBlur ? onBlur : validate ? validateInput : focusHandler,
+    onBlur: onBlur ? onBlur : validate ? validateInput : validate ? focusHandler : undefined,
     onChange: handleInputChange,
     onFocus: handleFocus
   }, props))), !err && supportingText && React.createElement("span", {
     className: "text-slatyGrey text-[12px] sm:text-[14px]"
   }, supportingText), err && React.createElement("span", {
     className: "text-defaultRed text-[12px] sm:text-[14px]"
-  }, errorMessage));
+  }, errMsg));
 };
 
 export { Textarea };
