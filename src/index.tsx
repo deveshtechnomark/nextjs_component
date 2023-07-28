@@ -176,7 +176,7 @@ const Password: React.FC<PasswordProps> = ({
     } else if (
       data.match(/[A-Z]/) &&
       data.match(/[a-z]/) &&
-      data.match(/[0-9]/) 
+      data.match(/[0-9]/)
     ) {
       strength = "Good";
     } else if (password.length >= 3 && data.match(/[a-z]/)) {
@@ -243,7 +243,15 @@ const Password: React.FC<PasswordProps> = ({
           type={type}
           value={password}
           onChange={handlePasswordChange}
-          onBlur={onBlur ? onBlur : validate ? validateInput : focusHandler}
+          onBlur={
+            onBlur
+              ? onBlur
+              : validate
+              ? validateInput
+              : validate
+              ? focusHandler
+              : undefined
+          }
           onFocus={handleFocus}
           disabled={disabled}
           {...props}
@@ -288,7 +296,7 @@ const Password: React.FC<PasswordProps> = ({
                     ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg"
                     : data.match(/[A-Z]/) &&
                       data.match(/[a-z]/) &&
-                      data.match(/[0-9]/) 
+                      data.match(/[0-9]/)
                     ? "bg-[#FFBF00] sm:w-[100px]"
                     : password.length >= 3 && data.match(/[a-z]/)
                     ? "bg-defaultRed sm:w-[45px]"

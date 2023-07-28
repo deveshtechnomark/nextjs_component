@@ -263,7 +263,7 @@ var Password = function Password(_a) {
     type: type,
     value: password,
     onChange: handlePasswordChange,
-    onBlur: onBlur ? onBlur : validate ? validateInput : focusHandler,
+    onBlur: onBlur ? onBlur : validate ? validateInput : validate ? focusHandler : undefined,
     onFocus: handleFocus,
     disabled: disabled
   }, props))), type === "password" ? React.createElement("span", {
