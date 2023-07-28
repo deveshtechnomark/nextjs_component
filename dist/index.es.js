@@ -114,28 +114,33 @@ var Password = function Password(_a) {
     getValue = _a.getValue,
     hasError = _a.hasError,
     disabled = _a.disabled,
-    props = __rest(_a, ["label", "className", "onBlur", "validate", "errorMessage", "getValue", "hasError", "disabled"]);
-  var _c = useState(""),
-    password = _c[0],
-    setPassword = _c[1];
-  var _d = useState("password"),
-    type = _d[0],
-    setType = _d[1];
-  var _e = useState(false),
-    err = _e[0],
-    setErr = _e[1];
-  var _f = useState(false),
-    focus = _f[0],
-    setFocus = _f[1];
+    _c = _a.minChar,
+    minChar = _c === void 0 ? 8 : _c,
+    _d = _a.maxChar,
+    maxChar = _d === void 0 ? 30 : _d,
+    // Default to 30 characters if maxChar prop is not provided
+    props = __rest(_a, ["label", "className", "onBlur", "validate", "errorMessage", "getValue", "hasError", "disabled", "minChar", "maxChar"]);
+  var _e = useState(""),
+    password = _e[0],
+    setPassword = _e[1];
+  var _f = useState("password"),
+    type = _f[0],
+    setType = _f[1];
   var _g = useState(false),
-    open = _g[0],
-    setOpen = _g[1];
-  var _h = useState(""),
-    errorMes = _h[0],
-    setErrorMsg = _h[1];
-  var _j = useState(""),
-    data = _j[0],
-    setData = _j[1];
+    err = _g[0],
+    setErr = _g[1];
+  var _h = useState(false),
+    focus = _h[0],
+    setFocus = _h[1];
+  var _j = useState(false),
+    open = _j[0],
+    setOpen = _j[1];
+  var _k = useState(""),
+    errorMes = _k[0],
+    setErrorMsg = _k[1];
+  var _l = useState(""),
+    data = _l[0],
+    setData = _l[1];
   useEffect(function () {
     setErrorMsg(errorMessage);
     setErr(hasError);
@@ -166,15 +171,17 @@ var Password = function Password(_a) {
     regex: /\s/,
     index: 4
   }, {
-    regex: /.{8,}/,
+    regex: new RegExp(".{".concat(minChar, ",").concat(maxChar, "}")),
     index: 5
   }];
-  var requirementList = ["1 Special Character", "1 Uppercase", "1 Lowercase", "1 Number", "No Space Allowed", "Minimum 8 Characters"];
+  var requirementList = ["1 Special Character", "1 Uppercase", "1 Lowercase", "1 Number", "No Space Allowed", "Minimum ".concat(minChar, " and Maximum ").concat(maxChar, " Characters")];
   var validatePassword = function validatePassword() {
     var isAllValid = true;
     var requirementsList = requirements.map(function (item) {
       var isValid;
       if (item.index === 4 && password.length > 0) {
+        isValid = !item.regex.test(password);
+      } else if (item.index === 5 && password.length > maxChar) {
         isValid = !item.regex.test(password);
       } else {
         isValid = item.regex.test(password);
@@ -204,27 +211,7 @@ var Password = function Password(_a) {
       setErr(true);
       setOpen(false);
       setErrorMsg(errorMessage);
-    } else if (!e.target.value.match(/[^A-Za-z0-9]/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (!e.target.value.match(/[A-Z]/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (!e.target.value.match(/[a-z]/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (!e.target.value.match(/[0-9]/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (e.target.value.match(/\s/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (!e.target.value.match(/.{8,}/)) {
+    } else if (!e.target.value.match(/[^A-Za-z0-9]/) || !e.target.value.match(/[A-Z]/) || !e.target.value.match(/[a-z]/) || !e.target.value.match(/[0-9]/) || e.target.value.match(/\s/) || e.target.value.length < minChar || e.target.value.length > maxChar) {
       setErr(true);
       setOpen(false);
       setErrorMsg("Please fill details according to the requirements.");
@@ -242,7 +229,7 @@ var Password = function Password(_a) {
   };
   var getPasswordStrength = function getPasswordStrength() {
     var strength = "password";
-    if (data.match(/[^A-Za-z0-9]/) && data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.match(/.{8,}/)) {
+    if (data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.length >= minChar && data.length <= maxChar) {
       strength = "Excellent";
     } else if (data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/)) {
       strength = "Good";
@@ -278,12 +265,12 @@ var Password = function Password(_a) {
     onFocus: handleFocus,
     disabled: disabled
   }, props))), type === "password" ? React.createElement("span", {
-    className: "absolute ".concat(!label ? "top-2" : "top-8", " right-1 text-md sm:text-lg ").concat(err ? "text-defaultRed" : "text-[#979797]"),
+    className: "absolute ".concat(!label ? "top-2" : "top-7", " right-1 text-md sm:text-lg ").concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
       return setType("text");
     }
   }, React.createElement(EyeClose, null)) : React.createElement("span", {
-    className: "absolute ".concat(!label ? "top-2" : "top-8", " right-1 text-md sm:text-lg ").concat(err ? "text-defaultRed" : "text-[#979797]"),
+    className: "absolute ".concat(!label ? "top-2" : "top-7", " right-1 text-md sm:text-lg ").concat(err ? "text-defaultRed" : "text-[#979797]"),
     onClick: function onClick() {
       return setType("password");
     }
@@ -294,7 +281,7 @@ var Password = function Password(_a) {
   }, React.createElement("div", {
     className: "relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]"
   }, React.createElement("span", {
-    className: "absolute rounded-l-lg h-[5px] ".concat(data.match(/[^A-Za-z0-9]/) && data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.match(/.{8,}/) ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg" : data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) ? "bg-[#FFBF00] w-[85px] sm:w-[100px]" : password.length >= 3 && data.match(/[a-z]/) ? "bg-defaultRed  w-[30px] sm:w-[45px]" : "bg-[#979797]")
+    className: "absolute rounded-l-lg h-[5px] ".concat(data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) && !data.match(/\s/) && data.length >= minChar && data.length <= maxChar ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg" : data.match(/[A-Z]/) && data.match(/[a-z]/) && data.match(/[0-9]/) ? "bg-[#FFBF00] sm:w-[100px]" : password.length >= 3 && data.match(/[a-z]/) ? "bg-defaultRed sm:w-[45px]" : "bg-[#979797]")
   })), React.createElement("span", {
     className: "ml-4 text-xs sm:text-sm"
   }, getPasswordStrength())), err && React.createElement("span", {

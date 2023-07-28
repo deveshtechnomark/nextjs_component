@@ -9,6 +9,8 @@ interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
     getValue: (arg1: string) => void;
     hasError?: boolean;
     props?: any;
+    minChar?: number;
+    maxChar?: number;
 }
 declare const Password: React.FC<PasswordProps>;
 export { Password };

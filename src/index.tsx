@@ -16,6 +16,8 @@ interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
   getValue: (arg1: string) => void;
   hasError?: boolean;
   props?: any;
+  minChar?: number;
+  maxChar?: number;
 }
 
 const Password: React.FC<PasswordProps> = ({
@@ -27,6 +29,8 @@ const Password: React.FC<PasswordProps> = ({
   getValue,
   hasError,
   disabled,
+  minChar = 8,
+  maxChar = 30, // Default to 30 characters if maxChar prop is not provided
   ...props
 }) => {
   const [password, setPassword] = useState("");
@@ -64,7 +68,7 @@ const Password: React.FC<PasswordProps> = ({
     { regex: /[a-z]/, index: 2 },
     { regex: /[0-9]/, index: 3 },
     { regex: /\s/, index: 4 },
-    { regex: /.{8,}/, index: 5 },
+    { regex: new RegExp(`.{${minChar},${maxChar}}`), index: 5 },
   ];
 
   const requirementList = [
@@ -73,7 +77,7 @@ const Password: React.FC<PasswordProps> = ({
     "1 Lowercase",
     "1 Number",
     "No Space Allowed",
-    "Minimum 8 Characters",
+    `Minimum ${minChar} and Maximum ${maxChar} Characters`,
   ];
 
   const validatePassword = (): JSX.Element[] => {
@@ -82,6 +86,8 @@ const Password: React.FC<PasswordProps> = ({
     const requirementsList = requirements.map((item) => {
       let isValid;
       if (item.index === 4 && password.length > 0) {
+        isValid = !item.regex.test(password);
+      } else if (item.index === 5 && password.length! > maxChar) {
         isValid = !item.regex.test(password);
       } else {
         isValid = item.regex.test(password);
@@ -128,27 +134,15 @@ const Password: React.FC<PasswordProps> = ({
       setErr(true);
       setOpen(false);
       setErrorMsg(errorMessage);
-    } else if (!e.target.value.match(/[^A-Za-z0-9]/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (!e.target.value.match(/[A-Z]/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (!e.target.value.match(/[a-z]/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (!e.target.value.match(/[0-9]/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (e.target.value.match(/\s/)) {
-      setErr(true);
-      setOpen(false);
-      setErrorMsg("Please fill details according to the requirements.");
-    } else if (!e.target.value.match(/.{8,}/)) {
+    } else if (
+      !e.target.value.match(/[^A-Za-z0-9]/) ||
+      !e.target.value.match(/[A-Z]/) ||
+      !e.target.value.match(/[a-z]/) ||
+      !e.target.value.match(/[0-9]/) ||
+      e.target.value.match(/\s/) ||
+      e.target.value.length! < minChar ||
+      e.target.value.length! > maxChar
+    ) {
       setErr(true);
       setOpen(false);
       setErrorMsg("Please fill details according to the requirements.");
@@ -169,24 +163,26 @@ const Password: React.FC<PasswordProps> = ({
 
   const getPasswordStrength = () => {
     let strength = "password";
+
     if (
-      data.match(/[^A-Za-z0-9]/) &&
       data.match(/[A-Z]/) &&
       data.match(/[a-z]/) &&
       data.match(/[0-9]/) &&
       !data.match(/\s/) &&
-      data.match(/.{8,}/)
+      data.length >= minChar &&
+      data.length <= maxChar
     ) {
       strength = "Excellent";
     } else if (
       data.match(/[A-Z]/) &&
       data.match(/[a-z]/) &&
-      data.match(/[0-9]/)
+      data.match(/[0-9]/) 
     ) {
       strength = "Good";
     } else if (password.length >= 3 && data.match(/[a-z]/)) {
       strength = "Too weak";
     }
+
     return strength;
   };
 
@@ -256,7 +252,7 @@ const Password: React.FC<PasswordProps> = ({
       {type === "password" ? (
         <span
           className={`absolute ${
-            !label ? "top-2" : "top-8"
+            !label ? "top-2" : "top-7"
           } right-1 text-md sm:text-lg ${
             err ? "text-defaultRed" : "text-[#979797]"
           }`}
@@ -267,7 +263,7 @@ const Password: React.FC<PasswordProps> = ({
       ) : (
         <span
           className={`absolute ${
-            !label ? "top-2" : "top-8"
+            !label ? "top-2" : "top-7"
           } right-1 text-md sm:text-lg ${
             err ? "text-defaultRed" : "text-[#979797]"
           }`}
@@ -283,19 +279,19 @@ const Password: React.FC<PasswordProps> = ({
             <div className="relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]">
               <span
                 className={`absolute rounded-l-lg h-[5px] ${
-                  data.match(/[^A-Za-z0-9]/) &&
                   data.match(/[A-Z]/) &&
                   data.match(/[a-z]/) &&
                   data.match(/[0-9]/) &&
                   !data.match(/\s/) &&
-                  data.match(/.{8,}/)
+                  data.length >= minChar &&
+                  data.length <= maxChar
                     ? "bg-successColor w-[150px] sm:w-[180px] rounded-lg"
                     : data.match(/[A-Z]/) &&
                       data.match(/[a-z]/) &&
-                      data.match(/[0-9]/)
-                    ? "bg-[#FFBF00] w-[85px] sm:w-[100px]"
+                      data.match(/[0-9]/) 
+                    ? "bg-[#FFBF00] sm:w-[100px]"
                     : password.length >= 3 && data.match(/[a-z]/)
-                    ? "bg-defaultRed  w-[30px] sm:w-[45px]"
+                    ? "bg-defaultRed sm:w-[45px]"
                     : "bg-[#979797]"
                 }`}
               ></span>
