@@ -816,6 +816,7 @@ var Tel = function Tel(_a) {
   var validateInput = function validateInput(e) {
     if (e.target.value === "") {
       setErr(true);
+      setErrorMsg("This is a required field!");
     } else if (e.target.value.length < 12) {
       setErr(true);
       setErrorMsg("Please Enter valid 10 digits Phone Number.");
