@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import data from "./data";
-import  {Select}  from "../Selectdropdown/Select";
+import { Select } from "../Selectdropdown/Select";
+
 
 interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -45,6 +46,7 @@ const Tel: React.FC<TelInputProps> = ({
   const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") {
       setErr(true);
+      setErrorMsg("This is a required field!");
     } else if (e.target.value.length < 12) {
       setErr(true);
       setErrorMsg("Please Enter valid 10 digits Phone Number.");

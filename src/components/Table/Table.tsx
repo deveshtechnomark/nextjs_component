@@ -24,7 +24,7 @@ interface TableProps {
   actionHeading?: string | React.ReactNode;
   expandable?: boolean;
   JsxComponents?: Record<string, React.ComponentType<any>> | JSX.Element | React.ReactNode;
-
+  getRowId?: (rowData: any) => void;
 }
 
 const Table: React.FC<TableProps> = (props) => {
@@ -156,6 +156,7 @@ const Table: React.FC<TableProps> = (props) => {
                   ? "bg-whiteSmoke"
                   : "border-b border-b-lightSilver"
                   }`}
+
               >
                 {props.expandable && (
                   <td className="sm:w-[56px]">
@@ -195,7 +196,7 @@ const Table: React.FC<TableProps> = (props) => {
                       ) : (
                         props.JsxComponents &&
                           props.JsxComponents[header.field] ? (
-                    
+
                           <div>
                             {React.createElement(props.JsxComponents[header.field], {
                               data: item[header.field],
@@ -210,7 +211,13 @@ const Table: React.FC<TableProps> = (props) => {
                 ))}
 
                 {props.action &&
-                  props.actions.map((action) => <td key={action}>{action}</td>)}
+                  props.actions.map((action) => <td onClick={() => {
+                    if (props.getRowId) {
+                      props.getRowId(item.id);
+                    }
+                  }} key={action}>{action}</td>
+                    
+                  )}
               </tr>
 
               {props.expandable && expandedRows[index] && (
