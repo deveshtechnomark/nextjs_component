@@ -114,14 +114,14 @@ var Password = function Password(_a) {
     _b = _a.errorMessage,
     errorMessage = _b === void 0 ? "This is a required field!" : _b,
     getValue = _a.getValue,
+    getError = _a.getError,
     hasError = _a.hasError,
     disabled = _a.disabled,
     _c = _a.minChar,
     minChar = _c === void 0 ? 8 : _c,
     _d = _a.maxChar,
     maxChar = _d === void 0 ? 30 : _d,
-    // Default to 30 characters if maxChar prop is not provided
-    props = __rest(_a, ["label", "className", "onBlur", "validate", "errorMessage", "getValue", "hasError", "disabled", "minChar", "maxChar"]);
+    props = __rest(_a, ["label", "className", "onBlur", "validate", "errorMessage", "getValue", "getError", "hasError", "disabled", "minChar", "maxChar"]);
   var _e = React.useState(""),
     password = _e[0],
     setPassword = _e[1];
@@ -217,8 +217,10 @@ var Password = function Password(_a) {
       setErr(true);
       setOpen(false);
       setErrorMsg("Please fill details according to the requirements.");
+      getError(false);
     } else {
       setErr(false);
+      getError(true);
     }
   };
   var handleFocus = function handleFocus() {

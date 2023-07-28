@@ -1,5 +1,4 @@
 import React, { InputHTMLAttributes } from "react";
-import "./index.css";
 interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     className?: string;
@@ -7,6 +6,7 @@ interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
     errorMessage?: string;
     disabled?: boolean;
     getValue: (arg1: string) => void;
+    getError: (arg1: boolean) => void;
     hasError?: boolean;
     props?: any;
     minChar?: number;

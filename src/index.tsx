@@ -4,7 +4,6 @@ import React, {
   useEffect,
   InputHTMLAttributes,
 } from "react";
-import "./index.css";
 import { Dot, Check, EyeOpen, EyeClose } from "./icons/icons";
 
 interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -14,6 +13,7 @@ interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
   disabled?: boolean;
   getValue: (arg1: string) => void;
+  getError: (arg1: boolean) => void;
   hasError?: boolean;
   props?: any;
   minChar?: number;
@@ -27,10 +27,11 @@ const Password: React.FC<PasswordProps> = ({
   validate,
   errorMessage = "This is a required field!",
   getValue,
+  getError,
   hasError,
   disabled,
   minChar = 8,
-  maxChar = 30, // Default to 30 characters if maxChar prop is not provided
+  maxChar = 30,
   ...props
 }) => {
   const [password, setPassword] = useState("");
@@ -146,8 +147,10 @@ const Password: React.FC<PasswordProps> = ({
       setErr(true);
       setOpen(false);
       setErrorMsg("Please fill details according to the requirements.");
+      getError(false);
     } else {
       setErr(false);
+      getError(true);
     }
   };
 
