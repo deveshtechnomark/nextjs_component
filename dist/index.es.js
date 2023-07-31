@@ -40,23 +40,6 @@ function __rest(s, e) {
     return t;
 }
 
-function ClearIcon() {
-  return React.createElement("div", null, React.createElement("svg", {
-    stroke: "currentColor",
-    fill: "currentColor",
-    strokeWidth: "0",
-    viewBox: "0 0 24 24",
-    height: "1em",
-    width: "1em",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, React.createElement("path", {
-    fill: "none",
-    d: "M0 0h24v24H0V0z"
-  }), React.createElement("path", {
-    d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
-  })));
-}
-
 function CheckIcon() {
   return React.createElement("div", null, React.createElement("svg", {
     stroke: "currentColor",
@@ -82,11 +65,14 @@ var TextField = function TextField(_a) {
     supportingText = _a.supportingText,
     disabled = _a.disabled,
     getValue = _a.getValue,
+    getError = _a.getError,
     hasError = _a.hasError,
+    autoComplete = _a.autoComplete,
     minChar = _a.minChar,
+    maxChar = _a.maxChar,
     noNumeric = _a.noNumeric,
     noSpecialChar = _a.noSpecialChar,
-    props = __rest(_a, ["label", "className", "type", "validate", "onBlur", "onChange", "errorMessage", "supportingText", "disabled", "getValue", "hasError", "minChar", "noNumeric", "noSpecialChar"]);
+    props = __rest(_a, ["label", "className", "type", "validate", "onBlur", "onChange", "errorMessage", "supportingText", "disabled", "getValue", "getError", "hasError", "autoComplete", "minChar", "maxChar", "noNumeric", "noSpecialChar"]);
   var inputRef = useRef(null);
   var _b = useState(false),
     err = _b[0],
@@ -120,13 +106,21 @@ var TextField = function TextField(_a) {
       setShowEmailError(true);
       setFocus(false);
       setErrorMsg("Please Provide the correct email!");
-    } else if (validateEmail(e.target.value)) {
-      setErr(false);
-      setShowEmailError(false);
-      setFocus(true);
-    } else if (e.target.value.trim().length < minChar) {
+    } else if (validate && e.target.value.trim().length < minChar) {
       setErr(true);
       setErrorMsg("Please enter minimum ".concat(minChar, " character!"));
+    } else if (validate && e.target.value.trim().length > maxChar) {
+      setErr(true);
+      setErrorMsg("Please enter minimum ".concat(maxChar, " character!"));
+    } else if (validate && e.target.value.trim().match(/\d/)) {
+      setErr(true);
+      setErrorMsg("Numbers are not allowed");
+    } else if (validate && type === "email" && e.target.value.trim().length < minChar) {
+      setErr(true);
+      setErrorMsg("Please enter minimum ".concat(minChar, " character!"));
+    } else if (validate && type === "email" && e.target.value.trim().length > maxChar) {
+      setErr(true);
+      setErrorMsg("Please enter minimum ".concat(maxChar, " character!"));
     } else {
       setErr(false);
       setShowEmailError(false);
@@ -159,39 +153,44 @@ var TextField = function TextField(_a) {
     }
     if (validate && type === "text") {
       if (inputValue.length < 0) {
-        setValid(true);
-        setErr(false);
+        getError(false);
+      } else if (inputValue.trim().length < minChar) {
+        getError(false);
+      } else if (inputValue.trim().length > maxChar) {
+        getError(false);
+      } else if (inputValue.trim().match(/\d/)) {
+        getError(false);
       } else {
         setValid(false);
         setErr(false);
+        getError(true);
       }
     } else if (validate && type === "email") {
       if (inputValue && validateEmail(inputValue)) {
         setValid(true);
         setErr(false);
+        getError(true);
         setShowEmailError(false);
-      } else if (inputValue) {
+      } else if (validate && type === "email" && inputValue.trim().length < minChar) {
+        setValid(true);
         setErr(false);
+        getError(false);
+        setShowEmailError(false);
+      } else if (validate && type === "email" && inputValue.trim().length > maxChar) {
+        setValid(true);
+        setErr(false);
+        getError(false);
         setShowEmailError(false);
       } else {
         setValid(false);
+        setErr(false);
+        setShowEmailError(false);
+        getError(false);
       }
     } else if (err || valid) {
       setErr(false);
       setValid(false);
     }
-  };
-  var handleClear = function handleClear() {
-    if (onChange) {
-      onChange({
-        target: {
-          value: ""
-        }
-      });
-    }
-    setErr(false);
-    setValid(false);
-    setShowEmailError(false);
   };
   return React.createElement("div", {
     className: "flex flex-col text-[14px] relative"
@@ -210,13 +209,9 @@ var TextField = function TextField(_a) {
     onBlur: handleBlur,
     onChange: handleInputChange,
     onFocus: handleFocus,
-    disabled: disabled
-  }, props))), err && React.createElement("span", {
-    className: "text-defaultRed absolute right-0 top-0 mt-5 mr-1 cursor-pointer"
-  }, React.createElement("div", {
-    className: "text-[20px]",
-    onClick: handleClear
-  }, React.createElement(ClearIcon, null))), valid && !err && React.createElement("span", {
+    disabled: disabled,
+    autoComplete: autoComplete
+  }, props))), valid && !err && React.createElement("span", {
     className: "text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3"
   }, React.createElement(CheckIcon, null)), err && React.createElement("span", {
     className: "text-defaultRed text-[12px] sm:text-[14px]"

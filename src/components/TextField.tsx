@@ -13,10 +13,13 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   supportingText?: string;
   disabled?: boolean;
   hasError?: boolean;
+  autoComplete?: string;
   minChar?: number;
+  maxChar?: number;
   noNumeric?: boolean;
   noSpecialChar?: boolean;
   getValue: (arg1: string) => void;
+  getError: (arg1: boolean) => void;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -30,8 +33,11 @@ const TextField: React.FC<TextFieldProps> = ({
   supportingText,
   disabled,
   getValue,
+  getError,
   hasError,
+  autoComplete,
   minChar,
+  maxChar,
   noNumeric,
   noSpecialChar,
   ...props
@@ -62,13 +68,21 @@ const TextField: React.FC<TextFieldProps> = ({
       setShowEmailError(true);
       setFocus(false);
       setErrorMsg("Please Provide the correct email!");
-    } else if (validateEmail(e.target.value)) {
-      setErr(false);
-      setShowEmailError(false);
-      setFocus(true);
-    } else if (e.target.value.trim().length < minChar) {
+    } else if (validate && e.target.value.trim().length < minChar) {
       setErr(true);
       setErrorMsg(`Please enter minimum ${minChar} character!`);
+    } else if (validate && e.target.value.trim().length > maxChar) {
+      setErr(true);
+      setErrorMsg(`Please enter minimum ${maxChar} character!`);
+    } else if (validate && e.target.value.trim().match(/\d/)) {
+      setErr(true);
+      setErrorMsg(`Numbers are not allowed`);
+    } else if (validate && type === "email" && e.target.value.trim().length < minChar) {
+      setErr(true);
+      setErrorMsg(`Please enter minimum ${minChar} character!`);
+    } else if (validate && type === "email" && e.target.value.trim().length > maxChar) {
+      setErr(true);
+      setErrorMsg(`Please enter minimum ${maxChar} character!`);
     } else {
       setErr(false);
       setShowEmailError(false);
@@ -110,22 +124,42 @@ const TextField: React.FC<TextFieldProps> = ({
 
     if (validate && type === "text") {
       if (inputValue.length < 0) {
-        setValid(true);
-        setErr(false);
-      } else {
+        getError(false);
+      } else if (inputValue.trim().length < minChar) {
+        getError(false);
+      }
+      else if (inputValue.trim().length > maxChar) {
+        getError(false);
+      } else if (inputValue.trim().match(/\d/)) {
+        getError(false);
+      }
+      else {
         setValid(false);
         setErr(false);
+        getError(true)
       }
     } else if (validate && type === "email") {
       if (inputValue && validateEmail(inputValue)) {
         setValid(true);
         setErr(false);
+        getError(true)
         setShowEmailError(false);
-      } else if (inputValue) {
+      } else if (validate && type === "email" && inputValue.trim().length < minChar) {
+        setValid(true);
+        setErr(false);
+        getError(false)
+        setShowEmailError(false);
+      } else if (validate && type === "email" && inputValue.trim().length > maxChar) {
+        setValid(true);
+        setErr(false);
+        getError(false)
+        setShowEmailError(false);
+      }
+      else {
+        setValid(false);
         setErr(false);
         setShowEmailError(false);
-      } else {
-        setValid(false);
+        getError(false);
       }
     } else if (err || valid) {
       setErr(false);
@@ -133,29 +167,17 @@ const TextField: React.FC<TextFieldProps> = ({
     }
   };
 
-  const handleClear = () => {
-    if (onChange) {
-      onChange({
-        target: { value: "" },
-      } as React.ChangeEvent<HTMLInputElement>);
-    }
-    setErr(false);
-    setValid(false);
-    setShowEmailError(false);
-  };
-
   return (
     <div className="flex flex-col text-[14px] relative">
       {label && (
         <span className="flex">
           <label
-            className={`${
-              err
-                ? "text-defaultRed"
-                : focus
+            className={`${err
+              ? "text-defaultRed"
+              : focus
                 ? "text-primary"
                 : "text-slatyGrey"
-            }`}
+              }`}
           >
             {label}
           </label>
@@ -170,31 +192,28 @@ const TextField: React.FC<TextFieldProps> = ({
       )}
 
       <div
-        className={`${
-          !err &&
+        className={`${!err &&
           !disabled &&
           "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
-        }`}
+          }`}
       >
         <input
           className={`
           ${className}
           py-1 border-b outline-none transition duration-600 w-full font-normal text-[14px]
           ${type === "email" ? "pr-10" : ""}
-          ${
-            err
+          ${err
               ? "border-b-defaultRed"
               : focus
-              ? "border-b-primary"
-              : "border-b-lightSilver"
-          }
-          ${
-            valid && !err
+                ? "border-b-primary"
+                : "border-b-lightSilver"
+            }
+          ${valid && !err
               ? "text-successColor"
               : showEmailError
-              ? "text-defaultRed"
-              : "text-[#333333]"
-          }
+                ? "text-defaultRed"
+                : "text-[#333333]"
+            }
         `}
           ref={inputRef}
           type={type}
@@ -202,17 +221,10 @@ const TextField: React.FC<TextFieldProps> = ({
           onChange={handleInputChange}
           onFocus={handleFocus}
           disabled={disabled}
+          autoComplete={autoComplete}
           {...props}
         />
       </div>
-
-      {err && (
-        <span className="text-defaultRed absolute right-0 top-0 mt-5 mr-1 cursor-pointer">
-          <div className="text-[20px]" onClick={handleClear}>
-            <ClearIcon />
-          </div>
-        </span>
-      )}
 
       {valid && !err && (
         <span className="text-primary bg-white text-[20px] absolute right-0 top-0 mt-6 mr-3">
