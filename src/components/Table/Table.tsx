@@ -1,7 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CheckBox from "../Checkbox/Checkbox";
 import SortingIcon from "./icons/SortingIcon";
 import ChevronIcon from "./icons/ChevronIcon";
+import "./Table.module.scss"
 
 interface TableHeader {
   heading: string;
@@ -107,14 +108,14 @@ const Table: React.FC<TableProps> = (props) => {
   const actionItem = props.actionDesc.map((name: any, index) => {
     return (
       <React.Fragment key={name + index}>
-        <li onClick={()=>
-        props.getAction(name)
+        <li onClick={() =>
+          props.getAction(name)
         } key={index} className="flex w-full h-9 px-3 hover:bg-lightGray !cursor-pointer">
           <div className="flex justify-center items-center ml-2 cursor-pointer">
             <label className="inline-block text-xs cursor-pointer">{name}</label>
           </div>
         </li>
-        </React.Fragment>
+      </React.Fragment>
     )
   })
 
@@ -138,7 +139,7 @@ const Table: React.FC<TableProps> = (props) => {
 
   return (
 
-    <div className={`w-full overflow-x-auto h-screen ${props.className}`}>
+    <div className={`w-full overflow-x-auto h-screen ${props.className} table-container`}>
       <table className="w-full">
 
         <thead>
@@ -184,7 +185,10 @@ const Table: React.FC<TableProps> = (props) => {
             ))}
 
             {props.action && (
-              <th className="cursor-pointer text-[16px] sm:text-[14px] font-bold uppercase">
+              <th
+                className={`cursor-pointer text-[16px] sm:text-[14px] font-bold uppercase ${props.sticky ? "sticky_action_column" : ""
+                  }`}
+              >
                 {props.actionHeading ? props.actionHeading : "Actions"}
               </th>
             )}
@@ -256,15 +260,15 @@ const Table: React.FC<TableProps> = (props) => {
                 {props.action &&
                   props.actions.map((action) =>
                     <td onClick=
-                      {() => 
-                        {
+                      {() => {
                         if (props.getRowId) {
                           props.getRowId(item.id);
                           setActionOpen(true);
                           setSelectedRowIndex(index);
                         }
                       }
-                      } key={action}>
+                      } key={action} className={` ${props.sticky ? "fix" : ""} ${props.sticky && index === selectedRowIndex ? "right-0" : ""
+                        }`}>
                       {action}
                       {selectedRowIndex === index && (
                         <div className="action-div relative flex justify-center items-center"><div className="visible absolute top-4 right-12 w-fit h-auto py-2 border border-lightSilver rounded-md bg-white shadow-lg ">
@@ -273,7 +277,7 @@ const Table: React.FC<TableProps> = (props) => {
                               {actionItem}
                             </ul>
                           </div>
-                          </div>
+                        </div>
                         </div>
                       )}
                     </td>

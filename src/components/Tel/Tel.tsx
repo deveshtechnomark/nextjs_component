@@ -11,6 +11,7 @@ interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   countryCode?: boolean;
   getValue: (arg1: string) => void;
+  getError: (arg1: boolean) => void;
   hasError?: boolean;
 }
 
@@ -25,6 +26,7 @@ const Tel: React.FC<TelInputProps> = ({
   supportingText,
   disabled,
   getValue,
+  getError,
   countryCode = false,
   errorMessage,
   hasError,
@@ -45,12 +47,15 @@ const Tel: React.FC<TelInputProps> = ({
   const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") {
       setErr(true);
+      getError(false);
       setErrorMsg("This is a required field!");
     } else if (e.target.value.length < 12) {
       setErr(true);
+      getError(false);
       setErrorMsg("Please Enter valid 10 digits Phone Number.");
     } else {
       setErr(false);
+      getError(true);
     }
   };
 
@@ -142,7 +147,15 @@ const Tel: React.FC<TelInputProps> = ({
             id={id}
             name={name}
             value={value}
-            onBlur={onBlur ? onBlur : validate ? validateInput : validate ? focusHandler : undefined}
+            onBlur={
+              onBlur
+                ? onBlur
+                : validate
+                ? validateInput
+                : validate
+                ? focusHandler
+                : undefined
+            }
             onChange={handleInputChange}
             onFocus={handleFocus}
             disabled={disabled}

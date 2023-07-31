@@ -12,10 +12,21 @@
   overflow-y: auto;
 }
 
-
 .stickyDataCells {
   position: sticky;
   left: 0;
   background-color: white;
   z-index: 1;
+}
+
+.sticky_action_column {
+  position: static; /* Set the position to static to remove the sticky behavior */
+  background-color: white;
+  right: 0;
+  background-color: white; /* You can add a background color if you want */
+  z-index: 2; /* Adjust the z-index as needed to make it appear above other elements */
+}
+
+.w-full {
+  overflow-x: hidden;
 }
