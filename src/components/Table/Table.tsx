@@ -22,10 +22,11 @@ interface TableProps {
   actionHeading?: string | React.ReactNode;
   expandable?: boolean;
   JsxComponents?:
-    | Record<string, React.ComponentType<any>>
-    | JSX.Element
-    | React.ReactNode;
+  | Record<string, React.ComponentType<any>>
+  | JSX.Element
+  | React.ReactNode;
   actionDesc?: any[];
+  expandableHeading?: boolean;
   getRowId?: (rowData: any) => void;
   getAction?: any;
   actionSticky?: boolean;
@@ -38,7 +39,6 @@ const Table: React.FC<TableProps> = (props) => {
   const [isAllChecked, setIsAllChecked] = useState<boolean[]>([]);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [expandedRows, setExpandedRows] = useState<Record<number, boolean>>([]);
-  const [actionOpen, setActionOpen] = useState(false);
   const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
 
   const toggleRowExpansion = (index: number) => {
@@ -141,6 +141,19 @@ const Table: React.FC<TableProps> = (props) => {
     setSelectedRowIndex(checked ? index : -1);
   };
 
+  const detectExpandableKey = (): string | null => {
+    if (props.expandable && props.data.length > 0) {
+      const firstItem = props.data[0];
+      for (const key in firstItem) {
+        if (Array.isArray(firstItem[key])) {
+          return key;
+        }
+      }
+    }
+    return null;
+  };
+
+  const nestedKey = props.expandable ? detectExpandableKey() : null;
   return (
     <div
       className={`scrollable-table w-full overflow-x-auto h-screen ${props.className} ${Style.table_container}`}
@@ -148,11 +161,10 @@ const Table: React.FC<TableProps> = (props) => {
       <table className="w-full">
         <thead>
           <tr
-            className={`${
-              props.sticky
-                ? "sticky top-0 z-[2] drop-shadow-md"
-                : "border-y border-b-pureBlack border-t-pureBlack"
-            } bg-pureWhite h-[48px] w-full`}
+            className={`${props.sticky
+              ? "sticky top-0 z-[2] drop-shadow-md"
+              : "border-y border-b-pureBlack border-t-pureBlack"
+              } bg-pureWhite h-[48px] w-full`}
           >
             {props.expandable && <th></th>}
             {props.selected && (
@@ -179,9 +191,8 @@ const Table: React.FC<TableProps> = (props) => {
                     {header.heading}
                     {header.sort && (
                       <span
-                        className={`ml-2 ${
-                          sortingOrder === "asc" ? "" : "rotate-180"
-                        }`}
+                        className={`ml-2 ${sortingOrder === "asc" ? "" : "rotate-180"
+                          }`}
                       >
                         <SortingIcon />
                       </span>
@@ -193,9 +204,8 @@ const Table: React.FC<TableProps> = (props) => {
 
             {props.action && (
               <th
-                className={`cursor-pointer text-[16px] sm:text-[14px] font-bold uppercase ${
-                  props.actionSticky ? `${Style.sticky_action_column}` : ""
-                }`}
+                className={`cursor-pointer text-[16px] sm:text-[14px] font-bold uppercase ${props.actionSticky ? `${Style.sticky_action_column}` : ""
+                  }`}
               >
                 {props.actionHeading ? props.actionHeading : "Actions"}
               </th>
@@ -207,19 +217,17 @@ const Table: React.FC<TableProps> = (props) => {
           {filteredData.map((item, index) => (
             <React.Fragment key={item.id}>
               <tr
-                className={`h-[56px] cursor-default hover:bg-whiteSmoke ${
-                  props.expandable && expandedRows[index]
-                    ? "bg-whiteSmoke"
-                    : "border-b border-b-lightSilver"
-                }`}
+                className={`h-[56px] cursor-default hover:bg-whiteSmoke ${props.expandable && expandedRows[index]
+                  ? "bg-whiteSmoke"
+                  : "border-b border-b-lightSilver"
+                  }`}
               >
                 {props.expandable && (
                   <td className="sm:w-[56px]">
                     <button
                       onClick={() => toggleRowExpansion(index)}
-                      className={`transition-all duration-300 ${
-                        expandedRows[index] && "-rotate-180"
-                      }`}
+                      className={`transition-all duration-300 ${expandedRows[index] && "-rotate-180"
+                        }`}
                     >
                       <ChevronIcon />
                     </button>
@@ -247,7 +255,7 @@ const Table: React.FC<TableProps> = (props) => {
                   >
                     <span className="flex justify-start items-center">
                       {typeof item[header.field] === "string" &&
-                      item[header.field].startsWith("http") ? (
+                        item[header.field].startsWith("http") ? (
                         <img
                           src={item[header.field]}
                           alt="Item"
@@ -281,15 +289,13 @@ const Table: React.FC<TableProps> = (props) => {
                         }
                       }}
                       key={action}
-                      className={`${
-                        props.actionSticky
-                          ? `${Style.sticky_action_column}`
-                          : ""
-                      } ${
-                        props.sticky && index === selectedRowIndex
+                      className={`${props.actionSticky
+                        ? `${Style.sticky_action_column} hover:bg-whiteSmoke`
+                        : ""
+                        } ${props.sticky && index === selectedRowIndex
                           ? "right-0"
                           : ""
-                      }`}
+                        }`}
                     >
                       {action}
                       {selectedRowIndex === index && (
@@ -305,68 +311,43 @@ const Table: React.FC<TableProps> = (props) => {
                   ))}
               </tr>
 
-              {props.expandable && expandedRows[index] && item.children && (
+              {props.expandable && expandedRows[index] && nestedKey && item[nestedKey] && (
                 <tr
-                  className={`p-4 ${
-                    props.expandable && expandedRows[index]
-                      ? "bg-whiteSmoke"
-                      : "border-b border-b-lightSilver"
-                  }`}
+                  className={`p-4 ${props.expandable && expandedRows[index]
+                    ? "bg-whiteSmoke"
+                    : "border-b border-b-lightSilver"
+                    }`}
                 >
-                  <td
-                    colSpan={props.headers.length + (props.action ? 1 : 0)}
-                  ></td>{" "}
-                  {/* Take a blank heading on the expandable icon */}
-                  {props.selected && <td></td>}{" "}
-                  {/* Take a blank column when select and expandable both enabled */}
                   <td colSpan={props.headers.length + (props.action ? 1 : 0)}>
-                    {/* Render the expandable row */}
-                    {Object.entries(item.children).map(([childKey, child]) => {
-                      return (
-                        <div key={childKey}>
-                          {/* Render child data here */}
-                          {Object.entries(child).map(
-                            ([childDataKey, childDataValue]) => (
-                              <tr
-                                key={childDataKey}
+                    <table className="w-full">
+                      <thead>
+                        <tr>
+                          <th>{ }</th>
+                          {item[nestedKey].length > 0 &&
+                            Object.keys(item[nestedKey][0]).map((key) => ( // Update this line
+                              <th key={key}>{key}</th>
+                            ))}
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {item[nestedKey].map((child, index) => ( // Update this line
+                          <tr key={index}>
+                            <td>{ }</td>
+                            {Object.values(child).map((value: any) => ( // Update this line
+                              <td
+                                key={value}
                                 className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
                               >
-                                <td></td>{" "}
-                                {/* Take a blank column on the expandable icon */}
-                                {props.selected && <td></td>}{" "}
-                                {/* Take a blank column when select and expandable both enabled */}
-                                <td className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal">
-                                  <span className="flex justify-start items-center">
-                                    {childDataValue}
-                                  </span>
-                                </td>
-                                {/* Display other fields in the expandable row */}
-                                {props.headers.map((header) => (
-                                  <td
-                                    key={header.field}
-                                    className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
-                                  >
-                                    <span className="flex justify-start items-center">
-                                      {typeof child[header.field] ===
-                                        "string" &&
-                                      child[header.field].startsWith("http") ? (
-                                        <img
-                                          src={child[header.field]}
-                                          alt="Item"
-                                          className="max-w-[50px] max-h-[50px] rounded"
-                                        />
-                                      ) : (
-                                        child[header.field]
-                                      )}
-                                    </span>
-                                  </td>
-                                ))}
-                              </tr>
-                            )
-                          )}
-                        </div>
-                      );
-                    })}
+                                <span className="flex justify-center items-center">
+                                  {value}
+                                </span>
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </td>
                 </tr>
               )}
