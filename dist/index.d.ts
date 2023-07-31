@@ -8,6 +8,7 @@ interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
     supportingText?: string;
     disabled?: boolean;
     getValue: (arg1: string) => void;
+    getError: (arg1: boolean) => void;
     hasError?: boolean;
     minChar?: number;
     maxChar?: number;

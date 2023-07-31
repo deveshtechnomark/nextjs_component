@@ -10,6 +10,7 @@ interface TextareaProps
   supportingText?: string;
   disabled?: boolean;
   getValue: (arg1: string) => void;
+  getError: (arg1: boolean) => void;
   hasError?: boolean;
   minChar?: number;
   maxChar?: number;
@@ -28,6 +29,7 @@ const Textarea: React.FC<TextareaProps> = ({
   supportingText,
   disabled,
   getValue,
+  getError,
   hasError,
   minChar,
   maxChar,
@@ -47,15 +49,19 @@ const Textarea: React.FC<TextareaProps> = ({
   const validateInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value.trim() === "") {
       setErr(true);
+      getError(false);
       setErrMsg("This is a required field!");
     } else if (e.target.value.trim().length <= minChar) {
       setErr(true);
+      getError(false);
       setErrMsg(`Please enter minimum ${minChar} characters.`);
     } else if (e.target.value.trim().length >= maxChar) {
       setErr(true);
+      getError(false);
       setErrMsg(`You can enter maximum ${maxChar} characters.`);
     } else {
       setErr(false);
+      getError(true);
       setErrMsg("");
     }
   };

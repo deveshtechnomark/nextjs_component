@@ -54,12 +54,13 @@ var Textarea = function Textarea(_a) {
     supportingText = _a.supportingText,
     disabled = _a.disabled,
     getValue = _a.getValue,
+    getError = _a.getError,
     hasError = _a.hasError,
     minChar = _a.minChar,
     maxChar = _a.maxChar,
     _c = _a.errorMessage,
     errorMessage = _c === void 0 ? "This is a required field!" : _c,
-    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "hasError", "minChar", "maxChar", "errorMessage"]);
+    props = __rest(_a, ["label", "className", "id", "name", "value", "rows", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "getError", "hasError", "minChar", "maxChar", "errorMessage"]);
   var textAreaRef = useRef(null);
   var _d = useState(false),
     err = _d[0],
@@ -77,15 +78,19 @@ var Textarea = function Textarea(_a) {
   var validateInput = function validateInput(e) {
     if (e.target.value.trim() === "") {
       setErr(true);
+      getError(false);
       setErrMsg("This is a required field!");
     } else if (e.target.value.trim().length <= minChar) {
       setErr(true);
+      getError(false);
       setErrMsg("Please enter minimum ".concat(minChar, " characters."));
     } else if (e.target.value.trim().length >= maxChar) {
       setErr(true);
+      getError(false);
       setErrMsg("You can enter maximum ".concat(maxChar, " characters."));
     } else {
       setErr(false);
+      getError(true);
       setErrMsg("");
     }
   };
