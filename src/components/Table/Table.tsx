@@ -293,7 +293,7 @@ const Table: React.FC<TableProps> = (props) => {
                     >
                       {action}
                       {selectedRowIndex === index && (
-                        <div className="action-div relative flex justify-center items-center">
+                        <div className="action-div relative z-10 flex justify-center items-center">
                           <div className="visible absolute top-4 right-12 w-fit h-auto py-2 border border-lightSilver rounded-md bg-white shadow-lg ">
                             <div className="w-40 h-auto ">
                               <ul className="w-40">{actionItem}</ul>

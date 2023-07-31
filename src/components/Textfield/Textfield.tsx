@@ -1,5 +1,4 @@
 import React, { InputHTMLAttributes, useEffect, useRef, useState } from "react";
-import ClearIcon from "./icons/ClearIcon";
 import CheckIcon from "./icons/CheckIcon";
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -19,6 +18,7 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   noNumeric?: boolean;
   noSpecialChar?: boolean;
   getValue: (arg1: string) => void;
+  getError: (arg1: boolean) => void;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -28,10 +28,11 @@ const TextField: React.FC<TextFieldProps> = ({
   validate,
   onBlur,
   onChange,
-  errorMessage= "This field is required!",
+  errorMessage,
   supportingText,
   disabled,
   getValue,
+  getError,
   hasError,
   autoComplete,
   minChar,
@@ -122,22 +123,42 @@ const TextField: React.FC<TextFieldProps> = ({
 
     if (validate && type === "text") {
       if (inputValue.length < 0) {
-        setValid(true);
-        setErr(false);
-      } else {
+        getError(false);
+      } else if (inputValue.trim().length < minChar) {
+        getError(false);
+      }
+      else if (inputValue.trim().length > maxChar) {
+        getError(false);
+      } else if (inputValue.trim().match(/\d/)) {
+        getError(false);
+      }
+      else {
         setValid(false);
         setErr(false);
+        getError(true)
       }
     } else if (validate && type === "email") {
       if (inputValue && validateEmail(inputValue)) {
         setValid(true);
         setErr(false);
+        getError(true)
         setShowEmailError(false);
-      } else if (inputValue) {
+      } else if (validate && type === "email" && inputValue.trim().length < minChar) {
+        setValid(true);
+        setErr(false);
+        getError(false)
+        setShowEmailError(false);
+      } else if (validate && type === "email" && inputValue.trim().length > maxChar) {
+        setValid(true);
+        setErr(false);
+        getError(false)
+        setShowEmailError(false);
+      }
+      else {
+        setValid(false);
         setErr(false);
         setShowEmailError(false);
-      } else {
-        setValid(false);
+        getError(false);
       }
     } else if (err || valid) {
       setErr(false);
@@ -150,13 +171,12 @@ const TextField: React.FC<TextFieldProps> = ({
       {label && (
         <span className="flex">
           <label
-            className={`${
-              err
-                ? "text-defaultRed"
-                : focus
+            className={`${err
+              ? "text-defaultRed"
+              : focus
                 ? "text-primary"
                 : "text-slatyGrey"
-            }`}
+              }`}
           >
             {label}
           </label>
@@ -171,31 +191,28 @@ const TextField: React.FC<TextFieldProps> = ({
       )}
 
       <div
-        className={`${
-          !err &&
+        className={`${!err &&
           !disabled &&
           "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
-        }`}
+          }`}
       >
         <input
           className={`
           ${className}
           py-1 border-b outline-none transition duration-600 w-full font-normal text-[14px]
-          ${type === "email" && "pr-10"}
-          ${
-            err
+          ${type === "email" ? "pr-10" : ""}
+          ${err
               ? "border-b-defaultRed"
               : focus
-              ? "border-b-primary"
-              : "border-b-lightSilver"
-          }
-          ${
-            valid && !err
+                ? "border-b-primary"
+                : "border-b-lightSilver"
+            }
+          ${valid && !err
               ? "text-successColor"
               : showEmailError
-              ? "text-defaultRed"
-              : "text-[#333333]"
-          }
+                ? "text-defaultRed"
+                : "text-[#333333]"
+            }
         `}
           ref={inputRef}
           type={type}
@@ -216,7 +233,7 @@ const TextField: React.FC<TextFieldProps> = ({
 
       {err && (
         <span className="text-defaultRed text-[12px] sm:text-[14px]">
-          {errorMessage && errorMsg}
+          {errorMessage ? errorMessage : errorMsg}
         </span>
       )}
 
