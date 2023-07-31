@@ -28,7 +28,7 @@ const TextField: React.FC<TextFieldProps> = ({
   validate,
   onBlur,
   onChange,
-  errorMessage,
+  errorMessage = "This is a required field!",
   supportingText,
   disabled,
   getValue,
@@ -73,13 +73,21 @@ const TextField: React.FC<TextFieldProps> = ({
     } else if (validate && e.target.value.trim().length > maxChar) {
       setErr(true);
       setErrorMsg(`Please enter minimum ${maxChar} character!`);
-    } else if (validate && e.target.value.trim().match(/\d/)) {
+    } else if (validate && noNumeric && e.target.value.trim().match(/\d/)) {
       setErr(true);
       setErrorMsg(`Numbers are not allowed`);
-    } else if (validate && type === "email" && e.target.value.trim().length < minChar) {
+    } else if (
+      validate &&
+      type === "email" &&
+      e.target.value.trim().length < minChar
+    ) {
       setErr(true);
       setErrorMsg(`Please enter minimum ${minChar} character!`);
-    } else if (validate && type === "email" && e.target.value.trim().length > maxChar) {
+    } else if (
+      validate &&
+      type === "email" &&
+      e.target.value.trim().length > maxChar
+    ) {
       setErr(true);
       setErrorMsg(`Please enter minimum ${maxChar} character!`);
     } else {
@@ -126,35 +134,45 @@ const TextField: React.FC<TextFieldProps> = ({
         getError(false);
       } else if (inputValue.trim().length < minChar) {
         getError(false);
-      }
-      else if (inputValue.trim().length > maxChar) {
+      } else if (inputValue.trim().length > maxChar) {
         getError(false);
-      } else if (inputValue.trim().match(/\d/)) {
+      } else if (
+        validate &&
+        type === "text" &&
+        noNumeric &&
+        inputValue.trim().match(/\d/)
+      ) {
         getError(false);
-      }
-      else {
+      } else {
         setValid(false);
         setErr(false);
-        getError(true)
+        getError(true);
       }
     } else if (validate && type === "email") {
       if (inputValue && validateEmail(inputValue)) {
         setValid(true);
         setErr(false);
-        getError(true)
+        getError(true);
         setShowEmailError(false);
-      } else if (validate && type === "email" && inputValue.trim().length < minChar) {
+      } else if (
+        validate &&
+        type === "email" &&
+        inputValue.trim().length < minChar
+      ) {
         setValid(true);
         setErr(false);
-        getError(false)
+        getError(false);
         setShowEmailError(false);
-      } else if (validate && type === "email" && inputValue.trim().length > maxChar) {
+      } else if (
+        validate &&
+        type === "email" &&
+        inputValue.trim().length > maxChar
+      ) {
         setValid(true);
         setErr(false);
-        getError(false)
+        getError(false);
         setShowEmailError(false);
-      }
-      else {
+      } else {
         setValid(false);
         setErr(false);
         setShowEmailError(false);
@@ -172,10 +190,10 @@ const TextField: React.FC<TextFieldProps> = ({
         <span className="flex">
           <label
             className={`${err
-              ? "text-defaultRed"
-              : focus
-                ? "text-primary"
-                : "text-slatyGrey"
+                ? "text-defaultRed"
+                : focus
+                  ? "text-primary"
+                  : "text-slatyGrey"
               }`}
           >
             {label}
