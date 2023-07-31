@@ -788,11 +788,12 @@ var Tel = function Tel(_a) {
     var supportingText = _a.supportingText,
     disabled = _a.disabled,
     getValue = _a.getValue,
+    getError = _a.getError,
     _b = _a.countryCode,
     countryCode = _b === void 0 ? false : _b,
     errorMessage = _a.errorMessage,
     hasError = _a.hasError,
-    props = __rest(_a, ["label", "className", "id", "name", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "countryCode", "errorMessage", "hasError"]);
+    props = __rest(_a, ["label", "className", "id", "name", "validate", "onBlur", "onChange", "supportingText", "disabled", "getValue", "getError", "countryCode", "errorMessage", "hasError"]);
   var inputRef = React.useRef(null);
   var _c = React.useState(false),
     err = _c[0],
@@ -816,12 +817,15 @@ var Tel = function Tel(_a) {
   var validateInput = function validateInput(e) {
     if (e.target.value === "") {
       setErr(true);
+      getError(false);
       setErrorMsg("This is a required field!");
     } else if (e.target.value.length < 12) {
       setErr(true);
+      getError(false);
       setErrorMsg("Please Enter valid 10 digits Phone Number.");
     } else {
       setErr(false);
+      getError(true);
     }
   };
   var handleFocus = function handleFocus() {
