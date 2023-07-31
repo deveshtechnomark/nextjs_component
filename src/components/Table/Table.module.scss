@@ -19,14 +19,28 @@
   z-index: 1;
 }
 
-.sticky_action_column {
-  position: static; /* Set the position to static to remove the sticky behavior */
-  background-color: white;
-  right: 0;
-  background-color: white; /* You can add a background color if you want */
-  z-index: 2; /* Adjust the z-index as needed to make it appear above other elements */
+/* Table.module.scss */
+
+/* Add the following styles */
+.table_container {
+  overflow-x: auto; /* Enable horizontal scrolling */
 }
 
-.w-full {
-  overflow-x: hidden;
+thead th {
+  /* Set a fixed width for the header cells except for the action column */
+  width: 200px; /* You can adjust this value as per your requirements */
+}
+
+/* Styling for the sticky action column */
+.sticky_action_column {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-table {
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: calc(100vh - 100px); /* Set the maximum height of the container */
 }
