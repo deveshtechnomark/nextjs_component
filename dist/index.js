@@ -213,6 +213,7 @@ var Password = function Password(_a) {
       setErr(true);
       setOpen(false);
       setErrorMsg(errorMessage);
+      getError(false);
     } else if (!e.target.value.match(/[^A-Za-z0-9]/) || !e.target.value.match(/[A-Z]/) || !e.target.value.match(/[a-z]/) || !e.target.value.match(/[0-9]/) || e.target.value.match(/\s/) || e.target.value.length < minChar || e.target.value.length > maxChar) {
       setErr(true);
       setOpen(false);

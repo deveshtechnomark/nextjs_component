@@ -135,6 +135,7 @@ const Password: React.FC<PasswordProps> = ({
       setErr(true);
       setOpen(false);
       setErrorMsg(errorMessage);
+      getError(false);
     } else if (
       !e.target.value.match(/[^A-Za-z0-9]/) ||
       !e.target.value.match(/[A-Z]/) ||
