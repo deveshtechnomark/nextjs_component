@@ -28,7 +28,7 @@ const TextField: React.FC<TextFieldProps> = ({
   validate,
   onBlur,
   onChange,
-  errorMessage = "This is a required field!",
+  errorMessage,
   supportingText,
   disabled,
   getValue,
@@ -49,7 +49,7 @@ const TextField: React.FC<TextFieldProps> = ({
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
-    setErrorMsg(errorMessage);
+    setErrorMsg(errorMessage ? errorMessage : "This is required field!");
     setErr(hasError);
   }, [hasError, errorMessage]);
 
@@ -76,6 +76,13 @@ const TextField: React.FC<TextFieldProps> = ({
     } else if (validate && noNumeric && e.target.value.trim().match(/\d/)) {
       setErr(true);
       setErrorMsg(`Numbers are not allowed`);
+    } else if (
+      validate &&
+      noSpecialChar &&
+      e.target.value.trim().match(/[^a-zA-Z0-9]/)
+    ) {
+      setErr(true);
+      setErrorMsg(`Special characters are not allowed!`);
     } else if (
       validate &&
       type === "email" &&
@@ -143,6 +150,13 @@ const TextField: React.FC<TextFieldProps> = ({
         inputValue.trim().match(/\d/)
       ) {
         getError(false);
+      } else if (
+        validate &&
+        type === "text" &&
+        noSpecialChar &&
+        e.target.value.trim().match(/[^a-zA-Z0-9]/)
+      ) {
+        getError(false);
       } else {
         setValid(false);
         setErr(false);
@@ -189,12 +203,13 @@ const TextField: React.FC<TextFieldProps> = ({
       {label && (
         <span className="flex">
           <label
-            className={`${err
+            className={`${
+              err
                 ? "text-defaultRed"
                 : focus
-                  ? "text-primary"
-                  : "text-slatyGrey"
-              }`}
+                ? "text-primary"
+                : "text-slatyGrey"
+            }`}
           >
             {label}
           </label>
@@ -209,28 +224,31 @@ const TextField: React.FC<TextFieldProps> = ({
       )}
 
       <div
-        className={`${!err &&
+        className={`${
+          !err &&
           !disabled &&
           "animated-input relative inline-block before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
-          }`}
+        }`}
       >
         <input
           className={`
           ${className}
           py-1 border-b outline-none transition duration-600 w-full font-normal text-[14px]
           ${type === "email" ? "pr-10" : ""}
-          ${err
+          ${
+            err
               ? "border-b-defaultRed"
               : focus
-                ? "border-b-primary"
-                : "border-b-lightSilver"
-            }
-          ${valid && !err
+              ? "border-b-primary"
+              : "border-b-lightSilver"
+          }
+          ${
+            valid && !err
               ? "text-successColor"
               : showEmailError
-                ? "text-defaultRed"
-                : "text-[#333333]"
-            }
+              ? "text-defaultRed"
+              : "text-[#333333]"
+          }
         `}
           ref={inputRef}
           type={type}
