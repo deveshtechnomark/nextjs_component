@@ -6,7 +6,7 @@ import ChevronDown from "./icons/ChevronDown.js";
 import UserIcon from "./icons/UserIcon.js";
 // Library Components
 import { Avatar } from "../Avatar/Avatar.js";
-import CheckBox from "../Checkbox/Checkbox.js";
+import CheckBox  from "../Checkbox/Checkbox.js";
 
 interface MultiSelectProps {
   id: string;

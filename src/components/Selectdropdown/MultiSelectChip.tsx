@@ -6,7 +6,7 @@ import CrossIcon from "./icons/CrossIcon.js";
 import ChevronDown from "./icons/ChevronDown.js";
 
 import { Avatar } from "../Avatar/Avatar.js";
-import CheckBox  from "../Checkbox/Checkbox.js";
+import  CheckBox from "../Checkbox/Checkbox.js";
 
 interface MultiSelectChipProps {
   options: { value: string; label: string }[];

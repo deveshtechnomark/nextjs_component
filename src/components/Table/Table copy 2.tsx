@@ -39,10 +39,20 @@ const Table: React.FC<TableProps> = (props) => {
   const [isAllChecked, setIsAllChecked] = useState<boolean[]>([]);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [expandedRows, setExpandedRows] = useState<Record<number, boolean>>([]);
+  const [expandedNestedRows, setExpandedNestedRows] = useState<Record<number, boolean>>([]);
   const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
 
   const toggleRowExpansion = (index: number) => {
+    console.log("🚀 ~ file: Table.tsx:46 ~ toggleRowExpansion ~ index:", index)
     setExpandedRows((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
+  };
+
+  const toggleNestedRowExpansion = (index: number) => {
+    console.log("🚀 ~ file: Table.tsx:53 ~ toggleNestedRowExpansion ~ index:", index)
+    setExpandedNestedRows((prevState) => ({
       ...prevState,
       [index]: !prevState[index],
     }));
@@ -108,16 +118,16 @@ const Table: React.FC<TableProps> = (props) => {
     };
   }, [selectedRowIndex]);
 
-  const actionItem = (props.actionDesc ?? []).map((name: any, index) => {
+  const actionItem = props.actionDesc.map((name: any, index) => {
     return (
       <React.Fragment key={name + index}>
         <li
           onClick={() => props.getAction(name)}
-          key={index+name}
-          className="flex w-full z-[3] h-9 px-3 hover:bg-lightGray !cursor-pointer"
+          key={index}
+          className="flex w-full h-9 px-3 hover:bg-lightGray !cursor-pointer"
         >
           <div className="flex justify-center items-center ml-2 cursor-pointer">
-            <label className="inline text-xs z[2] cursor-pointer">
+            <label className="inline-block text-xs cursor-pointer">
               {name}
             </label>
           </div>
@@ -141,19 +151,25 @@ const Table: React.FC<TableProps> = (props) => {
     setSelectedRowIndex(checked ? index : -1);
   };
 
-  const detectExpandableKey = (): string | null => {
+  const detectExpandableKeys = (): string[] => {
+    const expandableKeys: string[] = [];
     if (props.expandable && props.data.length > 0) {
       const firstItem = props.data[0];
       for (const key in firstItem) {
         if (Array.isArray(firstItem[key])) {
-          return key;
+          const firstNestedItem = firstItem[key][0];
+          if (firstNestedItem && firstNestedItem.Alvish) {
+            expandableKeys.push(key); 
+          }
         }
       }
     }
-    return null;
+    return expandableKeys;
   };
 
-  const nestedKey = props.expandable ? detectExpandableKey() : null;
+  const nestedKeys = props.expandable ? detectExpandableKeys() : [];
+
+
   return (
     <div
       className={`scrollable-table w-full overflow-x-auto h-screen ${props.className} ${Style.table_container}`}
@@ -178,9 +194,9 @@ const Table: React.FC<TableProps> = (props) => {
               </th>
             )}
 
-            {props.headers.map((header,index) => (
+            {props.headers.map((header) => (
               <th
-                key={`${header.field}_${index}`}
+                key={header.field}
                 className="cursor-pointer text-[16px] sm:text-[14px] font-bold uppercase"
                 onClick={() => {
                   handleSort(header.field, header.sort);
@@ -218,25 +234,19 @@ const Table: React.FC<TableProps> = (props) => {
             <React.Fragment key={item.id}>
               <tr
                 className={`h-[56px] cursor-default hover:bg-whiteSmoke ${props.expandable && expandedRows[index]
-                  ? "bg-whiteSmoke border-b border-b-lightSilver"
+                  ? "bg-whiteSmoke"
                   : "border-b border-b-lightSilver"
                   }`}
               >
                 {props.expandable && (
-                  <td className="sm:w-[56px]" key={item.id}>
-
-                    {item[nestedKey] && item[nestedKey].length > 0 ? (
-                      <button
-                        onClick={() => toggleRowExpansion(index)}
-                        className={`transition-all duration-300 ${expandedRows[index] && "-rotate-180"
-                          }`}
-                      >
-                        <ChevronIcon />
-                      </button>
-                    ) : (
-                      // If no nested data, show an empty space to align the data properly.
-                      <div style={{ width: "24px" }} />
-                    )}
+                  <td className="sm:w-[56px]">
+                    <button
+                      onClick={() => toggleRowExpansion(index)}
+                      className={`transition-all duration-300 ${expandedRows[index] && "-rotate-180"
+                        }`}
+                    >
+                      <ChevronIcon />
+                    </button>
                   </td>
                 )}
 
@@ -285,19 +295,18 @@ const Table: React.FC<TableProps> = (props) => {
                 ))}
 
                 {props.action &&
-                  props.actions &&
                   props.actions.map((action) => (
                     <td
                       onClick={() => {
                         if (props.getRowId) {
-                          props.getRowId(item);
+                          props.getRowId(item.id);
                           // setActionOpen(true);
                           setSelectedRowIndex(index);
                         }
                       }}
                       key={action}
                       className={`${props.actionSticky
-                        ? `${Style.sticky_action_column} hover:bg-whiteSmoke z[-3]`
+                        ? `${Style.sticky_action_column} hover:bg-whiteSmoke`
                         : ""
                         } ${props.sticky && index === selectedRowIndex
                           ? "right-0"
@@ -306,8 +315,8 @@ const Table: React.FC<TableProps> = (props) => {
                     >
                       {action}
                       {selectedRowIndex === index && (
-                        <div className={`${Style.sticky_action_column}  action-div relative flex justify-center items-center`}>
-                          <div className={`${Style.sticky_action_column} visible absolute top-4 right-12 w-fit h-auto py-2 border border-lightSilver rounded-md bg-white shadow-lg `}>
+                        <div className="action-div relative flex justify-center items-center">
+                          <div className="visible absolute top-4 right-12 w-fit h-auto py-2 border border-lightSilver rounded-md bg-white shadow-lg ">
                             <div className="w-40 h-auto ">
                               <ul className="w-40">{actionItem}</ul>
                             </div>
@@ -318,53 +327,100 @@ const Table: React.FC<TableProps> = (props) => {
                   ))}
               </tr>
 
-
-              {props.expandable && expandedRows[index] && nestedKey && item[nestedKey] && (
-                <>
-
-                  <tr
-                    className={`p-4   ${props.expandable && expandedRows[index]
-                      ? "bg-whiteSmoke"
-                      : "border-b border-b-lightSilver"
-                      }`}
-                  >
-                    <td colSpan={props.headers.length + 1}>
-                      <table className="w-[100%]">
-                        <thead>
-                          <tr>
-                            <th></th>
-                            {item[nestedKey].length > 0 &&
-                              Object.keys(item[nestedKey][0]).map((key) => (
-                                <th key={key}></th>
-                              ))}
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                          {item[nestedKey].map((child, index) => (
-                            <tr className=" bg-pureWhite   border-b border-b-lightSilver hover:bg-whiteSmoke" key={`${child.id}`}>
-                              <td></td>
-                              {Object.values(child).map((value: any, valueIndex) => (
-                                <td
-                                  key={valueIndex}
-                                  className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
-                                >
-                                  <span className="flex justify-start items-start">
-                                    {value} {/* Corrected to display the actual value */}
-                                  </span>
-                                </td>
-
-                              ))}
+              {props.expandable &&
+                expandedRows[index] &&
+                nestedKeys.map((nestedKey) => (
+                  item[nestedKey] && (
+                    <tr
+                      key={nestedKey + index}
+                      className={`p-4 ${props.expandable && expandedRows[index]
+                        ? "bg-whiteSmoke"
+                        : "border-b border-b-lightSilver"
+                        }`}
+                    >
+                      <td colSpan={props.headers.length + (props.action ? 1 : 0)}>
+                        <table className="w-full">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              {item[nestedKey].length > 0 &&
+                                Object.keys(item[nestedKey][0]).map((key) => (
+                                  <th key={key}>{key}</th> // Show the key as the column header
+                                ))}
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                          </thead>
 
-                    </td>
-                  </tr>
-                </>)}
+                          <tbody>
+                            {item[nestedKey].map((child: any, childIndex: number) => (
+                              <React.Fragment key={nestedKey + index + childIndex}>
+                                <tr key={nestedKey + index + childIndex}>
+                                  <td className="sm:w-[56px]">
+                                    <button
+                                      onClick={() => toggleNestedRowExpansion(childIndex)}
+                                      className={`transition-all duration-300 ${expandedNestedRows[childIndex] && "-rotate-180"
+                                        }`}
+                                    >
+                                      <ChevronIcon />
+                                    </button>
+                                  </td>
+                                  {Object.keys(child).map((key) => (
+                                    <td
+                                      key={nestedKey + index + childIndex + key}
+                                      className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
+                                    >
+                                      <span className="flex justify-center items-center">
+                                        {/* {child.id} */}
+                                        {typeof child[key] === 'object' ? "" : child[key]}
+                                      </span>
+                                    </td>
+                                  ))}
+                                </tr>
+                                {/* Nested table for Alvish */}
+                                {expandedNestedRows[childIndex] && child.Alvish && (
+                                  <tr>
+                                    <td colSpan={props.headers.length + (props.action ? 1 : 0)}>
+                                      <table className="w-full">
+                                        <thead>
+                                          <tr>
+                                            <th></th>
+                                            {child.Alvish.length > 0 &&
+                                              Object.keys(child.Alvish[0]).map((key) => (
+                                                <th key={key}>{key}</th>
+                                              ))}
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {child.Alvish.map((nestedChild: any, nestedChildIndex: number) => (
+                                            <tr key={nestedKey + index + childIndex + nestedChildIndex}>
+                                              <td></td>
+                                              {Object.keys(nestedChild).map((nestedKey) => (
+                                                <td
+                                                  key={nestedKey + index + childIndex + nestedChildIndex + nestedKey}
+                                                  className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
+                                                >
+                                                  <span className="flex justify-center items-center">
+                                                    {nestedChild[nestedKey]}
+                                                  </span>
+                                                </td>
+                                              ))}
+                                            </tr>
+                                          ))}
+                                        </tbody>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                )}
+                              </React.Fragment>
+                            ))}
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  )
+                ))}
             </React.Fragment>
           ))}
+
         </tbody>
       </table>
     </div>
