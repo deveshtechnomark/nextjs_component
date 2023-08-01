@@ -33,6 +33,7 @@
     "@types/react": "^18.2.12",
     "classnames": "^2.3.2",
     "form-elements": "file:../checkbox",
+    "next-ts-lib": "file:../Merge-Library",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2"
   }

@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classNames from 'classnames';
+import { Avatar } from 'next-ts-lib';
+import 'next-ts-lib/dist/index.css';
 import { CheckBox } from 'form-elements';
 import 'form-elements/dist/index.css';
 
@@ -17,35 +19,25 @@ function ChevronDown() {
   })));
 }
 
-function UserIcon() {
-  return React.createElement("div", null, React.createElement("svg", {
-    stroke: "currentColor",
-    fill: "currentColor",
-    strokeWidth: "0",
-    viewBox: "0 0 24 24",
-    height: "1em",
-    width: "1em",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, React.createElement("path", {
-    d: "M12 2A10.13 10.13 0 0 0 2 12a10 10 0 0 0 4 7.92V20h.1a9.7 9.7 0 0 0 11.8 0h.1v-.08A10 10 0 0 0 22 12 10.13 10.13 0 0 0 12 2zM8.07 18.93A3 3 0 0 1 11 16.57h2a3 3 0 0 1 2.93 2.36 7.75 7.75 0 0 1-7.86 0zm9.54-1.29A5 5 0 0 0 13 14.57h-2a5 5 0 0 0-4.61 3.07A8 8 0 0 1 4 12a8.1 8.1 0 0 1 8-8 8.1 8.1 0 0 1 8 8 8 8 0 0 1-2.39 5.64z"
-  }), React.createElement("path", {
-    d: "M12 6a3.91 3.91 0 0 0-4 4 3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4zm0 6a1.91 1.91 0 0 1-2-2 1.91 1.91 0 0 1 2-2 1.91 1.91 0 0 1 2 2 1.91 1.91 0 0 1-2 2z"
-  })));
-}
-
 var Select = function Select(_a) {
   var _b;
   var id = _a.id,
     options = _a.options,
-    onSelect = _a.onSelect,
-    type = _a.type,
-    label = _a.label,
+    onSelect = _a.onSelect;
+    _a.type;
+    var label = _a.label,
     className = _a.className,
     _c = _a.search,
     search = _c === void 0 ? false : _c,
     _d = _a.required,
     required = _d === void 0 ? false : _d,
-    defaultValue = _a.defaultValue;
+    defaultValue = _a.defaultValue,
+    avatar = _a.avatar,
+    avatarName = _a.avatarName,
+    avatarImgUrl = _a.avatarImgUrl;
+    _a.errorMessage;
+    _a.hasError;
+    _a.getError;
   var _e = useState(""),
     inputValue = _e[0],
     setInputValue = _e[1];
@@ -112,7 +104,7 @@ var Select = function Select(_a) {
   }, options && options.map(function (option, index) {
     return React.createElement("li", {
       key: index,
-      className: classNames("p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex", {
+      className: classNames("p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex items-center", {
         "bg-whiteSmoke": option.value === inputValue,
         hidden: search && !option.label.toLowerCase().startsWith(inputValue)
       }),
@@ -121,9 +113,13 @@ var Select = function Select(_a) {
           handleSelect(option.value);
         }
       }
-    }, type === "icons" && React.createElement("div", {
+    }, avatar && React.createElement("div", {
       className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal"
-    }, React.createElement(UserIcon, null)), option.label);
+    }, React.createElement(Avatar, {
+      variant: "x-small",
+      name: avatarName,
+      imageUrl: avatarImgUrl
+    })), option.label);
   }))));
 };
 
@@ -163,7 +159,10 @@ var MultiSelect = function MultiSelect(_a) {
     className = _a.className,
     _b = _a.required,
     required = _b === void 0 ? false : _b,
-    defaultValue = _a.defaultValue;
+    defaultValue = _a.defaultValue,
+    avatar = _a.avatar,
+    avatarName = _a.avatarName,
+    avatarImgUrl = _a.avatarImgUrl;
   var selectRef = useRef(null);
   var _c = useState([]),
     selectedValues = _c[0],
@@ -240,7 +239,7 @@ var MultiSelect = function MultiSelect(_a) {
   }, options && options.map(function (option, index) {
     return React.createElement("li", {
       key: index,
-      className: classNames("p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
+      className: classNames("p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex items-center", {
         "bg-whiteSmoke": selectedValues.includes(option.value),
         hidden: !option.label.toLowerCase().startsWith(inputValue)
       }),
@@ -249,15 +248,19 @@ var MultiSelect = function MultiSelect(_a) {
           handleSelect(option.value);
         }
       } : undefined
-    }, type === "icons" && React.createElement("div", {
+    }, avatar && React.createElement("div", {
       className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal"
-    }, React.createElement(UserIcon, null)), type === "checkbox" && React.createElement(CheckBox, {
+    }, React.createElement(Avatar, {
+      variant: "x-small",
+      name: avatarName,
+      imageUrl: avatarImgUrl
+    })), type === "checkbox" && React.createElement(CheckBox, {
       id: option.value,
       label: option.label,
       onChange: function onChange(e) {
         e.target.checked ? handleSelect(option.value) : handleSelect(option.value);
       }
-    }), type !== "checkbox" && option.label);
+    }));
   })));
 };
 
@@ -285,7 +288,10 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     _a.id;
     var className = _a.className,
     _c = _a.required,
-    required = _c === void 0 ? false : _c;
+    required = _c === void 0 ? false : _c,
+    avatar = _a.avatar,
+    avatarName = _a.avatarName,
+    avatarImgUrl = _a.avatarImgUrl;
   var _d = useState(defaultValue || []),
     selected = _d[0],
     setSelected = _d[1];
@@ -383,9 +389,13 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       onClick: type !== "checkbox" ? function () {
         return handleSelect(option.value);
       } : undefined
-    }, type === "icons" && React.createElement("div", {
+    }, avatar && React.createElement("div", {
       className: "mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal"
-    }, React.createElement(UserIcon, null)), type === "checkbox" && React.createElement(CheckBox, {
+    }, React.createElement(Avatar, {
+      variant: "x-small",
+      name: avatarName,
+      imageUrl: avatarImgUrl
+    })), type === "checkbox" && React.createElement(CheckBox, {
       id: option.value,
       label: option.label,
       checked: selected.includes(option.value),

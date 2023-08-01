@@ -4,7 +4,9 @@ import classNames from "classnames";
 // Icons Componnents
 import ChevronDown from "./icons/ChevronDown.js";
 import UserIcon from "./icons/UserIcon.js";
-
+// Library Components
+import { Avatar } from "next-ts-lib";
+import 'next-ts-lib/dist/index.css';
 import { CheckBox } from "form-elements";
 import "form-elements/dist/index.css";
 
@@ -17,6 +19,9 @@ interface MultiSelectProps {
   className?: string;
   required?: boolean;
   defaultValue?: string;
+  avatar?: boolean;
+  avatarName?: string;
+  avatarImgUrl?: string
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
@@ -28,6 +33,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   className,
   required = false,
   defaultValue,
+  avatar,
+  avatarName,
+  avatarImgUrl
 }) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
@@ -146,7 +154,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             <li
               key={index}
               className={classNames(
-                "p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex",
+                "p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex items-center",
                 {
                   "bg-whiteSmoke": selectedValues.includes(option.value),
                   hidden: !option.label.toLowerCase().startsWith(inputValue),
@@ -162,11 +170,18 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                   : undefined
               }
             >
-              {type === "icons" && (
+              {/* {type === "icons" && (
                 <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
                   <UserIcon />
                 </div>
+              )} */}
+
+              {avatar && (
+                <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
+                  <Avatar variant="x-small" name={avatarName} imageUrl={avatarImgUrl} />
+                </div>
               )}
+
               {type === "checkbox" && (
                 <CheckBox
                   id={option.value}
@@ -178,7 +193,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                   }}
                 />
               )}
-              {type !== "checkbox" && option.label}
+              {/* {option.label} */}
             </li>
           ))}
       </ul>

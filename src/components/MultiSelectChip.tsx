@@ -4,8 +4,9 @@ import classNames from "classnames";
 // Icon Components
 import CrossIcon from "./icons/CrossIcon.js";
 import ChevronDown from "./icons/ChevronDown.js";
-import UserIcon from "./icons/UserIcon.js";
 
+import { Avatar } from "next-ts-lib";
+import 'next-ts-lib/dist/index.css';
 import { CheckBox } from "form-elements";
 import "form-elements/dist/index.css";
 
@@ -18,6 +19,9 @@ interface MultiSelectChipProps {
   type?: string;
   className?: string;
   required?: boolean;
+  avatar?: boolean;
+  avatarName?: string;
+  avatarImgUrl?: string
 }
 
 const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
@@ -29,6 +33,9 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
   id,
   className,
   required = false,
+  avatar,
+  avatarName,
+  avatarImgUrl
 }) => {
   const [selected, setSelected] = useState<string[]>(defaultValue || []);
   const [open, setOpen] = useState(false);
@@ -188,11 +195,18 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
                   : undefined
               }
             >
-              {type === "icons" && (
+              {/* {type === "icons" && (
                 <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
                   <UserIcon />
                 </div>
+              )} */}
+
+              {avatar && (
+                <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
+                  <Avatar variant="x-small" name={avatarName} imageUrl={avatarImgUrl} />
+                </div>
               )}
+
               {type === "checkbox" && (
                 <CheckBox
                   id={option.value}
