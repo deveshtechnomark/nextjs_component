@@ -28,7 +28,7 @@ const TextField: React.FC<TextFieldProps> = ({
   validate,
   onBlur,
   onChange,
-  errorMessage = "This is a required field!",
+  errorMessage,
   supportingText,
   disabled,
   getValue,
@@ -49,7 +49,7 @@ const TextField: React.FC<TextFieldProps> = ({
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
-    setErrorMsg(errorMessage);
+    setErrorMsg(errorMessage ? errorMessage : "This is required field!");
     setErr(hasError);
   }, [hasError, errorMessage]);
 
@@ -76,6 +76,13 @@ const TextField: React.FC<TextFieldProps> = ({
     } else if (validate && noNumeric && e.target.value.trim().match(/\d/)) {
       setErr(true);
       setErrorMsg(`Numbers are not allowed`);
+    } else if (
+      validate &&
+      noSpecialChar &&
+      e.target.value.trim().match(/[^a-zA-Z0-9]/)
+    ) {
+      setErr(true);
+      setErrorMsg(`Special characters are not allowed!`);
     } else if (
       validate &&
       type === "email" &&
@@ -143,6 +150,13 @@ const TextField: React.FC<TextFieldProps> = ({
         inputValue.trim().match(/\d/)
       ) {
         getError(false);
+      } else if (
+        validate &&
+        type === "text" &&
+        noSpecialChar &&
+        e.target.value.trim().match(/[^a-zA-Z0-9]/)
+      ) {
+        getError(false);
       } else {
         setValid(false);
         setErr(false);
@@ -173,10 +187,10 @@ const TextField: React.FC<TextFieldProps> = ({
         getError(false);
         setShowEmailError(false);
       } else {
-        getError(true);
         setValid(false);
         setErr(false);
         setShowEmailError(false);
+        getError(true);
       }
     } else if (err || valid) {
       setErr(false);
