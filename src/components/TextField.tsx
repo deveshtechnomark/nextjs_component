@@ -164,7 +164,7 @@ const TextField: React.FC<TextFieldProps> = ({
       }
     } else if (validate && type === "email") {
       if (inputValue && !validateEmail(inputValue)) {
-        setValid(true);
+        setValid(false);
         setErr(false);
         getError(false);
         setShowEmailError(false);
@@ -187,7 +187,7 @@ const TextField: React.FC<TextFieldProps> = ({
         getError(false);
         setShowEmailError(false);
       } else {
-        setValid(false);
+        setValid(true);
         setErr(false);
         setShowEmailError(false);
         getError(true);

@@ -59,7 +59,8 @@ function CheckIcon() {
 var TextField = function TextField(_a) {
   var label = _a.label,
     className = _a.className,
-    type = _a.type,
+    _b = _a.type,
+    type = _b === void 0 ? "text" : _b,
     validate = _a.validate,
     onBlur = _a.onBlur,
     onChange = _a.onChange,
@@ -76,23 +77,23 @@ var TextField = function TextField(_a) {
     noSpecialChar = _a.noSpecialChar,
     props = __rest(_a, ["label", "className", "type", "validate", "onBlur", "onChange", "errorMessage", "supportingText", "disabled", "getValue", "getError", "hasError", "autoComplete", "minChar", "maxChar", "noNumeric", "noSpecialChar"]);
   var inputRef = React.useRef(null);
-  var _b = React.useState(false),
-    err = _b[0],
-    setErr = _b[1];
   var _c = React.useState(false),
-    focus = _c[0],
-    setFocus = _c[1];
+    err = _c[0],
+    setErr = _c[1];
   var _d = React.useState(false),
-    valid = _d[0],
-    setValid = _d[1];
+    focus = _d[0],
+    setFocus = _d[1];
   var _e = React.useState(false),
-    showEmailError = _e[0],
-    setShowEmailError = _e[1];
-  var _f = React.useState(""),
-    errorMsg = _f[0],
-    setErrorMsg = _f[1];
+    valid = _e[0],
+    setValid = _e[1];
+  var _f = React.useState(false),
+    showEmailError = _f[0],
+    setShowEmailError = _f[1];
+  var _g = React.useState(""),
+    errorMsg = _g[0],
+    setErrorMsg = _g[1];
   React.useEffect(function () {
-    setErrorMsg(errorMessage);
+    setErrorMsg(errorMessage ? errorMessage : "This is required field!");
     setErr(hasError);
   }, [hasError, errorMessage]);
   var handleFocus = function handleFocus() {
@@ -114,9 +115,12 @@ var TextField = function TextField(_a) {
     } else if (validate && e.target.value.trim().length > maxChar) {
       setErr(true);
       setErrorMsg("Please enter minimum ".concat(maxChar, " character!"));
-    } else if (validate && e.target.value.trim().match(/\d/)) {
+    } else if (validate && noNumeric && e.target.value.trim().match(/\d/)) {
       setErr(true);
       setErrorMsg("Numbers are not allowed");
+    } else if (validate && noSpecialChar && e.target.value.trim().match(/[^a-zA-Z0-9]/)) {
+      setErr(true);
+      setErrorMsg("Special characters are not allowed!");
     } else if (validate && type === "email" && e.target.value.trim().length < minChar) {
       setErr(true);
       setErrorMsg("Please enter minimum ".concat(minChar, " character!"));
@@ -160,7 +164,9 @@ var TextField = function TextField(_a) {
         getError(false);
       } else if (inputValue.trim().length > maxChar) {
         getError(false);
-      } else if (inputValue.trim().match(/\d/)) {
+      } else if (validate && type === "text" && noNumeric && inputValue.trim().match(/\d/)) {
+        getError(false);
+      } else if (validate && type === "text" && noSpecialChar && e.target.value.trim().match(/[^a-zA-Z0-9]/)) {
         getError(false);
       } else {
         setValid(false);
@@ -168,10 +174,10 @@ var TextField = function TextField(_a) {
         getError(true);
       }
     } else if (validate && type === "email") {
-      if (inputValue && validateEmail(inputValue)) {
-        setValid(true);
+      if (inputValue && !validateEmail(inputValue)) {
+        setValid(false);
         setErr(false);
-        getError(true);
+        getError(false);
         setShowEmailError(false);
       } else if (validate && type === "email" && inputValue.trim().length < minChar) {
         setValid(true);
@@ -184,10 +190,10 @@ var TextField = function TextField(_a) {
         getError(false);
         setShowEmailError(false);
       } else {
-        setValid(false);
+        setValid(true);
         setErr(false);
         setShowEmailError(false);
-        getError(false);
+        getError(true);
       }
     } else if (err || valid) {
       setErr(false);
