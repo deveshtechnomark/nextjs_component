@@ -808,19 +808,25 @@ var Tel = function Tel(_a) {
   var _g = useState(""),
     errorMsg = _g[0],
     setErrorMsg = _g[1];
-  useEffect(function () {
-    setErrorMsg(errorMessage);
-    setErr(hasError);
-  }, [hasError, errorMessage]);
+  {
+    validate && useEffect(function () {
+      setErrorMsg(errorMessage);
+      setErr(hasError);
+      hasError && getError(false);
+    }, [errorMessage, hasError]);
+  }
+  {
+    !validate && getError(true);
+  }
   var validateInput = function validateInput(e) {
     if (e.target.value === "") {
       setErr(true);
-      getError(false);
       setErrorMsg("This is a required field!");
+      getError(false);
     } else if (e.target.value.length < 12) {
       setErr(true);
-      getError(false);
       setErrorMsg("Please Enter valid 10 digits Phone Number.");
+      getError(false);
     } else {
       setErr(false);
       getError(true);
@@ -868,10 +874,11 @@ var Tel = function Tel(_a) {
     className: "!border-none",
     options: data,
     id: "basic",
-    onSelect: function onSelect(value) {
-      setSelectedCountryCode(value);
+    getValue: function getValue(e) {
+      setSelectedCountryCode(e);
     },
-    defaultValue: "+91"
+    defaultValue: "+91",
+    getError: function getError(e) {}
   })), React.createElement("input", __assign({
     className: "".concat(className, " py-1 outline-none w-full h-full text-darkCharcoal"),
     ref: inputRef,
