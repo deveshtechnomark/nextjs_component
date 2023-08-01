@@ -108,7 +108,7 @@ const Table: React.FC<TableProps> = (props) => {
     };
   }, [selectedRowIndex]);
 
-  const actionItem = props.actionDesc.map((name: any, index) => {
+  const actionItem = (props.actionDesc ?? []).map((name: any, index) => {
     return (
       <React.Fragment key={name + index}>
         <li
@@ -218,19 +218,24 @@ const Table: React.FC<TableProps> = (props) => {
             <React.Fragment key={item.id}>
               <tr
                 className={`h-[56px] cursor-default hover:bg-whiteSmoke ${props.expandable && expandedRows[index]
-                  ? "bg-whiteSmoke"
+                  ? "bg-whiteSmoke border-b border-b-lightSilver"
                   : "border-b border-b-lightSilver"
                   }`}
               >
                 {props.expandable && (
                   <td className="sm:w-[56px]">
-                    <button
-                      onClick={() => toggleRowExpansion(index)}
-                      className={`transition-all duration-300 ${expandedRows[index] && "-rotate-180"
-                        }`}
-                    >
-                      <ChevronIcon />
-                    </button>
+
+                    {item[nestedKey] && item[nestedKey].length > 0 ? (
+                      <button
+                        onClick={() => toggleRowExpansion(index)}
+                        className={`transition-all duration-300 ${expandedRows[index] && "-rotate-180"
+                          }`}
+                      >
+                        <ChevronIcon />
+                      </button>
+                    ) : (
+                      <div style={{ width: "24px" }} />
+                    )}
                   </td>
                 )}
 
@@ -241,8 +246,8 @@ const Table: React.FC<TableProps> = (props) => {
                       id={index.toString()}
                       checked={isAllChecked[index]}
                       onChange={(e) => {
-                        e.stopPropagation(); // Prevent the click event from propagating to the parent (action cell)
-                        handleCheckRow(index, e.target.checked); // Handle checkbox click separately
+                        e.stopPropagation(); 
+                        handleCheckRow(index, e.target.checked);
                       }}
                     />
                   </td>
@@ -279,12 +284,12 @@ const Table: React.FC<TableProps> = (props) => {
                 ))}
 
                 {props.action &&
+                  props.actions &&
                   props.actions.map((action) => (
                     <td
                       onClick={() => {
                         if (props.getRowId) {
                           props.getRowId(item.id);
-                          // setActionOpen(true);
                           setSelectedRowIndex(index);
                         }
                       }}
@@ -311,46 +316,50 @@ const Table: React.FC<TableProps> = (props) => {
                   ))}
               </tr>
 
-              {props.expandable && expandedRows[index] && nestedKey && item[nestedKey] && (
+
+              {props.expandable && expandedRows[index] && nestedKey && item[nestedKey] && (<>
+
                 <tr
-                  className={`p-4 ${props.expandable && expandedRows[index]
+                  className={`p-4   ${props.expandable && expandedRows[index]
                     ? "bg-whiteSmoke"
                     : "border-b border-b-lightSilver"
                     }`}
                 >
-                  <td colSpan={props.headers.length + (props.action ? 1 : 0)}>
-                    <table className="w-full">
+                  <td colSpan={props.headers.length + 1}>
+                    <table className="w-[100%] ">
                       <thead>
                         <tr>
-                          <th>{ }</th>
+                          <th></th>
                           {item[nestedKey].length > 0 &&
-                            Object.keys(item[nestedKey][0]).map((key) => ( // Update this line
-                              <th key={key}>{key}</th>
+                            Object.keys(item[nestedKey][0]).map((key) => (
+                              <th key={key}></th>
                             ))}
                         </tr>
                       </thead>
 
                       <tbody>
-                        {item[nestedKey].map((child, index) => ( // Update this line
-                          <tr key={index}>
-                            <td>{ }</td>
-                            {Object.values(child).map((value: any) => ( // Update this line
+                        {item[nestedKey].map((child, index) => (
+                          <tr className=" bg-pureWhite   border-b border-b-lightSilver hover:bg-whiteSmoke" key={index}>
+                            <td></td>
+                            {Object.values(child).map((value: any, valueIndex) => (
                               <td
-                                key={value}
+                                key={valueIndex}
                                 className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
                               >
-                                <span className="flex justify-center items-center">
+                                <span className="flex justify-start items-start">
                                   {value}
                                 </span>
                               </td>
+
                             ))}
                           </tr>
                         ))}
                       </tbody>
                     </table>
+
                   </td>
                 </tr>
-              )}
+              </>)}
             </React.Fragment>
           ))}
         </tbody>
