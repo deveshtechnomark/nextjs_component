@@ -11,6 +11,7 @@ interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   countryCode?: boolean;
   getValue: (arg1: string) => void;
+  getError: (arg1: boolean) => void;
   hasError?: boolean;
 }
 
@@ -25,6 +26,7 @@ const Tel: React.FC<TelInputProps> = ({
   supportingText,
   disabled,
   getValue,
+  getError,
   countryCode = false,
   errorMessage,
   hasError,
@@ -37,20 +39,30 @@ const Tel: React.FC<TelInputProps> = ({
   const [selectedCountryCode, setSelectedCountryCode] = useState("+91");
   const [errorMsg, setErrorMsg] = useState("");
 
-  useEffect(() => {
-    setErrorMsg(errorMessage);
-    setErr(hasError);
-  }, [hasError, errorMessage]);
+  {
+    validate &&
+      useEffect(() => {
+        setErrorMsg(errorMessage);
+        setErr(hasError);
+        hasError && getError(false);
+      }, [errorMessage, hasError]);
+  }
+  {
+    !validate && getError(true);
+  }
 
   const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") {
       setErr(true);
       setErrorMsg("This is a required field!");
+      getError(false);
     } else if (e.target.value.length < 12) {
       setErr(true);
       setErrorMsg("Please Enter valid 10 digits Phone Number.");
+      getError(false);
     } else {
       setErr(false);
+      getError(true);
     }
   };
 
@@ -128,10 +140,11 @@ const Tel: React.FC<TelInputProps> = ({
                 className="!border-none"
                 options={data}
                 id="basic"
-                onSelect={(value: any) => {
-                  setSelectedCountryCode(value);
+                getValue={(e) => {
+                  setSelectedCountryCode(e);
                 }}
                 defaultValue="+91"
+                getError={(e) => {}}
               />
             </div>
           )}
@@ -142,7 +155,15 @@ const Tel: React.FC<TelInputProps> = ({
             id={id}
             name={name}
             value={value}
-            onBlur={onBlur ? onBlur : validate ? validateInput : validate ? focusHandler : undefined}
+            onBlur={
+              onBlur
+                ? onBlur
+                : validate
+                ? validateInput
+                : validate
+                ? focusHandler
+                : undefined
+            }
             onChange={handleInputChange}
             onFocus={handleFocus}
             disabled={disabled}

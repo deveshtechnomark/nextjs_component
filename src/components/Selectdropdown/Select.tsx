@@ -3,39 +3,67 @@ import classNames from "classnames";
 
 // Icon Components
 import ChevronDown from "./icons/ChevronDown.js";
-import UserIcon from "./icons/UserIcon.js";
-
+// Library Components
+import { Avatar } from "../Avatar/Avatar.js";
+ 
 interface Option {
   value: string;
   label: string;
 }
 
-interface SelectProps {
+interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   options: Option[];
-  onSelect: (value: string) => void;
   type?: string;
   label?: string;
   className?: string;
   search?: boolean;
-  required?: boolean;
+  validate?: boolean;
   defaultValue?: string;
+  avatar?: boolean;
+  avatarName?: string;
+  avatarImgUrl?: string;
+  errorMessage?: string;
+  hasError?: boolean;
+  getValue: (value: string) => void;
+  getError: (arg1: boolean) => void;
+  supportingText?: string;
+  errorClass?: string;
 }
 
 const Select: React.FC<SelectProps> = ({
   id,
   options,
-  onSelect,
+  getValue,
   type,
   label,
   className,
   search = false,
-  required = false,
+  validate,
   defaultValue,
+  avatar,
+  avatarName,
+  avatarImgUrl,
+  errorMessage = "This is a required field.",
+  supportingText,
+  hasError,
+  getError,
+  errorClass,
 }) => {
   const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
   const [open, setOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+
+  {
+    validate &&
+      useEffect(() => {
+        setErrMsg(errorMessage);
+        setError(hasError);
+        hasError && getError(false);
+      }, [errorMessage, hasError]);
+  }
 
   useEffect(() => {
     window.addEventListener("click", handleOutsideClick);
@@ -60,40 +88,81 @@ const Select: React.FC<SelectProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.toLowerCase();
-    setInputValue(inputValue);
+    if (validate && inputValue.trim() === "") {
+      setError(true);
+      setErrMsg("Please select a valid option.");
+    } else {
+      setError(false);
+      setErrMsg("");
+      getValue(inputValue);
+      setInputValue(inputValue);
+    }
   };
 
   const handleSelect = (value: string) => {
     setInputValue(value);
     setOpen(false);
-    onSelect(value);
+
+    if (value.trim() === "") {
+      setError(true);
+      getError(false);
+      setErrMsg("Please select a valid option.");
+    } else {
+      setError(false);
+      setErrMsg("");
+      getValue(value);
+      getError(true);
+    }
+  };
+
+  const handleBlur = () => {
+    if (validate) {
+      if (inputValue.trim() === "") {
+        setError(true);
+        setErrMsg("Please select a valid option.");
+        getError(false);
+      } else {
+        setError(false);
+        setErrMsg("");
+        getError(true);
+      }
+    }
   };
 
   return (
     <>
       <div
         className={classNames(
-          `relative font-medium w-full flex-row border-b ${inputValue ? "border-primary" : "border-lightSilver"} hover:border-primary transition-colors duration-300 ${className}`,
-          )}
-          ref={selectRef}
-          >
+          `relative font-medium w-full flex-row border-b ${
+            inputValue ? "border-primary" : "border-lightSilver"
+          } hover:border-primary transition-colors duration-300 ${className}`,
+          {
+            "border-defaultRed": error,
+          }
+        )}
+        ref={selectRef}
+      >
         {label && (
           <label
             className={classNames(
-              "text-[14px] font-normal ",
-              open ? "text-primary" : inputValue ? "text-primary" : "text-slatyGrey",
-              
+              "text-[14px] font-normal font-proxima",
+              open
+                ? "text-primary"
+                : inputValue
+                ? "text-primary"
+                : "text-slatyGrey"
             )}
             htmlFor={id}
           >
             {label}
-            {required && <span className="text-defaultRed">&nbsp;*</span>}
+            {validate && <span className="text-defaultRed">&nbsp;*</span>}
           </label>
         )}
 
-        <div className="flex flex-row items-center relative w-full">
+        <div className="flex flex-row items-center relative w-full mb-0">
           <input
             id={id}
+            onBlur={handleBlur}
             onClick={handleToggleOpen}
             onChange={handleInputChange}
             readOnly={!search}
@@ -103,8 +172,9 @@ const Select: React.FC<SelectProps> = ({
                 ? inputValue.substring(0, 20) + "..."
                 : inputValue
             }
+            autoComplete="off"
             className={classNames(
-              "flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal w-full",
+              "flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full",
               open && "text-primary",
               !open ? "cursor-pointer" : "cursor-default",
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"
@@ -126,7 +196,7 @@ const Select: React.FC<SelectProps> = ({
 
         <ul
           className={classNames(
-            "absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform",
+            "absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform w-full",
             open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
@@ -135,7 +205,6 @@ const Select: React.FC<SelectProps> = ({
               "ease-out": open,
             }
           )}
-
           // Setting the width inline style based on the client width of the parent div
           style={{ width: selectRef.current?.clientWidth }}
         >
@@ -144,7 +213,7 @@ const Select: React.FC<SelectProps> = ({
               <li
                 key={index}
                 className={classNames(
-                  "p-[10px] text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex",
+                  "p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex items-center",
                   {
                     "bg-whiteSmoke": option.value === inputValue,
                     hidden:
@@ -158,18 +227,31 @@ const Select: React.FC<SelectProps> = ({
                   }
                 }}
               >
-                {type === "icons" && (
+                {avatar && (
                   <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
-                    <UserIcon />
+                    <Avatar
+                      variant="x-small"
+                      name={avatarName}
+                      imageUrl={avatarImgUrl}
+                    />
                   </div>
                 )}
 
                 {option.label}
-
               </li>
             ))}
         </ul>
       </div>
+      {!error && supportingText && (
+        <span className="text-slatyGrey text-[12px] sm:text-[14px] -mt-[20px]">
+          {supportingText}
+        </span>
+      )}
+      {error && (
+        <span className={`text-defaultRed text-[12px] sm:text-[14px] ${errorClass}`}>
+          {errMsg}
+        </span>
+      )}
     </>
   );
 };

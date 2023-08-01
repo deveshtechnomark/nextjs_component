@@ -24,7 +24,7 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 const TextField: React.FC<TextFieldProps> = ({
   label,
   className,
-  type,
+  type="text",
   validate,
   onBlur,
   onChange,
@@ -163,10 +163,10 @@ const TextField: React.FC<TextFieldProps> = ({
         getError(true);
       }
     } else if (validate && type === "email") {
-      if (inputValue && validateEmail(inputValue)) {
+      if (inputValue && !validateEmail(inputValue)) {
         setValid(true);
         setErr(false);
-        getError(true);
+        getError(false);
         setShowEmailError(false);
       } else if (
         validate &&
@@ -190,7 +190,7 @@ const TextField: React.FC<TextFieldProps> = ({
         setValid(false);
         setErr(false);
         setShowEmailError(false);
-        getError(false);
+        getError(true);
       }
     } else if (err || valid) {
       setErr(false);
