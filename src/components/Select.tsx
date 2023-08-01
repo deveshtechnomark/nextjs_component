@@ -5,10 +5,10 @@ import classNames from "classnames";
 import ChevronDown from "./icons/ChevronDown.js";
 // Library Components
 import { Avatar } from "next-ts-lib";
-import 'next-ts-lib/dist/index.css';
- 
+import "next-ts-lib/dist/index.css";
+
 interface Option {
-  value: string;
+  value: any;
   label: string;
 }
 
@@ -26,7 +26,7 @@ interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   avatarImgUrl?: string;
   errorMessage?: string;
   hasError?: boolean;
-  getValue: (value: string) => void;
+  getValue: (value: any) => void;
   getError: (arg1: boolean) => void;
   supportingText?: string;
   errorClass?: string;
@@ -95,16 +95,15 @@ const Select: React.FC<SelectProps> = ({
     } else {
       setError(false);
       setErrMsg("");
-      getValue(inputValue);
       setInputValue(inputValue);
     }
   };
 
-  const handleSelect = (value: string) => {
-    setInputValue(value);
+  const handleSelect = (label: string, value: any) => {
+    setInputValue(label);
     setOpen(false);
 
-    if (value.trim() === "") {
+    if (label.trim() === "") {
       setError(true);
       getError(false);
       setErrMsg("Please select a valid option.");
@@ -133,26 +132,20 @@ const Select: React.FC<SelectProps> = ({
   return (
     <>
       <div
-        className={classNames(
-          `relative font-medium w-full flex-row border-b ${
-            inputValue ? "border-primary" : "border-lightSilver"
-          } hover:border-primary transition-colors duration-300 ${className}`,
-          {
-            "border-defaultRed": error,
-          }
-        )}
+        className={`relative font-medium w-full flex-row border-b ${inputValue ? "border-primary" : error ? "border-defaultRed" : "border-lightSilver hover:border-primary transition-colors duration-300"
+          } ${className}`}
         ref={selectRef}
       >
         {label && (
           <label
-            className={classNames(
-              "text-[14px] font-normal font-proxima",
-              open
+            className={`text-[14px] font-normal font-proxima ${open
                 ? "text-primary"
                 : inputValue
-                ? "text-primary"
-                : "text-slatyGrey"
-            )}
+                  ? "text-primary"
+                  : error
+                    ? "text-defaultRed"
+                    : "text-slatyGrey"
+              }`}
             htmlFor={id}
           >
             {label}
@@ -174,57 +167,40 @@ const Select: React.FC<SelectProps> = ({
                 : inputValue
             }
             autoComplete="off"
-            className={classNames(
-              "flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full",
-              open && "text-primary",
-              !open ? "cursor-pointer" : "cursor-default",
-              !open ? "placeholder-darkCharcoal" : "placeholder-primary"
-            )}
+            className={`flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full ${open ? "text-primary" : ""
+              } ${!open ? "cursor-pointer" : "cursor-default"
+              } ${!open ? "placeholder-darkCharcoal" : "placeholder-primary"
+              }`}
           />
 
           <div
             onClick={handleToggleOpen}
-            className={classNames(
-              "text-[1.5rem] text-darkCharcoal cursor-pointer",
-              {
-                "rotate-180": open,
-              }
-            )}
+            className={`text-[1.5rem] text-darkCharcoal cursor-pointer ${open ? "rotate-180" : ""
+              }`}
           >
             <ChevronDown />
           </div>
         </div>
 
         <ul
-          className={classNames(
-            "absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform w-full",
-            open
+          className={`absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform w-full ${open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
-              : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
-
-            {
-              "ease-out": open,
-            }
-          )}
-          // Setting the width inline style based on the client width of the parent div
+              : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500"
+            } ${open ? "ease-out" : ""}`}
           style={{ width: selectRef.current?.clientWidth }}
         >
-          {options &&
+          {options.length > 0 &&
             options.map((option, index) => (
               <li
                 key={index}
-                className={classNames(
-                  "p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex items-center",
-                  {
-                    "bg-whiteSmoke": option.value === inputValue,
-                    hidden:
-                      search &&
-                      !option.label.toLowerCase().startsWith(inputValue),
-                  }
-                )}
+                className={`p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex items-center ${option.value === inputValue ? "bg-whiteSmoke" : ""
+                  } ${search && !option.label.toLowerCase().startsWith(inputValue)
+                    ? "hidden"
+                    : ""
+                  }`}
                 onClick={() => {
-                  if (option.value !== inputValue) {
-                    handleSelect(option.value);
+                  if (option.label !== inputValue) {
+                    handleSelect(option.label, option.value);
                   }
                 }}
               >
@@ -253,6 +229,7 @@ const Select: React.FC<SelectProps> = ({
           {errMsg}
         </span>
       )}
+
     </>
   );
 };

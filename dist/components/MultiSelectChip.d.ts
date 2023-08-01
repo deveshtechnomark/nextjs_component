@@ -16,6 +16,13 @@ interface MultiSelectChipProps {
     avatar?: boolean;
     avatarName?: string;
     avatarImgUrl?: string;
+    errorMessage?: string;
+    hasError?: boolean;
+    getValue: (value: any) => void;
+    getError: (arg1: boolean) => void;
+    supportingText?: string;
+    errorClass?: string;
+    validate?: boolean;
 }
 declare const MultiSelectChip: React.FC<MultiSelectChipProps>;
 export { MultiSelectChip };

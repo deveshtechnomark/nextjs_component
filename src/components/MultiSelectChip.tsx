@@ -6,8 +6,8 @@ import CrossIcon from "./icons/CrossIcon.js";
 import ChevronDown from "./icons/ChevronDown.js";
 
 import { Avatar } from "next-ts-lib";
-import 'next-ts-lib/dist/index.css';
 import { CheckBox } from "form-elements";
+import 'next-ts-lib/dist/index.css';
 import "form-elements/dist/index.css";
 
 interface MultiSelectChipProps {
@@ -22,6 +22,13 @@ interface MultiSelectChipProps {
   avatar?: boolean;
   avatarName?: string;
   avatarImgUrl?: string
+  errorMessage?: string;
+  hasError?: boolean;
+  getValue: (value: any) => void;
+  getError: (arg1: boolean) => void;
+  supportingText?: string;
+  errorClass?: string;
+  validate?: boolean;
 }
 
 const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
@@ -35,11 +42,44 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
   required = false,
   avatar,
   avatarName,
-  avatarImgUrl
+  avatarImgUrl,
+  errorMessage = "This is a required field.",
+  supportingText,
+  hasError,
+  getError,
+  getValue,
+  errorClass,
+  validate,
 }) => {
+
   const [selected, setSelected] = useState<string[]>(defaultValue || []);
   const [open, setOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
+  {
+    validate &&
+      useEffect(() => {
+        setErrMsg(errorMessage);
+        setError(hasError);
+        hasError && getError(false);
+      }, [errorMessage, hasError]);
+  }
+
+  const handleBlur = () => {
+    if (validate) {
+      if (selected.length === 0) {
+        setError(true);
+        setErrMsg("Please select a valid option.");
+        getError(false);
+      } else {
+        setError(false);
+        setErrMsg("");
+        getError(true);
+      }
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("click", handleOutsideClick);
@@ -73,13 +113,18 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
       ];
     }
 
+    if (updatedSelected.length > 0) {
+      setError(false);
+      setErrMsg("");
+    }
+
     setSelected(updatedSelected);
-    onSelect(updatedSelected);
+    getValue(updatedSelected);
   };
 
   const handleClearAll = () => {
     setSelected([]);
-    onSelect([]);
+    getValue([]);
   };
 
   const handleToggleOpen = () => {
@@ -92,18 +137,13 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
         {selected.slice(0, 2).map((option) => (
           <div
             key={option}
-            className={classNames(
-              "flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima",
-              option.length > 8 && "max-w-[100px]"
-            )}
+            className={`flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima ${option.length > 8 ? "max-w-[100px]" : ""
+              }`}
           >
             <span title={option}>
               {option.length > 8 ? option.substring(0, 8) + "..." : option}
             </span>
-            <div
-              onClick={() => handleSelect(option)}
-              className="ml-1 cursor-pointer"
-            >
+            <div onClick={() => handleSelect(option)} className="ml-1 cursor-pointer">
               <CrossIcon />
             </div>
           </div>
@@ -115,115 +155,93 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
         )}
       </div>
     ) : (
-      <div
-        className={classNames("text-darkCharcoal font-proxima", {
-          "text-primary": open,
-        })}
-      >
+      <div className={`text-darkCharcoal font-proxima ${open ? "text-primary" : ""}`}>
         Please Select...
       </div>
     );
 
-  return (
-    <div className="relative w-full font-medium flex-row" ref={selectRef}>
-      {label && (
-        <label
-          onClick={handleToggleOpen}
-          className={classNames(
-            "text-[14px] font-normal font-proxima",
-            open ? "text-primary" : selected.length > 0 ? "text-primary" : "text-slatyGrey"
-          )}
-        >
-          {label}
-          {required && <span className="text-defaultRed">&nbsp;*</span>}
-        </label>
-      )}
-      <div
-        onClick={handleToggleOpen}
-        className={`${classNames(
-          "flex justify-between bg-white border-b text-[14px] font-normal font-proxima transition-colors duration-300",
-          open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer",
-          selected.length > 0 ? "border-primary" : "border-lightSilver",
-          "hover:border-primary"
-        )} ${className}`}
-      >
-        {selectedDisplay}
 
+  return (
+    <>
+      <div className={`relative w-full font-medium flex-row`} ref={selectRef}>
+        {label && (
+          <label
+            onClick={handleToggleOpen}
+            className={`text-[14px] font-normal font-proxima ${open ? "text-primary" : selected.length > 0 ? "text-primary" : error ? "text-defaultRed" : "text-slatyGrey"
+              }`}
+          >
+            {label}
+            {validate && <span className="text-defaultRed">&nbsp;*</span>}
+          </label>
+        )}
         <div
           onClick={handleToggleOpen}
-          className={classNames(
-            "text-[1.5rem] text-darkCharcoal cursor-pointer",
-            {
-              "rotate-180": open,
-            }
-          )}
+          className={`flex justify-between bg-white border-b text-[14px] font-normal font-proxima  ${open ? "text-primary cursor-default" : selected.length === 0 ? "text-darkCharcoal cursor-pointer" : ""
+            } ${selected.length > 0 ? "border-primary" : error ? "border-defaultRed" : "border-lightSilver transition-colors duration-300 hover:border-primary"} ${className}`}
         >
-          <ChevronDown />
+          {selectedDisplay}
+
+          <div
+            onClick={handleToggleOpen}
+            className={`text-[1.5rem] text-darkCharcoal cursor-pointer ${open ? "rotate-180" : ""
+              }`}
+          >
+            <ChevronDown />
+          </div>
         </div>
-      </div>
 
-      <ul
-        className={classNames(
-          "absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform",
-          open
-            ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
-            : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
-          { "ease-out": open }
-        )}
-        // Setting the width inline style based on the client width of the parent div
-        style={{ width: selectRef.current?.clientWidth }}
-      >
-        <li
-          className={classNames(
-            "pt-3 pl-3 text-[14px] font-normal font-proxima text-primary cursor-pointer flex"
-          )}
-          onClick={handleClearAll}
+        <ul
+          className={`absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform ${open
+              ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500 ease-out"
+              : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500 ease-out"
+            }`}
+          // Setting the width inline style based on the client width of the parent div
+          style={{ width: selectRef.current?.clientWidth }}
         >
-          Clear All
-        </li>
-        {options &&
-          options.map((option, index) => (
-            <li
-              key={index}
-              className={classNames(
-                "p-3 text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex",
-                { "bg-whiteSmoke": selected.includes(option.value) }
-              )}
-              onClick={
-                type !== "checkbox"
-                  ? () => handleSelect(option.value)
-                  : undefined
-              }
-            >
-              {/* {type === "icons" && (
-                <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
-                  <UserIcon />
-                </div>
-              )} */}
+          <li
+            className={`pt-3 pl-3 text-[14px] font-normal font-proxima text-primary cursor-pointer flex`}
+            onClick={handleClearAll}
+          >
+            Clear All
+          </li>
+          {options.length > 0 &&
+            options.map((option, index) => (
+              <li
+                key={index}
+                className={`p-3 text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex ${selected.includes(option.value) ? "bg-whiteSmoke" : ""
+                  }`}
+                onClick={type !== "checkbox" ? () => handleSelect(option.value) : undefined}
+              >
+                {avatar && (
+                  <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
+                    <Avatar variant="x-small" name={avatarName} imageUrl={avatarImgUrl} />
+                  </div>
+                )}
 
-              {avatar && (
-                <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
-                  <Avatar variant="x-small" name={avatarName} imageUrl={avatarImgUrl} />
-                </div>
-              )}
+                {type === "checkbox" && (
+                  <CheckBox
+                    id={option.value}
+                    label={option.label}
+                    checked={selected.includes(option.value)}
+                    onChange={(e: any) => {
+                      e.target.checked
+                        ? handleSelect(option.value)
+                        : handleSelect(option.value);
+                    }}
+                  />
+                )}
+                {type !== "checkbox" && option.label}
+              </li>
+            ))}
+        </ul>
+      </div>
+      {error && (
+        <span className={`text-defaultRed text-[12px] sm:text-[14px] ${errorClass}`}>
+          {errMsg}
+        </span>
+      )}
+    </>
 
-              {type === "checkbox" && (
-                <CheckBox
-                  id={option.value}
-                  label={option.label}
-                  checked={selected.includes(option.value)}
-                  onChange={(e: any) => {
-                    e.target.checked
-                      ? handleSelect(option.value)
-                      : handleSelect(option.value);
-                  }}
-                />
-              )}
-              {type !== "checkbox" && option.label}
-            </li>
-          ))}
-      </ul>
-    </div>
   );
 };
 

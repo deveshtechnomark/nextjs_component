@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import classNames from 'classnames';
 import { Avatar } from 'next-ts-lib';
 import 'next-ts-lib/dist/index.css';
 import { CheckBox } from 'form-elements';
@@ -23,28 +22,43 @@ var Select = function Select(_a) {
   var _b;
   var id = _a.id,
     options = _a.options,
-    onSelect = _a.onSelect;
+    getValue = _a.getValue;
     _a.type;
     var label = _a.label,
     className = _a.className,
     _c = _a.search,
     search = _c === void 0 ? false : _c,
-    _d = _a.required,
-    required = _d === void 0 ? false : _d,
+    validate = _a.validate,
     defaultValue = _a.defaultValue,
     avatar = _a.avatar,
     avatarName = _a.avatarName,
-    avatarImgUrl = _a.avatarImgUrl;
-    _a.errorMessage;
-    _a.hasError;
-    _a.getError;
+    avatarImgUrl = _a.avatarImgUrl,
+    _d = _a.errorMessage,
+    errorMessage = _d === void 0 ? "This is a required field." : _d,
+    supportingText = _a.supportingText,
+    hasError = _a.hasError,
+    getError = _a.getError,
+    errorClass = _a.errorClass;
   var _e = useState(""),
     inputValue = _e[0],
     setInputValue = _e[1];
   var _f = useState(false),
-    open = _f[0],
-    setOpen = _f[1];
+    error = _f[0],
+    setError = _f[1];
+  var _g = useState(""),
+    errMsg = _g[0],
+    setErrMsg = _g[1];
+  var _h = useState(false),
+    open = _h[0],
+    setOpen = _h[1];
   var selectRef = useRef(null);
+  {
+    validate && useEffect(function () {
+      setErrMsg(errorMessage);
+      setError(hasError);
+      hasError && getError(false);
+    }, [errorMessage, hasError]);
+  }
   useEffect(function () {
     window.addEventListener("click", handleOutsideClick);
     return function () {
@@ -63,54 +77,77 @@ var Select = function Select(_a) {
   };
   var handleInputChange = function handleInputChange(e) {
     var inputValue = e.target.value.toLowerCase();
-    setInputValue(inputValue);
+    if (validate && inputValue.trim() === "") {
+      setError(true);
+      setErrMsg("Please select a valid option.");
+    } else {
+      setError(false);
+      setErrMsg("");
+      setInputValue(inputValue);
+    }
   };
-  var handleSelect = function handleSelect(value) {
-    setInputValue(value);
+  var handleSelect = function handleSelect(label, value) {
+    setInputValue(label);
     setOpen(false);
-    onSelect(value);
+    if (label.trim() === "") {
+      setError(true);
+      getError(false);
+      setErrMsg("Please select a valid option.");
+    } else {
+      setError(false);
+      setErrMsg("");
+      getValue(value);
+      getError(true);
+    }
+  };
+  var handleBlur = function handleBlur() {
+    if (validate) {
+      if (inputValue.trim() === "") {
+        setError(true);
+        setErrMsg("Please select a valid option.");
+        getError(false);
+      } else {
+        setError(false);
+        setErrMsg("");
+        getError(true);
+      }
+    }
   };
   return React.createElement(React.Fragment, null, React.createElement("div", {
-    className: classNames("relative font-medium w-full flex-row border-b ".concat(inputValue ? "border-primary" : "border-lightSilver", " hover:border-primary transition-colors duration-300 ").concat(className)),
+    className: "relative font-medium w-full flex-row border-b ".concat(inputValue ? "border-primary" : error ? "border-defaultRed" : "border-lightSilver hover:border-primary transition-colors duration-300", " ").concat(className),
     ref: selectRef
   }, label && React.createElement("label", {
-    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : inputValue ? "text-primary" : "text-slatyGrey"),
+    className: "text-[14px] font-normal font-proxima ".concat(open ? "text-primary" : inputValue ? "text-primary" : error ? "text-defaultRed" : "text-slatyGrey"),
     htmlFor: id
-  }, label, required && React.createElement("span", {
+  }, label, validate && React.createElement("span", {
     className: "text-defaultRed"
   }, "\xA0*")), React.createElement("div", {
-    className: "flex flex-row items-center relative w-full"
+    className: "flex flex-row items-center relative w-full mb-0"
   }, React.createElement("input", {
     id: id,
+    onBlur: handleBlur,
     onClick: handleToggleOpen,
     onChange: handleInputChange,
     readOnly: !search,
     placeholder: defaultValue || "Please select",
     value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
-    className: classNames("flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    autoComplete: "off",
+    className: "flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full ".concat(open ? "text-primary" : "", " ").concat(!open ? "cursor-pointer" : "cursor-default", " ").concat(!open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
-      "rotate-180": open
-    })
+    className: "text-[1.5rem] text-darkCharcoal cursor-pointer ".concat(open ? "rotate-180" : "")
   }, React.createElement(ChevronDown, null))), React.createElement("ul", {
-    className: classNames("absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
-      "ease-out": open
-    }),
-    // Setting the width inline style based on the client width of the parent div
+    className: "absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform w-full ".concat(open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", " ").concat(open ? "ease-out" : ""),
     style: {
       width: (_b = selectRef.current) === null || _b === void 0 ? void 0 : _b.clientWidth
     }
-  }, options && options.map(function (option, index) {
+  }, options.length > 0 && options.map(function (option, index) {
     return React.createElement("li", {
       key: index,
-      className: classNames("p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex items-center", {
-        "bg-whiteSmoke": option.value === inputValue,
-        hidden: search && !option.label.toLowerCase().startsWith(inputValue)
-      }),
+      className: "p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex items-center ".concat(option.value === inputValue ? "bg-whiteSmoke" : "", " ").concat(search && !option.label.toLowerCase().startsWith(inputValue) ? "hidden" : ""),
       onClick: function onClick() {
-        if (option.value !== inputValue) {
-          handleSelect(option.value);
+        if (option.label !== inputValue) {
+          handleSelect(option.label, option.value);
         }
       }
     }, avatar && React.createElement("div", {
@@ -120,7 +157,11 @@ var Select = function Select(_a) {
       name: avatarName,
       imageUrl: avatarImgUrl
     })), option.label);
-  }))));
+  }))), !error && supportingText && React.createElement("span", {
+    className: "text-slatyGrey text-[12px] sm:text-[14px] -mt-[20px]"
+  }, supportingText), error && React.createElement("span", {
+    className: "text-defaultRed text-[12px] sm:text-[14px] ".concat(errorClass)
+  }, errMsg));
 };
 
 /******************************************************************************
@@ -162,17 +203,38 @@ var MultiSelect = function MultiSelect(_a) {
     defaultValue = _a.defaultValue,
     avatar = _a.avatar,
     avatarName = _a.avatarName,
-    avatarImgUrl = _a.avatarImgUrl;
+    avatarImgUrl = _a.avatarImgUrl,
+    _c = _a.errorMessage,
+    errorMessage = _c === void 0 ? "This is a required field." : _c;
+    _a.supportingText;
+    var hasError = _a.hasError,
+    getError = _a.getError,
+    getValue = _a.getValue,
+    errorClass = _a.errorClass,
+    validate = _a.validate;
   var selectRef = useRef(null);
-  var _c = useState([]),
-    selectedValues = _c[0],
-    setSelectedValues = _c[1];
-  var _d = useState(""),
-    inputValue = _d[0],
-    setInputValue = _d[1];
-  var _e = useState(false),
-    open = _e[0],
-    setOpen = _e[1];
+  var _d = useState([]),
+    selectedValues = _d[0],
+    setSelectedValues = _d[1];
+  var _e = useState(""),
+    inputValue = _e[0],
+    setInputValue = _e[1];
+  var _f = useState(false),
+    open = _f[0],
+    setOpen = _f[1];
+  var _g = useState(false),
+    error = _g[0],
+    setError = _g[1];
+  var _h = useState(""),
+    errMsg = _h[0],
+    setErrMsg = _h[1];
+  {
+    validate && useEffect(function () {
+      setErrMsg(errorMessage);
+      setError(hasError);
+      hasError && getError(false);
+    }, [errorMessage, hasError]);
+  }
   useEffect(function () {
     var handleOutsideClick = function handleOutsideClick(event) {
       if (selectRef.current && !selectRef.current.contains(event.target)) {
@@ -191,7 +253,15 @@ var MultiSelect = function MultiSelect(_a) {
   };
   var handleInputChange = function handleInputChange(e) {
     var inputValue = e.target.value.toLowerCase();
-    setInputValue(inputValue);
+    if (validate && inputValue.trim() === "") {
+      setError(true);
+      setErrMsg("Please select a valid option.");
+    } else {
+      setError(false);
+      setErrMsg("");
+      getValue(inputValue);
+      setInputValue(inputValue);
+    }
   };
   var handleSelect = function handleSelect(value) {
     var updatedValues = __spreadArray([], selectedValues, true);
@@ -203,46 +273,63 @@ var MultiSelect = function MultiSelect(_a) {
     }
     setSelectedValues(updatedValues);
     setInputValue("");
-    console.log(updatedValues);
     onSelect(updatedValues);
+    if (validate) {
+      if (updatedValues.length === 0) {
+        setError(true);
+        setErrMsg("Please select at least one option.");
+        getError(false);
+      } else {
+        setError(false);
+        setErrMsg("");
+        getError(true);
+      }
+    }
   };
-  return React.createElement("div", {
-    className: "relative font-medium w-full flex-row border-b  hover:border-primary transition-colors duration-300 ".concat(selectedValues.length > 0 ? "border-primary" : "border-lightSilver", " ").concat(className),
+  var handleBlur = function handleBlur() {
+    if (validate) {
+      if (inputValue.trim() === "") {
+        setError(true);
+        setErrMsg("Please select a valid option.");
+        getError(false);
+      } else {
+        setError(false);
+        setErrMsg("");
+        getError(true);
+      }
+    }
+  };
+  return React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "relative font-medium w-full flex-row border-b ".concat(selectedValues.length > 0 ? "border-primary" : error ? "border-defaultRed" : "border-lightSilver hover:border-primary transition-colors duration-300", " ").concat(className),
     ref: selectRef
-  }, React.createElement("label", {
-    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : selectedValues.length > 0 ? "text-primary" : "text-slatyGrey"),
+  }, label && React.createElement("label", {
+    className: "text-[14px] font-normal font-proxima ".concat(open ? "text-primary" : selectedValues.length > 0 ? "text-primary" : error ? "text-defaultRed" : "text-slatyGrey"),
     htmlFor: id
-  }, label ? label : "label", required && React.createElement("span", {
+  }, label, required && React.createElement("span", {
     className: "text-defaultRed"
   }, "\xA0*")), React.createElement("div", {
     className: "flex flex-row items-center justify-center relative"
   }, React.createElement("input", {
     id: id,
+    onBlur: handleBlur,
     onClick: handleToggleOpen,
     onChange: handleInputChange,
     readOnly: !open,
     placeholder: selectedValues.length > 0 ? "".concat(selectedValues.length, " selected") : defaultValue || "Please select",
-    value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
+    value: inputValue.length > 25 ? "".concat(inputValue.substring(0, 20), "...") : inputValue,
     style: {
       width: "191px"
     },
-    className: classNames("flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal font-proxima", open && "text-primary", !open ? "cursor-pointer" : "cursor-default", !open ? "placeholder-darkCharcoal" : "placeholder-primary")
+    className: "flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal font-proxima ".concat(open ? "text-primary" : "", " ").concat(!open ? "cursor-pointer" : "cursor-default", " ").concat(!open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
-      "rotate-180": open
-    })
+    className: "text-[1.5rem] text-darkCharcoal cursor-pointer ".concat(open ? "rotate-180" : "")
   }, React.createElement(ChevronDown, null))), React.createElement("ul", {
-    className: classNames("absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
-      "ease-out": open
-    })
-  }, options && options.map(function (option, index) {
+    className: "absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform ".concat(open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", " ").concat(open ? "ease-out" : "")
+  }, options.length > 0 && options.map(function (option, index) {
     return React.createElement("li", {
       key: index,
-      className: classNames("p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex items-center", {
-        "bg-whiteSmoke": selectedValues.includes(option.value),
-        hidden: !option.label.toLowerCase().startsWith(inputValue)
-      }),
+      className: "p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex items-center ".concat(selectedValues.includes(option.value) ? "bg-whiteSmoke" : "", " ").concat(!option.label.toLowerCase().startsWith(inputValue) ? "hidden" : ""),
       onClick: type !== "checkbox" ? function () {
         if (option.value !== inputValue) {
           handleSelect(option.value);
@@ -261,7 +348,9 @@ var MultiSelect = function MultiSelect(_a) {
         e.target.checked ? handleSelect(option.value) : handleSelect(option.value);
       }
     }));
-  })));
+  }))), error && React.createElement("span", {
+    className: "text-defaultRed text-[12px] sm:text-[14px] ".concat(errorClass)
+  }, errMsg));
 };
 
 function CrossIcon() {
@@ -281,24 +370,44 @@ function CrossIcon() {
 var MultiSelectChip = function MultiSelectChip(_a) {
   var _b;
   var options = _a.options,
-    defaultValue = _a.defaultValue,
-    onSelect = _a.onSelect,
-    label = _a.label,
+    defaultValue = _a.defaultValue;
+    _a.onSelect;
+    var label = _a.label,
     type = _a.type;
     _a.id;
-    var className = _a.className,
-    _c = _a.required,
-    required = _c === void 0 ? false : _c,
-    avatar = _a.avatar,
+    var className = _a.className;
+    _a.required;
+    var avatar = _a.avatar,
     avatarName = _a.avatarName,
-    avatarImgUrl = _a.avatarImgUrl;
-  var _d = useState(defaultValue || []),
-    selected = _d[0],
-    setSelected = _d[1];
-  var _e = useState(false),
-    open = _e[0],
-    setOpen = _e[1];
+    avatarImgUrl = _a.avatarImgUrl,
+    _d = _a.errorMessage,
+    errorMessage = _d === void 0 ? "This is a required field." : _d;
+    _a.supportingText;
+    var hasError = _a.hasError,
+    getError = _a.getError,
+    getValue = _a.getValue,
+    errorClass = _a.errorClass,
+    validate = _a.validate;
+  var _e = useState(defaultValue || []),
+    selected = _e[0],
+    setSelected = _e[1];
+  var _f = useState(false),
+    open = _f[0],
+    setOpen = _f[1];
   var selectRef = useRef(null);
+  var _g = useState(false),
+    error = _g[0],
+    setError = _g[1];
+  var _h = useState(""),
+    errMsg = _h[0],
+    setErrMsg = _h[1];
+  {
+    validate && useEffect(function () {
+      setErrMsg(errorMessage);
+      setError(hasError);
+      hasError && getError(false);
+    }, [errorMessage, hasError]);
+  }
   useEffect(function () {
     window.addEventListener("click", handleOutsideClick);
     return function () {
@@ -320,12 +429,16 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       // Value is already selected, remove it from the selection
       updatedSelected = __spreadArray(__spreadArray([], selected.slice(0, selectedIndex), true), selected.slice(selectedIndex + 1), true);
     }
+    if (updatedSelected.length > 0) {
+      setError(false);
+      setErrMsg("");
+    }
     setSelected(updatedSelected);
-    onSelect(updatedSelected);
+    getValue(updatedSelected);
   };
   var handleClearAll = function handleClearAll() {
     setSelected([]);
-    onSelect([]);
+    getValue([]);
   };
   var handleToggleOpen = function handleToggleOpen() {
     setOpen(function (prevState) {
@@ -337,7 +450,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   }, selected.slice(0, 2).map(function (option) {
     return React.createElement("div", {
       key: option,
-      className: classNames("flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima", option.length > 8 && "max-w-[100px]")
+      className: "flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima ".concat(option.length > 8 ? "max-w-[100px]" : "")
     }, React.createElement("span", {
       title: option
     }, option.length > 8 ? option.substring(0, 8) + "..." : option), React.createElement("div", {
@@ -349,43 +462,35 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   }), selected.length > 2 && React.createElement("div", {
     className: "flex items-center badge bg-[#E9ECEF] text-darkCharcoal border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima"
   }, "+", selected.length - 2)) : React.createElement("div", {
-    className: classNames("text-darkCharcoal font-proxima", {
-      "text-primary": open
-    })
+    className: "text-darkCharcoal font-proxima ".concat(open ? "text-primary" : "")
   }, "Please Select...");
-  return React.createElement("div", {
+  return React.createElement(React.Fragment, null, React.createElement("div", {
     className: "relative w-full font-medium flex-row",
     ref: selectRef
   }, label && React.createElement("label", {
     onClick: handleToggleOpen,
-    className: classNames("text-[14px] font-normal font-proxima", open ? "text-primary" : selected.length > 0 ? "text-primary" : "text-slatyGrey")
-  }, label, required && React.createElement("span", {
+    className: "text-[14px] font-normal font-proxima ".concat(open ? "text-primary" : selected.length > 0 ? "text-primary" : error ? "text-defaultRed" : "text-slatyGrey")
+  }, label, validate && React.createElement("span", {
     className: "text-defaultRed"
   }, "\xA0*")), React.createElement("div", {
     onClick: handleToggleOpen,
-    className: "".concat(classNames("flex justify-between bg-white border-b text-[14px] font-normal font-proxima transition-colors duration-300", open ? "text-primary cursor-default" : selected.length === 0 && "text-darkCharcoal cursor-pointer", selected.length > 0 ? "border-primary" : "border-lightSilver", "hover:border-primary"), " ").concat(className)
+    className: "flex justify-between bg-white border-b text-[14px] font-normal font-proxima  ".concat(open ? "text-primary cursor-default" : selected.length === 0 ? "text-darkCharcoal cursor-pointer" : "", " ").concat(selected.length > 0 ? "border-primary" : error ? "border-defaultRed" : "border-lightSilver transition-colors duration-300 hover:border-primary", " ").concat(className)
   }, selectedDisplay, React.createElement("div", {
     onClick: handleToggleOpen,
-    className: classNames("text-[1.5rem] text-darkCharcoal cursor-pointer", {
-      "rotate-180": open
-    })
+    className: "text-[1.5rem] text-darkCharcoal cursor-pointer ".concat(open ? "rotate-180" : "")
   }, React.createElement(ChevronDown, null))), React.createElement("ul", {
-    className: classNames("absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform", open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500", {
-      "ease-out": open
-    }),
+    className: "absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform ".concat(open ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500 ease-out" : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500 ease-out"),
     // Setting the width inline style based on the client width of the parent div
     style: {
       width: (_b = selectRef.current) === null || _b === void 0 ? void 0 : _b.clientWidth
     }
   }, React.createElement("li", {
-    className: classNames("pt-3 pl-3 text-[14px] font-normal font-proxima text-primary cursor-pointer flex"),
+    className: "pt-3 pl-3 text-[14px] font-normal font-proxima text-primary cursor-pointer flex",
     onClick: handleClearAll
-  }, "Clear All"), options && options.map(function (option, index) {
+  }, "Clear All"), options.length > 0 && options.map(function (option, index) {
     return React.createElement("li", {
       key: index,
-      className: classNames("p-3 text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex", {
-        "bg-whiteSmoke": selected.includes(option.value)
-      }),
+      className: "p-3 text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex ".concat(selected.includes(option.value) ? "bg-whiteSmoke" : ""),
       onClick: type !== "checkbox" ? function () {
         return handleSelect(option.value);
       } : undefined
@@ -403,7 +508,9 @@ var MultiSelectChip = function MultiSelectChip(_a) {
         e.target.checked ? handleSelect(option.value) : handleSelect(option.value);
       }
     }), type !== "checkbox" && option.label);
-  })));
+  }))), error && React.createElement("span", {
+    className: "text-defaultRed text-[12px] sm:text-[14px] ".concat(errorClass)
+  }, errMsg));
 };
 
 export { MultiSelect, MultiSelectChip, Select };
