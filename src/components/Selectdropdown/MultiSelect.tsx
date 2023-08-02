@@ -3,10 +3,9 @@ import classNames from "classnames";
 
 // Icons Componnents
 import ChevronDown from "./icons/ChevronDown.js";
-import UserIcon from "./icons/UserIcon.js";
 // Library Components
 import { Avatar } from "../Avatar/Avatar.js";
-import CheckBox  from "../Checkbox/Checkbox.js";
+import CheckBox from "../Checkbox/Checkbox.js";
 
 interface MultiSelectProps {
   id: string;
@@ -19,7 +18,14 @@ interface MultiSelectProps {
   defaultValue?: string;
   avatar?: boolean;
   avatarName?: string;
-  avatarImgUrl?: string
+  avatarImgUrl?: string;
+  errorMessage?: string;
+  hasError?: boolean;
+  getValue: (value: string) => void;
+  getError: (arg1: boolean) => void;
+  supportingText?: string;
+  errorClass?: string;
+  validate?: boolean;
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({
@@ -33,12 +39,30 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   defaultValue,
   avatar,
   avatarName,
-  avatarImgUrl
+  avatarImgUrl,
+  errorMessage = "This is a required field.",
+  supportingText,
+  hasError,
+  getError,
+  getValue,
+  errorClass,
+  validate,
 }) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
+  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
+  {
+    validate &&
+      useEffect(() => {
+        setErrMsg(errorMessage);
+        setError(hasError);
+        hasError && getError(false);
+      }, [errorMessage, hasError]);
+  }
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -63,7 +87,16 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.toLowerCase();
-    setInputValue(inputValue);
+
+    if (validate && inputValue.trim() === "") {
+      setError(true);
+      setErrMsg("Please select a valid option.");
+    } else {
+      setError(false);
+      setErrMsg("");
+      getValue(inputValue);
+      setInputValue(inputValue);
+    }
   };
 
   const handleSelect = (value: string) => {
@@ -78,124 +111,162 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
     setSelectedValues(updatedValues);
     setInputValue("");
-
-    console.log(updatedValues);
     onSelect(updatedValues);
+
+    if (validate) {
+      if (updatedValues.length === 0) {
+        setError(true);
+        setErrMsg("Please select at least one option.");
+        getError(false);
+      } else {
+        setError(false);
+        setErrMsg("");
+        getError(true);
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    if (validate) {
+      if (inputValue.trim() === "") {
+        setError(true);
+        setErrMsg("Please select a valid option.");
+        getError(false);
+      } else {
+        setError(false);
+        setErrMsg("");
+        getError(true);
+      }
+    }
   };
 
   return (
-    <div
-      className={`relative font-medium w-full flex-row border-b  hover:border-primary transition-colors duration-300 ${selectedValues.length > 0 ? "border-primary" : "border-lightSilver"} ${className}`}
-      ref={selectRef}
-    >
-      <label
-        className={classNames(
-          "text-[14px] font-normal font-proxima",
-          open ? "text-primary" : selectedValues.length > 0 ? "text-primary" : "text-slatyGrey",
-        )}
-        htmlFor={id}
+    <>
+      <div
+        className={`relative font-medium w-full flex-row border-b ${
+          selectedValues.length > 0
+            ? "border-primary"
+            : error
+            ? "border-defaultRed"
+            : "border-lightSilver hover:border-primary transition-colors duration-300"
+        } ${className}`}
+        ref={selectRef}
       >
-        {label ? label : "label"}
-        {required && <span className="text-defaultRed">&nbsp;*</span>}
-      </label>
+        {label && (
+          <label
+            className={`text-[14px] font-normal font-proxima ${
+              open
+                ? "text-primary"
+                : selectedValues.length > 0
+                ? "text-primary"
+                : error
+                ? "text-defaultRed"
+                : "text-slatyGrey"
+            }`}
+            htmlFor={id}
+          >
+            {label}
+            {required && <span className="text-defaultRed">&nbsp;*</span>}
+          </label>
+        )}
 
-      <div className="flex flex-row items-center justify-center relative">
-        <input
-          id={id}
-          onClick={handleToggleOpen}
-          onChange={handleInputChange}
-          readOnly={!open}
-          placeholder={
-            selectedValues.length > 0
-              ? `${selectedValues.length} selected`
-              : (defaultValue || "Please select")
-          }
-          value={
-            inputValue.length > 25
-              ? inputValue.substring(0, 20) + "..."
-              : inputValue
-          }
-          style={{ width: "191px" }}
-          className={classNames(
-            "flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal font-proxima",
-            open && "text-primary",
-            !open ? "cursor-pointer" : "cursor-default",
-            !open ? "placeholder-darkCharcoal" : "placeholder-primary"
-          )}
-        />
-        <div
-          onClick={handleToggleOpen}
-          className={classNames(
-            "text-[1.5rem] text-darkCharcoal cursor-pointer",
-            {
-              "rotate-180": open,
+        <div className="flex flex-row items-center justify-center relative">
+          <input
+            id={id}
+            onBlur={handleBlur}
+            onClick={handleToggleOpen}
+            onChange={handleInputChange}
+            readOnly={!open}
+            placeholder={
+              selectedValues.length > 0
+                ? `${selectedValues.length} selected`
+                : defaultValue || "Please select"
             }
-          )}
-        >
-          <ChevronDown />
+            value={
+              inputValue.length > 25
+                ? `${inputValue.substring(0, 20)}...`
+                : inputValue
+            }
+            style={{ width: "191px" }}
+            className={`flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal font-proxima ${
+              open ? "text-primary" : ""
+            } ${!open ? "cursor-pointer" : "cursor-default"} ${
+              !open ? "placeholder-darkCharcoal" : "placeholder-primary"
+            }`}
+          />
+          <div
+            onClick={handleToggleOpen}
+            className={`text-[1.5rem] text-darkCharcoal cursor-pointer ${
+              open ? "rotate-180" : ""
+            }`}
+          >
+            <ChevronDown />
+          </div>
         </div>
+
+        <ul
+          className={`absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform ${
+            open
+              ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
+              : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500"
+          } ${open ? "ease-out" : ""}`}
+        >
+          {options.length > 0 &&
+            options.map((option, index) => (
+              <li
+                key={index}
+                className={`p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex items-center ${
+                  selectedValues.includes(option.value) ? "bg-whiteSmoke" : ""
+                } ${
+                  !option.label.toLowerCase().startsWith(inputValue)
+                    ? "hidden"
+                    : ""
+                }`}
+                onClick={
+                  type !== "checkbox"
+                    ? () => {
+                        if (option.value !== inputValue) {
+                          handleSelect(option.value);
+                        }
+                      }
+                    : undefined
+                }
+              >
+                {avatar && (
+                  <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
+                    <Avatar
+                      variant="x-small"
+                      name={avatarName}
+                      imageUrl={avatarImgUrl}
+                    />
+                  </div>
+                )}
+
+                {type === "checkbox" && (
+                  <CheckBox
+                    id={option.value}
+                    label={option.label}
+                    onChange={(e: any) => {
+                      e.target.checked
+                        ? handleSelect(option.value)
+                        : handleSelect(option.value);
+                    }}
+                  />
+                )}
+                {/* {option.label} */}
+              </li>
+            ))}
+        </ul>
       </div>
 
-      <ul
-        className={classNames(
-          "absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform",
-          open
-            ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
-            : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500",
-          {
-            "ease-out": open,
-          }
-        )}
-      >
-        {options &&
-          options.map((option, index) => (
-            <li
-              key={index}
-              className={classNames(
-                "p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex items-center",
-                {
-                  "bg-whiteSmoke": selectedValues.includes(option.value),
-                  hidden: !option.label.toLowerCase().startsWith(inputValue),
-                }
-              )}
-              onClick={
-                type !== "checkbox"
-                  ? () => {
-                    if (option.value !== inputValue) {
-                      handleSelect(option.value);
-                    }
-                  }
-                  : undefined
-              }
-            >
-              {/* {type === "icons" && (
-                <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
-                  <UserIcon />
-                </div>
-              )} */}
-
-              {avatar && (
-                <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
-                  <Avatar variant="x-small" name={avatarName} imageUrl={avatarImgUrl} />
-                </div>
-              )}
-
-              {type === "checkbox" && (
-                <CheckBox
-                  id={option.value}
-                  label={option.label}
-                  onChange={(e: any) => {
-                    e.target.checked
-                      ? handleSelect(option.value)
-                      : handleSelect(option.value);
-                  }}
-                />
-              )}
-              {/* {option.label} */}
-            </li>
-          ))}
-      </ul>
-    </div>
+      {error && (
+        <span
+          className={`text-defaultRed text-[12px] sm:text-[14px] ${errorClass}`}
+        >
+          {errMsg}
+        </span>
+      )}
+    </>
   );
 };
 
