@@ -34,14 +34,16 @@ module.exports = {
       slatyBlue: '#0F2552',
       darkGray: '#848a95',
       lightYellow: '#FFC107',
-      lightGray:"#F4F4F4",
-      slatyGreen:"#CCF1EB",
+      lightGray: "#F4F4F4",
+      slatyGreen: "#CCF1EB",
       pinkSwan: '#B7B7B7',
     },
 
     screens: {
       sm: "1360px",
       md: "1920px",
+      lg: "1366px",
+      xl: "1920px",
     },
   },
   variants: {

@@ -19,19 +19,14 @@
   z-index: 1;
 }
 
-/* Table.module.scss */
-
-/* Add the following styles */
 .table_container {
-  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-x: auto; 
 }
 
 thead th {
-  /* Set a fixed width for the header cells except for the action column */
-  width: 200px; /* You can adjust this value as per your requirements */
+  width: 200px; 
 }
 
-/* Styling for the sticky action column */
 .sticky_action_column {
   position: sticky;
   z-index: 1;
@@ -40,6 +35,6 @@ thead th {
 }
 
 .scrollable-table {
-  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-y: auto; 
   max-height: calc(100vh - 100px); /* Set the maximum height of the container */
 }
