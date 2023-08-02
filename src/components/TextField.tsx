@@ -173,7 +173,7 @@ const TextField: React.FC<TextFieldProps> = ({
         type === "email" &&
         inputValue.trim().length < minChar
       ) {
-        setValid(true);
+        setValid(false);
         setErr(false);
         getError(false);
         setShowEmailError(false);
@@ -182,7 +182,7 @@ const TextField: React.FC<TextFieldProps> = ({
         type === "email" &&
         inputValue.trim().length > maxChar
       ) {
-        setValid(true);
+        setValid(false);
         setErr(false);
         getError(false);
         setShowEmailError(false);
