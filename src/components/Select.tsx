@@ -20,12 +20,13 @@ interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   search?: boolean;
   validate?: boolean;
   defaultValue?: string;
+  value?: any;
   avatar?: boolean;
   avatarName?: string;
   avatarImgUrl?: string;
   errorMessage?: string;
   hasError?: boolean;
-  getValue: (value: any) => void;
+  getValue: (value: any, label?: any) => void;
   getError: (arg1: boolean) => void;
   supportingText?: string;
   errorClass?: string;
@@ -41,6 +42,7 @@ const Select: React.FC<SelectProps> = ({
   search = false,
   validate,
   defaultValue,
+  value,
   avatar,
   avatarName,
   avatarImgUrl,
@@ -64,6 +66,19 @@ const Select: React.FC<SelectProps> = ({
         hasError && getError(false);
       }, [errorMessage, hasError]);
   }
+
+  // {
+  //   value !== -1 && options
+  //     ? useEffect(() => {
+  //         options.map((option, index) => {
+  //           // if (option.value === value) {
+  //           //   setInputValue(option.label);
+  //           console.log("option", value, option.label, option.value);
+  //           // }
+  //         });
+  //       }, [])
+  //     : "";
+  // }
 
   useEffect(() => {
     window.addEventListener("click", handleOutsideClick);
@@ -109,7 +124,7 @@ const Select: React.FC<SelectProps> = ({
     } else {
       setError(false);
       setErrMsg("");
-      getValue(label);
+      getValue(value, label);
       getError(true);
     }
   };
@@ -167,7 +182,9 @@ const Select: React.FC<SelectProps> = ({
             readOnly={!search}
             placeholder={defaultValue || "Please select"}
             value={
-              inputValue.length > 25
+              value
+                ? value
+                : inputValue.length > 25
                 ? inputValue.substring(0, 20) + "..."
                 : inputValue
             }
