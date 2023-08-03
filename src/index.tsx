@@ -162,7 +162,7 @@ const Tel: React.FC<TelInputProps> = ({
                 ? onBlur
                 : validate
                 ? validateInput
-                : validate
+                : !validate
                 ? focusHandler
                 : undefined
             }

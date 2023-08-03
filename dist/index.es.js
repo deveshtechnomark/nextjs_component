@@ -886,7 +886,7 @@ var Tel = function Tel(_a) {
     id: id,
     name: name,
     value: value,
-    onBlur: onBlur ? onBlur : validate ? validateInput : validate ? focusHandler : undefined,
+    onBlur: onBlur ? onBlur : validate ? validateInput : !validate ? focusHandler : undefined,
     onChange: handleInputChange,
     onFocus: handleFocus,
     disabled: disabled,
