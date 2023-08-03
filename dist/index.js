@@ -32,6 +32,7 @@ var Select = function Select(_a) {
     search = _c === void 0 ? false : _c,
     validate = _a.validate,
     defaultValue = _a.defaultValue,
+    value = _a.value,
     avatar = _a.avatar,
     avatarName = _a.avatarName,
     avatarImgUrl = _a.avatarImgUrl,
@@ -61,6 +62,18 @@ var Select = function Select(_a) {
       hasError && getError(false);
     }, [errorMessage, hasError]);
   }
+  // {
+  //   value !== -1 && options
+  //     ? useEffect(() => {
+  //         options.map((option, index) => {
+  //           // if (option.value === value) {
+  //           //   setInputValue(option.label);
+  //           console.log("option", value, option.label, option.value);
+  //           // }
+  //         });
+  //       }, [])
+  //     : "";
+  // }
   React.useEffect(function () {
     window.addEventListener("click", handleOutsideClick);
     return function () {
@@ -98,7 +111,7 @@ var Select = function Select(_a) {
     } else {
       setError(false);
       setErrMsg("");
-      getValue(value);
+      getValue(value, label);
       getError(true);
     }
   };
@@ -132,7 +145,7 @@ var Select = function Select(_a) {
     onChange: handleInputChange,
     readOnly: !search,
     placeholder: defaultValue || "Please select",
-    value: inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
+    value: value ? value : inputValue.length > 25 ? inputValue.substring(0, 20) + "..." : inputValue,
     autoComplete: "off",
     className: "flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full ".concat(open ? "text-primary" : "", " ").concat(!open ? "cursor-pointer" : "cursor-default", " ").concat(!open ? "placeholder-darkCharcoal" : "placeholder-primary")
   }), React.createElement("div", {
@@ -393,16 +406,19 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   var _e = React.useState(defaultValue || []),
     selected = _e[0],
     setSelected = _e[1];
-  var _f = React.useState(false),
-    open = _f[0],
-    setOpen = _f[1];
-  var selectRef = React.useRef(null);
+  var _f = React.useState(defaultValue || []);
+    _f[0];
+    _f[1];
   var _g = React.useState(false),
-    error = _g[0],
-    setError = _g[1];
-  var _h = React.useState(""),
-    errMsg = _h[0],
-    setErrMsg = _h[1];
+    open = _g[0],
+    setOpen = _g[1];
+  var selectRef = React.useRef(null);
+  var _h = React.useState(false),
+    error = _h[0],
+    setError = _h[1];
+  var _j = React.useState(""),
+    errMsg = _j[0],
+    setErrMsg = _j[1];
   {
     validate && React.useEffect(function () {
       setErrMsg(errorMessage);

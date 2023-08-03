@@ -13,12 +13,13 @@ interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
     search?: boolean;
     validate?: boolean;
     defaultValue?: string;
+    value?: any;
     avatar?: boolean;
     avatarName?: string;
     avatarImgUrl?: string;
     errorMessage?: string;
     hasError?: boolean;
-    getValue: (value: any) => void;
+    getValue: (value: any, label?: any) => void;
     getError: (arg1: boolean) => void;
     supportingText?: string;
     errorClass?: string;
