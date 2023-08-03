@@ -28,7 +28,7 @@ const Tel: React.FC<TelInputProps> = ({
   getValue,
   getError,
   countryCode = false,
-  errorMessage,
+  errorMessage = "This is required field!",
   hasError,
   ...props
 }) => {
