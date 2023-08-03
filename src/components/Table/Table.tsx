@@ -215,7 +215,7 @@ const Table: React.FC<TableProps> = (props) => {
 
         <tbody>
           {filteredData.map((item, index) => (
-            <React.Fragment key={item.UserId}>
+            <React.Fragment key={index}>
               <tr
                 className={`h-[56px] cursor-default hover:bg-whiteSmoke ${props.expandable && expandedRows[index]
                   ? "bg-whiteSmoke border-b border-b-lightSilver"
@@ -253,9 +253,9 @@ const Table: React.FC<TableProps> = (props) => {
                   </td>
                 )}
 
-                {props.headers.map((header) => (
+                {props.headers.map((header,index) => (
                   <td
-                    key={header.field}
+                    key={index}
                     className="py-[19px] sm:py-[12px] pl-[10px] sm:text-base font-normal"
                   >
                     <span className="flex justify-start items-center">
@@ -331,8 +331,8 @@ const Table: React.FC<TableProps> = (props) => {
                         <tr>
                           <th></th>
                           {item[nestedKey].length > 0 &&
-                            Object.keys(item[nestedKey][0]).map((key) => (
-                              <th key={key}></th>
+                            Object.keys(item[nestedKey][0]).map((key,index) => (
+                              <th key={index}></th>
                             ))}
                         </tr>
                       </thead>

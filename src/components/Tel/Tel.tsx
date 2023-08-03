@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import data from "./data";
-import {Select} from "../Selectdropdown/Select";
+import { Select } from "../Selectdropdown/Select";
 
 interface TelInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -149,7 +149,7 @@ const Tel: React.FC<TelInputProps> = ({
             </div>
           )}
           <input
-            className={`${className} py-1 outline-none w-full h-full text-darkCharcoal`}
+            className={`${className} py-[4.5px] outline-none w-full h-full text-darkCharcoal`}
             ref={inputRef}
             type="tel"
             id={id}
@@ -160,7 +160,7 @@ const Tel: React.FC<TelInputProps> = ({
                 ? onBlur
                 : validate
                 ? validateInput
-                : validate
+                : !validate
                 ? focusHandler
                 : undefined
             }
