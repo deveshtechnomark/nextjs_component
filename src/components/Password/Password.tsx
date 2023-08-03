@@ -10,6 +10,7 @@ interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   className?: string;
   validate?: boolean;
+  novalidate?: boolean;
   errorMessage?: string;
   disabled?: boolean;
   getValue: (arg1: string) => void;
@@ -25,6 +26,7 @@ const Password: React.FC<PasswordProps> = ({
   className,
   onBlur,
   validate,
+  novalidate,
   errorMessage = "This is a required field!",
   getValue,
   getError,
@@ -192,7 +194,7 @@ const Password: React.FC<PasswordProps> = ({
   return (
     <div className="relative flex flex-col text-[14px] w-full">
       <div className="relative w-full">
-        {open && (
+        {!novalidate && open && (
           <>
             <div
               className={`absolute bottom-[30px] z-10 left-0 bg-pureWhite shadow-2xl py-4 pl-2 pr-4 text-[16px] sm-text-[14px] w-fit`}
@@ -247,7 +249,9 @@ const Password: React.FC<PasswordProps> = ({
           value={password}
           onChange={handlePasswordChange}
           onBlur={
-            onBlur
+            novalidate
+              ? undefined
+              : onBlur
               ? onBlur
               : validate
               ? validateInput
@@ -285,7 +289,7 @@ const Password: React.FC<PasswordProps> = ({
       )}
 
       <div className="flex flex-col justify-center w-full">
-        {password && (
+        {!novalidate && password && (
           <div className="mt-2 flex items-center">
             <div className="relative w-[150px] sm:w-[180px] h-[5px] rounded-lg bg-[#979797]">
               <span
