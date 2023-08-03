@@ -24,7 +24,7 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 const TextField: React.FC<TextFieldProps> = ({
   label,
   className,
-  type="text",
+  type = "text",
   validate,
   onBlur,
   onChange,
@@ -119,22 +119,22 @@ const TextField: React.FC<TextFieldProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
+    getValue(inputValue);
+    console.log(inputValue);
 
     // Check if noNumeric prop is true and input contains numeric characters
-    if (noNumeric && /\d/.test(inputValue)) {
-      return;
-    }
+    // if (noNumeric && /\d/.test(inputValue)) {
+    //   return;
+    // }
 
-    // Check if noSpecialChar prop is true and input contains special characters
-    if (noSpecialChar && /[^a-zA-Z0-9]/.test(inputValue)) {
-      return;
-    }
+    // // Check if noSpecialChar prop is true and input contains special characters
+    // if (noSpecialChar && /[^a-zA-Z0-9]/.test(inputValue)) {
+    //   return;
+    // }
 
-    getValue(inputValue);
-
-    if (onChange) {
-      onChange(e);
-    }
+    // if (onChange) {
+    //   onChange(e);
+    // }
 
     if (validate && type === "text") {
       if (inputValue.length < 0) {
@@ -143,19 +143,9 @@ const TextField: React.FC<TextFieldProps> = ({
         getError(false);
       } else if (inputValue.trim().length > maxChar) {
         getError(false);
-      } else if (
-        validate &&
-        type === "text" &&
-        noNumeric &&
-        inputValue.trim().match(/\d/)
-      ) {
+      } else if (noNumeric && /\d/.test(inputValue)) {
         getError(false);
-      } else if (
-        validate &&
-        type === "text" &&
-        noSpecialChar &&
-        e.target.value.trim().match(/[^a-zA-Z0-9]/)
-      ) {
+      } else if (noSpecialChar && /[^a-zA-Z]/.test(inputValue)) {
         getError(false);
       } else {
         setValid(false);
@@ -163,25 +153,22 @@ const TextField: React.FC<TextFieldProps> = ({
         getError(true);
       }
     } else if (validate && type === "email") {
-      if (inputValue && !validateEmail(inputValue)) {
+      if (inputValue.trim().length <= 0) {
         setValid(false);
         setErr(false);
         getError(false);
         setShowEmailError(false);
-      } else if (
-        validate &&
-        type === "email" &&
-        inputValue.trim().length < minChar
-      ) {
+      } else if (inputValue && !validateEmail(inputValue)) {
         setValid(false);
         setErr(false);
         getError(false);
         setShowEmailError(false);
-      } else if (
-        validate &&
-        type === "email" &&
-        inputValue.trim().length > maxChar
-      ) {
+      } else if (inputValue.trim().length < minChar) {
+        setValid(false);
+        setErr(false);
+        getError(false);
+        setShowEmailError(false);
+      } else if (inputValue.trim().length > maxChar) {
         setValid(false);
         setErr(false);
         getError(false);
