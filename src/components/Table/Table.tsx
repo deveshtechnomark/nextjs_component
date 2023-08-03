@@ -41,6 +41,12 @@ const Table: React.FC<TableProps> = (props) => {
   const [expandedRows, setExpandedRows] = useState<Record<number, boolean>>([]);
   const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
 
+  
+  useEffect(() => {
+    setFilteredData(props.data)
+  },[props.data])
+  
+  
   const toggleRowExpansion = (index: number) => {
     setExpandedRows((prevState) => ({
       ...prevState,
