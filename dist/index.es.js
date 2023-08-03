@@ -44,7 +44,7 @@ var Toast = /** @class */function (_super) {
     var toastElement = document.createElement("div");
     toastElement.className = "flex flex-col text-xs sm:text-base m-[6px] p-[12px] px-[16px] rounded-md text-white font-semibold min-w-15rem relative ".concat(type === "error" ? "bg-errorColor !text-defaultRed" : type === "warning" ? "bg-warningColor !text-defaultOrange" : type === "info" ? "bg-infoColor !text-defaultBlue" : "bg-primary !text-pureWhite");
     var closeButton = document.createElement("span");
-    closeButton.className = "absolute top-[14px] right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10 text-xs sm:text-base";
+    closeButton.className = "absolute top-[18px] right-[20px] w-15 h-15 bg-transparent border-none text-base cursor-pointer pl-10 text-xs sm:text-base";
     closeButton.innerHTML = "\n    <svg\n      width=\"14\"\n      height=\"14\"\n      viewBox=\"0 0 14 14\"\n      fill=\"none\"\n      xmlns=\"http://www.w3.org/2000/svg\"\n    >\n      <rect\n        x=\"-0.000732422\"\n        y=\"12\"\n        width=\"17\"\n        height=\"2\"\n        rx=\"1\"\n        transform=\"rotate(-45 -0.000732422 12)\"\n        fill=".concat(type === "error" ? "#DC3545" : type === "warning" ? "#664D03" : type === "info" ? "#0A58CA" : "#fff", "\n      />\n      <rect\n        x=\"1.41357\"\n        width=\"17\"\n        height=\"2\"\n        rx=\"1\"\n        transform=\"rotate(45 1.41357 0)\"\n        fill=").concat(type === "error" ? "#DC3545" : type === "warning" ? "#664D03" : type === "info" ? "#0A58CA" : "#fff", "\n      />\n    </svg>");
     closeButton.addEventListener("click", function () {
       Toast.removeToast(toastElement);
