@@ -40,10 +40,12 @@ import { Timepicker24Hr } from "./components/Timepicker/Timepicker24Hr";
 import { Toast } from "./components/Toast/Toast";
 import { Tooltip } from "./components/Tooltip/Tooltip";
 import Typography from "./components/Typography/Typography";
+import DataTable from "./components/Datatable/DataTable";
 import "./style.css"
 
 export {
     Accordion,
+    DataTable,
     Alert,
     Avatar,
     AvatarGroup,
