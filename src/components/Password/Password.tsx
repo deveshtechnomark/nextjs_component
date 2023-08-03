@@ -191,6 +191,17 @@ const Password: React.FC<PasswordProps> = ({
     return strength;
   };
 
+  const validateNull = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.trim() === "") {
+      setErr(true);
+      setOpen(false);
+      setErrorMsg(errorMessage);
+    } else {
+      setErr(false);
+      getError(true);
+    }
+  };
+
   return (
     <div className="relative flex flex-col text-[14px] w-full">
       <div className="relative w-full">
@@ -250,7 +261,7 @@ const Password: React.FC<PasswordProps> = ({
           onChange={handlePasswordChange}
           onBlur={
             novalidate
-              ? undefined
+              ? validateNull
               : onBlur
               ? onBlur
               : validate
