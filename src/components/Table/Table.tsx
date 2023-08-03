@@ -204,7 +204,7 @@ const Table: React.FC<TableProps> = (props) => {
 
             {props.action && (
               <th
-                className={`cursor-pointer text-[16px] sm:text-[14px] font-bold uppercase ${props.actionSticky ? `${Style.sticky_action_column}` : ""
+                className={`cursor-pointer text-[16px] sm:text-[14px] font-bold uppercase ${props.actionHeading && "w-[10px] pr-5"} ${props.actionSticky ? `${Style.sticky_action_column}` : ""
                   }`}
               >
                 {props.actionHeading ? props.actionHeading : "Actions"}
