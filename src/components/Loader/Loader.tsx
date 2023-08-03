@@ -1,10 +1,12 @@
 import React from "react";
+import Typography from "../Typography/Typography";
 
 type LoaderProps = {
   size?: "sm" | "md" | "lg";
+  helperText?: boolean;
 };
 
-const Loader: React.FC<LoaderProps> = ({ size }) => {
+const Loader: React.FC<LoaderProps> = ({ size, helperText }) => {
   let container = "";
   let svgSize = 88;
 
@@ -23,7 +25,7 @@ const Loader: React.FC<LoaderProps> = ({ size }) => {
   }
 
   return (
-    <div className={container}>
+    <div className={`${container} flex flex-col items-center justify-center`}>
       <svg
         className="animate-spin"
         width={svgSize}
@@ -31,7 +33,12 @@ const Loader: React.FC<LoaderProps> = ({ size }) => {
         viewBox="0 0 133 132"
       >
         <g clipPath="url(#clip0_5047_872358)">
-          <rect width="132" height="132" transform="translate(0.5)" fill="url(#pattern0)" />
+          <rect
+            width="132"
+            height="132"
+            transform="translate(0.5)"
+            fill="url(#pattern0)"
+          />
           <g clipPath="url(#clip1_5047_872358)">
             <path
               opacity="0.05"
@@ -121,20 +128,45 @@ const Loader: React.FC<LoaderProps> = ({ size }) => {
           </g>
         </g>
         <defs>
-          <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+          <pattern
+            id="pattern0"
+            patternContentUnits="objectBoundingBox"
+            width="1"
+            height="1"
+          >
             <use xlinkHref="#image0_5047_872358" />
           </pattern>
           <clipPath id="clip0_5047_872358">
-            <rect width="132" height="132" fill="white" transform="translate(0.5)" />
+            <rect
+              width="132"
+              height="132"
+              fill="white"
+              transform="translate(0.5)"
+            />
           </clipPath>
           <clipPath id="clip1_5047_872358">
-            <rect width="96" height="96" fill="white" transform="translate(18.5 18)" />
+            <rect
+              width="96"
+              height="96"
+              fill="white"
+              transform="translate(18.5 18)"
+            />
           </clipPath>
           <clipPath id="clip2_5047_872358">
-            <rect width="96" height="96" fill="white" transform="translate(48.9307 131.569) rotate(-120)" />
+            <rect
+              width="96"
+              height="96"
+              fill="white"
+              transform="translate(48.9307 131.569) rotate(-120)"
+            />
           </clipPath>
           <clipPath id="clip3_5047_872358">
-            <rect width="96" height="96" fill="white" transform="translate(132.069 48.4307) rotate(120)" />
+            <rect
+              width="96"
+              height="96"
+              fill="white"
+              transform="translate(132.069 48.4307) rotate(120)"
+            />
           </clipPath>
           <image
             id="image0_5047_872358"
@@ -144,8 +176,16 @@ const Loader: React.FC<LoaderProps> = ({ size }) => {
           />
         </defs>
       </svg>
+      {helperText && (
+        <Typography
+          type="h5"
+          className={`text-primary ${size === "sm" ? "!text-[10px]" : ""}`}
+        >
+          Please wait...
+        </Typography>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export { Loader };

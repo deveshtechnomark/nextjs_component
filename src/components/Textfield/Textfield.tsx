@@ -120,7 +120,6 @@ const TextField: React.FC<TextFieldProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     getValue(inputValue);
-    console.log(inputValue);
 
     // Check if noNumeric prop is true and input contains numeric characters
     // if (noNumeric && /\d/.test(inputValue)) {
