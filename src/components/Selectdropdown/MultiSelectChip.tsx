@@ -149,7 +149,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
           return (
             <div
               key={selectedValue}
-              className={`flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima ${
+              className={`flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] ${
                 selectedOption?.label.length > 8 ? "max-w-[100px]" : ""
               }`}
             >
@@ -169,14 +169,14 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
           );
         })}
         {selected.length > 2 && (
-          <div className="flex items-center badge bg-[#E9ECEF] text-darkCharcoal border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima">
+          <div className="flex items-center badge bg-[#E9ECEF] text-darkCharcoal border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px]">
             +{selected.length - 2}
           </div>
         )}
       </div>
     ) : (
       <div
-        className={`text-darkCharcoal font-proxima ${
+        className={`text-darkCharcoal ${
           open ? "text-primary" : ""
         }`}
       >
@@ -190,7 +190,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
         {label && (
           <label
             onClick={handleToggleOpen}
-            className={`text-[14px] font-normal font-proxima ${
+            className={`text-[14px] font-normal ${
               open
                 ? "text-primary"
                 : selected.length > 0
@@ -207,7 +207,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
         <div
           onBlur={handleBlur}
           onClick={handleToggleOpen}
-          className={`flex justify-between bg-white border-b text-[14px] font-normal font-proxima  ${
+          className={`flex justify-between bg-white border-b text-[14px] font-normal  ${
             open
               ? "text-primary cursor-default"
               : selected.length === 0
@@ -243,7 +243,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
           style={{ width: selectRef.current?.clientWidth }}
         >
           <li
-            className={`pt-3 pl-3 text-[14px] font-normal font-proxima text-primary cursor-pointer flex`}
+            className={`pt-3 pl-3 text-[14px] font-normal text-primary cursor-pointer flex`}
             onClick={handleClearAll}
           >
             Clear All
@@ -252,7 +252,7 @@ const MultiSelectChip: React.FC<MultiSelectChipProps> = ({
             options.map((option, index) => (
               <li
                 key={index}
-                className={`p-3 text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex ${
+                className={`p-3 text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex ${
                   selected.includes(option.value) ? "bg-whiteSmoke" : ""
                 }`}
                 onClick={

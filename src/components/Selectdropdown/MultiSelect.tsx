@@ -154,7 +154,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       >
         {label && (
           <label
-            className={`text-[14px] font-normal font-proxima ${
+            className={`text-[14px] font-normal ${
               open
                 ? "text-primary"
                 : selectedValues.length > 0
@@ -188,7 +188,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 : inputValue
             }
             style={{ width: "191px" }}
-            className={`flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal font-proxima ${
+            className={`flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal ${
               open ? "text-primary" : ""
             } ${!open ? "cursor-pointer" : "cursor-default"} ${
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"
@@ -215,7 +215,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             options.map((option, index) => (
               <li
                 key={index}
-                className={`p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex items-center ${
+                className={`p-[10px] text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex items-center ${
                   selectedValues.includes(option.value) ? "bg-whiteSmoke" : ""
                 } ${
                   !option.label.toLowerCase().startsWith(inputValue)
