@@ -42,12 +42,12 @@ export default class Typography extends React.Component<TypographyProps> {
         styles = "text-[14px] font-medium lg:text-[16px]";
         break;
       case "title":
-        Element = "title";
+        Element = "span";
         styles = "text-[16px] font-medium lg:text-[20px]";
         break;
       case "sub-title":
         Element = "span";
-        styles = "text-[16px] font-medium lg:text-[16px]";
+        styles = "text-[14px] font-medium lg:text-[16px]";
         break;
       case "table-title":
         Element = "caption";
@@ -67,7 +67,7 @@ export default class Typography extends React.Component<TypographyProps> {
         break;
       case "caption":
         Element = "caption";
-        styles = "text-[10px] width-max-content font-normal lg:text-[10px]";
+        styles = "text-[10px] width-max-content font-normal lg:text-[12px]";
         break;
       case "badge":
         Element = "span";
