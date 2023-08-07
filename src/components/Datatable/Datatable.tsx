@@ -121,7 +121,7 @@ const DataTable = ({
                                 )}
                                 {columns?.map((column, columnIndex) => (
                                     <td
-                                        className="p-2 border-b border-b-[#ccc] whitespace-nowrap overflow-hidden text-ellipsis"
+                                        className="p-2 border-b border-b-[#ccc] whitespace-nowrap text-ellipsis"
                                         key={columnIndex}
                                     >
                                         {row[column.accessor]}
