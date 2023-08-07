@@ -58,8 +58,10 @@ const Tel: React.FC<TelInputProps> = ({
       getError(false);
     } else if (e.target.value.length < 12) {
       setErr(true);
-      setErrorMsg("Please Enter valid 10 digits Phone Number.");
+      // setErrorMsg("Please Enter valid 10 digits Phone Number.");  //old one statement
+      setErrorMsg("Please enter minimum 10 digits.");
       getError(false);
+    } else if (e.target.value.length < 16) {
     } else {
       setErr(false);
       getError(true);
@@ -76,13 +78,13 @@ const Tel: React.FC<TelInputProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let inputValue = e.target.value || "";
-    inputValue = inputValue.replace(/\s/g, "");
+    // inputValue = inputValue.replace(/\s/g, "");
     inputValue = inputValue.replace(/[^\d]/g, "");
-    inputValue = inputValue.slice(0, 10);
+    inputValue = inputValue.slice(0, 14);
 
     let formattedValue = "";
     for (let i = 0; i < inputValue.length; i++) {
-      if (i === 4 || i === 7) {
+      if (i === 4 || i === 7 || i === 10) {
         formattedValue += " ";
       }
       formattedValue += inputValue[i];
@@ -167,7 +169,7 @@ const Tel: React.FC<TelInputProps> = ({
             onChange={handleInputChange}
             onFocus={handleFocus}
             disabled={disabled}
-            placeholder="9874 563 214"
+            placeholder="9874 563 214 5247"
             {...props}
           />
         </div>
