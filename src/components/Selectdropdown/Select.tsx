@@ -149,7 +149,7 @@ const Select: React.FC<SelectProps> = ({
       >
         {label && (
           <label
-            className={`text-[14px] font-normal font-proxima ${
+            className={`text-[14px] font-normal ${
               open
                 ? "text-primary"
                 : inputValue
@@ -187,7 +187,7 @@ const Select: React.FC<SelectProps> = ({
                 : inputValue
             }
             autoComplete="off"
-            className={`flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full ${
+            className={`flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal w-full ${
               open ? "text-primary" : ""
             } ${!open ? "cursor-pointer" : "cursor-default"} ${
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"
@@ -216,7 +216,7 @@ const Select: React.FC<SelectProps> = ({
             options.map((option, index) => (
               <li
                 key={index}
-                className={`p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex items-center ${
+                className={`p-[10px] text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex items-center ${
                   option.value === inputValue ? "bg-whiteSmoke" : ""
                 } ${
                   search && !option.label.toLowerCase().startsWith(inputValue)
