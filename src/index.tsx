@@ -8,6 +8,7 @@ import { Button } from "./components/Button/Button";
 import CheckBox from "./components/Checkbox/Checkbox";
 import { Close } from "./components/Closebutton/Close";
 import { ColorPicker } from "./components/Colorpicker/Colorpicker";
+import DataTable from "./components/Datatable/Datatable";
 import { Calendar } from "./components/Datepicker/calendar";
 import { CalendarYear } from "./components/Datepicker/calendarYear";
 import Uploader from "./components/Fileupload/Fileupload";
@@ -55,6 +56,7 @@ export {
     ColorPicker,
     Calendar,
     CalendarYear,
+    DataTable,
     Uploader,
     InputMask,
     Loader,
