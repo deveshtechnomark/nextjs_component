@@ -18,14 +18,14 @@ interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   search?: boolean;
   validate?: boolean;
-  defaultValue?: string;
+  defaultValue?: any;
   value?: any;
   avatar?: boolean;
   avatarName?: string;
   avatarImgUrl?: string;
   errorMessage?: string;
   hasError?: boolean;
-  getValue: (value: any, label?: any) => void;
+  getValue: (value: any) => void;
   getError: (arg1: boolean) => void;
   supportingText?: string;
   errorClass?: string;
@@ -56,28 +56,20 @@ const Select: React.FC<SelectProps> = ({
   const [errMsg, setErrMsg] = useState("");
   const [open, setOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+  const [selectedOption, setSelectedOption] = useState<Option | null>(
+    defaultValue
+      ? options.find((option) => option.value === defaultValue) ?? null
+      : null
+  );
 
-  {
-    validate &&
-      useEffect(() => {
-        setErrMsg(errorMessage);
-        setError(hasError);
-        hasError && getError(false);
-      }, [errorMessage, hasError]);
-  }
-
-  // {
-  //   value !== -1 && options
-  //     ? useEffect(() => {
-  //         options.map((option, index) => {
-  //           // if (option.value === value) {
-  //           //   setInputValue(option.label);
-  //           console.log("option", value, option.label, option.value);
-  //           // }
-  //         });
-  //       }, [])
-  //     : "";
-  // }
+  useEffect(() => {
+    if (validate) {
+      setOpen(hasError);
+      setErrMsg(errorMessage);
+      setError(hasError);
+      hasError && getError(false);
+    }
+  }, [errorMessage, hasError, validate]);
 
   useEffect(() => {
     window.addEventListener("click", handleOutsideClick);
@@ -112,7 +104,8 @@ const Select: React.FC<SelectProps> = ({
     }
   };
 
-  const handleSelect = (label: string, value: any) => {
+  const handleSelect = (value: any) => {
+    setSelectedOption({ label, value });
     setInputValue(label);
     setOpen(false);
 
@@ -123,7 +116,7 @@ const Select: React.FC<SelectProps> = ({
     } else {
       setError(false);
       setErrMsg("");
-      getValue(value, label);
+      getValue(value);
       getError(true);
     }
   };
@@ -156,7 +149,7 @@ const Select: React.FC<SelectProps> = ({
       >
         {label && (
           <label
-            className={`text-[14px] font-normal ${
+            className={`text-[14px] font-normal font-proxima ${
               open
                 ? "text-primary"
                 : inputValue
@@ -179,16 +172,22 @@ const Select: React.FC<SelectProps> = ({
             onClick={handleToggleOpen}
             onChange={handleInputChange}
             readOnly={!search}
-            placeholder={defaultValue || "Please select"}
+            placeholder={"Please select"}
             value={
-              value
-                ? value
+              defaultValue !== null && defaultValue !== undefined
+                ? options.find((option) => option.value === defaultValue)
+                    ?.label ?? "Please select"
+                : selectedOption
+                ? selectedOption.label
+                : defaultValue
+                ? options.find((option) => option.value === defaultValue)
+                    ?.label ?? ""
                 : inputValue.length > 25
                 ? inputValue.substring(0, 20) + "..."
                 : inputValue
             }
             autoComplete="off"
-            className={`flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal w-full ${
+            className={`flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal font-proxima w-full ${
               open ? "text-primary" : ""
             } ${!open ? "cursor-pointer" : "cursor-default"} ${
               !open ? "placeholder-darkCharcoal" : "placeholder-primary"
@@ -217,7 +216,7 @@ const Select: React.FC<SelectProps> = ({
             options.map((option, index) => (
               <li
                 key={index}
-                className={`p-[10px] text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex items-center ${
+                className={`p-[10px] text-[14px] font-proxima hover:bg-whiteSmoke font-normal cursor-pointer flex items-center ${
                   option.value === inputValue ? "bg-whiteSmoke" : ""
                 } ${
                   search && !option.label.toLowerCase().startsWith(inputValue)
@@ -226,7 +225,7 @@ const Select: React.FC<SelectProps> = ({
                 }`}
                 onClick={() => {
                   if (option.label !== inputValue) {
-                    handleSelect(option.label, option.value);
+                    handleSelect(option.value);
                   }
                 }}
               >

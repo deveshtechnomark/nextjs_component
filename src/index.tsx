@@ -35,7 +35,8 @@ import TabBar from "./components/Tab/Tab";
 import Table from "./components/Table/Table";
 import { Tel } from "./components/Tel/Tel";
 import { Textarea } from "./components/Textarea/Textarea";
-import { TextField } from "./components/Textfield/Textfield";
+import { Email } from "./components/Textfield/Email";
+import { Text } from "./components/Textfield/Text";
 import { Timepicker } from "./components/Timepicker/Timepicker";
 import { Timepicker24Hr } from "./components/Timepicker/Timepicker24Hr";
 import { Toast } from "./components/Toast/Toast";
@@ -81,7 +82,8 @@ export {
     Table,
     Tel,
     Textarea,
-    TextField,
+    Email,
+    Text,
     Timepicker,
     Timepicker24Hr,
     Toast,
