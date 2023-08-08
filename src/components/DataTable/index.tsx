@@ -1,11 +1,14 @@
 import React, { useRef, useState } from "react";
-import ChevronRight from "./icons/ChevronRight";
+
 import ChevronDown from "./icons/ChevronDown";
+import ChevronRight from "./icons/ChevronRight";
 import ChevronUp from "./icons/ChevronUp";
+import SortIcon from "./icons/SortIcon";
 
 interface DataTableProps {
   columns: any[];
   data: any[];
+  expandable?: any;
   stickyHeader?: any;
   hoverEffect?: any;
   headerInvisible?: any;
@@ -15,6 +18,7 @@ const DataTable = ({
   columns,
   data,
   stickyHeader,
+  expandable,
   hoverEffect,
   headerInvisible,
 }: DataTableProps) => {
@@ -71,29 +75,29 @@ const DataTable = ({
     <div className="h-full overflow-auto">
       <table className="w-full">
         <thead
-          className={`text-left border-t border-b border-t-[#ccc] border-b-[#ccc] top-0 z-[1] ${
+          className={`text-base text-left border-t border-b border-t-[#ccc] border-b-[#ccc] top-0 z-[1] ${
             stickyHeader ? "bg-[#f2f2f2] sticky" : "bg-none static"
           } ${headerInvisible ? "hidden" : ""}`}
         >
           <tr>
-            {expandedRows && <th className="w-12"></th>}
-            {columns?.map((column) => (
+            {expandable && <th className="w-12"></th>}
+            {columns?.map((column, colIndex) => (
               <th
                 className={`font-bold p-2 ${
                   column.sortable ? "cursor-pointer" : "cursor-default"
                 }`}
-                key={column.key}
+                key={colIndex}
                 onClick={() => column.sortable && handleSort(column.accessor)}
               >
                 {column.sortable ? (
-                  <span className="flex items-center gap-1 ml-[5px]">
+                  <span className="flex items-center gap-2 ml-[5px]">
                     {column.header}
-                    {sortConfig.key === column.accessor &&
-                      (sortConfig.direction === "asc" ? (
-                        <ChevronUp style={{ height: "0.7em" }} />
-                      ) : (
-                        <ChevronDown style={{ height: "0.7em" }} />
-                      ))}
+                    <SortIcon
+                      order={
+                        sortConfig.key === column.accessor &&
+                        sortConfig.direction
+                      }
+                    />
                   </span>
                 ) : (
                   column.header
@@ -102,7 +106,7 @@ const DataTable = ({
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-sm">
           {sortedData?.map((row, rowIndex) => (
             <React.Fragment key={rowIndex}>
               <tr
@@ -110,7 +114,7 @@ const DataTable = ({
                   hoverEffect ? "hover:bg-[#f2f2f2]" : ""
                 }`}
               >
-                {expandedRows && (
+                {expandable && (
                   <td
                     className="pl-2 border-b border-b-[#ccc]"
                     onClick={() => handleRowToggle(rowIndex)}

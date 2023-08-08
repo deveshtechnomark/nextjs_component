@@ -1,9 +1,8 @@
 import React from "react";
 
-const ChevronUp = ({ style }) => {
+const ChevronUp = () => {
   return (
     <svg
-      style={{ ...style }}
       xmlns="http://www.w3.org/2000/svg"
       height="0.5em"
       viewBox="0 0 512 512"
