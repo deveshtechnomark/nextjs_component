@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
-import ChevronRight from "@/app/DataTable/icons/ChevronRight";
-import ChevronDown from "@/app/DataTable/icons/ChevronDown";
-import SortIcon from "@/app/DataTable/icons/SortIcon";
+import ChevronDown from "./icons/ChevronDown";
+import ChevronRight from "./icons/ChevronRight";
+import ChevronUp from "./icons/ChevronUp";
+import SortIcon from "./icons/SortIcon";
 
 interface DataTableProps {
   columns: any[];
