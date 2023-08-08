@@ -61,7 +61,9 @@ const Tel: React.FC<TelInputProps> = ({
       // setErrorMsg("Please Enter valid 10 digits Phone Number.");  //old one statement
       setErrorMsg("Please enter minimum 10 digits.");
       getError(false);
-    } else if (e.target.value.length < 16) {
+    } else if (e.target.value.length >= 12) {
+      setErr(false);
+      getError(true);
     } else {
       setErr(false);
       getError(true);
