@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-
 import ChevronDown from "./icons/ChevronDown";
 import ChevronRight from "./icons/ChevronRight";
 import SortIcon from "./icons/SortIcon";
@@ -74,8 +73,8 @@ const DataTable = ({
     <div className="h-full overflow-auto">
       <table className="w-full">
         <thead
-          className={`text-base text-left border-t border-b border-t-[#ccc] border-b-[#ccc] top-0 z-[1] ${
-            stickyHeader ? "bg-[#f2f2f2] sticky" : "bg-none static"
+          className={`h-14 text-base text-left border-t border-b border-t-[#ccc] border-b-[#ccc] top-0 z-[1] bg-white ${
+            stickyHeader ? "shadow-md sticky" : "static"
           } ${headerInvisible ? "hidden" : ""}`}
         >
           <tr>
@@ -109,7 +108,7 @@ const DataTable = ({
           {sortedData?.map((row, rowIndex) => (
             <React.Fragment key={rowIndex}>
               <tr
-                className={`cursor-pointer ${
+                className={`h-14 cursor-pointer ${
                   hoverEffect ? "hover:bg-[#f2f2f2]" : ""
                 }`}
               >
@@ -127,7 +126,7 @@ const DataTable = ({
                 )}
                 {columns?.map((column, columnIndex) => (
                   <td
-                    className="p-2 border-b border-b-[#ccc] whitespace-nowrap overflow-hidden text-ellipsis"
+                    className="p-2 border-b border-b-[#ccc] whitespace-nowrap text-ellipsis"
                     key={columnIndex}
                   >
                     {row[column.accessor]}

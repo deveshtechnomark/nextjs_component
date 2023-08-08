@@ -64,7 +64,6 @@ const Select: React.FC<SelectProps> = ({
 
   useEffect(() => {
     if (validate) {
-      setOpen(hasError);
       setErrMsg(errorMessage);
       setError(hasError);
       hasError && getError(false);
