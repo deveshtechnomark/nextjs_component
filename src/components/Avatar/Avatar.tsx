@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, SyntheticEvent } from "react";
 import styles from "./Avatar.module.scss";
-import  Badge  from "../Badge/Badge";
+import Badge  from "../Badge/Badge";
 
 interface AvatarProps {
   imageUrl?: string;
@@ -199,7 +199,13 @@ const AvatarGroup: FC<AvatarGroupProps> = ({
     );
   }
 
-  return <div className="avatar-group">{children}</div>;
+  return (
+    <div
+      className={`${styles.avatarGroup} avatar-group flex items-center justify-center`}
+    >
+      {children}
+    </div>
+  );
 };
 
 export { Avatar, AvatarGroup };
