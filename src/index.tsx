@@ -201,7 +201,13 @@ const AvatarGroup: FC<AvatarGroupProps> = ({
     );
   }
 
-  return <div className="avatar-group">{children}</div>;
+  return (
+    <div
+      className={`${styles.avatarGroup} avatar-group flex items-center justify-center`}
+    >
+      {children}
+    </div>
+  );
 };
 
 export { Avatar, AvatarGroup };

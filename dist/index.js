@@ -99,7 +99,7 @@ var AvatarGroup = function AvatarGroup(_a) {
     }));
   }
   return React.createElement("div", {
-    className: "avatar-group"
+    className: "".concat(styles.avatarGroup, " avatar-group flex items-center justify-center")
   }, children);
 };
 
