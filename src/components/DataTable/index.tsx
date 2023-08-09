@@ -74,7 +74,7 @@ const DataTable = ({
     <div className="h-full overflow-auto">
       <table className="w-full">
         <thead
-          className={`h-14 text-base text-left border-t border-b border-t-[#ccc] border-b-[#ccc] top-0 z-[1] bg-white ${
+          className={`h-12 text-sm text-left border-t border-b border-t-[#ccc] border-b-[#ccc] top-0 z-[1] bg-white ${
             stickyHeader ? "shadow-md sticky" : "static"
           } ${headerInvisible ? "hidden" : ""}`}
         >
@@ -105,11 +105,11 @@ const DataTable = ({
             ))}
           </tr>
         </thead>
-        <tbody className="text-sm">
+        <tbody className="text-xs">
           {sortedData?.map((row, rowIndex) => (
             <React.Fragment key={rowIndex}>
               <tr
-                className={`h-14 cursor-pointer ${
+                className={`h-12 cursor-pointer ${
                   hoverEffect ? "hover:bg-[#f2f2f2]" : ""
                 }`}
               >
