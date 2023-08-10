@@ -27,7 +27,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
     r: 0,
     g: 0,
     b: 0,
-    a: 100,
+    a: 1,
   });
 
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -351,10 +351,9 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
   useEffect(() => {
     if (props.value) {
       const value = props.value;
-
       setHex(value);
     }
-  }, [props.value]);
+  }, []);
 
   return (
     <>
@@ -672,6 +671,9 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                     className={`${Styles.color_picker__rgba}`}
                     type="number"
                     name="a"
+                    min={0}
+                    max={1}
+                    step={0.01}
                     value={rgba.a}
                     onChange={handleOpacityChange}
                     onFocus={handleInputFocus}
