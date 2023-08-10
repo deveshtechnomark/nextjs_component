@@ -9,6 +9,7 @@ import Styles from "./Colorpicker.module.scss";
 
 
 interface ColorPickerProps {
+  value?:any
   onChange?: (value: string) => void;
 }
 
@@ -345,9 +346,12 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
   }`;
 
   useEffect(() => {
-    console.log(colorBoxValue);
     props.onChange(colorBoxValue || rgbaColorValue);
-  }, [colorBoxValue, rgbaColorValue]);
+    if(props.value){
+      const value = props.value
+      setHex(value)
+    }
+  }, [colorBoxValue, rgbaColorValue,props.value]);
 
   return (
     <>
