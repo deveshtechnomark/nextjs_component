@@ -59,6 +59,7 @@ var Select = function Select(_a) {
     validate && React.useEffect(function () {
       setErrMsg(errorMessage);
       setError(hasError);
+      defaultValue > 0 && setInputValue(defaultValue);
       hasError && getError(false);
     }, [errorMessage, hasError]);
   }
@@ -403,22 +404,19 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     getValue = _a.getValue,
     errorClass = _a.errorClass,
     validate = _a.validate;
-  var _e = React.useState(defaultValue || []),
+  var _e = React.useState([]),
     selected = _e[0],
     setSelected = _e[1];
-  var _f = React.useState(defaultValue || []);
-    _f[0];
-    _f[1];
-  var _g = React.useState(false),
-    open = _g[0],
-    setOpen = _g[1];
+  var _f = React.useState(false),
+    open = _f[0],
+    setOpen = _f[1];
   var selectRef = React.useRef(null);
-  var _h = React.useState(false),
-    error = _h[0],
-    setError = _h[1];
-  var _j = React.useState(""),
-    errMsg = _j[0],
-    setErrMsg = _j[1];
+  var _g = React.useState(false),
+    error = _g[0],
+    setError = _g[1];
+  var _h = React.useState(""),
+    errMsg = _h[0],
+    setErrMsg = _h[1];
   {
     validate && React.useEffect(function () {
       setErrMsg(errorMessage);
@@ -426,6 +424,24 @@ var MultiSelectChip = function MultiSelectChip(_a) {
       hasError && getError(false);
     }, [errorMessage, hasError]);
   }
+  {
+    defaultValue && React.useEffect(function () {
+      setSelected(defaultValue);
+    }, [defaultValue]);
+  }
+  var handleBlur = function handleBlur() {
+    if (validate) {
+      if (selected.length === 0) {
+        setError(true);
+        setErrMsg("Please select a valid option.");
+        getError(false);
+      } else {
+        setError(false);
+        setErrMsg("");
+        getError(true);
+      }
+    }
+  };
   React.useEffect(function () {
     window.addEventListener("click", handleOutsideClick);
     return function () {
@@ -442,7 +458,10 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     var updatedSelected;
     if (selectedIndex === -1) {
       // Value is not selected, add it to the selection
-      updatedSelected = __spreadArray(__spreadArray([], selected, true), [value], false);
+      var selectedOption = options.find(function (option) {
+        return option.value === value;
+      });
+      updatedSelected = __spreadArray(__spreadArray([], selected, true), [selectedOption ? selectedOption.value : value], false);
     } else {
       // Value is already selected, remove it from the selection
       updatedSelected = __spreadArray(__spreadArray([], selected.slice(0, selectedIndex), true), selected.slice(selectedIndex + 1), true);
@@ -450,6 +469,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
     if (updatedSelected.length > 0) {
       setError(false);
       setErrMsg("");
+      getError(true);
     }
     setSelected(updatedSelected);
     getValue(updatedSelected);
@@ -465,15 +485,18 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   };
   var selectedDisplay = selected.length > 0 ? React.createElement("div", {
     className: "flex flex-wrap items-center"
-  }, selected.slice(0, 2).map(function (option) {
+  }, selected.slice(0, 2).map(function (selectedValue) {
+    var selectedOption = options.find(function (option) {
+      return option.value === selectedValue;
+    });
     return React.createElement("div", {
-      key: option,
-      className: "flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima ".concat(option.length > 8 ? "max-w-[100px]" : "")
+      key: selectedValue,
+      className: "flex items-center badge bg-[#E9ECEF] text-[#212529] border border-[#CED4DA] rounded-sm px-1 mr-[5px] mb-2 text-[14px] font-proxima ".concat((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label.length) > 8 ? "max-w-[100px]" : "")
     }, React.createElement("span", {
-      title: option
-    }, option.length > 8 ? option.substring(0, 8) + "..." : option), React.createElement("div", {
+      title: selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label
+    }, (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label.length) > 8 ? (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label.substring(0, 8)) + "..." : selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label), React.createElement("div", {
       onClick: function onClick() {
-        return handleSelect(option);
+        return handleSelect(selectedValue);
       },
       className: "ml-1 cursor-pointer"
     }, React.createElement(CrossIcon, null)));
@@ -491,6 +514,7 @@ var MultiSelectChip = function MultiSelectChip(_a) {
   }, label, validate && React.createElement("span", {
     className: "text-defaultRed"
   }, "\xA0*")), React.createElement("div", {
+    onBlur: handleBlur,
     onClick: handleToggleOpen,
     className: "flex justify-between bg-white border-b text-[14px] font-normal font-proxima  ".concat(open ? "text-primary cursor-default" : selected.length === 0 ? "text-darkCharcoal cursor-pointer" : "", " ").concat(selected.length > 0 ? "border-primary" : error ? "border-defaultRed" : "border-lightSilver transition-colors duration-300 hover:border-primary", " ").concat(className)
   }, selectedDisplay, React.createElement("div", {

@@ -3,11 +3,11 @@ import 'next-ts-lib/dist/index.css';
 import "form-elements/dist/index.css";
 interface MultiSelectChipProps {
     options: {
-        value: string;
-        label: string;
+        value: any;
+        label: any;
     }[];
-    defaultValue?: string[];
-    onSelect: (selected: string[]) => void;
+    defaultValue?: any[];
+    onSelect: (selected: any[]) => void;
     id?: string;
     label?: string;
     type?: string;

@@ -4,10 +4,8 @@ import classNames from "classnames";
 // Icons Componnents
 import ChevronDown from "./icons/ChevronDown.js";
 // Library Components
-import { Avatar } from "next-ts-lib";
-import "next-ts-lib/dist/index.css";
-import { CheckBox } from "form-elements";
-import "form-elements/dist/index.css";
+import { Avatar } from "../Avatar/Avatar.js";
+import CheckBox from "../Checkbox/Checkbox.js";
 
 interface MultiSelectProps {
   id: string;
@@ -63,7 +61,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         setErrMsg(errorMessage);
         setError(hasError);
         hasError && getError(false);
-      }, [errorMessage, hasError]);
+        defaultValue && setInputValue(defaultValue)
+      }, [errorMessage, hasError, defaultValue]);
   }
 
   useEffect(() => {
@@ -145,26 +144,24 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   return (
     <>
       <div
-        className={`relative font-medium w-full flex-row border-b ${
-          selectedValues.length > 0
+        className={`relative font-medium w-full flex-row border-b ${selectedValues.length > 0
             ? "border-primary"
             : error
-            ? "border-defaultRed"
-            : "border-lightSilver hover:border-primary transition-colors duration-300"
-        } ${className}`}
+              ? "border-defaultRed"
+              : "border-lightSilver hover:border-primary transition-colors duration-300"
+          } ${className}`}
         ref={selectRef}
       >
         {label && (
           <label
-            className={`text-[14px] font-normal font-proxima ${
-              open
+            className={`text-[14px] font-normal ${open
                 ? "text-primary"
                 : selectedValues.length > 0
-                ? "text-primary"
-                : error
-                ? "text-defaultRed"
-                : "text-slatyGrey"
-            }`}
+                  ? "text-primary"
+                  : error
+                    ? "text-defaultRed"
+                    : "text-slatyGrey"
+              }`}
             htmlFor={id}
           >
             {label}
@@ -190,47 +187,41 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 : inputValue
             }
             style={{ width: "191px" }}
-            className={`flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal font-proxima ${
-              open ? "text-primary" : ""
-            } ${!open ? "cursor-pointer" : "cursor-default"} ${
-              !open ? "placeholder-darkCharcoal" : "placeholder-primary"
-            }`}
+            className={`flex-grow bg-white outline-none text-darkCharcoal text-[14px] font-normal ${open ? "text-primary" : ""
+              } ${!open ? "cursor-pointer" : "cursor-default"} ${!open ? "placeholder-darkCharcoal" : "placeholder-primary"
+              }`}
           />
           <div
             onClick={handleToggleOpen}
-            className={`text-[1.5rem] text-darkCharcoal cursor-pointer ${
-              open ? "rotate-180" : ""
-            }`}
+            className={`text-[1.5rem] text-darkCharcoal cursor-pointer ${open ? "rotate-180" : ""
+              }`}
           >
             <ChevronDown />
           </div>
         </div>
 
         <ul
-          className={`absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform ${
-            open
+          className={`absolute z-10 w-full bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform ${open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500"
-          } ${open ? "ease-out" : ""}`}
+            } ${open ? "ease-out" : ""}`}
         >
           {options.length > 0 &&
             options.map((option, index) => (
               <li
                 key={index}
-                className={`p-[10px] text-[14px] hover:bg-whiteSmoke font-normal font-proxima cursor-pointer flex items-center ${
-                  selectedValues.includes(option.value) ? "bg-whiteSmoke" : ""
-                } ${
-                  !option.label.toLowerCase().startsWith(inputValue)
+                className={`p-[10px] text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex items-center ${selectedValues.includes(option.value) ? "bg-whiteSmoke" : ""
+                  } ${!option.label.toLowerCase().startsWith(inputValue)
                     ? "hidden"
                     : ""
-                }`}
+                  }`}
                 onClick={
                   type !== "checkbox"
                     ? () => {
-                        if (option.value !== inputValue) {
-                          handleSelect(option.value);
-                        }
+                      if (option.value !== inputValue) {
+                        handleSelect(option.value);
                       }
+                    }
                     : undefined
                 }
               >
