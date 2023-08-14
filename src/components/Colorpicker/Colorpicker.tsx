@@ -2,13 +2,11 @@ import React, {
   useRef,
   useState,
   useEffect,
-  HTMLInputTypeAttribute,
-  InputHTMLAttributes,
 } from "react";
 import Styles from "./Colorpicker.module.scss";
 
 interface ColorPickerProps {
-  value?: string;
+  value?:any
   onChange?: (value: string) => void;
 }
 
@@ -19,7 +17,8 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
   const [rgba, setRGBA] = useState({ r: 0, g: 0, b: 0, a: 1 });
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [opacityPercentage, setOpacityPercentage] = useState(100);
-  const [hex, setHex] = useState("#f10909");
+  const [hex, setHex] = useState("#ff0000");
+  const [value, setValue] = useState("");
 
   const [isDragging2, setIsDragging2] = useState(false);
   const [cursorPosition2, setCursorPosition2] = useState({ x: 0, y: 0 });
@@ -348,12 +347,13 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
     props.onChange(colorBoxValue || rgbaColorValue);
   }, [colorBoxValue, rgbaColorValue]);
 
-  useEffect(() => {
-    if (props.value) {
-      const value = props.value;
-      setHex(value);
-    }
-  }, []);
+  useEffect(()=> {
+    if(props.value){
+      setValue(props.value)
+    } 
+  },[props.value])
+
+
 
   return (
     <>
@@ -365,12 +365,12 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div className="flex items-center">
                   <div
                     style={{
-                      backgroundColor: colorBoxValue || rgbaColorValue,
+                      backgroundColor: colorBoxValue || value,
                       width: "30px",
                       height: "30px",
                       margin: "5px 10px 5px 0",
                       borderRadius: "5px",
-                      border: `2px solid ${colorBoxValue || rgbaColorValue}`,
+                      border: `2px solid ${colorBoxValue || value}`,
                     }}
                   ></div>
                 </div>
@@ -574,6 +574,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                   }}
                 ></div>
               </div>
+
               <p style={{ margin: "5px 0 0 0" }}>
                 Opacity:{" "}
                 <span style={{ float: "right" }}>{opacityPercentage}%</span>
@@ -671,9 +672,9 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                     className={`${Styles.color_picker__rgba}`}
                     type="number"
                     name="a"
-                    min={0}
-                    max={1}
                     step={0.01}
+                    max={1}
+                    min={0}
                     value={rgba.a}
                     onChange={handleOpacityChange}
                     onFocus={handleInputFocus}
