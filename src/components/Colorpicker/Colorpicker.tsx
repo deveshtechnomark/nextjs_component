@@ -15,6 +15,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
   const [opacityPercentage, setOpacityPercentage] = useState(100);
   const [hex, setHex] = useState("#ff0000");
   const [value, setValue] = useState("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const [isDragging2, setIsDragging2] = useState(false);
   const [cursorPosition2, setCursorPosition2] = useState({ x: 0, y: 0 });
@@ -316,7 +317,6 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
 
     // Update the alpha value in the rgba state
     setRGBA((prevRGBA) => ({ ...prevRGBA, a: newOpacity }));
-
   };
 
   const getRGBAFromHex = (hexColor: string) => {
@@ -340,8 +340,6 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
     opacity !== 1 ? Math.round(opacity * 255).toString(16) : ""
   }`;
 
-  console.log("rgbacolor : ",rgbaColorValue);
-  
   useEffect(() => {
     props.onChange(rgbaColorValue);
   }, [rgbaColorValue]);
@@ -349,17 +347,29 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
   useEffect(() => {
     if (props.value) {
       setValue(props.value);
-      // props.onChange(props.value);
-    }else{
-      setValue("")
+    } else {
+      setValue("");
     }
-    
   }, [props.value]);
+  useEffect(() => {
+    if (open) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [open]);
 
-  console.log("Library side props : ",props.value);
-  console.log("Library side value : ",value);
-
-  
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setOpen(false);
+    }
+  };
 
   return (
     <>
@@ -389,7 +399,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_white}`}
                   onClick={() => {
-                    props.onChange("#FFFFFF")
+                    props.onChange("#FFFFFF");
                     setColorBoxValue("#FFFFFF");
                     setValue(props.value);
                     setOpen(false);
@@ -398,7 +408,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_gray}`}
                   onClick={() => {
-                    props.onChange("#D8D8D8")
+                    props.onChange("#D8D8D8");
                     setColorBoxValue("#D8D8D8");
                     setValue(props.value);
                     setOpen(false);
@@ -407,7 +417,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_primary}`}
                   onClick={() => {
-                    props.onChange("#02B89D")
+                    props.onChange("#02B89D");
                     setColorBoxValue("#02B89D");
                     setValue(props.value);
                     setOpen(false);
@@ -416,7 +426,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_secondary}`}
                   onClick={() => {
-                    props.onChange("#069CDE")
+                    props.onChange("#069CDE");
                     setColorBoxValue("#069CDE");
                     setValue(`${props.value}`);
                     setOpen(false);
@@ -425,7 +435,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_success}`}
                   onClick={() => {
-                    props.onChange("#135736")
+                    props.onChange("#135736");
                     setColorBoxValue("#135736");
                     setValue(`${props.value}`);
                     setOpen(false);
@@ -436,7 +446,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_danger}`}
                   onClick={() => {
-                    props.onChange("#DC3545")
+                    props.onChange("#DC3545");
                     setColorBoxValue("#DC3545");
                     setValue(props.value);
                     setOpen(false);
@@ -445,7 +455,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_warning}`}
                   onClick={() => {
-                    props.onChange("#FFC107")
+                    props.onChange("#FFC107");
                     setColorBoxValue("#FFC107");
                     setValue(`${props.value}`);
                     setOpen(false);
@@ -454,7 +464,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_info}`}
                   onClick={() => {
-                    props.onChange("#0DCAF0")
+                    props.onChange("#0DCAF0");
                     setColorBoxValue("#0DCAF0");
                     setValue(`${props.value}`);
                     setOpen(false);
@@ -463,7 +473,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_dark}`}
                   onClick={() => {
-                    props.onChange("#333333")
+                    props.onChange("#333333");
                     setColorBoxValue("#333333");
                     setValue(`${props.value}`);
                     setOpen(false);
@@ -472,9 +482,10 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.wrapper}`}
                   onClick={() => {
-                    setColorBoxValue("");
-                    setHex("");
-                    setValue("")
+                    props.onChange("#000000");
+                    setColorBoxValue("#000000");
+                    setHex("#000000");
+                    setValue("#000000");
                     setOpen(false);
                   }}
                 >
@@ -519,193 +530,192 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
           </div>
         </div>
 
-        <div
-          className={`${
-            open ? "" : "hidden"
-          } rounded overflow-hidden shadow-lg`}
-          style={{
-            width: "100%",
-            height: "370px",
-          }}
-        >
+        <div ref={dropdownRef}>
           <div
-            className={`${Styles.color_picker__color_block}`}
-            ref={colorPickerRef}
+            className={`${
+              open ? "" : "hidden"
+            } rounded overflow-hidden shadow-lg`}
+            style={{
+              width: "100%",
+              height: "370px",
+            }}
           >
             <div
-              style={{
-                float: "right",
-                margin: "5px 5px 5px 5px",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                setOpen(false);
-              }}
+              className={`${Styles.color_picker__color_block}`}
+              ref={colorPickerRef}
             >
-              <svg
-                className="w-3 h-3 text-custom-color"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 14 14"
-              >
-                <path
-                  stroke="currentcolor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                />
-              </svg>
-            </div>
-            <div className="px-1 py-1">
-              <div className="font-bold text-xl mb-2">
-                <div className={`${Styles.color_picker__gradient}`}>
-                  <canvas
-                    className={`${Styles.color_picker__color_block} w-full h-48`}
-                    ref={colorBlockRef}
-                    width="322"
-                    height="200"
-                    style={{
-                      borderRadius: "5px",
-                      cursor: isDragging2 ? "grabbing" : "crosshair",
-                    }}
-                  ></canvas>
-                </div>
-
-                <div
-                  className={`${Styles.color_picker__cursor}`}
-                  style={{
-                    left: `${cursorPosition2.x}px`,
-                    top: `${cursorPosition2.y}px`,
-                  }}
-                ></div>
-              </div>
-              <p>Hue</p>
-
               <div
-                className={`${Styles.saturation}`}
-                ref={colorPickerRef}
-                onMouseDown={handleMouseDown}
-              >
-                <div
-                  className={`${Styles.cursor}`}
-                  style={{
-                    border: "5px solid rgb(248, 248, 248)",
-                    background: hex,
-                    position: "absolute",
-                    top: `0px`,
-                    left: `${cursorPosition.x}px`,
-                    cursor: isDragging ? "grabbing" : "grab",
-                  }}
-                ></div>
-              </div>
-
-              <p style={{ margin: "5px 0 0 0" }}>
-                Opacity:
-                <span style={{ float: "right" }}>{opacityPercentage}%</span>
-              </p>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={opacity}
-                onChange={handleOpacityChange}
                 style={{
-                  WebkitAppearance: "none",
-                  MozAppearance: "none",
-                  appearance: "none",
-                  width: "100%",
-                  height: "8px",
-                  background: `linear-gradient(to right, rgba(0, 0, 0, 0), ${rgbaColorValue})`,
-                  borderRadius: "3px",
-                  outline: "none",
-                  margin: "0",
-                  padding: "0",
+                  float: "right",
+                  margin: "5px 5px 5px 5px",
+                  cursor: "pointer",
                 }}
-              />
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                <svg
+                  className="w-3 h-3 text-custom-color"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentcolor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+              </div>
+              <div className="px-1 py-1">
+                <div className="font-bold text-xl mb-2">
+                  <div className={`${Styles.color_picker__gradient}`}>
+                    <canvas
+                      className={`${Styles.color_picker__color_block} w-full h-48`}
+                      ref={colorBlockRef}
+                      width="322"
+                      height="200"
+                      style={{
+                        borderRadius: "5px",
+                        cursor: isDragging2 ? "grabbing" : "crosshair",
+                      }}
+                    ></canvas>
+                  </div>
 
-              <div className="flex align-center gap-1">
-                <div className="flex flex-col w-full">
-                  <span>Hex</span>
-                  <input
-                    className={`${Styles.color_picker__input} ${
-                      isInputFocused ? "focused" : ""
-                    }`}
-                    type="text"
-                    value={`${hex}${
-                      opacity !== 1
-                        ? Math.round(opacity * 255).toString(16)
-                        : ""
-                    }`}
-                    onChange={handleHexChange}
-                    onFocus={handleInputFocus}
-                    onBlur={handleInputBlur}
-                  />
+                  <div
+                    className={`${Styles.color_picker__cursor}`}
+                    
+                  ></div>
                 </div>
-                <div className="flex flex-col w-full">
-                  <span>R</span>
-                  <input
-                    className={`${Styles.color_picker__rgba} ${
-                      isInputFocused ? "focused" : ""
-                    }`}
-                    type="number"
-                    name="r"
-                    min={0}
-                    max={255}
-                    value={rgba.r}
-                    onChange={handleRGBChange}
-                    onFocus={handleInputFocus}
-                    onBlur={handleInputBlur}
-                  />
+                <p>Hue</p>
+
+                <div
+                  className={`${Styles.saturation}`}
+                  ref={colorPickerRef}
+                  onMouseDown={handleMouseDown}
+                >
+                  <div
+                    className={`${Styles.cursor}`}
+                    style={{
+                      border: "5px solid rgb(248, 248, 248)",
+                      background: hex,
+                      position: "absolute",
+                      top: `0px`,
+                      left: `${cursorPosition.x}px`,
+                      cursor: isDragging ? "grabbing" : "grab",
+                    }}
+                  ></div>
                 </div>
-                <div className="flex flex-col w-full">
-                  <span>G</span>
-                  <input
-                    className={`${Styles.color_picker__rgba} ${
-                      isInputFocused ? "focused" : ""
-                    }`}
-                    type="number"
-                    name="g"
-                    min={0}
-                    max={255}
-                    value={rgba.g}
-                    onChange={handleRGBChange}
-                    onFocus={handleInputFocus}
-                    onBlur={handleInputBlur}
-                  />
-                </div>
-                <div className="flex flex-col w-full">
-                  <span>B</span>
-                  <input
-                    className={`${Styles.color_picker__rgba} ${
-                      isInputFocused ? "focused" : ""
-                    }`}
-                    type="number"
-                    name="b"
-                    min={0}
-                    max={255}
-                    value={rgba.b}
-                    onChange={handleRGBChange}
-                    onFocus={handleInputFocus}
-                    onBlur={handleInputBlur}
-                  />
-                </div>
-                <div className="flex flex-col w-full">
-                  <span>A</span>
-                  <input
-                    className={`${Styles.color_picker__rgba}`}
-                    type="number"
-                    name="a"
-                    step={0.01}
-                    max={1}
-                    min={0}
-                    value={rgba.a}
-                    onChange={handleOpacityChange}
-                    onFocus={handleInputFocus}
-                    onBlur={handleInputBlur}
-                  />
+
+                <p style={{ margin: "5px 0 0 0" }}>
+                  Opacity:
+                  <span style={{ float: "right" }}>{opacityPercentage}%</span>
+                </p>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={opacity}
+                  onChange={handleOpacityChange}
+                  style={{
+                    WebkitAppearance: "none",
+                    MozAppearance: "none",
+                    appearance: "none",
+                    width: "100%",
+                    height: "8px",
+                    background: `linear-gradient(to right, rgba(0, 0, 0, 0), ${rgbaColorValue})`,
+                    borderRadius: "3px",
+                    outline: "none",
+                    margin: "0",
+                    padding: "0",
+                  }}
+                />
+
+                <div className="flex align-center gap-1">
+                  <div className="flex flex-col w-full">
+                    <span>Hex</span>
+                    <input
+                      className={`${Styles.color_picker__input} ${
+                        isInputFocused ? "focused" : ""
+                      }`}
+                      type="text"
+                      value={`${hex}${
+                        opacity !== 1
+                          ? Math.round(opacity * 255).toString(16)
+                          : ""
+                      }`}
+                      onChange={handleHexChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                  </div>
+                  <div className="flex flex-col w-full">
+                    <span>R</span>
+                    <input
+                      className={`${Styles.color_picker__rgba} ${
+                        isInputFocused ? "focused" : ""
+                      }`}
+                      type="number"
+                      name="r"
+                      min={0}
+                      max={255}
+                      value={rgba.r}
+                      onChange={handleRGBChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                  </div>
+                  <div className="flex flex-col w-full">
+                    <span>G</span>
+                    <input
+                      className={`${Styles.color_picker__rgba} ${
+                        isInputFocused ? "focused" : ""
+                      }`}
+                      type="number"
+                      name="g"
+                      min={0}
+                      max={255}
+                      value={rgba.g}
+                      onChange={handleRGBChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                  </div>
+                  <div className="flex flex-col w-full">
+                    <span>B</span>
+                    <input
+                      className={`${Styles.color_picker__rgba} ${
+                        isInputFocused ? "focused" : ""
+                      }`}
+                      type="number"
+                      name="b"
+                      min={0}
+                      max={255}
+                      value={rgba.b}
+                      onChange={handleRGBChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                  </div>
+                  <div className="flex flex-col w-full">
+                    <span>A</span>
+                    <input
+                      className={`${Styles.color_picker__rgba}`}
+                      type="number"
+                      name="a"
+                      step={0.01}
+                      max={1}
+                      min={0}
+                      value={rgba.a}
+                      onChange={handleOpacityChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
