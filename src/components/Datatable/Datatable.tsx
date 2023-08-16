@@ -1,25 +1,30 @@
-import React, { useRef, useState } from "react";
+import React, { HTMLProps, useRef, useState } from "react";
 import ChevronDown from "./icons/ChevronDown";
 import ChevronRight from "./icons/ChevronRight";
-import ChevronUp from "./icons/ChevronUp";
 import SortIcon from "./icons/SortIcon";
 
 interface DataTableProps {
   columns: any[];
   data: any[];
-  expandable?: any;
-  stickyHeader?: any;
-  hoverEffect?: any;
-  headerInvisible?: any;
+  align?: "left" | "center" | "right";
+  headerStyle?: string;
+  rowStyle?: string;
+  expandable?: boolean;
+  sticky?: boolean;
+  hoverEffect?: boolean;
+  noHeader?: boolean;
 }
 
 const DataTable = ({
   columns,
   data,
-  stickyHeader,
+  headerStyle,
+  rowStyle,
+  align = "left",
+  sticky,
   expandable,
   hoverEffect,
-  headerInvisible,
+  noHeader,
 }: DataTableProps) => {
   const tableRef = useRef<HTMLTableElement>(null);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "" });
@@ -70,26 +75,47 @@ const DataTable = ({
     return sorted;
   }, [data, sortConfig]);
 
+  const getAlignment = (align: string) => {
+    switch (align) {
+      case "left":
+        return "start";
+        break;
+      case "center":
+        return "center";
+        break;
+      case "right":
+        return "end";
+        break;
+      default:
+        return "start";
+        break;
+    }
+  };
+
   return (
     <div className="h-full overflow-auto">
       <table className="w-full">
-        <thead
-          className={`h-12 text-sm text-left border-t border-b border-t-[#ccc] border-b-[#ccc] top-0 z-[1] bg-white ${
-            stickyHeader ? "shadow-md sticky" : "static"
-          } ${headerInvisible ? "hidden" : ""}`}
-        >
-          <tr>
-            {expandable && <th className="w-12"></th>}
+        <thead>
+          <tr
+            className={`top-0 z-[1] bg-[#f2f2f2] ${
+              sticky ? "shadow-md sticky" : "static"
+            } ${noHeader ? "hidden" : ""}`}
+          >
+            {expandable && <th className={`w-5 ${headerStyle}`}></th>}
             {columns?.map((column, colIndex) => (
               <th
-                className={`font-bold p-2 ${
+                className={`${headerStyle} h-12 text-sm font-bold p-2 ${
                   column.sortable ? "cursor-pointer" : "cursor-default"
                 }`}
                 key={colIndex}
                 onClick={() => column.sortable && handleSort(column.accessor)}
               >
                 {column.sortable ? (
-                  <span className="flex items-center gap-2 ml-[5px]">
+                  <span
+                    className={`flex items-center justify-${getAlignment(
+                      align
+                    )} gap-2`}
+                  >
                     {column.header}
                     <SortIcon
                       order={
@@ -99,44 +125,52 @@ const DataTable = ({
                     />
                   </span>
                 ) : (
-                  column.header
+                  <span
+                    className={`flex items-center justify-${getAlignment(
+                      align
+                    )}`}
+                  >
+                    {column.header}
+                  </span>
                 )}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="text-xs">
+        <tbody>
           {sortedData?.map((row, rowIndex) => (
             <React.Fragment key={rowIndex}>
-              <tr
-                className={`h-12 cursor-pointer ${
-                  hoverEffect ? "hover:bg-[#f2f2f2]" : ""
-                }`}
-              >
+              <tr className={`${hoverEffect ? "hover:bg-[#f2f2f2]" : ""}`}>
                 {expandable && (
                   <td
-                    className="pl-2 border-b border-b-[#ccc]"
+                    className={`${rowStyle} h-12 pl-2 border-b border-b-[#ccc] cursor-pointer`}
                     onClick={() => handleRowToggle(rowIndex)}
                   >
                     {expandedRows.has(rowIndex) ? (
-                      <ChevronDown style={{}} />
+                      <ChevronDown />
                     ) : (
                       <ChevronRight />
                     )}
                   </td>
                 )}
-                {columns?.map((column, columnIndex) => (
+                {columns?.map((column, colIndex) => (
                   <td
-                    className="p-2 border-b border-b-[#ccc] whitespace-nowrap text-ellipsis"
-                    key={columnIndex}
+                    key={colIndex}
+                    className={`${rowStyle} h-12 text-xs p-2 border-b border-b-[#ccc] break-all`}
                   >
-                    {row[column.accessor]}
+                    <span
+                      className={`flex items-center justify-${getAlignment(
+                        align
+                      )}`}
+                    >
+                      {row[column.accessor]}
+                    </span>
                   </td>
                 ))}
               </tr>
               {expandedRows.has(rowIndex) && (
                 <tr>
-                  <td className="p-2" colSpan={columns.length + 1}>
+                  <td colSpan={columns.length + 1}>
                     {row.details ? (
                       row.details
                     ) : (
