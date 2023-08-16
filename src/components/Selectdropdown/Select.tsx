@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Toast } from "../Toast/Toast";
-import { Button } from "../Button/Button";
+import { Toast} from "../Toast/Toast";
 import { Text } from "../Textfield/Text";
+import { Button } from "../Button/Button";
+import "next-ts-lib/dist/index.css";
 
 interface Option {
   value: any;
@@ -33,7 +34,8 @@ interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   addDynamicForm_ButtonLabel?: String;
   addDynamicForm_ButtonLabelEdit?: String;
   onChangeText?: (value: any, label: any) => void;
-  onClickButton?: () => void;
+  onClickButton?: (value: any) => void;
+  onDeleteButton?:(value: any) => void;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -59,6 +61,7 @@ const Select: React.FC<SelectProps> = ({
   addDynamicForm_ButtonLabelEdit,
   onClickButton,
   onChangeText,
+  onDeleteButton
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [inputLabel, setInputLabel] = useState("");
@@ -150,18 +153,28 @@ const Select: React.FC<SelectProps> = ({
   };
 
   const handleSubmit = () => {
-    onChangeText(textValue, inputLabel);
     if (onClickButton) {
-      onClickButton();
+      onClickButton(editing);
     }
+    cleartextData();
   };
+
+  const cleartextData = () => {
+    setInputLabel("")
+    setTextValue("")
+    setTextName("")
+  }
+  const handleDeleteValue = (value:any) => {    
+    if (onDeleteButton) {
+      onDeleteButton(value);
+    }
+  }
 
   useEffect(() => {
     setOpen(editing);
   }, [editing]);
 
-  console.log("Open : ", open);
-  console.log("Editing : ", editing);
+
 
   return (
     <>
@@ -309,6 +322,7 @@ const Select: React.FC<SelectProps> = ({
                           viewBox="0 0 18 20"
                           onClick={() => {
                             onChangeText(option.value, option.label);
+                            handleDeleteValue(option.value)
                           }}
                         >
                           <path
