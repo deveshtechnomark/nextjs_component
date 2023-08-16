@@ -1,12 +1,8 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-} from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Styles from "./Colorpicker.module.scss";
 
 interface ColorPickerProps {
-  value?:any
+  value?: any;
   onChange?: (value: string) => void;
 }
 
@@ -347,30 +343,34 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
     props.onChange(colorBoxValue || rgbaColorValue);
   }, [colorBoxValue, rgbaColorValue]);
 
-  useEffect(()=> {
-    if(props.value){
-      setValue(props.value)
-    } 
-  },[props.value])
+  useEffect(() => {
+    if (props.value) {
+      
+      setValue(props.value);
+    }
+  }, [props.value]);
 
+  console.log("Library side props : ",props.value);
+  console.log("Library side value : ",value);
 
+  
 
   return (
     <>
-      <div className="flex gap-2">
-        <div className="max-w-sm max-h-[230px] rounded overflow-hidden shadow-lg">
+      <div className="flex flex-col gap-2">
+        <div className="w-56 max-h-[230px] rounded overflow-hidden shadow-lg">
           <div className="px-6 py-4">
             <div className="flex items-center">
               <div className="grid grid-cols-1">
                 <div className="flex items-center">
                   <div
                     style={{
-                      backgroundColor: colorBoxValue || value,
+                      backgroundColor: value,
                       width: "30px",
                       height: "30px",
                       margin: "5px 10px 5px 0",
                       borderRadius: "5px",
-                      border: `2px solid ${colorBoxValue || value}`,
+                      border: `2px solid ${value}`,
                     }}
                   ></div>
                 </div>
@@ -450,6 +450,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                   onClick={() => {
                     setColorBoxValue("");
                     setHex("");
+                    setValue("")
                     setOpen(false);
                   }}
                 >
@@ -457,6 +458,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 </div>
               </div>
             </div>
+
             <div className="divide-y divide-gary-300">
               <div className="text-center py-2"></div>
               <div
@@ -498,7 +500,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
             open ? "" : "hidden"
           } rounded overflow-hidden shadow-lg`}
           style={{
-            width: "330px",
+            width: "100%",
             height: "370px",
           }}
         >
@@ -536,7 +538,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
               <div className="font-bold text-xl mb-2">
                 <div className={`${Styles.color_picker__gradient}`}>
                   <canvas
-                    className={`${Styles.color_picker__color_block}`}
+                    className={`${Styles.color_picker__color_block} w-full h-48`}
                     ref={colorBlockRef}
                     width="322"
                     height="200"
@@ -576,7 +578,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
               </div>
 
               <p style={{ margin: "5px 0 0 0" }}>
-                Opacity:{" "}
+                Opacity:
                 <span style={{ float: "right" }}>{opacityPercentage}%</span>
               </p>
               <input
@@ -601,7 +603,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
               />
 
               <div className="flex align-center gap-1">
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                   <span>Hex</span>
                   <input
                     className={`${Styles.color_picker__input} ${
@@ -618,7 +620,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                     onBlur={handleInputBlur}
                   />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                   <span>R</span>
                   <input
                     className={`${Styles.color_picker__rgba} ${
@@ -634,7 +636,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                     onBlur={handleInputBlur}
                   />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                   <span>G</span>
                   <input
                     className={`${Styles.color_picker__rgba} ${
@@ -650,7 +652,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                     onBlur={handleInputBlur}
                   />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                   <span>B</span>
                   <input
                     className={`${Styles.color_picker__rgba} ${
@@ -666,7 +668,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                     onBlur={handleInputBlur}
                   />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                   <span>A</span>
                   <input
                     className={`${Styles.color_picker__rgba}`}
