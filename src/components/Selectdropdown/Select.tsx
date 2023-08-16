@@ -94,7 +94,7 @@ const Select: React.FC<SelectProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.toLowerCase();
-    if (validate && inputValue.trim() === "") {
+    if (validate && inputValue === "") {
       setError(true);
       setErrMsg("Please select a valid option.");
     } else {
@@ -123,7 +123,7 @@ const Select: React.FC<SelectProps> = ({
 
   const handleBlur = () => {
     if (validate) {
-      if (inputValue.trim() === "") {
+      if (inputValue === "") {
         setError(true);
         setErrMsg("Please select a valid option.");
         getError(false);
