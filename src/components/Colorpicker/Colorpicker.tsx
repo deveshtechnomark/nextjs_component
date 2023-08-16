@@ -316,6 +316,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
 
     // Update the alpha value in the rgba state
     setRGBA((prevRGBA) => ({ ...prevRGBA, a: newOpacity }));
+
   };
 
   const getRGBAFromHex = (hexColor: string) => {
@@ -339,15 +340,20 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
     opacity !== 1 ? Math.round(opacity * 255).toString(16) : ""
   }`;
 
+  console.log("rgbacolor : ",rgbaColorValue);
+  
   useEffect(() => {
-    props.onChange(colorBoxValue || rgbaColorValue);
-  }, [colorBoxValue, rgbaColorValue]);
+    props.onChange(rgbaColorValue);
+  }, [rgbaColorValue]);
 
   useEffect(() => {
     if (props.value) {
-      
       setValue(props.value);
+      // props.onChange(props.value);
+    }else{
+      setValue("")
     }
+    
   }, [props.value]);
 
   console.log("Library side props : ",props.value);
@@ -383,35 +389,45 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_white}`}
                   onClick={() => {
+                    props.onChange("#FFFFFF")
                     setColorBoxValue("#FFFFFF");
+                    setValue(props.value);
                     setOpen(false);
                   }}
                 ></div>
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_gray}`}
                   onClick={() => {
+                    props.onChange("#D8D8D8")
                     setColorBoxValue("#D8D8D8");
+                    setValue(props.value);
                     setOpen(false);
                   }}
                 ></div>
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_primary}`}
                   onClick={() => {
+                    props.onChange("#02B89D")
                     setColorBoxValue("#02B89D");
+                    setValue(props.value);
                     setOpen(false);
                   }}
                 ></div>
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_secondary}`}
                   onClick={() => {
+                    props.onChange("#069CDE")
                     setColorBoxValue("#069CDE");
+                    setValue(`${props.value}`);
                     setOpen(false);
                   }}
                 ></div>
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_success}`}
                   onClick={() => {
+                    props.onChange("#135736")
                     setColorBoxValue("#135736");
+                    setValue(`${props.value}`);
                     setOpen(false);
                   }}
                 ></div>
@@ -420,28 +436,36 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_danger}`}
                   onClick={() => {
+                    props.onChange("#DC3545")
                     setColorBoxValue("#DC3545");
+                    setValue(props.value);
                     setOpen(false);
                   }}
                 ></div>
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_warning}`}
                   onClick={() => {
+                    props.onChange("#FFC107")
                     setColorBoxValue("#FFC107");
+                    setValue(`${props.value}`);
                     setOpen(false);
                   }}
                 ></div>
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_info}`}
                   onClick={() => {
+                    props.onChange("#0DCAF0")
                     setColorBoxValue("#0DCAF0");
+                    setValue(`${props.value}`);
                     setOpen(false);
                   }}
                 ></div>
                 <div
                   className={`${Styles.color_box} ${Styles.color_box_dark}`}
                   onClick={() => {
+                    props.onChange("#333333")
                     setColorBoxValue("#333333");
+                    setValue(`${props.value}`);
                     setOpen(false);
                   }}
                 ></div>
