@@ -73,7 +73,7 @@ const Select: React.FC<SelectProps> = ({
   const selectRef = useRef<HTMLDivElement>(null);
   const [selectedOption, setSelectedOption] = useState<Option | null>(
     defaultValue
-      ? options.find((option) => option.value === defaultValue) ?? null
+      ? options.find((option) => option.value === defaultValue)
       : null
   );
 
@@ -88,7 +88,7 @@ const Select: React.FC<SelectProps> = ({
       setErrMsg(errorMessage);
       setError(hasError);
       hasError && getError(false);
-      defaultValue && setInputValue(defaultValue);
+      defaultValue !== "" && defaultValue!== null && setInputValue(defaultValue);
     }
   }, [errorMessage, hasError, validate, defaultValue]);
 
@@ -189,26 +189,28 @@ const Select: React.FC<SelectProps> = ({
   return (
     <>
       <div
-        className={`relative font-medium w-full flex-row border-b ${open
+        className={`relative font-medium w-full flex-row border-b ${
+          open
             ? "border-primary"
             : inputValue
-              ? "border-primary"
-              : error
-                ? "border-defaultRed"
-                : "border-lightSilver hover:border-primary transition-colors duration-300"
-          } ${className}`}
+            ? "border-primary"
+            : error
+            ? "border-defaultRed"
+            : "border-lightSilver hover:border-primary transition-colors duration-300"
+        } ${className}`}
         ref={selectRef}
       >
         {label && (
           <label
-            className={`text-[14px] font-normal w-full ${open
+            className={`text-[14px] font-normal w-full ${
+              open
                 ? "text-primary"
                 : inputValue
-                  ? "text-primary"
-                  : error
-                    ? "text-defaultRed"
-                    : "text-slatyGrey"
-              }`}
+                ? "text-primary"
+                : error
+                ? "text-defaultRed"
+                : "text-slatyGrey"
+            }`}
             htmlFor={id}
           >
             {label}
@@ -226,29 +228,32 @@ const Select: React.FC<SelectProps> = ({
             placeholder={"Please select"}
             value={
               defaultValue !== null &&
-                defaultValue !== undefined &&
-                defaultValue !== ""
+              defaultValue !== undefined &&
+              defaultValue !== ""
                 ? options.find((option) => option.value === defaultValue)
-                  ?.label ?? "Please select"
+                    ?.label ?? "Please select"
                 : selectedOption
-                  ? selectedOption.label
-                  : defaultValue
-                    ? options.find((option) => option.value === defaultValue)
-                      ?.label ?? ""
-                    : inputValue.length > 25
-                      ? inputValue.substring(0, 20) + "..."
-                      : inputValue
+                ? selectedOption.label
+                : defaultValue
+                ? options.find((option) => option.value === defaultValue)
+                    ?.label ?? ""
+                : inputValue.length > 25
+                ? inputValue.substring(0, 20) + "..."
+                : inputValue
             }
             autoComplete="off"
-            className={`flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal w-full ${open ? "text-primary" : ""
-              } ${!open ? "cursor-pointer" : "cursor-default"} ${!open ? "placeholder-darkCharcoal" : "placeholder-primary"
-              }`}
+            className={`flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal w-full ${
+              open ? "text-primary" : ""
+            } ${!open ? "cursor-pointer" : "cursor-default"} ${
+              !open ? "placeholder-darkCharcoal" : "placeholder-primary"
+            }`}
           />
 
           <div
             onClick={handleToggleOpen}
-            className={`text-[1.5rem] text-darkCharcoal m-2 cursor-pointer ${open ? "" : "rotate-180"
-              }`}
+            className={`text-[1.5rem] text-darkCharcoal m-2 cursor-pointer ${
+              open ? "" : "rotate-180"
+            }`}
           >
             <svg
               className="w-3 h-3 text-gray-800"
@@ -269,10 +274,11 @@ const Select: React.FC<SelectProps> = ({
         </div>
 
         <ul
-          className={`absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform w-full ${open
+          className={`absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform w-full ${
+            open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500"
-            } ${open ? "ease-out" : ""}`}
+          } ${open ? "ease-out" : ""}`}
           style={{ width: selectRef.current?.clientWidth }}
         >
           <li className="relative flex flex-col max-h-40 overflow-y-auto">
@@ -281,12 +287,14 @@ const Select: React.FC<SelectProps> = ({
                 options.map((option, index) => (
                   <li
                     key={index}
-                    className={`p-[10px] group/item text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex flex-row items-center justify-between ${option.value === inputValue ? "bg-whiteSmoke" : ""
-                      } ${search &&
-                        !option.label.toLowerCase().startsWith(inputValue)
+                    className={`p-[10px] group/item text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex flex-row items-center justify-between ${
+                      option.value === inputValue ? "bg-whiteSmoke" : ""
+                    } ${
+                      search &&
+                      !option.label.toLowerCase().startsWith(inputValue)
                         ? "hidden"
                         : ""
-                      }`}
+                    }`}
                     onClick={() => {
                       if (option.label !== inputValue) {
                         handleSelect(option.value);
