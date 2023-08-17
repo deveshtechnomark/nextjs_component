@@ -29,6 +29,9 @@ var Modal = function Modal(_a) {
   var modalStyles = {
     width: width
   };
+  var handleModalClick = function handleModalClick(event) {
+    event.stopPropagation();
+  };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 bg-black bg-opacity-40 backdrop-blur-[1px] z-50",
     onClick: onClose
@@ -36,7 +39,8 @@ var Modal = function Modal(_a) {
     className: "fixed inset-0 z-50 flex items-center justify-center ".concat(Style.modal)
   }, /*#__PURE__*/React.createElement("div", {
     className: "my-6 mx-auto ".concat(getSizeClasses(), " "),
-    style: modalStyles
+    style: modalStyles,
+    onClick: handleModalClick
   }, /*#__PURE__*/React.createElement("div", {
     className: "border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
   }, children)))));

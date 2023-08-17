@@ -39,6 +39,10 @@ const Modal: React.FC<ModalProps> = ({
     width: width,
   };
 
+  const handleModalClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+  };
+
   return (
     <>
       <div
@@ -51,6 +55,7 @@ const Modal: React.FC<ModalProps> = ({
           <div
             className={`my-6 mx-auto ${getSizeClasses()} `}
             style={modalStyles}
+            onClick={handleModalClick}
           >
             <div className="border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none">
               {children}
