@@ -106,6 +106,7 @@ const Select: React.FC<SelectProps> = ({
       !selectRef.current.contains(event.target as Node)
     ) {
       setOpen(false);
+      setEditing(false);
     }
   };
 
@@ -274,7 +275,7 @@ const Select: React.FC<SelectProps> = ({
         </div>
 
         <ul
-          className={`absolute z-10 bg-pureWhite mt-[1px] overflow-y-auto shadow-md transition-transform w-full ${
+          className={`absolute z-10 bg-pureWhite mt-[1px] shadow-md transition-transform w-full ${
             open
               ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
               : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500"
@@ -303,12 +304,12 @@ const Select: React.FC<SelectProps> = ({
                   >
                     {option.label}
 
-                    {addDynamicForm && (
+                    {(addDynamicForm || addDynamicForm_Icons_Edit) && (
                       <a className="group/edit invisible hover:bg-slate-100 group-hover/item:visible">
                         <div className="flex flex-row right-0 mr-2 justify-end items-end">
                           {addDynamicForm_Icons_Edit && (
                             <div
-                              className="p-2"
+                              className="p-[2px]"
                               onClick={(event) => {
                                 event.stopPropagation();
                                 setTextValue(option.value);
@@ -335,8 +336,9 @@ const Select: React.FC<SelectProps> = ({
 
                           {addDynamicForm_Icons_Delete && (
                             <div
-                              className="p-2"
-                              onClick={() => {
+                              className="p-[2px]"
+                              onClick={(event) => {
+                                event.stopPropagation();
                                 onChangeText(option.value, option.label);
                                 handleDeleteValue(option.value);
                               }}
@@ -365,9 +367,9 @@ const Select: React.FC<SelectProps> = ({
                 ))}
             </ul>
           </li>
-          {addDynamicForm && (
+          {(addDynamicForm || editing) && (
             <li className="w-full z-50 bg-pureWhite">
-              <div className="bg-gray-100 flex flex-row justify-between ">
+              <div className="bg-gray-100 flex flex-row items-center justify-between ">
                 <div className="m-2 w-full">
                   <Text
                     label={addDynamicForm_Label}
@@ -388,7 +390,7 @@ const Select: React.FC<SelectProps> = ({
                     getError={(e) => setTextNameError(e)}
                   />
                 </div>
-                <div className="m-5">
+                <div className="ml-3 mr-2">
                   <Button
                     type="button"
                     variant="btn-primary"
