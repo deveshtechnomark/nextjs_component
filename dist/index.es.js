@@ -7,9 +7,7 @@ var Modal = function Modal(_a) {
     onClose = _a.onClose,
     children = _a.children,
     size = _a.size,
-    width = _a.width // Receive the custom width from props
-  ;
-
+    width = _a.width;
   if (!isOpen) return null;
   var getSizeClasses = function getSizeClasses() {
     switch (size) {
@@ -21,15 +19,13 @@ var Modal = function Modal(_a) {
         return "w-[1140px]";
       case "full":
         return "w-full";
-      case "md":
-        return width ? "w-[".concat(width, "]") : "w-[500px]";
-      // Use custom width if provided, else default
       default:
+      case "md":
         return "w-[500px]";
     }
   };
-  var handleModalClick = function handleModalClick(event) {
-    event.stopPropagation();
+  var modalStyles = {
+    width: width
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 bg-black bg-opacity-40 backdrop-blur-[1px] z-50",
@@ -37,8 +33,8 @@ var Modal = function Modal(_a) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 z-50 flex items-center justify-center ".concat(Style.modal)
   }, /*#__PURE__*/React.createElement("div", {
-    className: "my-6 mx-auto ".concat(getSizeClasses()),
-    onClick: handleModalClick
+    className: "my-6 mx-auto ".concat(getSizeClasses(), " "),
+    style: modalStyles
   }, /*#__PURE__*/React.createElement("div", {
     className: "border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none"
   }, children)))));

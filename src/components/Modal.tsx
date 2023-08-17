@@ -7,7 +7,7 @@ interface ModalProps {
   children: ReactNode;
   size?: "sm" | "md" | "lg" | "extra-lg" | "full";
   closeIcon?: boolean;
-  width?: string; // Allow custom width to be passed in props
+  width?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -15,7 +15,7 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
   size,
-  width // Receive the custom width from props
+  width,
 }) => {
   if (!isOpen) return null;
 
@@ -29,15 +29,14 @@ const Modal: React.FC<ModalProps> = ({
         return "w-[1140px]";
       case "full":
         return "w-full";
-      case "md":
-        return width ? `w-[${width}]` : "w-[500px]"; // Use custom width if provided, else default
       default:
+      case "md":
         return "w-[500px]";
     }
   };
 
-  const handleModalClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
+  const modalStyles = {
+    width: width,
   };
 
   return (
@@ -50,8 +49,8 @@ const Modal: React.FC<ModalProps> = ({
           className={`fixed inset-0 z-50 flex items-center justify-center ${Style.modal}`}
         >
           <div
-            className={`my-6 mx-auto ${getSizeClasses()}`}
-            onClick={handleModalClick}
+            className={`my-6 mx-auto ${getSizeClasses()} `}
+            style={modalStyles}
           >
             <div className="border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none">
               {children}
