@@ -20,12 +20,9 @@ const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   const getSizeClasses = () => {
-  
     switch (size) {
       case "sm":
         return "w-[300px]";
-      case "md":
-        return "w-[500px]";
       case "lg":
         return "w-[800px]";
       case "extra-lg":
@@ -33,8 +30,17 @@ const Modal: React.FC<ModalProps> = ({
       case "full":
         return "w-full";
       default:
-        return `w-[${width}] || w-[500px]`;
+      case "md":
+        return "w-[500px]";
     }
+  };
+
+  const modalStyles = {
+    width: width,
+  };
+
+  const handleModalClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
   };
 
   return (
@@ -46,7 +52,11 @@ const Modal: React.FC<ModalProps> = ({
         <div
           className={`fixed inset-0 z-50 flex items-center justify-center ${Style.modal}`}
         >
-          <div className={`my-6 mx-auto ${getSizeClasses()} ${width}`}>
+          <div
+            className={`my-6 mx-auto ${getSizeClasses()} `}
+            style={modalStyles}
+            onClick={handleModalClick}
+          >
             <div className="border-[1px] border-lightSilver rounded-lg flex flex-col bg-pureWhite outline-none focus:outline-none">
               {children}
             </div>

@@ -19,6 +19,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
   noNumeric?: boolean;
   noSpecialChar?: boolean;
+  noText?: boolean;
 }
 
 const Text: React.FC<InputProps> = ({
@@ -34,9 +35,10 @@ const Text: React.FC<InputProps> = ({
   disabled,
   getValue,
   getError,
-  hasError=false,
+  hasError = false,
   minChar,
   maxChar,
+  noText,
   noNumeric,
   noSpecialChar,
   errorMessage = "This is a required field!",
@@ -48,7 +50,7 @@ const Text: React.FC<InputProps> = ({
   const [errMsg, setErrMsg] = useState<string>(errorMessage);
 
   useEffect(() => {
-    setFocus(hasError)
+    setFocus(hasError);
     setErr(hasError || false);
     setErrMsg(errorMessage);
   }, [hasError, errorMessage]);
@@ -71,10 +73,14 @@ const Text: React.FC<InputProps> = ({
       setErr(true);
       getError(false);
       setErrMsg(`Numbers characters are not allowed.`);
-    } else if (noSpecialChar && /[^a-zA-Z]/.test(inputValue)) {
+    } else if (noSpecialChar && /[^a-zA-Z0-9]/.test(inputValue)) {
       setErr(true);
       getError(false);
       setErrMsg(`Special characters are not allowed.`);
+    } else if (noText && /[a-zA-Z]/.test(inputValue)) {
+      setErr(true);
+      getError(false);
+      setErrMsg(`Alphabets are not allowed.`);
     } else {
       setErr(false);
       getError(true);
