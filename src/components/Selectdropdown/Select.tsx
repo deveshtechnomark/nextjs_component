@@ -118,11 +118,14 @@ const Select: React.FC<SelectProps> = ({
     ) {
       setOpen(false);
       setEditing(false);
-     
+
     }
   };
 
   const handleToggleOpen = () => {
+    if (disabled) {
+      return;
+    }
     setOpen((prevOpen) => !prevOpen);
   };
 
@@ -199,29 +202,28 @@ const Select: React.FC<SelectProps> = ({
   return (
     <>
       <div
-        className={`relative font-medium w-full flex-row border-b ${
+        className={`relative font-medium w-full flex-row border-b ${disabled ? "border-lightSilver" :
           open
             ? "border-primary"
             : inputValue
-            ? "border-primary"
-            : error
-            ? "border-defaultRed"
-            : `border-lightSilver hover:border-primary transition-colors duration-300`
+              ? "border-primary"
+              : error
+                ? "border-defaultRed"
+                : `border-lightSilver hover:border-primary transition-colors duration-300`
 
-        } ${disabled ? "hover:border-lightSilver" : ""} ${className}`}
+          } ${className}`}
         ref={selectRef}
       >
         {label && (
           <label
-            className={`text-[14px] font-normal w-full ${
-              open
-                ? "text-primary"
-                : inputValue
+            className={`text-[14px] font-normal w-full ${open
+              ? "text-primary"
+              : inputValue
                 ? "text-primary"
                 : error
-                ? "text-defaultRed"
-                : "text-slatyGrey"
-            } ${disabled ? "hover:border-lightSilver" : ""}`}
+                  ? "text-defaultRed"
+                  : "text-slatyGrey"
+              }`}
             htmlFor={id}
           >
             {label}
@@ -238,46 +240,39 @@ const Select: React.FC<SelectProps> = ({
             readOnly={!search}
             disabled={disabled}
             placeholder={placeholder || "Please select"}
-            style={{
-              color: disabled ? "lightgray" : "",
-            }}
             value={
               defaultValue !== null && defaultValue !== undefined
                 ? options.find((option) => option.value === defaultValue)
-                    ?.label ?? placeholder
+                  ?.label ?? placeholder
                 : selectedOption
-                ? selectedOption.label
-                : defaultValue
-                ? options.find((option) => option.value === defaultValue)
-                    ?.label ?? ""
-                : inputValue.length > 25
-                ? inputValue.substring(0, 20) + "..."
-                : inputValue
+                  ? selectedOption.label
+                  : defaultValue
+                    ? options.find((option) => option.value === defaultValue)
+                      ?.label ?? ""
+                    : inputValue.length > 25
+                      ? inputValue.substring(0, 20) + "..."
+                      : inputValue
             }
             autoComplete="off"
-            className={`flex-grow outline-none bg-white text-darkCharcoal text-[14px] font-normal w-full ${
-              open ? "text-primary" : ""
-            } ${!open ? "cursor-pointer" : "cursor-default"} ${
-              !open ? "placeholder-darkCharcoal" : "placeholder-primary"
-            }`}
+            className={`flex-grow outline-none bg-white ${disabled ? "text-slatyGrey" : open ? "text-primary" : "text-darkCharcoal"} text-[14px] font-normal w-full
+             ${disabled ? "cursor-default" : !open ? "cursor-pointer" : "cursor-default"} ${!open ? "placeholder-darkCharcoal" : disabled ? "text-slatyGrey" : "placeholder-primary"
+              }`}
           />
 
           <div
             onClick={handleToggleOpen}
-            className={`text-[1.5rem] text-darkCharcoal cursor-pointer ${
-              open ? "rotate-180" : ""
-            }`}
+            className={`text-[1.5rem] ${disabled ? "text-slatyGrey cursor-default" : "text-darkCharcoal cursor-pointer"} ${open ? "rotate-180" : ""
+              }`}
           >
             <ChevronDown />
           </div>
         </div>
         {open && (
           <ul
-            className={`absolute z-10 bg-pureWhite mt-[1px] shadow-md transition-transform w-full ${
-              open
-                ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
-                : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500"
-            } ${open ? "ease-out" : ""}`}
+            className={`absolute z-10 bg-pureWhite mt-[1px] shadow-md transition-transform w-full ${open
+              ? "max-h-60 translate-y-0 transition-opacity opacity-100 duration-500"
+              : "max-h-0 translate-y-20 transition-opacity opacity-0 duration-500"
+              } ${open ? "ease-out" : ""}`}
             style={{ width: selectRef.current?.clientWidth }}
           >
             <li className="relative flex flex-col max-h-40 overflow-y-auto">
@@ -286,14 +281,12 @@ const Select: React.FC<SelectProps> = ({
                   options.map((option, index) => (
                     <li
                       key={index}
-                      className={`p-[10px] group/item text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex flex-row items-center justify-between ${
-                        option.value === inputValue ? "bg-whiteSmoke" : ""
-                      } ${
-                        search &&
-                        !option.label.toLowerCase().startsWith(inputValue)
+                      className={`p-[10px] group/item text-[14px] hover:bg-whiteSmoke font-normal cursor-pointer flex flex-row items-center justify-between ${option.value === inputValue ? "bg-whiteSmoke" : ""
+                        } ${search &&
+                          !option.label.toLowerCase().startsWith(inputValue)
                           ? "hidden"
                           : ""
-                      }`}
+                        }`}
                       onClick={() => {
                         if (option.label !== inputValue) {
                           handleSelect(option.value);
@@ -392,7 +385,7 @@ const Select: React.FC<SelectProps> = ({
           {supportingText}
         </span>
       )}
-      {(error && !inputValue ) && (
+      {(error && !inputValue) && (
         <span
           className={`text-defaultRed text-[12px] sm:text-[14px] ${errorClass}`}
         >
