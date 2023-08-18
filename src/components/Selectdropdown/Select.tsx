@@ -342,7 +342,7 @@ const Select: React.FC<SelectProps> = ({
               </ul>
             </li>
             {(addDynamicForm || editing) && (
-              <li className="w-full z-50 bg-pureWhite">
+               <li className="w-full z-50 bg-pureWhite border-t-[1px] border-lightSilver shadow-md">
                 <div className="bg-gray-100 flex flex-row items-center justify-between ">
                   <div className="m-2 w-full">
                     <Text
