@@ -70,7 +70,7 @@ const Textarea: React.FC<TextareaProps> = ({
   };
 
   const focusHandler = () => {
-    setFocus(false);
+    setFocus(true);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

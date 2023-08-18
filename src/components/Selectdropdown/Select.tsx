@@ -4,8 +4,8 @@ import { Button } from "../Button/Button";
 
 import { EditIconDropdown } from "./icons/EditIconDropdown";
 import { DeleteIconDropdown } from "./icons/DeleteIconDropdown";
-import { ArrowDropdown } from "./icons/ArrowDropdown";
-
+import ChevronDown from "./icons/ChevronDown";
+import { Avatar } from "../Avatar/Avatar";
 
 interface Option {
   value: any;
@@ -21,6 +21,7 @@ interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   search?: boolean;
   validate?: boolean;
   defaultValue?: any;
+  placeholder?: any;
   value?: any;
   avatar?: boolean;
   avatarName?: string;
@@ -39,6 +40,7 @@ interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onChangeText?: (value: any, label: any) => void;
   onClickButton?: (value: any) => void;
   onDeleteButton?: (value: any) => void;
+  disabled?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -48,6 +50,7 @@ const Select: React.FC<SelectProps> = ({
   type,
   label,
   className,
+  placeholder = "Please select",
   search = false,
   validate,
   defaultValue,
@@ -56,6 +59,9 @@ const Select: React.FC<SelectProps> = ({
   supportingText,
   hasError,
   getError,
+  avatar,
+  avatarName,
+  avatarImgUrl,
   errorClass,
   addDynamicForm,
   addDynamicForm_Label,
@@ -65,6 +71,7 @@ const Select: React.FC<SelectProps> = ({
   onDeleteButton,
   addDynamicForm_Icons_Edit,
   addDynamicForm_Icons_Delete,
+  disabled
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [inputLabel, setInputLabel] = useState("");
@@ -74,7 +81,7 @@ const Select: React.FC<SelectProps> = ({
   const selectRef = useRef<HTMLDivElement>(null);
   const [selectedOption, setSelectedOption] = useState<Option | null>(
     defaultValue
-      ? options.find((option) => option.value === defaultValue)
+      ? options.find((option) => option.value === defaultValue) ?? null
       : null
   );
 
@@ -91,6 +98,7 @@ const Select: React.FC<SelectProps> = ({
       hasError && getError(false);
       defaultValue !== "" &&
         defaultValue !== null &&
+        defaultValue !== 0 &&
         setInputValue(defaultValue);
     }
   }, [errorMessage, hasError, validate, defaultValue]);
@@ -110,6 +118,7 @@ const Select: React.FC<SelectProps> = ({
     ) {
       setOpen(false);
       setEditing(false);
+     
     }
   };
 
@@ -152,10 +161,6 @@ const Select: React.FC<SelectProps> = ({
         setError(true);
         setErrMsg("Please select a valid option.");
         getError(false);
-      } else if (inputValue === "" && open) {
-        setError(false);
-        setErrMsg("");
-        getError(true);
       } else {
         setError(false);
         setErrMsg("");
@@ -180,6 +185,7 @@ const Select: React.FC<SelectProps> = ({
     setTextValue("");
     setTextName("");
   };
+
   const handleDeleteValue = (value: any) => {
     if (onDeleteButton) {
       onDeleteButton(value);
@@ -200,8 +206,9 @@ const Select: React.FC<SelectProps> = ({
             ? "border-primary"
             : error
             ? "border-defaultRed"
-            : "border-lightSilver hover:border-primary transition-colors duration-300"
-        } ${className}`}
+            : `border-lightSilver hover:border-primary transition-colors duration-300`
+
+        } ${disabled ? "hover:border-lightSilver" : ""} ${className}`}
         ref={selectRef}
       >
         {label && (
@@ -214,11 +221,11 @@ const Select: React.FC<SelectProps> = ({
                 : error
                 ? "text-defaultRed"
                 : "text-slatyGrey"
-            }`}
+            } ${disabled ? "hover:border-lightSilver" : ""}`}
             htmlFor={id}
           >
             {label}
-            {validate && <span className="text-defaultRed">&nbsp;*</span>}
+            {validate && <span className={`${disabled ? "lightSilver" : "text-defaultRed"}`}>&nbsp;*</span>}
           </label>
         )}
 
@@ -229,13 +236,15 @@ const Select: React.FC<SelectProps> = ({
             onClick={handleToggleOpen}
             onChange={handleInputChange}
             readOnly={!search}
-            placeholder={"Please select"}
+            disabled={disabled}
+            placeholder={placeholder || "Please select"}
+            style={{
+              color: disabled ? "lightgray" : "",
+            }}
             value={
-              defaultValue !== null &&
-              defaultValue !== undefined &&
-              defaultValue !== ""
+              defaultValue !== null && defaultValue !== undefined
                 ? options.find((option) => option.value === defaultValue)
-                    ?.label ?? "Please select"
+                    ?.label ?? placeholder
                 : selectedOption
                 ? selectedOption.label
                 : defaultValue
@@ -255,11 +264,11 @@ const Select: React.FC<SelectProps> = ({
 
           <div
             onClick={handleToggleOpen}
-            className={`text-[1.5rem] text-darkCharcoal m-2 cursor-pointer ${
-              open ? "" : "rotate-180"
+            className={`text-[1.5rem] text-darkCharcoal cursor-pointer ${
+              open ? "rotate-180" : ""
             }`}
           >
-           <ArrowDropdown/>
+            <ChevronDown />
           </div>
         </div>
         {open && (
@@ -291,6 +300,15 @@ const Select: React.FC<SelectProps> = ({
                         }
                       }}
                     >
+                      {avatar && (
+                        <div className="mr-2 flex-shrink-0 items-center text-[1.5rem] text-darkCharcoal">
+                          <Avatar
+                            variant="x-small"
+                            name={avatarName}
+                            imageUrl={avatarImgUrl}
+                          />
+                        </div>
+                      )}
                       {option.label}
 
                       {(addDynamicForm || addDynamicForm_Icons_Edit) && (
@@ -360,10 +378,7 @@ const Select: React.FC<SelectProps> = ({
                       className="rounded-[4px] !h-auto"
                       onClick={handleSubmit}
                     >
-                      {editing
-                        ? "Save"
-                        : "ADD"}
-                      
+                      {editing ? "Save" : "ADD"}
                     </Button>
                   </div>
                 </div>
@@ -377,7 +392,7 @@ const Select: React.FC<SelectProps> = ({
           {supportingText}
         </span>
       )}
-      {error && !open && (
+      {(error && !inputValue ) && (
         <span
           className={`text-defaultRed text-[12px] sm:text-[14px] ${errorClass}`}
         >

@@ -33,7 +33,7 @@ const Password: React.FC<PasswordProps> = ({
   hasError,
   disabled,
   minChar = 8,
-  maxChar = 30,
+  maxChar = 20,
   ...props
 }) => {
   const [password, setPassword] = useState("");

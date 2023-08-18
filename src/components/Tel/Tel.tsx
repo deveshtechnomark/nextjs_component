@@ -42,13 +42,18 @@ const Tel: React.FC<TelInputProps> = ({
   {
     validate &&
       useEffect(() => {
+        setFocus(hasError);
         setErrorMsg(errorMessage);
         setErr(hasError);
         hasError && getError(false);
       }, [errorMessage, hasError]);
   }
   {
-    !validate && getError(true);
+    !validate &&
+      useEffect(() => {
+        getError(true);
+        setFocus(hasError);
+      }, [hasError]);
   }
 
   const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +80,7 @@ const Tel: React.FC<TelInputProps> = ({
   };
 
   const focusHandler = () => {
-    setFocus(false);
+    setFocus(true);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

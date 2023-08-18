@@ -57,6 +57,9 @@ const Text: React.FC<InputProps> = ({
 
   const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.trim();
+    if (disabled) {
+      return;
+    }
     if (inputValue === "") {
       setErr(true);
       getError(false);
@@ -89,11 +92,14 @@ const Text: React.FC<InputProps> = ({
   };
 
   const handleFocus = () => {
+    if (disabled) {
+      return;
+    }
     setFocus(true);
   };
 
   const focusHandler = () => {
-    setFocus(false);
+    setFocus(true);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,13 +117,12 @@ const Text: React.FC<InputProps> = ({
       {label && (
         <span className="flex">
           <label
-            className={`${
-              err
+            className={`${err
                 ? "text-defaultRed"
                 : focus
-                ? "text-primary"
-                : "text-slatyGrey"
-            }`}
+                  ? "text-primary"
+                  : "text-slatyGrey"
+              }`}
           >
             {label}
           </label>
@@ -132,33 +137,34 @@ const Text: React.FC<InputProps> = ({
       )}
 
       <div
-        className={`${
-          !err
-            ? "flex w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in hover:before:w-full"
-            : "w-full"
-        }`}
+        className={`${!err
+            ? `flex w-full relative before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-px before:bg-primary before:transition-width before:duration-[800ms] before:ease-in ${!disabled && 'hover:before:w-full'
+            }`
+            : 'w-full'
+          }`}
       >
+
         <input
           type="text"
-          className={`${className} py-1 border-b outline-none transition duration-600 w-full h-full text-darkCharcoal ${
-            err
+          className={`${className} py-1 border-b outline-none transition duration-600 w-full h-full text-darkCharcoal ${err
               ? "border-b-defaultRed"
               : focus
-              ? "border-b-primary"
-              : "border-b-lightSilver"
-          }`}
+                ? "border-b-primary"
+                : "border-b-lightSilver"
+            }`}
           ref={inputRef}
           id={id}
           name={name}
           value={value}
+          disabled={disabled}
           onBlur={
             onBlur
               ? onBlur
               : validate
-              ? validateInput
-              : !validate
-              ? focusHandler
-              : undefined
+                ? validateInput
+                : !validate
+                  ? focusHandler
+                  : undefined
           }
           onChange={handleInputChange}
           onFocus={handleFocus}
