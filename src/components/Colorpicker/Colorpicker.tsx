@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import Styles from "./Colorpicker.module.scss";
+import Styles from "./styles.module.scss";
+import "./style.css";
 
 interface ColorPickerProps {
   value?: any;
@@ -119,7 +120,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
           b: imageData[2],
           a: 1,
         };
-        setColorBlockRGBA(newRGBA); // Set the new RGBA value for the color block
+        setColorBlockRGBA(newRGBA); 
         setHex(getHexColor(newRGBA));
       }
     }
@@ -159,9 +160,10 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
 
   const handleHexChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newHex = e.target.value;
+    
     setHex(newHex);
     setRGBA({ ...rgba, ...getRGBAFromHex(newHex) });
-    updateCursorPosition(newHex); // Update the cursor position on the hue line
+    updateCursorPosition(newHex); 
   };
 
   const updateCursorPosition = (newHex: string) => {
@@ -177,7 +179,6 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
     b: number;
     a: number;
   }) => {
-    // Calculate the percentage of color on the hue line based on its RGB values
     const { r, g, b } = color;
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
@@ -311,11 +312,10 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
       const newOpacity1 = parseFloat(e.target.value);
       setOpacity(newOpacity1);
     }
-    // Calculate the percentage and update the state
+
     const percentage = Math.round(newOpacity * 100);
     setOpacityPercentage(percentage);
 
-    // Update the alpha value in the rgba state
     setRGBA((prevRGBA) => ({ ...prevRGBA, a: newOpacity }));
   };
 
@@ -351,6 +351,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
       setValue("");
     }
   }, [props.value]);
+
   useEffect(() => {
     if (open) {
       document.addEventListener("mousedown", handleOutsideClick);
@@ -570,13 +571,13 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props: any) => {
                   />
                 </svg>
               </div>
-              <div className="px-1 py-1">
+              <div className="px-1 py-1 w-full">
                 <div className="font-bold text-xl mb-2">
                   <div className={`${Styles.color_picker__gradient}`}>
                     <canvas
-                      className={`${Styles.color_picker__color_block} w-full h-48`}
+                      className={`${Styles.color_picker__color_block} h-48`}
                       ref={colorBlockRef}
-                      width="322"
+                      width="350"
                       height="200"
                       style={{
                         borderRadius: "5px",
